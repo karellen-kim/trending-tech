@@ -18,31 +18,58 @@ _BASE_CSS = """<style>
 </style>"""
 
 _DAILY_CSS = """<style>
-  body { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
-  .back-btn { display: inline-block; font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.3rem 0.7rem; margin-bottom: 3rem; }
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
   .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
-  .page-meta { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
-  h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 3rem; }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
   h1 em { font-style: normal; color: var(--accent); }
-  .section { margin-bottom: 3rem; }
-  .section-title { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; padding-bottom: 0.6rem; border-bottom: 2px solid var(--ink); }
-  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item-left { min-width: 0; }
-  .item-name { font-weight: 600; font-size: 0.98rem; margin-bottom: 0.2rem; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
   .item-name a { color: var(--ink); text-decoration: none; }
   .item-name a:hover { color: var(--accent-deep); }
-  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint); margin-bottom: 0.5rem; }
-  .item-summary { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.65; }
-  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.1rem; }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
   .item-arrow a { color: inherit; text-decoration: none; }
   .item-arrow a:hover { color: var(--accent); }
-  .highlight-section { background: var(--accent-wash); border-left: 3px solid var(--accent); padding: 1.2rem 1.5rem; margin-bottom: 3rem; }
-  .highlight-section .section-title { border-bottom-color: var(--accent); color: var(--accent-deep); }
-  .highlight-list { list-style: none; padding: 0; margin-top: 0.8rem; }
-  .highlight-list li { font-size: 0.92rem; color: var(--ink); padding: 0.35rem 0 0.35rem 1.2rem; position: relative; border-bottom: 1px solid var(--accent-wash); }
-  .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.45rem; }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
 </style>"""
 
 _INDEX_CSS = """<style>
@@ -90,53 +117,88 @@ def _item_html(name: str, url: str, meta: str, summary: str) -> str:
   <div class="item-arrow"><a href="{url}" target="_blank" rel="noopener">&rarr;</a></div>
 </div>"""
 
-def _section_html(title: str, items_html: str) -> str:
-    return f"""<div class="section">
-  <div class="section-title">{title}</div>
-  {items_html}
-</div>"""
+_SECTIONS_META = [
+    ("highlights",    "★",    "오늘의 하이라이트"),
+    ("tech-blog",     "TECH", "기술 블로그"),
+    ("dev-blogs",     "DEV",  "개발자 블로그 &amp; SNS"),
+    ("papers",        "PAPER","AI / LLM 논문"),
+    ("hn-reddit",     "COMM", "Hacker News &amp; Reddit"),
+    ("github",        "CODE", "GitHub 트렌딩"),
+]
 
-def _highlights_html(items: list[str]) -> str:
-    if not items:
-        return ""
-    rows = "".join(f'<li>{_e(h)}</li>' for h in items)
-    return f"""<div class="section highlight-section">
-  <div class="section-title">오늘의 하이라이트</div>
-  <ul class="highlight-list">{rows}</ul>
+def _section_html(sid: str, icon: str, title: str, items_html: str, count: int = 0) -> str:
+    count_html = f'<span class="section-count">{count}개</span>' if count else ""
+    extra_cls = " highlight-section" if sid == "highlights" else ""
+    return f"""<div class="section{extra_cls}" id="{sid}">
+  <div class="section-header">
+    <span class="section-icon">{icon}</span>
+    <span class="section-title">{title}</span>
+    {count_html}
+  </div>
+  {items_html}
 </div>"""
 
 def render_daily_page(data: dict) -> str:
     date = data["date"]
     y, m, d = date.split("-")
 
-    sections = _highlights_html(data.get("highlights", []))
-
-    if data.get("company_blogs"):
-        sections += _section_html("Tech Blog", "".join(
-            _item_html(i["title"], i["url"], i.get("source", ""), i.get("summary", ""))
-            for i in data["company_blogs"]))
-    if data.get("dev_blogs"):
-        sections += _section_html("Developer Blogs &amp; SNS", "".join(
-            _item_html(i["title"], i["url"], i.get("source", ""), i.get("summary", ""))
-            for i in data["dev_blogs"]))
-    if data.get("papers"):
-        sections += _section_html("AI / LLM Papers", "".join(
-            _item_html(i["title"], i["url"], "arXiv", i.get("summary", i.get("abstract", "")))
-            for i in data["papers"]))
+    # 섹션별 콘텐츠 생성
+    highlights = data.get("highlights", [])
+    company_blogs = data.get("company_blogs", [])
+    dev_blogs = data.get("dev_blogs", [])
+    papers = data.get("papers", [])
     hn_reddit = data.get("hn", []) + data.get("reddit", [])
+    github = data.get("github", [])
+
+    sections = ""
+
+    if highlights:
+        rows = "".join(f'<li>{_e(h)}</li>' for h in highlights)
+        sections += _section_html("highlights", "★", "오늘의 하이라이트",
+            f'<ul class="highlight-list">{rows}</ul>')
+
+    if company_blogs:
+        sections += _section_html("tech-blog", "TECH", "기술 블로그", "".join(
+            _item_html(i["title"], i["url"], i.get("source",""), i.get("summary",""))
+            for i in company_blogs), len(company_blogs))
+
+    if dev_blogs:
+        sections += _section_html("dev-blogs", "DEV", "개발자 블로그 &amp; SNS", "".join(
+            _item_html(i["title"], i["url"], i.get("source",""), i.get("summary",""))
+            for i in dev_blogs), len(dev_blogs))
+
+    if papers:
+        sections += _section_html("papers", "PAPER", "AI / LLM 논문", "".join(
+            _item_html(i["title"], i["url"], "arXiv", i.get("summary", i.get("abstract","")))
+            for i in papers), len(papers))
+
     if hn_reddit:
-        sections += _section_html("Hacker News &amp; Reddit", "".join(
+        sections += _section_html("hn-reddit", "COMM", "Hacker News &amp; Reddit", "".join(
             _item_html(
-                i.get("title", ""),
-                i["url"],
-                f"{i.get('source','HN')} · {i.get('points',0)} pts" if "points" in i else i.get("source", ""),
-                i.get("summary", "")
-            )
-            for i in hn_reddit))
-    if data.get("github"):
-        sections += _section_html("GitHub Trending", "".join(
-            _item_html(i["name"], i["url"], i.get("stars_today", ""), i.get("summary", i.get("description", "")))
-            for i in data["github"]))
+                i.get("title",""), i["url"],
+                f"{i.get('source','HN')} · {i.get('points',0)} pts" if "points" in i else i.get("source",""),
+                i.get("summary",""))
+            for i in hn_reddit), len(hn_reddit))
+
+    if github:
+        sections += _section_html("github", "CODE", "GitHub 트렌딩", "".join(
+            _item_html(i["name"], i["url"], i.get("stars_today",""), i.get("summary", i.get("description","")))
+            for i in github), len(github))
+
+    # 존재하는 섹션만 nav에 포함
+    section_ids = {
+        "highlights": bool(highlights),
+        "tech-blog": bool(company_blogs),
+        "dev-blogs": bool(dev_blogs),
+        "papers": bool(papers),
+        "hn-reddit": bool(hn_reddit),
+        "github": bool(github),
+    }
+    nav_links = "".join(
+        f'<a href="#{sid}" class="nav-link">{title.replace("&amp;","&")}</a>'
+        for sid, icon, title in _SECTIONS_META
+        if section_ids.get(sid)
+    )
 
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -149,9 +211,13 @@ def render_daily_page(data: dict) -> str:
 {_DAILY_CSS}
 </head>
 <body>
-<a href="./index.html" class="back-btn">&larr; index</a>
-<div class="page-meta">TRENDING-TECH &middot; {date}</div>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">{date}</div>
 <h1><em>{d}</em> {_MONTH_NAMES[m]} {y}</h1>
+<nav class="page-nav">{nav_links}</nav>
 {sections}
 </body>
 </html>"""

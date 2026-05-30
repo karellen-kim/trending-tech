@@ -1,7 +1,24 @@
 import re
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime, date, timezone, timedelta
 from config import SCRAPER_SOURCES, MAX_SCRAPER_ITEMS
+
+KST = timezone(timedelta(hours=9))
+_MONTH_MAP = {"Jan":1,"Feb":2,"Mar":3,"Apr":4,"May":5,"Jun":6,
+              "Jul":7,"Aug":8,"Sep":9,"Oct":10,"Nov":11,"Dec":12}
+
+def _is_today(date_str: str) -> bool:
+    """'May 26, 2026' 형식 날짜가 오늘(KST)인지 확인"""
+    try:
+        m = re.search(r'(\w{3})\s+(\d{1,2}),?\s+(\d{4})', date_str)
+        if not m:
+            return False
+        month, day, year = _MONTH_MAP.get(m.group(1), 0), int(m.group(2)), int(m.group(3))
+        today = datetime.now(KST).date()
+        return date(year, month, day) == today
+    except Exception:
+        return False
 
 _HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/124.0 Safari/537.36",
@@ -42,18 +59,30 @@ def fetch_alibaba(max_items: int = MAX_SCRAPER_ITEMS) -> list[dict]:
     resp = requests.get("https://www.alibabacloud.com/blog", headers=_HEADERS, timeout=15)
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text, "html.parser")
+    date_pattern = re.compile(r'(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},?\s+\d{4}')
     seen, items = set(), []
     for a in soup.find_all("a", href=True):
         href = a["href"]
         if not href.startswith("https://www.alibabacloud.com/blog/"):
             continue
-        # 목록 페이지 자체 링크 제거
-        if href.rstrip("/") == "https://www.alibabacloud.com/blog":
-            continue
-        if href in seen:
+        if href.rstrip("/") == "https://www.alibabacloud.com/blog" or href in seen:
             continue
         title = a.get_text(strip=True)
         if len(title) < 15:
+            continue
+        # 부모 요소에서 날짜 찾아 오늘 날짜만 포함
+        parent = a.parent
+        date_found, is_today = False, False
+        for _ in range(6):
+            if parent is None:
+                break
+            m = date_pattern.search(parent.get_text(" ", strip=True))
+            if m:
+                date_found = True
+                is_today = _is_today(m.group())
+                break
+            parent = parent.parent
+        if date_found and not is_today:
             continue
         seen.add(href)
         items.append({

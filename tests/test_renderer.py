@@ -25,28 +25,28 @@ def test_render_daily_page_is_html():
 
 def test_render_daily_page_has_sections():
     html = render_daily_page(SAMPLE_DATA)
-    assert "GitHub Trending" in html
+    assert "GitHub 트렌딩" in html
     assert "Hacker News" in html
-    assert "AI / LLM Papers" in html
-    assert "Developer Blogs" in html
-    assert "Tech Blog" in html
+    assert "AI / LLM 논문" in html
+    assert "개발자 블로그" in html
+    assert "기술 블로그" in html
     assert "하이라이트" in html
 
 def test_render_daily_page_section_order():
     html = render_daily_page(SAMPLE_DATA)
     positions = {
         "하이라이트": html.index("하이라이트"),
-        "Tech Blog": html.index("Tech Blog"),
-        "Developer Blogs": html.index("Developer Blogs"),
-        "AI / LLM Papers": html.index("AI / LLM Papers"),
+        "기술 블로그": html.index("기술 블로그"),
+        "개발자 블로그": html.index("개발자 블로그"),
+        "AI / LLM 논문": html.index("AI / LLM 논문"),
         "Hacker News": html.index("Hacker News"),
-        "GitHub Trending": html.index("GitHub Trending"),
+        "GitHub 트렌딩": html.index("GitHub 트렌딩"),
     }
-    assert positions["하이라이트"] < positions["Tech Blog"]
-    assert positions["Tech Blog"] < positions["Developer Blogs"]
-    assert positions["Developer Blogs"] < positions["AI / LLM Papers"]
-    assert positions["AI / LLM Papers"] < positions["Hacker News"]
-    assert positions["Hacker News"] < positions["GitHub Trending"]
+    assert positions["하이라이트"] < positions["기술 블로그"]
+    assert positions["기술 블로그"] < positions["개발자 블로그"]
+    assert positions["개발자 블로그"] < positions["AI / LLM 논문"]
+    assert positions["AI / LLM 논문"] < positions["Hacker News"]
+    assert positions["Hacker News"] < positions["GitHub 트렌딩"]
 
 def test_render_daily_page_has_items():
     html = render_daily_page(SAMPLE_DATA)
