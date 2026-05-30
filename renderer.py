@@ -73,7 +73,10 @@ _DAILY_CSS = """<style>
 </style>"""
 
 _INDEX_CSS = """<style>
+  /* ── 레이아웃 ── */
   body { display: flex; min-height: 100vh; }
+
+  /* ── 사이드바 (기존 유지) ── */
   .sidebar { width: 200px; flex-shrink: 0; border-right: 1px solid var(--rule); position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 2rem 0; }
   .sidebar-header { padding: 0 1.4rem 1.4rem; border-bottom: 1px solid var(--rule); margin-bottom: 1rem; }
   .s-label { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; margin-bottom: 0.4rem; }
@@ -81,24 +84,57 @@ _INDEX_CSS = """<style>
   .year-btn { width: 100%; padding: 0.7rem 1.4rem; display: block; cursor: pointer; background: none; border: none; font-family: var(--sans); text-align: left; font-size: 0.9rem; font-weight: 500; color: var(--ink-soft); border-left: 2px solid transparent; transition: all 0.12s; }
   .year-btn:hover { background: var(--paper-deep); }
   .year-btn.active { background: var(--accent-wash); border-left-color: var(--accent); color: var(--accent-deep); font-weight: 600; }
-  .main { flex: 1; padding: 3rem 4rem; max-width: 800px; }
-  .main-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.5rem; }
-  h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 2.5rem; }
-  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 메인 ── */
+  .main { flex: 1; overflow-y: auto; min-width: 0; }
   .year-section { display: none; }
-  .month-block { margin-bottom: 0.5rem; }
-  .month-btn { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 0; background: none; border: none; border-bottom: 1px solid var(--rule); cursor: pointer; font-family: var(--sans); }
-  .month-btn:hover .month-label { color: var(--accent-deep); }
-  .month-label { font-size: 0.95rem; font-weight: 600; color: var(--ink); }
-  .month-arrow { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-faint); transition: transform 0.2s; }
-  .month-btn.open .month-arrow { transform: rotate(90deg); color: var(--accent); }
-  .month-highlights { padding: 0.6rem 0 0.4rem 0.5rem; }
-  .month-highlights ul { list-style: none; padding: 0; }
-  .month-highlights li { font-size: 0.85rem; color: var(--ink-soft); padding: 0.2rem 0 0.2rem 1rem; position: relative; }
-  .month-highlights li::before { content: "·"; position: absolute; left: 0; color: var(--accent); }
-  .month-dates { padding: 0.6rem 0; display: none; flex-wrap: wrap; gap: 0.4rem; }
-  .date-link { font-family: var(--mono); font-size: 0.75rem; padding: 0.25rem 0.6rem; border: 1px solid var(--rule); color: var(--ink-soft); text-decoration: none; transition: all 0.12s; }
-  .date-link:hover { border-color: var(--accent); color: var(--accent-deep); background: var(--accent-wash); }
+
+  /* ── 히어로 ── */
+  .main-hero { padding: clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3.5rem) clamp(2.5rem,5vw,4rem); max-width: 900px; position: relative; }
+  .main-hero::before { content: ""; position: absolute; top: 2rem; left: clamp(1.5rem,4vw,3.5rem); right: clamp(1.5rem,4vw,3.5rem); height: 1px; background: var(--ink); }
+  .meta-row { display: flex; justify-content: space-between; align-items: baseline; padding-top: 2.5rem; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
+  .meta-row span:last-child { color: var(--accent-deep); }
+  .main-title { font-size: clamp(2.4rem,6vw,4.8rem); line-height: 0.95; font-weight: 600; margin-top: clamp(1.5rem,4vw,2.5rem); letter-spacing: -0.035em; color: var(--ink); }
+  .main-title em { font-style: normal; font-weight: 300; color: var(--accent-deep); }
+  .hero-grid { margin-top: clamp(2rem,4vw,3.5rem); display: grid; grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap: 1px; background: var(--rule); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .hero-grid > div { background: var(--paper); padding: 1rem 1.25rem; }
+  .hero-grid .k { display: block; font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; margin-bottom: 0.3rem; }
+  .hero-grid .v { font-size: 1.05rem; color: var(--ink); font-weight: 600; letter-spacing: -0.01em; }
+  .hero-grid .v small { font-size: 0.72rem; color: var(--ink-soft); margin-left: 0.2rem; font-weight: 400; }
+
+  /* ── 월 섹션 ── */
+  .m-section { padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,4vw,3.5rem); border-top: 1px solid var(--rule); max-width: 900px; }
+  .section-head { display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem,3vw,2.2rem); align-items: baseline; margin-bottom: clamp(1.5rem,3vw,2.5rem); }
+  .section-num { font-size: clamp(2.8rem,6vw,4.8rem); line-height: 0.85; color: var(--accent); font-weight: 200; letter-spacing: -0.04em; }
+  .section-titles { border-left: 1px solid var(--ink); padding-left: clamp(0.9rem,2.5vw,1.8rem); padding-top: 0.4rem; }
+  .section-kicker { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-deep); font-weight: 600; margin-bottom: 0.5rem; }
+  .section-title { font-size: clamp(1.5rem,2.8vw,2rem); line-height: 1.15; font-weight: 600; letter-spacing: -0.025em; }
+
+  /* ── 주차 리스트 ── */
+  .notes { border-top: 2px solid var(--ink); }
+  .note { display: grid; grid-template-columns: 3.5rem 1fr auto; gap: clamp(0.8rem,2vw,2rem); align-items: center; padding: clamp(1.2rem,3vw,2rem) 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); transition: padding 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease; position: relative; }
+  .note:hover { padding-left: 0.8rem; padding-right: 0.8rem; background: var(--paper-deep); }
+  .note::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 0; background: var(--accent); transition: width 0.4s cubic-bezier(0.22,1,0.36,1); }
+  .note:hover::after { width: 100%; }
+  .note .n { font-size: 0.78rem; color: var(--accent); font-weight: 400; letter-spacing: 0.06em; font-family: var(--mono); }
+  .note .body { min-width: 0; }
+  .note .body h3 { font-size: clamp(1.1rem,1.8vw,1.35rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.3rem; }
+  .note .body h3 em { font-style: normal; color: var(--accent-deep); font-weight: 400; }
+  .note .body p { color: var(--ink-soft); font-size: 0.88rem; font-weight: 300; line-height: 1.55; }
+  .note .meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; font-size: 0.7rem; color: var(--ink-faint); text-align: right; white-space: nowrap; }
+  .note .meta .tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-deep); padding: 0.2rem 0.5rem; border: 1px solid var(--accent); background: var(--accent-wash); }
+  .note .arrow { font-family: var(--mono); color: var(--ink); font-weight: 500; font-size: 1rem; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
+  .note:hover .arrow { transform: translateX(5px); color: var(--accent-deep); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .m-section, .note { animation: rise 0.6s cubic-bezier(0.22,1,0.36,1) both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  }
+  @media (max-width: 640px) {
+    .note { grid-template-columns: 3rem 1fr; }
+    .note .meta { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
+    .note .arrow { display: none; }
+  }
 </style>"""
 
 _MONTH_NAMES = {"01":"Jan","02":"Feb","03":"Mar","04":"Apr","05":"May","06":"Jun",
@@ -289,18 +325,17 @@ def render_weekly_page(week_data: dict) -> str:
 </html>"""
 
 def render_index_page(entries: list[dict]) -> str:
-    from datetime import datetime, date as date_type
-    _DAY_KR = ["월","화","수","목","금","토","일"]
+    from datetime import datetime
 
     def _week_id(d: str) -> str:
         dt = datetime.strptime(d, "%Y-%m-%d").date()
         return f"{dt.isocalendar()[0]}-W{dt.isocalendar()[1]:02d}"
 
-    def _week_label(week_id: str) -> str:
+    def _week_range(week_id: str) -> tuple:
         y, w = week_id.split("-W")
-        dt = datetime.strptime(f"{y}-W{w}-1", "%G-W%V-%u").date()
+        start = datetime.strptime(f"{y}-W{w}-1", "%G-W%V-%u").date()
         end = datetime.strptime(f"{y}-W{w}-7", "%G-W%V-%u").date()
-        return f"{y}년 {dt.month}월 {int(w)}주 ({dt.month}/{dt.day} – {end.month}/{end.day})"
+        return f"{start.month}/{start.day}", f"{end.month}/{end.day}"
 
     # 연도 → 월 → 주차별 분류
     by_year = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
@@ -310,6 +345,13 @@ def render_index_page(entries: list[dict]) -> str:
         by_year[y][mo][wid].append(e)
 
     years = sorted(by_year.keys(), reverse=True)
+
+    # stats
+    all_dates = sorted(e["date"] for e in entries)
+    first_date = all_dates[0][:7].replace("-", ".") if all_dates else "—"
+    last_date = all_dates[-1] if all_dates else "—"
+    total_days = len(all_dates)
+
     sidebar = "".join(
         f'<button class="year-btn" data-year="{y}" onclick="showYear(\'{y}\')">{y}</button>'
         for y in years)
@@ -317,38 +359,50 @@ def render_index_page(entries: list[dict]) -> str:
     year_sections = ""
     for y in years:
         months_html = ""
-        for mo in sorted(by_year[y].keys(), reverse=True):
-            weeks_html = ""
+        for mo_idx, mo in enumerate(sorted(by_year[y].keys(), reverse=True), 1):
+            notes_html = ""
             for wid in sorted(by_year[y][mo].keys(), reverse=True):
                 week_entries = by_year[y][mo][wid]
-                wlabel = _week_label(wid)
                 day_count = len(week_entries)
-                weeks_html += f"""<a href="./{wid}.html" class="week-link">
-  <span class="week-label">{wlabel}</span>
-  <span class="week-count">{day_count}일</span>
-  <span class="week-arrow">&rarr;</span>
+                w_num = wid.split("-W")[1]
+                s, e_ = _week_range(wid)
+
+                # 하이라이트 수집 (최대 2개)
+                highlights = []
+                for we in sorted(week_entries, key=lambda x: x["date"]):
+                    highlights.extend(we.get("highlights", []))
+                if highlights:
+                    desc = "　·　".join(h[:40] + ("…" if len(h) > 40 else "") for h in highlights[:2])
+                    desc_html = f'<p>{_e(desc)}</p>'
+                else:
+                    desc_html = f'<p>{s} – {e_} · {day_count}일</p>'
+
+                notes_html += f"""<a class="note" href="./{wid}.html">
+  <div class="n">W{w_num}</div>
+  <div class="body">
+    <h3>{int(mo)}월 <em>{w_num}주</em></h3>
+    {desc_html}
+  </div>
+  <div class="meta">
+    <span class="tag">{day_count}일</span>
+    <span class="arrow">&rarr;</span>
+  </div>
 </a>"""
-            months_html += f"""<div class="month-block">
-  <button class="month-btn" onclick="toggleMonth(this)">
-    <span class="month-label">{y}.{mo} {_MONTH_NAMES[mo]}</span>
-    <span class="month-arrow">&rarr;</span>
-  </button>
-  <div class="month-weeks">{weeks_html}</div>
+
+            months_html += f"""<div class="m-section">
+  <div class="section-head">
+    <div class="section-num">{mo:>02}</div>
+    <div class="section-titles">
+      <div class="section-kicker">{y}</div>
+      <h2 class="section-title">{int(mo)}월 {_MONTH_NAMES[mo]}</h2>
+    </div>
+  </div>
+  <div class="notes">{notes_html}</div>
 </div>"""
+
         year_sections += f'<div class="year-section" id="year-{y}">{months_html}</div>'
 
     first_year = years[0] if years else ""
-
-    index_css_extra = """<style>
-  .month-weeks { display: none; padding: 0.5rem 0; }
-  .week-link { display: flex; align-items: center; gap: 0.8rem; padding: 0.65rem 0.5rem; text-decoration: none; color: var(--ink); border-bottom: 1px solid var(--rule); transition: background 0.1s; }
-  .week-link:last-child { border-bottom: none; }
-  .week-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
-  .week-label { font-size: 0.88rem; font-weight: 500; flex: 1; }
-  .week-count { font-family: var(--mono); font-size: 0.62rem; color: var(--ink-faint); }
-  .week-arrow { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-faint); }
-  .week-link:hover .week-arrow { color: var(--accent); }
-</style>"""
 
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -359,7 +413,6 @@ def render_index_page(entries: list[dict]) -> str:
 {_FONTS}
 {_BASE_CSS}
 {_INDEX_CSS}
-{index_css_extra}
 </head>
 <body>
 <nav class="sidebar">
@@ -370,8 +423,19 @@ def render_index_page(entries: list[dict]) -> str:
   {sidebar}
 </nav>
 <main class="main">
-  <div class="main-label">TRENDING-TECH &middot; ARCHIVE</div>
-  <h1>all <em>trends</em></h1>
+  <div class="main-hero">
+    <div class="meta-row">
+      <span>trending-tech &middot; archive</span>
+      <span>last updated &middot; {last_date}</span>
+    </div>
+    <h1 class="main-title">trending<br><em>tech</em></h1>
+    <div class="hero-grid">
+      <div><span class="k">수집 시작</span><span class="v">{first_date}</span></div>
+      <div><span class="k">마지막 갱신</span><span class="v">{last_date}</span></div>
+      <div><span class="k">수집 일수</span><span class="v">{total_days}<small>&middot; days</small></span></div>
+      <div><span class="k">분야</span><span class="v">Tech / Dev</span></div>
+    </div>
+  </div>
   {year_sections}
 </main>
 <script>
@@ -380,11 +444,6 @@ function showYear(y) {{
   document.querySelectorAll('.year-btn').forEach(function(b) {{ b.classList.remove('active'); }});
   document.getElementById('year-' + y).style.display = 'block';
   document.querySelector('[data-year="' + y + '"]').classList.add('active');
-}}
-function toggleMonth(btn) {{
-  btn.classList.toggle('open');
-  var weeks = btn.nextElementSibling;
-  weeks.style.display = weeks.style.display === 'block' ? 'none' : 'block';
 }}
 if ('{first_year}') showYear('{first_year}');
 </script>
