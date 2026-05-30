@@ -435,12 +435,6 @@ def render_index_page(entries: list[dict]) -> str:
       <span>last updated &middot; {last_date}</span>
     </div>
     <h1 class="main-title">trending<br><em>tech</em></h1>
-    <div class="hero-grid">
-      <div><span class="k">수집 시작</span><span class="v">{first_date}</span></div>
-      <div><span class="k">마지막 갱신</span><span class="v">{last_date}</span></div>
-      <div><span class="k">수집 일수</span><span class="v">{total_days}<small>&middot; days</small></span></div>
-      <div><span class="k">분야</span><span class="v">Tech / Dev</span></div>
-    </div>
   </div>
   {year_sections}
 </main>
