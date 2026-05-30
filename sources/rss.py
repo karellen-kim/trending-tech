@@ -1,6 +1,8 @@
 import feedparser
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, time
 from config import RSS_SOURCES, MAX_BLOG_ITEMS
+
+KST = timezone(timedelta(hours=9))
 
 def _get_date(entry) -> datetime | None:
     for field in ("published_parsed", "updated_parsed"):
@@ -12,10 +14,14 @@ def _get_date(entry) -> datetime | None:
                 pass
     return None
 
+def _today_cutoff() -> datetime:
+    now_kst = datetime.now(KST)
+    return now_kst.replace(hour=0, minute=0, second=0, microsecond=0).astimezone(timezone.utc)
+
 def fetch_rss_entries(name: str, url: str, max_items: int = MAX_BLOG_ITEMS, **kwargs) -> list[dict]:
     feed = feedparser.parse(url)
     items = []
-    cutoff = datetime.now(timezone.utc) - timedelta(days=1)
+    cutoff = _today_cutoff()
     for entry in feed.entries:
         pub = _get_date(entry)
         if pub is None or pub < cutoff:
