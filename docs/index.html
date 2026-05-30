@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trending Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { display: flex; min-height: 100vh; }
+  .sidebar { width: 200px; flex-shrink: 0; border-right: 1px solid var(--rule); position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 2rem 0; }
+  .sidebar-header { padding: 0 1.4rem 1.4rem; border-bottom: 1px solid var(--rule); margin-bottom: 1rem; }
+  .s-label { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; margin-bottom: 0.4rem; }
+  .s-title { font-size: 1rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
+  .year-btn { width: 100%; padding: 0.7rem 1.4rem; display: block; cursor: pointer; background: none; border: none; font-family: var(--sans); text-align: left; font-size: 0.9rem; font-weight: 500; color: var(--ink-soft); border-left: 2px solid transparent; transition: all 0.12s; }
+  .year-btn:hover { background: var(--paper-deep); }
+  .year-btn.active { background: var(--accent-wash); border-left-color: var(--accent); color: var(--accent-deep); font-weight: 600; }
+  .main { flex: 1; padding: 3rem 4rem; max-width: 800px; }
+  .main-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.5rem; }
+  h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 2.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .year-section { display: none; }
+  .month-block { margin-bottom: 0.5rem; }
+  .month-btn { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 0; background: none; border: none; border-bottom: 1px solid var(--rule); cursor: pointer; font-family: var(--sans); }
+  .month-btn:hover .month-label { color: var(--accent-deep); }
+  .month-label { font-size: 0.95rem; font-weight: 600; color: var(--ink); }
+  .month-arrow { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-faint); transition: transform 0.2s; }
+  .month-btn.open .month-arrow { transform: rotate(90deg); color: var(--accent); }
+  .month-highlights { padding: 0.6rem 0 0.4rem 0.5rem; }
+  .month-highlights ul { list-style: none; padding: 0; }
+  .month-highlights li { font-size: 0.85rem; color: var(--ink-soft); padding: 0.2rem 0 0.2rem 1rem; position: relative; }
+  .month-highlights li::before { content: "·"; position: absolute; left: 0; color: var(--accent); }
+  .month-dates { padding: 0.6rem 0; display: none; flex-wrap: wrap; gap: 0.4rem; }
+  .date-link { font-family: var(--mono); font-size: 0.75rem; padding: 0.25rem 0.6rem; border: 1px solid var(--rule); color: var(--ink-soft); text-decoration: none; transition: all 0.12s; }
+  .date-link:hover { border-color: var(--accent); color: var(--accent-deep); background: var(--accent-wash); }
+</style>
+</head>
+<body>
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <div class="s-label">trending</div>
+    <div class="s-title">tech</div>
+  </div>
+  <button class="year-btn" data-year="2026" onclick="showYear('2026')">2026</button>
+</nav>
+<main class="main">
+  <div class="main-label">TRENDING-TECH &middot; ARCHIVE</div>
+  <h1>all <em>trends</em></h1>
+  <div class="year-section" id="year-2026"><div class="month-block">
+  <button class="month-btn" onclick="toggleMonth(this)">
+    <span class="month-label">2026.05 May</span>
+    <span class="month-arrow">&rarr;</span>
+  </button>
+  <div class="month-highlights"><ul><li>microsoft/markitdown</li><li>harry0703/MoneyPrinterTurbo</li></ul></div>
+  <div class="month-dates"><a href="./2026-05-31.html" class="date-link">2026-05-31</a></div>
+</div></div>
+</main>
+<script>
+function showYear(y) {
+  document.querySelectorAll('.year-section').forEach(function(s) { s.style.display = 'none'; });
+  document.querySelectorAll('.year-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('year-' + y).style.display = 'block';
+  document.querySelector('[data-year="' + y + '"]').classList.add('active');
+}
+function toggleMonth(btn) {
+  btn.classList.toggle('open');
+  var dates = btn.nextElementSibling.nextElementSibling;
+  dates.style.display = dates.style.display === 'flex' ? 'none' : 'flex';
+}
+if ('2026') showYear('2026');
+</script>
+</body>
+</html>

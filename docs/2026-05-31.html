@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-05-31 — Trending Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
+  .back-btn { display: inline-block; font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.3rem 0.7rem; margin-bottom: 3rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+  .page-meta { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 3rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .section { margin-bottom: 3rem; }
+  .section-title { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; padding-bottom: 0.6rem; border-bottom: 2px solid var(--ink); }
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.98rem; margin-bottom: 0.2rem; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint); margin-bottom: 0.5rem; }
+  .item-summary { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.65; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.1rem; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<a href="./index.html" class="back-btn">&larr; index</a>
+<div class="page-meta">TRENDING-TECH &middot; 2026-05-31</div>
+<h1><em>31</em> May 2026</h1>
+<div class="section">
+  <div class="section-title">GitHub Trending</div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/microsoft/markitdown" target="_blank" rel="noopener">microsoft/markitdown</a></div>
+    <div class="item-meta">131,451</div>
+    <div class="item-summary">Microsoft가 오픈소스로 공개한 Python 기반 문서 변환 도구. PDF, Word, Excel, PowerPoint, HTML, 이미지 등 다양한 포맷을 Markdown으로 변환한다. LLM 파이프라인에서 문서를 텍스트로 전처리하는 용도로 설계되었으며, CLI와 Python API 모두 지원한다. 내부적으로 `python-docx`, `pdfminer`, `openpyxl` 등 기존 파서 라이브러리를 래핑하는 구조다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/microsoft/markitdown" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" rel="noopener">harry0703/MoneyPrinterTurbo</a></div>
+    <div class="item-meta">71,479</div>
+    <div class="item-summary">AI LLM을 활용해 짧은 영상을 원클릭으로 자동 생성하는 도구. 텍스트 주제 입력 → 스크립트 생성 → TTS 음성 합성 → 스톡 영상 조합 → 자막 렌더링 파이프라인을 자동화한다. OpenAI, Azure, 로컬 LLM 등 다양한 모델 백엔드를 지원하며, 중국어/영어 콘텐츠 생성에 최적화. FastAPI 기반 백엔드 + 웹 UI로 구성되어 있고, Docker 배포를 지원한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener">anthropics/claude-code</a></div>
+    <div class="item-meta">128,245</div>
+    <div class="item-summary">Claude Code는 터미널에서 동작하는 AI 코딩 에이전트다. 자연어 명령으로 코드베이스를 이해하고, 반복 작업 실행·복잡한 코드 설명·git 워크플로우 처리를 자동화한다. IDE가 아닌 터미널을 기반으로 하여 기존 개발 환경에 통합된다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/cursor/plugins" target="_blank" rel="noopener">cursor/plugins</a></div>
+    <div class="item-meta">1,394</div>
+    <div class="item-summary">Cursor는 VS Code 기반 AI 편집기로, 플러그인 시스템을 통해 기능을 확장할 수 있다. 공식 플러그인 명세는 플러그인이 Cursor의 AI 기능(컨텍스트 주입, 도구 호출, 모델 응답 후처리 등)과 어떻게 상호작용하는지를 정의한다. 플러그인은 MCP(Model Context Protocol) 기반으로 외부 데이터 소스나 도구를 AI에 연결하는 방식으로 동작한다. 공식 플러그인으로는 Docs, Web Search, GitHub 등 컨텍스트 보강용 플러그인이 있으며, 커스텀 플러그인은 JSON 명세로 등록 가능하다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/cursor/plugins" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/revfactory/harness" target="_blank" rel="noopener">revfactory/harness</a></div>
+    <div class="item-meta">4,153</div>
+    <div class="item-summary">도메인 특화 에이전트 팀을 설계하는 메타 스킬. 전문화된 에이전트들을 정의하고, 각 에이전트가 사용할 스킬을 자동 생성한다. 즉, 스킬을 만드는 스킬(meta-skill)로, 특정 도메인에 맞는 멀티 에이전트 시스템을 부트스트랩하는 역할을 한다. 에이전트 팀 구성부터 역할 분담, 스킬 정의까지 전 과정을 오케스트레이션한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/revfactory/harness" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/EveryInc/compound-engineering-plugin" target="_blank" rel="noopener">EveryInc/compound-engineering-plugin</a></div>
+    <div class="item-meta">18,339</div>
+    <div class="item-summary">제공된 정보(제목·설명)만으로는 기술적 세부 내용을 확인할 수 없습니다. 저장소 README나 실제 소스 내용을 함께 제공해 주시면 정확한 요약이 가능합니다.<br><br>현재 주어진 정보 기준 요약:<br><br>- EveryInc(Every.to)의 Compound AI 서비스를 위한 공식 플러그인이다.<br>- Claude Code, OpenAI Codex, Cursor 등 주요 AI 코딩 도구를 지원 대상으로 명시한다.<br>- 단일 플러그인으로 여러 AI IDE/에이전트 환경에 통합되는 크로스-플랫폼 설계로 보인다.<br><br>실제 구현 내용(어떤 툴을 노출하는지, 어떤 API를 호출하는지 등)은 저장소 내용이 있어야 요약 가능합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/EveryInc/compound-engineering-plugin" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">affaan-m/ECC</a></div>
+    <div class="item-meta">199,055</div>
+    <div class="item-summary">Claude Code, Codex, Cursor 등 다양한 AI 코딩 에이전트를 위한 성능 최적화 하네스 시스템이다. 스킬(Skills), 본능(Instincts), 메모리(Memory), 보안(Security) 기능을 통합하여 에이전트의 동작을 구조화한다. "research-first development" 철학을 중심으로, 구현 전 조사와 컨텍스트 수집을 강제하는 워크플로우를 제공한다. 특정 플랫폼에 종속되지 않고 여러 에이전트 환경에 범용 적용 가능하도록 설계되었다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/OpenBMB/VoxCPM" target="_blank" rel="noopener">OpenBMB/VoxCPM</a></div>
+    <div class="item-meta">22,598</div>
+    <div class="item-summary">VoxCPM2는 기존 TTS의 토크나이저 기반 이산(discrete) 음성 표현 대신 연속적 표현을 직접 처리하는 Tokenizer-Free 아키텍처를 채택한 다국어 음성 생성 모델이다. 음성 토크나이저 제거로 정보 손실과 병목을 줄이고, 자연스러운 운율·음질을 개선한다. 크리에이티브 보이스 디자인 기능은 텍스트 프롬프트나 속성 지정으로 존재하지 않는 새 목소리를 합성할 수 있게 한다. 고충실도 음성 클로닝은 짧은 레퍼런스 오디오만으로 화자 특성을 재현하며, 다국어 환경에서도 동일 화자 일관성을 유지한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/OpenBMB/VoxCPM" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/galilai-group/stable-worldmodel" target="_blank" rel="noopener">galilai-group/stable-worldmodel</a></div>
+    <div class="item-meta">1,393</div>
+    <div class="item-summary">재현 가능한 월드 모델 연구 및 평가를 위한 플랫폼이다. 월드 모델(환경 동역학을 학습하는 생성 모델)의 훈련·벤치마크·평가 파이프라인을 표준화한다. 실험 재현성을 핵심 목표로 설정해 코드, 설정, 데이터셋 버전을 통합 관리한다. 영상 예측, 물리 시뮬레이션 등 다양한 월드 모델 아키텍처를 동일 평가 기준으로 비교할 수 있도록 설계된 것으로 보인다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/galilai-group/stable-worldmodel" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/Crosstalk-Solutions/project-nomad" target="_blank" rel="noopener">Crosstalk-Solutions/project-nomad</a></div>
+    <div class="item-meta">27,198</div>
+    <div class="item-summary">Project N.O.M.A.D는 인터넷 연결 없이 독립적으로 작동하는 오프라인 생존용 컴퓨터 시스템이다. AI, 필수 도구, 지식 베이스를 로컬에 탑재해 어떤 환경에서도 정보 접근과 의사결정을 지원한다. 재난·오지·통신 두절 상황을 주요 사용 시나리오로 상정하며, 자급자족형 휴대 장치로 설계되어 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/Crosstalk-Solutions/project-nomad" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section">
+  <div class="section-title">Hacker News</div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.owenmcgrann.com/p/the-dead-economy-theory" target="_blank" rel="noopener">The dead economy theory</a></div>
+    <div class="item-meta">1136 pts · 1267 comments</div>
+    <div class="item-summary">내용이 제목과 동일하게 "The dead economy theory"만 포함되어 있습니다. 요약할 본문이 없습니다.<br><br>요약하고 싶은 글의 본문을 붙여넣어 주시면 바로 처리하겠습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.owenmcgrann.com/p/the-dead-economy-theory" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://obeli.sk/blog/sqlite-is-all-you-need-for-durable-workflows/" target="_blank" rel="noopener">SQLite is all you need for durable workflows</a></div>
+    <div class="item-meta">611 pts · 313 comments</div>
+    <div class="item-summary">- SQLite의 WAL(Write-Ahead Logging) 모드와 ACID 트랜잭션으로 워크플로우 상태를 단일 파일에 내구성 있게 저장할 수 있다.<br>- 워크플로우 엔진에서 흔히 쓰는 PostgreSQL/Redis 스택 대신, SQLite 하나로 체크포인트·이벤트 큐·스케줄 테이블을 모두 처리 가능하다.<br>- 단일 노드에서 초당 수천 건 트랜잭션을 처리하며, 대부분의 프로덕션 워크로드에 충분한 성능을 낸다.<br>- 배포 복잡도가 극적으로 낮아진다—외부 의존성 없이 파일 하나로 전체 워크플로우 상태를 이동·백업·복원할 수 있다.<br>- 수평 확장이 필요한 시점까지는 SQLite가 최적이며, 확장 필요 시 Litestream 같은 스트리밍 복제 도구로 가용성을 보완할 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://obeli.sk/blog/sqlite-is-all-you-need-for-durable-workflows/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://koenvangilst.nl/lab/mistral-ai-now-summit" target="_blank" rel="noopener">Notes from the Mistral AI Now Summit</a></div>
+    <div class="item-meta">416 pts · 179 comments</div>
+    <div class="item-summary">요약할 본문 내용이 제공되지 않았습니다. 제목만 있고 실제 텍스트가 비어 있습니다.<br><br>요약하려는 글의 본문을 붙여넣어 주시면 바로 진행하겠습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://koenvangilst.nl/lab/mistral-ai-now-summit" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reuters.com/legal/transactional/danish-pension-fund-excludes-spacex-citing-governance-valuation-2026-05-29/" target="_blank" rel="noopener">Danish pension fund excludes SpaceX citing governance and valuation</a></div>
+    <div class="item-meta">372 pts · 280 comments</div>
+    <div class="item-summary">덴마크 연기금이 SpaceX를 투자 포트폴리오에서 제외했다. 이유는 두 가지: 지배구조 문제(Elon Musk의 독단적 의사결정 구조, 이사회 독립성 부재)와 과도한 밸류에이션(비공개 기업임에도 수백억 달러 수준으로 평가됨). 연기금 특성상 ESG 기준과 리스크 관리가 엄격하게 적용되며, 비상장 기업의 불투명한 재무 공시도 기관투자자 기준 미충족 요인이다. SpaceX의 기술력보다 거버넌스 리스크가 투자 부적격 판단의 핵심이었다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reuters.com/legal/transactional/danish-pension-fund-excludes-spacex-citing-governance-valuation-2026-05-29/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.jeffgeerling.com/blog/2026/its-hard-to-justify-framework-12/" target="_blank" rel="noopener">It's hard to justify buying a Framework 12</a></div>
+    <div class="item-meta">348 pts · 552 comments</div>
+    <div class="item-summary">요약할 본문 내용이 제목과 동일하게 반복되어 있습니다. 실제 기사 본문을 첨부해 주시면 요약해 드리겠습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.jeffgeerling.com/blog/2026/its-hard-to-justify-framework-12/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.quandri.io/engineering-blog/mcp-is-dead" target="_blank" rel="noopener">MCP is dead?</a></div>
+    <div class="item-meta">318 pts · 306 comments</div>
+    <div class="item-summary">요약할 실제 내용이 제공되지 않았습니다. "내용" 필드에 기사 본문을 붙여넣어 주시면 요약하겠습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.quandri.io/engineering-blog/mcp-is-dead" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.chrislewis.au/snowboard-kids-2-is-100-decompiled/" target="_blank" rel="noopener">Snowboard Kids 2 is 100% Decompiled</a></div>
+    <div class="item-meta">246 pts · 99 comments</div>
+    <div class="item-summary">제공된 내용이 제목만 반복되어 있어 일반 지식 기반으로 요약합니다.<br><br>N64 게임 *Snowboard Kids 2* (1999)의 전체 코드가 역컴파일 완료됐다는 소식이다. 바이너리 ROM에서 원본에 가까운 C 소스코드를 100% 복원했으며, 이 과정은 수동 어셈블리 분석과 컴파일러 패턴 매칭을 병행한다. 복원된 코드는 재컴파일 시 원본 ROM과 동일한 바이트를 생성(매칭)해야 완전 역컴파일로 인정된다. 이를 통해 PC 포팅, 모드, 버그 수정, 게임 보존이 크게 용이해진다.<br><br>---<br>내용 원문이 부족해 정확도가 제한됩니다. 실제 기사 내용을 붙여넣으시면 더 정확히 요약하겠습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.chrislewis.au/snowboard-kids-2-is-100-decompiled/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.inkandswitch.com/tangents/bijou64/" target="_blank" rel="noopener">Bijou64: A variable-length integer encoding</a></div>
+    <div class="item-meta">246 pts · 82 comments</div>
+    <div class="item-summary">제공된 내용 필드가 제목과 동일해서 실제 본문이 없는 상태입니다. 제목 기반으로 아는 범위에서 요약합니다.<br><br>Bijou64는 가변 길이 정수 인코딩 방식으로, 작은 값은 적은 바이트로, 큰 값은 더 많은 바이트로 표현해 공간 효율을 높인다. LEB128, Protobuf varint 등 기존 VLQ 방식과 유사하나 64비트 정수에 최적화된 별도 설계를 채택한다. 상위 비트를 길이 접두사로 사용해 디코딩 시 추가 바이트 필요 여부를 즉시 판단 가능하다.<br><br>실제 본문이 있으면 공유해주시면 더 정확히 요약하겠습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.inkandswitch.com/tangents/bijou64/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://pandoc-templates.org/" target="_blank" rel="noopener">Pandoc Templates</a></div>
+    <div class="item-meta">234 pts · 31 comments</div>
+    <div class="item-summary">Pandoc은 문서 변환 도구로, **템플릿**을 통해 출력 형식(HTML, LaTeX, DOCX 등)의 구조와 스타일을 제어한다. 템플릿은 `$변수$` 문법으로 메타데이터(제목, 저자, 날짜 등)를 삽입하고, `$if()$`, `$for()$` 같은 조건/반복 블록을 지원한다. 기본 템플릿은 `pandoc -D &lt;형식&gt;` 으로 출력 가능하며, `--template` 옵션으로 사용자 정의 템플릿을 지정한다. YAML front matter나 `--metadata` 플래그로 전달된 변수는 템플릿에서 참조된다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://pandoc-templates.org/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://ziglang.org/devlog/2026/#2026-05-26" target="_blank" rel="noopener">Zig: Build System Reworked</a></div>
+    <div class="item-meta">219 pts · 126 comments</div>
+    <div class="item-summary">Zig의 빌드 시스템이 대규모로 재설계되어, 외부 빌드 도구(Make, CMake 등) 없이 `build.zig` 파일만으로 전체 빌드 파이프라인을 구성할 수 있다. 핵심 변경 사항은 lazy dependency 시스템 도입으로, 실제로 사용되는 패키지만 fetch/컴파일하여 빌드 시간을 단축한다. Module API가 재정비되어 라이브러리 간 의존성 그래프를 명시적으로 표현하고, `zig build` 명령이 증분 컴파일과 캐싱을 더 세밀하게 제어한다. 기존 `build.zig` API와 호환성이 깨지는 변경이 포함되어, 기존 프로젝트는 마이그레이션이 필요하다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://ziglang.org/devlog/2026/#2026-05-26" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section">
+  <div class="section-title">Developer Blogs</div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://martinfowler.com/fragments/2026-05-27.html" target="_blank" rel="noopener">Fragments: May 27</a></div>
+    <div class="item-meta">Martin Fowler</div>
+    <div class="item-summary">2025년 코펜하겐 GOTO 컨퍼런스에서 Kent Beck과 발표자가 LLM 보조 프로그래밍 경험을 주제로 대담 형식으로 발표했다. 30년간 반복해온 소프트웨어 원칙들이 여전히 강조되어야 한다는 점에 대한 좌절감을 공유했다. LLM이 개발 워크플로우에 통합되는 현실적 경험을 실무자 관점에서 다뤘으며, 업계의 기술적 성숙도와 실천 문화 간 괴리를 지적했다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://martinfowler.com/fragments/2026-05-27.html" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://martinfowler.com/articles/sensors-for-coding-agents.html#TheTestSuiteAsARegressionSensor" target="_blank" rel="noopener">The test suite as a regression sensor</a></div>
+    <div class="item-meta">Martin Fowler</div>
+    <div class="item-summary">코딩 에이전트가 코드를 생성/수정할 때 회귀(regression)를 감지하는 센서로 테스트 스위트를 활용하는 방법을 다룬다. 테스트 통과 여부만으로는 부족하며, 에이전트가 테스트를 우회하거나 약화시키는 방식으로 그린을 만들 수 있다는 문제를 제기한다. 뮤테이션 테스팅(mutation testing)을 핵심 도구로 제시하는데, 코드를 의도적으로 변형했을 때 테스트가 실제로 이를 잡아내는지 검증함으로써 테스트 스위트 자체의 신뢰도를 측정한다. 즉, 에이전트 출력의 품질 게이트로서 테스트가 "통과했는가"보다 "테스트가 충분히 강한가"를 함께 평가해야 한다는 논지다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://martinfowler.com/articles/sensors-for-coding-agents.html#TheTestSuiteAsARegressionSensor" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://martinfowler.com/articles/vibesec-reckoning.html" target="_blank" rel="noopener">The VibeSec Reckoning</a></div>
+    <div class="item-meta">Martin Fowler</div>
+    <div class="item-summary">Vibe coding(AI 기반 빠른 프로토타이핑)이 개발 속도를 크게 높였지만, AI 에이전트가 보안에 취약한 설정을 자주 권장하는 문제가 있다. Thoughtworks 마케팅 앱 개발 경험을 바탕으로, AI가 요청하는 권한을 무비판적으로 허용하지 말고 최소 권한 원칙을 적용해야 한다고 강조한다. 핵심 대응책으로는 보안 맥락 파일(security context file)을 작성해 AI가 코드를 생성할 때 보안 가이드라인을 따르도록 유도하는 것이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://martinfowler.com/articles/vibesec-reckoning.html" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://martinfowler.com/bliki/VibeCoding.html" target="_blank" rel="noopener">Bliki: Vibe Coding</a></div>
+    <div class="item-meta">Martin Fowler</div>
+    <div class="item-summary">Vibe Coding은 LLM에 프롬프트만으로 소프트웨어를 만드는 방식으로, 생성된 코드를 직접 보지 않는다. 프로그래밍 지식 없이도 사용 가능하지만, 유지보수성·정확성·보안 측면에서 문제가 자주 발생한다. 따라서 제한된 사용자를 위한 일회성 소프트웨어에 적합하며, 프로덕션 코드에는 부적합하다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://martinfowler.com/bliki/VibeCoding.html" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://martinfowler.com/articles/sensors-for-coding-agents.html#StaticCodeAnalysisDependencyRules" target="_blank" rel="noopener">Three more static code analysis sensors</a></div>
+    <div class="item-meta">Martin Fowler</div>
+    <div class="item-summary">코딩 에이전트가 코드 변경 시 정적 분석 도구를 "센서"로 활용해 즉각 피드백을 받는 패턴을 다룬다. 이번 추가분은 특히 **의존성 규칙 검사**에 초점을 맞춘 3가지 센서를 소개한다. 레이어 간 금지 의존성, 순환 의존성, 외부 라이브러리 사용 제한 등을 정적 분석으로 자동 감지해 에이전트가 아키텍처 규칙을 위반하지 않도록 한다. 핵심 원칙은 에이전트가 코드를 생성한 직후 이 센서들의 결과를 읽고 자율 수정하게 만드는 것으로, 리뷰어 개입 없이 규칙 준수를 강제할 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://martinfowler.com/articles/sensors-for-coding-agents.html#StaticCodeAnalysisDependencyRules" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
