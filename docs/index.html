@@ -47,6 +47,16 @@
   .date-link { font-family: var(--mono); font-size: 0.75rem; padding: 0.25rem 0.6rem; border: 1px solid var(--rule); color: var(--ink-soft); text-decoration: none; transition: all 0.12s; }
   .date-link:hover { border-color: var(--accent); color: var(--accent-deep); background: var(--accent-wash); }
 </style>
+<style>
+  .month-weeks { display: none; padding: 0.5rem 0; }
+  .week-link { display: flex; align-items: center; gap: 0.8rem; padding: 0.65rem 0.5rem; text-decoration: none; color: var(--ink); border-bottom: 1px solid var(--rule); transition: background 0.1s; }
+  .week-link:last-child { border-bottom: none; }
+  .week-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .week-label { font-size: 0.88rem; font-weight: 500; flex: 1; }
+  .week-count { font-family: var(--mono); font-size: 0.62rem; color: var(--ink-faint); }
+  .week-arrow { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-faint); }
+  .week-link:hover .week-arrow { color: var(--accent); }
+</style>
 </head>
 <body>
 <nav class="sidebar">
@@ -64,8 +74,11 @@
     <span class="month-label">2026.05 May</span>
     <span class="month-arrow">&rarr;</span>
   </button>
-  <div class="month-highlights"><ul><li>Uber GenAI 코드 리뷰, 주 6.5만 변경의 90%를 자동 처리</li><li>Uber Apache Hudi, 하루 6조 행·10PB 규모 데이터 파이프라인 운영</li></ul></div>
-  <div class="month-dates"><a href="./2026-05-31.html" class="date-link">2026-05-31</a></div>
+  <div class="month-weeks"><a href="./2026-W22.html" class="week-link">
+  <span class="week-label">2026년 5월 22주 (5/25 – 5/31)</span>
+  <span class="week-count">1일</span>
+  <span class="week-arrow">&rarr;</span>
+</a></div>
 </div></div>
 </main>
 <script>
@@ -77,8 +90,8 @@ function showYear(y) {
 }
 function toggleMonth(btn) {
   btn.classList.toggle('open');
-  var dates = btn.nextElementSibling.nextElementSibling;
-  dates.style.display = dates.style.display === 'flex' ? 'none' : 'flex';
+  var weeks = btn.nextElementSibling;
+  weeks.style.display = weeks.style.display === 'block' ? 'none' : 'block';
 }
 if ('2026') showYear('2026');
 </script>
