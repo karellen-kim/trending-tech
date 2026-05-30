@@ -66,9 +66,47 @@ def fetch_alibaba(max_items: int = MAX_SCRAPER_ITEMS) -> list[dict]:
             break
     return items
 
+def fetch_spotify(max_items: int = MAX_SCRAPER_ITEMS) -> list[dict]:
+    from datetime import date
+    resp = requests.get("https://engineering.atspotify.com/", headers=_HEADERS, timeout=15)
+    resp.raise_for_status()
+    soup = BeautifulSoup(resp.text, "html.parser")
+    today = date.today()
+    # URL 패턴: /YYYY/M/slug — 현재 월 또는 직전 월 기준
+    pattern = re.compile(r'^/(\d{4})/(\d{1,2})/')
+    seen, items = set(), []
+    for a in soup.find_all("a", href=True):
+        href = a["href"]
+        m = pattern.match(href)
+        if not m:
+            continue
+        y, mo = int(m.group(1)), int(m.group(2))
+        # 이번 달 또는 지난달만 포함
+        if not ((y == today.year and mo == today.month) or
+                (y == today.year and mo == today.month - 1) or
+                (today.month == 1 and y == today.year - 1 and mo == 12)):
+            continue
+        full_url = f"https://engineering.atspotify.com{href}"
+        if full_url in seen:
+            continue
+        title = a.get_text(strip=True)
+        if len(title) < 15:
+            continue
+        seen.add(full_url)
+        items.append({
+            "title": title,
+            "url": full_url,
+            "source": "Spotify Engineering",
+            "summary": "",
+        })
+        if len(items) >= max_items:
+            break
+    return items
+
 _SCRAPERS = {
     "Uber Engineering": fetch_uber,
     "Alibaba Cloud Blog": fetch_alibaba,
+    "Spotify Engineering": fetch_spotify,
 }
 
 def fetch_all_scraped() -> list[dict]:
