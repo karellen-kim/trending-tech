@@ -1,5 +1,12 @@
 import subprocess
 
+TRANSLATE_TITLE_PROMPT = """다음 영어 제목을 자연스러운 한국어로 번역해줘.
+규칙: 번역문만 출력해. 설명, 부연, 따옴표 없이.
+고유명사(제품명, 회사명, 기술명)는 그대로 유지해.
+
+제목: {title}
+번역:"""
+
 SUMMARIZE_PROMPT = """아래 [내용]을 한국어로 3~5줄로 요약해줘.
 규칙: 반드시 [내용]에 있는 정보만 사용해. 추가 지식이나 추론으로 내용을 만들어내지 마.
 내용이 불충분하면 빈 문자열만 반환해.
@@ -22,6 +29,14 @@ def _run_claude(prompt: str, timeout: int = 60) -> str:
     if result.returncode != 0:
         return ""
     return result.stdout.strip()
+
+def translate_title(title: str) -> str:
+    if not title or not title.strip():
+        return title
+    ascii_ratio = sum(1 for c in title if ord(c) < 128) / max(len(title), 1)
+    if ascii_ratio < 0.6:
+        return title
+    return _run_claude(TRANSLATE_TITLE_PROMPT.format(title=title), timeout=30)
 
 def summarize_item(title: str, content: str) -> str:
     if not content or len(content.strip()) < 150:

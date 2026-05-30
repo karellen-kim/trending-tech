@@ -26,7 +26,31 @@ _HEADERS = {
 }
 
 def _strip_category_prefix(text: str) -> str:
-    return re.sub(r'^[A-Z]{2,}', '', text).strip()
+    # e.g. "RESEARCHMoirai" → "Moirai", "TECHApache" → "Apache"
+    m = re.match(r'^[A-Z]{4,}(?=[A-Z][a-z])', text)
+    if m:
+        return text[m.end():].strip()
+    # e.g. "TECHuReview" → "uReview"
+    m = re.match(r'^[A-Z]{4,}(?=[a-z])', text)
+    if m:
+        return text[m.end():].strip()
+    # e.g. "TECH BLOG Apache" → "Apache"
+    return re.sub(r'^(?:[A-Z]{2,}\s+)+', '', text).strip()
+
+def _fetch_article_text(url: str, max_chars: int = 2000) -> str:
+    try:
+        resp = requests.get(url, headers=_HEADERS, timeout=10)
+        resp.raise_for_status()
+        soup = BeautifulSoup(resp.text, "html.parser")
+        for tag in soup(["script", "style", "nav", "footer", "header"]):
+            tag.decompose()
+        container = soup.find("article") or soup.find("main") or soup.body
+        if not container:
+            return ""
+        text = " ".join(container.get_text(" ", strip=True).split())
+        return text[:max_chars]
+    except Exception:
+        return ""
 
 def fetch_uber(max_items: int = MAX_SCRAPER_ITEMS) -> list[dict]:
     resp = requests.get("https://eng.uber.com/", headers=_HEADERS, timeout=15)
@@ -50,6 +74,7 @@ def fetch_uber(max_items: int = MAX_SCRAPER_ITEMS) -> list[dict]:
             "url": href,
             "source": "Uber Engineering",
             "summary": "",
+            "content": _fetch_article_text(href),
         })
         if len(items) >= max_items:
             break
@@ -90,6 +115,7 @@ def fetch_alibaba(max_items: int = MAX_SCRAPER_ITEMS) -> list[dict]:
             "url": href,
             "source": "Alibaba Cloud Blog",
             "summary": "",
+            "content": _fetch_article_text(href),
         })
         if len(items) >= max_items:
             break
@@ -127,6 +153,7 @@ def fetch_spotify(max_items: int = MAX_SCRAPER_ITEMS) -> list[dict]:
             "url": full_url,
             "source": "Spotify Engineering",
             "summary": "",
+            "content": _fetch_article_text(full_url),
         })
         if len(items) >= max_items:
             break

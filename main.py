@@ -10,15 +10,18 @@ from sources.rss import fetch_all_blogs
 from sources.arxiv import fetch_all_papers
 from sources.reddit import fetch_all_reddit
 from sources.scraper import fetch_all_scraped
-from summarizer import summarize_item, filter_important_papers, generate_highlights
+from summarizer import summarize_item, filter_important_papers, generate_highlights, translate_title
 from renderer import render_daily_page, render_weekly_page, render_index_page
 from notifier import send_slack
 
 
 def _add_summaries(items: list[dict], content_key: str) -> list[dict]:
     for item in items:
-        content = item.get(content_key) or item.get("description") or item.get("abstract") or ""
-        item["summary"] = summarize_item(item.get("title") or item.get("name", ""), content)
+        content = (item.get(content_key) or item.get("content") or
+                   item.get("description") or item.get("abstract") or "")
+        title = item.get("title") or item.get("name", "")
+        item["summary"] = summarize_item(title, content)
+        item["title_ko"] = translate_title(title)
     return items
 
 

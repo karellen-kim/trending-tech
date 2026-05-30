@@ -107,10 +107,11 @@ _MONTH_NAMES = {"01":"Jan","02":"Feb","03":"Mar","04":"Apr","05":"May","06":"Jun
 def _e(s: str) -> str:
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
-def _item_html(name: str, url: str, meta: str, summary: str) -> str:
+def _item_html(name: str, url: str, meta: str, summary: str, name_ko: str = "") -> str:
+    display_name = name_ko if name_ko and name_ko.strip() else name
     return f"""<div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="{url}" target="_blank" rel="noopener">{_e(name)}</a></div>
+    <div class="item-name"><a href="{url}" target="_blank" rel="noopener">{_e(display_name)}</a></div>
     <div class="item-meta">{_e(meta)}</div>
     <div class="item-summary">{_e(summary).replace(chr(10), "<br>")}</div>
   </div>
@@ -159,17 +160,17 @@ def render_daily_page(data: dict) -> str:
 
     if company_blogs:
         sections += _section_html("tech-blog", "TECH", "기술 블로그", "".join(
-            _item_html(i["title"], i["url"], i.get("source",""), i.get("summary",""))
+            _item_html(i["title"], i["url"], i.get("source",""), i.get("summary",""), i.get("title_ko",""))
             for i in company_blogs), len(company_blogs))
 
     if dev_blogs:
         sections += _section_html("dev-blogs", "DEV", "개발자 블로그 &amp; SNS", "".join(
-            _item_html(i["title"], i["url"], i.get("source",""), i.get("summary",""))
+            _item_html(i["title"], i["url"], i.get("source",""), i.get("summary",""), i.get("title_ko",""))
             for i in dev_blogs), len(dev_blogs))
 
     if papers:
         sections += _section_html("papers", "PAPER", "AI / LLM 논문", "".join(
-            _item_html(i["title"], i["url"], "arXiv", i.get("summary", i.get("abstract","")))
+            _item_html(i["title"], i["url"], "arXiv", i.get("summary", i.get("abstract","")), i.get("title_ko",""))
             for i in papers), len(papers))
 
     if hn_reddit:
@@ -177,7 +178,7 @@ def render_daily_page(data: dict) -> str:
             _item_html(
                 i.get("title",""), i["url"],
                 f"{i.get('source','HN')} · {i.get('points',0)} pts" if "points" in i else i.get("source",""),
-                i.get("summary",""))
+                i.get("summary",""), i.get("title_ko",""))
             for i in hn_reddit), len(hn_reddit))
 
     if github:
