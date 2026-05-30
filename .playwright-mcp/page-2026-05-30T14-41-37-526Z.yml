@@ -1,0 +1,153 @@
+- generic [active] [ref=e1]:
+  - link "← notebook" [ref=e2] [cursor=pointer]:
+    - /url: ./index.html
+    - generic [ref=e3]: ←
+    - generic [ref=e4]: notebook
+  - banner [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: karellen-kim · notebook
+      - generic [ref=e8]: A–Z
+    - heading "all notes" [level=1] [ref=e9]:
+      - text: all
+      - emphasis [ref=e10]: notes
+  - generic [ref=e11]:
+    - link "Aerospike 하이브리드 메모리 NoSQL — DRAM Index·SSD Data·Smart Client·XDR·Strong Consistency →" [ref=e12] [cursor=pointer]:
+      - /url: ./aerospike.html
+      - generic [ref=e13]:
+        - emphasis [ref=e15]: Aerospike
+        - generic [ref=e16]: 하이브리드 메모리 NoSQL — DRAM Index·SSD Data·Smart Client·XDR·Strong Consistency
+      - generic [ref=e17]: →
+    - link "Apache Airflow Python DAG 오케스트레이터 — Scheduler·Executor·XCom·TaskFlow API·대용량 운영 →" [ref=e18] [cursor=pointer]:
+      - /url: ./airflow.html
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - text: Apache
+          - emphasis [ref=e21]: Airflow
+        - generic [ref=e22]: Python DAG 오케스트레이터 — Scheduler·Executor·XCom·TaskFlow API·대용량 운영
+      - generic [ref=e23]: →
+    - link "Apache Spark 분산 인메모리 계산 엔진 — RDD·DataFrame·Lazy Evaluation·셔플·Structured Streaming·MLlib →" [ref=e24] [cursor=pointer]:
+      - /url: ./apache-spark.html
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - text: Apache
+          - emphasis [ref=e27]: Spark
+        - generic [ref=e28]: 분산 인메모리 계산 엔진 — RDD·DataFrame·Lazy Evaluation·셔플·Structured Streaming·MLlib
+      - generic [ref=e29]: →
+    - link "Building Effective Agents 워크플로우 5패턴과 에이전트 루프, Augmented LLM 빌딩블록, ACI 설계 →" [ref=e30] [cursor=pointer]:
+      - /url: ./building-effective-agents.html
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - text: Building Effective
+          - emphasis [ref=e33]: Agents
+        - generic [ref=e34]: 워크플로우 5패턴과 에이전트 루프, Augmented LLM 빌딩블록, ACI 설계
+      - generic [ref=e35]: →
+    - link "Concurrency Issues & Solutions Race Condition·Deadlock·MVCC·Optimistic Lock·Redis 분산 락·SKIP LOCKED →" [ref=e36] [cursor=pointer]:
+      - /url: ./concurrency.html
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - emphasis [ref=e39]: Concurrency
+          - text: Issues & Solutions
+        - generic [ref=e40]: Race Condition·Deadlock·MVCC·Optimistic Lock·Redis 분산 락·SKIP LOCKED
+      - generic [ref=e41]: →
+    - link "Distributed Transactions 2PC·Saga·TCC·Outbox Pattern·Temporal·CRDT — 분산 환경 원자성 보장 기법 →" [ref=e42] [cursor=pointer]:
+      - /url: ./distributed-transactions.html
+      - generic [ref=e43]:
+        - generic [ref=e44]:
+          - text: Distributed
+          - emphasis [ref=e45]: Transactions
+        - generic [ref=e46]: 2PC·Saga·TCC·Outbox Pattern·Temporal·CRDT — 분산 환경 원자성 보장 기법
+      - generic [ref=e47]: →
+    - link "Elasticsearch Lucene 역인덱스·BM25·샤드 설계·ILM·kNN 하이브리드 검색·RRF →" [ref=e48] [cursor=pointer]:
+      - /url: ./elasticsearch.html
+      - generic [ref=e49]:
+        - emphasis [ref=e51]: Elasticsearch
+        - generic [ref=e52]: Lucene 역인덱스·BM25·샤드 설계·ILM·kNN 하이브리드 검색·RRF
+      - generic [ref=e53]: →
+    - link "GPU 운영 최적화 아키텍처(SM·HBM·Tensor Core)·분산 학습(FSDP·3D)·추론(vLLM·PagedAttention)·빅테크 대규모 운영 →" [ref=e54] [cursor=pointer]:
+      - /url: ./gpu.html
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - emphasis [ref=e57]: GPU
+          - text: 운영 최적화
+        - generic [ref=e58]: 아키텍처(SM·HBM·Tensor Core)·분산 학습(FSDP·3D)·추론(vLLM·PagedAttention)·빅테크 대규모 운영
+      - generic [ref=e59]: →
+    - link "Apache Kafka 분산 커밋 로그 — 파티션·ISR·EOS 트랜잭션·Zero-Copy·KRaft →" [ref=e60] [cursor=pointer]:
+      - /url: ./kafka.html
+      - generic [ref=e61]:
+        - generic [ref=e62]:
+          - text: Apache
+          - emphasis [ref=e63]: Kafka
+        - generic [ref=e64]: 분산 커밋 로그 — 파티션·ISR·EOS 트랜잭션·Zero-Copy·KRaft
+      - generic [ref=e65]: →
+    - link "Milvus 클라우드 네이티브 벡터 DB — HNSW·IVF-PQ·DiskANN·Growing/Sealed 세그먼트 →" [ref=e66] [cursor=pointer]:
+      - /url: ./milvus.html
+      - generic [ref=e67]:
+        - emphasis [ref=e69]: Milvus
+        - generic [ref=e70]: 클라우드 네이티브 벡터 DB — HNSW·IVF-PQ·DiskANN·Growing/Sealed 세그먼트
+      - generic [ref=e71]: →
+    - link "ML Platforms Design 빅테크 6개 ML 플랫폼 교차 비교 — Uber·Netflix·Meta·Lyft·Airbnb·LinkedIn →" [ref=e72] [cursor=pointer]:
+      - /url: ./ml-platforms-design.html
+      - generic [ref=e73]:
+        - generic [ref=e74]:
+          - text: ML
+          - emphasis [ref=e75]: Platforms Design
+        - generic [ref=e76]: 빅테크 6개 ML 플랫폼 교차 비교 — Uber·Netflix·Meta·Lyft·Airbnb·LinkedIn
+      - generic [ref=e77]: →
+    - link "MongoDB 도큐먼트 모델·WiredTiger MVCC·레플리카셋·샤딩·집계 파이프라인·Change Stream →" [ref=e78] [cursor=pointer]:
+      - /url: ./mongodb.html
+      - generic [ref=e79]:
+        - emphasis [ref=e81]: MongoDB
+        - generic [ref=e82]: 도큐먼트 모델·WiredTiger MVCC·레플리카셋·샤딩·집계 파이프라인·Change Stream
+      - generic [ref=e83]: →
+    - link "Multi-Agent Research System Lead–Subagent 아키텍처, 토큰 15x 경제학, LLM judge 평가, 프로덕션 교훈 →" [ref=e84] [cursor=pointer]:
+      - /url: ./multi-agent-research-system.html
+      - generic [ref=e85]:
+        - generic [ref=e86]:
+          - text: Multi-Agent
+          - emphasis [ref=e87]: Research System
+        - generic [ref=e88]: Lead–Subagent 아키텍처, 토큰 15x 경제학, LLM judge 평가, 프로덕션 교훈
+      - generic [ref=e89]: →
+    - link "Recursive Multi-Agent Systems latent vector 통신으로 토큰 75% 절감, 속도 2.4x, 정확도 +8.3% →" [ref=e90] [cursor=pointer]:
+      - /url: ./recursive-multi-agent-systems.html
+      - generic [ref=e91]:
+        - generic [ref=e92]:
+          - text: Recursive
+          - emphasis [ref=e93]: Multi-Agent Systems
+        - generic [ref=e94]: latent vector 통신으로 토큰 75% 절감, 속도 2.4x, 정확도 +8.3%
+      - generic [ref=e95]: →
+    - link "Uber Delivery Search Platform billion-scale 시맨틱 검색 — two-tower + Matryoshka + int7 양자화 + boolean pre-filter →" [ref=e96] [cursor=pointer]:
+      - /url: ./uber-delivery-search.html
+      - generic [ref=e97]:
+        - generic [ref=e98]:
+          - text: Uber Delivery
+          - emphasis [ref=e99]: Search Platform
+        - generic [ref=e100]: billion-scale 시맨틱 검색 — two-tower + Matryoshka + int7 양자화 + boolean pre-filter
+      - generic [ref=e101]: →
+    - link "Uber Michelangelo 9년 ML 플랫폼 진화 — Spark 모놀리식 → PyML → MAJC → Ray on K8s →" [ref=e102] [cursor=pointer]:
+      - /url: ./uber-michelangelo.html
+      - generic [ref=e103]:
+        - generic [ref=e104]:
+          - text: Uber
+          - emphasis [ref=e105]: Michelangelo
+        - generic [ref=e106]: 9년 ML 플랫폼 진화 — Spark 모놀리식 → PyML → MAJC → Ray on K8s
+      - generic [ref=e107]: →
+    - link "Uber Search Platform Elasticsearch → Sia → OpenSearch 10년 궤적, pull-based 인제스천, active-active →" [ref=e108] [cursor=pointer]:
+      - /url: ./uber-search-platform.html
+      - generic [ref=e109]:
+        - generic [ref=e110]:
+          - text: Uber
+          - emphasis [ref=e111]: Search Platform
+        - generic [ref=e112]: Elasticsearch → Sia → OpenSearch 10년 궤적, pull-based 인제스천, active-active
+      - generic [ref=e113]: →
+    - link "Vector Search Engines HNSW/IVF/DiskANN + Milvus/Qdrant/Weaviate/pgvector 종합 비교, 워크로드별 선택 →" [ref=e114] [cursor=pointer]:
+      - /url: ./vector-search-engines.html
+      - generic [ref=e115]:
+        - generic [ref=e116]:
+          - text: Vector Search
+          - emphasis [ref=e117]: Engines
+        - generic [ref=e118]: HNSW/IVF/DiskANN + Milvus/Qdrant/Weaviate/pgvector 종합 비교, 워크로드별 선택
+      - generic [ref=e119]: →
+  - contentinfo [ref=e120]:
+    - generic [ref=e121]: karellen-kim · 학습 노트
+    - link "github.com/karellen-kim/karellen-kim" [ref=e122] [cursor=pointer]:
+      - /url: https://github.com/karellen-kim/karellen-kim

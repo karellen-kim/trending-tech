@@ -37,6 +37,12 @@ _DAILY_CSS = """<style>
   .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.1rem; }
   .item-arrow a { color: inherit; text-decoration: none; }
   .item-arrow a:hover { color: var(--accent); }
+  .highlight-section { background: var(--accent-wash); border-left: 3px solid var(--accent); padding: 1.2rem 1.5rem; margin-bottom: 3rem; }
+  .highlight-section .section-title { border-bottom-color: var(--accent); color: var(--accent-deep); }
+  .highlight-list { list-style: none; padding: 0; margin-top: 0.8rem; }
+  .highlight-list li { font-size: 0.92rem; color: var(--ink); padding: 0.35rem 0 0.35rem 1.2rem; position: relative; border-bottom: 1px solid var(--accent-wash); }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.45rem; }
 </style>"""
 
 _INDEX_CSS = """<style>
@@ -90,27 +96,47 @@ def _section_html(title: str, items_html: str) -> str:
   {items_html}
 </div>"""
 
+def _highlights_html(items: list[str]) -> str:
+    if not items:
+        return ""
+    rows = "".join(f'<li>{_e(h)}</li>' for h in items)
+    return f"""<div class="section highlight-section">
+  <div class="section-title">오늘의 하이라이트</div>
+  <ul class="highlight-list">{rows}</ul>
+</div>"""
+
 def render_daily_page(data: dict) -> str:
     date = data["date"]
     y, m, d = date.split("-")
 
-    sections = ""
-    if data.get("github"):
-        sections += _section_html("GitHub Trending", "".join(
-            _item_html(i["name"], i["url"], i.get("stars_today", ""), i.get("summary", i.get("description", "")))
-            for i in data["github"]))
-    if data.get("hn"):
-        sections += _section_html("Hacker News", "".join(
-            _item_html(i["title"], i["url"], f"{i.get('points', 0)} pts · {i.get('comments', 0)} comments", i.get("summary", ""))
-            for i in data["hn"]))
+    sections = _highlights_html(data.get("highlights", []))
+
+    if data.get("company_blogs"):
+        sections += _section_html("Tech Blog", "".join(
+            _item_html(i["title"], i["url"], i.get("source", ""), i.get("summary", ""))
+            for i in data["company_blogs"]))
+    if data.get("dev_blogs"):
+        sections += _section_html("Developer Blogs &amp; SNS", "".join(
+            _item_html(i["title"], i["url"], i.get("source", ""), i.get("summary", ""))
+            for i in data["dev_blogs"]))
     if data.get("papers"):
         sections += _section_html("AI / LLM Papers", "".join(
             _item_html(i["title"], i["url"], "arXiv", i.get("summary", i.get("abstract", "")))
             for i in data["papers"]))
-    if data.get("blogs"):
-        sections += _section_html("Developer Blogs", "".join(
-            _item_html(i["title"], i["url"], i.get("source", ""), i.get("summary", ""))
-            for i in data["blogs"]))
+    hn_reddit = data.get("hn", []) + data.get("reddit", [])
+    if hn_reddit:
+        sections += _section_html("Hacker News &amp; Reddit", "".join(
+            _item_html(
+                i.get("title", ""),
+                i["url"],
+                f"{i.get('source','HN')} · {i.get('points',0)} pts" if "points" in i else i.get("source", ""),
+                i.get("summary", "")
+            )
+            for i in hn_reddit))
+    if data.get("github"):
+        sections += _section_html("GitHub Trending", "".join(
+            _item_html(i["name"], i["url"], i.get("stars_today", ""), i.get("summary", i.get("description", "")))
+            for i in data["github"]))
 
     return f"""<!DOCTYPE html>
 <html lang="ko">

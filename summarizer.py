@@ -23,6 +23,32 @@ def _run_claude(prompt: str, timeout: int = 60) -> str:
 def summarize_item(title: str, content: str) -> str:
     return _run_claude(SUMMARIZE_PROMPT.format(title=title, content=content[:2000]))
 
+HIGHLIGHT_PROMPT = """오늘의 개발/기술 트렌드 항목들을 보고, 가장 중요하고 임팩트 있는 것 5개를 골라서
+각각 한국어로 한 줄(50자 이내)로 요약해줘.
+형식: 각 줄에 하나씩, 번호 없이, 글머리 기호 없이.
+
+{items_text}"""
+
+def generate_highlights(data: dict) -> list[str]:
+    items = []
+    for i in data.get("company_blogs", [])[:3]:
+        items.append(f"[{i.get('source','')}] {i.get('title','')}")
+    for i in data.get("dev_blogs", [])[:3]:
+        items.append(f"[{i.get('source','')}] {i.get('title','')}")
+    for i in data.get("papers", [])[:3]:
+        items.append(f"[논문] {i.get('title','')}")
+    for i in data.get("hn", [])[:3]:
+        items.append(f"[HN] {i.get('title','')}")
+    for i in data.get("reddit", [])[:3]:
+        items.append(f"[Reddit/{i.get('source','')}] {i.get('title','')}")
+    for i in data.get("github", [])[:3]:
+        items.append(f"[GitHub] {i.get('name','')}: {i.get('description','')[:60]}")
+    if not items:
+        return []
+    items_text = "\n".join(items[:20])
+    response = _run_claude(HIGHLIGHT_PROMPT.format(items_text=items_text), timeout=90)
+    return [line.strip() for line in response.splitlines() if line.strip()][:5]
+
 def filter_important_papers(papers: list[dict], max_items: int = 5) -> list[dict]:
     if not papers:
         return []
