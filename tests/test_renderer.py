@@ -58,4 +58,4 @@ def test_render_index_page_is_html():
     html = render_index_page(entries)
     assert html.startswith("<!DOCTYPE html>")
     assert "2026" in html
-    assert "2026-05-31" in html
+    assert "2026-W22" in html  # 날짜 대신 주차 링크

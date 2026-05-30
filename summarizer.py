@@ -1,8 +1,11 @@
 import subprocess
 
-SUMMARIZE_PROMPT = """다음 항목을 한국어로 3~5줄 요약해줘. 기술적 핵심만 간결하게.
+SUMMARIZE_PROMPT = """아래 [내용]을 한국어로 3~5줄로 요약해줘.
+규칙: 반드시 [내용]에 있는 정보만 사용해. 추가 지식이나 추론으로 내용을 만들어내지 마.
+내용이 불충분하면 빈 문자열만 반환해.
+
 제목: {title}
-내용: {content}
+[내용]: {content}
 요약:"""
 
 FILTER_PROMPT = """다음 AI/ML 논문 목록에서 오늘 가장 주목할 만한 논문 번호를 최대 {max_items}개 골라줘.
@@ -21,6 +24,8 @@ def _run_claude(prompt: str, timeout: int = 60) -> str:
     return result.stdout.strip()
 
 def summarize_item(title: str, content: str) -> str:
+    if not content or len(content.strip()) < 150:
+        return ""
     return _run_claude(SUMMARIZE_PROMPT.format(title=title, content=content[:2000]))
 
 HIGHLIGHT_PROMPT = """오늘의 개발/기술 트렌드 항목들을 보고, 가장 중요하고 임팩트 있는 것 5개를 골라서

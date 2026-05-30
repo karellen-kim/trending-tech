@@ -8,8 +8,9 @@ def _mock_proc(stdout="요약 결과입니다.", returncode=0):
     return m
 
 def test_summarize_item_returns_string():
+    long_content = "A small but capable language model by Microsoft. " * 5
     with patch("summarizer.subprocess.run", return_value=_mock_proc()):
-        result = summarize_item("phi-4", "A small but capable language model by Microsoft.")
+        result = summarize_item("phi-4", long_content)
     assert isinstance(result, str)
     assert len(result) > 0
 
