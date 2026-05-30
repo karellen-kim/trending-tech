@@ -9,6 +9,7 @@ def test_send_slack_posts_to_webhook():
     mock_post.assert_called_once()
     payload = mock_post.call_args[1]["json"]
     assert "2026-05-31" in payload["text"]
+    assert "karellen-kim.github.io/trending-tech" in payload["text"]
 
 def test_send_slack_skips_empty_url():
     with patch("notifier.requests.post") as mock_post:
