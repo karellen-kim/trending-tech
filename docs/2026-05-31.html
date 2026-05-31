@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2026-05-31 — Trending Tech</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -82,15 +83,8 @@
 </div>
 <div class="page-meta">2026-05-31</div>
 <h1><em>31</em> May 2026</h1>
-<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section highlight-section" id="highlights">
-  <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">오늘의 하이라이트</span>
-    
-  </div>
-  <ul class="highlight-list"><li>Uber, GenAI로 주당 6.5만 코드 변경 90% 자동 리뷰</li><li>Uber Hudi, 하루 6조 행·10PB 데이터 수집 규모 공개</li><li>SQLite 하나로 내구성 있는 워크플로우 충분히 구현 가능</li><li>Microsoft, 문서·오피스 파일 Markdown 변환 오픈소스 공개</li><li>Uber Moirai, 무손실 스트래글러 완화 기법 SOSP 2025 채택</li></ul>
-</div><div class="section" id="tech-blog">
+<nav class="page-nav"><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section" id="tech-blog">
   <div class="section-header">
     <span class="section-icon">TECH</span>
     <span class="section-title">기술 블로그</span>
@@ -98,207 +92,354 @@
   </div>
   <div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주당 ~65K 변경 사항 중 90%를 분석하는 GenAI 코드 리뷰</a></div>
+    <div class="item-name"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: GenAI code review analyzing 90% of Uber's ~65K weekly changes</a></div>
     <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary">Uber는 매주 ~65,000건의 코드 변경을 처리하기 위해 AI 코드 리뷰 플랫폼 uReview를 개발했다. uReview의 핵심인 Commenter는 기능 버그, 에러 처리 문제, 보안 취약점, 내부 코딩 표준 준수를 검토하는 다단계 GenAI 시스템이다. AI 코드 리뷰의 주요 과제는 LLM 환각과 맥락에 맞지 않는 일반적 지적으로 인한 오탐(false positive)이며, 오탐이 많으면 엔지니어들이 AI 코멘트를 무시하게 된다. uReview는 이 신호 대 잡음비 문제를 해결해 코드 리뷰 품질을 높이는 것을 목표로 한다.</div>
+    <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">Apache Hudi: 19,500개 데이터셋, 하루 6조 행, 10PB 수집</a></div>
+    <div class="item-name"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">Apache Hudi: 19,500 datasets, 6 trillion daily rows, 10 PB ingestion</a></div>
     <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary">Uber는 수백 페타바이트 규모의 데이터 레이크를 운영하며, 매일 수조 건의 행을 처리하는 복잡한 데이터 생태계를 갖고 있다. 수백 개의 마이크로서비스와 수천 개 도시에서 발생하는 데이터는 높은 카디널리티, 빠른 스키마 변화, 분 단위의 데이터 신선도를 요구한다. 이러한 요구를 기존 기술로 충족할 수 없었기 때문에 Uber는 직접 Apache Hudi를 설계·개발했다. Hudi는 ACID 트랜잭션, 인덱싱, 증분 처리 등 데이터베이스 수준의 기능을 데이터 레이크에 도입한 스토리지 엔진으로, 현재 수만 개의 데이터셋과 대규모 일일 수집 볼륨을 처리하며 Uber의 모빌리티·배달·광고 등 전 사업 부문을 지원한다.</div>
+    <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">Moirai: SOSP 2025에 채택된 무손실 스트래글러 완화 기법</a></div>
+    <div class="item-name"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">Moirai: Lossless Straggler Mitigation â accepted at SOSP 2025</a></div>
     <div class="item-meta">Uber Engineering</div>
     <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">Uber의 멀티 클라우드 시크릿 관리 플랫폼 구축</a></div>
+    <div class="item-name"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">Building Uber's Multi-Cloud Secrets Management Platform</a></div>
     <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary">Uber는 5,000개 이상의 마이크로서비스와 150,000개 이상의 시크릿을 관리하는 대규모 분산 환경에서 증가하는 사이버 공격에 대응하기 위해 중앙화된 시크릿 관리 플랫폼을 구축했다. 시크릿 분산(sprawl), 비공식 vault, 불안전한 시크릿 공유 문제를 해결하고 필요 시 시크릿 교체를 용이하게 하는 것이 주요 목표였다. 이를 위해 Git pre-commit hook으로 동작하는 CLI 도구를 도입하여 시크릿이 코드베이스에 포함되는 것을 커밋 단계에서 사전 차단했다. 이 플랫폼은 400개 이상의 서드파티 벤더 통합과 400개 SaaS 애플리케이션을 포함한 복잡한 생태계 전반의 시크릿 관리 표준을 새롭게 정립했다.</div>
+    <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">제로 성장 스택, 실질적 이득: Go에서 스택 할당으로 CPU 10%를 절약하는 방법</a></div>
+    <div class="item-name"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">Zero-Growth Stack, Real Gains: How Stack Allocation Can Save 10% CPU in GoGo's default 2KB stack allocation triggered wasteful expansion cycles consuming 10% CPU in Uber's high-throughput services. The team built a profile-guided automation system reading CPU profiles and binary symbols to compute optimal per-service stack sizes. Result: CPU overhead dropped below 1%, enabling 16% efficiency gains while keeping memory overhead under 2% across 2M cores.Read more →</a></div>
     <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary">Uber는 전체 서비스의 65%가 Go로 작동하며 200만 코어 이상을 사용한다. Go의 기본 고루틴 스택 크기는 2KB로, 부족할 경우 두 배로 확장하는 과정에서 CPU를 낭비한다. Uber 팀은 CPU 프로파일과 바이너리 심볼을 읽어 서비스별 최적 스택 크기를 자동 산출하는 시스템을 구축했다. 그 결과 한 서비스에서 CPU 오버헤드를 10% 아래로 줄이고 16% 효율 개선을 달성했으며, 메모리 오버헤드는 2% 미만으로 유지했다.</div>
+    <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">LLM Evals로 더 나은 실험하기 — 분기가 아닌 깔때기</a></div>
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">Better Experiments with LLM Evals — A funnel, not a fork</a></div>
     <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify에서 A/B 테스트의 약 12%만 긍정적 결과로 출시되며, LLM 평가(eval)는 실험 전에 품질을 검증하는 도구로 활용된다. LLM eval은 관련성·일관성·의도 정합성 등 기존에 대규모로 측정하기 어려웠던 차원을 사람의 어노테이션보다 빠르고 저렴하게 평가할 수 있다. eval과 실험은 상호 대체 관계가 아닌 깔때기(funnel) 관계로, eval이 먼저 비유망한 후보를 걸러낸 후 실험이 비즈니스 결과를 검증한다. eval은 출력이 품질 기준에 부합하는지 '검증(verification)'하고, 온라인 실험은 실제 사용자가 예상대로 반응하는지 '유효성 확인(validation)'을 담당한다. 또한 eval은 팀이 미처 발견하지 못한 패턴을 드러내 새로운 가설을 생성하고, 수정 후 효과를 재확인하는 두 가지 역할을 수행한다.</div>
+    <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">Claude Code 플러그인으로 Spotify Ads API에 자연어 인터페이스 구축하기</a></div>
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">Building a Natural Language Interface to the Spotify Ads API with Claude Code Plugins</a></div>
     <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify Ads API를 자연어로 제어할 수 있는 Claude Code 플러그인을 개발했다. Spotify Ads API v3는 30개 이상의 리소스 타입과 복잡한 계층 구조(캠페인→광고세트→광고)를 가지고 있어, 일반 사용자가 직접 다루기 어렵다. 이 플러그인은 사용자가 평문 영어로 원하는 것을 설명하면 시스템이 올바른 캠페인 구조로 변환해 API를 호출한다. Markdown 파일, bash 스크립트, Python 헬퍼 2개로 구성된 오픈소스 프로젝트이며, GitHub와 Anthropic의 Claude Plugins 마켓플레이스에서 이용 가능하다.</div>
+    <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/4/background-coding-agents-dataset-migrations-honk-part-4" target="_blank" rel="noopener">백그라운드 코딩 에이전트: 다운스트림 컨슈머 데이터셋 마이그레이션 강화 (Honk, 4부)</a></div>
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/4/background-coding-agents-dataset-migrations-honk-part-4" target="_blank" rel="noopener">Background Coding Agents: Supercharging Downstream Consumer Dataset Migrations (Honk, Part 4)</a></div>
     <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify는 내부 코드명 "Honk"라는 백그라운드 코딩 에이전트 프로젝트의 일환으로, 대규모 데이터셋 마이그레이션을 자동화한 사례를 공유했다. 연말에 가장 많이 사용되는 두 개의 사용자 데이터셋을 새 버전으로 교체해야 했으며, 직접 연결된 다운스트림 파이프라인만 약 1,800개에 달했다. 마이그레이션 대상 파이프라인은 BigQuery Runner, dbt(SQL 기반), Scio(Scala 기반) 등 세 가지 서로 다른 프레임워크에 걸쳐 있었고, 수동으로 처리했을 경우 약 10 엔지니어링 주(週)가 소요될 것으로 추산됐다. 이에 Backstage, Fleet Management, Honk를 활용해 마이그레이션 복잡성을 자동화하는 방안을 모색했다.</div>
+    <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/4/background-coding-agents-dataset-migrations-honk-part-4" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/4/anthropic-agentic-development" target="_blank" rel="noopener">Agentic 개발에 대해 이야기해봅시다: Spotify x Anthropic 라이브</a></div>
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/4/anthropic-agentic-development" target="_blank" rel="noopener">Let’s Talk Agentic Development: Spotify x Anthropic Live</a></div>
     <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">2026년 3월 30일, Spotify의 런던 HQ에서 Spotify 수석 아키텍트 Niklas Gustavsson과 Anthropic의 David Soria Parra, Christian Ryan이 에이전트 기반 개발에 대한 대담을 진행했다. 2025년 11월 25일 Claude Opus 4.5 출시가 Spotify 내부 지표에 가시적인 변곡점으로 나타났으며, 엔지니어들의 업무 방식을 바꿨다. Spotify는 Slack 메시지로 프롬프트를 입력하면 Claude 기반 코딩 에이전트 'Honk'가 작동하는 시스템을 도입했으며, 수천 개의 저장소에 걸친 복잡한 소프트웨어 마이그레이션에도 활용되고 있다. 대담에서는 에이전트 우선 개발을 실제 규모로 구현하기 위한 도구, 인프라, 조직 변화에 대한 논의도 다뤄졌다.</div>
+    <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/4/anthropic-agentic-development" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/May/31/anthropic-run-rate/#atom-everything" target="_blank" rel="noopener">Quoting Karen Kwok for Reuters Breakingviews</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/May/31/anthropic-run-rate/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/May/30/how-we-contain-claude/#atom-everything" target="_blank" rel="noopener">How we contain Claude across products</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/May/30/how-we-contain-claude/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/May/30/pyodide-asgi-browser/#atom-everything" target="_blank" rel="noopener">Running Python ASGI apps in the browser via Pyodide + a service worker</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/May/30/pyodide-asgi-browser/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/May/30/retiring-from-tech-to-live-offline/#atom-everything" target="_blank" rel="noopener">I Am Retiring from Tech to Live Offline</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/May/30/retiring-from-tech-to-live-offline/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/May/30/daniel-jalkut/#atom-everything" target="_blank" rel="noopener">Quoting Daniel Jalkut</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/May/30/daniel-jalkut/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="hn-reddit">
   <div class="section-header">
     <span class="section-icon">커뮤</span>
     <span class="section-title">Hacker News &amp; Reddit</span>
-    <span class="section-count">19개</span>
+    <span class="section-count">34개</span>
   </div>
   <div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.owenmcgrann.com/p/the-dead-economy-theory" target="_blank" rel="noopener">죽은 경제 이론</a></div>
-    <div class="item-meta">HN · 1166 pts</div>
+    <div class="item-name"><a href="https://consumerrights.wiki/w/Microsoft_Office_2019_and_2021_for_Mac_view-only_conversion_(2026)" target="_blank" rel="noopener">Microsoft degrades functionality of perpetually-licensed offline products</a></div>
+    <div class="item-meta">HN · 395 pts</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.owenmcgrann.com/p/the-dead-economy-theory" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://consumerrights.wiki/w/Microsoft_Office_2019_and_2021_for_Mac_view-only_conversion_(2026)" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://obeli.sk/blog/sqlite-is-all-you-need-for-durable-workflows/" target="_blank" rel="noopener">SQLite만 있으면 내구성 있는 워크플로우는 충분하다</a></div>
-    <div class="item-meta">HN · 628 pts</div>
-    <div class="item-summary"></div>
-  </div>
-  <div class="item-arrow"><a href="https://obeli.sk/blog/sqlite-is-all-you-need-for-durable-workflows/" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://koenvangilst.nl/lab/mistral-ai-now-summit" target="_blank" rel="noopener">Mistral AI Now Summit 현장 노트</a></div>
-    <div class="item-meta">HN · 427 pts</div>
-    <div class="item-summary"></div>
-  </div>
-  <div class="item-arrow"><a href="https://koenvangilst.nl/lab/mistral-ai-now-summit" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.reuters.com/legal/transactional/danish-pension-fund-excludes-spacex-citing-governance-valuation-2026-05-29/" target="_blank" rel="noopener">덴마크 연기금, 거버넌스 및 밸류에이션 문제로 SpaceX 투자 제외</a></div>
-    <div class="item-meta">HN · 418 pts</div>
-    <div class="item-summary"></div>
-  </div>
-  <div class="item-arrow"><a href="https://www.reuters.com/legal/transactional/danish-pension-fund-excludes-spacex-citing-governance-valuation-2026-05-29/" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.jeffgeerling.com/blog/2026/its-hard-to-justify-framework-12/" target="_blank" rel="noopener">Framework 12를 구매하는 것은 정당화하기 어렵다</a></div>
-    <div class="item-meta">HN · 359 pts</div>
-    <div class="item-summary"></div>
-  </div>
-  <div class="item-arrow"><a href="https://www.jeffgeerling.com/blog/2026/its-hard-to-justify-framework-12/" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://qazinform.com/news/anthropic-surpasses-openai-to-become-worlds-most-valuable-ai-startup" target="_blank" rel="noopener">Anthropic, OpenAI 제치고 가장 가치 있는 AI 스타트업으로 등극</a></div>
-    <div class="item-meta">HN · 338 pts</div>
-    <div class="item-summary"></div>
-  </div>
-  <div class="item-arrow"><a href="https://qazinform.com/news/anthropic-surpasses-openai-to-become-worlds-most-valuable-ai-startup" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.quandri.io/engineering-blog/mcp-is-dead" target="_blank" rel="noopener">MCP는 죽었는가?</a></div>
-    <div class="item-meta">HN · 337 pts</div>
-    <div class="item-summary"></div>
-  </div>
-  <div class="item-arrow"><a href="https://www.quandri.io/engineering-blog/mcp-is-dead" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://pandoc-templates.org/" target="_blank" rel="noopener">Pandoc 템플릿</a></div>
-    <div class="item-meta">HN · 269 pts</div>
+    <div class="item-name"><a href="https://pandoc-templates.org/" target="_blank" rel="noopener">Pandoc Templates</a></div>
+    <div class="item-meta">HN · 364 pts</div>
     <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://pandoc-templates.org/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://arstechnica.com/science/2026/05/the-office-of-management-and-budget-tries-again-to-cripple-us-science/" target="_blank" rel="noopener">제안된 미국 새 자금 지원 규정: 언제든 보조금 취소 가능</a></div>
-    <div class="item-meta">HN · 266 pts</div>
+    <div class="item-name"><a href="https://openrouter.ai/announcements/series-b" target="_blank" rel="noopener">OpenRouter raises $113M Series B</a></div>
+    <div class="item-meta">HN · 362 pts</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://arstechnica.com/science/2026/05/the-office-of-management-and-budget-tries-again-to-cripple-us-science/" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://openrouter.ai/announcements/series-b" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://blog.chrislewis.au/snowboard-kids-2-is-100-decompiled/" target="_blank" rel="noopener">Snowboard Kids 2, 100% 디컴파일 완료</a></div>
-    <div class="item-meta">HN · 258 pts</div>
+    <div class="item-name"><a href="https://github.com/kristapsdz/openrsync" target="_blank" rel="noopener">Openrsync: An implementation of rsync, by the OpenBSD team</a></div>
+    <div class="item-meta">HN · 323 pts</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://blog.chrislewis.au/snowboard-kids-2-is-100-decompiled/" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://github.com/kristapsdz/openrsync" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1ts2m9n/workshop_submission_for_main_conference_paper/" target="_blank" rel="noopener">메인 컨퍼런스 심사 중인 논문의 워크샵 제출 [D]</a></div>
+    <div class="item-name"><a href="https://ziglang.org/devlog/2026/#2026-05-26" target="_blank" rel="noopener">Zig: Build System Reworked</a></div>
+    <div class="item-meta">HN · 321 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://ziglang.org/devlog/2026/#2026-05-26" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.brethorsting.com/blog/2026/05/domain-expertise-has-always-been-the-real-moat/" target="_blank" rel="noopener">Domain expertise has always been the real moat</a></div>
+    <div class="item-meta">HN · 303 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.brethorsting.com/blog/2026/05/domain-expertise-has-always-been-the-real-moat/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://s-macke.github.io/VoxelSpace/" target="_blank" rel="noopener">Voxel Space (2017)</a></div>
+    <div class="item-meta">HN · 252 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://s-macke.github.io/VoxelSpace/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://newsroom.accenture.com/news/2026/accenture-to-acquire-ookla-to-strengthen-network-intelligence-and-experience-with-data-and-ai-for-enterprises" target="_blank" rel="noopener">Accenture to acquire Ookla</a></div>
+    <div class="item-meta">HN · 243 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://newsroom.accenture.com/news/2026/accenture-to-acquire-ookla-to-strengthen-network-intelligence-and-experience-with-data-and-ai-for-enterprises" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/Hawzen/I-found-a-seashell-in-the-middle-of-the-desert" target="_blank" rel="noopener">I found a seashell in the middle of the desert</a></div>
+    <div class="item-meta">HN · 227 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/Hawzen/I-found-a-seashell-in-the-middle-of-the-desert" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.economist.com/europe/2026/05/28/leos-first-encyclical-attacks-technological-messianism" target="_blank" rel="noopener">Leo's first encyclical attacks technological messianism</a></div>
+    <div class="item-meta">HN · 187 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.economist.com/europe/2026/05/28/leos-first-encyclical-attacks-technological-messianism" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1ts2m9n/workshop_submission_for_main_conference_paper/" target="_blank" rel="noopener">Workshop submission for main conference paper under review [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
     <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1ts2m9n/workshop_submission_for_main_conference_paper/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1ts2n0t/i_connected_my_ai_agent_to_manage_my_redirects/" target="_blank" rel="noopener">AI 에이전트를 리다이렉트 관리에 연결했더니 이제 수동으로 돌아갈 수가 없다</a></div>
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1ts6j6j/nvidiaqwen3635ba3bnvfp4_hugging_face/" target="_blank" rel="noopener">nvidia/Qwen3.6-35B-A3B-NVFP4 · Hugging Face</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1ts6j6j/nvidiaqwen3635ba3bnvfp4_hugging_face/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tsd41n/someone_out_there_likely_needs_this/" target="_blank" rel="noopener">Someone out there likely needs this</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tsd41n/someone_out_there_likely_needs_this/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tsbl9j/cost_analysis_of_my_64k_local_llm_server/" target="_blank" rel="noopener">Cost Analysis of my $6.4k Local LLM Server</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tsbl9j/cost_analysis_of_my_64k_local_llm_server/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tshmxa/my_home_data_center/" target="_blank" rel="noopener">My home data center</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tshmxa/my_home_data_center/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tse423/psa_5060ti_16gb_for_30099_5070ti_16gb_for_69999/" target="_blank" rel="noopener">[PSA] 5060ti 16GB for $300.99. 5070ti 16GB for $699.99. Best Buy in store clearance.</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tse423/psa_5060ti_16gb_for_30099_5070ti_16gb_for_69999/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1ts97an/the_gold_standard_of_optimization_a_look_under/" target="_blank" rel="noopener">The gold standard of optimization: A look under the hood of RollerCoaster Tycoon</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1ts97an/the_gold_standard_of_optimization_a_look_under/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1ts7ahi/when_architecture_diagrams_stop_scaling/" target="_blank" rel="noopener">When Architecture Diagrams Stop Scaling</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1ts7ahi/when_architecture_diagrams_stop_scaling/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1ts7u6m/looking_at_code_behind_file_pilot/" target="_blank" rel="noopener">Looking at code behind File Pilot</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1ts7u6m/looking_at_code_behind_file_pilot/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1ts8trn/why_pope_leo_is_right_to_call_on_eu_to_disarm/" target="_blank" rel="noopener">Why Pope Leo is right to call on EU to disarm lethal AI weapons</a></div>
     <div class="item-meta">r/artificial</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1ts2n0t/i_connected_my_ai_agent_to_manage_my_redirects/" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1ts8trn/why_pope_leo_is_right_to_call_on_eu_to_disarm/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1ts3x2l/im_not_crying_youre_crying_ai_for_good_making_a/" target="_blank" rel="noopener">내가 우는 게 아니야, 네가 우는 거야. NotebookLM으로 어머니를 위한 유산 책 만들기, A.I. For Good</a></div>
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1ts6q6b/how_has_ai_actually_benefited_you_in_daytoday_life/" target="_blank" rel="noopener">How has AI actually benefited you in day-to-day life?</a></div>
     <div class="item-meta">r/artificial</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1ts3x2l/im_not_crying_youre_crying_ai_for_good_making_a/" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1ts6q6b/how_has_ai_actually_benefited_you_in_daytoday_life/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1ts4cqu/is_ai_worth_the_cost_the_roi_reckoning_and_the/" target="_blank" rel="noopener">AI는 비용 대비 가치가 있는가? ROI 재고와 다가오는 시장 조정</a></div>
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1ts5ql9/i_built_a_tool_that_generates_3d_objects/" target="_blank" rel="noopener">I built a tool that generates 3D objects assembled with separate, logical parts (e.g. it generated a microwave in the video with complete internal assembly and a door that swings open)</a></div>
     <div class="item-meta">r/artificial</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1ts4cqu/is_ai_worth_the_cost_the_roi_reckoning_and_the/" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1ts5ql9/i_built_a_tool_that_generates_3d_objects/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1ts36ns/i_built_a_site_that_shows_you_what_cities/" target="_blank" rel="noopener">유명한 명소뿐 아니라 도시의 실제 모습을 보여주는 사이트를 만들었습니다.</a></div>
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1ts7b48/prompt_logic_gates_plg_are_prompts_becoming/" target="_blank" rel="noopener">🚀 Prompt Logic Gates (PLG): Are Prompts Becoming Systems?</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1ts7b48/prompt_logic_gates_plg_are_prompts_becoming/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1tshkls/llama_surgery_continuous_sparsification_of/" target="_blank" rel="noopener">Llama Surgery: Continuous Sparsification of Pre-Trained Language Models via Differentiable Ultrametric Topology Injection</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1tshkls/llama_surgery_continuous_sparsification_of/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1ts36ns/i_built_a_site_that_shows_you_what_cities/" target="_blank" rel="noopener">I built a site that shows you what cities actually look like, not only the famous spots.</a></div>
     <div class="item-meta">r/webdev</div>
     <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1ts36ns/i_built_a_site_that_shows_you_what_cities/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1ts4dzj/found_an_impersonation_scam_on_indeed/" target="_blank" rel="noopener">Indeed에서 사칭 사기 발견</a></div>
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1ts4yxu/i_made_a_tiny_website_about_stuff_my_dog_loves/" target="_blank" rel="noopener">I made a tiny website about stuff my dog loves</a></div>
     <div class="item-meta">r/webdev</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1ts4dzj/found_an_impersonation_scam_on_indeed/" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1ts4yxu/i_made_a_tiny_website_about_stuff_my_dog_loves/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1ts2s3a/while_building_my_portfolio_i_made_a_lil_fun/" target="_blank" rel="noopener">포트폴리오를 만들다가 내 고양이 "BOK"에 관한 재미있는 기능을 만들었어요</a></div>
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1tsdv5j/are_guest_books_on_personal_websites_making_a/" target="_blank" rel="noopener">Are guest books on personal websites making a comeback?</a></div>
     <div class="item-meta">r/webdev</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1ts2s3a/while_building_my_portfolio_i_made_a_lil_fun/" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1tsdv5j/are_guest_books_on_personal_websites_making_a/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1ts4g6s/postpilot_156_sequence_flow_command_palette/" target="_blank" rel="noopener">PostPilot 1.5.6 - 시퀀스 플로우, 커맨드 팔레트, 컬렉션 검색 및 더 많은 기능</a></div>
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1ts2tnq/got_an_interview_afraid_of_technical_questions/" target="_blank" rel="noopener">Got an interview. Afraid of technical questions. How to prepare?</a></div>
     <div class="item-meta">r/webdev</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1ts4g6s/postpilot_156_sequence_flow_command_palette/" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1ts2tnq/got_an_interview_afraid_of_technical_questions/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1ts3s3q/do_you_still_manually_maintain_dockercompose/" target="_blank" rel="noopener">여러 프로젝트에서 docker-compose 파일을 아직도 수동으로 관리하시나요, 아니면 더 나은 워크플로우가 생겼나요?</a></div>
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1tscwhm/if_any_of_you_order_cheap_glasses_from_zenni_its/" target="_blank" rel="noopener">If any of you order cheap glasses from Zenni, it's really fun to look at the network tab of your myOrders page to see how not to do website design / architecture.</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1tscwhm/if_any_of_you_order_cheap_glasses_from_zenni_its/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1ts3s3q/do_you_still_manually_maintain_dockercompose/" target="_blank" rel="noopener">Do you still manually maintain docker-compose files across projects, or do you have a better workflow now?</a></div>
     <div class="item-meta">r/devops</div>
     <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1ts3s3q/do_you_still_manually_maintain_dockercompose/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1ts78fq/when_architecture_diagrams_stop_scaling/" target="_blank" rel="noopener">When Architecture Diagrams Stop Scaling</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1ts78fq/when_architecture_diagrams_stop_scaling/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1ts5co6/kodekloud_platform/" target="_blank" rel="noopener">Kodekloud platform</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1ts5co6/kodekloud_platform/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1tsbew6/case_study_for_infrastructure_lead_any_ideas/" target="_blank" rel="noopener">Case study for Infrastructure lead: any ideas?</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1tsbew6/case_study_for_infrastructure_lead_any_ideas/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1ts55w3/i_made_a_roadmap_for_3_months_to_land_a_job_as/" target="_blank" rel="noopener">I made a roadmap for 3 months, to land a job as Junior DevOps Engineer</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1ts55w3/i_made_a_roadmap_for_3_months_to_land_a_job_as/" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="github">
   <div class="section-header">
@@ -309,35 +450,35 @@
   <div class="item">
   <div class="item-left">
     <div class="item-name"><a href="https://github.com/microsoft/markitdown" target="_blank" rel="noopener">microsoft/markitdown</a></div>
-    <div class="item-meta">131,680</div>
+    <div class="item-meta">132,534</div>
     <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://github.com/microsoft/markitdown" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
     <div class="item-name"><a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" rel="noopener">harry0703/MoneyPrinterTurbo</a></div>
-    <div class="item-meta">71,609</div>
+    <div class="item-meta">72,079</div>
     <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
     <div class="item-name"><a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener">anthropics/claude-code</a></div>
-    <div class="item-meta">128,287</div>
-    <div class="item-summary">Claude Code는 터미널에서 동작하는 에이전틱 코딩 도구다. 코드베이스를 이해하고, 자연어 명령을 통해 반복적인 작업을 실행하거나 복잡한 코드를 설명해준다. 또한 git 워크플로우 처리를 지원하여 더 빠른 코딩을 돕는다.</div>
+    <div class="item-meta">128,426</div>
+    <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
     <div class="item-name"><a href="https://github.com/cursor/plugins" target="_blank" rel="noopener">cursor/plugins</a></div>
-    <div class="item-meta">1,403</div>
+    <div class="item-meta">1,472</div>
     <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://github.com/cursor/plugins" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
     <div class="item-name"><a href="https://github.com/revfactory/harness" target="_blank" rel="noopener">revfactory/harness</a></div>
-    <div class="item-meta">4,169</div>
+    <div class="item-meta">4,281</div>
     <div class="item-summary"></div>
   </div>
   <div class="item-arrow"><a href="https://github.com/revfactory/harness" target="_blank" rel="noopener">&rarr;</a></div>
