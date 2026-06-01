@@ -340,7 +340,7 @@ def render_index_page(entries: list[dict]) -> str:
         y, w = week_id.split("-W")
         start = datetime.strptime(f"{y}-W{w}-1", "%G-W%V-%u").date()
         end = datetime.strptime(f"{y}-W{w}-7", "%G-W%V-%u").date()
-        return f"{start.month}/{start.day}", f"{end.month}/{end.day}"
+        return start, end
 
     # 연도 → 월 → 주차별 분류
     by_year = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
@@ -372,6 +372,11 @@ def render_index_page(entries: list[dict]) -> str:
                 w_num = wid.split("-W")[1]
                 s, e_ = _week_range(wid)
 
+                if s.month == e_.month:
+                    date_label = f"{s.month}월 {s.day:02d}일~{e_.day:02d}일"
+                else:
+                    date_label = f"{s.month}월 {s.day:02d}일~{e_.month}월 {e_.day:02d}일"
+
                 # 하이라이트 수집 (최대 2개)
                 highlights = []
                 for we in sorted(week_entries, key=lambda x: x["date"]):
@@ -380,12 +385,12 @@ def render_index_page(entries: list[dict]) -> str:
                     desc = "　·　".join(h[:40] + ("…" if len(h) > 40 else "") for h in highlights[:2])
                     desc_html = f'<p>{_e(desc)}</p>'
                 else:
-                    desc_html = f'<p>{s} – {e_} · {day_count}일</p>'
+                    desc_html = f'<p>{day_count}일</p>'
 
                 notes_html += f"""<a class="note" href="./{wid}.html">
   <div class="n">W{w_num}</div>
   <div class="body">
-    <h3>{int(mo)}월 <em>{w_num}주</em></h3>
+    <h3>{date_label}</h3>
     {desc_html}
   </div>
   <div class="meta">
