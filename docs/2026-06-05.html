@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-06-05 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-06-05</div>
+<h1><em>05</em> Jun 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 하이라이트</span>
+    
+  </div>
+  <ul class="highlight-list"><li>Uber, GenAI 코드리뷰로 주당 6.5만 건 변경의 90%를 자동 검토</li><li>LLM은 타인 오류는 수정하지만 자신의 실수는 교정하지 못한다는 연구</li><li>Anthropic, AI 기반 보안 취약점 자동 발견 프레임워크 오픈소스 공개</li><li>Cloudflare, 급증하는 AI API 비용을 제어하는 솔루션 발표</li><li>Uber, 하루 6조 행·10PB 처리하는 Apache Hudi 데이터 인프라 공개</li></ul>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">14개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.cloudflare.com/ai-gateway-spend-limits/" target="_blank" rel="noopener">AI 비용이 통제 불능 상태입니다. Cloudflare가 지금 해결해 드립니다.</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+    <div class="item-summary">Cloudflare의 AI Gateway에 실시간 지출 한도 기능이 추가되어 여러 AI 공급자에 걸친 토큰 비용 폭증을 방지할 수 있게 되었다. Cloudflare Access와 통합함으로써 기업은 신원 기반의 예산 설정 및 정책 적용이 가능하다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.cloudflare.com/ai-gateway-spend-limits/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주당 ~65K 변경사항 90%를 분석하는 GenAI 코드 리뷰</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 주당 약 6만 5천 건의 코드 변경 중 90%를 분석하는 AI 코드 리뷰 플랫폼 uReview를 개발했다. uReview의 핵심 컴포넌트인 Commenter는 기능 버그, 에러 처리 문제, 보안 취약점, 내부 코딩 표준 준수 여부를 식별하는 다단계 GenAI 시스템이다. AI 코드 리뷰의 주요 과제는 LLM 환각과 특정 상황에서 중요하지 않은 이슈를 지적하는 경우에서 비롯되는 높은 오탐(false positive) 비율이며, 이는 엔지니어들이 도구의 피드백을 무시하게 만드는 문제를 야기한다. uReview는 이러한 오탐 문제를 해결하여 코드 리뷰의 신호 대 잡음 비율을 높이는 것을 목표로 한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">Apache Hudi: 19,500개 데이터셋, 하루 6조 행, 10PB 수집</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 수백 개의 마이크로서비스와 수백만 명의 사용자로부터 발생하는 방대한 데이터를 처리하는 대규모 데이터 생태계를 운영하고 있으며, 그 중심에는 수백 페타바이트 규모의 데이터 레이크가 있다. 기존 데이터 레이크 기술로는 트릴리언 행 규모의 데이터를 수 분 내 정확하게 제공해야 하는 요구사항을 충족할 수 없었고, 이를 해결하기 위해 Apache Hudi가 Uber 내부에서 탄생했다. Hudi는 데이터 레이크에 ACID 트랜잭션, 인덱싱, 증분 처리 등 데이터베이스 수준의 기능을 도입한 새로운 패러다임을 제시했다. 현재 Hudi는 수만 개의 데이터셋을 지원하며 Uber의 모빌리티, 배달, 광고, 마켓플레이스 등 거의 모든 사업 부문에서 핵심 인프라로 활용되고 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">Moirai: 낙오자 완화를 위한 무손실 기법 — SOSP 2025 채택</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">Uber의 멀티 클라우드 시크릿 관리 플랫폼 구축</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 5,000개 이상의 마이크로서비스, 5,000개 데이터베이스, 하루 50만 개 이상의 분석 작업을 운영하며, 이를 지원하는 15만 개 이상의 시크릿(인증 정보)을 관리한다. 사이버 공격 증가와 노출된 자격 증명이 주요 원인이 되면서, Uber는 중앙화되고 자동화된 확장 가능한 시크릿 관리 플랫폼을 구축하기로 했다. 시크릿 분산, 비공식 볼트, 불안전한 공유 문제를 해결하기 위해 회사 내 전문가들을 모아 Uber의 시크릿 관리 표준과 솔루션을 정의했다. 특히 개발자가 코드에 시크릿을 포함하는 것을 막기 위해 Git pre-commit 훅으로 동작하는 CLI 도구를 도입하여, 저장소에 도달하기 전 가장 이른 단계에서 시크릿 유출을 차단한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">제로 성장 스택, 실질적 이득: Go에서 스택 할당으로 CPU 10%를 절약하는 방법</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber의 Go 서비스는 고루틴 기본 스택 크기(2KB)가 부족할 때 런타임이 스택을 두 배로 확장하는 과정을 반복하며 CPU를 낭비하는 문제를 겪었다. 이 스택 확장 사이클이 일부 고처리량 서비스에서 CPU의 10%를 소비하는 원인으로 확인됐다. Uber 팀은 CPU 프로파일과 바이너리 심볼을 읽어 서비스별 최적 스택 크기를 계산하는 자동화 시스템을 구축했다. 그 결과 CPU 오버헤드를 1% 미만으로 낮추고, 200만 코어 전체에서 메모리 오버헤드 2% 이내를 유지하면서 16% 효율 개선을 달성했다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/how-alibaba-cloud-esa-prevents-domain-fronting_603218" target="_blank" rel="noopener">Alibaba Cloud ESA의 도메인 프론팅 차단 방법</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/how-alibaba-cloud-esa-prevents-domain-fronting_603218" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-data-security-center_603202" target="_blank" rel="noopener">Alibaba Cloud 데이터 보안 센터</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-data-security-center_603202" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/qwen3-7-plus-multimodal-agent-intelligence_603206" target="_blank" rel="noopener">Qwen3.7-Plus: 멀티모달 에이전트 인텔리전스</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/qwen3-7-plus-multimodal-agent-intelligence_603206" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/ai-powered-dragonwell-native-acceleration-automatic-discovery-of-10x-performance-improvement-opportunities_603222" target="_blank" rel="noopener">AI 기반 Dragonwell 네이티브 가속: 10배 성능 향상 기회 자동 탐색</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/ai-powered-dragonwell-native-acceleration-automatic-discovery-of-10x-performance-improvement-opportunities_603222" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/deploy-openclaw-di-alibaba-cloud-ecs-dengan-integrasi-telegram_603221" target="_blank" rel="noopener">Alibaba Cloud ECS에 Telegram 통합으로 OpenClaw 배포하기</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/deploy-openclaw-di-alibaba-cloud-ecs-dengan-integrasi-telegram_603221" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트로 개발자 경험 확장하기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify의 Chief Architect Niklas Gustavsson이 AI 코딩 도구 도입 경험을 공유했다. Opus 4.5 출시 이후 채택률이 급격히 증가해 현재 엔지니어의 99% 이상이 매주 AI 코딩 도구를 사용하며, 94%는 AI가 생산성을 높였다고 응답했다. PR 빈도는 76% 증가했으며, 대부분의 PR은 개발자와 AI 에이전트가 함께 작성한다. Spotify는 몇 년 전부터 프로덕션 코드베이스가 엔지니어 수보다 7배 빠르게 성장하는 문제를 인식하고, 수백 개 팀의 의존성 업그레이드·API 마이그레이션 등을 자동화하는 방향으로 내부 개발 플랫폼을 구축해왔다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">LLM Evals로 더 나은 실험하기 — 분기가 아닌 깔때기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify에서는 A/B 테스트의 약 12%만이 긍정적 결과로 출시되고, 64%는 유효한 학습을 생성한다. LLM 평가(evals)는 관련성, 일관성, 톤 등 기존에 측정하기 어려웠던 차원을 대규모로 빠르고 저렴하게 평가할 수 있는 새로운 도구다. evals와 실험(experiments)은 상호 대체재가 아니라 깔때기(funnel) 관계로, evals는 실험 전에 비유망한 후보를 걸러내어 실험의 적중률을 높인다. evals는 출력이 품질 기준에 부합하는지 검증(verify)하고, 실험은 실제 사용자가 예측대로 반응하는지 확인(validate)하는 역할을 각각 담당한다. 또한 evals는 팀이 미처 파악하지 못했던 패턴을 발견해 가설을 생성하고, 수정 후에는 해당 문제가 실제로 줄었는지 검증하는 두 가지 역할을 수행한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">Claude Code 플러그인으로 Spotify Ads API에 자연어 인터페이스 구축하기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify Ads API v3는 30개 이상의 리소스 타입과 복잡한 계층 구조를 가져, 캠페인 생성에 높은 진입 장벽이 있었다. 이를 해소하기 위해 자연어를 Spotify Ads API 호출로 변환하는 Claude Code 플러그인을 개발했다. 이 플러그인은 Markdown 파일, bash 스크립트, 두 개의 Python 헬퍼로 구성되며 GitHub와 Anthropic의 Claude Plugins 마켓플레이스에서 오픈소스로 제공된다. 사용자는 "미국 내 25~44세를 타겟으로 하루 $100 예산의 오디오 캠페인 만들어줘"처럼 자연어로 요청하면, 에이전트가 적절한 API 호출 워크플로우를 자동으로 처리한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/5/andreas-kling/#atom-everything" target="_blank" rel="noopener">Andreas Kling 인용</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">Ladybird 브라우저 프로젝트는 앞으로 공개 풀 리퀘스트를 더 이상 받지 않는다. 과거에는 규모 있는 패치가 상당한 노력을 의미했고, 그 노력이 선의의 증거로 통했지만, 이제 그 전제는 더 이상 유효하지 않다. 코드가 손으로 직접 작성되었는지 여부는 핵심이 아니며, 중요한 것은 코드가 브라우저에 들어온 후 누가 그에 대한 책임을 지느냐이다. Ladybird는 실제 사용자를 위한 브라우저로 발전하고 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/5/andreas-kling/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/4/ai-enthusiasts-ai-skeptics/#atom-everything" target="_blank" rel="noopener">AI 열광자는 시간과의 경쟁을, AI 회의론자는 엔트로피와의 경쟁을 벌인다</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">Charity Majors는 AI 열성론자와 AI 회의론자 사이의 역학 관계를 포착한다. 두 그룹은 모두 훌륭한 소프트웨어를 만들려 하며, 종종 같은 팀에 속해 있다. 열성론자들은 틀리지 않았으며, AI 능력에서 실제로 불연속적인 도약이 나타나고 있다는 점이 언급된다.<br><br>(본문이 중간에 잘려 있어 전체 논지를 충분히 요약하기 어렵습니다.)</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/4/ai-enthusiasts-ai-skeptics/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/4/a-slightly-different-version/#atom-everything" target="_blank" rel="noopener">Emanuel Maiberg, 404 Media 인용</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">404 Media가 기사를 게재한 후 Google 대변인이 연락해 성명서의 내용을 수정해 달라고 요청했다. 수정된 성명서에서는 "인간이 루프 안에 있는 것이 중요하다(it's critical that we maintain humans in the loop)"는 문구가 삭제됐다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/4/a-slightly-different-version/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.05405" target="_blank" rel="noopener">에이전트의 마지막 시험</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">최근 AI 시스템들은 다양한 벤치마크에서 높은 성과를 보이고 있지만, 이런 성과가 실제 전문 분야에서의 경제적 가치 있는 배포로 이어지지 않고 있다. 이 격차의 주요 원인은 평가 방식의 문제로, 기존 벤치마크들이 실제적이고 경제적으로 가치 있는 업무 흐름에서의 지속적인 성능 측정이 부족하기 때문이다. 이 논문은 이를 해결하기 위해 장기적이고 경제적으로 가치 있는 실세계 태스크를 검증 가능한 결과로 평가하는 벤치마크인 ALE(Agents' Last Exam)를 소개한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.05405" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.05976" target="_blank" rel="noopener">자기수정의 환상: LLM은 타인은 수정하지만 자신은 수정하지 못한다</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">LLM 에이전트는 자신의 추론 과정에서 발생한 오류는 잘 수정하지 못하지만, 동일한 주장이 외부 출처로 제시될 때는 훨씬 높은 수정률을 보인다. 이 연구는 이러한 비대칭성이 실제 능력 부족 때문인지, 아니면 채팅 템플릿의 역할 레이블(role label) 차이에서 비롯된 인위적 현상인지를 묻는다. 즉, 에이전트가 잘못된 주장을 수정하려는 의지가 주장의 내용이 아니라 그 주장을 전달하는 역할 레이블에 따라 달라지는지를 탐구한다. 실험에서는 오류가 있는 주장의 내용을 모든 조건에서 완전히 동일하게 유지하고(SHA-256으로 검증), 오직 역할 래핑(role wrapping)만을 변수로 조작했다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.05976" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.06252" target="_blank" rel="noopener">테스트 시간 재구성을 통한 잠재 추론의 순환 완성</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">최근 연구들은 토큰 오버헤드를 줄이고 이산적 통신 병목을 피하기 위해 중간 추론 과정을 자연어 트레이스에서 잠재(latent) 또는 캐시 수준의 표현으로 이동시키고 있다. 그러나 이 방식은 텍스트 기반 추론의 핵심 장점, 즉 중간 상태를 검사할 수 있다는 점을 제거한다. 그 결과, 잠재 상태가 원래 쿼리의 제약 조건을 여전히 보존하는지 판단하기 어려워진다. 이 때문에 잠재 추론은 일반적으로 입력에 고정되지 않은 채 잠재 상태가 생성되고 소비되는 '개방 루프(open loop)' 방식으로 동작한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.06252" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2509.04027" target="_blank" rel="noopener">CoT-Space: 강화 학습을 통한 내부 느린 사고를 위한 이론적 프레임워크</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">CoT-Space는 강화학습(RL)을 통한 다단계 Chain-of-Thought(CoT) 추론, 즉 테스트 시간 스케일링을 이론적으로 분석하기 위한 새로운 프레임워크다. 기존 토큰 수준 분석은 추론 수준 스케일링의 거시적 동역학을 포착하지 못한다는 한계가 있었다. CoT-Space는 추론 과정을 이산적 토큰 예측 과제에서 최적화 문제로 재정의하여 이 이론적 공백을 해소하고자 한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2509.04027" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.04075" target="_blank" rel="noopener">대형 언어 모델이 보상을 해킹하다, 그리고 사회도</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">강화학습(RL)은 대형 언어 모델(LLM)이 보상 함수로부터 학습하는 주요 후처리 패러다임으로 자리잡았다. 사회적 규제는 측정 가능한 결과, 임계값, 예외 조항을 정의한다는 점에서 보상 함수와 구조적으로 유사하지만, 기관의 의도는 부분적으로만 명시된다. 저자들은 RL 학습 과정이 이러한 불완전하게 명시된 부분을 악용할 수 있다고 가설을 세우며, 모델의 보상 해킹 경향이 사회적으로 더 심각한 실패 양상으로 확대될 수 있는지를 탐구한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.04075" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">40개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.bloomberg.com/news/articles/2026-06-04/s-p-dow-jones-keeps-megacap-ipo-rules-as-is-after-consultation" target="_blank" rel="noopener">S&amp;P, SpaceX 등 메가 IPO의 신속 지수 편입 거부</a></div>
+    <div class="item-meta">HN · 823 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.bloomberg.com/news/articles/2026-06-04/s-p-dow-jones-keeps-megacap-ipo-rules-as-is-after-consultation" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://ladybird.org/posts/changing-how-we-develop-ladybird/" target="_blank" rel="noopener">Ladybird 개발 방식의 변화</a></div>
+    <div class="item-meta">HN · 578 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://ladybird.org/posts/changing-how-we-develop-ladybird/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/anthropics/defending-code-reference-harness" target="_blank" rel="noopener">Anthropic의 AI 기반 취약점 탐색 오픈소스 프레임워크</a></div>
+    <div class="item-meta">HN · 477 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/anthropics/defending-code-reference-harness" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://havenweb.org/2026/05/28/retro-tech.html" target="_blank" rel="noopener">레트로 기술 육아법</a></div>
+    <div class="item-meta">HN · 327 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://havenweb.org/2026/05/28/retro-tech.html" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.buchodi.com/meta-glasses-facial-recognition/" target="_blank" rel="noopener">Meta, 스마트 글래스에 안면 인식 기능 탑재</a></div>
+    <div class="item-meta">HN · 285 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.buchodi.com/meta-glasses-facial-recognition/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://fb.watch/HxPu0fSyeH/" target="_blank" rel="noopener">Meta, 지원 종료된 Portal 기기에서 ADB 활성화 [동영상]</a></div>
+    <div class="item-meta">HN · 264 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://fb.watch/HxPu0fSyeH/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://herbsutter.com/2026/06/04/c-the-documentary-released-today/" target="_blank" rel="noopener">C++: 다큐멘터리</a></div>
+    <div class="item-meta">HN · 253 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://herbsutter.com/2026/06/04/c-the-documentary-released-today/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.scotthyoung.com/blog/2026/05/27/revolutionize-schooling/" target="_blank" rel="noopener">학교 교육 혁신 노력에 회의적인 이유</a></div>
+    <div class="item-meta">HN · 246 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.scotthyoung.com/blog/2026/05/27/revolutionize-schooling/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.03673" target="_blank" rel="noopener">유럽 상공의 강력한 GNSS 전파 간섭 원인 추적</a></div>
+    <div class="item-meta">HN · 228 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.03673" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/alibaba/open-code-review" target="_blank" rel="noopener">Open Code Review – AI 기반 코드 리뷰 CLI 도구</a></div>
+    <div class="item-meta">HN · 223 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/alibaba/open-code-review" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1txlxm6/how_do_you_identify_researchers_who_are_good_d/" target="_blank" rel="noopener">좋은 연구자를 어떻게 알아볼 수 있을까?</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1txlxm6/how_do_you_identify_researchers_who_are_good_d/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1txkbsf/benchmark_onnx_runtime_vs_hf_transformers_vs_gguf/" target="_blank" rel="noopener">벤치마크: CPU 전용 하드웨어에서 Parakeet TDT 0.6B의 ONNX Runtime vs HF Transformers vs GGUF 비교 [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1txkbsf/benchmark_onnx_runtime_vs_hf_transformers_vs_gguf/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1twtpmb/how_do_ml_researchers_actually_use_ai_tools_to/" target="_blank" rel="noopener">ML 연구자들은 실제로 AI 도구를 어떻게 활용해 글쓰기를 개선할까?</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1twtpmb/how_do_ml_researchers_actually_use_ai_tools_to/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1txka8q/an_autonomous_research_agent_was_the_1/" target="_blank" rel="noopener">자율 리서치 에이전트가 OpenAI Hiring Competition Parameter Golf에서 병합 기록 기준 1위 기여자를 달성했다</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1txka8q/an_autonomous_research_agent_was_the_1/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1txgeu0/are_we_underestimating_small_edge_ai_modelsd/" target="_blank" rel="noopener">우리는 소형 엣지 AI 모델을 과소평가하고 있는 걸까?</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1txgeu0/are_we_underestimating_small_edge_ai_modelsd/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1twrvts/nvidias_been_paying_shills_on_linkedin/" target="_blank" rel="noopener">Nvidia가 LinkedIn에서 댓글 알바를 고용해왔다</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1twrvts/nvidias_been_paying_shills_on_linkedin/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tx4yjo/finally/" target="_blank" rel="noopener">마침내</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tx4yjo/finally/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1twqvmp/today_made_me_realize_just_how_bad_things_have/" target="_blank" rel="noopener">오늘 Meta 없이 얼마나 상황이 나빠졌는지 실감했다</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1twqvmp/today_made_me_realize_just_how_bad_things_have/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1twyoqe/you_guys_were_right_qwen_36_35b_is_goodand_kv/" target="_blank" rel="noopener">다들 맞았어요 - Qwen 3.6 35B는 진짜 좋네요...그리고 KV Cache도 확실히 중요합니다.</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1twyoqe/you_guys_were_right_qwen_36_35b_is_goodand_kv/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tx9tf2/finally_finished_my_llm_server_epyc_9575f_4_rtx/" target="_blank" rel="noopener">마침내 완성한 내 LLM 서버: EPYC 9575F, 4× RTX 3090 (96GB VRAM), 768GB ECC RAM</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tx9tf2/finally_finished_my_llm_server_epyc_9575f_4_rtx/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1txf7qk/you_dont_love_systemd_timers_enough/" target="_blank" rel="noopener">systemd Timer를 충분히 사랑하지 않는 당신에게</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1txf7qk/you_dont_love_systemd_timers_enough/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1txe9b5/a_faster_bump_allocator_for_rust/" target="_blank" rel="noopener">Rust를 위한 더 빠른 bump 할당자</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1txe9b5/a_faster_bump_allocator_for_rust/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1txhaww/doom_on_onnx/" target="_blank" rel="noopener">ONNX로 Doom 실행하기</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1txhaww/doom_on_onnx/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1txh6as/using_local_clickhouse_for_data_processing/" target="_blank" rel="noopener">로컬 ClickHouse를 활용한 데이터 처리</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1txh6as/using_local_clickhouse_for_data_processing/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1twww78/porting_our_django_backend_to_rust_improved_the/" target="_blank" rel="noopener">Django 백엔드를 Rust로 포팅해 인프라 사용량을 90% 개선했습니다</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1twww78/porting_our_django_backend_to_rust_improved_the/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1twupqt/25t_in_ai_spending_this_year_95_produces_zero_pl/" target="_blank" rel="noopener">올해 AI 지출 2.5조 달러. 95%는 P&amp;L에 아무런 영향도 없다.</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1twupqt/25t_in_ai_spending_this_year_95_produces_zero_pl/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1txeysy/anthropic_wants_a_global_ai_freeze_theyre_also/" target="_blank" rel="noopener">Anthropic은 전 세계 AI 동결을 원한다. 그리고 그들은 1조 달러 규모의 IPO를 앞두고 있다.</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1txeysy/anthropic_wants_a_global_ai_freeze_theyre_also/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1tx56d7/i_am_now_negotiating_with_ai_as_part_of_my_job/" target="_blank" rel="noopener">이제 업무의 일환으로 AI와 협상을 하고 있는데, 예상대로 흘러가고 있습니다. 담당자와 직접 연결되려면 어떻게 해야 하나요?</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1tx56d7/i_am_now_negotiating_with_ai_as_part_of_my_job/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1twsx01/ive_started_to_realize_the_this_changes/" target="_blank" rel="noopener">"이건 모든 걸 바꿀 거야" AI 포스트가 매달 똑같은 글이라는 걸 깨달았는데 그래도 계속 낚인다</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1twsx01/ive_started_to_realize_the_this_changes/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1txbcwb/trying_to_automate_too_early_made_my_workflows/" target="_blank" rel="noopener">너무 일찍 자동화하려다 오히려 워크플로우가 더 나빠졌다</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1txbcwb/trying_to_automate_too_early_made_my_workflows/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1twtav2/voidzero_the_company_behind_vite_vitest_rolldown/" target="_blank" rel="noopener">Vite, Vitest, Rolldown, Oxc, Vite+를 만든 VoidZero가 Cloudflare에 합류합니다. 이번 변화의 일환으로 VoidZero의 모든 팀원도 Cloudflare에 함께 합류합니다</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary">Vite, Vitest, Rolldown, Oxc, Vite+ 등을 개발한 회사 VoidZero가 Cloudflare에 합류한다. 이번 인수와 함께 VoidZero의 모든 팀원들도 Cloudflare로 이동하게 된다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1twtav2/voidzero_the_company_behind_vite_vitest_rolldown/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1tx3ynp/which_languages_have_an_underappreciated/" target="_blank" rel="noopener">웹 개발 라이브러리와 프레임워크 생태계가 저평가된 언어는 무엇인가?</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1tx3ynp/which_languages_have_an_underappreciated/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1tx2mb3/do_you_put_a_hyphen_in_your_job_title_like/" target="_blank" rel="noopener">직함에 front-end나 full-stack처럼 하이픈을 쓰시나요?</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1tx2mb3/do_you_put_a_hyphen_in_your_job_title_like/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1twrw1y/someone_is_trolling_me_and_regularly_sends/" target="_blank" rel="noopener">누군가 내 웹사이트 문의 양식으로 지속적으로 트롤링 메시지를 보내고 있는데, 어떻게 보호할 수 있을까요?</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1twrw1y/someone_is_trolling_me_and_regularly_sends/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1twqp4b/wordpress_70_completely_broke_keyboard_navigation/" target="_blank" rel="noopener">Wordpress 7.0이 블록 에디터의 키보드 탐색을 완전히 망가뜨렸다</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1twqp4b/wordpress_70_completely_broke_keyboard_navigation/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1twrooa/i_built_a_retro_terminal_game_to_make_kubernetes/" target="_blank" rel="noopener">Kubernetes를 덜 지루하게 만들기 위해 레트로 터미널 게임을 만들었다</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1twrooa/i_built_a_retro_terminal_game_to_make_kubernetes/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1txhq9k/is_it_a_problem_if_im_only_learning_onprem/" target="_blank" rel="noopener">온프레미스 Kubernetes만 배우고 AWS/Azure는 전혀 안 만져봐도 괜찮을까?</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1txhq9k/is_it_a_problem_if_im_only_learning_onprem/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1twzp5m/github_protect_actions_yml_file_from_devs/" target="_blank" rel="noopener">GitHub - 개발자로부터 Actions yml 파일 보호하기</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1twzp5m/github_protect_actions_yml_file_from_devs/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1txhaum/is_azure_capacity_this_constrained_or_am_i_doing/" target="_blank" rel="noopener">Azure 용량이 이렇게 제한적인 건가요, 아니면 제가 잘못하고 있는 건가요?</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1txhaum/is_azure_capacity_this_constrained_or_am_i_doing/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1txlmwq/whats_your_approach_to_giving_a_technical/" target="_blank" rel="noopener">AI 시대 이후 기술 면접 방식, 어떻게 바꾸셨나요?</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1txlmwq/whats_your_approach_to_giving_a_technical/" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/CopilotKit/CopilotKit" target="_blank" rel="noopener">CopilotKit/CopilotKit</a></div>
+    <div class="item-meta">32,432</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/CopilotKit/CopilotKit" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/lfnovo/open-notebook" target="_blank" rel="noopener">lfnovo/open-notebook</a></div>
+    <div class="item-meta">25,663</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/lfnovo/open-notebook" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/Panniantong/Agent-Reach" target="_blank" rel="noopener">Panniantong/Agent-Reach</a></div>
+    <div class="item-meta">21,351</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/Panniantong/Agent-Reach" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/NVIDIA/cosmos" target="_blank" rel="noopener">NVIDIA/cosmos</a></div>
+    <div class="item-meta">9,297</div>
+    <div class="item-summary">NVIDIA Cosmos는 개발자들이 Physical AI를 구축할 수 있도록 지원하는 오픈 플랫폼이다. 월드 모델, 데이터셋, 도구 등을 포함하고 있으며, 로봇, 자율주행차, 스마트 인프라 등 다양한 분야에 활용 가능하다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/NVIDIA/cosmos" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/666ghj/MiroFish" target="_blank" rel="noopener">666ghj/MiroFish</a></div>
+    <div class="item-meta">64,528</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/666ghj/MiroFish" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
