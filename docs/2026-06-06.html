@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-06-06 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-06-06</div>
+<h1><em>06</em> Jun 2026</h1>
+<nav class="page-nav"><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">13개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주간 약 6만 5천 건 변경 중 90%를 분석하는 GenAI 코드 리뷰</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">uReview는 Uber가 주당 약 6만 5천 건에 달하는 코드 변경을 검토하기 위해 개발한 AI 코드 리뷰 플랫폼으로, 기존 동료 리뷰를 보조하는 두 번째 AI 리뷰어 역할을 한다. 핵심 시스템인 Commenter는 기능적 버그, 에러 처리 문제, 보안 취약점, 내부 코딩 표준 준수 여부를 식별하는 다단계 GenAI 시스템이며, Fixer는 사람 또는 AI의 코멘트에 따라 실제 코드 변경을 제안한다. AI 코드 리뷰의 주된 과제는 LLM 환각과 상황상 중요하지 않은 이슈에서 비롯되는 false positive로, 이 비율이 높으면 엔지니어가 도구를 신뢰하지 않고 무시하게 된다. uReview는 이러한 문제를 해결해 코드 리뷰의 신호 대 잡음비를 높이는 것을 목표로 한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">번역문만 출력하라는 규칙에 따라:
+
+Apache Hudi: 데이터셋 19,500개, 하루 6조 행, 10PB 수집</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Apache Hudi™는 Uber에서 설계·개발한 데이터 레이크 스토리지 엔진으로, 수백 페타바이트 규모의 데이터 레이크를 운영하기 위해 탄생했다. Uber의 워크로드는 끊임없는 데이터 변경, 높은 카디널리티, 빠르게 변하는 스키마, 그리고 시간 단위가 아닌 분 단위의 데이터 신선도를 요구하며, 단일 데이터셋이 수조 행에 달하는 규모를 가진다. 기존 데이터 레이크 기술로는 이런 대규모·고신선도·운영 엄격성의 조합을 충족할 수 없었기에 Hudi가 만들어졌다. Hudi는 ACID 트랜잭션, 인덱싱, 증분 처리 같은 데이터베이스 수준의 기능을 데이터 레이크에 도입하면서도 확장성과 유연성을 유지하는 새로운 패러다임을 제시했다. 현재 Hudi는 수만 개의 데이터셋을 지원하며 Uber 데이터 플랫폼의 핵심 축으로 자리 잡았다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">번역문만 출력하라는 규칙이므로, 스킬 없이 바로 번역하겠습니다.
+
+Moirai: 무손실 낙오자(Straggler) 완화 — SOSP 2025 채택</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">Uber의 멀티 클라우드 시크릿 관리 플랫폼 구축기</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 5,000개 이상의 마이크로서비스와 데이터베이스, 하루 50만 건 이상의 분석 작업을 운영하며, 15만 개가 넘는 secret과 400개 이상의 서드파티 벤더 통합·SaaS 앱 인증을 처리한다. 노출된 자격증명이 사이버 공격의 주요 원인으로 부각되자, secret sprawl·shadow IT vault·안전하지 않은 secret 공유를 막고 secret 교체를 지원하기 위해 중앙집중식·자동화·확장형 Secret Management Platform 구축에 나섰다. 이를 위해 사내 전문가들을 모아 Uber의 Secret Management Standard와 비전을 정의했다. secret sprawl 대응으로는 예방과 교정 전략을 병행했으며, Git pre-commit hook으로 동작하는 CLI 도구를 도입해 secret이 포함된 커밋을 저장소에 도달하기 전에 차단함으로써 유출을 개발 초기 단계에서 막는다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">제로 그로스 스택, 진짜 이득: 스택 할당으로 Go에서 CPU 10%를 절약하는 방법
+Go의 기본 2KB 스택 할당은 낭비적인 확장 사이클을 유발해 Uber의 고처리량 서비스에서 CPU 10%를 소모했다. 팀은 CPU 프로파일과 바이너리 심볼을 읽어 서비스별 최적 스택 크기를 계산하는 프로파일 기반 자동화 시스템을 구축했다. 그 결과 CPU 오버헤드는 1% 미만으로 떨어졌고, 메모리 오버헤드를 2백만 코어 전체에서 2% 이하로 유지하면서 16%의 효율 개선을 달성했다.</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 전체 용량의 65%, 200만 코어 이상을 Go로 운영하며, 이 규모에서는 1% 효율 개선이 수백만 달러에 해당한다. Go는 goroutine 스택을 기본 2KB로 시작하지만, 부족하면 두 배 크기의 새 스택을 만들어 내용을 복사하는 확장(runtime.morestack)이 발생하며, 이 반복적 확장이 CPU를 낭비한다. 이를 막기 위해 CPU 프로파일과 바이너리 심볼을 읽어 서비스별 최적 스택 크기를 계산하는 profile-guided 자동화 시스템을 구축했다. 그 결과 CPU 오버헤드가 1% 미만으로 떨어지고 메모리 오버헤드는 2% 미만으로 유지하면서 16%의 효율 향상을 달성했으며, go1.19에서 도입된 adaptive stack size도 평균 스택 크기를 추적해 활용한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/how-alibaba-cloud-esa-prevents-domain-fronting_603218" target="_blank" rel="noopener">Alibaba Cloud ESA가 Domain Fronting을 방어하는 방법</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/how-alibaba-cloud-esa-prevents-domain-fronting_603218" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-data-security-center_603202" target="_blank" rel="noopener">Alibaba Cloud 데이터 보안 센터</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-data-security-center_603202" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/qwen3-7-plus-multimodal-agent-intelligence_603206" target="_blank" rel="noopener">Qwen3.7-Plus: 멀티모달 에이전트 인텔리전스</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/qwen3-7-plus-multimodal-agent-intelligence_603206" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/ai-powered-dragonwell-native-acceleration-automatic-discovery-of-10x-performance-improvement-opportunities_603222" target="_blank" rel="noopener">AI 기반 Dragonwell 네이티브 가속: 10배 성능 개선 기회의 자동 발견</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/ai-powered-dragonwell-native-acceleration-automatic-discovery-of-10x-performance-improvement-opportunities_603222" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/deploy-openclaw-di-alibaba-cloud-ecs-dengan-integrasi-telegram_603221" target="_blank" rel="noopener">Telegram 연동과 함께 Alibaba Cloud ECS에 OpenClaw 배포하기</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/deploy-openclaw-di-alibaba-cloud-ecs-dengan-integrasi-telegram_603221" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify의 팀과 에이전트로 개발자 경험 확장하기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify는 사내 개발 플랫폼과 엔지니어링 모범 사례에 대한 수년간의 투자가 AI 전환을 이끌고 있으며, 코딩이 더 이상 병목이 아닌 상황을 맞고 있다(Chief Architect 겸 VP of Engineering Niklas Gustavsson의 Code with Claude 2026 발표). AI 코딩 도구 도입 속도는 전례 없는 수준으로, 작년 말 Opus 4.5 출시와 함께 급격히 가속됐다. 현재 엔지니어의 99% 이상이 매주 AI 코딩 도구를 사용하고, 94%가 생산성 향상을 보고했으며, PR 빈도는 76% 증가했고 대부분의 PR이 개발자와 AI 에이전트의 협업으로 작성된다. 몇 년 전 Spotify는 프로덕션 코드베이스가 엔지니어 수보다 7배 빠르게 증가하고, 개발자들이 의존성 업그레이드·API 마이그레이션·취약점 패치 같은 유지보수에 점점 더 많은 시간을 쓰는 것을 발견했으며, 마이그레이션이 개발자 불만의 가장 큰 원인이었다. 이에 수백 개 팀이 컴포넌트를 수동으로 하나씩 업데이트하는 대신, 자동화로 수백~수천 개 소프트웨어 컴포넌트에 걸쳐 변경을 적용하는 접근을 구상했다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">번역만 출력하라는 규칙이지만, 작업 전 KB 검색 규칙이 있다. 단순 번역 작업이고 순수 텍스트 변환이므로 search_docs 스킵 예외에 해당한다. 바로 번역만 출력한다.
+
+LLM Evals로 더 나은 실험하기 — 갈림길이 아닌 깔때기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify에서는 A/B 테스트 중 약 12%만 긍정적 결과로 출시되고, 약 64%는 회귀 발견·아이디어 기각·가설 정교화 같은 유효한 학습으로 이어진다. LLM eval은 관련성·일관성·톤·의도 정합성 등 기존에 대규모로 측정하기 어려웠던 차원을 사람 주석보다 빠르고 저렴하게 평가하는 새 도구다. Schultzberg와 Ottens(2024)는 eval과 실험의 올바른 관계를 'fork(분기)'가 아닌 'evaluation funnel(평가 깔때기)'로 보며, eval은 실험을 대체하는 것이 아니라 실험 이전 단계에 위치한다. eval은 출력이 품질 기준에 부합하는지 검증(verify)하고, 실험은 실제 사용자가 예측대로 반응하는지 입증(validate)하여 서로 다른 것을 측정한다. 또한 eval은 유망하지 않은 후보를 걸러 실험의 적중률을 높이고, 신뢰를 깨는 콘텐츠를 잡아내는 판정기처럼 가설을 생성하며 수정 후 효과 검증까지 수행한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">Claude Code Plugins로 Spotify Ads API에 자연어 인터페이스 구축하기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Claude Code 플러그인 형태로 스킬·에이전트·도구를 묶어 Spotify Ads Platform을 AI 에이전트 도구에서 쉽게 쓸 수 있게 만든 spotify-ads-api 플러그인을 소개한다. Spotify Ads API v3는 30개 넘는 리소스 타입, 중첩된 타게팅 구조, 캠페인-광고세트-광고로 이어지는 다단계 엔티티 계층을 가져 의도와 실행 사이의 간극이 크다. 이 플러그인은 Markdown 파일, bash 스크립트, 두 개의 작은 Python 헬퍼로 구성되어 자연어를 Spotify Ads API 호출로 변환한다. Claude Code에 설치되며 광고 캠페인 관리용 슬래시 커맨드를 제공하고, "미국의 25-44세를 타게팅해 하루 100달러 예산의 오디오 캠페인을 만들어줘" 같은 대화형 요청으로 에이전트가 알맞은 스킬과 API 호출로 라우팅해 전체 캠페인 구조를 구성한다. 오픈소스로 공개되어 GitHub와 Anthropic의 Claude Plugins 마켓플레이스에서 받을 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">4개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://magazine.sebastianraschka.com/p/llm-research-papers-2026-part1" target="_blank" rel="noopener">LLM 연구 논문: 2026년 목록 (1월부터 5월까지)</a></div>
+    <div class="item-meta">Sebastian Raschka</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://magazine.sebastianraschka.com/p/llm-research-papers-2026-part1" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/6/micropython-wasm/#atom-everything" target="_blank" rel="noopener">micropython-wasm 0.1a2</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">micropython-wasm 0.1a2 릴리스가 공개되었다. 이 릴리스에서는 `micropython-wasm`에 CLI가 추가되었다(issue #7). CLI 추가는 블로그 글의 첫 초안에서 영감을 받은 것이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/6/micropython-wasm/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/6/micropython-in-a-sandbox/#atom-everything" target="_blank" rel="noopener">MicroPython과 WASM으로 샌드박스에서 Python 코드 실행하기</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">제목: 샌드박스에서 MicroPython과 WASM으로 파이썬 코드 실행하기<br><br>저자는 수년간 코드를 샌드박스에서 실행하는 여러 접근법을 실험해 왔으며, 최신 시도가 마침내 원하던 특성을 모두 갖춘 것으로 보인다고 밝혔다. 그 결과를 `micropython-wasm`이라는 알파 단계 패키지로 공개했다. 또한 이 패키지를 Datasette Agent용 코드 실행 샌드박스 플러그인에 활용하고 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/6/micropython-in-a-sandbox/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/5/openai-help-lockdown-mode/#atom-everything" target="_blank" rel="noopener">OpenAI 도움말: 잠금 모드</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">OpenAI가 2월에 처음 공개했던 Lockdown Mode가 이제 정식 출시되어 Free, Go, Plus, Pro 등 개인 계정과 self-serve ChatGPT Business 계정 중 적용 대상에 순차 배포되고 있다. Lockdown Mode는 데이터 유출(exfiltration)의 마지막 단계를 방지하도록 설계된 기능이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/5/openai-help-lockdown-mode/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.06036" target="_blank" rel="noopener">기억은 검색되는 것이 아니라 재구성된다: LLM 에이전트를 위한 그래프 메모리</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">LLM 에이전트는 긴 상호작용 이력에 대한 추론에 여전히 어려움을 겪으며, 기존 메모리 증강 에이전트는 정적인 retrieve-then-reason 방식에 의존해 추론 중 발견된 중간 증거에 맞춰 메모리 접근을 동적으로 조정하지 못한다. 이를 해결하기 위해 저자들은 연상 메모리 그래프와 능동적 재구성 메커니즘을 결합한 MRAgent 프레임워크를 제안한다. 메모리는 Cue-Tag-Content 그래프로 표현되며, 연상 태그(associative tags)가 의미적 다리(semantic bridge) 역할을 한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.06036" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.06252" target="_blank" rel="noopener">번역문만 출력하라는 규칙에 따라 바로 출력하겠습니다.
+
+Test-Time Reconstruction을 통한 잠재 추론의 루프 닫기</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">latent reasoning(잠재 추론)은 중간 추론 과정을 자연어 트레이스 대신 latent/cache 수준 표현으로 옮겨 토큰 비용과 이산적 통신 병목을 줄인다. 그러나 이 전환은 중간 상태를 더 이상 들여다볼 수 없게 만들어, latent 상태가 원래 쿼리의 제약을 여전히 보존하는지 확인하기 어렵게 한다. 그 결과 latent reasoning은 입력에 닻을 두지 않은 채 latent 상태가 생성·소비되는 open loop 방식으로 작동한다. 제목에 따르면 이 논문은 test-time reconstruction을 통해 그 loop를 닫는 것을 제안한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.06252" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.06453" target="_blank" rel="noopener">Vortex: AI 에이전트를 위한 효율적이고 프로그래밍 가능한 Sparse Attention 서빙</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">Vortex는 대규모 언어 모델(LLM) 서빙에서 점점 중요해지는 sparse attention 알고리즘을 대규모로 배포·평가하는 데 드는 높은 엔지니어링 부담을 해결하기 위한 시스템이다. 생성 길이가 길어지면서 sparse attention의 중요성이 커지지만, 새로운 알고리즘을 실제 환경에서 시도하는 일이 연구자와 AI 에이전트 모두에게 큰 장애물이 되고 있다. Vortex는 다양한 sparse attention 알고리즘을 표현할 수 있도록 page-centric 텐서 추상화 위에 Python 기반 프런트엔드 언어를 결합해 이 문제를 다룬다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.06453" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">38개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arstechnica.com/tech-policy/2026/06/sp-500-blocks-fast-spacex-entry-wont-waive-rule-for-unprofitable-ai-firms/" target="_blank" rel="noopener">번역문만 출력하라는 요청이므로 스킬 없이 바로 답한다.
+
+S&amp;P 500, SpaceX 편입 거부… OpenAI와 Anthropic도 진입 막혀</a></div>
+    <div class="item-meta">HN · 895 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://arstechnica.com/tech-policy/2026/06/sp-500-blocks-fast-spacex-entry-wont-waive-rule-for-unprofitable-ai-firms/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.0xkato.xyz/how-llms-actually-work/" target="_blank" rel="noopener">LLM은 어떻게 작동하는가</a></div>
+    <div class="item-meta">HN · 577 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.0xkato.xyz/how-llms-actually-work/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://mouseless.click" target="_blank" rel="noopener">Mouseless – 키보드로 제어하는 macOS/Linux/Windows</a></div>
+    <div class="item-meta">HN · 554 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://mouseless.click" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.theregister.com/public-sector/2026/06/04/govuk-goes-dutch-on-payments-as-it-dumps-stripe/5250763" target="_blank" rel="noopener">Gov.uk가 Stripe를 네덜란드 결제 업체 Adyen으로 교체했다</a></div>
+    <div class="item-meta">HN · 523 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.theregister.com/public-sector/2026/06/04/govuk-goes-dutch-on-payments-as-it-dumps-stripe/5250763" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://alexispurslane.github.io/rsync-analysis/" target="_blank" rel="noopener">Claude가 rsync에 버그를 늘렸을까?</a></div>
+    <div class="item-meta">HN · 466 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://alexispurslane.github.io/rsync-analysis/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.rochester.edu/newscenter/what-is-desalination-definition-ocean-water-704732/" target="_blank" rel="noopener">버려지는 것 없이 바닷물을 식수로 바꾸는 새로운 기술</a></div>
+    <div class="item-meta">HN · 441 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.rochester.edu/newscenter/what-is-desalination-definition-ocean-water-704732/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/microsoft/pg_durable" target="_blank" rel="noopener">pg_durable: Microsoft, 데이터베이스 내장 durable execution을 오픈소스로 공개</a></div>
+    <div class="item-meta">HN · 430 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/microsoft/pg_durable" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://news.ycombinator.com/item?id=48406174" target="_blank" rel="noopener">Ask HN: GenAI를 쓰다가 "아 망했다" 싶었던 순간은 언제였나요?</a></div>
+    <div class="item-meta">HN · 427 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://news.ycombinator.com/item?id=48406174" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.bbc.com/news/live/c4g44ew3g1kt" target="_blank" rel="noopener">국제우주정거장 공기 누출 수리 중 대피했던 우주비행사들, ISS 복귀 지시받아</a></div>
+    <div class="item-meta">HN · 410 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.bbc.com/news/live/c4g44ew3g1kt" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.03673" target="_blank" rel="noopener">번역:
+
+system[Request interrupted by user]</a></div>
+    <div class="item-meta">HN · 405 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.03673" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1txvvo4/tinytpu_systemverilog_systolic_array_compiled_to/" target="_blank" rel="noopener">TinyTPU: SystemVerilog 시스톨릭 배열을 WASM으로 컴파일해 브라우저에서 실시간 실행 - RTL을 numpy로 골든 검증 [P]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1txvvo4/tinytpu_systemverilog_systolic_array_compiled_to/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1ty60zo/building_a_custom_drones_mujoco_environment_p/" target="_blank" rel="noopener">커스텀 드론 MuJoCo 환경 구축하기 [P]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1ty60zo/building_a_custom_drones_mujoco_environment_p/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1txopqg/icml_nonarchival_workshop_worth_attending_d/" target="_blank" rel="noopener">ICML 비아카이벌 워크숍 - 참석할 가치가 있을까? [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1txopqg/icml_nonarchival_workshop_worth_attending_d/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1tybqrx/using_fc26_to_simulate_the_world_cup_d/" target="_blank" rel="noopener">FC26으로 월드컵 시뮬레이션 돌려보기? [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1tybqrx/using_fc26_to_simulate_the_world_cup_d/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1txpeo0/gemma_4_with_quantizationaware_training/" target="_blank" rel="noopener">양자화 인식 훈련을 적용한 Gemma 4</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1txpeo0/gemma_4_with_quantizationaware_training/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1txufl9/dont_act_like_yall_aint_thinking_it_im_just/" target="_blank" rel="noopener">다들 속으로 그렇게 생각하면서 아닌 척하지 마. 난 그냥 다들 입 밖에 안 내던 말을 대놓고 했을 뿐이야. /s</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1txufl9/dont_act_like_yall_aint_thinking_it_im_just/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1txxgpq/openlumara_a_different_kind_of_ai_agent_written/" target="_blank" rel="noopener">OpenLumara - A different kind of AI agent, written from scratch, not vibecoded. Extremely token-efficient, super small system prompt, made for local models. Everything is modular.</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary">OpenLumara는 처음부터 직접 작성된 AI 에이전트로, 소위 '바이브코딩' 방식으로 만들어지지 않았다. 토큰 효율이 매우 높고 시스템 프롬프트가 극도로 작아 로컬 모델을 위해 설계되었다. 모든 구성 요소가 모듈식으로 이루어져 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1txxgpq/openlumara_a_different_kind_of_ai_agent_written/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1txnhqp/unsloth_just_dropped_mtp_gguf_weights_for_gemma_4/" target="_blank" rel="noopener">Unsloth just dropped MTP GGUF weights for Gemma 4!</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1txnhqp/unsloth_just_dropped_mtp_gguf_weights_for_gemma_4/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tyb3np/deepseek_v4_flash_is_amazing_wip_llamacpp_pr_24162/" target="_blank" rel="noopener">DeepSeek V4 Flash is amazing! (WIP llama.cpp PR #24162)</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tyb3np/deepseek_v4_flash_is_amazing_wip_llamacpp_pr_24162/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1tyalr6/the_perils_of_uuid_primary_keys_in_sqlite/" target="_blank" rel="noopener">The perils of UUID primary keys in SQLite</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1tyalr6/the_perils_of_uuid_primary_keys_in_sqlite/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1tydqbt/stop_using_conventional_commits/" target="_blank" rel="noopener">Stop Using Conventional Commits</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1tydqbt/stop_using_conventional_commits/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1tybuv7/the_cover_of_c_the_programming_language_raises/" target="_blank" rel="noopener">The cover of C++: The Programming Language raises questions not answered by the cover</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1tybuv7/the_cover_of_c_the_programming_language_raises/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1tyh2jc/the_architectural_teardown_why_machine_learning/" target="_blank" rel="noopener">The Architectural Teardown: Why Machine Learning Fails Against Game Randomization (And Why We Killed Behavioral Telemetry)</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1tyh2jc/the_architectural_teardown_why_machine_learning/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1txp7ah/the_strange_thing_about_llm_reasoning_research/" target="_blank" rel="noopener">The strange thing about LLM reasoning research: we're now trying to remove the chain-of-thought traces</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1txp7ah/the_strange_thing_about_llm_reasoning_research/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1txrw9m/why_the_great_calculator_debate_of_the_1980s_is/" target="_blank" rel="noopener">Why the Great Calculator Debate of the 1980s is still relevant today and how Isaac Asimov got AI right in 1956</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1txrw9m/why_the_great_calculator_debate_of_the_1980s_is/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1ty7pt5/benefits_and_risks_of_ai_at_harvard_class_day_2026/" target="_blank" rel="noopener">Benefits and Risks of AI at Harvard Class Day 2026</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1ty7pt5/benefits_and_risks_of_ai_at_harvard_class_day_2026/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1txvhd1/i_launched_a_brandnew_author_identity_with_zero/" target="_blank" rel="noopener">I launched a brand-new author identity with zero web presence. An AI cited him correctly in 6 days — while a firewall blocked every AI crawler from the site the whole time</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1txvhd1/i_launched_a_brandnew_author_identity_with_zero/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1tyh08z/slow_browser_agents_are_going_to_eat_your_ai/" target="_blank" rel="noopener">Slow browser agents are going to eat your AI budget and nobody's really talking about it yet</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1tyh08z/slow_browser_agents_are_going_to_eat_your_ai/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1tyabcg/i_built_a_blackandwhite_eink_display_so_id_stop/" target="_blank" rel="noopener">I built a black-and-white e-ink display so I'd stop checking my phone 60 times a day</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1tyabcg/i_built_a_blackandwhite_eink_display_so_id_stop/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1txz9fx/why_would_a_site_like_amc_queue_visitors_before/" target="_blank" rel="noopener">Why Would a Site Like AMC Queue Visitors Before They Even Reach the Homepage?</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1txz9fx/why_would_a_site_like_amc_queue_visitors_before/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1txw35f/where_modern_php_stands_in_2026_deployment/" target="_blank" rel="noopener">Where modern PHP stands in 2026: deployment, architecture, typing, and concurrency</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1txw35f/where_modern_php_stands_in_2026_deployment/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1ty481u/optimized_for_large_numbers_of_vertices_nearly/" target="_blank" rel="noopener">Optimized for large numbers of vertices. Nearly 400 commits milestone.🚩</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1ty481u/optimized_for_large_numbers_of_vertices_nearly/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1tybtln/6_months_later_a_comparison_site_for_vps_and/" target="_blank" rel="noopener">6 Months later: A comparison site for VPS and Dedicated Servers</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1tybtln/6_months_later_a_comparison_site_for_vps_and/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1txvbbk/devsecops_roadmap/" target="_blank" rel="noopener">DevSecOps Roadmap</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1txvbbk/devsecops_roadmap/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1ty50ot/how_are_you_using_ai/" target="_blank" rel="noopener">How Are You Using AI?</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1ty50ot/how_are_you_using_ai/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1txnub0/are_you_ready_http2_bomb/" target="_blank" rel="noopener">Are you ready? http2 bomb</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1txnub0/are_you_ready_http2_bomb/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1txqndp/jr_devops_opportunity/" target="_blank" rel="noopener">Jr Devops Opportunity</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1txqndp/jr_devops_opportunity/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1txuwzg/how_are_you_handling_ai_quality_checks_in_your/" target="_blank" rel="noopener">How are you handling AI quality checks in your deployment pipeline?</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1txuwzg/how_are_you_handling_ai_quality_checks_in_your/" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/mvanhorn/last30days-skill" target="_blank" rel="noopener">mvanhorn/last30days-skill</a></div>
+    <div class="item-meta">28,523</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/mvanhorn/last30days-skill" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/MemPalace/mempalace" target="_blank" rel="noopener">MemPalace/mempalace</a></div>
+    <div class="item-meta">54,114</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/MemPalace/mempalace" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/danielmiessler/Personal_AI_Infrastructure" target="_blank" rel="noopener">danielmiessler/Personal_AI_Infrastructure</a></div>
+    <div class="item-meta">14,828</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/danielmiessler/Personal_AI_Infrastructure" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/openai/plugins" target="_blank" rel="noopener">openai/plugins</a></div>
+    <div class="item-meta">1,667</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/openai/plugins" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/sveltejs/svelte" target="_blank" rel="noopener">sveltejs/svelte</a></div>
+    <div class="item-meta">86,884</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/sveltejs/svelte" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
