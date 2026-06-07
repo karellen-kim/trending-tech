@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-06-07 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-06-07</div>
+<h1><em>07</em> Jun 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 하이라이트</span>
+    
+  </div>
+  <ul class="highlight-list"><li>Uber, GenAI로 주간 6.5만 건 코드 리뷰 90% 자동화</li><li>Apache Hudi, 하루 6조 행·10PB 규모 데이터 레이크 운영</li><li>Uber Moirai, 손실 없는 스트래글러 완화로 SOSP 2025 채택</li><li>Nvidia, Windows PC용 초강력 AI CPU 시스템 공식 제안</li><li>fork()+exec() 대체할 새 프로세스 실행 모델 논의 부상</li></ul>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">13개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주당 ~6만 5천 건 변경의 90%를 분석하는 GenAI 코드 리뷰</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 주당 약 65,000건의 코드 변경을 처리하기 위해 AI 코드 리뷰 플랫폼 uReview를 개발했다. 핵심 컴포넌트인 Commenter는 기능 버그, 보안 취약점, 내부 코딩 표준 준수 여부를 탐지하는 다단계 GenAI 시스템이다. AI 코드 리뷰의 주요 과제는 LLM 환각과 맥락에 맞지 않는 지적으로 인한 false positive이며, 이는 엔지니어들이 AI 코멘트를 무시하게 만드는 신뢰 저하로 이어진다. uReview의 핵심 목표는 코드 리뷰의 신호 대 잡음 비율을 높이는 것이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">Apache Hudi: 19,500개 데이터셋, 일 6조 행, 10 PB 수집</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Apache Hudi는 Uber의 데이터 레이크를 지원하기 위해 Uber 내부에서 설계·개발된 데이터 레이크 스토리지 엔진이다. Uber는 수백 개의 마이크로서비스와 수천 개 도시에서 발생하는 데이터를 처리하며, 수백 페타바이트 규모의 데이터 레이크를 운영한다. 기존 기술로는 조 단위 행 규모, 분 단위 데이터 신선도, 높은 운영 엄격성을 동시에 충족할 수 없어 Hudi가 탄생했다. Hudi는 ACID 트랜잭션, 인덱싱, 증분 처리 등 데이터베이스 수준의 기능을 데이터 레이크에 도입한 새로운 패러다임을 제시했다. 현재 Hudi는 수만 개 데이터셋을 지원하며 모빌리티·배달·광고 등 Uber 전 사업 부문의 핵심 인프라로 자리잡고 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">Moirai: SOSP 2025에 게재 승인된 무손실 지연자 완화 기법</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">Uber의 멀티 클라우드 시크릿 관리 플랫폼 구축</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 5,000개 이상의 마이크로서비스, 5,000개의 데이터베이스, 하루 50만 개 이상의 분석 작업을 운영하며, 이를 지원하기 위해 15만 개 이상의 시크릿을 사용한다. 사이버 공격이 산업 전반에서 증가하고 노출된 자격증명이 주요 원인이 되면서, Uber는 중앙화·자동화·확장 가능한 시크릿 관리 플랫폼 구축에 착수했다. 시크릿 분산(sprawl), 비공식 보안 저장소, 불안전한 시크릿 공유 문제를 해결하기 위해 사내 전문가들이 모여 시크릿 관리 표준과 솔루션을 정의했다. 코드베이스에 시크릿이 포함되는 것을 막기 위해 Git pre-commit 훅으로 동작하는 CLI 도구를 도입해, 커밋 단계에서 시크릿 노출을 사전 차단하는 방식을 적용했다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">성장 없는 스택, 진짜 이득: Go에서 스택 할당으로 CPU 10%를 절약하는 법</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 전체 서비스의 65%를 Go로 운영하며 200만 코어 이상을 사용한다. Go는 고루틴의 기본 스택 크기를 2KB로 시작하며, 이를 초과하면 스택을 두 배로 확장하는 과정에서 CPU를 낭비한다. Uber는 이 반복적인 스택 확장이 고처리량 서비스에서 CPU의 10%를 소비한다는 것을 발견했다. 이를 해결하기 위해 CPU 프로파일과 바이너리 심볼을 분석해 서비스별 최적 스택 크기를 자동 계산하는 시스템을 구축했다. 그 결과 CPU 오버헤드가 1% 미만으로 줄었고, 200만 코어 전체에서 메모리 오버헤드 2% 이하를 유지하면서 16% 효율 향상을 달성했다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/how-alibaba-cloud-esa-prevents-domain-fronting_603218" target="_blank" rel="noopener">Alibaba Cloud ESA가 도메인 프론팅을 차단하는 방법</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/how-alibaba-cloud-esa-prevents-domain-fronting_603218" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-data-security-center_603202" target="_blank" rel="noopener">Alibaba Cloud 데이터 보안 센터</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-data-security-center_603202" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/qwen3-7-plus-multimodal-agent-intelligence_603206" target="_blank" rel="noopener">Qwen3.7-Plus: 멀티모달 에이전트 인텔리전스</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/qwen3-7-plus-multimodal-agent-intelligence_603206" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/ai-powered-dragonwell-native-acceleration-automatic-discovery-of-10x-performance-improvement-opportunities_603222" target="_blank" rel="noopener">AI 기반 Dragonwell 네이티브 가속: 10배 성능 개선 기회 자동 발견</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/ai-powered-dragonwell-native-acceleration-automatic-discovery-of-10x-performance-improvement-opportunities_603222" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/deploy-openclaw-di-alibaba-cloud-ecs-dengan-integrasi-telegram_603221" target="_blank" rel="noopener">Alibaba Cloud ECS에서 Telegram 통합으로 OpenClaw 배포하기</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/deploy-openclaw-di-alibaba-cloud-ecs-dengan-integrasi-telegram_603221" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 병목이 아니다: Spotify에서 팀과 에이전트로 개발자 경험 확장하기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify에서는 AI 코딩 도구 도입률이 폭발적으로 증가해 현재 엔지니어 99% 이상이 매주 사용하며, 94%가 생산성 향상을 보고하고 PR 빈도는 76% 증가했다. 특히 Opus 4.5 출시 이후 Claude Code 채택이 급등했으며, 이는 Spotify가 이전에 어떤 도구 도입에서도 본 적 없는 속도였다. 몇 년 전부터 Spotify는 엔지니어 수보다 코드베이스가 7배 빠르게 성장하는 문제를 인식했고, 개발자들이 기능 개발보다 의존성 업그레이드·API 마이그레이션·취약점 패치 등 유지보수에 시간을 점점 더 많이 소비하고 있었다. 이에 수백~수천 개 컴포넌트에 자동화로 변경을 적용하는 방식을 구상했으며, 이러한 내부 개발 플랫폼 투자가 현재 AI 전환의 기반이 되고 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">LLM Evals로 더 나은 실험하기 — 분기가 아닌 깔때기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify에서 A/B 테스트의 약 12%만 긍정적 결과로 출시되며, 64%는 유효한 학습을 만들어낸다. LLM 평가(evals)는 관련성, 일관성, 어조 등 기존에 확장하기 어려웠던 차원을 빠르고 저렴하게 측정할 수 있는 새로운 도구다. evals와 실험은 서로 다른 것을 측정하며, 올바른 관계는 분기(fork)가 아닌 깔때기(funnel)다. evals는 실험 전에 비유망한 후보를 걸러내어 이후 실험의 적중률을 높이고, 팀이 미처 몰랐던 패턴을 가설로 제시하는 두 가지 역할을 수행한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">Claude Code Plugins로 Spotify Ads API 자연어 인터페이스 구축하기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify Ads API를 자연어로 제어할 수 있는 Claude Code 플러그인을 개발했다. 30개 이상의 리소스 타입과 복잡한 계층 구조를 가진 Spotify Ads API v3를 누구나 쉽게 사용할 수 있도록, 영어 문장으로 캠페인 의도를 설명하면 시스템이 올바른 API 호출 구조로 변환해준다. 플러그인은 Markdown 파일, bash 스크립트, Python 헬퍼 두 개로 구성되며 오픈소스로 공개되어 있다. GitHub 및 Anthropic의 Claude Plugins 마켓플레이스에서 설치 가능하며, 슬래시 커맨드와 대화형 방식 모두 지원한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">37개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://ntsc.rs/" target="_blank" rel="noopener">Ntsc-rs – 아날로그 TV와 VHS 아티팩트의 오픈소스 비디오 에뮬레이션</a></div>
+    <div class="item-meta">HN · 372 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://ntsc.rs/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://lwn.net/SubscriberLink/1076018/16f01bbbb8e0d1f0/" target="_blank" rel="noopener">fork() + exec() 를 넘어서</a></div>
+    <div class="item-meta">HN · 324 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://lwn.net/SubscriberLink/1076018/16f01bbbb8e0d1f0/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://twitter.com/lemire/status/2062880075117113739" target="_blank" rel="noopener">Nvidia가 Windows PC용으로 강력한 CPU 시스템을 제안하다</a></div>
+    <div class="item-meta">HN · 311 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://twitter.com/lemire/status/2062880075117113739" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://human-in-the-loop.bearblog.dev/llms-are-eroding-my-software-engineering-career-and-i-dont-know-what-to-do/" target="_blank" rel="noopener">LLM이 내 소프트웨어 엔지니어링 커리어를 갉아먹고 있는데 어떻게 해야 할지 모르겠다</a></div>
+    <div class="item-meta">HN · 303 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://human-in-the-loop.bearblog.dev/llms-are-eroding-my-software-engineering-career-and-i-dont-know-what-to-do/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.ioccc.org/2025/" target="_blank" rel="noopener">제29회 국제 난독화 C 코드 콘테스트(IOCCC) 2025 수상작</a></div>
+    <div class="item-meta">HN · 271 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.ioccc.org/2025/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://openai.com/index/harness-engineering/" target="_blank" rel="noopener">Harness 엔지니어링: 에이전트 중심 세계에서 Codex 활용하기</a></div>
+    <div class="item-meta">HN · 251 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://openai.com/index/harness-engineering/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/ValveSoftware/GameNetworkingSockets/issues/398" target="_blank" rel="noopener">Valve P2P 네트워킹, 2개월 넘게 고장 상태</a></div>
+    <div class="item-meta">HN · 217 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/ValveSoftware/GameNetworkingSockets/issues/398" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://pdimagearchive.org/" target="_blank" rel="noopener">공개 도메인 이미지 아카이브</a></div>
+    <div class="item-meta">HN · 177 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://pdimagearchive.org/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://kristoff.it/blog/north-star/" target="_blank" rel="noopener">나의 소프트웨어 북극성</a></div>
+    <div class="item-meta">HN · 144 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://kristoff.it/blog/north-star/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2601.14470" target="_blank" rel="noopener">토크노믹스: 에이전틱 소프트웨어 엔지니어링에서 토큰 사용처 정량화</a></div>
+    <div class="item-meta">HN · 132 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2601.14470" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1tyy0vj/ml_reading_group_to_read_recent_interesting_and/" target="_blank" rel="noopener">ML 읽기 모임: ICML/ICLR/NeurIPS 최신 인기 논문 읽기 [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1tyy0vj/ml_reading_group_to_read_recent_interesting_and/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1tylgoq/anyone_here_with_experience_submitting_to_nature/" target="_blank" rel="noopener">Nature Machine Intelligence 투고 경험 있는 분 계신가요?</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1tylgoq/anyone_here_with_experience_submitting_to_nature/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1tyq81n/sources_for_ml_news_d/" target="_blank" rel="noopener">ML 뉴스 소식은 어디서 얻나요?</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1tyq81n/sources_for_ml_news_d/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1tyo8gf/does_it_make_sense_to_use_alternative/" target="_blank" rel="noopener">QAT 모델의 대안적 양자화를 사용하는 것이 의미가 있을까?</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1tyo8gf/does_it_make_sense_to_use_alternative/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1tz7014/research_collection_of_arxiv_whitepapers_r/" target="_blank" rel="noopener">Arxiv 백서 연구 컬렉션 [R]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1tz7014/research_collection_of_arxiv_whitepapers_r/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tz6h86/open_models_to_win/" target="_blank" rel="noopener">오픈 모델의 승리</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tz6h86/open_models_to_win/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tylzy2/coheres_unreleased_coding_model_early_access_for/" target="_blank" rel="noopener">Cohere의 미공개 코딩 모델 (localllama 얼리 액세스)</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tylzy2/coheres_unreleased_coding_model_early_access_for/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tys1wj/another_1click_admin_account_takeover_in/" target="_blank" rel="noopener">pewdiepie의 AI 도구에서 또 다른 1-클릭 관리자 계정 탈취 (영상 내 언어 주의)</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tys1wj/another_1click_admin_account_takeover_in/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1typjmc/120_toks_on_12gb_vram_with_gemma_4_12b_qat_mtp/" target="_blank" rel="noopener">12GB VRAM에서 Gemma 4 12B QAT MTP로 초당 120 토큰 달성</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1typjmc/120_toks_on_12gb_vram_with_gemma_4_12b_qat_mtp/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tzbcyp/llamacpp_gemma4_mtp_support_merged/" target="_blank" rel="noopener">llama.cpp Gemma4 MTP 지원 병합 완료!</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tzbcyp/llamacpp_gemma4_mtp_support_merged/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1tzaugj/to_my_students/" target="_blank" rel="noopener">내 학생들에게</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1tzaugj/to_my_students/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1tz9cp7/reverse_engineering_the_creative_katana_v2x/" target="_blank" rel="noopener">Creative Katana V2X 사운드바를 Linux에서 제어하기 위한 리버스 엔지니어링</a></div>
+    <div class="item-meta">r/programming</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1tz9cp7/reverse_engineering_the_creative_katana_v2x/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1tyq91e/ai_keeps_getting_blamed_for_tech_layoffs_but_the/" target="_blank" rel="noopener">AI가 기술직 대량해고의 원인으로 지목되지만, 실제 수치는 다른 이야기를 한다</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1tyq91e/ai_keeps_getting_blamed_for_tech_layoffs_but_the/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1tylcl1/does_anyone_else_say_please_and_thank_you_to_ai/" target="_blank" rel="noopener">혹시 나만 AI에게 "감사합니다"나 "부탁드려요" 같은 말을 쓰는 건가요? 아니면 제가 이상한 건가요?</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1tylcl1/does_anyone_else_say_please_and_thank_you_to_ai/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1tymxz2/the_more_i_use_multiple_models_the_more_i_think/" target="_blank" rel="noopener">여러 모델을 쓸수록 'AI 합의'는 함정이라는 생각이 든다 — 불일치야말로 유일하게 주목할 만한 부분이다</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1tymxz2/the_more_i_use_multiple_models_the_more_i_think/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1tymn0m/i_have_no_idea_what_im_doing_anymore/" target="_blank" rel="noopener">나는 더 이상 내가 무엇을 하고 있는지 모르겠다.</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1tymn0m/i_have_no_idea_what_im_doing_anymore/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1tyonst/ai_general_question/" target="_blank" rel="noopener">AI 일반 질문</a></div>
+    <div class="item-meta">r/artificial</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1tyonst/ai_general_question/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1tz7kr8/jpeg_xl_is_objectively_better_than_webp_in_almost/" target="_blank" rel="noopener">JPEG XL은 거의 모든 면에서 WebP보다 객관적으로 뛰어나다 - 그런데 왜 대부분의 브라우저는 여전히 외면하고 있을까? 청원을 시작해야 할까?</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1tz7kr8/jpeg_xl_is_objectively_better_than_webp_in_almost/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1tyqrvb/your_github_contribution_grid_but_3d/" target="_blank" rel="noopener">당신의 GitHub 기여 그리드, 3D로</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1tyqrvb/your_github_contribution_grid_but_3d/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1tylwxk/i_wrote_a_free_online_book_on_auth/" target="_blank" rel="noopener">인증에 관한 무료 온라인 책을 썼습니다</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1tylwxk/i_wrote_a_free_online_book_on_auth/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1tytuva/petition_to_rename_saturdays/" target="_blank" rel="noopener">토요일 이름 바꾸기 청원</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1tytuva/petition_to_rename_saturdays/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1tz0unb/building_open_source_racing_analytics/" target="_blank" rel="noopener">오픈소스 레이싱 애널리틱스 구축</a></div>
+    <div class="item-meta">r/webdev</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1tz0unb/building_open_source_racing_analytics/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1tz7i2q/is_devops_field_saturated_in_eu_or_its_just/" target="_blank" rel="noopener">유럽 devops 분야는 포화 상태인가, 아니면 AI 우산 효과 아래 단순히 무시당하는 것인가?</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1tz7i2q/is_devops_field_saturated_in_eu_or_its_just/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1tykav4/how_are_you_handling_argocd_poject_generation/" target="_blank" rel="noopener">ArgoCD 프로젝트 생성을 어떻게 처리하고 있나요?</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1tykav4/how_are_you_handling_argocd_poject_generation/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1tz8lcf/4_years_into_my_career_what_should_i_focus_on_next/" target="_blank" rel="noopener">커리어 4년차 – 다음엔 무엇에 집중해야 할까?</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1tz8lcf/4_years_into_my_career_what_should_i_focus_on_next/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1tyqn5r/beginner_in_devops_enjoying_the_journey_but/" target="_blank" rel="noopener">DevOps 입문자 - 여정을 즐기고 있지만 자신감이 부족해요. 이게 정상인가요?</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1tyqn5r/beginner_in_devops_enjoying_the_journey_but/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1tzdfdy/what_ide_is_convenient_for_writing_ansible/" target="_blank" rel="noopener">Ansible 플레이북/롤 작성에 편리한 IDE는?</a></div>
+    <div class="item-meta">r/devops</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1tzdfdy/what_ide_is_convenient_for_writing_ansible/" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/opencv/opencv" target="_blank" rel="noopener">opencv/opencv</a></div>
+    <div class="item-meta">87,925</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/opencv/opencv" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/Leonxlnx/taste-skill" target="_blank" rel="noopener">Leonxlnx/taste-skill</a></div>
+    <div class="item-meta">36,019</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/Leonxlnx/taste-skill" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">NousResearch/hermes-agent</a></div>
+    <div class="item-meta">185,465</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/lfnovo/open-notebook" target="_blank" rel="noopener">lfnovo/open-notebook</a></div>
+    <div class="item-meta">26,957</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/lfnovo/open-notebook" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/yikart/AiToEarn" target="_blank" rel="noopener">yikart/AiToEarn</a></div>
+    <div class="item-meta">18,576</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/yikart/AiToEarn" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
