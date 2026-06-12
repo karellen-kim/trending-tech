@@ -1,8 +1,20 @@
 import requests
 from bs4 import BeautifulSoup
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from config import MAX_GITHUB_ITEMS
 
 TRENDING_URL = "https://github.com/trending"
+README_MAX_CHARS = 3000
+
+def _fetch_readme(path: str) -> str:
+    url = f"https://raw.githubusercontent.com/{path}/HEAD/README.md"
+    try:
+        resp = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+        if resp.status_code == 200:
+            return resp.text[:README_MAX_CHARS]
+    except Exception:
+        pass
+    return ""
 
 def fetch_trending(since: str = "daily", exclude: set[str] | None = None) -> list[dict]:
     resp = requests.get(TRENDING_URL, params={"since": since}, timeout=15,
@@ -28,4 +40,10 @@ def fetch_trending(since: str = "daily", exclude: set[str] | None = None) -> lis
             "description": desc_el.get_text(strip=True) if desc_el else "",
             "stars_today": stars_el.get_text(strip=True) if stars_el else "",
         })
+
+    with ThreadPoolExecutor(max_workers=len(items)) as ex:
+        futures = {ex.submit(_fetch_readme, item["name"]): i for i, item in enumerate(items)}
+        for future in as_completed(futures):
+            items[futures[future]]["readme"] = future.result()
+
     return items

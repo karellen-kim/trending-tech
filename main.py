@@ -76,7 +76,7 @@ def collect(today: str) -> dict:
 
 def summarize(data: dict) -> dict:
     print("[요약] 시작")
-    data["github"] = _add_summaries(data["github"], "description")
+    data["github"] = _add_summaries(data["github"], "readme")
     data["hn"] = _add_summaries(data["hn"], "title")
     data["company_blogs"] = _add_summaries(data["company_blogs"], "summary")
     data["dev_blogs"] = _add_summaries(data["dev_blogs"], "summary")
