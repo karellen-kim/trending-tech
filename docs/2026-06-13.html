@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-06-13 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-06-13</div>
+<h1><em>13</em> Jun 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 하이라이트</span>
+    
+  </div>
+  <ul class="highlight-list"><li>Uber, GenAI로 주당 6.5만 코드 변경의 90% 자동 리뷰 실현</li><li>미 정부, Fable 5·Mythos 5 AI 모델 접근 중단 지시</li><li>오픈소스 AI 주도권 확보 필요성 — HN 커뮤니티 논의 점화</li><li>CRISPR, '치료 불가' 암세포 선택적 파괴 기술 임상 가능성 확인</li><li>Uber Hudi, 하루 6조 행·10PB 규모 실시간 데이터 레이크 운영</li></ul>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">14개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주간 ~65K 변경사항 중 90%를 분석하는 GenAI 코드 리뷰</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 매주 ~6만 5천 건의 코드 변경을 처리하는 과정에서 리뷰어 과부하와 버그 누락 문제를 해결하기 위해 AI 코드 리뷰 플랫폼 uReview를 개발했다. uReview의 핵심은 Commenter로, 기능 버그·보안 취약점·코딩 표준 준수 여부를 다단계로 분석하는 GenAI 시스템이다. 추가로 Fixer 컴포넌트는 사람이나 AI가 남긴 코멘트에 대해 실제 코드 수정안을 제안한다. AI 코드 리뷰의 주요 과제는 LLM 환각과 맥락에 맞지 않는 지적으로 인한 높은 오탐률이며, 오탐이 많으면 엔지니어들이 리뷰 코멘트를 무시하게 된다. uReview는 이 문제를 해결해 신호 대 잡음비를 높이는 것을 목표로 한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">Apache Hudi: 19,500개 데이터셋, 하루 6조 행, 10PB 수집</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 수백 개의 마이크로서비스와 수백만 명의 사용자로부터 끊임없이 데이터가 생성되는 복잡한 데이터 생태계를 운영하며, 그 중심에는 수백 페타바이트 규모의 데이터 레이크가 있다. 기존 데이터 레이크 기술로는 조 단위 행 규모의 데이터를 몇 분 이내의 신선도로 처리하는 요구사항을 충족할 수 없었고, 이 문제를 해결하기 위해 Apache Hudi가 Uber 내부에서 탄생했다. Hudi는 ACID 트랜잭션, 인덱싱, 증분 처리 등 데이터베이스 수준의 기능을 데이터 레이크에 도입한 새로운 패러다임을 업계에 제시했다. 현재 Hudi는 Uber의 수만 개 데이터셋을 지원하며 모빌리티, 배달, 광고 등 사실상 모든 사업 부문에서 활용되고 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">Moirai: Lossless Straggler Mitigation — SOSP 2025 채택</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">Uber의 멀티클라우드 시크릿 관리 플랫폼 구축</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 5,000개 이상의 마이크로서비스, 5,000개 데이터베이스, 하루 50만 개 이상의 분석 작업을 운영하며, 이를 연결하는 15만 개 이상의 시크릿을 관리한다. 사이버 공격 증가와 자격증명 유출 위험에 대응하기 위해, 시크릿 관리 표준과 중앙화된 자동화 플랫폼을 구축하는 프로젝트를 시작했다. 시크릿이 코드·설정 파일 등 암호화되지 않은 곳에 분산되는 문제(secrets sprawl)를 막기 위해, Git pre-commit 훅으로 동작하는 CLI 도구를 도입해 시크릿이 포함된 커밋을 저장소에 도달하기 전 단계에서 차단한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">제로 성장 스택, 진짜 이득: Go에서 스택 할당으로 CPU 10%를 절약하는 방법</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 전체 서비스의 65%를 Go로 운영하며 200만 개 이상의 코어를 사용한다. Go는 고루틴 스택 초기 크기를 기본 2KB로 설정하며, 이 크기를 초과하면 스택을 2배로 늘리고 기존 내용을 복사하는 확장 절차를 실행한다. 이 반복적인 스택 확장이 고처리량 서비스에서 CPU의 10%를 낭비하는 원인이었다. Uber 팀은 CPU 프로파일과 바이너리 심볼을 분석해 서비스별 최적 스택 크기를 산출하는 프로파일 기반 자동화 시스템을 구축했다. 그 결과 CPU 오버헤드가 1% 미만으로 줄었고, 메모리 오버헤드 2% 이하를 유지하면서 16%의 효율 개선을 달성했다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/skillclaw-%C3%97-nacos-autonomic-evolutionary-closed-loop-from-an-agent-session-to-a-governable-skill-registry_603219" target="_blank" rel="noopener">SkillClaw × Nacos: Agent 세션에서 거버넌스 가능한 Skill Registry까지의 자율 진화형 폐쇄 루프</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/skillclaw-%C3%97-nacos-autonomic-evolutionary-closed-loop-from-an-agent-session-to-a-governable-skill-registry_603219" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/one-sql-query-to-generate-an-ad-how-hologres-unifies-creative-production-and-campaign-analytics_603204" target="_blank" rel="noopener">SQL 쿼리 하나로 광고를 만든다: Hologres가 크리에이티브 제작과 캠페인 분석을 통합하는 방법</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/one-sql-query-to-generate-an-ad-how-hologres-unifies-creative-production-and-campaign-analytics_603204" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-amplifies-malaysia-infrastructure-with-public-cloud-region-in-johor-to-meet-growing-demand_603235" target="_blank" rel="noopener">Alibaba Cloud, 급증하는 수요에 맞춰 조호르에 퍼블릭 클라우드 리전 신설로 말레이시아 인프라 확장</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-amplifies-malaysia-infrastructure-with-public-cloud-region-in-johor-to-meet-growing-demand_603235" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/millions-of-queries-per-second-qps-and-second-level-fault-recovery-how-polardb-x-proxy-empowers-mysql-clusters_603245" target="_blank" rel="noopener">초당 수백만 쿼리(QPS)와 초 단위 장애 복구: PolarDB-X Proxy가 MySQL 클러스터를 강화하는 방법</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/millions-of-queries-per-second-qps-and-second-level-fault-recovery-how-polardb-x-proxy-empowers-mysql-clusters_603245" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/big-data-%26-ai-platform-monthly-newsletter%E2%80%94may-2026_603242" target="_blank" rel="noopener">빅 데이터 &amp; AI 플랫폼 월간 뉴스레터 — 2026년 5월</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/big-data-%26-ai-platform-monthly-newsletter%E2%80%94may-2026_603242" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가를 인코딩하다: Spotify 데이터 어시스턴트 뒤에 숨겨진 컨텍스트 레이어</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify는 7만 개 이상의 데이터셋과 하루 1.4조 건의 데이터를 처리하는 환경에서, 데이터 전문가에 대한 수요가 개인이 감당할 수 없는 수준으로 증가하자 AI 데이터 어시스턴트를 개발했다. 단순히 모든 스키마를 LLM에 넣는 방식은 컨텍스트 윈도우 한계와 스키마만으로는 전달되지 않는 도메인 지식(예: "활성 사용자"의 정의, 레거시 테스트 데이터 구분 등) 때문에 작동하지 않았다. 이를 해결하기 위해 도메인 소유자가 관리하는 "컨텍스트 레이어"를 중간에 두는 방식을 채택했다. 이 어시스턴트는 2025년 8월부터 2,100명 이상의 Spotify 직원이 사용하고 있으며, 광고·팟캐스트·음악·오디오북·금융 등 177개 클러스터를 커버하며 13,000건 이상의 대화에서 활용되었다. 사용자의 1/4 이상은 SQL을 전혀 작성해본 적 없는 비개발자다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트로 개발자 경험 확장하기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify에서는 AI 코딩 도구 도입이 폭발적으로 증가하여 엔지니어의 99% 이상이 매주 AI 도구를 사용하고 있으며, 94%가 생산성 향상을 체감하고 있다. Opus 4.5 출시 이후 Claude Code 도입이 급격히 증가했고, PR 빈도는 76% 늘었으며 대부분의 PR이 AI 에이전트와 협업하여 작성되고 있다. Spotify는 수년 전부터 내부 개발 플랫폼에 투자해왔는데, 엔지니어 수 증가보다 코드베이스가 7배 빠르게 성장하면서 개발자들이 기능 개발보다 유지보수에 더 많은 시간을 쓰는 문제가 있었다. 이를 해결하기 위해 수백~수천 개의 소프트웨어 컴포넌트에 자동으로 변경을 적용하는 자동화 접근법을 도입했고, 이 기반이 현재 AI 전환을 가속화하는 토대가 되고 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">LLM Evals로 더 나은 실험하기 — 분기가 아닌 깔때기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify에서 A/B 테스트의 약 12%만 긍정적 결과로 출시되며, LLM 평가(evals)는 이 실험의 적중률을 높이는 새로운 도구로 주목받고 있다. LLM evals는 관련성, 일관성, 톤 등 기존에 대규모로 측정하기 어려웠던 품질 차원을 인간 어노테이션보다 빠르고 저렴하게 평가할 수 있다. evals와 실험은 측정하는 대상이 다르며, Schultzberg와 Ottens(2024)는 이를 "평가 퍼널(evaluation funnel)"로 개념화한다. evals는 실험 전에 비유망한 후보를 걸러내는 검증(verification) 역할을 하고, 실험은 실제 사용자 반응을 통한 유효성 확인(validation)을 담당한다. 또한 evals는 팀이 미처 찾지 못한 패턴을 발굴해 가설을 생성하고, 수정 후 해당 문제가 실제로 감소했는지 확인하는 두 가지 역할을 동시에 수행할 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">Claude Code 플러그인으로 Spotify Ads API 자연어 인터페이스 구축하기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify Ads API는 30개 이상의 리소스 타입과 복잡한 계층 구조를 가져 사용하기 어렵다. 이를 해결하기 위해 자연어로 광고 캠페인을 생성할 수 있는 Claude Code 플러그인(`spotify-ads-api`)을 개발했다. 이 플러그인은 Markdown 파일, bash 스크립트, Python 헬퍼 2개로 구성되며 GitHub과 Anthropic의 Claude Plugins 마켓플레이스에서 오픈소스로 제공된다. 사용자는 "코네티컷 청취자 대상 오디오 캠페인 만들어줘"처럼 자연어로 요청하면, 에이전트가 필요한 API 호출과 워크플로우를 자동으로 처리한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/13/us-government-directive-to-suspend-access/#atom-everything" target="_blank" rel="noopener">Fable 5 및 Mythos 5 접근 중단에 관한 미국 정부 지침 성명</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">미국 정부가 국가 안보 권한을 근거로 Fable 5와 Mythos 5에 대한 접근을 모든 외국 국적자에게 중단하는 수출 통제 지침을 발령했다. 이 지침은 미국 내외를 불문하고 외국 국적 Anthropic 직원을 포함한 모든 외국 국적자에게 적용된다. 나머지 내용은 [내용]이 중간에 잘려 있어 확인할 수 없다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/13/us-government-directive-to-suspend-access/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/12/openai-webrtc/#atom-everything" target="_blank" rel="noopener">OpenAI WebRTC Audio Session, 이제 문서 컨텍스트 지원</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/12/openai-webrtc/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/12/andrew-singleton/#atom-everything" target="_blank" rel="noopener">Andrew Singleton 인용</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">Jenny는 화장장을 운영하며, John의 프로판 회사로부터 200억 달러 투자를 받고 사업의 5%를 넘긴다. Jenny는 투자금 중 100억 달러를 소각로에 태우고, 나머지 100억 달러로 John에게서 프로판을 구매해 그 돈을 재로 만든다. John은 이를 두고 자신의 AI 투자가 이번 분기에 100억 달러의 수익을 창출했으며, 1,000억 달러 규모 사업의 5%를 보유하고 있다고 보고한다. 이 풍자는 AI 관련 투자와 수익 보고 방식의 순환적 허구성을 비꼬는 내용이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/12/andrew-singleton/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">14개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener">미국 정부의 Fable 5 및 Mythos 5 접근 중단 지침에 대한 성명</a></div>
+    <div class="item-meta">HN · 2773 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://opensourceaimustwin.com/?share=v2" target="_blank" rel="noopener">오픈소스 AI가 반드시 승리해야 한다</a></div>
+    <div class="item-meta">HN · 1254 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://opensourceaimustwin.com/?share=v2" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://innovativegenomics.org/news/crispr-technique-selectively-shreds-cancer-cells/" target="_blank" rel="noopener">CRISPR 기술로 '난치성' 암 포함 암세포를 선택적으로 파괴</a></div>
+    <div class="item-meta">HN · 896 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://innovativegenomics.org/news/crispr-technique-selectively-shreds-cancer-cells/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.renaultgroup.com/en/magazine/energy-and-powertrains/all-about-electric-motors-with-no-rare-earths/" target="_blank" rel="noopener">희토류 없는 전기 모터</a></div>
+    <div class="item-meta">HN · 595 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.renaultgroup.com/en/magazine/energy-and-powertrains/all-about-electric-motors-with-no-rare-earths/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://twitter.com/jsrailton/status/2064661778978533571" target="_blank" rel="noopener">악성코드 개발자들이 스파이웨어에 핵무기 및 생물학 무기 관련 텍스트를 삽입했다</a></div>
+    <div class="item-meta">HN · 428 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://twitter.com/jsrailton/status/2064661778978533571" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://ikyle.me/blog/2026/how-to-setup-a-local-coding-agent-on-macos" target="_blank" rel="noopener">macOS에서 로컬 코딩 에이전트 설정하는 방법</a></div>
+    <div class="item-meta">HN · 421 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://ikyle.me/blog/2026/how-to-setup-a-local-coding-agent-on-macos" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://12gramsofcarbon.com/p/tech-things-there-is-a-massive-shadow" target="_blank" rel="noopener">Fable에 드리운 그림자</a></div>
+    <div class="item-meta">HN · 376 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://12gramsofcarbon.com/p/tech-things-there-is-a-massive-shadow" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://piwodlaiwo.github.io/pirates/" target="_blank" rel="noopener">Sid Meier's Pirates에서 영감을 받은 해전 게임, Pirates</a></div>
+    <div class="item-meta">HN · 298 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://piwodlaiwo.github.io/pirates/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://depthfirst.com/research/21-zero-days-in-ffmpeg" target="_blank" rel="noopener">FFmpeg의 제로데이 취약점 21개</a></div>
+    <div class="item-meta">HN · 252 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://depthfirst.com/research/21-zero-days-in-ffmpeg" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.eff.org/deeplinks/2026/06/congress-just-rushed-through-disastrous-copyright-office-overhaul" target="_blank" rel="noopener">H.R. 6028은 미국 저작권청을 근본적으로 바꿀 것이다</a></div>
+    <div class="item-meta">HN · 243 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.eff.org/deeplinks/2026/06/congress-just-rushed-through-disastrous-copyright-office-overhaul" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1u4m3lz/unprofessional_coauthor_behavior_with/" target="_blank" rel="noopener">허구 참고문헌을 인용하는 비전문적인 공저자 행동</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1u4m3lz/unprofessional_coauthor_behavior_with/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1u4hy2x/paddleocr_v3v4v5v6_implemented_in_c_with_ncnn_p/" target="_blank" rel="noopener">PaddleOCR (v3/v4/v5/v6) C++/ncnn 구현체</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1u4hy2x/paddleocr_v3v4v5v6_implemented_in_c_with_ncnn_p/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1u4obgy/anomaly_detection_vs_classification_for_visually/" target="_blank" rel="noopener">시각적으로 유사한 암과 유사 병변의 이상 탐지 vs 분류?</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1u4obgy/anomaly_detection_vs_classification_for_visually/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1u4fc16/derivativefree_neural_network_optimization_mnist/" target="_blank" rel="noopener">도함수 없는 신경망 최적화: MNIST 사례 [R]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1u4fc16/derivativefree_neural_network_optimization_mnist/" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/chatwoot/chatwoot" target="_blank" rel="noopener">chatwoot/chatwoot</a></div>
+    <div class="item-meta">30,702</div>
+    <div class="item-summary">Chatwoot는 Intercom, Zendesk, Salesforce Service Cloud 등의 오픈소스 대안인 현대적인 고객 지원 플랫폼이다. Docker를 통한 배포를 지원하며, Heroku 원클릭 배포도 제공한다. CircleCI 기반의 CI/CD 파이프라인을 갖추고 있으며, Crowdin을 통한 다국어 현지화, Discord 커뮤니티, 공개 상태 페이지(uptime/응답시간 모니터링)를 운영한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/chatwoot/chatwoot" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">obra/superpowers</a></div>
+    <div class="item-meta">226,625</div>
+    <div class="item-summary">Superpowers는 코딩 에이전트를 위한 완전한 소프트웨어 개발 방법론으로, 조합 가능한 스킬 세트와 초기 지침으로 구성된다. 에이전트가 코드를 바로 작성하는 대신, 먼저 사용자가 진짜 원하는 것을 파악하고 스펙을 도출한 뒤 구현 계획을 수립한다. 계획이 확정되면 subagent-driven-development 방식으로 여러 에이전트가 각 태스크를 수행하고 서로 검토하며 진행하며, 별도의 설정 없이도 스킬이 자동으로 작동한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/apple/container" target="_blank" rel="noopener">apple/container</a></div>
+    <div class="item-meta">35,912</div>
+    <div class="item-summary">`container`는 Apple이 Swift로 개발한 도구로, Mac(Apple 실리콘 전용)에서 Linux 컨테이너를 경량 가상 머신으로 실행할 수 있게 해준다. OCI 호환 컨테이너 이미지를 소비하고 생성하므로, 표준 컨테이너 레지스트리에서 이미지를 pull/push/run할 수 있다. 내부적으로는 Apple의 Containerization Swift 패키지를 사용해 컨테이너, 이미지, 프로세스를 관리한다. macOS 26의 가상화 및 네트워킹 신기능을 활용하기 때문에 macOS 26 이상에서만 지원된다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/apple/container" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/kenn-io/agentsview" target="_blank" rel="noopener">kenn-io/agentsview</a></div>
+    <div class="item-meta">2,201</div>
+    <div class="item-summary">agentsview는 AI 코딩 에이전트들의 세션을 탐색·검색하고 비용을 추적할 수 있는 단일 바이너리 도구로, 계정 없이 모든 데이터를 로컬에 저장한다. macOS/Linux/Windows 설치를 지원하며, Homebrew나 Docker 이미지, 데스크탑 앱 형태로도 제공된다. 첫 실행 시 머신에서 지원되는 에이전트의 세션을 자동으로 탐색해 로컬 SQLite 데이터베이스에 동기화하고, `http://127.0.0.1:8080`에서 웹 UI를 연다. SSH 포트 포워딩이나 리버스 프록시 등 원격 환경에서 접근할 경우 DNS 리바인딩 방어로 인해 403 오류가 발생할 수 있으며, 이때는 `--public-url` 옵션으로 실제 브라우저 접속 주소를 지정해야 한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/kenn-io/agentsview" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/LMCache/LMCache" target="_blank" rel="noopener">LMCache/LMCache</a></div>
+    <div class="item-meta">8,778</div>
+    <div class="item-summary">LMCache는 확장 가능한 LLM 추론을 위한 KV Cache 관리 레이어다. 2026년 4월에 새로운 멀티프로세스(MP) 아키텍처를 출시해 MoE 추론 성능을 최대 10배 향상시켰으며, 2026년 5월에는 AMD MI300X에서 멀티턴 에이전틱 워크로드 벤치마크 결과를 공개했다. 멀티노드 P2P CPU 메모리 공유 기능은 실험적 단계에서 프로덕션 수준으로 발전했다. PyPI를 통해 배포되며 Slack 커뮤니티와 정기 미팅을 운영하고 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/LMCache/LMCache" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
