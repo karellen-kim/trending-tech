@@ -51,7 +51,6 @@ REDDIT_SUBREDDITS = [
 ]
 
 SCRAPER_SOURCES = [
-    {"name": "Uber Engineering", "url": "https://eng.uber.com/"},
     {"name": "Alibaba Cloud Blog", "url": "https://www.alibabacloud.com/blog"},
     {"name": "Spotify Engineering", "url": "https://engineering.atspotify.com/"},
 ]
