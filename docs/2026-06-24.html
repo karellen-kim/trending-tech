@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-06-24 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-06-24</div>
+<h1><em>24</em> Jun 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 하이라이트</span>
+    
+  </div>
+  <ul class="highlight-list"><li>AI를 하드드라이브처럼 쓰지 마라. 2026년 필수는 영속적 컨텍스트 레이어다.</li><li>알리바바 Qwen-Robot Suite로 물리적 AI 로봇 에이전트 시대 개막.</li><li>에이전트 기반 오픈소스 비디오 제작 플랫폼 OpenMontage 첫 공개.</li><li>GLM-5.2 로컬 실행 가능해져 개발자 AI 접근성 대폭 향상.</li><li>817개 사이버보안 스킬을 AI 에이전트용으로 체계화해 공개.</li></ul>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">9개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/oss-tables-the-missing-piece-in-the-ai-data-lakehouse-infrastructure_603276" target="_blank" rel="noopener">OSS Tables: AI 데이터 레이크하우스 인프라의 누락된 부분</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/oss-tables-the-missing-piece-in-the-ai-data-lakehouse-infrastructure_603276" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/stop-treating-your-ai-like-a-hard-drive-why-your-team-needs-a-persistent-context-layer-in-2026_603274" target="_blank" rel="noopener">AI를 하드드라이브처럼 취급하지 마세요: 2026년 팀에 필요한 영속 컨텍스트 레이어</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/stop-treating-your-ai-like-a-hard-drive-why-your-team-needs-a-persistent-context-layer-in-2026_603274" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/entering-the-physical-ai-era-introducing-the-qwen-robot-suite_603261" target="_blank" rel="noopener">물리 AI 시대 진입: Qwen-Robot Suite 소개</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/entering-the-physical-ai-era-introducing-the-qwen-robot-suite_603261" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/happyhorse-gets-stronger-motion-expressiveness-higher-generation-consistency-and-enhanced-visual-quality_603293" target="_blank" rel="noopener">HappyHorse, 모션 표현력 강화·생성 일관성 향상·시각 품질 개선</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/happyhorse-gets-stronger-motion-expressiveness-higher-generation-consistency-and-enhanced-visual-quality_603293" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/cross-platform-quant-trading-bringing-smart-q-into-market-monitoring-and-trading-review_603291" target="_blank" rel="noopener">크로스플랫폼 퀀트 트레이딩: 시장 모니터링과 거래 검토에 Smart Q 도입하기</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/cross-platform-quant-trading-bringing-smart-q-into-market-monitoring-and-trading-review_603291" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가 인코딩: Spotify 데이터 어시스턴트의 컨텍스트 계층</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify는 70,000개 이상의 데이터셋을 관리하면서 데이터 전문가에게 의존하는 비효율을 해결하기 위해 AI 데이터 어시스턴트를 개발했습니다. 단순히 모든 스키마를 LLM에 입력하는 방식은 컨텍스트 윈도우 제한과 스키마만으로는 실제 데이터의 의미를 전달할 수 없어 작동하지 않았습니다. 이를 위해 도메인 전문가의 지식을 담는 "컨텍스트 레이어"를 개발했으며, 2025년 8월 이후 2,100명 이상의 직원이 13,000+ 대화를 통해 60,000+ 메시지로 활용 중입니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트를 위한 개발자 경험 확장</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">LLM Evals로 더 나은 실험 — 분기가 아닌 깔때기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">LLM 평가(eval)는 관련성, 일관성 등을 자동으로 판정하는 도구로, 실험과의 관계는 "포크"가 아닌 "펀넬" 형태여야 한다. Evals는 실험 전에 품질 기준 충족 여부를 검증하고 유망하지 않은 후보를 제거해 실험의 성공률을 높인다. Experiments는 실제 사용자 반응을 검증하는 역할을 담당한다. Evals는 검증뿐 아니라 팀이 미처 발견하지 못한 패턴을 드러내어 제품 개선 가설을 생성하기도 한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">Claude Code Plugins를 이용한 Spotify Ads API 자연어 인터페이스 구축</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify Ads API의 자연어 인터페이스를 제공하는 Claude Code 플러그인을 개발했다. 복잡한 Ads API(30개 이상의 리소스 타입, 다단계 구조)를 사용하기 쉽게 하기 위해 마크다운, bash, Python으로 구성된 오픈소스 도구를 만들었다. 사용자는 "25-44세 미국 청취자를 대상으로 일일 $100 예산의 오디오 캠프페인 생성"처럼 자연어로 요청하면, 시스템이 의도를 파악해 올바른 API 호출로 변환한다. GitHub와 Claude Plugins 마켓플레이스에서 다운로드 가능하며, LLM 기반 에이전트와의 상호작용을 제어하려는 개발자와 광고주를 위해 설계됐다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">10개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://store.steampowered.com/news/group/45479024/view/685257114654870245" target="_blank" rel="noopener">Steam Machine 오늘 출시</a></div>
+    <div class="item-meta">HN · 1784 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://store.steampowered.com/news/group/45479024/view/685257114654870245" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://unsloth.ai/docs/models/glm-5.2" target="_blank" rel="noopener">GLM-5.2 – 로컬에서 실행하는 방법</a></div>
+    <div class="item-meta">HN · 500 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://unsloth.ai/docs/models/glm-5.2" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.dahl.dev/posts/my-mathematical-regression/" target="_blank" rel="noopener">나의 수학적 회귀</a></div>
+    <div class="item-meta">HN · 335 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.dahl.dev/posts/my-mathematical-regression/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.16140" target="_blank" rel="noopener">VibeThinker: 새로운 SFT+GRPO 기법으로 추론에서 Opus 4.5를 능가하는 3B 파라미터 모델</a></div>
+    <div class="item-meta">HN · 291 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.16140" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.stephendiehl.com/posts/bad_place_2026/" target="_blank" rel="noopener">2026년 암호화폐: 오, 여긴 나쁜 곳이군</a></div>
+    <div class="item-meta">HN · 235 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.stephendiehl.com/posts/bad_place_2026/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://swelljoe.com/post/will-it-mythos/" target="_blank" rel="noopener">Mythos가 될까?</a></div>
+    <div class="item-meta">HN · 228 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://swelljoe.com/post/will-it-mythos/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://jchri.st/blog/in-praise-of-memcached/" target="_blank" rel="noopener">memcached의 미덕</a></div>
+    <div class="item-meta">HN · 224 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://jchri.st/blog/in-praise-of-memcached/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/baidu/Unlimited-OCR" target="_blank" rel="noopener">무제한 OCR: 원샷 장거리 파싱</a></div>
+    <div class="item-meta">HN · 218 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/baidu/Unlimited-OCR" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/dorukkumkumoglu/optocamzero" target="_blank" rel="noopener">Optocam Zero: 기성 부품으로 만든 Pi Zero 기반 디지털 카메라</a></div>
+    <div class="item-meta">HN · 208 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/dorukkumkumoglu/optocamzero" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://openai.com/index/daybreak-securing-the-world/" target="_blank" rel="noopener">OpenAI DayBreak – GPT-5.5-Cyber</a></div>
+    <div class="item-meta">HN · 161 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://openai.com/index/daybreak-securing-the-world/" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/calesthio/OpenMontage" target="_blank" rel="noopener">calesthio/OpenMontage</a></div>
+    <div class="item-meta">14,574</div>
+    <div class="item-summary">OpenMontage는 오픈소스 에이전트식 비디오 프로덕션 시스템으로, 사용자의 자연어 요청을 받아 AI가 연구, 스크립팅, 자산 생성, 편집, 최종 구성을 자동으로 처리한다. 기존 비디오를 붙여넣거나 프롬프트를 입력하면 AI 코딩 어시스턴트가 전체 비디오 제작 과정을 관리한다. AGPLv3 라이선스로 공개되었으며 깃허브 트렌딩 1위를 기록했다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/calesthio/OpenMontage" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/ZhuLinsen/daily_stock_analysis" target="_blank" rel="noopener">ZhuLinsen/daily_stock_analysis</a></div>
+    <div class="item-meta">46,711</div>
+    <div class="item-summary">AI 대모델 기반의 주식 자동 분석 시스템으로, A주·홍콩주·미국주·일본주·한국주 등을 분석한다. 매일 자동으로 분석 결과인 "의사결정 대시보드"를 엔터프라이즈 위챗, 飞书, 텔레그램, 디스코드, 슬랙, 이메일로 푸시한다. Python 3.10 이상을 필요로 하며 GitHub Actions와 Docker를 지원한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/ZhuLinsen/daily_stock_analysis" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills" target="_blank" rel="noopener">mukul975/Anthropic-Cybersecurity-Skills</a></div>
+    <div class="item-meta">19,340</div>
+    <div class="item-summary">Anthropic Cybersecurity Skills는 AI 에이전트를 위한 오픈소스 사이버보안 스킬 라이브러리입니다. 817개의 스킬, 29개의 보안 도메인, 6개의 프레임워크를 포함하며 26개 이상의 플랫폼을 지원합니다. MITRE F3 v1.1 표준을 준수하고 Apache 2.0 라이선스로 제공됩니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener">garrytan/gstack</a></div>
+    <div class="item-meta">113,802</div>
+    <div class="item-summary">gstack은 Y Combinator CEO인 Garry Tan의 개발 방법론으로, AI 에이전트를 활용해 생산성을 극대화하는 접근법이다. Tan은 최근 60일간 3개의 프로덕션 서비스와 40개 이상의 기능을 파트타임으로 배포했으며, 2026년 생산성은 2013년 대비 약 810배를 기록했다. AI가 대부분의 코드를 작성하며, 올해 YTD 성과는 2013년 전체의 240배에 달한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/bytedance/deer-flow" target="_blank" rel="noopener">bytedance/deer-flow</a></div>
+    <div class="item-meta">73,751</div>
+    <div class="item-summary">DeerFlow 2.0는 ByteDance의 오픈소스 슈퍼 에이전트 하네스로, 서브 에이전트, 메모리, 샌드박스를 조율하고 확장 가능한 스킬로 다양한 작업을 수행한다. v2는 v1과 공유 코드가 없는 완전히 새로운 작성이며, v1은 1.x 브랜치에서 유지보수되고 있다. Python 3.12+와 Node.js 22+가 필요하다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/bytedance/deer-flow" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
