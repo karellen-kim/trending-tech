@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-07-01 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-07-01</div>
+<h1><em>01</em> Jul 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 하이라이트</span>
+    
+  </div>
+  <ul class="highlight-list"><li>Cloudflare x402로 모든 웹 리소스에 결제 시스템 표준화 추진</li><li>Claude Sonnet 5로 AI 성능과 비용 효율성 획기적으로 향상</li><li>완전 자동화 연구 시스템이 대규모 운영 환경으로 확장 배포</li><li>멀티에이전트 오케스트레이션 벤치마크로 복합 워크플로우 평가 기준화</li><li>arXiv가 25년 만에 Cornell 독립해 비영리로 학술 인프라 재구성</li></ul>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">18개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.fb.com/2026/06/30/open-source/10-years-of-metas-commitment-to-python/" target="_blank" rel="noopener">파이썬을 향한 메타의 10년 약속</a></div>
+    <div class="item-meta">Meta Engineering</div>
+    <div class="item-summary">올해는 Meta가 Python Software Foundation(PSF)에 10년을 연속으로 스폰서로 지원하는 해입니다. PSF는 오픈소스 Python 프로그래밍 언어의 발전과 보호를 담당하는 자선 단체입니다. Python은 세계에서 가장 영향력 있는 프로그래밍 언어 중 하나이며, Meta는 엔지니어링 스택 전반에 걸쳐 Python을 사용합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.fb.com/2026/06/30/open-source/10-years-of-metas-commitment-to-python/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.cloudflare.com/monetization-gateway/" target="_blank" rel="noopener">Monetization Gateway 공개: Cloudflare 뒤의 모든 리소스에 x402로 요금 청구</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+    <div class="item-summary">Cloudflare 뒤에 있는 웹페이지, 데이터셋, API, MCP 도구 등 모든 리소스에 대해 과금할 수 있는 Monetization Gateway의 웨이트리스트가 오픈됐습니다. 과금은 x402 오픈 프로토콜을 통해 스테이블코인으로 결제되며, 별도의 결제 시스템을 구축할 필요가 없습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.cloudflare.com/monetization-gateway/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.cloudflare.com/agentic-internet-bot-report/" target="_blank" rel="noopener">콘텐츠 독립의 날, 1년 후: 에이전트 인터넷을 위한 비즈니스 모델 구축</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+    <div class="item-summary">Content Independence Day 선언 1년 후, 수익화된 콘텐츠의 역동적 시장이 공식적으로 출현했다. 보고서는 자율 AI 에이전트의 등장이 전통적 검색 레퍼럴을 어떻게 변화시키는지 분석하고, 지속 가능한 웹 경제를 지원하기 위해 필요한 새로운 인프라를 설명한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.cloudflare.com/agentic-internet-bot-report/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.cloudflare.com/making-ai-search-smarter/" target="_blank" rel="noopener">AI 검색을 더 똑똑하게 만들기</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+    <div class="item-summary">검색은 웹에서 정보를 찾는 주요 방식이며, AI의 발전으로 이 지형이 변화하고 있다. AI 에이전트 시대에 크리에이터들은 발견 가능성을 유지하면서 동시에 정당한 보상을 받아야 하는 과제에 직면해 있다. 이에 대응하여 두 가지 이니셔티브가 시작되고 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.cloudflare.com/making-ai-search-smarter/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.cloudflare.com/content-independence-day-ai-options/" target="_blank" rel="noopener">당신의 사이트, 당신의 규칙: 모든 고객을 위한 새로운 AI 트래픽 옵션</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+    <div class="item-summary">웹사이트 소유자들이 AI 트래픽을 더 세밀하게 관리할 수 있는 새로운 옵션을 제공합니다. 기존의 일괄 차단 방식 대신, Search, Agent, Training 봇을 개별적으로 구분하고 관리할 수 있습니다. 또한 광고 수익화 페이지를 보호하는 기능이 추가되었습니다. 이는 Content Independence Day의 일환으로, 모든 고객이 이용할 수 있습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.cloudflare.com/content-independence-day-ai-options/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.cloudflare.com/attribution-business-insights/" target="_blank" rel="noopener">크롤의 정체를 드러내는 Attribution Business Insights</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+    <div class="item-summary">Cloudflare의 새로운 Attribution Business Insights 대시보드는 웹사이트 소유자들이 크롤러의 행동, 관심도, 잠재적 가치를 이해하도록 도와준다. 이 도구는 크롤 보상과 관련된 비즈니스 수준의 대화를 촉진한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.cloudflare.com/attribution-business-insights/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/qwen-agentworld-language-world-models-for-general-agents_603304" target="_blank" rel="noopener">Qwen-AgentWorld: 범용 에이전트를 위한 언어 기반 세계 모델</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/qwen-agentworld-language-world-models-for-general-agents_603304" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/esa-unlocked-smart-routing---making-dynamic-content-as-fast-as-static_603290" target="_blank" rel="noopener">ESA 언락됨: 스마트 라우팅 - 동적 콘텐츠를 정적 수준의 속도로</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/esa-unlocked-smart-routing---making-dynamic-content-as-fast-as-static_603290" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/entering-the-physical-ai-era-introducing-the-qwen-robot-suite_603261" target="_blank" rel="noopener">물리적 AI 시대로의 진입: Qwen-Robot Suite 소개</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/entering-the-physical-ai-era-introducing-the-qwen-robot-suite_603261" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/cross-account-intelligent-database-operations-integrating-das-agent-mcp-server-and-dify_603320" target="_blank" rel="noopener">계정 간 지능형 데이터베이스 운영: DAS Agent, MCP Server, Dify 통합</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/cross-account-intelligent-database-operations-integrating-das-agent-mcp-server-and-dify_603320" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/the-second-half-of-the-enterprise-agent-era-how-to-make-agents-smarter-the-more-they-are-used_603319" target="_blank" rel="noopener">엔터프라이즈 에이전트 시대의 후반부: 사용할수록 더 똑똑해지는 에이전트 만드는 법</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/the-second-half-of-the-enterprise-agent-era-how-to-make-agents-smarter-the-more-they-are-used_603319" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가 인코딩: Spotify 데이터 어시스턴트 뒤의 컨텍스트 레이어</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify는 70,000개 이상의 데이터셋으로 인해 모든 스키마를 LLM에 넣을 수 없는 문제를 해결하기 위해 AI 데이터 어시스턴트를 개발했다. 컨텍스트 윈도우 제한과 스키마만으로는 실제 의미를 전달할 수 없기 때문에, 도메인 소유자가 이해하는 정보를 담은 컨텍스트 레이어를 구축했다. 이 어시스턴트는 2025년 8월부터 2,100명 이상의 사용자가 13,000개 이상의 대화에서 활용 중이며, SQL 코딩 경험이 없는 사용자도 영어로 질문해 데이터 인사이트를 얻을 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트로 개발자 경험 확장하기</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify의 Chief Architect가 발표한 내용으로, 코딩 제약이 사라짐에 따라 AI 도구 채택이 급증했다는 것이 핵심이다. Opus 4.5 출시 이후 엔지니어의 99%가 AI 코딩 도구를 주간 기준으로 사용하고 있으며, 94%가 생산성 향상을 보고했고 Pull Request 빈도도 76% 증가했다. Spotify는 생산 코드베이스가 엔지니어 수의 7배 속도로 증가하면서 의존성 업그레이드, API 마이그레이션, 취약점 패치 등 유지보수에 개발자 시간이 낭비되는 문제를 경험했고, 이를 자동화로 해결하는 방식을 추진했다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주간 65,000여 개 변경사항 중 90%를 분석하는 GenAI 코드 리뷰</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">우버는 주 65,000건의 코드 변경 중 90%를 분석하는 AI 코드 리뷰 플랫폼 uReview를 개발했다. 이 플랫폼은 Commenter라는 다단계 생성형 AI 시스템으로 기능 버그, 오류 처리, 보안 취약점, 코딩 표준을 식별하며, Fixer는 AI나 인간의 코멘트에 대응하는 코드 변경을 제안한다. 주요 과제는 LLM 환각과 특정 상황에서 중요하지 않은 지적으로 인한 거짓 긍정을 줄이는 것이며, 최종 목표는 신호 대 잡음비를 높이는 것이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">Apache Hudi: 19,500개 데이터셋, 일일 6조 행, 10 PB 수집</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Apache Hudi는 Uber가 만든 데이터 레이크 스토리지 엔진으로, 수백 페타바이트 규모의 데이터 처리를 지원한다. 기존 기술로 충족할 수 없던 대규모 데이터 처리, 높은 신선도 요구사항, 운영상 엄격함이라는 도전 과제를 해결하기 위해 개발되었다. Hudi는 ACID 트랜잭션, 인덱싱, 증분 처리 같은 데이터베이스 기능을 데이터 레이크에 가져왔으며, 현재 Uber의 수십만 개 데이터셋을 지원하고 모든 비즈니스 라인의 일관성과 신선도 요구사항을 충족한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">Moirai: 무손실 지연 작업 완화 – SOSP 2025 채택</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">Uber의 멀티클라우드 시크릿 관리 플랫폼 구축</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 5,000개 마이크로서비스와 150,000개 이상의 시크릿을 관리하는 환경에서 증가하는 사이버 공격에 대응하기 위해 중앙화된 시크릿 관리 플랫폼을 구축했다. 플랫폼은 시크릿 확산, 섀도우 IT 볼트, 불안전한 공유 문제를 해결하고 시크릿 로테이션을 지원한다. 예방 차원에서 Git 사전 커밋 훅 CLI 도구를 도입하여 코드베이스에 시크릿이 들어가는 것을 사전 차단한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">Zero-Growth Stack, Real Gains: Go의 기본 2KB 스택 할당은 Uber의 고처리량 서비스에서 낭비적인 확장 사이클을 촉발해 CPU의 10%를 소비했습니다. 팀은 CPU 프로필과 바이너리 심볼을 읽어 서비스별 최적의 스택 크기를 계산하는 프로필 가이드 자동화 시스템을 구축했습니다. 결과: CPU 오버헤드가 1% 미만으로 감소했으며, 2M 코어 전체에서 메모리 오버헤드를 2% 미만으로 유지하면서 16% 효율성 향상을 달성했습니다.</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 200만 개 이상의 코어에서 Go 서비스를 운영하며, Go의 goroutine은 기본 2KB 스택으로 시작합니다. 스택이 부족하면 runtime.morestack이 호출되어 2배 크기의 새 스택을 생성하고 기존 내용을 복사하는 반복 과정이 발생합니다. 이러한 스택 확장이 빈번하면 CPU 낭비를 초래합니다. Go 1.19부터는 적응형 스택 크기 기능이 도입되어 진행 중인 평균 스택 크기를 추적합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">7개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/30/anthropic/#atom-everything" target="_blank" rel="noopener">Anthropic 인용</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">Anthropic은 미국 상무부로부터 Claude Fable 5와 Mythos 5에 대한 수출 통제 해제 통지를 받았다. 내일부터 접근이 복원될 예정이며, 향후 상세한 업데이트를 공유할 계획이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/30/anthropic/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/30/nano-banana-2-lite/#atom-everything" target="_blank" rel="noopener">나노 바나나 2 라이트</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">Nano Banana 2 Lite(Gemini 3.1 Flash Lite Image)는 Google의 이미지 생성 모델이다. API에서는 `gemini-3.1-flash-lite-image` 코드명으로 사용되며, "가장 빠르고 저렴한 Gemini 이미지 모델"로 속도와 규모를 위해 설계되었다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/30/nano-banana-2-lite/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/30/claude-sonnet-5/#atom-everything" target="_blank" rel="noopener">Claude Sonnet 5의 새로운 기능</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">제공된 [내용]이 불완전합니다 (마지막 문장이 "at lower pric"에서 끝남). 규칙에 따라 빈 문자열을 반환합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/30/claude-sonnet-5/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/30/the-ai-compass/#atom-everything" target="_blank" rel="noopener">AI 나침반</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">"The AI Compass"는 bambamramfan이 만든 정치 나침반 스타일의 퀴즈입니다. AI와 AI 윤리에 관한 29개의 질문에 답하면 30가지 원형 중 자신과 가장 잘 맞는 유형을 찾을 수 있습니다. 필자는 첫 시도에서 "The Garage Tinkerer"로 분류되었습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/30/the-ai-compass/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/30/shot-scraper-video/#atom-everything" target="_blank" rel="noopener">에이전트가 shot-scraper video로 작업 비디오 데모를 기록하도록 하기</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">shot-scraper 1.10 릴리스에서 새로 도입된 `shot-scraper video` 명령어는 `storyboard.yml` 파일에 정의된 웹 애플리케이션 루틴을 실행하고, Playwright를 사용하여 그 루틴의 비디오를 자동으로 기록한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/30/shot-scraper-video/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jun/30/shot-scraper/#atom-everything" target="_blank" rel="noopener">shot-scraper 1.10</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">shot-scraper 1.10이 릴리스되었습니다. 주요 새 기능은 `shot-scraper video storyboard.yml`로, 에이전트의 작업을 비디오 데모로 기록할 수 있습니다. 자세한 설명은 "Have your agent record video demos of its work with shot-scraper video" 글에서 확인할 수 있습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jun/30/shot-scraper/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://newsletter.kentbeck.com/p/air-traffic-control" target="_blank" rel="noopener">항공 교통 관제</a></div>
+    <div class="item-meta">Kent Beck</div>
+    <div class="item-summary">Keith Adams는 시스템 레이어 분야에서 경력을 쌓았습니다. VMware에서 9년간 근무했고, Facebook의 HHVM 팀을 창립했으며, Slack에서 최고 아키텍트로 역임했습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://newsletter.kentbeck.com/p/air-traffic-control" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.31651" target="_blank" rel="noopener">FARS: 대규모 배포된 완전 자동화 연구 시스템</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">FARS는 연구 주제 전반에 걸쳐 대규모로 작동하는 완전 자동화 AI 연구 시스템이다. 이 시스템은 아이디어 생성, 계획 수립, 실험 수행, 논문 작성 등의 단계를 자율적으로 진행한다. 단계별 특화 에이전트들이 이 과정을 조율하여 연구 프로젝트를 독립적으로 진전시킨다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.31651" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.31410" target="_blank" rel="noopener">Xiaomi-GUI-0 기술 보고서</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">Xiaomi-GUI-0 기술 보고서는 비전-언어 모델 기반 GUI 에이전트에 관한 것입니다. 기존 GUI 에이전트들은 오프라인 궤적, 시뮬레이션 환경, 표준화된 벤치마크에서 학습 및 평가되고 있습니다. 그러나 이들은 실제 애플리케이션의 인터페이스 레이아웃, 상호작용 로직, 비정상 상태 분포와 크게 다르기 때문에, 실제 사용 환경에서의 실행 안정성을 제대로 특징지을 수 없다는 한계가 있습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.31410" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.31174" target="_blank" rel="noopener">ClawArena-Team: 언어 모델 에이전트의 서브에이전트 오케스트레이션과 동적 워크플로우 벤치마킹</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">내용이 불완전합니다. Abstract이 중간에 끝나 있어 ClawArena-Team의 핵심 내용과 결과를 확인할 수 없습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.31174" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.31285" target="_blank" rel="noopener">언어와 기호 표현 간 양식 전환을 통한 공간 추론</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">논문은 인간의 추론이 멀티모달(언어와 시각적 표현의 혼합)임을 전제로 한다. 복잡한 공간 추론 문제를 자연언어로만 처리하기보다는 다이어그램이나 그리드 같은 기하학 인식 모달리티로 변환했을 때 추론 성능이 향상되는지 조사한다. 또한 모델이 언어와 기호 표현 사이를 전환할 시점을 자동으로 결정할 수 있는지를 탐구한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.31285" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.31648" target="_blank" rel="noopener">영어로 생각하고 한국어로 답하기: 다언어 도구 활용 에이전트의 효율적 적응</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">LuckyStar 111B는 Cohere와 LG CNS가 협력 개발한 111B-parameter 하이브리드 추론 모델로, 실제 메모리와 제공 제약 하에서 한국어-영어 엔터프라이즈 에이전트용으로 설계됐다. Cohere의 Command A 모델에서 새로운 pretraining 없이 훈련되며, preamble conditioning으로 간결한 행동과 도구 지향 추론 간 전환을 지원한다. 다중언어 감독 미세조정과 강화학습 등 네 가지 도구 사용 에이전트 확장 방식을 연구했다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.31648" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">15개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://thereallo.dev/blog/claude-code-prompt-steganography" target="_blank" rel="noopener">Claude Code는 요청을 은폐적으로 표시하고 있다</a></div>
+    <div class="item-meta">HN · 2284 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://thereallo.dev/blog/claude-code-prompt-steganography" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.anthropic.com/news/claude-sonnet-5" target="_blank" rel="noopener">Claude Sonnet 5</a></div>
+    <div class="item-meta">HN · 1198 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.anthropic.com/news/claude-sonnet-5" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://claude.com/product/claude-science" target="_blank" rel="noopener">Claude 사이언스</a></div>
+    <div class="item-meta">HN · 532 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://claude.com/product/claude-science" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.pcgamer.com/gaming-industry/open-source-game-engine-godot-will-no-longer-accept-ai-authored-code-contributions-we-cant-trust-heavy-users-of-ai-to-understand-their-code-enough-to-fix-it/" target="_blank" rel="noopener">Godot이 AI 작성 코드 기여를 더 이상 수용하지 않기로</a></div>
+    <div class="item-meta">HN · 431 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.pcgamer.com/gaming-industry/open-source-game-engine-godot-will-no-longer-accept-ai-authored-code-contributions-we-cant-trust-heavy-users-of-ai-to-understand-their-code-enough-to-fix-it/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://deepmind.google/models/gemini-image/flash-lite/" target="_blank" rel="noopener">나노 바나나 2 라이트</a></div>
+    <div class="item-meta">HN · 416 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://deepmind.google/models/gemini-image/flash-lite/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://asahilinux.org/2026/06/progress-report-7-1/" target="_blank" rel="noopener">Asahi Linux 7.1 진행 보고서</a></div>
+    <div class="item-meta">HN · 366 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://asahilinux.org/2026/06/progress-report-7-1/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://home.cern/cern-bids-farewell-to-the-lhc-and-enters-long-shutdown-3/" target="_blank" rel="noopener">CERN이 LHC에 작별을 고하고 Long Shutdown 3에 진입하다</a></div>
+    <div class="item-meta">HN · 298 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://home.cern/cern-bids-farewell-to-the-lhc-and-enters-long-shutdown-3/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://docs.mistral.ai/models/model-cards/leanstral-1-5-26-06" target="_blank" rel="noopener">Leanstral 1.5</a></div>
+    <div class="item-meta">HN · 279 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://docs.mistral.ai/models/model-cards/leanstral-1-5-26-06" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.thefocalpoints.com/p/new-study-frog-derived-gut-bacterium" target="_blank" rel="noopener">개구리 유래 장내 박테리아 단일 투여로 쥐의 종양 100% 완전 제거</a></div>
+    <div class="item-meta">HN · 278 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.thefocalpoints.com/p/new-study-frog-derived-gut-bacterium" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://wangcong.org/2026-06-30-why-i-stopped-arguing-with-people.html" target="_blank" rel="noopener">사람들과의 논쟁을 멈춘 이유</a></div>
+    <div class="item-meta">HN · 277 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://wangcong.org/2026-06-30-why-i-stopped-arguing-with-people.html" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1ukjtlm/on_july_1_2026_arxiv_will_spin_out_from_cornell/" target="_blank" rel="noopener">2026년 7월 1일, arXiv가 25년간의 본거지 Cornell University를 떠나 독립 비영리 조직이 된다. Simons Foundation과 Schmidt Sciences의 주요 자금 지원. 웹사이트에서 빨간색을 버린다.</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary">2026년 7월 1일, arXiv는 25년간 터전이었던 Cornell University에서 분리되어 독립 비영리단체로 전환된다. Simons Foundation과 Schmidt Sciences의 주요 자금 지원을 받으며, 웹사이트 색상을 변경할 예정이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1ukjtlm/on_july_1_2026_arxiv_will_spin_out_from_cornell/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1uk949b/d_monthly_whos_hiring_and_who_wants_to_be_hired/" target="_blank" rel="noopener">[D] 월간 채용 공고와 구직자</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1uk949b/d_monthly_whos_hiring_and_who_wants_to_be_hired/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1ukjh6y/icml_qr_code_visible_d/" target="_blank" rel="noopener">ICML QR 코드 표시 [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1ukjh6y/icml_qr_code_visible_d/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1ukgwk1/a_systemlevel_approach_to_prompt_injection/" target="_blank" rel="noopener">LLM 에이전트의 prompt injection: instruction과 data 채널 분리를 통한 시스템 수준의 접근 [P]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1ukgwk1/a_systemlevel_approach_to_prompt_injection/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1ujztdd/how_to_improve_a_5class_diabetic_retinopathy/" target="_blank" rel="noopener">5분류 Diabetic Retinopathy 모델 개선하기 (APTOS 2019) – 클래스 간 혼재된 예측[P]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1ujztdd/how_to_improve_a_5class_diabetic_retinopathy/" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/HKUDS/Vibe-Trading" target="_blank" rel="noopener">HKUDS/Vibe-Trading</a></div>
+    <div class="item-meta">16,283</div>
+    <div class="item-summary">Vibe-Trading은 개인 트레이딩 에이전트로, 한 명령으로 포괄적인 트레이딩 기능을 제공합니다. Python 3.11+, FastAPI 백엔드, React 19 프론트엔드로 구축되었으며 PyPI에서 배포됩니다. MIT 라이선스 오픈소스이며 Feishu, WeChat, Discord 커뮤니티를 운영 중입니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/HKUDS/Vibe-Trading" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/hasaneyldrm/exercises-dataset" target="_blank" rel="noopener">hasaneyldrm/exercises-dataset</a></div>
+    <div class="item-meta">8,068</div>
+    <div class="item-summary">**hasaneyldrm/exercises-dataset** 요약:<br><br>1,324개 운동 데이터와 개발자 설정 마법사를 제공하는 구조화된 데이터셋입니다. 영어, 스페인어, 이탈리아어, 터키어, 러시아어, 중국어 6개 언어로 카테고리, 신체 부위, 장비, 목표 근육 및 단계별 지시사항이 JSON 형식으로 포함되어 있습니다. 운동 미디어(이미지, GIF)는 포함되지 않으며, 각 레코드는 원본 ExerciseDB 미디어 참조 ID만 유지합니다. 데이터 출처는 AscendAPI의 ExerciseDB v1입니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/hasaneyldrm/exercises-dataset" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/facebook/astryx" target="_blank" rel="noopener">facebook/astryx</a></div>
+    <div class="item-meta">2,216</div>
+    <div class="item-summary">Astryx는 Meta에서 8년간 개발해 13,000개 이상의 앱을 지원한 오픈소스 디자인 시스템입니다. React와 StyleX 기반으로 150개 이상의 접근성 있는 컴포넌트, 브랜드 테마, 다크모드, 템플릿, CLI를 제공합니다. 개방형 구조로 자유로운 커스터마이징이 가능하고, StyleX 외에도 Tailwind나 CSS modules 등 다양한 스타일링을 지원하며, 사람과 AI 에이전트 모두를 위해 설계되었습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/facebook/astryx" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/allenai/olmocr" target="_blank" rel="noopener">allenai/olmocr</a></div>
+    <div class="item-meta">18,127</div>
+    <div class="item-summary">olmocr은 PDF와 이미지 기반 문서를 깔끔한 평문으로 변환하는 툴킷입니다. 수식, 표, 필기, 복잡한 포맷을 지원하며 자동으로 헤더와 푸터를 제거합니다. 다단 레이아웃이나 그림이 있어도 자연스러운 읽기 순서를 유지하며, 100만 페이지당 $200 미만으로 효율적입니다. 7B 파라미터 VLM 기반이므로 GPU가 필요합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/allenai/olmocr" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/logto-io/logto" target="_blank" rel="noopener">logto-io/logto</a></div>
+    <div class="item-meta">13,116</div>
+    <div class="item-summary">Logto는 SaaS와 AI 앱을 위한 현대적인 오픈소스 인증 인프라다. OIDC와 OAuth 2.1을 지원하며 보안 프로덕션 레벨 인증 구축을 용이하게 한다. 멀티테넌시, 엔터프라이즈 SSO, RBAC 기능을 포함한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/logto-io/logto" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
