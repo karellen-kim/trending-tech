@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-07-04 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-07-04</div>
+<h1><em>04</em> Jul 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 하이라이트</span>
+    
+  </div>
+  <ul class="highlight-list"><li>Qwen-AgentWorld가 언어 세계 모델로 범용 에이전트 개발 플랫폼 제공</li><li>Atomic Task Graph가 에이전트 계획·실행 통합 프레임워크 제시</li><li>알리바바 Qwen-Robot Suite로 물리 AI 시대 본격화</li><li>RLVR 기반 도구 사용 에이전트, Atlassian 워크플로우 자동화 구현</li><li>Wiola 아키텍처, 효율적인 소형 언어 모델 구현 방법 제안</li></ul>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">12개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/qwen-agentworld-language-world-models-for-general-agents_603304" target="_blank" rel="noopener">Qwen-AgentWorld: 범용 에이전트를 위한 언어 세계 모델</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/qwen-agentworld-language-world-models-for-general-agents_603304" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-pushes-open-source-apache-flink-toward-agentic-streaming-for-ai_603313" target="_blank" rel="noopener">알리바바 클라우드, 오픈소스 Apache Flink를 AI 에이전틱 스트리밍으로 추진</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-pushes-open-source-apache-flink-toward-agentic-streaming-for-ai_603313" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/entering-the-physical-ai-era-introducing-the-qwen-robot-suite_603261" target="_blank" rel="noopener">물리적 AI 시대로의 진입: Qwen-Robot Suite 소개</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/entering-the-physical-ai-era-introducing-the-qwen-robot-suite_603261" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/quest-mode-task-delegation-to-agents_603328" target="_blank" rel="noopener">Quest Mode: 에이전트에게 작업 위임</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/quest-mode-task-delegation-to-agents_603328" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/qoderwake-your-always-on-ai-employee_603327" target="_blank" rel="noopener">QoderWake: 당신의 항상 켜져 있는 AI 직원</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/qoderwake-your-always-on-ai-employee_603327" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">당신의 도메인 전문가를 인코딩하다: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify는 70,000개 이상의 데이터셋 규모에서 데이터 문제 해결을 자동화하기 위해 AI 데이터 어시스턴트를 개발했습니다. 모든 스키마를 LLM에 입력하는 방식은 확장성이 떨어지므로, 도메인 전문가가 실제로 중요한 정보를 담은 '중간 계층'을 구축했습니다. 이 어시스턴트는 2025년 8월부터 2,100명 이상의 직원이 13,000+ 대화에서 활용 중이며, SQL 미경험자도 1/4 이상을 차지합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트를 위한 개발자 경험 확장</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify는 내부 개발 플랫폼 투자를 통해 AI 코딩 도구 도입을 가속화했으며, 현재 99% 이상의 엔지니어가 주간 AI 도구를 사용하고 있다. 94%의 엔지니어가 생산성 향상을 보고했고, PR 빈도는 76% 증가했으며, Opus 4.5 릴리스 이후 Claude Code 채택이 급격히 증가했다. 이러한 성과의 배경에는 수년 전 생산 코드베이스가 엔지니어 수 증가의 7배 속도로 성장하면서 유지보수 업무(종속성 업그레이드, API 마이그레이션, 보안 패칭)가 개발자 불만의 최우선 이슈였던 문제를 해결하려는 노력이 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주간 약 6만5천 건 변경사항의 90%를 분석하는 GenAI 코드 리뷰</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber가 개발한 uReview는 주간 약 65,000개의 코드 변경사항 중 90%를 분석하는 AI 코드 리뷰 플랫폼이다. Commenter 시스템은 함수형 버그, 오류 처리, 보안 취약점, 코딩 표준을 식별하고, Fixer는 AI와 인간의 코멘트에 대응한 코드 변경을 제안한다. 주요 과제는 LLM 환각과 맥락에 맞지 않는 유효한 이슈로 인한 거짓 양성을 줄이는 것이며, uReview는 신호 대 잡음 비율을 개선하는 것을 목표로 한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">Apache Hudi: 19,500개 데이터셋, 일일 6조 행, 10 PB 수집</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 매초 발생하는 수조 개 행의 데이터를 처리하기 위해 Apache Hudi를 개발했다. Hudi는 ACID 트랜잭션, 인덱싱, 증분 처리 같은 데이터베이스 기능을 데이터 레이크에 직접 도입한 스토리지 엔진이다. 현재 Uber에서는 19,500개 데이터셋과 일일 6조 행, 10PB 수집을 Hudi로 처리하며, 기존 기술이 충족할 수 없었던 대규모 데이터의 일관성과 신선성을 보장한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">Moirai: 무손실 지연자 완화 — SOSP 2025 채택</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">Uber의 멀티클라우드 시크릿 관리 플랫폼 구축</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 5,000개 이상의 마이크로서비스와 150,000개의 시크릿을 관리하는 대규모 분산 시스템에서 증가하는 사이버 공격 위협에 대응하기 위해 중앙집중식, 자동화된 시크릿 관리 플랫폼을 구축했다. 이 플랫폼은 코드, 설정 등에 산재된 시크릿(시크릿 스프롤), 안전하지 않은 공유, 섀도우 IT 문제를 해결하고 필요시 시크릿 로테이션을 지원한다. 개발자의 Git pre-commit hook으로 작동하는 CLI 도구를 도입하여 커밋 단계에서 시크릿 포함을 사전에 차단하는 방식으로 누출을 방지한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">Zero-Growth Stack, 실제 성과: Go 스택 할당으로 CPU 10% 절약하는 방법. Go의 기본 2KB 스택 할당이 Uber의 고처리량 서비스에서 낭비적인 확장 사이클을 유발하여 CPU 10%를 소비했다. 팀은 CPU 프로필과 바이너리 심볼을 읽어 최적의 서비스별 스택 크기를 계산하는 프로필 기반 자동화 시스템을 구축했다. 결과: CPU 오버헤드가 1% 이하로 감소했고, 2M 코어 전체에서 메모리 오버헤드를 2% 이하로 유지하면서 16% 효율성 향상을 달성했다. 더 읽기 →</a></div>
+    <div class="item-meta">Uber Engineering</div>
+    <div class="item-summary">Uber는 Go로 운영하는 200만 코어 규모 서비스에서 기본 2KB 스택 할당이 반복적인 확장을 유발해 CPU 10%를 낭비하는 문제를 발견했다. Go 런타임은 스택 부족 시 2배 크기의 새 스택을 생성하고 기존 내용을 복사하는 방식으로 동작하며, 이 과정이 누적되면서 효율성 저하를 초래한다. Uber는 프로필 기반 자동화 시스템으로 서비스별 최적 스택 크기를 계산해 적용한 결과, CPU 오버헤드를 1% 이하로 감소시키고 16% 효율성을 향상시켰으며 메모리 오버헤드는 2% 이하로 유지했다. Go 1.19부터는 진행 중인 평균 스택 크기를 추적하는 적응형 스택 크기 기능도 도입됐다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.01394" target="_blank" rel="noopener">효율적인 소형 언어 모델을 위한 Wiola 아키텍처</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">(내용이 중간에 끊겨있어 불충분합니다.)</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.01394" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.01465" target="_blank" rel="noopener">다음 토큰 예측을 넘어: Atlassian Workflows의 도구 사용 에이전트를 위한 RLVR 개념 증명</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">빈 문자열 — Abstract가 완전하지 않아 요약에 필요한 정보가 불충분합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.01465" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.01942" target="_blank" rel="noopener">Atomic Task Graph: 에이전트 계획과 실행을 위한 통합 프레임워크</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">본 논문은 LLM 기반 에이전트의 복잡한 다단계 작업 해결을 위해 "Atomic Task Graph"라는 통합 프레임워크를 제안한다. 기존 방식(더 큰 모델 사용 또는 작업별 미세조정)은 계산 비용이 높거나 다양한 작업에 일반화되지 않는 문제가 있다. 이 연구는 프롬프트 기반 제어를 통해 부분작업 간 입출력 의존성을 명시적으로 다루어 검증된 중간 결과를 얻을 수 있도록 목표한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.01942" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.02389" target="_blank" rel="noopener">제약을 통한 조종 가능성: 코딩 에이전트의 확장 가능한 감시를 위한 기반</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">코딩 에이전트는 능력이 있으나 인간의 감시가 병목이 되고 있으며, 제약 없는 에이전트는 보안 위험과 코드베이스 확장성 문제를 야기합니다. 논문은 대규모 엔지니어링 팀 관리에 사용되어온 접근 제어, 네트워크 정책, 코딩 규칙 적용 등의 방법이 코딩 에이전트에도 직접 적용 가능하며, 최근의 에이전트 스캐폴딩보다 저렴하다고 주장합니다. 연구자들은 이 원칙을 기반으로 하는 엔드-투-엔드 시스템을 구축하고 확장 가능한 감시에 대한 제어된 실험 결과를 보고합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.02389" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.31174" target="_blank" rel="noopener">ClawArena-Team: 언어모델 에이전트의 서브에이전트 오케스트레이션과 동적 워크플로우 벤치마킹</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">이 논문은 대규모언어모델(LLM) 에이전트가 주요 관리자로서 특화된 부에이전트들을 생성하고 업무를 위임하며 병렬 워크플로우를 조율하는 능력을 측정하는 새로운 벤치마크 'ClawArena-Team'을 제시한다. 기존 벤치마크는 단일 정책의 개별 작업 해결 능력이나 고정된 멀티에이전트 시스템의 집단 행동만 측정했으나, 이 연구는 리더 역할을 하는 단일 LLM의 관리 능력을 구체적으로 평가하고자 한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.31174" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">10개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.hunton.com/privacy-and-cybersecurity-law-blog/virginia-bans-sale-of-geolocation-data" target="_blank" rel="noopener">버지니아, 정확한 위치정보 데이터 판매 금지</a></div>
+    <div class="item-meta">HN · 907 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.hunton.com/privacy-and-cybersecurity-law-blog/virginia-bans-sale-of-geolocation-data" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://weli.dev/blog/half-baked-product/" target="_blank" rel="noopener">불완전한 제품</a></div>
+    <div class="item-meta">HN · 728 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://weli.dev/blog/half-baked-product/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.podman.io/2026/07/introducing-podman-v6-0-0/" target="_blank" rel="noopener">Podman v6.0.0</a></div>
+    <div class="item-meta">HN · 596 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.podman.io/2026/07/introducing-podman-v6-0-0/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/immich-app/immich/discussions/29439" target="_blank" rel="noopener">Immich 3.0</a></div>
+    <div class="item-meta">HN · 530 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/immich-app/immich/discussions/29439" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://mathstodon.xyz/@iblech/116769502749142438" target="_blank" rel="noopener">Linux 6.9부터 LUKS suspend가 메모리의 디스크 암호화 키를 더 이상 지우지 않음</a></div>
+    <div class="item-meta">HN · 509 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://mathstodon.xyz/@iblech/116769502749142438" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.caseyliss.com/2026/7/2/carplay-is-additive-you-dolts" target="_blank" rel="noopener">CarPlay는 부가적이다</a></div>
+    <div class="item-meta">HN · 442 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.caseyliss.com/2026/7/2/carplay-is-additive-you-dolts" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://righttointelligence.org/" target="_blank" rel="noopener">지역 인텔리전스에 대한 권리</a></div>
+    <div class="item-meta">HN · 380 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://righttointelligence.org/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/FractalFir/crustc" target="_blank" rel="noopener">crustc: rustc 전체를 C로 번역</a></div>
+    <div class="item-meta">HN · 335 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/FractalFir/crustc" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://johnsalvatier.org/blog/2017/reality-has-a-surprising-amount-of-detail" target="_blank" rel="noopener">현실에는 생각보다 훨씬 많은 디테일이 있다 (2017)</a></div>
+    <div class="item-meta">HN · 321 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://johnsalvatier.org/blog/2017/reality-has-a-surprising-amount-of-detail" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.zachtronics.com/exapunks/" target="_blank" rel="noopener">Exapunks (2018)</a></div>
+    <div class="item-meta">HN · 315 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.zachtronics.com/exapunks/" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/openai/codex-plugin-cc" target="_blank" rel="noopener">openai/codex-plugin-cc</a></div>
+    <div class="item-meta">22,995</div>
+    <div class="item-summary">Claude Code에서 Codex를 통합하는 플러그인으로, 코드 리뷰 및 작업 위임에 사용할 수 있다. /codex:review, /codex:adversarial-review 등의 명령을 제공하며, ChatGPT 구독 또는 OpenAI API 키가 필요하다. 설치는 marketplace에서 플러그인을 추가한 후 설치하고 /codex:setup으로 준비 상태를 확인하면 된다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/openai/codex-plugin-cc" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/elastic/elasticsearch" target="_blank" rel="noopener">elastic/elasticsearch</a></div>
+    <div class="item-meta">77,256</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/elastic/elasticsearch" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/actions/checkout" target="_blank" rel="noopener">actions/checkout</a></div>
+    <div class="item-meta">8,233</div>
+    <div class="item-summary">**actions/checkout 요약:**<br><br>GitHub Actions의 checkout 액션으로, 저장소를 워크플로우 환경에 체크아웃한다. v7은 fork pull request의 안전성을 개선하고 ESM으로 마이그레이션했으며 보안 업데이트를 포함한다. v6은 자격증명 보안을 강화해 별도 파일에 저장하고, v5는 node24 런타임으로 업데이트했다. 기본적으로 단일 커밋만 페칭하며 `fetch-depth: 0`으로 전체 이력을 가져올 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/actions/checkout" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/ChromeDevTools/chrome-devtools-mcp" target="_blank" rel="noopener">ChromeDevTools/chrome-devtools-mcp</a></div>
+    <div class="item-meta">45,377</div>
+    <div class="item-summary">Chrome DevTools for agents (`chrome-devtools-mcp`)는 AI 코딩 어시스턴트가 라이브 Chrome 브라우저를 제어·검사할 수 있는 MCP 서버입니다. Chrome DevTools와 Puppeteer를 활용해 성능 분석, 네트워크 디버깅, 스크린샷 캡처, 콘솔 메시지 확인 등을 제공합니다. 공식적으로 Google Chrome과 Chrome for Testing만 지원하며, 브라우저의 민감한 정보 노출에 주의해야 합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/ChromeDevTools/chrome-devtools-mcp" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/ansible/ansible" target="_blank" rel="noopener">ansible/ansible</a></div>
+    <div class="item-meta">69,117</div>
+    <div class="item-summary">Ansible은 IT 자동화 시스템으로 설정 관리, 애플리케이션 배포, 클라우드 프로비저닝, 네트워크 자동화, 멀티노드 오케스트레이션을 지원합니다. 기존 SSH 데몬을 활용한 에이전트 없는 아키텍처로 단순한 설치와 빠른 병렬 관리를 제공하며, 인간과 기계 모두 이해할 수 있는 언어로 인프라를 기술합니다. 소프트웨어 부트스트래핑 없이 새 원격 머신을 즉시 관리할 수 있고 보안과 감시 가능성에 중점을 둡니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/ansible/ansible" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
