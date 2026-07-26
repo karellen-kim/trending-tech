@@ -11,13 +11,24 @@ def _mock_feed():
     return feed
 
 def test_fetch_arxiv_papers_returns_list():
-    with patch("sources.arxiv.feedparser.parse", return_value=_mock_feed()):
+    mock_resp = MagicMock(content=b"<rss></rss>")
+    with patch("sources.arxiv.requests.get", return_value=mock_resp), \
+         patch("sources.arxiv.feedparser.parse", return_value=_mock_feed()):
         items = fetch_arxiv_papers("https://rss.arxiv.org/rss/cs.AI")
     assert isinstance(items, list)
 
 def test_fetch_arxiv_papers_parses_entry():
-    with patch("sources.arxiv.feedparser.parse", return_value=_mock_feed()):
+    mock_resp = MagicMock(content=b"<rss></rss>")
+    with patch("sources.arxiv.requests.get", return_value=mock_resp), \
+         patch("sources.arxiv.feedparser.parse", return_value=_mock_feed()):
         items = fetch_arxiv_papers("https://rss.arxiv.org/rss/cs.AI")
     assert items[0]["title"] == "Attention Is All You Need 2.0"
     assert "arxiv.org" in items[0]["url"]
     assert "abstract" in items[0]
+
+def test_fetch_arxiv_papers_uses_timeout():
+    mock_resp = MagicMock(content=b"<rss></rss>")
+    with patch("sources.arxiv.requests.get", return_value=mock_resp) as mock_get, \
+         patch("sources.arxiv.feedparser.parse", return_value=_mock_feed()):
+        fetch_arxiv_papers("https://rss.arxiv.org/rss/cs.AI")
+    assert mock_get.call_args.kwargs.get("timeout") == 15

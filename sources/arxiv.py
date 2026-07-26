@@ -1,8 +1,13 @@
 import feedparser
+import requests
 from config import ARXIV_FEEDS
 
+_HEADERS = {"User-Agent": "trending-tech-bot/1.0"}
+
 def fetch_arxiv_papers(feed_url: str) -> list[dict]:
-    feed = feedparser.parse(feed_url)
+    resp = requests.get(feed_url, headers=_HEADERS, timeout=15)
+    resp.raise_for_status()
+    feed = feedparser.parse(resp.content)
     items = []
     for entry in feed.entries:
         items.append({

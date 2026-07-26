@@ -1,8 +1,10 @@
 import feedparser
+import requests
 from datetime import datetime, timezone, timedelta, time
 from config import RSS_SOURCES, MAX_BLOG_ITEMS
 
 KST = timezone(timedelta(hours=9))
+_HEADERS = {"User-Agent": "trending-tech-bot/1.0"}
 
 def _get_date(entry) -> datetime | None:
     for field in ("published_parsed", "updated_parsed"):
@@ -19,7 +21,9 @@ def _today_cutoff() -> datetime:
     return now_kst.replace(hour=0, minute=0, second=0, microsecond=0).astimezone(timezone.utc)
 
 def fetch_rss_entries(name: str, url: str, max_items: int = MAX_BLOG_ITEMS, **kwargs) -> list[dict]:
-    feed = feedparser.parse(url)
+    resp = requests.get(url, headers=_HEADERS, timeout=15)
+    resp.raise_for_status()
+    feed = feedparser.parse(resp.content)
     items = []
     cutoff = _today_cutoff()
     for entry in feed.entries:

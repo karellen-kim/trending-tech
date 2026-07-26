@@ -1,4 +1,5 @@
 import json
+import signal
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, timedelta, datetime
@@ -177,7 +178,15 @@ def git_commit_push(date_str: str) -> None:
     print("[Git] 커밋 + 푸시 완료")
 
 
+def _timeout_handler(signum, frame):
+    print("[TIMEOUT] 1시간 초과, 강제 종료")
+    raise SystemExit(1)
+
+
 def main():
+    signal.signal(signal.SIGALRM, _timeout_handler)
+    signal.alarm(3600)
+
     today = date.today()
     today_str = str(today)
     data = collect(today_str)

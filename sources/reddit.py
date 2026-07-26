@@ -1,4 +1,5 @@
 import feedparser
+import requests
 from datetime import datetime, timezone, timedelta, time
 from config import REDDIT_SUBREDDITS, MAX_REDDIT_ITEMS
 
@@ -11,7 +12,9 @@ def _today_cutoff() -> datetime:
 
 def fetch_subreddit(name: str, max_items: int = MAX_REDDIT_ITEMS) -> list[dict]:
     url = f"https://www.reddit.com/r/{name}/top.rss?t=day"
-    feed = feedparser.parse(url, request_headers=_HEADERS)
+    resp = requests.get(url, headers=_HEADERS, timeout=15)
+    resp.raise_for_status()
+    feed = feedparser.parse(resp.content)
     cutoff = _today_cutoff()
     items = []
     for entry in feed.entries:
@@ -23,10 +26,10 @@ def fetch_subreddit(name: str, max_items: int = MAX_REDDIT_ITEMS) -> list[dict]:
             except Exception:
                 pass
         title = getattr(entry, "title", "")
-        url = getattr(entry, "link", "")
+        link = getattr(entry, "link", "")
         items.append({
             "title": title,
-            "url": url,
+            "url": link,
             "source": f"r/{name}",
             "summary": "",
         })
