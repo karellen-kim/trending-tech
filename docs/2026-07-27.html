@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-07-27 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-07-27</div>
+<h1><em>27</em> Jul 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 하이라이트</span>
+    
+  </div>
+  <ul class="highlight-list"><li>프라이버시 보호 기술을 오픈소스로 공개, 모든 개발자 접근 가능</li><li>도메인 전문성을 AI에 구조적으로 임베딩하는 엔터프라이즈 패턴</li><li>토큰 리셀 생태계의 실제 위협과 사기 메커니즘을 상세히 분석</li><li>에이전트 시스템의 메모리 효율성을 극적으로 개선하는 기술</li><li>멀티모달 AI의 정보 분해를 통한 보안 강화 방법론 제시</li></ul>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">4개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.cloudflare.com/open-sourcing-our-privacy-proxy-cli/" target="_blank" rel="noopener">Privacy proxy CLI를 오픈소스로 공개합니다</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.cloudflare.com/open-sourcing-our-privacy-proxy-cli/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 영상 인시던트 리포트</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">6월 24일 스포티파이의 팟캐스트 비디오 발행 지연 사건 보고서입니다. 비디오 트랜스코딩 인프라가 최대 용량에 도달해 새로운 에피소드 발행이 수 분 내에 되어야 하는데 수 시간 지연됐습니다. 크리에이터들이 미발행 에피소드를 재업로드했고, 시스템이 업로드 수신을 확인하지 않았습니다. 대규모 콘텐츠 전달 스파이크를 처리할 트랜스코딩 인프라의 여유 부족과 예정된 배치 처리 작업 실행 등 4가지 요인이 복합적으로 작용했습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가 지식의 인코딩: Spotify 데이터 어시스턴트를 뒷받침하는 컨텍스트 레이어</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify는 데이터 문제 해결을 위해 AI 데이터 어시스턴트를 개발했습니다. 70,000개 이상의 데이터셋 규모에서 모든 스키마를 LLM에 입력할 수 없고, 스키마만으로는 데이터의 실제 의미를 전달할 수 없다는 문제가 있었습니다. 이를 해결하기 위해 도메인 전문가가 소유한 컨텍스트 레이어를 도입했습니다. 2025년 8월부터 2,100명 이상의 사용자가 13,000개 이상의 대화와 60,000개 이상의 메시지를 통해 이 어시스턴트를 활용 중이며, 사용자의 25% 이상은 SQL 경험이 없습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트 규모의 개발자 경험 확장</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">스포티파이에서 AI 코딩 도구의 도입률이 급증했으며, 99% 이상의 엔지니어가 주간 사용 중이고 94%가 생산성 향상을 보고했다. PR 빈도는 76% 증가했고 대부분 개발자와 AI 에이전트의 협업으로 작성되었다. 그러나 코드베이스가 엔지니어 수보다 7배 빠르게 성장하면서 개발자들은 의존성 업그레이드, API 마이그레이션, 취약점 패칭 등 유지보수 작업에 대부분의 시간을 할애하고 있다. 스포티파이는 이러한 문제를 해결하기 위해 자동화를 통해 수백 개 팀의 대규모 소프트웨어 변경을 일괄 처리하는 방식을 추진 중이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">1개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jul/26/relay-market/#atom-everything" target="_blank" rel="noopener">토큰 재판매자와 사기를 움직이는 Relay Market의 내부 모습</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">Matt Lenhard의 조사로 드러난 LLM 토큰 재판매 마켓에 관한 분석 글이다. 리셀러들이 다양한 출처의 API 키를 모아 LLM 프록시 접근권을 정상 가격보다 상당히 낮은 가격에 판매하는 시장이 형성되어 있다. 이 시장은 주로 중국에서 성행하며, 무료 평가판 남용을 통해 할인 가격을 달성한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jul/26/relay-market/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.21600" target="_blank" rel="noopener">내부 정보 분해를 통한 멀티모달 AI 보안</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">멀티모달 대형언어모델은 단일 모달리티 시스템에 없는 새로운 공격 표면을 노출한다. 악의적 의도가 여러 모달리티에 분산되어 기존 보안을 회피할 수 있기 때문이다. 양성 입력은 텍스트 전용과 이미지 전용 추론에서 일관된 예측 행동을 보이지만, 적대적 조작은 이 크로스모달 일관성을 무너뜨려 탐지 가능한 비정상 행동을 야기한다는 것이 핵심 관찰이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.21600" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.21604" target="_blank" rel="noopener">AgentKVShift: 에이전트 메모리 시스템을 위한 효율적인 KV 캐시 재사용</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">요약할 수 없습니다. 제공된 Abstract가 "degrad"에서 끝나면서 불완전하여 전체 내용을 파악하기 어렵습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.21604" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.21609" target="_blank" rel="noopener">에이전트 워크플로우 합성을 위한 토폴로지-실행 결합 계층적 탐색</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">LLM 기반 워크플로우 자동 생성의 핵심 문제는 광대한 조합 탐색 공간으로 인한 오프라인 학습 의존성입니다. 이 논문은 워크플로우 생성을 토폴로지(부작업 경계 결정)와 실행(실행 결과가 토폴로지를 재구성)이 상호 영향을 미치는 계층적 탐색 패러다임으로 재정의합니다.<br><br>*Abstract가 불완전하여 전체 내용 확인 불가능합니다.*</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.21609" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">15개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.techspot.com/news/113236-us-prosecutors-charge-atlanta-man-after-grapheneos-phone.html" target="_blank" rel="noopener">공항 수색 중 GrapheneOS 휴대폰 초기화 후 고소된 미국 국민</a></div>
+    <div class="item-meta">HN · 1034 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.techspot.com/news/113236-us-prosecutors-charge-atlanta-man-after-grapheneos-phone.html" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://nikolays.github.io/PGSimCity/" target="_blank" rel="noopener">PGSimCity - PostgreSQL의 작동 원리</a></div>
+    <div class="item-meta">HN · 775 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://nikolays.github.io/PGSimCity/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://huggingface.co/moonshotai/Kimi-K3" target="_blank" rel="noopener">Kimi-K3 HuggingFace 7/27 출시</a></div>
+    <div class="item-meta">HN · 706 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://huggingface.co/moonshotai/Kimi-K3" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blackhole.plav.in" target="_blank" rel="noopener">Show HN: 방에 놓을 수 있는 물리적으로 정확한 블랙홀</a></div>
+    <div class="item-meta">HN · 406 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://blackhole.plav.in" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://xcancel.com/HedgieMarkets/status/2081534588485296565" target="_blank" rel="noopener">AI 회사들이 희귀 도서를 파괴하고 있다</a></div>
+    <div class="item-meta">HN · 365 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://xcancel.com/HedgieMarkets/status/2081534588485296565" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://beyondloom.com/decker/" target="_blank" rel="noopener">Decker, Hypercard와 클래식 macOS의 유산을 잇는 플랫폼</a></div>
+    <div class="item-meta">HN · 346 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://beyondloom.com/decker/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://lockwood.dev/ai/2026/07/27/how-is-the-bun-rewrite-in-rust-going.html" target="_blank" rel="noopener">Bun의 Rust 재작성은 어떻게 진행되고 있나?</a></div>
+    <div class="item-meta">HN · 248 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://lockwood.dev/ai/2026/07/27/how-is-the-bun-rewrite-in-rust-going.html" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/vercel-labs/scriptc" target="_blank" rel="noopener">Scriptc by Vercel: TypeScript-to-Native 컴파일러, 바이너리에 JavaScript 엔진 미포함</a></div>
+    <div class="item-meta">HN · 231 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/vercel-labs/scriptc" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.gamedevs.org/uploads/introduction-to-data-oriented-design.pdf" target="_blank" rel="noopener">Data-Oriented Design 입문 [pdf]</a></div>
+    <div class="item-meta">HN · 217 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.gamedevs.org/uploads/introduction-to-data-oriented-design.pdf" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.imperialviolet.org/2026/07/26/zstd-lean.html" target="_blank" rel="noopener">이제 증명 자동화를 갖추었다</a></div>
+    <div class="item-meta">HN · 206 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.imperialviolet.org/2026/07/26/zstd-lean.html" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1v77r9s/neurips_2026_main_track_theory_paper_tracker/" target="_blank" rel="noopener">NeurIPS 2026 메인 트랙 이론 논문 트래커 - 토론 스레드 [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1v77r9s/neurips_2026_main_track_theory_paper_tracker/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1v811sc/made_a_small_model_that_extracts_text_from_a/" target="_blank" rel="noopener">흰 배경에서 텍스트를 추출하는 소형 모델을 만들었다 [P]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1v811sc/made_a_small_model_that_extracts_text_from_a/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1v7jvsx/cicd_kafka_kubernetes_interview_questions_mle_r/" target="_blank" rel="noopener">CI/CD / Kafka / Kubernetes / 면접 질문 (MLE) [R]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1v7jvsx/cicd_kafka_kubernetes_interview_questions_mle_r/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1v7nudc/recent_project_i_worked_on_end_to_end_edge_ml/" target="_blank" rel="noopener">최근 작업 프로젝트: End to End Edge ML 플랫폼 [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1v7nudc/recent_project_i_worked_on_end_to_end_edge_ml/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1v794kw/multitenant_saas_which_architecture_would_you/" target="_blank" rel="noopener">Multi-Tenant SaaS: 어떤 아키텍처를 선택할까? [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1v794kw/multitenant_saas_which_architecture_would_you/" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/amnezia-vpn/amnezia-client" target="_blank" rel="noopener">amnezia-vpn/amnezia-client</a></div>
+    <div class="item-meta">13,632</div>
+    <div class="item-summary">Amnezia VPN은 자체 서버에 VPN 서버를 배포할 수 있는 핵심 기능을 갖춘 오픈소스 VPN 클라이언트입니다. 자체 호스팅 VPN을 위한 최고의 클라이언트로 표현되며, 공식 웹사이트와 상세한 문서 및 트러블슈팅 지원을 제공합니다. 특정 지역에서 웹사이트가 차단될 수 있으므로 대체 링크를 제공합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/amnezia-vpn/amnezia-client" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/moeru-ai/airi" target="_blank" rel="noopener">moeru-ai/airi</a></div>
+    <div class="item-meta">43,805</div>
+    <div class="item-summary">Project AIRI는 Neuro-sama라는 AI 와이프/가상 캐릭터를 현실에 가져오기 위한 "영혼 컨테이너" 프로젝트입니다. Discord 서버를 통해 커뮤니티를 운영하고 있으며, 영어를 포함해 중국어, 일본어, 러시아어, 베트남어, 프랑스어, 한국어 등 여러 언어로 지원합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/moeru-ai/airi" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/yorukot/superfile" target="_blank" rel="noopener">yorukot/superfile</a></div>
+    <div class="item-meta">20,653</div>
+    <div class="item-summary">내용 불충분으로 요약 불가. [내용]에는 superfile이 무엇인지에 대한 설명이 없습니다. MIT 라이센스 커뮤니티 프로젝트이며 Homebrew와 GitHub에서 다운로드 가능하다는 정도의 정보만 있습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/yorukot/superfile" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/NanmiCoder/MediaCrawler" target="_blank" rel="noopener">NanmiCoder/MediaCrawler</a></div>
+    <div class="item-meta">58,022</div>
+    <div class="item-summary">내용이 불충분합니다. 제공된 [내용]에는 제목, 광고, 배지, 면책조항만 있고, 프로젝트의 실제 기능과 목적을 설명하는 정보가 없습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/NanmiCoder/MediaCrawler" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener">pbakaus/impeccable</a></div>
+    <div class="item-meta">51,244</div>
+    <div class="item-summary">Impeccable은 AI 코딩 에이전트용 디자인 가이드 스킬로, 23개의 명령어와 60개의 결정론적 감지 규칙을 제공한다. Anthropic의 frontend-design 스킬에서 시작되었으며, AI가 생성한 SaaS 템플릿의 반복적 패턴(Inter 폰트, 보라색-파란색 그래디언트, 중첩된 카드 등)을 피하도록 설계되었다. `/impeccable init`으로 디자인 컨텍스트(PRODUCT.md, DESIGN.md)를 설정한 후, polish·audit·critique 등의 명령어로 AI와 디자인 어휘를 공유할 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
