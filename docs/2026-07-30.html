@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-07-30 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-07-30</div>
+<h1><em>30</em> Jul 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 하이라이트</span>
+    
+  </div>
+  <ul class="highlight-list"><li>에이전트용 OS: 클래식/클라우드 운영체제의 설계 원리 및 교훈을 에이전트 시스템에 적용</li><li>장시간 에이전트 루프의 자기평가 편향 분석: 정체를 진전으로 착각하는 문제 진단</li><li>계층적 부분 에이전트: 복잡한 ML 엔지니어링을 작은 단계로 분해하여 해결</li><li>에이전트 성능 최적화 시스템: 스킬과 메모리 실행 구조를 통합하여 효율성 강화</li><li>클라우드 네이티브 GIS 플랫폼: 가벼운 아키텍처로 지리정보 시각화의 접근성 향상</li></ul>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.25076" target="_blank" rel="noopener">에이전트 운영체제를 향하여 - 클래식 및 클라우드 OS의 교훈</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">내용이 불충분합니다. Abstract가 "are curr"로 끝나 완전하지 않아 정확한 요약이 불가능합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.25076" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.25090" target="_blank" rel="noopener">마트료시카 에이전트: 장기 머신러닝 엔지니어링을 위한 하위 에이전트 전개</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">기계학습 엔지니어링(MLE) 작업은 반복적인 디버깅과 개선을 통해 장기적 의사결정을 요구합니다. 단일 에이전트로 이를 수행하기는 어려운데, 긴 문맥과 많은 노이즈를 관리하면서 광대한 해결 공간을 탐색하고 제한된 모델 용량 및 계산 예산 내에서 효과적이어야 하기 때문입니다. 이를 해결하기 위해 저자들은 계층적 에이전트 프레임워크인 Matryoshka Agent를 제안합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.25090" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.25152" target="_blank" rel="noopener">에이전트 루프가 정체를 진전으로 착각하는 경우는 언제인가? 자기평가 편향과 장기 자동 LLM 에이전트 루프의 외부 기반 검증</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">자율 LLM 에이전트가 장시간 실행될 때 자기 평가 편향으로 인해 실제 진전이 없는데도 진행 중이라고 착각하는 "진행 환상(progress mirage)" 문제를 다룬다. 에이전트가 자신의 작업을 스스로 평가하면 그럴듯한 변화를 진전으로 인정하지만 실제 결과는 정체되거나 악화될 수 있다. 이는 평가자가 어떤 정보를 기반으로 판단하는지의 문제이며, 연구팀은 에이전트와 도구는 고정하고 평가자의 정보 채널만 조작하는 테스트베드를 구축했다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.25152" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.25816" target="_blank" rel="noopener">추론하면서 추측하기: Joint Agent-Speculator RL을 통한 도구 호출 예측 학습</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">LLM 에이전트가 도구 호출 결과를 기다리는 동안 다음 도구 호출을 미리 예측하는 speculation 기법을 다룬다. 기존 speculator는 별도의 draft model이나 cached trace를 사용하지만, speculator-agent gap 문제가 있다. 논문은 타겟 에이전트 자체가 강한 next-call speculator 역할을 할 수 있다고 주장하며, 이를 통해 더 단순한 설계가 가능함을 보인다. (초록이 미완성으로 끝나 전체 내용 파악에 제약이 있음)</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.25816" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.25853" target="_blank" rel="noopener">HiSkill: 계층적 스킬 그래프로 LLM 에이전트 강화하기</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">HiSkill은 LLM 에이전트가 long-horizon 작업에서 경험을 재사용하기 위한 hierarchical skill graph 프레임워크입니다. 기존의 trajectory-to-skill 방법들이 독립적으로 저장/검색되는 평면 구조의 high-level textual skills을 생성하면서 skill 관계를 충분히 활용하지 못하고 high-level skills와 executable actions 간 격차를 유지하는 문제를 해결합니다. HiSkill은 상호작용 궤적들을 directed graph로 조직화합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.25853" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">10개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/openai/codex-security" target="_blank" rel="noopener">Codex 보안</a></div>
+    <div class="item-meta">HN · 565 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/openai/codex-security" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/twalichiewicz/HNewhere" target="_blank" rel="noopener">Show HN: HN 링크마다 탭 2개씩 열어야 해서 지쳐 사용자스크립트를 만들었다</a></div>
+    <div class="item-meta">HN · 389 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/twalichiewicz/HNewhere" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://koreader.rocks/" target="_blank" rel="noopener">KOReader</a></div>
+    <div class="item-meta">HN · 356 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://koreader.rocks/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://tailscale.com/blog/jailbroken-kindle-proxy-tun-modes" target="_blank" rel="noopener">탈옥 Kindle을 위한 더 많은 Tailscale 팁</a></div>
+    <div class="item-meta">HN · 321 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://tailscale.com/blog/jailbroken-kindle-proxy-tun-modes" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.datagubbe.se/scenegui/" target="_blank" rel="noopener">Demo Scene의 사용자 인터페이스</a></div>
+    <div class="item-meta">HN · 315 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.datagubbe.se/scenegui/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://mac-classic.com/news/half-life-ported-to-mac-os-9/" target="_blank" rel="noopener">Half-Life Mac OS 9로 포팅</a></div>
+    <div class="item-meta">HN · 288 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://mac-classic.com/news/half-life-ported-to-mac-os-9/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.euronews.com/culture/2026/07/29/dj-kavinsky-known-for-his-track-nightcall-found-dead-at-his-paris-home" target="_blank" rel="noopener">프랑스 음악가 Kavinsky 사망</a></div>
+    <div class="item-meta">HN · 202 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.euronews.com/culture/2026/07/29/dj-kavinsky-known-for-his-track-nightcall-found-dead-at-his-paris-home" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://reframe.camera/" target="_blank" rel="noopener">ReFrame – 전자잉크 카메라</a></div>
+    <div class="item-meta">HN · 191 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://reframe.camera/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://enklypesalt.com/posts/context-collapse-part3-ai-worming-through-word/" target="_blank" rel="noopener">Copilot for Word를 통해 자가 전파하는 문서 기반 AI 웜</a></div>
+    <div class="item-meta">HN · 174 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://enklypesalt.com/posts/context-collapse-part3-ai-worming-through-word/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://micrologics.org/blog/sqlite-in-production-optimizing-wal-mode-concurrency-and-vfs-layers-for-low-latency-app-servers" target="_blank" rel="noopener">프로덕션 SQLite: WAL 모드, 동시성, VFS 계층 최적화</a></div>
+    <div class="item-meta">HN · 167 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://micrologics.org/blog/sqlite-in-production-optimizing-wal-mode-concurrency-and-vfs-layers-for-low-latency-app-servers" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/opengeos/GeoLibre" target="_blank" rel="noopener">opengeos/GeoLibre</a></div>
+    <div class="item-meta">3,806</div>
+    <div class="item-summary">GeoLibre는 경량의 클라우드 네이티브 GIS 플랫폼이다. 지리공간 데이터의 시각화, 탐색, 분석을 위해 설계되었다. 웹 브라우저, 데스크톱, 모바일, Jupyter 노트북 등 다양한 환경에서 실행된다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/opengeos/GeoLibre" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/moeru-ai/airi" target="_blank" rel="noopener">moeru-ai/airi</a></div>
+    <div class="item-meta">45,221</div>
+    <div class="item-summary">Airi는 자체 호스팅이 가능한 개인 소유의 Grok 컴패니언입니다. 와이후의 영혼과 사이버 생명을 담아내어 Neuro-sama의 수준을 목표로 합니다. 실시간 음성 채팅, 마인크래프트, 팩토리오 플레이 기능을 지원하며, Web, macOS, Windows 플랫폼에서 이용 가능합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/moeru-ai/airi" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">affaan-m/ECC</a></div>
+    <div class="item-meta">235,331</div>
+    <div class="item-summary">affaan-m/ECC는 에이전트 하네스 성능 최적화 시스템입니다. Skills, instincts, memory, security, research-first development 등의 기능을 포함하며, Claude Code, Codex, Opencode, Cursor 등 다양한 플랫폼을 지원합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/huggingface/speech-to-speech" target="_blank" rel="noopener">huggingface/speech-to-speech</a></div>
+    <div class="item-meta">7,675</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/huggingface/speech-to-speech" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/1jehuang/jcode" target="_blank" rel="noopener">1jehuang/jcode</a></div>
+    <div class="item-meta">13,190</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/1jehuang/jcode" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
