@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-07-31 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-07-31</div>
+<h1><em>31</em> Jul 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 하이라이트</span>
+    
+  </div>
+  <ul class="highlight-list"><li>도메인 전문가 지식을 AI 어시스턴트에 직접 임베딩하는 기술 혁신.</li><li>AI 에이전트가 스스로 오픈-엔드 AI 연구를 수행할 수 있음을 입증.</li><li>강화학습 대비 감독학습의 수학적 문제해결 능력 우수성 분석.</li><li>오래 실행되는 AI 에이전트를 관찰하고 제어하는 사용자 인터페이스.</li><li>데이터 레이크에서 실시간 포인트 쿼리를 효율적으로 인덱싱하는 기법.</li></ul>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">4개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">온라인 포인트 쿼리를 위한 데이터 레이크 인덱싱</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify 같은 기업은 온라인 서비스와 AI Agent가 사용자 데이터에 저지연 접근해야 하는데, 데이터가 너무 커서 KV 저장소(Bigtable, DynamoDB)에 저장할 수 없고 데이터 레이크(GCS, S3)에 보관됩니다. Trino나 BigQuery 같은 분산 SQL 엔진은 쿼리 계획 오버헤드로 단일 행 조회도 느려서 병목입니다. Random Access Parquet(RAP)는 외부 인덱스로 키를 파일 위치에 직접 매핑하고 필요한 바이트만 가져와 이를 해결하며, 기존 Parquet 파일을 재사용하므로 저장소와 비용을 절감합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 영상 인시던트 보고서</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify 팟캐스트 플랫폼에서 6월 24일 영상 트랜스코딩 인프라가 최대 용량에 도달해 새 에피소드 발행이 수 시간 지연되었다. 영상이 예상대로 나타나지 않자 크리에이터들이 에피소드를 재업로드했고, 시스템이 업로드 수신 및 대기열 상태를 제대로 확인해주지 않아 추가 부하가 발생했다. 원인은 대량 콘텐츠 스파이크 시 인프라 확장 여유 부족, 예정된 배치 처리 작업 실행 등 4가지 요인이 겹쳤기 때문이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">당신의 도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트 뒤의 컨텍스트 레이어</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify는 70,000개 이상의 데이터셋을 보유한 대규모 환경에서 AI 데이터 어시스턴트를 개발했다. 단순히 스키마를 LLM에 입력하는 방식은 컨텍스트 윈도우 제한과 스키마의 불완전성으로 인해 작동하지 않았기에, 도메인 전문가의 지식을 캡처하는 "컨텍스트 레이어"를 구축했다. 2025년 8월부터 2,100명 이상의 사용자가 13,000개 이상의 대화에서 활용하고 있으며, SQL을 모르는 사용자도 포함해 다양한 분야의 데이터 질문에 답하고 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩이 더 이상 제약이 아니다: Spotify에서 팀과 에이전트로 개발자 경험 확장</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify의 엔지니어링 플랫폼 투자로 AI 도구 도입이 급증했다. 99% 엔지니어가 주간 AI 코딩 도구를 사용하며, Opus 4.5 출시 이후 Claude Code 도입이 급速히 증가했다. PR 빈도는 76% 증가하고 94%가 생산성 향상을 보고했다. Spotify는 생산 코드가 엔지니어보다 7배 빠르게 증가하는 문제에 직면해 자동화로 대규모 코드 변경을 처리하고자 했다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.26119" target="_blank" rel="noopener">추론 성능의 기원 탐색: 수학 문제 해결을 위한 RL과 SFT 미세조정 모델의 표현 품질</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">이 논문은 강화학습(RL)으로 훈련된 대형 추론 모델이 감독학습(SFT) 모델보다 수학 문제 해결에서 더 잘 수행하는 이유를 규명합니다. 연구진은 계층별 숨겨진 상태에 대해 훈련된 선형 프로브를 사용하여 RL 모델이 정답 정확성 예측에서 더 높은 정확도를 달성함을 발견했습니다. 이를 통해 RL 모델의 우월한 성능을 가능하게 하는 내부 표현의 차이를 분석합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.26119" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.27191" target="_blank" rel="noopener">AI 에이전트가 개방형 AI 연구를 수행할 수 있을까? 두 사례 연구의 초기 증거</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">AI 에이전트가 개방형 AI 연구를 수행할 수 있는지에 대한 증거가 부족한 상황에서, 논문은 기존 평가 방식의 한계를 지적한다. 현재 평가는 좁은 검증 작업만 테스트하거나 AI 생성 논문을 맹검 피어 리뷰에 맡기는데, 둘 다 개방형 연구를 제대로 측정하지 못한다. 이를 해결하기 위해 논문은 AI R&amp;D 자동화 진행을 측정하는 새로운 방법을 제안하며, 미발표 고품질 논문의 핵심 연구 질문에 에이전트가 착수하는 사례 연구를 진행한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.27191" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.26300" target="_blank" rel="noopener">AgentGUI: 장기 실행 AI 에이전트를 관찰하고 조종하기 위한 인터페이스</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">AI agents가 복잡한 장기 작업에 능해지면서 자동화 기능은 빠르게 발전하지만, 인간 감시 능력이 뒤처지고 있습니다. 이를 해결하기 위해 AgentGUI는 로컬 호스팅 GUI로 여러 concurrent 세션에서 AI agents를 관찰하고 조종할 수 있는 인터페이스를 제공합니다. 주요 기능은 1) agent trajectory의 rich visualization, 2) manual과 automated steering, 3) 작동 간 통합 및 조정입니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.26300" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.26784" target="_blank" rel="noopener">SkillRise: 에이전트 강화학습을 통한 작업 간 기술 진화</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">요약:<br><br>SkillRise는 LLM 에이전트가 여러 관련 작업에서 재사용 가능한 스킬을 학습하도록 하는 통합 강화학습 프레임워크다. 기존 방식은 작업을 독립적으로 취급하거나 단일 작업 반복에만 집중하는 한계가 있었다. SkillRise는 관련 인스턴스를 점진적으로 도전적인 시퀀스로 조직화하여 교차 작업 스킬 진화를 실현한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.26784" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2605.22148" target="_blank" rel="noopener">Ratchet: 자기 진화하는 LLM 에이전트를 위한 최소 위생 레시피</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">Voyager가 개척한 자가 진화하는 스킬 라이브러리는 동결된 LLM 에이전트가 가중치 업데이트 없이 재사용 가능한 지식을 축적하게 합니다. 하지만 평가 결과 LLM이 저작한 스킬은 성능 향상이 0.0pp인 반면 인간이 큐레이션한 스킬은 +16.2pp를 달성해, 병목이 스킬 저작이 아니라 라이프사이클 관리임을 드러냅니다. 이에 Ratchet은 동결된 LLM이 자신의 자연어 스킬을 직접 작성, 검색, 큐레이션, 폐기하는 단일 에이전트 루프를 제안하며, 네 가지 위생 메커니즘을 통합합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2605.22148" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">10개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://llm2human.pages.dev/" target="_blank" rel="noopener">LLM 허니팟</a></div>
+    <div class="item-meta">HN · 351 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://llm2human.pages.dev/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://frantic.im/mirage/" target="_blank" rel="noopener">생산성의 신기루</a></div>
+    <div class="item-meta">HN · 318 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://frantic.im/mirage/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://remysharp.com/links/2026-07-23-35890312" target="_blank" rel="noopener">'VPN은 합법적인 기술 도구'라고 EU 법원이 획기적인 저작권 판결에서 밝혀</a></div>
+    <div class="item-meta">HN · 315 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://remysharp.com/links/2026-07-23-35890312" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://android-developers.googleblog.com/2026/07/google-play-age-signals-api-safer-experiences.html" target="_blank" rel="noopener">Google이 올해 말까지 Android의 연령 확인을 전 세계로 확대할 예정</a></div>
+    <div class="item-meta">HN · 220 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://android-developers.googleblog.com/2026/07/google-play-age-signals-api-safer-experiences.html" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.grumpygamer.com/twp2_announce/" target="_blank" rel="noopener">Ron Gilbert가 Thimbleweed Park 2 제작을 시작했다</a></div>
+    <div class="item-meta">HN · 144 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.grumpygamer.com/twp2_announce/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://en.wikipedia.org/wiki/Azulejo" target="_blank" rel="noopener">타일</a></div>
+    <div class="item-meta">HN · 110 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://en.wikipedia.org/wiki/Azulejo" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://bennuttall.com/blog/2026/07/gpiozero-flow/" target="_blank" rel="noopener">Gpiozero 흐름</a></div>
+    <div class="item-meta">HN · 97 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://bennuttall.com/blog/2026/07/gpiozero-flow/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://economist.com/leaders/2026/07/28/europes-fires-are-just-the-start" target="_blank" rel="noopener">유럽의 화재는 시작일 뿐이다</a></div>
+    <div class="item-meta">HN · 80 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://economist.com/leaders/2026/07/28/europes-fires-are-just-the-start" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/YoanWai/agent-manager" target="_blank" rel="noopener">Agent-Manager: Claude Code, Codex, OpenCode를 위한 Tmux TUI</a></div>
+    <div class="item-meta">HN · 69 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/YoanWai/agent-manager" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.construction-physics.com/p/why-is-everyone-trying-to-build-a" target="_blank" rel="noopener">왜 모두가 고체 전지를 만들려고 할까?</a></div>
+    <div class="item-meta">HN · 63 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.construction-physics.com/p/why-is-everyone-trying-to-build-a" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/microsoft/AI-For-Beginners" target="_blank" rel="noopener">microsoft/AI-For-Beginners</a></div>
+    <div class="item-meta">53,499</div>
+    <div class="item-summary">내용이 불충분합니다. 배지와 링크만 있고 실질적인 설명이 완성되지 않았으므로 요약할 정보가 없습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/microsoft/AI-For-Beginners" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/paperswithbacktest/awesome-systematic-trading" target="_blank" rel="noopener">paperswithbacktest/awesome-systematic-trading</a></div>
+    <div class="item-meta">10,822</div>
+    <div class="item-summary">체계적 거래 및 양적 거래 전략 개발을 위한 종합 리소스 모음입니다. 97개의 라이브러리와 패키지, 40개 이상의 전략, 55권의 책, 23개의 비디오 및 인터뷰, 블로그와 코스를 수집했습니다. paperswithbacktest.com에서 Python으로 구현된 거래 전략들의 포괄적인 컬렉션을 제공하고 있습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/paperswithbacktest/awesome-systematic-trading" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/different-ai/openwork" target="_blank" rel="noopener">different-ai/openwork</a></div>
+    <div class="item-meta">18,446</div>
+    <div class="item-summary">OpenWork는 AI 워크플로우 공유를 위한 무료 오픈소스 데스크톱 앱으로, Claude Cowork과 Codex의 대체재입니다. macOS, Windows, Linux를 지원하며, MCP를 통해 Claude Code, Cursor 등 다양한 에이전트에서 같은 스킬, MCP, 서비스를 재사용할 수 있습니다. 데스크톱 앱은 선택사항이며, 기존 에이전트에서도 사용 가능하고, 대규모 조직을 위한 관리자 인터페이스로 접근 권한과 공유 연결을 관리할 수 있습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/different-ai/openwork" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/WhiskeySockets/Baileys" target="_blank" rel="noopener">WhiskeySockets/Baileys</a></div>
+    <div class="item-meta">10,362</div>
+    <div class="item-summary">Baileys는 WhatsApp Web API와 상호작용하기 위한 WebSockets 기반의 TypeScript 라이브러리다. 7.0.0 버전부터 breaking changes가 도입되었으므로 마이그레이션 가이드 확인이 필요하다. 엔터프라이즈급 지원은 현 메인테이너 Rajeh의 비디오 채팅으로 제공되며, 프로젝트 스폰서십도 가능하다. 이 프로젝트는 WhatsApp과 공식 제휴가 없음을 명시한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/WhiskeySockets/Baileys" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">pascalorg/editor</a></div>
+    <div class="item-meta">19,949</div>
+    <div class="item-summary">Pascal Editor는 React Three Fiber와 WebGPU로 만든 3D 빌딩 에디터이며, MIT 라이선스 하에 공개된다. @pascal-app/core, @pascal-app/viewer, @pascal-app/editor, @pascal-app/nodes 패키지로 제공되며, npm 설치 후 loadPlugin으로 builtinPlugin을 로드하여 사용한다. Turborepo 모노레포 구조로 core, viewer, editor, nodes, ui 등 4개의 주요 런타임 패키지로 구성되어 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
