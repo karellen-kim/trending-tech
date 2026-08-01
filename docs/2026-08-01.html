@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-08-01 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-08-01</div>
+<h1><em>01</em> Aug 2026</h1>
+<nav class="page-nav"><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">2개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">Indexing the Data Lake for Online Point Queries</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">Content Ingestion &amp; Podcast Video Incident Report</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.26120" target="_blank" rel="noopener">Even More Deception: Objective Misalignment in Mixed-Motive LLM Multi-Agent Systems</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.26120" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2607.27191" target="_blank" rel="noopener">Can AI agents conduct open-ended AI research? Early evidence from two case studies</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.27191" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2606.06256" target="_blank" rel="noopener">RedKnot: Efficient Long-Context LLM Serving with Head-Aware KV Reuse and SegPagedAttention</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.06256" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2603.16140" target="_blank" rel="noopener">Noisy Data is Destructive to Reinforcement Learning with Verifiable Rewards</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2603.16140" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2508.16129" target="_blank" rel="noopener">Bridging the Gap in Ophthalmic AI: MM-Retinal-Reason Dataset and OphthaReason Model toward Dynamic Multimodal Reasoning</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2508.16129" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">10개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://krebsonsecurity.com/2026/07/read-this-before-you-buy-that-tv-streaming-stick/" target="_blank" rel="noopener">TV 스트리밍 스틱을 사기 전에 꼭 읽으세요</a></div>
+    <div class="item-meta">HN · 771 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://krebsonsecurity.com/2026/07/read-this-before-you-buy-that-tv-streaming-stick/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview/" target="_blank" rel="noopener">Stacked PRs are now live on GitHub</a></div>
+    <div class="item-meta">HN · 736 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://earendil.com/posts/session-portability/" target="_blank" rel="noopener">The session you cannot take with you</a></div>
+    <div class="item-meta">HN · 607 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://earendil.com/posts/session-portability/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/" target="_blank" rel="noopener">Gemini Robotics 2 brings whole body intelligence to robots</a></div>
+    <div class="item-meta">HN · 598 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://api-docs.deepseek.com/updates/" target="_blank" rel="noopener">DeepSeek-V4-Flash Update</a></div>
+    <div class="item-meta">HN · 475 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://api-docs.deepseek.com/updates/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://lwn.net/Articles/1086041/" target="_blank" rel="noopener">GCC steering committee announces AI policy</a></div>
+    <div class="item-meta">HN · 327 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://lwn.net/Articles/1086041/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.google/security/chrome-stronger-with-every-update/" target="_blank" rel="noopener">Google fixed more Chrome bugs in June than over the past two years, thanks to AI</a></div>
+    <div class="item-meta">HN · 314 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.google/security/chrome-stronger-with-every-update/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://artificialanalysis.ai/models/deepseek-v4-flash-ga" target="_blank" rel="noopener">DeepSeek V4 Flash 0731 Intelligence, Performance and Price Analysis</a></div>
+    <div class="item-meta">HN · 298 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://artificialanalysis.ai/models/deepseek-v4-flash-ga" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://martinfowler.com/articles/exploring-gen-ai/refactoring-economic-benefit.html" target="_blank" rel="noopener">The Economic Benefit of Refactoring</a></div>
+    <div class="item-meta">HN · 266 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://martinfowler.com/articles/exploring-gen-ai/refactoring-economic-benefit.html" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://geospatialml.com/posts/reviewing-ai-slop/" target="_blank" rel="noopener">I flagged two research papers for fake authors and both were accepted as orals</a></div>
+    <div class="item-meta">HN · 254 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://geospatialml.com/posts/reviewing-ai-slop/" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/zhaoxuya520/reverse-skill" target="_blank" rel="noopener">zhaoxuya520/reverse-skill</a></div>
+    <div class="item-meta">10,265</div>
+    <div class="item-summary">reverse-skill은 사이버보안 기술 라우터(Cybersecurity Skills Router)로, 버전 1.0.0으로 출시된 MIT 라이선스 프로젝트입니다. "Navigate the dark waters, sail against the stream"이라는 모토를 가지고 있으며, 기술 라우팅, 운영 계약, AI 부트스트랩 등의 기능을 제공합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/zhaoxuya520/reverse-skill" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/mvanhorn/last30days-skill" target="_blank" rel="noopener">mvanhorn/last30days-skill</a></div>
+    <div class="item-meta">55,956</div>
+    <div class="item-summary">last30days는 AI 에이전트 기반 검색 엔진으로, 편집자가 아닌 사람들의 투표(업보트, 좋아요, 실제 자금)로 콘텐츠를 평가한다. Claude Code 마켓플레이스를 통해 설치 가능하며 자동 업데이트되고, Reddit, HN, Polymarket, GitHub는 추가 설정 없이 즉시 사용할 수 있다. 초기 셋업 마법사(30초)를 거쳐 X, YouTube, TikTok, arXiv, Techmeme 등의 플랫폼을 추가로 활성화할 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/mvanhorn/last30days-skill" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/github/copilot-sdk" target="_blank" rel="noopener">github/copilot-sdk</a></div>
+    <div class="item-meta">10,087</div>
+    <div class="item-summary">GitHub Copilot SDK는 Python, TypeScript, Go, .NET, Java, Rust를 지원하는 여러 언어의 SDK를 제공한다. 이를 통해 Copilot의 에이전트 워크플로우를 애플리케이션에 임베드할 수 있으며, Copilot CLI 뒤의 프로덕션 테스트된 에이전트 런타임을 프로그래매틱하게 호출한다. 사용자가 에이전트 동작을 정의하면 Copilot이 플래닝, 도구 호출, 파일 편집 등을 자동으로 처리한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/github/copilot-sdk" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/chatwoot/chatwoot" target="_blank" rel="noopener">chatwoot/chatwoot</a></div>
+    <div class="item-meta">35,013</div>
+    <div class="item-summary">Chatwoot는 Intercom, Zendesk, Salesforce Service Cloud 등의 오픈소스 대안인 현대적 고객 지원 플랫폼이다. Docker 배포를 지원하며 CircleCI로 지속적 빌드되고 있다. Discord 커뮤니티와 Crowdin을 통한 다국어 지원이 있으며, Heroku 버튼으로 직접 배포할 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/chatwoot/chatwoot" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/agavra/tuicr" target="_blank" rel="noopener">agavra/tuicr</a></div>
+    <div class="item-meta">2,055</div>
+    <div class="item-summary">tuicr는 Vim 키바인딩을 탑재한 터미널 코드 리뷰 도구다. GitHub 스타일의 연속 diff를 터미널에서 표시하며, PR 스타일 댓글을 라인·범위·파일·리뷰 레벨에서 작성할 수 있다. Git, jj, Mercurial을 지원하고 미커밋 변경사항, 커밋 범위, GitHub PR, GitLab MR을 검토 가능하며, 리뷰는 세션 간에 유지된다. 작성한 리뷰를 GitHub·GitLab으로 푸시하거나 마크다운으로 클립보드에 복사할 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/agavra/tuicr" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
