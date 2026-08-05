@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-08-05 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-08-05</div>
+<h1><em>05</em> Aug 2026</h1>
+<nav class="page-nav"><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">2개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">데이터 레이크의 온라인 포인트 쿼리를 위한 인덱싱</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify 등의 기업은 온라인 서비스와 AI 에이전트용으로 사용자 데이터에 대한 빠른 포인트 쿼리가 필요하지만, GCS 데이터 레이크의 exabytes 규모 데이터 접근 시 Trino, BigQuery 같은 분산 SQL 엔진은 단일 행 조회에도 초 단위 오버헤드를 추가합니다. Random Access Parquet(RAP)는 외부 인덱스로 키를 파일 위치에 직접 매핑하고 필요한 바이트만 정확히 읽어 이 문제를 해결합니다. RAP는 기존 Parquet 파일에서 작동하므로 별도 저장 시스템 유지 비용이 없습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 비디오 인시던트 보고서</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">10개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.seangoedecke.com/llms-reward-expertise/" target="_blank" rel="noopener">LLMs가 전문성을 보상한다</a></div>
+    <div class="item-meta">HN · 1178 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.seangoedecke.com/llms-reward-expertise/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.exe.dev/devtools-must-be-open-source" target="_blank" rel="noopener">Devtools는 오픈소스여야 한다</a></div>
+    <div class="item-meta">HN · 671 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.exe.dev/devtools-must-be-open-source" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://openai.com/index/ten-advances-in-mathematics/" target="_blank" rel="noopener">수학과 이론 컴퓨터 과학의 10가지 발전</a></div>
+    <div class="item-meta">HN · 591 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://openai.com/index/ten-advances-in-mathematics/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://nelson.cloud/ai-generated-images-discourage-me-from-reading-your-blog/" target="_blank" rel="noopener">AI-Generated Images Discourage Me from Reading Your Blog</a></div>
+    <div class="item-meta">HN · 518 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://nelson.cloud/ai-generated-images-discourage-me-from-reading-your-blog/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://pandoc.org/twenty-years-of-pandoc.html" target="_blank" rel="noopener">Pandoc의 20년</a></div>
+    <div class="item-meta">HN · 351 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://pandoc.org/twenty-years-of-pandoc.html" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/FFmpeg/FFmpeg/blob/n9.0/RELEASE_NOTES" target="_blank" rel="noopener">FFmpeg 9.0</a></div>
+    <div class="item-meta">HN · 344 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/FFmpeg/FFmpeg/blob/n9.0/RELEASE_NOTES" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://short-stories.co/@raybradbury/there-will-come-soft-rains-6k8vr4xxlnmj" target="_blank" rel="noopener">Ray Bradbury의 'There Will Come Soft Rains'의 배경이 오늘(2026-08-04)이다</a></div>
+    <div class="item-meta">HN · 292 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://short-stories.co/@raybradbury/there-will-come-soft-rains-6k8vr4xxlnmj" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://birchtree.me/blog/xbox-goes-down-you-cant-play-games-you-own-on-disc/" target="_blank" rel="noopener">Xbox가 다운되면 디스크로 구입한 게임도 플레이할 수 없다</a></div>
+    <div class="item-meta">HN · 286 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://birchtree.me/blog/xbox-goes-down-you-cant-play-games-you-own-on-disc/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://users.wpi.edu/~zrbutzke/Docs/BradburyStories(1).pdf" target="_blank" rel="noopener">소리 없는 빗소리 (1950) [pdf]</a></div>
+    <div class="item-meta">HN · 261 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://users.wpi.edu/~zrbutzke/Docs/BradburyStories(1).pdf" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/leonickson1/Swiftlet" target="_blank" rel="noopener">Show HN: Mac에서 4.3GB 메모리로 80B Qwen을, iPhone에서 35B를 실행하기</a></div>
+    <div class="item-meta">HN · 260 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/leonickson1/Swiftlet" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory" target="_blank" rel="noopener">TencentCloud/TencentDB-Agent-Memory</a></div>
+    <div class="item-meta">13,042</div>
+    <div class="item-summary">TencentDB Agent Memory는 에이전트의 기억을 관리하는 시스템으로, npm 패키지로 제공됩니다. Node 22.16 이상과 OpenClaw 2026.3.13 이상이 필요하며, Hermes Gateway와 연동 가능합니다. memory-core, memory-hub, proxy 세 서비스로 구성되어 있고, 저장소 클론 후 .env 파일 설정으로 설치합니다. MIT 라이센스이며 Discord 커뮤니티를 지원합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/zhaoxuya520/reverse-skill" target="_blank" rel="noopener">zhaoxuya520/reverse-skill</a></div>
+    <div class="item-meta">17,397</div>
+    <div class="item-summary">(빈 문자열)<br><br>제공된 [내용]은 프로젝트의 제목, 배지, 슬로건만 있고 실제 기능이나 설명 부분이 없어 요약할 수 있는 정보가 부족합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/zhaoxuya520/reverse-skill" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/firecrawl/pdf-inspector" target="_blank" rel="noopener">firecrawl/pdf-inspector</a></div>
+    <div class="item-meta">9,496</div>
+    <div class="item-summary">pdf-inspector는 Firecrawl의 Rust 라이브러리로, OCR 없이 PDF를 분류하고 텍스트를 추출하며 마크다운으로 변환한다. 스마트 분류, 테이블 감지, 다중 컬럼 레이아웃 인식, CID 폰트 지원 등의 기능을 제공한다. Python, Node.js, 브라우저 WebAssembly 바인딩을 포함하며, 약 200ms 이내에 텍스트 기반 PDF를 처리해 OCR 비용을 절감할 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/firecrawl/pdf-inspector" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/uber/ADR" target="_blank" rel="noopener">uber/ADR</a></div>
+    <div class="item-meta">574</div>
+    <div class="item-summary">ADR(Agentic AI Detection and Response)은 Cursor, Claude Code, Codex 같은 직원 대면 AI 에이전트와 고객 지원 에이전트를 보호하는 엔터프라이즈 보안 시스템으로, Uber에서 프로덕션 배포 중입니다. 에이전트 활동 관찰, 보안 방어 테스트, 위험 행동 탐지, 안전하지 않은 작업 차단의 4가지 기능을 제공하며, MLSys 2026에 논문이 수락되었습니다. 오픈소스 릴리스에는 ADR Sensor, ADR-Bench, ADR Detector가 포함되어 있고, 예방 기능은 향후 공개될 예정입니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/uber/ADR" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">obra/superpowers</a></div>
+    <div class="item-meta">266,199</div>
+    <div class="item-summary">Superpowers는 코딩 에이전트를 위한 소프트웨어 개발 방법론으로, 에이전트가 코드 작성 전에 먼저 요구사항을 파악하고 사용자와 함께 설계를 검증한 후 구현 계획을 수립한다. 계획 승인 후 subagent-driven-development 프로세스로 각 작업을 수행하며, TDD, YAGNI, DRY 원칙을 강조한다. 자동 트리거되는 스킬들로 구성되어 별도 설정 없이도 에이전트가 이 방법론을 적용할 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
