@@ -83,8 +83,15 @@
 </div>
 <div class="page-meta">2026-08-05</div>
 <h1><em>05</em> Aug 2026</h1>
-<nav class="page-nav"><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section" id="tech-blog">
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 하이라이트</span>
+    
+  </div>
+  <ul class="highlight-list"><li>AI 에이전트에게 컴퓨터 제어 권한을 주는 오픈소스 도구</li><li>오픈소스 3B 멀티모달 모더레이션 모델로 AI 안전성 강화</li><li>팀 수준의 AI 에이전트 메모리 허브로 협업 효율 개선</li><li>대규모 데이터레이크에서 온라인 포인트 쿼리 성능 최적화</li><li>LLM 클라이언트에 reasoning trace와 서버사이드 도구 추가</li></ul>
+</div><div class="section" id="tech-blog">
   <div class="section-header">
     <span class="section-icon">TECH</span>
     <span class="section-title">기술 블로그</span>
@@ -92,95 +99,165 @@
   </div>
   <div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">데이터 레이크의 온라인 포인트 쿼리를 위한 인덱싱</a></div>
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">온라인 포인트 쿼리를 위한 Data Lake 인덱싱</a></div>
     <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify 등의 기업은 온라인 서비스와 AI 에이전트용으로 사용자 데이터에 대한 빠른 포인트 쿼리가 필요하지만, GCS 데이터 레이크의 exabytes 규모 데이터 접근 시 Trino, BigQuery 같은 분산 SQL 엔진은 단일 행 조회에도 초 단위 오버헤드를 추가합니다. Random Access Parquet(RAP)는 외부 인덱스로 키를 파일 위치에 직접 매핑하고 필요한 바이트만 정확히 읽어 이 문제를 해결합니다. RAP는 기존 Parquet 파일에서 작동하므로 별도 저장 시스템 유지 비용이 없습니다.</div>
+    <div class="item-summary">Spotify 같은 기업들은 온라인 서비스와 AI 에이전트를 위해 데이터 레이크의 대규모 데이터에 빠르게 접근해야 한다. 기존 SQL 엔진(Trino, BigQuery)은 포인트 쿼리에 과도한 스케줄링·쿼리 플래닝 오버헤드를 야기한다. Random Access Parquet(RAP)는 외부 인덱스로 키를 파일 위치에 직접 매핑하고 정확한 범위 읽기로 필요한 바이트만 가져와 이 병목을 해결한다. RAP는 ML 파이프라인이 이미 사용 중인 Parquet 파일에서 작동해 중복 저장 없이 한 번의 저장으로 다양한 워크로드를 지원한다.</div>
   </div>
   <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 비디오 인시던트 보고서</a></div>
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 영상 인시던트 보고서</a></div>
     <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary"></div>
+    <div class="item-summary">Spotify의 팟캐스트 콘텐츠 발행 파이프라인에서 2024년 6월 24일 비디오 트랜스코딩 인프라가 최대 용량에 도달하여 비디오 에피소드 발행이 최대 몇 시간 지연되었다. 시스템이 창작자의 업로드 수신을 확인하지 않아 창작자들이 미발행 에피소드를 재업로드하게 되었다. 이는 트랜스코딩 인프라 여유 부족과 예정된 배치 처리 작업 실행 등 4가지 요인이 동시에 발생하면서 발생했다.</div>
   </div>
   <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">4개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/4/new-release-of-llm/#atom-everything" target="_blank" rel="noopener">새로운 LLM 릴리스에 reasoning traces, OpenAI Responses, 서버 측 도구, 더 스마트한 로깅 지원 추가</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Aug/4/new-release-of-llm/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/4/llm-anthropic/#atom-everything" target="_blank" rel="noopener">llm-anthropic 0.26</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">llm-anthropic 0.26이 릴리스되었다. LLM 0.32가 활성화한 새로운 기능을 포함한다. claude-fable-5, claude-sonnet-5, claude-opus-5 세 가지 새로운 모델이 추가되었다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Aug/4/llm-anthropic/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/4/minimax-h3-mlx/#atom-everything" target="_blank" rel="noopener">PipeNetwork/minimax-h3-mlx</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">MiniMax가 최근 출시한 MiniMax-H3는 텍스트, 이미지, 오디오, 비디오를 입력받을 수 있는 멀티모달 생성형 AI 모델이다. 이 모델은 입력된 데이터를 기반으로 오디오가 포함된 최대 15초 길이의 비디오 클립을 생성한다. PipeNetwork/minimax-h3-mlx 프로젝트는 MiniMax-H3를 Apple Silicon에서 실행할 수 있도록 MLX 프레임워크로 포팅한 Python 패키지이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Aug/4/minimax-h3-mlx/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/4/llm/#atom-everything" target="_blank" rel="noopener">llm 0.32</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">빈 문자열 (내용에 llm 0.32의 구체적인 변경사항이나 기능 설명이 없음)</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Aug/4/llm/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="hn-reddit">
   <div class="section-header">
     <span class="section-icon">커뮤</span>
     <span class="section-title">Hacker News &amp; Reddit</span>
-    <span class="section-count">10개</span>
+    <span class="section-count">15개</span>
   </div>
   <div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://www.seangoedecke.com/llms-reward-expertise/" target="_blank" rel="noopener">LLMs가 전문성을 보상한다</a></div>
-    <div class="item-meta">HN · 1178 pts</div>
+    <div class="item-name"><a href="https://toneyalexander.github.io/inclusive-color-space/" target="_blank" rel="noopener">Show HN: 다양한 피부톤을 생성하는 간단한 알고리즘과 색 공간</a></div>
+    <div class="item-meta">HN · 580 pts</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.seangoedecke.com/llms-reward-expertise/" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://toneyalexander.github.io/inclusive-color-space/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://blog.exe.dev/devtools-must-be-open-source" target="_blank" rel="noopener">Devtools는 오픈소스여야 한다</a></div>
-    <div class="item-meta">HN · 671 pts</div>
+    <div class="item-name"><a href="https://earendil.com/posts/pi-autoresearch-and-databricks/" target="_blank" rel="noopener">Pi의 미니멀리즘이 강점이다</a></div>
+    <div class="item-meta">HN · 473 pts</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://blog.exe.dev/devtools-must-be-open-source" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://earendil.com/posts/pi-autoresearch-and-databricks/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://openai.com/index/ten-advances-in-mathematics/" target="_blank" rel="noopener">수학과 이론 컴퓨터 과학의 10가지 발전</a></div>
-    <div class="item-meta">HN · 591 pts</div>
+    <div class="item-name"><a href="https://mistral.ai/news/shieldstral/" target="_blank" rel="noopener">Mistral의 Shieldstral: 멀티모달 모더레이션용 3B 오픈 가중치 모델</a></div>
+    <div class="item-meta">HN · 462 pts</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://openai.com/index/ten-advances-in-mathematics/" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://mistral.ai/news/shieldstral/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://nelson.cloud/ai-generated-images-discourage-me-from-reading-your-blog/" target="_blank" rel="noopener">AI-Generated Images Discourage Me from Reading Your Blog</a></div>
-    <div class="item-meta">HN · 518 pts</div>
+    <div class="item-name"><a href="https://simonwillison.net/2026/Jul/31/stateless-mcp/" target="_blank" rel="noopener">Stateless MCP가 내 관심을 다시 끌었다</a></div>
+    <div class="item-meta">HN · 325 pts</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://nelson.cloud/ai-generated-images-discourage-me-from-reading-your-blog/" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jul/31/stateless-mcp/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://pandoc.org/twenty-years-of-pandoc.html" target="_blank" rel="noopener">Pandoc의 20년</a></div>
-    <div class="item-meta">HN · 351 pts</div>
+    <div class="item-name"><a href="https://www.wired.com/story/a-civilian-plane-crashed-in-new-mexico-was-the-militarys-tech-to-blame/" target="_blank" rel="noopener">뉴멕시코 민간항공기 추락, 군 GPS 차단과 연관</a></div>
+    <div class="item-meta">HN · 262 pts</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://pandoc.org/twenty-years-of-pandoc.html" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://www.wired.com/story/a-civilian-plane-crashed-in-new-mexico-was-the-militarys-tech-to-blame/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://github.com/FFmpeg/FFmpeg/blob/n9.0/RELEASE_NOTES" target="_blank" rel="noopener">FFmpeg 9.0</a></div>
-    <div class="item-meta">HN · 344 pts</div>
+    <div class="item-name"><a href="https://unsung.aresluna.org/gravity-is-worth-asking-about/" target="_blank" rel="noopener">중력은 물어볼 만하다</a></div>
+    <div class="item-meta">HN · 164 pts</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/FFmpeg/FFmpeg/blob/n9.0/RELEASE_NOTES" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://unsung.aresluna.org/gravity-is-worth-asking-about/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://short-stories.co/@raybradbury/there-will-come-soft-rains-6k8vr4xxlnmj" target="_blank" rel="noopener">Ray Bradbury의 'There Will Come Soft Rains'의 배경이 오늘(2026-08-04)이다</a></div>
-    <div class="item-meta">HN · 292 pts</div>
+    <div class="item-name"><a href="https://openreview.net/challenge?redirect=%2Fforum%3Fid%3DklU4737opt" target="_blank" rel="noopener">입장: LLM은 도약할 수 없다</a></div>
+    <div class="item-meta">HN · 144 pts</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://short-stories.co/@raybradbury/there-will-come-soft-rains-6k8vr4xxlnmj" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://openreview.net/challenge?redirect=%2Fforum%3Fid%3DklU4737opt" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://birchtree.me/blog/xbox-goes-down-you-cant-play-games-you-own-on-disc/" target="_blank" rel="noopener">Xbox가 다운되면 디스크로 구입한 게임도 플레이할 수 없다</a></div>
-    <div class="item-meta">HN · 286 pts</div>
+    <div class="item-name"><a href="https://www.vincentschmalbach.com/time-serves-ai-bots-a-different-website/" target="_blank" rel="noopener">TIME Is Serving AI Bots a Different Website, with Ads Built In</a></div>
+    <div class="item-meta">HN · 114 pts</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://birchtree.me/blog/xbox-goes-down-you-cant-play-games-you-own-on-disc/" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://www.vincentschmalbach.com/time-serves-ai-bots-a-different-website/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://users.wpi.edu/~zrbutzke/Docs/BradburyStories(1).pdf" target="_blank" rel="noopener">소리 없는 빗소리 (1950) [pdf]</a></div>
-    <div class="item-meta">HN · 261 pts</div>
+    <div class="item-name"><a href="https://blog.cloudflare.com/cloudflare-os/" target="_blank" rel="noopener">Cloudflare OS: 에이전트, 앱, 작업을 위한 오픈 플랫폼</a></div>
+    <div class="item-meta">HN · 101 pts</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://users.wpi.edu/~zrbutzke/Docs/BradburyStories(1).pdf" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://blog.cloudflare.com/cloudflare-os/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://github.com/leonickson1/Swiftlet" target="_blank" rel="noopener">Show HN: Mac에서 4.3GB 메모리로 80B Qwen을, iPhone에서 35B를 실행하기</a></div>
-    <div class="item-meta">HN · 260 pts</div>
+    <div class="item-name"><a href="https://www.quantamagazine.org/why-the-legendary-erdos-problems-are-falling-to-ai-20260803/" target="_blank" rel="noopener">에르되시 문제들이 AI에 정복되는 이유</a></div>
+    <div class="item-meta">HN · 74 pts</div>
     <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/leonickson1/Swiftlet" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://www.quantamagazine.org/why-the-legendary-erdos-problems-are-falling-to-ai-20260803/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vfrco1/i_compressed_bad_apple_into_a_3mb_neural_network_p/" target="_blank" rel="noopener">Bad Apple을 3MB Neural Network로 압축했다 [P]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vfrco1/i_compressed_bad_apple_into_a_3mb_neural_network_p/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vfm2k9/completely_dead_neurips_review_period_from_both/" target="_blank" rel="noopener">양쪽 끝에서 NeurIPS 검토 기간이 완전히 멈춰있나? [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vfm2k9/completely_dead_neurips_review_period_from_both/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vfx8pn/neurips_2026_main_track_theory_papers_score/" target="_blank" rel="noopener">NeurIPS 2026 Main Track — 이론 논문 재반박 후 점수 추적 [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vfx8pn/neurips_2026_main_track_theory_papers_score/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vfi23r/neurips_2026_postrebuttal_score_distribution_poll/" target="_blank" rel="noopener">NeurIPS 2026 재반박 후 점수 분포 투표 [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vfi23r/neurips_2026_postrebuttal_score_distribution_poll/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vg3jda/monodratic_learned_producthash_routing_for_sparse/" target="_blank" rel="noopener">Monodratic: 희소 인과 어텐션을 위한 학습 기반 곱-해시 라우팅 [R]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vg3jda/monodratic_learned_producthash_routing_for_sparse/" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="github">
   <div class="section-header">
@@ -190,39 +267,39 @@
   </div>
   <div class="item">
   <div class="item-left">
+    <div class="item-name"><a href="https://github.com/cloudflare/computer" target="_blank" rel="noopener">cloudflare/computer</a></div>
+    <div class="item-meta">1,928</div>
+    <div class="item-summary">Cloudflare Computer는 Durable Object 내부의 가상 파일시스템으로, SQLite에 authoritative state를 저장한다. Container, Isolate shell, Isolate JavaScript 세 가지 백엔드를 지원하며, 각각 샌드박스 컨테이너, bash, ECMAScript 모듈 실행을 가능하게 한다. 단일 진입점인 workspace.runtime.exec()를 통해 선택한 백엔드에서 코드를 실행하며, 여러 백엔드를 등록할 수 있다. 현재는 프리뷰 단계로 프로덕션 사용에는 적합하지 않다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/cloudflare/computer" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/huangruiteng/loopx" target="_blank" rel="noopener">huangruiteng/loopx</a></div>
+    <div class="item-meta">1,866</div>
+    <div class="item-summary">LoopX는 장기 실행 AI 에이전트 작업을 위한 로컬 컨트롤 플레인이다. 목표, 할일, 증거, 할당량 등의 상태를 안정적으로 유지하면서 Codex, Claude Code, Cursor 등의 런타임이 제한된 턴 단위로 작업을 실행할 수 있게 한다. 에이전트 런타임을 대체하지 않으며, 장기 실행 작업을 검토 가능하고 재시작 가능하며 더 쉽게 인수할 수 있도록 지원하는 가벼운 상태 커널이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/huangruiteng/loopx" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
     <div class="item-name"><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory" target="_blank" rel="noopener">TencentCloud/TencentDB-Agent-Memory</a></div>
-    <div class="item-meta">13,042</div>
-    <div class="item-summary">TencentDB Agent Memory는 에이전트의 기억을 관리하는 시스템으로, npm 패키지로 제공됩니다. Node 22.16 이상과 OpenClaw 2026.3.13 이상이 필요하며, Hermes Gateway와 연동 가능합니다. memory-core, memory-hub, proxy 세 서비스로 구성되어 있고, 저장소 클론 후 .env 파일 설정으로 설치합니다. MIT 라이센스이며 Discord 커뮤니티를 지원합니다.</div>
+    <div class="item-meta">14,773</div>
+    <div class="item-summary">제공된 내용은 프로젝트 헤더, 배지, 설치 명령어로 이루어져 있으며, 실제 기능 설명 부분이 생략되어 있습니다.<br><br>**요약 가능한 정보:**<br><br>TencentDB Agent Memory는 에이전트 메모리 시스템으로, MIT 라이센스 하에 공개됩니다. Node 22.16 이상 필요하며, memory-core, memory-hub, proxy 세 가지 서비스로 구성됩니다. npm 패키지 @tencentdb-agent-memory/memory-tencentdb로 설치 가능하며, Team Memory Beta 단계에서 진행 중입니다.</div>
   </div>
   <div class="item-arrow"><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
-    <div class="item-name"><a href="https://github.com/zhaoxuya520/reverse-skill" target="_blank" rel="noopener">zhaoxuya520/reverse-skill</a></div>
-    <div class="item-meta">17,397</div>
-    <div class="item-summary">(빈 문자열)<br><br>제공된 [내용]은 프로젝트의 제목, 배지, 슬로건만 있고 실제 기능이나 설명 부분이 없어 요약할 수 있는 정보가 부족합니다.</div>
+    <div class="item-name"><a href="https://github.com/donnemartin/system-design-primer" target="_blank" rel="noopener">donnemartin/system-design-primer</a></div>
+    <div class="item-meta">361,245</div>
+    <div class="item-summary">**System Design Primer**는 대규모 시스템 설계 방법을 배우고 시스템 설계 인터뷰에 대비하기 위한 가이드다. 웹 곳곳에 흩어진 시스템 설계 원칙들을 체계적으로 모은 리소스 모음이며, 확장 가능한 시스템 설계를 학습하면 더 나은 엔지니어가 될 수 있음을 강조한다. 여러 언어로 번역되어 있다.</div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/zhaoxuya520/reverse-skill" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item-arrow"><a href="https://github.com/donnemartin/system-design-primer" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
   <div class="item-left">
     <div class="item-name"><a href="https://github.com/firecrawl/pdf-inspector" target="_blank" rel="noopener">firecrawl/pdf-inspector</a></div>
-    <div class="item-meta">9,496</div>
-    <div class="item-summary">pdf-inspector는 Firecrawl의 Rust 라이브러리로, OCR 없이 PDF를 분류하고 텍스트를 추출하며 마크다운으로 변환한다. 스마트 분류, 테이블 감지, 다중 컬럼 레이아웃 인식, CID 폰트 지원 등의 기능을 제공한다. Python, Node.js, 브라우저 WebAssembly 바인딩을 포함하며, 약 200ms 이내에 텍스트 기반 PDF를 처리해 OCR 비용을 절감할 수 있다.</div>
+    <div class="item-meta">11,014</div>
+    <div class="item-summary">pdf-inspector는 Firecrawl에서 만든 Rust 기반 라이브러리로, PDF가 텍스트 기반인지 스캔된 것인지 빠르게 분류하고 텍스트를 추출한다. OCR 없이 위치 인식 기능과 함께 텍스트를 추출하고 깔끔한 Markdown으로 변환한다. Python, Node.js, WebAssembly 바인딩을 포함하며, 텍스트 기반 PDF는 200ms 이내에 처리한다. 스마트 분류(10-50ms), 테이블 감지, 다중 열 레이아웃, CID 폰트 지원 등의 기능을 제공한다.</div>
   </div>
   <div class="item-arrow"><a href="https://github.com/firecrawl/pdf-inspector" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/uber/ADR" target="_blank" rel="noopener">uber/ADR</a></div>
-    <div class="item-meta">574</div>
-    <div class="item-summary">ADR(Agentic AI Detection and Response)은 Cursor, Claude Code, Codex 같은 직원 대면 AI 에이전트와 고객 지원 에이전트를 보호하는 엔터프라이즈 보안 시스템으로, Uber에서 프로덕션 배포 중입니다. 에이전트 활동 관찰, 보안 방어 테스트, 위험 행동 탐지, 안전하지 않은 작업 차단의 4가지 기능을 제공하며, MLSys 2026에 논문이 수락되었습니다. 오픈소스 릴리스에는 ADR Sensor, ADR-Bench, ADR Detector가 포함되어 있고, 예방 기능은 향후 공개될 예정입니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/uber/ADR" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">obra/superpowers</a></div>
-    <div class="item-meta">266,199</div>
-    <div class="item-summary">Superpowers는 코딩 에이전트를 위한 소프트웨어 개발 방법론으로, 에이전트가 코드 작성 전에 먼저 요구사항을 파악하고 사용자와 함께 설계를 검증한 후 구현 계획을 수립한다. 계획 승인 후 subagent-driven-development 프로세스로 각 작업을 수행하며, TDD, YAGNI, DRY 원칙을 강조한다. 자동 트리거되는 스킬들로 구성되어 별도 설정 없이도 에이전트가 이 방법론을 적용할 수 있다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div>
 </body>
