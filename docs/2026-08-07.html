@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-08-07 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+
+  /* ── 아이템 ── */
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-left { min-width: 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
+  .item-arrow a { color: inherit; text-decoration: none; }
+  .item-arrow a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-08-07</div>
+<h1><em>07</em> Aug 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 하이라이트</span>
+    
+  </div>
+  <ul class="highlight-list"><li>임팩트 있는 5개를 선정했습니다:</li><li>약한 모델도 강한 모델의 버그를 진단 가능</li><li>멀티에이전트 시스템의 실패 모드와 복구 품질 벤치마킹</li><li>에이전트용 실행 환경 'Cloudflare Computer' 공개</li><li>자체 개선하는 RLM 에이전트 코딩 워크플로우 구현</li></ul>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">11개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.cloudflare.com/good-and-bad-agentic-behaviors/" target="_blank" rel="noopener">Agentic Internet의 좋은 행동과 나쁜 행동 드러내기</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+    <div class="item-summary">Cloudflare가 봇 완화 방식을 일회성 위험 평가에서 지속적 신뢰 평가로 변경한다. BotBase와 Precursor 시스템을 통해 봇과 에이전트의 좋은 행동과 나쁜 행동을 평가한다. 사용자는 Precursor Trace 시뮬레이션으로 자신의 커서 움직임이 인간인지 봇인지로 평가되는 방식을 확인할 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.cloudflare.com/good-and-bad-agentic-behaviors/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.cloudflare.com/introducing-radar-researcher/" target="_blank" rel="noopener">Radar Researcher 소개: 자연어로 인터넷 데이터를 탐색하는 AI 도구</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+    <div class="item-summary">Cloudflare Radar Researcher는 자연어를 이용해 글로벌 인터넷 트렌드와 트래픽 데이터를 탐색할 수 있는 새로운 AI 도구입니다. Cloudflare Developer Platform 위에 전적으로 구축되었으며, 사용자의 자연어 질의를 실시간 인터랙티브 차트로 변환하는 기능을 제공합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.cloudflare.com/introducing-radar-researcher/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.cloudflare.com/community-program-refresh/" target="_blank" rel="noopener">Cloudflare 앰배서더와 커뮤니티 엔지니어, 그리고 100만 달러 규모의 오픈소스 펀딩 공개</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+    <div class="item-summary">Cloudflare는 Ambassadors 및 Community Engineers를 포함한 업데이트된 커뮤니티 프로그램을 출시했다. 이 프로그램은 $1M 규모의 오픈소스 펀딩으로 뒷받침되며, 개발자 커뮤니티 확대와 오픈소스 유지보수자 지원을 목표로 한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.cloudflare.com/community-program-refresh/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://blog.cloudflare.com/workers-ai-gateway-unification/" target="_blank" rel="noopener">Workers AI와 AI Gateway를 단일 AI 컨트롤 플레인으로 통합</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+    <div class="item-summary">Cloudflare가 AI Gateway와 Workers AI를 단일 제어 평면으로 통합하고 있으며, 개발자에게 관찰성, 청구, 동적 라우팅 기능을 제공한다. 이 통합은 관리형 GPU와 외부 제공자 모두에 걸쳐 지원되며, 통합 바인딩과 모델 우선 라우팅을 통해 복원력 있는 AI 애플리케이션 구축을 간편화한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://blog.cloudflare.com/workers-ai-gateway-unification/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/apache-fluss-graduates-to-a-top-level-project-making-agentic-lake-fully-real-time-with-lakestream_603435" target="_blank" rel="noopener">Apache Fluss가 톱 레벨 프로젝트로 승격, Lakestream으로 Agentic Lake 완전 실시간화 실현</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/apache-fluss-graduates-to-a-top-level-project-making-agentic-lake-fully-real-time-with-lakestream_603435" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-id-verification-qwen-powered-detection-and-response-for-financial-grade-identity-security_603418" target="_blank" rel="noopener">Alibaba Cloud ID 검증: 금융급 신원 보안을 위한 Qwen 기반 탐지 및 대응</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-id-verification-qwen-powered-detection-and-response-for-financial-grade-identity-security_603418" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-unveils-qwen3-8-max-its-largest-and-most-capable-flagship-model-to-date_603420" target="_blank" rel="noopener">알리바바, Qwen3.8-Max 공개: 현재까지 가장 크고 강력한 주력 모델</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-unveils-qwen3-8-max-its-largest-and-most-capable-flagship-model-to-date_603420" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-smart-studio-self-service-edition-now-live-internationally_603440" target="_blank" rel="noopener">Alibaba Cloud Smart Studio Self-Service Edition 국제 출시</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-smart-studio-self-service-edition-now-live-internationally_603440" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-unveils-wan3-0-with-twice-as-long-video-outputs-from-a-richer-variety-of-inputs_603439" target="_blank" rel="noopener">알리바바 Wan3.0 공개, 더 다양한 입력으로 2배 길이의 비디오 생성</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-unveils-wan3-0-with-twice-as-long-video-outputs-from-a-richer-variety-of-inputs_603439" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">데이터 레이크의 온라인 포인트 쿼리를 위한 인덱싱</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify 같은 기업들이 온라인 서비스와 AI 에이전트를 위해 대규모 데이터에서 저지연 포인트 쿼리를 필요로 한다. 기존 분산 SQL 엔진(Trino, BigQuery)은 단일 행 조회에도 초 단위의 작업 스케줄링 오버헤드를 발생시킨다. RAP(Random Access Parquet)는 외부 인덱스로 키를 파일 위치에 직접 매핑하고 정확한 범위 읽기로 필요한 바이트만 가져와 이 문제를 해결한다. ML 파이프라인, 노트북, 배치 분석이 이미 사용하는 Parquet 파일에서 동작하므로 데이터를 중복 저장하지 않고 비용을 절감할 수 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 비디오 인시던트 보고서</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+    <div class="item-summary">Spotify의 팟캐스트 출판 파이프라인에서 신뢰도 문제가 발생했으며, 6월 24일에는 비디오 트랜스코딩 인프라가 최대 용량에 도달하여 비디오 팟캐스트 에피소드 발행이 수 시간 지연되었다. 크리에이터들이 에피소드가 나타나지 않자 재업로드하면서 추가 부하가 발생했으며, 이는 대량 콘텐츠 제출 시 확장할 여유 부족과 스케줄된 배치 처리 작업이 동시에 실행된 것이 주원인이다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/6/datasette/#atom-everything" target="_blank" rel="noopener">Datasette 1.0a38</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">Datasette 1.0a38 릴리스는 공개와 비공개 테이블이 혼합된 데이터베이스에서 접근 권한이 설정된 인스턴스에 영향을 주는 SQL injection 보안 이슈를 수정했다. 이 버전은 Datasette 권한 시스템으로 관리되는 환경에서의 보안 취약점을 해결한다.<br><br>(참고: 제공된 내용이 문장 중간에 끝나 완전한 정보 파악이 제한됨)</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Aug/6/datasette/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/6/datasette-2/#atom-everything" target="_blank" rel="noopener">datasette 0.65.3</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">datasette 0.65.3이 릴리스되었다. 이 버전은 1.0a38에서 제공된 SQL Injection 보안 수정을 백포트하여 포함하고 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Aug/6/datasette-2/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/6/simon-willison-on-technical-blogging/#atom-everything" target="_blank" rel="noopener">Simon Willison의 기술 블로깅</a></div>
+    <div class="item-meta">Simon Willison</div>
+    <div class="item-summary">Simon Willison이 Cynthia Dunlop의 "Write that blog!" 시리즈에서 기술 블로깅에 관한 인터뷰를 받았습니다. 인터뷰는 1월에 진행되었으며, 최근에야 자신의 블로그에 링크를 공유했습니다. 인터뷰에서는 블로깅을 시작한 이유와 지속 동기, 그리고 블로깅이 미친 가장 놀라운 영향에 대한 질문들이 다뤄집니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://simonwillison.net/2026/Aug/6/simon-willison-on-technical-blogging/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2608.05263" target="_blank" rel="noopener">OrchestraBench: 멀티-에이전트 오케스트레이션의 실패 모드, 복구, 분해 품질 평가</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">OrchestraBench는 다중 에이전트 오케스트레이션 프레임워크의 실패 원인, 복구 방식, 작업 분해 품질을 평가하는 벤치마크다. 기존 벤치마크가 작업 정확도만 보고하는 것과 달리, 실패가 발생한 이유, 연쇄 실패의 시작점, 라우팅 결정으로 인한 장애를 진단한다. 제어된 failure-injection 하네스와 재현 가능한 시드를 통해 엔터프라이즈 워크플로우를 평가하며, 연쇄 반경(cascade radius)과 failure별 복구 능력을 주요 지표로 삼는다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2608.05263" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2608.05212" target="_blank" rel="noopener">SearchAuditor: 장기 검색 에이전트의 실패 감시 및 원인 규명</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">내용이 불완전합니다 (추상이 중간에 끝남). 완전한 내용이 필요합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2608.05212" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://arxiv.org/abs/2608.05168" target="_blank" rel="noopener">Woodpecker 증류: 약한 모델이 강한 모델의 추론 버그를 진단한다</a></div>
+    <div class="item-meta">arXiv</div>
+    <div class="item-summary">강한 언어 모델의 추론 실패는 종종 전역적 무능함이 아니라 중간 단계의 국소적 추론 버그에서 비롯된다. 약한 모델이 생성한 짧은 패치를 강한 모델의 추론 과정 후에 삽입하면 올바른 해결책으로 방향을 재설정할 수 있다. 다만 직접 fine-tuning으로는 이러한 교정 효과가 안정적으로 내재화되지 않는다는 한계가 있다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://arxiv.org/abs/2608.05168" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">15개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.mayerowitz.io/blog/mario-meets-pareto" target="_blank" rel="noopener">마리오 만나 파레토</a></div>
+    <div class="item-meta">HN · 1103 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.mayerowitz.io/blog/mario-meets-pareto" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.theregister.com/systems/2026/08/06/amd-acquires-ai-chip-startup-taalas-to-boost-inference-performance-by-etching-models-into-silicon/5284344" target="_blank" rel="noopener">AMD가 Taalas 인수, 모델을 실리콘에 새겨 추론 성능 강화</a></div>
+    <div class="item-meta">HN · 765 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.theregister.com/systems/2026/08/06/amd-acquires-ai-chip-startup-taalas-to-boost-inference-performance-by-etching-models-into-silicon/5284344" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.bbc.com/news/articles/c1e1vg0gjl5o" target="_blank" rel="noopener">미국, 독일 회사 해상풍력 프로젝트 중단 대가로 12억 달러 지급 합의</a></div>
+    <div class="item-meta">HN · 647 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.bbc.com/news/articles/c1e1vg0gjl5o" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://notashelf.dev/posts/taste-is-all-thats-left" target="_blank" rel="noopener">남은 것은 취향뿐</a></div>
+    <div class="item-meta">HN · 552 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://notashelf.dev/posts/taste-is-all-thats-left" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.theguardian.com/technology/2026/aug/06/new-mexico-court-meta" target="_blank" rel="noopener">뉴멕시코 법원, Meta에 아동 정신건강 피해로 5억 6700만 달러 배상 명령</a></div>
+    <div class="item-meta">HN · 476 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.theguardian.com/technology/2026/aug/06/new-mexico-court-meta" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.githubstatus.com/incidents/qcvjkzcs7j74" target="_blank" rel="noopener">GitHub Actions와 Pages의 가용성 저하</a></div>
+    <div class="item-meta">HN · 449 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.githubstatus.com/incidents/qcvjkzcs7j74" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt/" target="_blank" rel="noopener">ChatGPT에서 GPT-5.6 Sol 개선, 무료 사용자를 위한 GPT-5.6 Luna 접근 확대</a></div>
+    <div class="item-meta">HN · 275 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://nso.edu/press-release/nsf-inouye-solar-telescope-enables-major-discovery-of-a-hidden-solar-process/" target="_blank" rel="noopener">과학자들이 태양 표면에서 Kelvin-Helmholtz Instability를 발견했다</a></div>
+    <div class="item-meta">HN · 272 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://nso.edu/press-release/nsf-inouye-solar-telescope-enables-major-discovery-of-a-hidden-solar-process/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://herdr.dev/blog/herdr-is-joining-y-combinator/" target="_blank" rel="noopener">Herdr이 Y Combinator에 입사한다. 런타임은 개방된 상태를 유지한다</a></div>
+    <div class="item-meta">HN · 249 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://herdr.dev/blog/herdr-is-joining-y-combinator/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://saopaulosecreto.com/en/tiquatira-linear-park-en/" target="_blank" rel="noopener">상파울루 주민이 황폐한 지역을 도시 숲으로 조성하다</a></div>
+    <div class="item-meta">HN · 224 pts</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://saopaulosecreto.com/en/tiquatira-linear-park-en/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vhbfns/neurips_meta_reviewer_comment_gone_what_gives_r/" target="_blank" rel="noopener">NeurIPS 메타 리뷰어 코멘트가 없어졌다. 뭐 하는 거야? [R]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vhbfns/neurips_meta_reviewer_comment_gone_what_gives_r/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vhmw48/cikm_26_notification_d/" target="_blank" rel="noopener">CIKM '26 공지 [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vhmw48/cikm_26_notification_d/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vhwwfr/imagenet1k_classifier_trained_entirely_on_an/" target="_blank" rel="noopener">Android에서 완전히 학습한 Imagenet-1k 분류기 [P]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vhwwfr/imagenet1k_classifier_trained_entirely_on_an/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vhsb17/which_degree_is_best_d/" target="_blank" rel="noopener">가장 좋은 학위는? [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vhsb17/which_degree_is_best_d/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vhtto1/cikm_2026_decisions_r/" target="_blank" rel="noopener">CIKM 2026 의사결정 [R]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+    <div class="item-summary"></div>
+  </div>
+  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vhtto1/cikm_2026_decisions_r/" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/PrimeIntellect-ai/prime-agent" target="_blank" rel="noopener">PrimeIntellect-ai/prime-agent</a></div>
+    <div class="item-meta">5,546</div>
+    <div class="item-summary">Prime Agent는 일반적이고 오래 지속되는 작업을 위한 오픈소스 코딩·연구 에이전트이다. 두 가지 핵심 추상화에 기반한다: Recursive Language Model(RLM)은 컨텍스트를 변수로, 도구를 함수 호출처럼 취급하고, Continual Harness는 프롬프트·메모리·스킬·서브에이전트 사양을 지속 가능한 상태로 저장한다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/PrimeIntellect-ai/prime-agent" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/addyosmani/agent-skills" target="_blank" rel="noopener">addyosmani/agent-skills</a></div>
+    <div class="item-meta">83,553</div>
+    <div class="item-summary">AI 코딩 에이전트를 위한 프로덕션급 엔지니어링 스킬 패키지입니다. 시니어 엔지니어의 워크플로우, 품질 게이트, 모범 사례를 인코딩해 AI 에이전트가 개발의 모든 단계에서 일관되게 따르도록 합니다. 개발 라이프사이클(DEFINE → PLAN → BUILD → VERIFY → REVIEW → SHIP)의 각 단계에 맞춘 8개의 slash command(/spec, /plan, /build, /test, /review, /webperf, /code-simplify, /ship)를 제공하며, /build auto 명령어로 계획 생성과 자동 구현이 가능합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/addyosmani/agent-skills" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/cloudflare/computer" target="_blank" rel="noopener">cloudflare/computer</a></div>
+    <div class="item-meta">5,311</div>
+    <div class="item-summary">Cloudflare Computer는 Durable Object 내부의 가상 파일시스템으로, SQLite를 기반으로 권위 있는 상태를 관리합니다. Container(FUSE 마운트), Isolate shell(just-bash), Isolate JavaScript(ECMAScript 모듈) 세 가지 백엔드를 제공하며, workspace.runtime.exec()를 통해 실행합니다. 현재 프리뷰 단계로 실험과 프로토타입에만 적합하고 프로덕션 사용은 부적합합니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/cloudflare/computer" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">mattpocock/skills</a></div>
+    <div class="item-meta">208,296</div>
+    <div class="item-summary">mattpocock이 만든 실제 엔지니어링을 위한 에이전트 스킬 모음입니다. 기존 GSD, BMAD, Spec-Kit 같은 방식과 달리 작고 적응하기 쉬우며 조합 가능한 스킬들을 제공합니다. 모든 모델에서 작동하며 수십 년의 엔지니어링 경험에 기반합니다. Claude Code 플러그인이나 skills.sh로 설치할 수 있습니다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item">
+  <div class="item-left">
+    <div class="item-name"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">obra/superpowers</a></div>
+    <div class="item-meta">268,557</div>
+    <div class="item-summary">Superpowers는 코딩 에이전트를 위한 완전한 소프트웨어 개발 방법론으로, 에이전트가 먼저 사용자에게 요구사항을 묻고 스펙을 설계한 후 구현 계획을 세운다. 사용자의 승인 후 subagent-driven-development 프로세스로 각 작업을 자율적으로 수행하며, TDD, YAGNI, DRY를 강조한다. Claude Code, Codex, Cursor 등 다양한 플랫폼을 지원하며, 상용 지원 서비스도 제공된다.</div>
+  </div>
+  <div class="item-arrow"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">&rarr;</a></div>
+</div>
+</div>
+</body>
+</html>
