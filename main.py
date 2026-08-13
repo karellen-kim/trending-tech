@@ -4,26 +4,49 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, timedelta, datetime
 
-from config import DOCS_DIR, SLACK_WEBHOOK_URL, MAX_PAPER_ITEMS
+from config import (DOCS_DIR, SLACK_WEBHOOK_URL, MAX_PAPER_ITEMS, SUMMARY_WORKERS,
+                    MAX_COMPANY_TOTAL, MAX_DEV_TOTAL, ENABLE_SVG, MAX_SVG_ITEMS)
 from sources.github import fetch_trending
-from sources.hackernews import fetch_top_stories
 from sources.rss import fetch_all_blogs
 from sources.arxiv import fetch_all_papers
-from sources.reddit import fetch_all_reddit
 from sources.scraper import fetch_all_scraped
-from summarizer import summarize_item, filter_important_papers, generate_highlights, translate_title
+from summarizer import analyze_item, filter_important_papers, generate_highlights
+from svgmaker import add_svgs
 from renderer import render_daily_page, render_weekly_page, render_index_page
 from notifier import send_slack
 
 
-def _add_summaries(items: list[dict], content_key: str) -> list[dict]:
-    for item in items:
+def _analyze_items(items: list[dict], content_key: str, filter_today: bool = True) -> list[dict]:
+    """날짜 판정·제목 번역·요약을 항목당 claude 호출 1회로 처리하고,
+    오늘 글이 아닌 항목은 리스트에서 제외한다."""
+    if not items:
+        return items
+    today = str(date.today())
+
+    def one(item):
         content = (item.get(content_key) or item.get("content") or
                    item.get("description") or item.get("abstract") or "")
         title = item.get("title") or item.get("name", "")
-        item["summary"] = summarize_item(title, content)
-        item["title_ko"] = translate_title(title)
-    return items
+        # 날짜를 거르지 않는 섹션(논문·GitHub)은 판정이 무의미하다.
+        # 판정 프롬프트를 태우면 is_today=false 로 답하면서 요약·번역까지 빈 값이 되어
+        # 렌더러가 영어 원문으로 폴백한다.
+        verified = bool(item.get("date_verified")) or not filter_today
+        result = analyze_item(title, content, item.get("pub_hint", "unknown"), today,
+                              date_verified=verified)
+        item["summary"] = result["summary"]
+        item["title_ko"] = result["title_ko"]
+        # 수집 단계에서 날짜를 확인한 항목은 그 값을 유지한다
+        item["pub_date"] = item.get("pub_date") or result["pub_date"]
+        item["is_today"] = result["is_today"]
+        return item
+
+    with ThreadPoolExecutor(max_workers=SUMMARY_WORKERS) as ex:
+        analyzed = list(ex.map(one, items))
+    if not filter_today:
+        return analyzed
+    kept = [i for i in analyzed if i.get("is_today")]
+    print(f"  [날짜판정] {len(analyzed)}건 중 오늘 글 {len(kept)}건")
+    return kept
 
 
 def _load_yesterday_github() -> set[str]:
@@ -38,51 +61,73 @@ def _load_yesterday_github() -> set[str]:
         return set()
 
 
+def _load_recent_urls(days: int = 7) -> set[str]:
+    """최근 페이지에 이미 실린 글 URL. COLLECT_DAYS 가 2 이상이면
+    어제 글이 오늘 페이지에 다시 올라오므로 여기서 걸러낸다."""
+    urls = set()
+    for i in range(1, days + 1):
+        jf = DOCS_DIR / f"{date.today() - timedelta(days=i)}.json"
+        if not jf.exists():
+            continue
+        try:
+            urls |= set(json.loads(jf.read_text(encoding="utf-8")).get("seen_urls", []))
+        except Exception:
+            pass
+    return urls
+
+
 def collect(today: str) -> dict:
     print(f"[{today}] 수집 시작")
     yesterday_github = _load_yesterday_github()
-    with ThreadPoolExecutor(max_workers=6) as ex:
+    with ThreadPoolExecutor(max_workers=4) as ex:
         f_gh = ex.submit(fetch_trending, "daily", yesterday_github)
-        f_hn = ex.submit(fetch_top_stories)
         f_bl = ex.submit(fetch_all_blogs)
         f_ar = ex.submit(fetch_all_papers)
-        f_rd = ex.submit(fetch_all_reddit)
         f_sc = ex.submit(fetch_all_scraped)
         github = f_gh.result()
-        hn = f_hn.result()
         all_blogs = f_bl.result()
         papers = f_ar.result()
-        reddit = f_rd.result()
         scraped = f_sc.result()
 
     company_blogs = [b for b in all_blogs if b.get("category") == "company"]
     company_blogs += scraped
     dev_blogs = [b for b in all_blogs if b.get("category") != "company"]
 
+    # 최근 페이지에 이미 실린 글은 제외 (COLLECT_DAYS 가 2 이상이라 어제 글이 다시 잡힌다)
+    seen = _load_recent_urls()
+    before = len(company_blogs) + len(dev_blogs)
+    company_blogs = [b for b in company_blogs if b.get("url") not in seen]
+    dev_blogs = [b for b in dev_blogs if b.get("url") not in seen]
+    after = len(company_blogs) + len(dev_blogs)
+    if before != after:
+        print(f"  [중복제거] 이미 실린 글 {before - after}건 제외")
+
     papers = filter_important_papers(papers, max_items=MAX_PAPER_ITEMS)
 
-    print(f"  GitHub:{len(github)} HN:{len(hn)} Company:{len(company_blogs)} "
-          f"Dev:{len(dev_blogs)} Papers:{len(papers)} Reddit:{len(reddit)}")
+    print(f"  GitHub:{len(github)} Company:{len(company_blogs)} "
+          f"Dev:{len(dev_blogs)} Papers:{len(papers)}")
 
     return {
         "date": today,
         "github": github,
-        "hn": hn,
         "company_blogs": company_blogs,
         "dev_blogs": dev_blogs,
         "papers": papers,
-        "reddit": reddit,
     }
 
 
 def summarize(data: dict) -> dict:
-    print("[요약] 시작")
-    data["github"] = _add_summaries(data["github"], "readme")
-    data["hn"] = _add_summaries(data["hn"], "title")
-    data["company_blogs"] = _add_summaries(data["company_blogs"], "summary")
-    data["dev_blogs"] = _add_summaries(data["dev_blogs"], "summary")
-    data["papers"] = _add_summaries(data["papers"], "abstract")
-    data["reddit"] = _add_summaries(data["reddit"], "title")
+    print("[분석] 날짜판정 + 요약 시작")
+    # 상한은 날짜 판정 뒤에 적용한다 — 판정 전에 자르면 오늘 글이 잘려나간다.
+    data["company_blogs"] = _analyze_items(data["company_blogs"], "summary")[:MAX_COMPANY_TOTAL]
+    data["dev_blogs"] = _analyze_items(data["dev_blogs"], "summary")[:MAX_DEV_TOTAL]
+    data["papers"] = _analyze_items(data["papers"], "abstract", filter_today=False)
+    data["github"] = _analyze_items(data["github"], "readme", filter_today=False)
+    if ENABLE_SVG:
+        print("[다이어그램] 생성 중...")
+        add_svgs(data["company_blogs"], MAX_SVG_ITEMS)
+        add_svgs(data["dev_blogs"], MAX_SVG_ITEMS)
+        add_svgs(data["papers"], MAX_SVG_ITEMS)
     data["highlights"] = generate_highlights(data)
     return data
 
@@ -96,13 +141,15 @@ def save_html(data: dict) -> list[str]:
 
     highlights = data.get("highlights") or [
         i.get("name", "") for i in data["github"][:2]
-    ] + [i.get("title", "") for i in data["hn"][:2]]
+    ] + [i.get("title", "") for i in data["company_blogs"][:2]]
 
     (DOCS_DIR / f"{today}.json").write_text(
         json.dumps({
             "date": today,
             "highlights": highlights,
             "github_names": [i["name"] for i in data["github"]],
+            "seen_urls": [i["url"] for k in ("company_blogs", "dev_blogs")
+                          for i in data.get(k, []) if i.get("url")],
         }, ensure_ascii=False),
         encoding="utf-8"
     )

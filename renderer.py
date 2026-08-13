@@ -56,18 +56,32 @@ _DAILY_CSS = """<style>
   .highlight-list li:last-child { border-bottom: none; }
   .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
 
-  /* ── 아이템 ── */
-  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
-  .item-left { min-width: 0; }
-  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { padding: 1rem 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; line-height: 1.4; color: var(--ink); min-width: 0; }
   .item-name a { color: var(--ink); text-decoration: none; }
   .item-name a:hover { color: var(--accent-deep); }
-  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint);
+    letter-spacing: 0.04em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "\2212"; color: var(--accent); }
+  .item-body { padding: 0 0 1.2rem; }
   .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
-  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
-  .item-arrow a { color: inherit; text-decoration: none; }
-  .item-arrow a:hover { color: var(--accent); }
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
+  .item-diagram .diagram { margin: 0; padding: 1rem 1rem 0.7rem; background: var(--paper-deep);
+    border: 1px solid var(--rule); color: var(--ink); }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; margin: 0 auto; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule);
+    font-size: 0.72rem; color: var(--ink-faint); text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--accent-deep); text-decoration: none; }
 
   @media (max-width: 600px) {
     body { padding: 0 1rem 3rem; }
@@ -146,15 +160,40 @@ _MONTH_NAMES = {"01":"Jan","02":"Feb","03":"Mar","04":"Apr","05":"May","06":"Jun
 def _e(s: str) -> str:
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
-def _item_html(name: str, url: str, meta: str, summary: str, name_ko: str = "") -> str:
+def _item_html(name: str, url: str, meta: str, summary: str,
+               name_ko: str = "", svg: str = "") -> str:
     display_name = name_ko if name_ko and name_ko.strip() else name
-    return f"""<div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="{url}" target="_blank" rel="noopener">{_e(display_name)}</a></div>
+    link_html = f'<a href="{url}" target="_blank" rel="noopener">{_e(display_name)}</a>'
+    has_body = bool((summary or "").strip()) or bool((svg or "").strip())
+
+    if not has_body:
+        return f"""<div class="item">
+  <div class="item-head">
+    <div class="item-name">{link_html}</div>
     <div class="item-meta">{_e(meta)}</div>
-    <div class="item-summary">{_e(summary).replace(chr(10), "<br>")}</div>
   </div>
-  <div class="item-arrow"><a href="{url}" target="_blank" rel="noopener">&rarr;</a></div>
+</div>"""
+
+    body = ""
+    if svg and svg.strip():
+        body += f'<div class="item-diagram">{svg}</div>'
+    if summary and summary.strip():
+        body += f'<div class="item-summary">{_e(summary).replace(chr(10), "<br>")}</div>'
+
+    # 제목을 <summary> 안에서 링크로 두면 클릭이 펼침과 충돌하므로,
+    # 접힌 헤더에는 텍스트만 두고 펼친 본문 하단에 원문 링크를 둔다.
+    return f"""<div class="item">
+  <details>
+    <summary>
+      <span class="item-name">{_e(display_name)}</span>
+      <span class="item-meta">{_e(meta)}</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      {body}
+      <div class="item-link">{link_html} &rarr;</div>
+    </div>
+  </details>
 </div>"""
 
 _SECTIONS_META = [
@@ -199,17 +238,20 @@ def render_daily_page(data: dict) -> str:
 
     if company_blogs:
         sections += _section_html("tech-blog", "TECH", "기술 블로그", "".join(
-            _item_html(i["title"], i["url"], i.get("source",""), i.get("summary",""), i.get("title_ko",""))
+            _item_html(i["title"], i["url"], i.get("source",""), i.get("summary",""),
+                       i.get("title_ko",""), i.get("svg",""))
             for i in company_blogs), len(company_blogs))
 
     if dev_blogs:
         sections += _section_html("dev-blogs", "DEV", "개발자 블로그 &amp; SNS", "".join(
-            _item_html(i["title"], i["url"], i.get("source",""), i.get("summary",""), i.get("title_ko",""))
+            _item_html(i["title"], i["url"], i.get("source",""), i.get("summary",""),
+                       i.get("title_ko",""), i.get("svg",""))
             for i in dev_blogs), len(dev_blogs))
 
     if papers:
         sections += _section_html("papers", "PAPER", "AI / LLM 논문", "".join(
-            _item_html(i["title"], i["url"], "arXiv", i.get("summary", i.get("abstract","")), i.get("title_ko",""))
+            _item_html(i["title"], i["url"], "arXiv", i.get("summary") or i.get("abstract",""),
+                       i.get("title_ko",""), i.get("svg",""))
             for i in papers), len(papers))
 
     if hn_reddit:
@@ -222,7 +264,7 @@ def render_daily_page(data: dict) -> str:
 
     if github:
         sections += _section_html("github", "코드", "GitHub 트렌딩", "".join(
-            _item_html(i["name"], i["url"], i.get("stars_today",""), i.get("summary", i.get("description","")))
+            _item_html(i["name"], i["url"], i.get("stars_today",""), i.get("summary") or i.get("description",""))
             for i in github), len(github))
 
     # 존재하는 섹션만 nav에 포함

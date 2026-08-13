@@ -53,6 +53,35 @@ def test_render_daily_page_has_items():
     assert "microsoft/phi-4" in html
     assert "LLaMA 4 Released" in html
 
+def test_item_is_collapsible():
+    from renderer import _item_html
+    html = _item_html("Title", "http://x", "meta", "요약 본문", "한글제목")
+    assert "<details" in html and "<summary" in html and "한글제목" in html
+
+
+def test_collapsed_by_default():
+    from renderer import _item_html
+    assert "<details open" not in _item_html("T", "http://x", "m", "본문", "")
+
+
+def test_svg_is_embedded_raw_not_escaped():
+    from renderer import _item_html
+    svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect width="5" height="5"/></svg>'
+    html = _item_html("T", "http://x", "m", "본문", "", svg)
+    assert "<svg" in html and "&lt;svg" not in html
+
+
+def test_summary_is_still_escaped():
+    from renderer import _item_html
+    html = _item_html("T", "http://x", "m", "<script>alert(1)</script>", "")
+    assert "<script>" not in html and "&lt;script&gt;" in html
+
+
+def test_item_without_summary_has_no_toggle():
+    from renderer import _item_html
+    assert "<details" not in _item_html("T", "http://x", "m", "", "")
+
+
 def test_render_index_page_is_html():
     entries = [{"date": "2026-05-31", "highlights": ["LLaMA 4", "phi-4"]}]
     html = render_index_page(entries)
