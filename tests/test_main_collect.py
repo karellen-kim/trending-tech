@@ -55,43 +55,40 @@ def test_analyze_items_calls_llm_once_per_item(monkeypatch):
     main._analyze_items(items, "summary")
     assert len(calls) == 5, "항목당 호출은 정확히 1회여야 한다"
 
-
-# ── NotebookLM 오디오 단계 ──
+# ── Gemini Notebook 오디오 오버뷰 단계 ──
 
 def test_audio_step_skipped_when_disabled(monkeypatch):
     called = []
     monkeypatch.setattr(main, "ENABLE_NOTEBOOKLM", False)
     monkeypatch.setattr(main, "generate_audio_review", lambda *a, **kw: called.append(1))
     assert main.make_audio({"date": "2026-08-14",
-                            "highlight_links": [{"url": "http://a"}]}) is None
+                            "highlight_links": [{"url": "http://a"}]}) is False
     assert called == []
 
 
-def test_audio_step_passes_highlight_urls(monkeypatch, tmp_path):
+def test_audio_step_passes_highlight_urls(monkeypatch):
     got = {}
     monkeypatch.setattr(main, "ENABLE_NOTEBOOKLM", True)
-    monkeypatch.setattr(main, "AUDIO_DIR", tmp_path)
     monkeypatch.setattr(main, "generate_audio_review",
-                        lambda urls, out, title="", **kw: got.update(urls=urls, out=out) or out)
+                        lambda urls, title="": got.update(urls=urls, title=title) or True)
     data = {"date": "2026-08-14",
             "highlight_links": [{"url": "http://a"}, {"url": "http://b"}, {"url": ""}]}
-    main.make_audio(data)
+    assert main.make_audio(data) is True
     assert got["urls"] == ["http://a", "http://b"]
-    assert got["out"].endswith("2026-08-14.mp3")
+    assert "2026-08-14" in got["title"]
 
 
 def test_audio_skipped_without_links(monkeypatch):
     called = []
     monkeypatch.setattr(main, "ENABLE_NOTEBOOKLM", True)
     monkeypatch.setattr(main, "generate_audio_review", lambda *a, **kw: called.append(1))
-    assert main.make_audio({"date": "2026-08-14", "highlight_links": []}) is None
+    assert main.make_audio({"date": "2026-08-14", "highlight_links": []}) is False
     assert called == []
 
 
-def test_audio_failure_does_not_break_pipeline(monkeypatch, tmp_path):
+def test_audio_failure_does_not_break_pipeline(monkeypatch):
     monkeypatch.setattr(main, "ENABLE_NOTEBOOKLM", True)
-    monkeypatch.setattr(main, "AUDIO_DIR", tmp_path)
     monkeypatch.setattr(main, "generate_audio_review",
                         lambda *a, **kw: (_ for _ in ()).throw(RuntimeError("boom")))
     assert main.make_audio({"date": "2026-08-14",
-                            "highlight_links": [{"url": "http://a"}]}) is None
+                            "highlight_links": [{"url": "http://a"}]}) is False

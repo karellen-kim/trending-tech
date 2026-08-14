@@ -63,7 +63,8 @@ _DAILY_CSS = """<style>
     margin-top: 0.9rem; padding: 0.8rem 1rem; border: 1px solid var(--rule); background: var(--paper-deep); }
   .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
-  .audio-block audio { flex: 1; min-width: 240px; height: 34px; }
+  .audio-block a { font-size: 0.82rem; color: var(--accent-deep); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
 
   /* ── 아이템 (아코디언) ── */
   .item { border-bottom: 1px solid var(--rule); }
@@ -251,8 +252,9 @@ def render_daily_page(data: dict) -> str:
         audio = ""
         if data.get("audio_url"):
             audio = (f'<div class="audio-block">'
-                     f'<span class="audio-label">오늘의 오디오 리뷰</span>'
-                     f'<audio controls preload="none" src="{data["audio_url"]}"></audio></div>')
+                     f'<span class="audio-label">오디오 리뷰</span>'
+                     f'<a href="{data["audio_url"]}" target="_blank" rel="noopener">'
+                     f'Gemini Notebook에서 듣기 &rarr;</a></div>')
         sections += _section_html("highlights", "★", "오늘의 하이라이트",
             f'<ul class="highlight-list">{rows}</ul>{audio}')
 

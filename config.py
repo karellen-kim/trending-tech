@@ -11,14 +11,16 @@ AUDIO_DIR = DOCS_DIR / "audio"
 
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL", "")
 
-# NotebookLM 오디오 리뷰 — notebooklm-podcast-automator 를 별도로 띄워야 동작한다.
-# 준비 절차는 docs/notebooklm-setup.md 참고. 기본은 꺼짐.
+# Gemini Notebook(구 NotebookLM) 오디오 오버뷰. 준비 절차는 docs/notebooklm-setup.md 참고.
+# 기본은 꺼짐 — 노트북 주소와 로그인 세션이 준비돼야 동작한다.
 ENABLE_NOTEBOOKLM = os.getenv("ENABLE_NOTEBOOKLM", "0") == "1"
-NOTEBOOKLM_API_URL = os.getenv("NOTEBOOKLM_API_URL", "http://127.0.0.1:8000")
-NOTEBOOKLM_STYLE = os.getenv("NOTEBOOKLM_STYLE", "deep_dive")
+NOTEBOOKLM_NOTEBOOK_URL = os.getenv("NOTEBOOKLM_NOTEBOOK_URL", "")
+NOTEBOOKLM_PROFILE_DIR = Path(os.getenv("NOTEBOOKLM_PROFILE_DIR",
+                                        str(Path.home() / ".gemini-notebook-profile")))
+NOTEBOOKLM_FORMAT = os.getenv("NOTEBOOKLM_FORMAT", "deep_dive")   # deep_dive|summary|criticism|debate
 NOTEBOOKLM_LANGUAGE = os.getenv("NOTEBOOKLM_LANGUAGE", "ko")
-NOTEBOOKLM_TIMEOUT = int(os.getenv("NOTEBOOKLM_TIMEOUT", "900"))
-NOTEBOOKLM_POLL_INTERVAL = int(os.getenv("NOTEBOOKLM_POLL_INTERVAL", "15"))
+NOTEBOOKLM_HEADLESS = os.getenv("NOTEBOOKLM_HEADLESS", "1") == "1"
+NOTEBOOKLM_TIMEOUT = int(os.getenv("NOTEBOOKLM_TIMEOUT", "120"))
 
 MAX_GITHUB_ITEMS = 5
 MAX_HN_ITEMS = 10
