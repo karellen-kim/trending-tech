@@ -57,18 +57,32 @@
   .highlight-list li:last-child { border-bottom: none; }
   .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
 
-  /* ── 아이템 ── */
-  .item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
-  .item-left { min-width: 0; }
-  .item-name { font-weight: 600; font-size: 0.97rem; margin-bottom: 0.2rem; line-height: 1.4; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { padding: 1rem 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; line-height: 1.4; color: var(--ink); min-width: 0; }
   .item-name a { color: var(--ink); text-decoration: none; }
   .item-name a:hover { color: var(--accent-deep); }
-  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint);
+    letter-spacing: 0.04em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
+  .item-body { padding: 0 0 1.2rem; }
   .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
-  .item-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); padding-top: 0.15rem; flex-shrink: 0; }
-  .item-arrow a { color: inherit; text-decoration: none; }
-  .item-arrow a:hover { color: var(--accent); }
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
+  .item-diagram .diagram { margin: 0; padding: 1rem 1rem 0.7rem; background: var(--paper-deep);
+    border: 1px solid var(--rule); color: var(--ink); }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; margin: 0 auto; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule);
+    font-size: 0.72rem; color: var(--ink-faint); text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--accent-deep); text-decoration: none; }
 
   @media (max-width: 600px) {
     body { padding: 0 1rem 3rem; }
@@ -97,7 +111,7 @@
 
 <div class="days-section">
   <div class="days-section-title">이번 주 일별 보기</div>
-  <a href="./2026-08-11.html" class="day-link"><span class="day-label">화요일</span><span class="day-date">2026-08-11</span><span class="day-arrow">&rarr;</span></a><a href="./2026-08-12.html" class="day-link"><span class="day-label">수요일</span><span class="day-date">2026-08-12</span><span class="day-arrow">&rarr;</span></a><a href="./2026-08-13.html" class="day-link"><span class="day-label">목요일</span><span class="day-date">2026-08-13</span><span class="day-arrow">&rarr;</span></a>
+  <a href="./2026-08-11.html" class="day-link"><span class="day-label">화요일</span><span class="day-date">2026-08-11</span><span class="day-arrow">&rarr;</span></a><a href="./2026-08-12.html" class="day-link"><span class="day-label">수요일</span><span class="day-date">2026-08-12</span><span class="day-arrow">&rarr;</span></a><a href="./2026-08-13.html" class="day-link"><span class="day-label">목요일</span><span class="day-date">2026-08-13</span><span class="day-arrow">&rarr;</span></a><a href="./2026-08-14.html" class="day-link"><span class="day-label">금요일</span><span class="day-date">2026-08-14</span><span class="day-arrow">&rarr;</span></a>
 </div>
 </body>
 </html>
