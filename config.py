@@ -7,8 +7,18 @@ load_dotenv()
 BASE_DIR = Path(__file__).parent
 DOCS_DIR = BASE_DIR / "docs"
 LOGS_DIR = BASE_DIR / "logs"
+AUDIO_DIR = DOCS_DIR / "audio"
 
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL", "")
+
+# NotebookLM 오디오 리뷰 — notebooklm-podcast-automator 를 별도로 띄워야 동작한다.
+# 준비 절차는 docs/notebooklm-setup.md 참고. 기본은 꺼짐.
+ENABLE_NOTEBOOKLM = os.getenv("ENABLE_NOTEBOOKLM", "0") == "1"
+NOTEBOOKLM_API_URL = os.getenv("NOTEBOOKLM_API_URL", "http://127.0.0.1:8000")
+NOTEBOOKLM_STYLE = os.getenv("NOTEBOOKLM_STYLE", "deep_dive")
+NOTEBOOKLM_LANGUAGE = os.getenv("NOTEBOOKLM_LANGUAGE", "ko")
+NOTEBOOKLM_TIMEOUT = int(os.getenv("NOTEBOOKLM_TIMEOUT", "900"))
+NOTEBOOKLM_POLL_INTERVAL = int(os.getenv("NOTEBOOKLM_POLL_INTERVAL", "15"))
 
 MAX_GITHUB_ITEMS = 5
 MAX_HN_ITEMS = 10

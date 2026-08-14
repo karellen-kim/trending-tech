@@ -4,14 +4,17 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, timedelta, datetime
 
-from config import (DOCS_DIR, SLACK_WEBHOOK_URL, MAX_PAPER_ITEMS, SUMMARY_WORKERS,
-                    MAX_COMPANY_TOTAL, MAX_DEV_TOTAL, ENABLE_SVG, MAX_SVG_ITEMS)
+from config import (DOCS_DIR, AUDIO_DIR, SLACK_WEBHOOK_URL, MAX_PAPER_ITEMS, SUMMARY_WORKERS,
+                    MAX_COMPANY_TOTAL, MAX_DEV_TOTAL, ENABLE_SVG, MAX_SVG_ITEMS,
+                    ENABLE_NOTEBOOKLM)
 from sources.github import fetch_trending
 from sources.rss import fetch_all_blogs
 from sources.arxiv import fetch_all_papers
 from sources.scraper import fetch_all_scraped
-from summarizer import analyze_item, filter_important_papers, generate_highlights
+from summarizer import (analyze_item, filter_important_papers, generate_highlights,
+                        generate_highlight_links)
 from svgmaker import add_svgs
+from notebooklm import generate_audio_review
 from renderer import render_daily_page, render_weekly_page, render_index_page
 from notifier import send_slack
 
@@ -128,8 +131,30 @@ def summarize(data: dict) -> dict:
         add_svgs(data["company_blogs"], MAX_SVG_ITEMS)
         add_svgs(data["dev_blogs"], MAX_SVG_ITEMS)
         add_svgs(data["papers"], MAX_SVG_ITEMS)
-    data["highlights"] = generate_highlights(data)
+    # 하이라이트는 원문 링크와 함께 뽑는다 (NotebookLM 에 넘길 링크의 출처).
+    # 링크 매핑이 실패하면 기존 방식으로 되돌아간다.
+    links = generate_highlight_links(data)
+    data["highlight_links"] = links
+    data["highlights"] = [l["text"] for l in links] or generate_highlights(data)
     return data
+
+
+def make_audio(data: dict) -> str | None:
+    """하이라이트 링크로 NotebookLM 오디오 리뷰를 만든다. 실패해도 배치는 계속된다."""
+    if not ENABLE_NOTEBOOKLM:
+        return None
+    urls = [l.get("url") for l in data.get("highlight_links", []) if l.get("url")]
+    if not urls:
+        print("[NotebookLM] 하이라이트 링크가 없어 건너뜀")
+        return None
+    try:
+        AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+        out = str(AUDIO_DIR / f"{data['date']}.mp3")
+        print(f"[NotebookLM] 링크 {len(urls)}건으로 오디오 생성 시작")
+        return generate_audio_review(urls, out, title=f"{data['date']} 기술 트렌드")
+    except Exception as e:
+        print(f"[NotebookLM] 실패: {type(e).__name__}: {str(e)[:150]}")
+        return None
 
 
 def save_html(data: dict) -> list[str]:
@@ -214,9 +239,10 @@ def save_weekly_page(today: date, weekly_highlights: list[str] | None = None) ->
     (DOCS_DIR / f"{wid}.html").write_text(render_weekly_page(wdata), encoding="utf-8")
     print(f"[HTML] docs/{wid}.html 업데이트")
 
-def git_commit_push(date_str: str) -> None:
+def git_commit_push(date_str: str, audio_path: str | None = None) -> None:
     wid = _week_id(date.fromisoformat(date_str))
-    subprocess.run(["git", "add",
+    extra = [f"docs/audio/{date_str}.mp3"] if audio_path else []
+    subprocess.run(["git", "add", *extra,
         f"docs/{date_str}.html", f"docs/{date_str}.json",
         f"docs/{wid}.html", f"docs/{wid}.json",
         "docs/index.html"], check=True)
@@ -238,6 +264,11 @@ def main():
     today_str = str(today)
     data = collect(today_str)
     data = summarize(data)
+
+    # 오디오는 페이지에 재생 링크를 넣어야 하므로 save_html 앞에서 만든다
+    audio_path = make_audio(data)
+    if audio_path:
+        data["audio_url"] = f"audio/{today_str}.mp3"
     highlights = save_html(data)
 
     # 주간 페이지 갱신 (매일)
@@ -248,7 +279,7 @@ def main():
         weekly_hl = generate_highlights(data)  # 당일 데이터 기반, 필요시 주간 집계로 확장
     save_weekly_page(today, weekly_hl)
 
-    git_commit_push(today_str)
+    git_commit_push(today_str, audio_path)
     send_slack(SLACK_WEBHOOK_URL, today_str, highlights)
     print(f"[완료] {today_str}")
 

@@ -55,6 +55,15 @@ _DAILY_CSS = """<style>
   .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
   .highlight-list li:last-child { border-bottom: none; }
   .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin-top: 0.9rem; padding: 0.8rem 1rem; border: 1px solid var(--rule); background: var(--paper-deep); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block audio { flex: 1; min-width: 240px; height: 34px; }
 
   /* ── 아이템 (아코디언) ── */
   .item { border-bottom: 1px solid var(--rule); }
@@ -232,9 +241,20 @@ def render_daily_page(data: dict) -> str:
     sections = ""
 
     if highlights:
-        rows = "".join(f'<li>{_e(h)}</li>' for h in highlights)
+        links = data.get("highlight_links") or []
+        rows = ""
+        for n, h in enumerate(highlights):
+            url = links[n].get("url", "") if n < len(links) else ""
+            body = (f'<a href="{url}" target="_blank" rel="noopener">{_e(h)}</a>'
+                    if url else _e(h))
+            rows += f'<li>{body}</li>'
+        audio = ""
+        if data.get("audio_url"):
+            audio = (f'<div class="audio-block">'
+                     f'<span class="audio-label">오늘의 오디오 리뷰</span>'
+                     f'<audio controls preload="none" src="{data["audio_url"]}"></audio></div>')
         sections += _section_html("highlights", "★", "오늘의 하이라이트",
-            f'<ul class="highlight-list">{rows}</ul>')
+            f'<ul class="highlight-list">{rows}</ul>{audio}')
 
     if company_blogs:
         sections += _section_html("tech-blog", "TECH", "기술 블로그", "".join(

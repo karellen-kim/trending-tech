@@ -79,3 +79,53 @@ def test_analyze_prompt_includes_today_and_hint():
         summarizer.analyze_item("T", "본문" * 200, "2026-08-13 10:00 KST", "2026-08-14")
     assert "2026-08-14" in captured["p"]
     assert "2026-08-13 10:00 KST" in captured["p"]
+
+
+# ── 하이라이트 ↔ 원문 링크 매핑 ──
+
+def test_highlight_links_map_back_to_urls():
+    data = {
+        "company_blogs": [{"source": "A", "title": "글1", "url": "http://a"},
+                          {"source": "B", "title": "글2", "url": "http://b"}],
+        "dev_blogs": [], "papers": [], "github": [],
+    }
+    with patch("summarizer._run_claude", return_value="2|두 번째가 중요\n1|첫 번째도"):
+        links = summarizer.generate_highlight_links(data)
+    assert [l["url"] for l in links] == ["http://b", "http://a"]
+    assert links[0]["text"] == "두 번째가 중요"
+
+
+def test_highlight_links_ignores_out_of_range_index():
+    data = {"company_blogs": [{"source": "A", "title": "글1", "url": "http://a"}],
+            "dev_blogs": [], "papers": [], "github": []}
+    with patch("summarizer._run_claude", return_value="9|없는 번호\n1|정상"):
+        links = summarizer.generate_highlight_links(data)
+    assert len(links) == 1 and links[0]["url"] == "http://a"
+
+
+def test_highlight_links_survives_unnumbered_output():
+    """모델이 번호를 빼먹어도 빈 리스트를 돌려주고 배치는 계속되어야 한다"""
+    data = {"company_blogs": [{"source": "A", "title": "글1", "url": "http://a"}],
+            "dev_blogs": [], "papers": [], "github": []}
+    with patch("summarizer._run_claude", return_value="번호 없는 줄\n또 한 줄"):
+        assert summarizer.generate_highlight_links(data) == []
+
+
+def test_highlight_links_dedupes_same_index():
+    data = {"company_blogs": [{"source": "A", "title": "글1", "url": "http://a"},
+                              {"source": "B", "title": "글2", "url": "http://b"}],
+            "dev_blogs": [], "papers": [], "github": []}
+    with patch("summarizer._run_claude", return_value="1|첫째\n1|또 첫째\n2|둘째"):
+        links = summarizer.generate_highlight_links(data)
+    assert [l["url"] for l in links] == ["http://a", "http://b"]
+
+
+def test_highlight_links_empty_when_no_items():
+    assert summarizer.generate_highlight_links({}) == []
+
+
+def test_highlight_candidates_prefer_korean_title():
+    data = {"company_blogs": [{"source": "A", "title": "English", "title_ko": "한글제목",
+                               "url": "http://a"}], "dev_blogs": [], "papers": [], "github": []}
+    cands = summarizer._highlight_candidates(data)
+    assert cands[0]["title"] == "한글제목"

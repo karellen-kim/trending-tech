@@ -153,6 +153,56 @@ HIGHLIGHT_PROMPT = """오늘의 개발/기술 트렌드 항목들을 보고, 가
 
 {items_text}"""
 
+HIGHLIGHT_LINK_PROMPT = """오늘의 개발/기술 트렌드 항목 목록이야.
+가장 중요하고 임팩트 있는 것 5개를 골라줘.
+
+형식: 각 줄에 "번호|한 줄 요약(50자 이내)" 로만 답해. 다른 말 없이.
+예: 3|새 모델이 코딩 벤치마크에서 기존 대비 크게 앞섰다
+
+{items_text}"""
+
+
+def _highlight_candidates(data: dict) -> list[dict]:
+    items = []
+    for key, tag in (("company_blogs", ""), ("dev_blogs", ""),
+                     ("papers", "논문"), ("github", "GitHub")):
+        for i in data.get(key, []):
+            title = i.get("title_ko") or i.get("title") or i.get("name", "")
+            if not title:
+                continue
+            items.append({"title": title, "url": i.get("url", ""),
+                          "source": tag or i.get("source", "")})
+    return items[:20]
+
+
+def generate_highlight_links(data: dict) -> list[dict]:
+    """하이라이트 문장과 원문 링크를 함께 돌려준다.
+    기존 generate_highlights 는 문장만 주어 어느 글에서 나왔는지 알 수 없었다."""
+    cands = _highlight_candidates(data)
+    if not cands:
+        return []
+    items_text = "\n".join(f"{n + 1}. [{c['source']}] {c['title']}" for n, c in enumerate(cands))
+    response = _run_claude(HIGHLIGHT_LINK_PROMPT.format(items_text=items_text), timeout=90)
+    out, seen = [], set()
+    for line in (response or "").splitlines():
+        line = line.strip()
+        if "|" not in line:
+            continue
+        num, _, text = line.partition("|")
+        num = num.strip().lstrip("0") or "0"
+        if not num.isdigit():
+            continue
+        idx = int(num) - 1
+        if not 0 <= idx < len(cands) or not text.strip() or idx in seen:
+            continue
+        seen.add(idx)
+        c = cands[idx]
+        out.append({"text": text.strip(), "url": c["url"], "source": c["source"]})
+        if len(out) >= 5:
+            break
+    return out
+
+
 def generate_highlights(data: dict) -> list[str]:
     items = []
     for i in data.get("company_blogs", [])[:3]:
