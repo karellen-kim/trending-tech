@@ -153,6 +153,26 @@ HIGHLIGHT_PROMPT = """오늘의 개발/기술 트렌드 항목들을 보고, 가
 
 {items_text}"""
 
+TODAY_TAKE_PROMPT = """아래는 오늘 수집된 기술 글 목록이야.
+개별 글을 요약하지 말고, 이 글들을 가로질러 읽었을 때 드러나는 흐름 하나를 짚어줘.
+
+{items_text}
+
+JSON만 출력해. 마크다운 펜스나 설명 없이.
+{{"headline": "", "body": "", "refs": [1, 2, 3]}}
+
+규칙:
+- headline: 한 문장(90자 이내). 무엇이 어디에서 어디로 움직이는지, 또는 무엇이 새로 문제가
+  되기 시작했는지를 구체적으로 써.
+  "AI가 빠르게 발전하고 있다", "다양한 기술이 등장했다" 같은 하나마나 한 문장은 실패다.
+  이 목록을 안 본 사람이 읽고 "그래서 뭐가 달라졌는데?"라고 되물으면 실패다.
+- body: 왜 그렇게 보는지 2~3문장. 어떤 글의 어떤 내용이 그 근거인지 짚어줘.
+  글 제목을 나열하지 말고 내용으로 설명해.
+- refs: headline 의 근거가 된 항목 번호 3~5개. 중요한 순서대로.
+- 목록에 있는 내용만 근거로 써. 없는 사실을 지어내지 마.
+- 오늘 글들이 서로 무관하면 억지로 엮지 말고 가장 굵은 줄기 하나만 짚어.
+"""
+
 HIGHLIGHT_LINK_PROMPT = """오늘의 개발/기술 트렌드 항목 목록이야.
 가장 중요하고 임팩트 있는 것 5개를 골라줘.
 
@@ -173,6 +193,50 @@ def _highlight_candidates(data: dict) -> list[dict]:
             items.append({"title": title, "url": i.get("url", ""),
                           "source": tag or i.get("source", "")})
     return items[:20]
+
+
+def generate_today_take(data: dict) -> dict:
+    """오늘 글들을 가로질러 읽은 해석 한 문장과 그 근거를 만든다.
+    반환: {"headline", "body", "refs": [{"text","url","source"}]}
+    refs 는 근거가 된 글이며, 목록에서 ★ 로 표시된다. 실패하면 빈 dict."""
+    cands = _highlight_candidates(data)
+    if not cands:
+        return {}
+    items_text = "\n".join(f"{n + 1}. [{c['source']}] {c['title']}" for n, c in enumerate(cands))
+    parsed = _parse_json(_run_claude(TODAY_TAKE_PROMPT.format(items_text=items_text), timeout=120))
+    if not isinstance(parsed, dict):
+        return {}
+    headline = str(parsed.get("headline") or "").strip()
+    if not headline:
+        return {}
+
+    refs, seen = [], set()
+    for r in (parsed.get("refs") or []):
+        try:
+            idx = int(r) - 1
+        except (TypeError, ValueError):
+            continue
+        if not 0 <= idx < len(cands) or idx in seen:
+            continue
+        seen.add(idx)
+        refs.append(dict(cands[idx]))
+        if len(refs) >= 5:
+            break
+
+    return {"headline": headline,
+            "body": str(parsed.get("body") or "").strip(),
+            "refs": [{"text": r["title"], "url": r["url"], "source": r["source"]} for r in refs]}
+
+
+def mark_important(data: dict, refs: list[dict]) -> None:
+    """해석의 근거가 된 글에 important 플래그를 세운다. 렌더러가 ★ 로 표시한다."""
+    urls = {r.get("url") for r in refs if r.get("url")}
+    if not urls:
+        return
+    for key in ("company_blogs", "dev_blogs", "papers", "github"):
+        for i in data.get(key, []):
+            if i.get("url") in urls:
+                i["important"] = True
 
 
 def generate_highlight_links(data: dict) -> list[dict]:

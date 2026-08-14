@@ -88,3 +88,53 @@ def test_render_index_page_is_html():
     assert html.startswith("<!DOCTYPE html>")
     assert "2026" in html
     assert "2026-W22" in html  # 날짜 대신 주차 링크
+
+
+# ── 해석 섹션 / 중요 표시 ──
+
+TAKE_DATA = dict(SAMPLE_DATA, today_take={
+    "headline": "경쟁력이 실행 계층으로 이동한다",
+    "body": "여러 글이 같은 방향을 가리킨다.",
+    "refs": [{"text": "글1", "url": "http://a", "source": "A"}],
+})
+
+
+def test_take_section_shows_headline_and_body():
+    html = render_daily_page(TAKE_DATA)
+    assert "오늘의 해석" in html
+    assert "경쟁력이 실행 계층으로 이동한다" in html
+    assert "여러 글이 같은 방향을 가리킨다." in html
+
+
+def test_take_section_shows_evidence_links():
+    html = render_daily_page(TAKE_DATA)
+    assert 'href="http://a"' in html
+    assert "근거" in html
+
+
+def test_falls_back_to_list_without_take():
+    """CSS 주석에도 같은 낱말이 있어 섹션 제목으로 정확히 확인한다"""
+    html = render_daily_page(SAMPLE_DATA)
+    assert '<span class="section-title">오늘의 하이라이트</span>' in html
+    assert '<span class="section-title">오늘의 해석</span>' not in html
+    assert 'class="take"' not in html
+
+
+def test_take_replaces_highlight_list():
+    html = render_daily_page(TAKE_DATA)
+    assert '<span class="section-title">오늘의 해석</span>' in html
+    assert '<span class="section-title">오늘의 하이라이트</span>' not in html
+
+
+def test_important_item_gets_star():
+    from renderer import _item_html
+    html = _item_html("T", "http://x", "m", "요약", "", "", True)
+    assert "item-star" in html and "★" in html
+    assert 'class="item important"' in html
+
+
+def test_normal_item_has_no_star():
+    from renderer import _item_html
+    html = _item_html("T", "http://x", "m", "요약", "", "", False)
+    assert "item-star" not in html
+    assert 'class="item"' in html

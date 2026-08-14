@@ -58,6 +58,22 @@ _DAILY_CSS = """<style>
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent); margin-right: 0.35rem; font-size: 0.85rem; }
+  .item.important .item-name { color: var(--accent-deep); }
+
   /* ── 오디오 리뷰 ── */
   .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
     margin-top: 0.9rem; padding: 0.8rem 1rem; border: 1px solid var(--rule); background: var(--paper-deep); }
@@ -171,15 +187,17 @@ def _e(s: str) -> str:
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 def _item_html(name: str, url: str, meta: str, summary: str,
-               name_ko: str = "", svg: str = "") -> str:
+               name_ko: str = "", svg: str = "", important: bool = False) -> str:
     display_name = name_ko if name_ko and name_ko.strip() else name
+    star = '<span class="item-star" title="꼭 봐야 할 글">★</span>' if important else ""
     link_html = f'<a href="{url}" target="_blank" rel="noopener">{_e(display_name)}</a>'
     has_body = bool((summary or "").strip()) or bool((svg or "").strip())
+    cls = "item important" if important else "item"
 
     if not has_body:
-        return f"""<div class="item">
+        return f"""<div class="{cls}">
   <div class="item-head">
-    <div class="item-name">{link_html}</div>
+    <div class="item-name">{star}{link_html}</div>
     <div class="item-meta">{_e(meta)}</div>
   </div>
 </div>"""
@@ -192,10 +210,10 @@ def _item_html(name: str, url: str, meta: str, summary: str,
 
     # 제목을 <summary> 안에서 링크로 두면 클릭이 펼침과 충돌하므로,
     # 접힌 헤더에는 텍스트만 두고 펼친 본문 하단에 원문 링크를 둔다.
-    return f"""<div class="item">
+    return f"""<div class="{cls}">
   <details>
     <summary>
-      <span class="item-name">{_e(display_name)}</span>
+      <span class="item-name">{star}{_e(display_name)}</span>
       <span class="item-meta">{_e(meta)}</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
@@ -241,7 +259,27 @@ def render_daily_page(data: dict) -> str:
 
     sections = ""
 
-    if highlights:
+    audio = ""
+    if data.get("audio_url"):
+        audio = (f'<div class="audio-block">'
+                 f'<span class="audio-label">오디오 리뷰</span>'
+                 f'<a href="{data["audio_url"]}" target="_blank" rel="noopener">'
+                 f'Gemini Notebook에서 듣기 &rarr;</a></div>')
+
+    take = data.get("today_take") or {}
+    if take.get("headline"):
+        # 해석은 항목 나열이 아니라 오늘 글들을 관통하는 흐름 한 문장이다
+        refs = ""
+        if take.get("refs"):
+            links_html = " · ".join(
+                f'<a href="{r["url"]}" target="_blank" rel="noopener">{_e(r["text"])}</a>'
+                if r.get("url") else _e(r["text"]) for r in take["refs"])
+            refs = f'<div class="take-refs"><span>근거</span>{links_html}</div>'
+        body_html = f'<p class="take-body">{_e(take["body"])}</p>' if take.get("body") else ""
+        sections += _section_html("highlights", "★", "오늘의 해석",
+            f'<div class="take"><p class="take-headline">{_e(take["headline"])}</p>'
+            f'{body_html}{refs}</div>{audio}')
+    elif highlights:
         links = data.get("highlight_links") or []
         rows = ""
         for n, h in enumerate(highlights):
@@ -249,31 +287,25 @@ def render_daily_page(data: dict) -> str:
             body = (f'<a href="{url}" target="_blank" rel="noopener">{_e(h)}</a>'
                     if url else _e(h))
             rows += f'<li>{body}</li>'
-        audio = ""
-        if data.get("audio_url"):
-            audio = (f'<div class="audio-block">'
-                     f'<span class="audio-label">오디오 리뷰</span>'
-                     f'<a href="{data["audio_url"]}" target="_blank" rel="noopener">'
-                     f'Gemini Notebook에서 듣기 &rarr;</a></div>')
         sections += _section_html("highlights", "★", "오늘의 하이라이트",
             f'<ul class="highlight-list">{rows}</ul>{audio}')
 
     if company_blogs:
         sections += _section_html("tech-blog", "TECH", "기술 블로그", "".join(
             _item_html(i["title"], i["url"], i.get("source",""), i.get("summary",""),
-                       i.get("title_ko",""), i.get("svg",""))
+                       i.get("title_ko",""), i.get("svg",""), i.get("important", False))
             for i in company_blogs), len(company_blogs))
 
     if dev_blogs:
         sections += _section_html("dev-blogs", "DEV", "개발자 블로그 &amp; SNS", "".join(
             _item_html(i["title"], i["url"], i.get("source",""), i.get("summary",""),
-                       i.get("title_ko",""), i.get("svg",""))
+                       i.get("title_ko",""), i.get("svg",""), i.get("important", False))
             for i in dev_blogs), len(dev_blogs))
 
     if papers:
         sections += _section_html("papers", "PAPER", "AI / LLM 논문", "".join(
             _item_html(i["title"], i["url"], "arXiv", i.get("summary") or i.get("abstract",""),
-                       i.get("title_ko",""), i.get("svg",""))
+                       i.get("title_ko",""), i.get("svg",""), i.get("important", False))
             for i in papers), len(papers))
 
     if hn_reddit:
@@ -286,7 +318,9 @@ def render_daily_page(data: dict) -> str:
 
     if github:
         sections += _section_html("github", "코드", "GitHub 트렌딩", "".join(
-            _item_html(i["name"], i["url"], i.get("stars_today",""), i.get("summary") or i.get("description",""))
+            _item_html(i["name"], i["url"], i.get("stars_today",""),
+                       i.get("summary") or i.get("description",""), i.get("title_ko",""),
+                       "", i.get("important", False))
             for i in github), len(github))
 
     # 존재하는 섹션만 nav에 포함

@@ -12,7 +12,7 @@ from sources.rss import fetch_all_blogs
 from sources.arxiv import fetch_all_papers
 from sources.scraper import fetch_all_scraped
 from summarizer import (analyze_item, filter_important_papers, generate_highlights,
-                        generate_highlight_links)
+                        generate_highlight_links, generate_today_take, mark_important)
 from svgmaker import add_svgs
 from notebooklm import generate_audio_review
 from renderer import render_daily_page, render_weekly_page, render_index_page
@@ -131,11 +131,19 @@ def summarize(data: dict) -> dict:
         add_svgs(data["company_blogs"], MAX_SVG_ITEMS)
         add_svgs(data["dev_blogs"], MAX_SVG_ITEMS)
         add_svgs(data["papers"], MAX_SVG_ITEMS)
-    # 하이라이트는 원문 링크와 함께 뽑는다 (NotebookLM 에 넘길 링크의 출처).
-    # 링크 매핑이 실패하면 기존 방식으로 되돌아간다.
-    links = generate_highlight_links(data)
-    data["highlight_links"] = links
-    data["highlights"] = [l["text"] for l in links] or generate_highlights(data)
+    # 오늘 글들을 가로질러 읽은 해석 한 문장. 근거가 된 글은 목록에서 ★ 로 표시한다.
+    take = generate_today_take(data)
+    data["today_take"] = take
+    if take:
+        mark_important(data, take.get("refs", []))
+        data["highlight_links"] = take.get("refs", [])
+        data["highlights"] = [r["text"] for r in take.get("refs", [])]
+        print(f"  [해석] {take['headline'][:50]}")
+    else:
+        # 해석 생성이 실패하면 기존 하이라이트 목록으로 되돌아간다
+        links = generate_highlight_links(data)
+        data["highlight_links"] = links
+        data["highlights"] = [l["text"] for l in links] or generate_highlights(data)
     return data
 
 
@@ -277,7 +285,7 @@ def main():
     save_weekly_page(today, weekly_hl)
 
     git_commit_push(today_str)
-    send_slack(SLACK_WEBHOOK_URL, today_str, highlights)
+    send_slack(SLACK_WEBHOOK_URL, today_str, highlights, data.get("today_take"))
     print(f"[완료] {today_str}")
 
 

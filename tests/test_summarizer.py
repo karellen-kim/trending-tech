@@ -129,3 +129,61 @@ def test_highlight_candidates_prefer_korean_title():
                                "url": "http://a"}], "dev_blogs": [], "papers": [], "github": []}
     cands = summarizer._highlight_candidates(data)
     assert cands[0]["title"] == "한글제목"
+
+
+# ── 오늘의 해석 ──
+
+def test_today_take_parses_headline_body_refs():
+    data = {"company_blogs": [{"source": "A", "title": "글1", "url": "http://a"},
+                              {"source": "B", "title": "글2", "url": "http://b"},
+                              {"source": "C", "title": "글3", "url": "http://c"}],
+            "dev_blogs": [], "papers": [], "github": []}
+    payload = ('{"headline": "실행 계층으로 경쟁력이 이동한다",'
+               ' "body": "근거 설명이다.", "refs": [2, 3]}')
+    with patch("summarizer._run_claude", return_value=payload):
+        take = summarizer.generate_today_take(data)
+    assert take["headline"] == "실행 계층으로 경쟁력이 이동한다"
+    assert take["body"] == "근거 설명이다."
+    assert [r["url"] for r in take["refs"]] == ["http://b", "http://c"]
+
+
+def test_today_take_empty_when_no_headline():
+    data = {"company_blogs": [{"source": "A", "title": "글1", "url": "http://a"}],
+            "dev_blogs": [], "papers": [], "github": []}
+    with patch("summarizer._run_claude", return_value='{"headline": "", "refs": [1]}'):
+        assert summarizer.generate_today_take(data) == {}
+
+
+def test_today_take_empty_on_garbage():
+    data = {"company_blogs": [{"source": "A", "title": "글1", "url": "http://a"}],
+            "dev_blogs": [], "papers": [], "github": []}
+    with patch("summarizer._run_claude", return_value="그냥 문장"):
+        assert summarizer.generate_today_take(data) == {}
+
+
+def test_today_take_ignores_bad_refs():
+    data = {"company_blogs": [{"source": "A", "title": "글1", "url": "http://a"}],
+            "dev_blogs": [], "papers": [], "github": []}
+    payload = '{"headline": "H", "body": "B", "refs": [99, "x", 1, 1]}'
+    with patch("summarizer._run_claude", return_value=payload):
+        take = summarizer.generate_today_take(data)
+    assert [r["url"] for r in take["refs"]] == ["http://a"]
+
+
+def test_today_take_empty_when_no_items():
+    assert summarizer.generate_today_take({}) == {}
+
+
+def test_mark_important_flags_only_refs():
+    data = {"company_blogs": [{"url": "http://a"}, {"url": "http://b"}],
+            "dev_blogs": [{"url": "http://c"}], "papers": [], "github": []}
+    summarizer.mark_important(data, [{"url": "http://a"}, {"url": "http://c"}])
+    assert data["company_blogs"][0].get("important") is True
+    assert data["company_blogs"][1].get("important") is None
+    assert data["dev_blogs"][0].get("important") is True
+
+
+def test_mark_important_handles_empty_refs():
+    data = {"company_blogs": [{"url": "http://a"}], "dev_blogs": [], "papers": [], "github": []}
+    summarizer.mark_important(data, [])
+    assert data["company_blogs"][0].get("important") is None
