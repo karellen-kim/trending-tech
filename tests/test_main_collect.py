@@ -62,7 +62,7 @@ def test_audio_step_skipped_when_disabled(monkeypatch):
     monkeypatch.setattr(main, "ENABLE_NOTEBOOKLM", False)
     monkeypatch.setattr(main, "generate_audio_review", lambda *a, **kw: called.append(1))
     assert main.make_audio({"date": "2026-08-14",
-                            "highlight_links": [{"url": "http://a"}]}) is False
+                            "highlight_links": [{"url": "http://a"}]}) == ""
     assert called == []
 
 
@@ -70,19 +70,22 @@ def test_audio_step_passes_highlight_urls(monkeypatch):
     got = {}
     monkeypatch.setattr(main, "ENABLE_NOTEBOOKLM", True)
     monkeypatch.setattr(main, "generate_audio_review",
-                        lambda urls, title="": got.update(urls=urls, title=title) or True)
+                        lambda urls, title="", date_str="": got.update(
+                            urls=urls, title=title, date_str=date_str) or "http://nb/1")
     data = {"date": "2026-08-14",
+            "today_take": {"headline": "실행 계층으로 이동한다"},
             "highlight_links": [{"url": "http://a"}, {"url": "http://b"}, {"url": ""}]}
-    assert main.make_audio(data) is True
+    assert main.make_audio(data) == "http://nb/1"
     assert got["urls"] == ["http://a", "http://b"]
-    assert "2026-08-14" in got["title"]
+    assert got["title"] == "실행 계층으로 이동한다"
+    assert got["date_str"] == "26.08.14"
 
 
 def test_audio_skipped_without_links(monkeypatch):
     called = []
     monkeypatch.setattr(main, "ENABLE_NOTEBOOKLM", True)
     monkeypatch.setattr(main, "generate_audio_review", lambda *a, **kw: called.append(1))
-    assert main.make_audio({"date": "2026-08-14", "highlight_links": []}) is False
+    assert main.make_audio({"date": "2026-08-14", "highlight_links": []}) == ""
     assert called == []
 
 
@@ -91,4 +94,4 @@ def test_audio_failure_does_not_break_pipeline(monkeypatch):
     monkeypatch.setattr(main, "generate_audio_review",
                         lambda *a, **kw: (_ for _ in ()).throw(RuntimeError("boom")))
     assert main.make_audio({"date": "2026-08-14",
-                            "highlight_links": [{"url": "http://a"}]}) is False
+                            "highlight_links": [{"url": "http://a"}]}) == ""

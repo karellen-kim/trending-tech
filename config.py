@@ -12,9 +12,9 @@ AUDIO_DIR = DOCS_DIR / "audio"
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL", "")
 
 # Gemini Notebook(구 NotebookLM) 오디오 오버뷰. 준비 절차는 docs/notebooklm-setup.md 참고.
-# 기본은 꺼짐 — 노트북 주소와 로그인 세션이 준비돼야 동작한다.
+# 매일 새 노트북을 만들어 링크를 올리고 오디오를 생성시킨다.
+# 기본은 꺼짐 — 로그인 세션이 준비돼야 동작한다.
 ENABLE_NOTEBOOKLM = os.getenv("ENABLE_NOTEBOOKLM", "0") == "1"
-NOTEBOOKLM_NOTEBOOK_URL = os.getenv("NOTEBOOKLM_NOTEBOOK_URL", "")
 NOTEBOOKLM_PROFILE_DIR = Path(os.getenv("NOTEBOOKLM_PROFILE_DIR",
                                         str(Path.home() / ".gemini-notebook-profile")))
 NOTEBOOKLM_FORMAT = os.getenv("NOTEBOOKLM_FORMAT", "deep_dive")   # deep_dive|summary|criticism|debate

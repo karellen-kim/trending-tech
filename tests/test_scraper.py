@@ -1,5 +1,11 @@
+from datetime import datetime
 from unittest.mock import patch
 from sources import scraper
+
+
+def _today_label():
+    """고정 날짜를 쓰면 _is_recent 범위 밖으로 밀려나 시간이 지나면 깨진다"""
+    return datetime.now(scraper.KST).strftime('%B %d, %Y')
 
 
 def test_alibaba_only_opens_top_n_articles():
@@ -14,7 +20,7 @@ def test_alibaba_only_opens_top_n_articles():
         g.return_value.status_code = 200
         g.return_value.raise_for_status = lambda: None
         with patch("sources.scraper._fetch_article_date",
-                   side_effect=lambda u: opened.append(u) or "August 14, 2026"), \
+                   side_effect=lambda u: opened.append(u) or _today_label()), \
              patch("sources.scraper._fetch_article_text", return_value="본문" * 200):
             items = scraper.fetch_alibaba(max_items=3)
     assert len(opened) == 3

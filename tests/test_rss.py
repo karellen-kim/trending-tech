@@ -108,13 +108,15 @@ def test_entry_without_date_passes_through_for_llm():
 
 
 def test_pub_hint_carries_parsed_date():
+    """고정 날짜를 쓰면 수집 범위(COLLECT_DAYS) 밖으로 밀려나 시간이 지나면 깨진다"""
     from sources import rss
-    d = "Thu, 13 Aug 2026 01:00:00 +0900"
+    now = datetime.now(KST).replace(hour=1, minute=0, second=0, microsecond=0)
+    d = now.strftime("%a, %d %b %Y %H:%M:%S +0900")
     with patch("sources.rss.requests.get", return_value=_mock_resp([d])):
         items = rss.fetch_rss_entries("s", "http://f")
     hint = items[0]["pub_hint"]
-    assert "2026-08-13" in hint, hint
-    assert "13 Aug 2026" in hint, hint
+    assert now.strftime("%Y-%m-%d") in hint, hint
+    assert now.strftime("%d %b %Y") in hint, hint
 
 
 def test_enrich_fetches_body_only_for_short_summaries(monkeypatch):

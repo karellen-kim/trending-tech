@@ -33,16 +33,7 @@ notebooklm.google.com  →  notebook.google.com   (도메인 변경)
 .venv/bin/python -m playwright install chromium
 ```
 
-### 2. 노트북 만들고 주소 확보
-
-[notebook.google.com](https://notebook.google.com/) 에서 노트북을 하나 만들고 주소창 URL 을 복사한다.
-매일 같은 노트북에 소스를 추가하는 방식이다.
-
-```
-https://notebook.google.com/notebook/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-```
-
-### 3. 로그인 (사람이 직접)
+### 2. 로그인 (사람이 직접)
 
 ```bash
 .venv/bin/python -m notebooklm login
@@ -51,12 +42,13 @@ https://notebook.google.com/notebook/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 Chrome 창이 열린다. Google 로그인을 마치고 터미널에서 Enter 를 누르면
 세션이 `~/.gemini-notebook-profile` 에 저장된다. 이후로는 자동으로 이 세션을 쓴다.
 
-### 4. `.env` 설정
+### 3. `.env` 설정
 
 ```
 ENABLE_NOTEBOOKLM=1
-NOTEBOOKLM_NOTEBOOK_URL=https://notebook.google.com/notebook/<노트북 ID>
 ```
+
+노트북은 **매일 새로 만든다.** 제목은 `[Daily] YY.MM.DD 그날의 해석` 으로 붙는다.
 
 선택 설정:
 
@@ -68,7 +60,7 @@ NOTEBOOKLM_NOTEBOOK_URL=https://notebook.google.com/notebook/<노트북 ID>
 | `NOTEBOOKLM_HEADLESS` | `1` | `0` 이면 창을 띄운다 (문제 진단용) |
 | `NOTEBOOKLM_TIMEOUT` | `120` | 페이지 로드 대기(초) |
 
-### 5. 실행
+### 4. 실행
 
 ```bash
 .venv/bin/python main.py
@@ -79,17 +71,22 @@ NOTEBOOKLM_NOTEBOOK_URL=https://notebook.google.com/notebook/<노트북 ID>
 실제 화면에서 확인한 흐름이다.
 
 ```
-하이라이트 5건 선정 (번호|요약 형식으로 받아 원문 URL 매핑)
-  → 노트북 URL 열기
-  → "출처 추가" 클릭
-  → "웹사이트" 클릭
+오늘의 해석 생성 (headline + 근거 5건)
+  → 노트북 새로 만들기
+  → "웹사이트" 클릭 (빈 노트북은 소스 다이얼로그가 이미 열려 있다)
   → URL 5건을 줄바꿈으로 구분해 한 번에 입력       ← 화면이 이 방식을 안내한다
   → "삽입" 클릭
   → 소스 크롤링 대기
   → "AI 오디오 오버뷰" 클릭
   → 형식 선택 + 집중할 내용 프롬프트 입력
   → "생성" 클릭 → "AI 오디오 오버뷰 생성 중..." 확인
+  → 노트북 제목을 "[Daily] YY.MM.DD 해석" 으로 설정 (마지막에 해야 한다)
+  → 노트북 주소를 돌려주면 일별 페이지에 링크로 건다
 ```
+
+**제목을 마지막에 설정하는 이유**: 소스를 넣으면 Gemini 가 내용을 보고 제목을 자동 생성해
+덮어쓴다. 실측으로 `[Daily] 26.08.17 ...` 가 `Cloudflare and AWS AgentCore Monitoring ...` 로
+바뀌는 것을 확인했다. 그래서 모든 작업이 끝난 뒤 설정하고, 값을 읽어 반영 여부를 확인한다.
 
 ## 알아둘 것
 
@@ -100,8 +97,8 @@ NOTEBOOKLM_NOTEBOOK_URL=https://notebook.google.com/notebook/<노트북 ID>
   (`docs/superpowers/plans/2026-08-03-fix-launchd-claude-auth.md`)이 있다. 같은 성격의 위험이다.
 - **일부 링크는 소스 추가에 실패한다.** 확인 중 `toss.tech` 는 빨간색으로 표시되며 소스로 잡히지 않았다.
   크롤링을 막는 사이트가 있다. 이때도 나머지 링크로 오디오는 생성된다.
-- **노트북은 하나를 재사용한다.** 소스가 계속 누적되므로 주기적으로 정리하거나
-  날짜별로 노트북을 나누는 편이 낫다.
+- **노트북은 매일 새로 만든다.** 한 노트북에 계속 쌓으면 소스가 무한히 늘어나기 때문이다.
+  대신 노트북 목록이 날마다 늘어나므로 주기적으로 정리하는 편이 낫다.
 - **UI 셀렉터에 의존한다.** Gemini Notebook UI 가 바뀌면 `notebooklm.py` 의 `_L` 딕셔너리를
   고쳐야 한다. 한국어·영어 라벨을 모두 넣어두었다.
 - 브라우저 자동화는 Google 서비스 약관에 저촉될 소지가 있다. 개인 용도 범위에서 판단해 쓸 것.

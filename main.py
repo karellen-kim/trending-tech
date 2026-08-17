@@ -6,7 +6,7 @@ from datetime import date, timedelta, datetime
 
 from config import (DOCS_DIR, SLACK_WEBHOOK_URL, MAX_PAPER_ITEMS, SUMMARY_WORKERS,
                     MAX_COMPANY_TOTAL, MAX_DEV_TOTAL, ENABLE_SVG, MAX_SVG_ITEMS,
-                    ENABLE_NOTEBOOKLM, NOTEBOOKLM_NOTEBOOK_URL)
+                    ENABLE_NOTEBOOKLM)
 from sources.github import fetch_trending
 from sources.rss import fetch_all_blogs
 from sources.arxiv import fetch_all_papers
@@ -147,21 +147,25 @@ def summarize(data: dict) -> dict:
     return data
 
 
-def make_audio(data: dict) -> bool:
-    """하이라이트 링크를 Gemini Notebook 에 올리고 오디오 오버뷰 생성을 시킨다.
-    파일은 내려받지 않는다 — 재생은 노트북에서 한다. 실패해도 배치는 계속된다."""
+def make_audio(data: dict) -> str:
+    """하이라이트 링크로 새 노트북을 만들고 오디오 오버뷰 생성을 시킨다.
+    성공하면 노트북 주소를 돌려준다. 파일은 내려받지 않는다 — 재생은 노트북에서 한다.
+    실패해도 배치는 계속된다."""
     if not ENABLE_NOTEBOOKLM:
-        return False
+        return ""
     urls = [l.get("url") for l in data.get("highlight_links", []) if l.get("url")]
     if not urls:
         print("[Notebook] 하이라이트 링크가 없어 건너뜀")
-        return False
+        return ""
     try:
         print(f"[Notebook] 링크 {len(urls)}건으로 오디오 오버뷰 요청")
-        return generate_audio_review(urls, title=f"{data['date']} 기술 트렌드")
+        # 노트북 제목은 "[Daily] YY.MM.DD 오늘의 해석" 으로 붙는다
+        headline = (data.get("today_take") or {}).get("headline", "")
+        yymmdd = date.fromisoformat(data["date"]).strftime("%y.%m.%d")
+        return generate_audio_review(urls, title=headline, date_str=yymmdd)
     except Exception as e:
         print(f"[Notebook] 실패: {type(e).__name__}: {str(e)[:150]}")
-        return False
+        return ""
 
 
 def save_html(data: dict) -> list[str]:
@@ -271,9 +275,10 @@ def main():
     data = collect(today_str)
     data = summarize(data)
 
-    # 오디오는 노트북에서 재생하므로, 성공하면 페이지에 노트북 링크만 건다
-    if make_audio(data):
-        data["audio_url"] = NOTEBOOKLM_NOTEBOOK_URL
+    # 오디오는 노트북에서 재생하므로, 성공하면 그 노트북 링크를 페이지에 건다
+    notebook_url = make_audio(data)
+    if notebook_url:
+        data["audio_url"] = notebook_url
     highlights = save_html(data)
 
     # 주간 페이지 갱신 (매일)
