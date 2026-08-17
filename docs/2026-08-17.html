@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-08-17 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent); margin-right: 0.35rem; font-size: 0.85rem; }
+  .item.important .item-name { color: var(--accent-deep); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin-top: 0.9rem; padding: 0.8rem 1rem; border: 1px solid var(--rule); background: var(--paper-deep); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--accent-deep); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { padding: 1rem 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; line-height: 1.4; color: var(--ink); min-width: 0; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint);
+    letter-spacing: 0.04em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
+  .item-body { padding: 0 0 1.2rem; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
+  .item-diagram .diagram { margin: 0; padding: 1rem 1rem 0.7rem; background: var(--paper-deep);
+    border: 1px solid var(--rule); color: var(--ink); }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; margin: 0 auto; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule);
+    font-size: 0.72rem; color: var(--ink-faint); text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--accent-deep); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-08-17</div>
+<h1><em>17</em> Aug 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">소형 LLM + 에이전트 기술 = 구체적 자동화 도구의 실전 배포 가속화</p><p class="take-body">Qwen 27B 같은 효율적인 소형 모델이 에이전트 구조에서 작동할 수 있고(2번), Agentao의 로컬 우선 런타임(4번), Second Thought의 병렬 추론(5번), HELIX의 자기개선(6번) 기술들이 정립되면서, Nautilus Trader 같은 구체적 자동화 도구가 GitHub에서 실제로 배포되기 시작했다. 에이전트가 학술 개념을 넘어 수익성 있는 실무 도구로 변환되는 전환점을 보여준다.</p><div class="take-refs"><span>근거</span><a href="https://simonwillison.net/2026/Aug/16/qwen-38-27b/" target="_blank" rel="noopener">Qwen 3.8 27B는 우수하지만 기본적으로 과도하게 생각하는 경향이 있다</a> · <a href="https://arxiv.org/abs/2608.13574" target="_blank" rel="noopener">Agentao: 도구 사용 LLM 에이전트를 위한 관리된 로컬 우선 런타임</a> · <a href="https://arxiv.org/abs/2608.13667" target="_blank" rel="noopener">Second Thought: LLM 에이전트의 행동 중 병렬 추론</a> · <a href="https://arxiv.org/abs/2608.13951" target="_blank" rel="noopener">HELIX: 재귀적 자기 개선을 위한 모델-하네스 공진화</a> · <a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" rel="noopener">MoneyPrinterTurbo</a></div></div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Markdown SVG 업그레이드</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 724 135" style="width:724px;max-width:100%" role="img" aria-label="마크다운과 SVG를 함께 공유하는 도구로의 진화" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="362" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">SVG 렌더러 발전</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Markdown</text><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">트랜스크립트</text><text x="104" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">입력 형식</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">markdown-svg</text><text x="362" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">-renderer</text><text x="362" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">5월 개발 시작</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">SVG 문서</text><text x="620" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">출력 형식</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">변환</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">생성</text></svg><figcaption>마크다운과 SVG를 함께 공유하는 도구로의 진화</figcaption></figure></div><div class="item-summary">markdown-svg-renderer 도구의 개발 진행 상황과 기능 개선에 관한 글<br>- 5월부터 markdown-svg-renderer 도구 개발을 시작<br>- 그 이후 충분한 기능이 추가되어 다시 소개할 필요성 대두<br>- Markdown 트랜스크립트와 SVG 문서를 함께 공유하기 위한 이상적인 도구로 발전</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Aug/16/markdown-svg-upgrades/" target="_blank" rel="noopener">Markdown SVG 업그레이드</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Qwen 3.8 27B는 우수하지만 기본적으로 과도하게 생각하는 경향이 있다</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 118" style="width:982px;max-width:100%" role="img" aria-label="우수한 성능과 과도한 추론이 공존하는 모델" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Qwen 3.8 27B의 두 얼굴</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Qwen 3.8 27B</text><text x="104" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">27B 파라미터</text><rect x="274" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">추론 수행</text><text x="362" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">기본 설정</text><rect x="532" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">우수한 결과</text><rect x="790" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">과도한 사고</text><text x="878" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">overthinking</text><line x1="192" y1="77" x2="271" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">실행</text><line x1="450" y1="77" x2="529" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">제공</text><line x1="450" y1="77" x2="787" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="609" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="620" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">유발</text></svg><figcaption>우수한 성능과 과도한 추론이 공존하는 모델</figcaption></figure></div><div class="item-summary">Alibaba의 Qwen 연구실이 공개한 Apache 2 라이선스의 27B 파라미터 비전 LLM에 대한 글.<br>- Qwen 3.8 27B는 27B 크기로 중상 사양 노트북에서 실행 가능<br>- 선행 모델인 Qwen 3.6 27B가 인상적이었음<br>- (제목의 핵심인 '과도한 사고' 문제에 대한 상세 내용은 제공된 글에 없음)</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Aug/16/qwen-38-27b/" target="_blank" rel="noopener">Qwen 3.8 27B는 우수하지만 기본적으로 과도하게 생각하는 경향이 있다</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/16/dario-amodei/" target="_blank" rel="noopener">다리오 아모데이 인용</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Agentao: 도구 사용 LLM 에이전트를 위한 관리된 로컬 우선 런타임</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 452 314" style="width:452px;max-width:100%" role="img" aria-label="LLM 에이전트의 보안을 위한 분리된 계층 구조" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="226" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Agentao 런타임 아키텍처</text><rect x="96" y="50" width="260" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">LLM 모델</text><rect x="96" y="121" width="260" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="144" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Action Proposals</text><rect x="96" y="192" width="260" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="215" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Host Authorization</text><rect x="96" y="263" width="260" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="286" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Tool Execution</text><line x1="226" y1="87" x2="226" y2="118" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="206" y="96" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="228" y="107" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">제안 생성</text><line x1="226" y1="158" x2="226" y2="189" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="206" y="167" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="228" y="178" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">검증 요청</text><line x1="226" y1="229" x2="226" y2="260" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="217" y="238" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="228" y="249" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">승인</text></svg><figcaption>LLM 에이전트의 보안을 위한 분리된 계층 구조</figcaption></figure></div><div class="item-summary">도구를 사용하는 LLM 에이전트의 보안 위험을 해결하기 위한 런타임 설계<br>- LLM 에이전트는 도구 실행, 로컬 상태 수정, persistent memory 사용, 외부 프로토콜 상호작용을 수행<br>- over-privileged actions, weak auditability, prompt injection, tool poisoning, uncontrolled side effects 등의 위험 발생<br>- 모델 생성 action proposals와 host-authorized execution을 분리하는 layered architecture로 위험 완화</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.13574" target="_blank" rel="noopener">Agentao: 도구 사용 LLM 에이전트를 위한 관리된 로컬 우선 런타임</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Second Thought: LLM 에이전트의 행동 중 병렬 추론</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 514 266" style="width:514px;max-width:100%" role="img" aria-label="idle window 문제를 병렬 추론으로 해결" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="257" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">ReAct vs Second Thought</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">ReAct</text><rect x="28" y="76" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Thought</text><text x="116" y="116" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Phase</text><text x="116" y="133" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">추론 수행</text><line x1="116" y1="147" x2="116" y2="178" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="181" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="212" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Response 대기</text><text x="116" y="230" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">idle window…</text><text x="398" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">Second Thought</text><rect x="310" y="76" width="176" height="71" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Thought</text><text x="398" y="116" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Phase</text><text x="398" y="133" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">추론 수행</text><line x1="398" y1="147" x2="398" y2="178" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="310" y="181" width="176" height="71" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="204" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Auxiliary</text><text x="398" y="221" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Branches</text><text x="398" y="238" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">4개 병렬 실행</text><line x1="257" y1="50" x2="257" y2="258" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>idle window 문제를 병렬 추론으로 해결</figcaption></figure></div><div class="item-summary">ReAct 패러다임의 LLM 에이전트 추론 효율 개선 프레임워크.<br>- ReAct 패러다임에서 에이전트가 action을 실행하고 environment의 응답을 기다리는 동안 추론이 정지되는 'reasoning idle window' 문제 식별<br>- 이 idle window를 활용하기 위해 Second Thought라는 training-free inference 프레임워크 제안<br>- 각 Thought phase마다 4개의 auxiliary branches를 병렬로 포크하여 미래 턴을 위한 추가 추론 수행</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.13667" target="_blank" rel="noopener">Second Thought: LLM 에이전트의 행동 중 병렬 추론</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>HELIX: 재귀적 자기 개선을 위한 모델-하네스 공진화</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 135" style="width:982px;max-width:100%" role="img" aria-label="모델과 런타임 하네스의 반복적 개선 루프" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">HELIX: 모델-하네스 공진화</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Agent Model</text><text x="104" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">초기 고정 모델</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Runtime</text><text x="362" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Harness</text><text x="362" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">context, 도구…</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Sibling</text><text x="620" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Trajectories</text><text x="620" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">검증 및 평가용</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Model Update</text><text x="878" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">개선된 모델</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="208" y="70" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">하네스 구축</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="470" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">궤적 생성</text><line x1="708" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="720" y="70" width="57" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">궤적에서 학습</text><path d="M 878 121 L 878 86 L 104 86 L 104 47" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">적용</text></svg><figcaption>모델과 런타임 하네스의 반복적 개선 루프</figcaption></figure></div><div class="item-summary">대화형 에이전트의 능력 향상을 위해 모델과 런타임 하네스의 공진화를 제안<br>- 런타임 하네스(context, tools, control flow, stopping 중재)가 모델의 능력과 학습 경로를 형성<br>- 고정 모델을 위한 하네스 구축 → 검증된 sibling trajectories에서 모델 업데이트 → 모델 능력 변화에 따라 하네스 재구축하는 반복 루프<br>- 루프 실현을 위한 controlled way 필요 (Abstract 미완성)</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.13951" target="_blank" rel="noopener">HELIX: 재귀적 자기 개선을 위한 모델-하네스 공진화</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">자율 칩 설계에서의 에이전트 오케스트레이션</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 223" style="width:982px;max-width:100%" role="img" aria-label="LLM·도구·오케스트레이션으로 칩 설계 초지능 창출" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">칩설계 에이전트 오케스트레이션</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">LLM</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Tool-Using</text><text x="362" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Agents</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Agent</text><text x="620" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Orchestrati…</text><text x="620" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">AI-Organiza…</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Chip Design</text><rect x="16" y="155" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="178" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Superintelli</text><text x="104" y="195" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">gence</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">지원</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">구성</text><line x1="708" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="738" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">조정</text><path d="M 878 121 L 878 138 L 104 138 L 104 152" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="122" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="133" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">달성</text></svg><figcaption>LLM·도구·오케스트레이션으로 칩 설계 초지능 창출</figcaption></figure></div><div class="item-summary">칩 설계에 LLM 기반 에이전트를 적용하는 방법에 관한 논문.<br>- LLM과 tool-using agents의 최근 발전이 칩 설계에서 에이전트 활용을 가능하게 함<br>- 칩 설계 같은 정교한 산업에서 필요한 AI의 종류가 핵심 질문<br>- 칩 디자인 superintelligence를 거대한 AI-organization으로 모델링하는 아이디어 제안</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.14035" target="_blank" rel="noopener">자율 칩 설계에서의 에이전트 오케스트레이션</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">ScienceFlow: ML 연구 및 과학 발견을 위한 장기 에이전트</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 135" style="width:982px;max-width:100%" role="img" aria-label="장기 연구를 위한 에이전트의 세 가지 메커니즘 부족" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Autoresearch agent limitations</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Long-horizon</text><text x="104" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">research</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Autoresearch</text><text x="362" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">agents</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Mechanism</text><text x="620" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">gaps</text><text x="620" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">연속성·회복·자원할당</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Performance</text><text x="878" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">degradation</text><text x="878" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">효율·자원·신뢰도</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="201" y="70" width="64" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">attempt…</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="431" y="70" width="120" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">lack continuity…</text><line x1="708" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="724" y="70" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">cause…</text></svg><figcaption>장기 연구를 위한 에이전트의 세 가지 메커니즘 부족</figcaption></figure></div><div class="item-summary">장기 목표를 달성하는 LLM 에이전트의 자동 연구 수행에 관한 논문<br>- 에이전트가 확장된 기간에 걸쳐 생산적이고 안정적인 목표 지향 연구를 유지하는 것이 자율 머신러닝의 핵심 과제<br>- 기존 autoresearch 에이전트들은 연속성 메커니즘, 막힌 상황 회복, 가치 기반 계산 리소스 할당이 부족함<br>- 이러한 한계로 인해 검색 효율 저하, 계산 리소스 낭비, 신뢰도 감소 초래</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.14354" target="_blank" rel="noopener">ScienceFlow: ML 연구 및 과학 발견을 위한 장기 에이전트</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>MoneyPrinterTurbo</span>
+      <span class="item-meta">105,486</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 대모델과 자동화 워크플로우를 이용한 짧은 동영상 생성 도구.<br>- AI 대모델 기반 처리<br>- 자동화된 워크플로우<br>- 주제/키워드로부터 한 번에 고화질 짧은 동영상 생성</div>
+      <div class="item-link"><a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" rel="noopener">MoneyPrinterTurbo</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">strix - 오픈소스 AI 펜트레이션 테스팅 도구</span>
+      <span class="item-meta">53,771</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">앱의 보안 취약점을 탐지하고 수정하기 위한 도구에 관한 글입니다.<br>- 오픈소스 프로젝트<br>- AI 기반 펜트레이션 테스팅 도구<br>- 취약점 탐지 및 수정 기능</div>
+      <div class="item-link"><a href="https://github.com/usestrix/strix" target="_blank" rel="noopener">strix - 오픈소스 AI 펜트레이션 테스팅 도구</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Nautilus Trader</span>
+      <span class="item-meta">25,727</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Rust 기반의 프로덕션 등급 거래 엔진<br>- Rust 네이티브로 개발됨<br>- 결정론적 아키텍처 구현<br>- 이벤트 기반 설계 적용</div>
+      <div class="item-link"><a href="https://github.com/nautechsystems/nautilus_trader" target="_blank" rel="noopener">Nautilus Trader</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Anthropic 사이버보안 스킬</span>
+      <span class="item-meta">28,154</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 에이전트를 위한 817개의 구조화된 사이버보안 스킬 모음<br>- MITRE ATT&amp;CK, NIST CSF 2.0, MITRE ATLAS, D3FEND, NIST AI RMF, MITRE F3 등 6개 보안 프레임워크에 매핑<br>- Claude Code, GitHub Copilot, Codex CLI, Cursor, Gemini CLI 등 20+개 플랫폼 지원<br>- 29개 보안 도메인으로 구성되며 Apache 2.0 라이선스</div>
+      <div class="item-link"><a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills" target="_blank" rel="noopener">Anthropic 사이버보안 스킬</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">llmfit: 당신의 하드웨어에 맞는 모델 찾기</span>
+      <span class="item-meta">32,073</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">당신의 하드웨어에 맞는 LLM 모델을 찾는 도구<br>- 수백 개의 모델과 제공자 지원<br>- 한 명령어로 호환성 확인</div>
+      <div class="item-link"><a href="https://github.com/AlexsJones/llmfit" target="_blank" rel="noopener">llmfit: 당신의 하드웨어에 맞는 모델 찾기</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div>
+</body>
+</html>
