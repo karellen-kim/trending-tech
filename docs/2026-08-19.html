@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-08-19 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent); margin-right: 0.35rem; font-size: 0.85rem; }
+  .item.important .item-name { color: var(--accent-deep); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin-top: 0.9rem; padding: 0.8rem 1rem; border: 1px solid var(--rule); background: var(--paper-deep); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--accent-deep); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { padding: 1rem 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; line-height: 1.4; color: var(--ink); min-width: 0; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint);
+    letter-spacing: 0.04em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
+  .item-body { padding: 0 0 1.2rem; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
+  .item-diagram .diagram { margin: 0; padding: 1rem 1rem 0.7rem; background: var(--paper-deep);
+    border: 1px solid var(--rule); color: var(--ink); }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; margin: 0 auto; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule);
+    font-size: 0.72rem; color: var(--ink-faint); text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--accent-deep); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-08-19</div>
+<h1><em>19</em> Aug 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 하이라이트</span>
+    
+  </div>
+  <ul class="highlight-list"><li><a href="https://arxiv.org/abs/2608.16381" target="_blank" rel="noopener">장기 작업 에이전트 실행을 위한 통합 모델 및 런타임</a></li><li><a href="https://arxiv.org/abs/2608.15303" target="_blank" rel="noopener">구조화된 해결책 합성으로 테스트 타임 컴퓨팅 확장</a></li><li><a href="https://github.blog/ai-and-ml/github-copilot/how-canvases-make-agentic-workflows-visible-steerable-and-cost-efficient/" target="_blank" rel="noopener">에이전트 워크플로우를 가시화·제어·비용 효율화</a></li><li><a href="https://arxiv.org/abs/2608.14590" target="_blank" rel="noopener">LLM 에이전트의 안전성을 명세·검증·강제하는 체계</a></li><li><a href="https://machinelearning.apple.com/research/grpo-beyond-english" target="_blank" rel="noopener">비영어/다국어 환경에서 대규모 GRPO 연구</a></li></ul><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/1a86a3d7-ecdb-4392-b01c-0bb2ac2c54c8" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">13개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Amazon SageMaker JumpStart에서 NVIDIA Nemotron 3.5 Lightning 지원</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 135" style="width:982px;max-width:100%" role="img" aria-label="SageMaker JumpStart에서 4배 빠른 처리" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Nemotron 3.5 Lightning 출시</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">에이전트 작업</text><text x="104" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">사용자 요청</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">SageMaker</text><text x="362" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">JumpStart</text><text x="362" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">AWS 플랫폼</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Nemotron 3.5</text><text x="620" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Lightning</text><text x="620" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">30B MoE, 3B…</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">처리 완료</text><text x="878" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">4배 처리량, 30%…</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">제출</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">배포</text><line x1="708" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="728" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">고속 처리</text></svg><figcaption>SageMaker JumpStart에서 4배 빠른 처리</figcaption></figure></div><div class="item-summary">NVIDIA Nemotron 3.5 Lightning이 Amazon SageMaker JumpStart에서 이용 가능하게 됨.<br>- 30B Mixture-of-Experts 모델 (3B active)<br>- 최대 4배 높은 처리량<br>- 항상 작동하는 에이전트의 작업 완료 시간을 최대 30% 단축</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/nvidia-nemotron-3-5-lightning-now-available-in-amazon-sagemaker-jumpstart/" target="_blank" rel="noopener">Amazon SageMaker JumpStart에서 NVIDIA Nemotron 3.5 Lightning 지원</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Amazon Bedrock AgentCore 결제와 연동하는 OpenClaw 에이전트 구축</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 206" style="width:982px;max-width:100%" role="img" aria-label="에이전트가 API 이용료를 테스트넷에서 자동으로 결제하는 흐름" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Agent 자동 결제 시스템</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">OpenClaw</text><text x="104" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Agent</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Bedrock</text><text x="362" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AgentCore</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">x402</text><text x="620" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Protocol</text><text x="620" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">aws-agents-…</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Human</text><text x="878" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Approval</text><rect x="16" y="155" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="178" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Testnet</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">배포</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">활용</text><line x1="708" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="728" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">승인 요청</text><path d="M 878 121 L 878 138 L 104 138 L 104 152" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="122" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="133" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">승인</text></svg><figcaption>에이전트가 API 이용료를 테스트넷에서 자동으로 결제하는 흐름</figcaption></figure></div><div class="item-summary">자율 에이전트가 지갑을 통해 유료 API, MCP 서버, 웹 콘텐츠에 대한 비용을 지불하는 시스템 구축에 관한 글<br>- OpenClaw를 Amazon Bedrock AgentCore 결제 및 x402 프로토콜과 연동<br>- aws-agents-pay 플러그인으로 테스트넷 결제 구현<br>- 인간이 승인하는 제한된 결제를 통한 에이전트 지출 제어</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/build-openclaw-agents-that-transact-with-amazon-bedrock-agentcore-payments/" target="_blank" rel="noopener">Amazon Bedrock AgentCore 결제와 연동하는 OpenClaw 에이전트 구축</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://machinelearning.apple.com/research/grpo-beyond-english" target="_blank" rel="noopener">영어 너머의 GRPO: 비영어 및 다국어 환경에서의 대규모 GRPO 연구</a></div>
+    <div class="item-meta">Apple ML Research</div>
+  </div>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">일관성이 새로운 지연성이다: 데이터 레이어에서의 AI</span>
+      <span class="item-meta">AWS Architecture Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 514 232" style="width:514px;max-width:100%" role="img" aria-label="에이전트는 일관성을, 챗봇은 응답 속도를 우선한다" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="257" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">일관성의 우선순위 전환</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">기존 (응답 속도 중심)</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">챗봇</text><text x="116" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">응답 속도 중심</text><line x1="116" y1="130" x2="116" y2="161" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="164" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="187" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">DynamoDB</text><text x="116" y="204" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">최종 일관성</text><text x="398" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">현재 (일관성 중심)</text><rect x="310" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AI 에이전트</text><text x="398" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">행동 신뢰성 필수</text><line x1="398" y1="130" x2="398" y2="161" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="310" y="164" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="187" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Aurora</text><text x="398" y="204" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">강한 일관성</text><line x1="257" y1="50" x2="257" y2="224" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>에이전트는 일관성을, 챗봇은 응답 속도를 우선한다</figcaption></figure></div><div class="item-summary">AI 에이전트의 신뢰성과 데이터 레이어 일관성의 관계에 관한 글.<br>- AI 에이전트가 챗봇에서 실제 행동을 수행하는 단계로 이동하면서 데이터 레이어 일관성의 중요성이 증대됨<br>- 복제 지연(replication lag)이 에이전트의 컨텍스트를 손상시키는 방식을 설명<br>- Amazon Aurora, Amazon DynamoDB, Amazon Keyspaces의 복제 모델을 각 작업의 일관성 요구사항에 맞춰 적용하는 방법 제시</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/architecture/consistency-is-the-new-latency-ai-at-the-data-layer/" target="_blank" rel="noopener">일관성이 새로운 지연성이다: 데이터 레이어에서의 AI</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Confluent Cloud와 WarpStream의 신기능: AI, 확장성, 제어를 위한 데이터 스트리밍 플랫폼 진화</span>
+      <span class="item-meta">Confluent Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 223" style="width:982px;max-width:100%" role="img" aria-label="데이터 소스부터 AI 분석까지 통합 스트리밍 플랫폼" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Confluent의 AI 스트리밍 진화</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Data Sources</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Connectors</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Confluent</text><text x="620" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Cloud</text><text x="620" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">Kora, Flink</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AI Anomaly</text><text x="878" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Detection</text><text x="878" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">이상 탐지</text><rect x="16" y="155" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="178" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Data</text><text x="104" y="195" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Consumers</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">매핑</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="473" y="70" width="36" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">스트리밍</text><line x1="708" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="738" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">분석</text><path d="M 878 121 L 878 138 L 104 138 L 104 152" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="122" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="133" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">제공</text></svg><figcaption>데이터 소스부터 AI 분석까지 통합 스트리밍 플랫폼</figcaption></figure></div><div class="item-summary">Confluent Cloud와 WarpStream의 새로운 제품 업데이트를 통해 엔터프라이즈 스트리밍 및 AI 워크로드를 가속화하는 글.<br>- Kora, connectors, Flink, Tableflow의 신기능 업데이트<br>- AI 이상 탐지 및 예측 기능<br>- 보안 강화 및 WarpStream 업데이트</div>
+      <div class="item-link"><a href="https://www.confluent.io/blog/2026-q3-confluent-cloud-launch/" target="_blank" rel="noopener">Confluent Cloud와 WarpStream의 신기능: AI, 확장성, 제어를 위한 데이터 스트리밍 플랫폼 진화</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Confluent Intelligence 및 AI 도구의 새로운 기능: 스트림 기반 에이전트, 확장된 모델 지원, 새로운 에이전트 스킬, Copilot</span>
+      <span class="item-meta">Confluent Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 223" style="width:982px;max-width:100%" role="img" aria-label="실시간 스트림이 에이전트와 AI 모델을 거쳐 코파일럿으로 전달" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Confluent AI 데이터 처리 흐름</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Real-Time</text><text x="104" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Stream</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Native</text><text x="362" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Agents</text><text x="362" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">스트림 통합</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AI Models</text><text x="620" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">Granite,…</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Agent Skills</text><text x="878" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">신규 기능</text><rect x="16" y="155" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="178" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Confluent</text><text x="104" y="195" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Copilot</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">처리</text><path d="M 620 121 L 620 86 L 362 86 L 362 47" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">강화</text><path d="M 878 121 L 878 86 L 362 86 L 362 47" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="609" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="620" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">확장</text><path d="M 362 121 L 362 138 L 104 138 L 104 152" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="122" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="133" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">전달</text></svg><figcaption>실시간 스트림이 에이전트와 AI 모델을 거쳐 코파일럿으로 전달</figcaption></figure></div><div class="item-summary">Confluent Intelligence와 AI 도구의 신규 기능 소개<br>- IBM Granite Time Series 모델과 TimesFM 모델 지원 (EA)<br>- Real-Time Context Engine 환경 개선<br>- 새로운 에이전트 스킬 및 Confluent Copilot</div>
+      <div class="item-link"><a href="https://www.confluent.io/blog/2026-q3-confluent-intelligence-ai-update/" target="_blank" rel="noopener">Confluent Intelligence 및 AI 도구의 새로운 기능: 스트림 기반 에이전트, 확장된 모델 지원, 새로운 에이전트 스킬, Copilot</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Confluent Cloud for Apache Flink: 미션 크리티컬 실시간 운영 시스템을 위한 엔진이자 데이터 사이언스와 AI를 위한 dbt/SQL 플랫폼</span>
+      <span class="item-meta">Confluent Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 452 365" style="width:452px;max-width:100%" role="img" aria-label="Apache Flink 엔진 기반 SQL-native 플랫폼의 계층 구조" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="226" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Confluent Flink 다층 플랫폼</text><rect x="96" y="50" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Apache Flink</text><text x="226" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">Mission-Critical</text><rect x="96" y="138" width="260" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="161" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">SQL-native 플랫폼</text><rect x="96" y="209" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="232" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Table API/UDFs/PTFs</text><text x="226" y="249" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">개발자용</text><rect x="96" y="297" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="320" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">dbt 통합</text><text x="226" y="337" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">데이터/AI용</text><line x1="226" y1="104" x2="226" y2="135" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="217" y="113" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="228" y="124" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">기반</text><line x1="226" y1="175" x2="226" y2="206" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="217" y="184" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="228" y="195" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">제공</text><line x1="226" y1="175" x2="226" y2="294" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="217" y="228" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="228" y="239" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">제공</text></svg><figcaption>Apache Flink 엔진 기반 SQL-native 플랫폼의 계층 구조</figcaption></figure></div><div class="item-summary">Confluent Cloud for Apache Flink의 개발자 및 데이터 사이언스 팀을 위한 플랫폼 기능<br>- Table API, UDFs, PTFs를 통해 개발자를 위한 강력한 엔진 제공<br>- SQL-native 플랫폼 기반<br>- dbt 통합으로 데이터 사이언스 및 AI 팀 지원</div>
+      <div class="item-link"><a href="https://www.confluent.io/blog/flink-mission-critical-operations-data-engg/" target="_blank" rel="noopener">Confluent Cloud for Apache Flink: 미션 크리티컬 실시간 운영 시스템을 위한 엔진이자 데이터 사이언스와 AI를 위한 dbt/SQL 플랫폼</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.databricks.com/blog/evaluating-ai-agents-live-grounded-reasoning-cup" target="_blank" rel="noopener">Grounded Reasoning Cup에서의 AI 에이전트 실시간 평가</a></div>
+    <div class="item-meta">Databricks Blog</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.databricks.com/blog/how-databricks-feature-store-serves-features-sub-second-freshness" target="_blank" rel="noopener">Databricks Feature Store가 서브초 이하의 신선도로 피처를 제공하는 방법</a></div>
+    <div class="item-meta">Databricks Blog</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.databricks.com/blog/prototyping-tax-killing-your-ai-roadmap" target="_blank" rel="noopener">프로토타이핑 비용이 AI 로드맵을 망치고 있다</a></div>
+    <div class="item-meta">Databricks Blog</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.blog/ai-and-ml/github-copilot/how-canvases-make-agentic-workflows-visible-steerable-and-cost-efficient/" target="_blank" rel="noopener">캔버스가 에이전트 워크플로우를 가시화·제어·비용 효율화하는 방법</a></div>
+    <div class="item-meta">GitHub Blog</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://techblog.lycorp.co.jp/ko/ai-agent-platform-sage-dev-log-part-1" target="_blank" rel="noopener">보안 업무를 위한 AI 에이전트 플랫폼 SAGE 개발기 1편: 판단은 사람에게 남기는 설계</a></div>
+    <div class="item-meta">LY Corp Tech</div>
+  </div>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">토스는 어떻게 광고 속에 게임을 넣었을까</span>
+      <span class="item-meta">Toss Tech</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">토스의 게임 광고 SDK 개발에 관한 글<br>- MRAID 기반 플레이어블 광고 SDK를 직접 개발<br>- 게임 광고를 받기 위한 기술 구현</div>
+      <div class="item-link"><a href="https://toss.tech/article/games-in-ads" target="_blank" rel="noopener">토스는 어떻게 광고 속에 게임을 넣었을까</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">2개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Qwen 3.8 27B가 Artificial Analysis Intelligence Index에서 52점 기록</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 514 249" style="width:514px;max-width:100%" role="img" aria-label="Qwen 27B가 52점으로 최상위 모델과 동일 성능" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="257" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">AI 모델 성능 비교</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">52점</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Qwen 3.8 27B</text><text x="116" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">52점</text><line x1="116" y1="130" x2="116" y2="161" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="164" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="196" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">GPT-5.6 Luna</text><text x="116" y="212" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">52점</text><text x="398" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">53점</text><rect x="310" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">GLM-5.2</text><text x="398" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">53점 753B</text><line x1="398" y1="130" x2="398" y2="161" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="310" y="164" width="176" height="71" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="187" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">DeepSeek V4</text><text x="398" y="204" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Pro</text><text x="398" y="221" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">53점 1.7T</text><line x1="257" y1="50" x2="257" y2="241" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>Qwen 27B가 52점으로 최상위 모델과 동일 성능</figcaption></figure></div><div class="item-summary">AI 모델 성능 벤치마크 비교<br>- Qwen 3.8 27B가 Artificial Analysis Intelligence Index에서 52점 달성<br>- GPT-5.6 Luna (max)와 동일한 점수<br>- GLM-5.2 (753B 파라미터)와 DeepSeek V4 Pro 0813 (1.7T 파라미터)보다 1점 낮음</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Aug/17/qwen-38-27b-scores-52/" target="_blank" rel="noopener">Qwen 3.8 27B가 Artificial Analysis Intelligence Index에서 52점 기록</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/17/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-tra/" target="_blank" rel="noopener">희귀 도서 배송을 추적했더니 Amazon AI 훈련 시설에서 끝났다</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">할루시네이션 눈덩이: Multi-Agent LLM 파이프라인의 오류 전파를 상태 전이로 모델링하기</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Sequential multi-agent LLM 파이프라인에서 핸드오프 시 검증 부재로 인한 구조적 결함과 할루시네이션 전파 연구.<br>- Stage 1에서 주입된 할루시네이션이 Raw Fact → Derived Computations → Narrative Prose → Editorially Approved Conclusions로 변환되며 전파<br>- 각 변환 단계마다 탐지 가능성이 감소<br>- 할루시네이션 눈덩이 효과를 first-order Markov process의 4개 상태로 형식화</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.14588" target="_blank" rel="noopener">할루시네이션 눈덩이: Multi-Agent LLM 파이프라인의 오류 전파를 상태 전이로 모델링하기</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">안전한 LLM 에이전트: 명세화, 검증, 강제의 체계적 검토</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">LLM 에이전트의 안전성 보장 방안에 관한 체계적 검토<br>- LLM 에이전트가 데이터베이스 업데이트, API 호출, 파일 작업, 도구 자동 사용 등 돌이킬 수 없는 현실 작업을 수행한다<br>- 기존 시스템은 이들이 생성하는 계획에 대한 형식적으로 근거가 있는 작업 수준의 안전성 보장을 제공하지 않는다<br>- PRISMA 2020 방법론으로 2022~2026년 사이 발표된 38개 연구를 검토했다</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.14590" target="_blank" rel="noopener">안전한 LLM 에이전트: 명세화, 검증, 강제의 체계적 검토</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">개인맞춤형 자동 연구: 진정한 AI 공동 과학자를 향하여</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 514 232" style="width:514px;max-width:100%" role="img" aria-label="범용 AI에서 연구자 특성을 반영한 개인화 AI로의 전환" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="257" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">AI 공동과학자의 개인화</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">현재 최첨단 시스템</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">범용 최적화</text><text x="116" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">모든 연구자 동일</text><line x1="116" y1="130" x2="116" y2="161" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="164" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="187" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">고정 지표</text><text x="116" y="204" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">혁신성·타당성·평점</text><text x="398" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">개인화된 시스템</text><rect x="310" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">개인화 최적화</text><text x="398" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">개별 특성 반영</text><line x1="398" y1="130" x2="398" y2="161" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="310" y="164" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="187" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">맞춤 기준</text><text x="398" y="204" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">배경·경험 기반</text><line x1="257" y1="50" x2="257" y2="224" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>범용 AI에서 연구자 특성을 반영한 개인화 AI로의 전환</figcaption></figure></div><div class="item-summary">AI가 자동으로 가설 생성, 문헌 검색, 실험 설계, 코드 실행, 논문 작성을 수행하는 시스템의 발전과 개선 방향을 논의하는 논문.<br>- 현재 최첨단 AI 시스템은 개별 연구자의 특성을 무시하고 혁신성, 타당성, 리뷰어 평점만 최적화함<br>- 무엇이 새롭고 가치 있으며 실현 가능한지는 개별 과학자의 배경과 경험에 따라 다름<br>- 개별 연구자를 고려한 개인화된 AI 공동 과학자 개발의 필요성을 제시</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.14881" target="_blank" rel="noopener">개인맞춤형 자동 연구: 진정한 AI 공동 과학자를 향하여</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">발산-수렴 추론: 구조화된 해결책 합성을 통한 테스트 타임 컴퓨팅 확장</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">LLM의 추론 성능 향상을 위한 테스트 타임 컴퓨팅 기법 DCR 연구<br>- DCR은 탐색 단계(다중 후보 솔루션 생성)와 수렴 단계(조화)의 2단계 구조<br>- 단일 조화 단계만으로도 올바른 소수 의견을 확실히 증폭 가능<br>- 데이터셋 전반에서 정답 회복 달성</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.15303" target="_blank" rel="noopener">발산-수렴 추론: 구조화된 해결책 합성을 통한 테스트 타임 컴퓨팅 확장</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">AstronOS: 장기 작업 에이전트 시스템을 위한 통합 실행 모델 및 런타임</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 189" style="width:982px;max-width:100%" role="img" aria-label="버전화된 작업 상태를 검증·기록 후 업데이트하는 루프" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">AstronOS 상태 관리</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">작업 항목</text><text x="104" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">지속적 정체성</text><rect x="274" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">상태 버전</text><text x="362" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">권위 있는 상태</text><rect x="532" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">단계 실행</text><text x="620" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">상태 + 신규 자료</text><rect x="790" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">검증 &amp; 기록</text><rect x="16" y="138" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="161" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">상태 업데이트</text><line x1="192" y1="77" x2="271" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">보유</text><line x1="450" y1="77" x2="529" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="473" y="61" width="36" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">입력한다</text><line x1="708" y1="77" x2="787" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="738" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">전달</text><path d="M 878 104 L 878 121 L 104 121 L 104 135" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="105" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="116" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">검증</text><path d="M 104 175 L 104 112 L 362 112 L 362 47" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="96" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="108" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">갱신</text></svg><figcaption>버전화된 작업 상태를 검증·기록 후 업데이트하는 루프</figcaption></figure></div><div class="item-summary">장기 실행되는 에이전트 시스템에서 작업 상태를 관리하는 실행 모델에 관한 논문<br>- 작업 항목의 지속적 정체성과 버전화된 권위 있는 상태를 모든 호출과 단계에 걸쳐 유지<br>- 각 단계는 특정 상태 버전에 대한 입력과 신규 자료를 받으며, 검증·기록 후에만 상태 변경 수행<br>- Cases, Tasks, Scenario Packs을 사용하여 AstronOS에서 구현</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.16381" target="_blank" rel="noopener">AstronOS: 장기 작업 에이전트 시스템을 위한 통합 실행 모델 및 런타임</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">MoneyPrinterTurbo - 통합 AI 단편 영상 생성 도구</span>
+      <span class="item-meta">107,902</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">주제나 키워드 입력만으로 AI가 자동으로 단편 영상을 생성하는 도구<br>- 비디오 스크립트, 소재 매칭, 자막, 배경음악을 자동 생성하고 고화질 영상으로 합성<br>- Python 3.11+을 기반으로 Windows, macOS, Linux에서 실행 가능<br>- WebUI와 API 인터페이스 제공</div>
+      <div class="item-link"><a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" rel="noopener">MoneyPrinterTurbo - 통합 AI 단편 영상 생성 도구</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Munder Difflin — 당신의 클론 팀을 운영하는 에이전트 하네스</span>
+      <span class="item-meta">1,769</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">여러 AI 모델을 조율하는 다중 에이전트 플랫폼입니다.<br>- Claude Code, Gemini, OpenAI Codex, xAI Grok, Kimi Code, Qwen, OpenCode, Crush, pi.dev, GitHub Copilot CLI 등 10개 이상의 AI 도구 지원<br>- 에이전트 메시징·라우팅·메모리 기능으로 조율되는 중앙 에이전트(Michael)가 분산 작업 수행<br>- Electron·React·TypeScript·Pixi.js·xterm.js·node-pty 스택, 버전 0.4.4, MIT 라이선스 오픈소스</div>
+      <div class="item-link"><a href="https://github.com/chaitanyagiri/munder-difflin" target="_blank" rel="noopener">Munder Difflin — 당신의 클론 팀을 운영하는 에이전트 하네스</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">AI-Memory: 코딩 에이전트의 장기 메모리</span>
+      <span class="item-meta">2,543</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 코딩 에이전트의 장기 메모리 시스템.<br>- 에이전트 간 전환 시(예: Claude Code → OpenAI Codex) 아키텍처·시도한 접근·미해결 질문 유지<br>- 지원 플랫폼: Linux(amd64/arm64), macOS(aarch64/x86_64), Windows WSL2, Windows 네이티브(실험적)<br>- 배포: Docker 이미지, Arch/AUR 패키지, 네이티브 바이너리</div>
+      <div class="item-link"><a href="https://github.com/akitaonrails/ai-memory" target="_blank" rel="noopener">AI-Memory: 코딩 에이전트의 장기 메모리</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">OpenViking: AI 에이전트를 위한 컨텍스트 데이터베이스</span>
+      <span class="item-meta">29,132</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.</div>
+      <div class="item-link"><a href="https://github.com/volcengine/OpenViking" target="_blank" rel="noopener">OpenViking: AI 에이전트를 위한 컨텍스트 데이터베이스</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Anthropic 사이버보안 스킬</span>
+      <span class="item-meta">28,901</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 에이전트용 오픈소스 사이버보안 스킬 라이브러리입니다.<br>- 817개의 스킬을 제공하며 6개 프레임워크 지원<br>- 29개 보안 도메인과 26+ 플랫폼 호환<br>- MITRE F3 v1.1 표준 기반</div>
+      <div class="item-link"><a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills" target="_blank" rel="noopener">Anthropic 사이버보안 스킬</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div>
+</body>
+</html>
