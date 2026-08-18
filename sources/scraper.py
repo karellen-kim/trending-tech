@@ -52,6 +52,10 @@ def _fetch_article_text(url: str, max_chars: int = 2000) -> str:
     try:
         resp = requests.get(url, headers=_HEADERS, timeout=10)
         resp.raise_for_status()
+        # 서버가 Content-Type 에 charset 을 안 주면 requests 는 ISO-8859-1 로 가정한다.
+        # 그대로 두면 한글이 mojibake 로 깨진다 (LY Corp 실측).
+        if resp.encoding is None or resp.encoding.lower() in ("iso-8859-1", "ascii"):
+            resp.encoding = resp.apparent_encoding or "utf-8"
         soup = BeautifulSoup(resp.text, "html.parser")
         for tag in soup(["script", "style", "nav", "footer", "header"]):
             tag.decompose()

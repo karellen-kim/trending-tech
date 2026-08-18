@@ -75,3 +75,45 @@ def test_every_scraper_source_has_an_implementation():
     import config
     for s in config.SCRAPER_SOURCES:
         assert s["name"] in scraper._SCRAPERS, f"{s['name']} 은 파서가 없어 조용히 스킵된다"
+
+
+# ── 본문 인코딩 (LY Corp 실측: 한글이 mojibake 로 깨졌다) ──
+
+class _FakeResp:
+    """requests.Response 처럼 encoding 을 바꾸면 text 가 다시 디코딩되는 가짜 응답"""
+    def __init__(self, raw: bytes, encoding: str, apparent: str):
+        self.content = raw
+        self.encoding = encoding
+        self.apparent_encoding = apparent
+
+    @property
+    def text(self):
+        return self.content.decode(self.encoding, errors="replace")
+
+    def raise_for_status(self):
+        pass
+
+
+def test_fetch_article_text_fixes_broken_encoding():
+    """서버가 charset 을 안 주면 requests 는 ISO-8859-1 로 가정해 한글이 깨진다 (LY Corp 실측)"""
+    from unittest.mock import patch
+    from sources import scraper
+    raw = ("<html><body><article>" + "안녕하세요 사내 보안 업무에 AI를 접목합니다. " * 8 +
+           "</article></body></html>").encode("utf-8")
+    resp = _FakeResp(raw, "ISO-8859-1", "utf-8")
+    with patch("sources.scraper.requests.get", return_value=resp):
+        out = scraper._fetch_article_text("http://x")
+    assert "안녕하세요" in out, out[:60]
+    assert "ì" not in out, "mojibake 가 남아 있다"
+
+
+def test_fetch_article_text_keeps_declared_encoding():
+    """서버가 charset 을 제대로 주면 건드리지 않는다"""
+    from unittest.mock import patch
+    from sources import scraper
+    raw = "<html><body><article>정상 문서 내용</article></body></html>".encode("utf-8")
+    resp = _FakeResp(raw, "utf-8", "euc-kr")
+    with patch("sources.scraper.requests.get", return_value=resp):
+        out = scraper._fetch_article_text("http://x")
+    assert resp.encoding == "utf-8"
+    assert "정상 문서 내용" in out

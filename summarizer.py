@@ -153,6 +153,8 @@ HIGHLIGHT_PROMPT = """오늘의 개발/기술 트렌드 항목들을 보고, 가
 
 {items_text}"""
 
+TAKE_TIMEOUT = 240   # 항목 20건을 한 번에 다루므로 넉넉히
+
 TODAY_TAKE_PROMPT = """아래는 오늘 수집된 기술 글 목록이야.
 개별 글을 요약하지 말고, 이 글들을 가로질러 읽었을 때 드러나는 흐름 하나를 짚어줘.
 
@@ -203,10 +205,18 @@ def generate_today_take(data: dict) -> dict:
     if not cands:
         return {}
     items_text = "\n".join(f"{n + 1}. [{c['source']}] {c['title']}" for n, c in enumerate(cands))
-    parsed = _parse_json(_run_claude(TODAY_TAKE_PROMPT.format(items_text=items_text), timeout=120))
-    if not isinstance(parsed, dict):
-        return {}
-    headline = str(parsed.get("headline") or "").strip()
+    prompt = TODAY_TAKE_PROMPT.format(items_text=items_text)
+
+    # 항목 20건을 한 번에 처리하므로 개별 글 요약보다 오래 걸린다.
+    # 실패하면 페이지에서 해석과 별표가 통째로 빠지므로 한 번 재시도한다.
+    parsed, headline = None, ""
+    for attempt in range(2):
+        parsed = _parse_json(_run_claude(prompt, timeout=TAKE_TIMEOUT))
+        headline = str((parsed or {}).get("headline") or "").strip() if isinstance(parsed, dict) else ""
+        if headline:
+            break
+        if attempt == 0:
+            print("[해석] 생성 실패, 재시도")
     if not headline:
         return {}
 

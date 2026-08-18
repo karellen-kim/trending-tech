@@ -187,3 +187,34 @@ def test_mark_important_handles_empty_refs():
     data = {"company_blogs": [{"url": "http://a"}], "dev_blogs": [], "papers": [], "github": []}
     summarizer.mark_important(data, [])
     assert data["company_blogs"][0].get("important") is None
+
+
+# ── 해석 생성 타임아웃 (8/19 배치에서 120초 초과로 해석·별표가 통째로 빠졌다) ──
+
+def test_today_take_retries_on_empty_response():
+    data = {"company_blogs": [{"source": "A", "title": "글1", "url": "http://a"},
+                              {"source": "B", "title": "글2", "url": "http://b"}],
+            "dev_blogs": [], "papers": [], "github": []}
+    calls = []
+
+    def fake(prompt, timeout=None):
+        calls.append(timeout)
+        if len(calls) == 1:
+            return ""      # 첫 호출 타임아웃
+        return '{"headline": "H", "body": "B", "refs": [1]}'
+
+    with patch("summarizer._run_claude", side_effect=fake):
+        take = summarizer.generate_today_take(data)
+    assert take["headline"] == "H"
+    assert len(calls) == 2, "한 번은 재시도해야 한다"
+
+
+def test_today_take_timeout_is_generous():
+    """항목 20건을 한 번에 처리하므로 개별 글 요약보다 넉넉해야 한다"""
+    data = {"company_blogs": [{"source": "A", "title": "글1", "url": "http://a"}],
+            "dev_blogs": [], "papers": [], "github": []}
+    seen = []
+    with patch("summarizer._run_claude",
+               side_effect=lambda p, timeout=None: seen.append(timeout) or '{"headline":"H","refs":[1]}'):
+        summarizer.generate_today_take(data)
+    assert seen[0] >= 180, f"타임아웃이 {seen[0]}초로 너무 짧다"

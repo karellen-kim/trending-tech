@@ -95,3 +95,28 @@ def test_audio_failure_does_not_break_pipeline(monkeypatch):
                         lambda *a, **kw: (_ for _ in ()).throw(RuntimeError("boom")))
     assert main.make_audio({"date": "2026-08-14",
                             "highlight_links": [{"url": "http://a"}]}) == ""
+
+
+# ── 본문이 짧은 RSS 요약에 가려지는 문제 (Databricks·Toss 실측) ──
+
+def test_analyze_picks_longest_content(monkeypatch):
+    """RSS summary 가 86자여도 truthy 라 or 연산에서 본문 1999자를 가려버렸다"""
+    got = {}
+    monkeypatch.setattr(main, "analyze_item",
+                        lambda t, c, p, d, date_verified=False: got.update(content=c) or {
+                            "is_today": True, "pub_date": "x", "title_ko": "한글", "summary": "요약"})
+    items = [{"title": "t", "summary": "짧은 티저 " * 5, "content": "진짜 본문 " * 200,
+              "pub_hint": "x", "date_verified": True}]
+    main._analyze_items(items, "summary")
+    assert "진짜 본문" in got["content"], "더 긴 쪽을 써야 한다"
+
+
+def test_analyze_keeps_summary_when_no_content(monkeypatch):
+    got = {}
+    monkeypatch.setattr(main, "analyze_item",
+                        lambda t, c, p, d, date_verified=False: got.update(content=c) or {
+                            "is_today": True, "pub_date": "x", "title_ko": "한글", "summary": "요약"})
+    items = [{"title": "t", "summary": "본문이 여기 다 있다 " * 30,
+              "pub_hint": "x", "date_verified": True}]
+    main._analyze_items(items, "summary")
+    assert "본문이 여기 다 있다" in got["content"]

@@ -27,8 +27,11 @@ def _analyze_items(items: list[dict], content_key: str, filter_today: bool = Tru
     today = str(date.today())
 
     def one(item):
-        content = (item.get(content_key) or item.get("content") or
-                   item.get("description") or item.get("abstract") or "")
+        # 짧은 RSS 요약이 truthy 라는 이유로 받아온 본문을 가리던 문제가 있었다
+        # (Databricks 86자 요약이 1999자 본문을 덮었다). 가장 긴 것을 쓴다.
+        cands = [item.get(content_key), item.get("content"),
+                 item.get("description"), item.get("abstract")]
+        content = max((c for c in cands if c), key=len, default="")
         title = item.get("title") or item.get("name", "")
         # 날짜를 거르지 않는 섹션(논문·GitHub)은 판정이 무의미하다.
         # 판정 프롬프트를 태우면 is_today=false 로 답하면서 요약·번역까지 빈 값이 되어
