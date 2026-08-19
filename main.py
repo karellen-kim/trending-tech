@@ -222,7 +222,7 @@ def _week_label(week_id: str) -> str:
     y, w = week_id.split("-W")
     start = datetime.strptime(f"{y}-W{w}-1", "%G-W%V-%u").date()
     end = datetime.strptime(f"{y}-W{w}-7", "%G-W%V-%u").date()
-    return f"{y}년 {start.month}월 {int(w)}주 ({start.month}/{start.day} – {end.month}/{end.day})"
+    return f"{y}년 {start.month}월 {start.day}일 ~ {end.month}월 {end.day}일"
 
 def save_weekly_page(today: date, weekly_highlights: list[str] | None = None) -> None:
     wid = _week_id(today)

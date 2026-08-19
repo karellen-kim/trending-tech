@@ -399,7 +399,7 @@ def render_weekly_page(week_data: dict) -> str:
     """
     week_data: {
       "week_id": "2026-W22",
-      "week_label": "2026년 5월 4주 (5/25 – 5/31)",
+      "week_label": "2026년 5월 25일 ~ 5월 31일",
       "highlights": [...],          # 일요일에만 채워짐
       "days": [{"date":"2026-05-27", "label":"화요일", "url":"2026-05-27.html"}, ...]
     }
