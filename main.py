@@ -12,7 +12,10 @@ from sources.rss import fetch_all_blogs
 from sources.arxiv import fetch_all_papers
 from sources.scraper import fetch_all_scraped
 from summarizer import (analyze_item, filter_important_papers, generate_highlights,
-                        generate_highlight_links, generate_today_take, mark_important)
+                        generate_highlight_links, generate_today_take, mark_important,
+                        generate_week_take, generate_month_take)
+import digest
+from renderer import render_monthly_page
 from svgmaker import add_svgs
 from notebooklm import generate_audio_review
 from renderer import render_daily_page, render_weekly_page, render_index_page
@@ -189,6 +192,11 @@ def save_html(data: dict) -> list[str]:
             "github_names": [i["name"] for i in data["github"]],
             "seen_urls": [i["url"] for k in ("company_blogs", "dev_blogs")
                           for i in data.get(k, []) if i.get("url")],
+            # 주간·월간 해석이 이 필드들을 모아 쓴다
+            "today_take": {k: v for k, v in (data.get("today_take") or {}).items()
+                           if k in ("headline", "body")},
+            "important_links": [{"text": l.get("text", ""), "url": l.get("url", "")}
+                                for l in (data.get("highlight_links") or []) if l.get("url")],
         }, ensure_ascii=False),
         encoding="utf-8"
     )
@@ -241,21 +249,72 @@ def save_weekly_page(today: date, weekly_highlights: list[str] | None = None) ->
         except Exception:
             pass
 
+    days = sorted(days, key=lambda x: x["date"])
     wdata.update({
         "week_id": wid,
         "week_label": _week_label(wid),
-        "days": sorted(days, key=lambda x: x["date"]),
+        "days": days,
     })
     if weekly_highlights is not None:
         wdata["highlights"] = weekly_highlights
+
+    # 그 주의 일별 해석을 모아 주간 해석을 만든다 (매일 갱신)
+    day_takes = digest.load_week(days)
+    if day_takes:
+        take = generate_week_take(day_takes)
+        if take:
+            wdata["week_take"] = take
+            print(f"  [주간 해석] {take['headline'][:50]}")
 
     wjf.write_text(json.dumps(wdata, ensure_ascii=False), encoding="utf-8")
     (DOCS_DIR / f"{wid}.html").write_text(render_weekly_page(wdata), encoding="utf-8")
     print(f"[HTML] docs/{wid}.html 업데이트")
 
-def git_commit_push(date_str: str) -> None:
+def save_monthly_page(today: date) -> str:
+    """그 달의 주간 해석들을 모아 월간 페이지를 만든다. 만든 파일명을 돌려준다."""
+    mid = digest.month_id(today.year, today.month)
+    weeks = digest.load_month(today.year, today.month)
+    if not weeks:
+        return ""
+
+    mdata = {}
+    mjf = DOCS_DIR / f"{mid}.json"
+    if mjf.exists():
+        try:
+            mdata = json.loads(mjf.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+
+    week_links = []
+    for w in weeks:
+        wid = w.get("date", "")
+        wjf = DOCS_DIR / f"{wid}.json"
+        label = wid
+        if wjf.exists():
+            try:
+                label = json.loads(wjf.read_text(encoding="utf-8")).get("week_label", wid)
+            except Exception:
+                pass
+        week_links.append({"label": label, "range": wid, "url": f"{wid}.html"})
+
+    mdata.update({"month_id": mid, "month_label": digest.month_label(mid),
+                  "weeks": week_links})
+
+    take = generate_month_take(weeks)
+    if take:
+        mdata["month_take"] = take
+        print(f"  [월간 해석] {take['headline'][:50]}")
+
+    mjf.write_text(json.dumps(mdata, ensure_ascii=False), encoding="utf-8")
+    (DOCS_DIR / f"{mid}.html").write_text(render_monthly_page(mdata), encoding="utf-8")
+    print(f"[HTML] docs/{mid}.html 업데이트")
+    return mid
+
+
+def git_commit_push(date_str: str, month_id: str = "") -> None:
     wid = _week_id(date.fromisoformat(date_str))
-    subprocess.run(["git", "add",
+    extra = [f"docs/{month_id}.html", f"docs/{month_id}.json"] if month_id else []
+    subprocess.run(["git", "add", *extra,
         f"docs/{date_str}.html", f"docs/{date_str}.json",
         f"docs/{wid}.html", f"docs/{wid}.json",
         "docs/index.html"], check=True)
@@ -291,8 +350,9 @@ def main():
         print("[주간 하이라이트] 생성 중...")
         weekly_hl = generate_highlights(data)  # 당일 데이터 기반, 필요시 주간 집계로 확장
     save_weekly_page(today, weekly_hl)
+    mid = save_monthly_page(today)
 
-    git_commit_push(today_str)
+    git_commit_push(today_str, mid)
     send_slack(SLACK_WEBHOOK_URL, today_str, highlights, data.get("today_take"))
     print(f"[완료] {today_str}")
 

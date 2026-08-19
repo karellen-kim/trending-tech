@@ -138,3 +138,40 @@ def test_normal_item_has_no_star():
     html = _item_html("T", "http://x", "m", "요약", "", "", False)
     assert "item-star" not in html
     assert 'class="item"' in html
+
+
+# ── 주간 페이지의 해석 섹션 ──
+
+WEEK_DATA = {
+    "week_id": "2026-W34", "week_label": "2026년 34주차 (8/17 – 8/23)",
+    "days": [{"date": "2026-08-17", "label": "월요일", "url": "2026-08-17.html"}],
+    "week_take": {
+        "headline": "에이전트가 실행 계층으로 내려왔다",
+        "body": "여러 날의 글이 같은 방향을 가리킨다.",
+        "picks": [{"text": "핵심 문서", "url": "http://a", "why": "판을 바꾼 발표"}],
+    },
+}
+
+
+def test_weekly_page_shows_take():
+    from renderer import render_weekly_page
+    html = render_weekly_page(WEEK_DATA)
+    assert "이 주의 해석" in html
+    assert "에이전트가 실행 계층으로 내려왔다" in html
+    assert "여러 날의 글이 같은 방향을 가리킨다." in html
+
+
+def test_weekly_page_shows_picks_with_links():
+    from renderer import render_weekly_page
+    html = render_weekly_page(WEEK_DATA)
+    assert 'href="http://a"' in html
+    assert "핵심 문서" in html
+    assert "판을 바꾼 발표" in html
+
+
+def test_weekly_page_without_take_still_renders():
+    from renderer import render_weekly_page
+    data = {k: v for k, v in WEEK_DATA.items() if k != "week_take"}
+    html = render_weekly_page(data)
+    assert html.startswith("<!DOCTYPE html>")
+    assert "2026-08-17.html" in html

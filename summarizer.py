@@ -175,6 +175,26 @@ JSON만 출력해. 마크다운 펜스나 설명 없이.
 - 오늘 글들이 서로 무관하면 억지로 엮지 말고 가장 굵은 줄기 하나만 짚어.
 """
 
+PERIOD_TAKE_PROMPT = """아래는 {period_desc} 동안의 {unit}별 해석과 그때 꼽힌 문서들이야.
+
+{items_text}
+
+{unit}별 해석을 나열하지 말고, {period_desc} 전체를 관통하는 흐름 하나를 짚어줘.
+그리고 위 문서 중 {period_desc}을 통틀어 가장 중요한 것 {pick_n}건을 골라줘.
+
+JSON만 출력해. 마크다운 펜스나 설명 없이.
+{{"headline": "", "body": "", "picks": [{{"text": "", "url": "", "why": ""}}]}}
+
+규칙:
+- headline: 한 문장(90자 이내). {period_desc} 사이에 무엇이 어디로 움직였는지 구체적으로.
+  "AI가 발전했다" 같은 하나마나 한 문장은 실패다.
+  {unit}별 해석을 이어 붙인 요약도 실패다. 그것들을 관통하는 한 줄이어야 한다.
+- body: 왜 그렇게 보는지 2~4문장. 어느 {unit}의 어떤 내용이 근거인지 짚어줘.
+- picks: 위 목록에 실제로 있는 문서만 고른다. text 와 url 은 목록에 있는 것을 그대로 옮겨 쓴다.
+  why 는 왜 중요한지 한 줄(40자 이내).
+- 목록에 없는 문서나 URL 을 지어내면 실패다.
+"""
+
 HIGHLIGHT_LINK_PROMPT = """오늘의 개발/기술 트렌드 항목 목록이야.
 가장 중요하고 임팩트 있는 것 5개를 골라줘.
 
@@ -306,3 +326,66 @@ def filter_important_papers(papers: list[dict], max_items: int = 5) -> list[dict
         return [papers[i] for i in indices if 0 <= i < len(papers)]
     except Exception:
         return papers[:max_items]
+
+
+def _period_take(entries: list[dict], period_desc: str, unit: str, pick_n: int = 4) -> dict:
+    """기간 해석과 대표 문서를 만든다. 주간·월간이 같은 로직을 쓴다.
+    반환: {"headline", "body", "picks": [{"text","url","why"}]}"""
+    entries = [e for e in entries if e.get("headline")]
+    if not entries:
+        return {}
+
+    lines, allowed = [], {}
+    for e in entries:
+        lines.append(f"[{e.get('date','')}] {e['headline']}")
+        for l in e.get("links", []):
+            url = l.get("url", "")
+            if not url:
+                continue
+            allowed[url] = l.get("text", "")
+            lines.append(f"    - {l.get('text','')} :: {url}")
+    if not allowed:
+        return {}
+
+    prompt = PERIOD_TAKE_PROMPT.format(
+        period_desc=period_desc, unit=unit, pick_n=pick_n,
+        items_text="\n".join(lines))
+    parsed, headline = None, ""
+    for attempt in range(2):
+        parsed = _parse_json(_run_claude(prompt, timeout=TAKE_TIMEOUT))
+        headline = str((parsed or {}).get("headline") or "").strip() if isinstance(parsed, dict) else ""
+        if headline:
+            break
+        if attempt == 0:
+            print(f"[{unit} 해석] 생성 실패, 재시도")
+    if not headline:
+        return {}
+
+    picks, seen = [], set()
+    for p in (parsed.get("picks") or []):
+        if not isinstance(p, dict):
+            continue
+        url = str(p.get("url") or "").strip()
+        # 목록에 없는 URL 을 지어내는 경우가 있어 걸러낸다
+        if url not in allowed or url in seen:
+            continue
+        seen.add(url)
+        picks.append({"text": str(p.get("text") or allowed[url]),
+                      "url": url,
+                      "why": str(p.get("why") or "")})
+        if len(picks) >= pick_n:
+            break
+
+    return {"headline": headline,
+            "body": str(parsed.get("body") or "").strip(),
+            "picks": picks}
+
+
+def generate_week_take(days: list[dict], pick_n: int = 4) -> dict:
+    """일별 해석들을 모아 이 주의 해석과 대표 문서를 만든다."""
+    return _period_take(days, "이번 주", "일", pick_n)
+
+
+def generate_month_take(weeks: list[dict], pick_n: int = 4) -> dict:
+    """주간 해석들을 모아 이 달의 해석과 대표 문서를 만든다."""
+    return _period_take(weeks, "이번 달", "주", pick_n)

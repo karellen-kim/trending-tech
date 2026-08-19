@@ -218,3 +218,71 @@ def test_today_take_timeout_is_generous():
                side_effect=lambda p, timeout=None: seen.append(timeout) or '{"headline":"H","refs":[1]}'):
         summarizer.generate_today_take(data)
     assert seen[0] >= 180, f"타임아웃이 {seen[0]}초로 너무 짧다"
+
+
+# ── 주간 해석 ──
+
+def test_week_take_parses_headline_and_picks():
+    days = [{"date": "2026-08-17", "headline": "월 해석",
+             "links": [{"text": "글A", "url": "http://a"}]},
+            {"date": "2026-08-19", "headline": "수 해석",
+             "links": [{"text": "글B", "url": "http://b"}]}]
+    payload = ('{"headline": "이번 주 흐름", "body": "근거다.",'
+               ' "picks": [{"text": "글B", "url": "http://b", "why": "핵심이다"}]}')
+    with patch("summarizer._run_claude", return_value=payload):
+        take = summarizer.generate_week_take(days)
+    assert take["headline"] == "이번 주 흐름"
+    assert take["picks"][0]["url"] == "http://b"
+    assert take["picks"][0]["why"] == "핵심이다"
+
+
+def test_week_take_drops_picks_not_in_source():
+    """목록에 없는 링크를 지어내면 버린다"""
+    days = [{"date": "2026-08-17", "headline": "h", "links": [{"text": "글A", "url": "http://a"}]}]
+    payload = ('{"headline": "H", "body": "B", "picks": ['
+               '{"text": "글A", "url": "http://a", "why": "w"},'
+               '{"text": "지어낸 글", "url": "http://fake", "why": "w"}]}')
+    with patch("summarizer._run_claude", return_value=payload):
+        take = summarizer.generate_week_take(days)
+    assert [p["url"] for p in take["picks"]] == ["http://a"]
+
+
+def test_week_take_limits_to_four():
+    links = [{"text": f"글{i}", "url": f"http://{i}"} for i in range(8)]
+    days = [{"date": "2026-08-17", "headline": "h", "links": links}]
+    picks = ",".join('{"text":"글%d","url":"http://%d","why":"w"}' % (i, i) for i in range(8))
+    with patch("summarizer._run_claude", return_value='{"headline":"H","body":"B","picks":[%s]}' % picks):
+        take = summarizer.generate_week_take(days)
+    assert len(take["picks"]) == 4, "5건 미만이어야 한다"
+
+
+def test_week_take_empty_without_days():
+    assert summarizer.generate_week_take([]) == {}
+
+
+def test_week_take_empty_on_garbage():
+    days = [{"date": "d", "headline": "h", "links": [{"text": "t", "url": "u"}]}]
+    with patch("summarizer._run_claude", return_value="딴소리"):
+        assert summarizer.generate_week_take(days) == {}
+
+
+def test_month_take_uses_week_entries():
+    weeks = [{"date": "2026-W33", "headline": "33주 흐름",
+              "links": [{"text": "글A", "url": "http://a"}]},
+             {"date": "2026-W34", "headline": "34주 흐름",
+              "links": [{"text": "글B", "url": "http://b"}]}]
+    payload = ('{"headline": "이번 달 흐름", "body": "근거",'
+               ' "picks": [{"text": "글B", "url": "http://b", "why": "가장 컸다"}]}')
+    captured = {}
+    def fake(prompt, timeout=None):
+        captured["p"] = prompt
+        return payload
+    with patch("summarizer._run_claude", side_effect=fake):
+        take = summarizer.generate_month_take(weeks)
+    assert take["headline"] == "이번 달 흐름"
+    assert take["picks"][0]["url"] == "http://b"
+    assert "주별 해석을 나열하지 말고" in captured["p"] or "주별" in captured["p"]
+
+
+def test_month_take_empty_without_weeks():
+    assert summarizer.generate_month_take([]) == {}

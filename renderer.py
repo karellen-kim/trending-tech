@@ -70,6 +70,16 @@ _DAILY_CSS = """<style>
   .take-refs a { color: var(--accent-deep); text-decoration: none; }
   .take-refs a:hover { text-decoration: underline; }
 
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { color: var(--accent-deep); text-decoration: none; font-weight: 500; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.78rem; color: var(--ink-faint); margin-top: 0.15rem; }
+
   /* ── 꼭 봐야 할 글 ── */
   .item-star { color: var(--accent); margin-right: 0.35rem; font-size: 0.85rem; }
   .item.important .item-name { color: var(--accent-deep); }
@@ -361,6 +371,30 @@ def render_daily_page(data: dict) -> str:
 </body>
 </html>"""
 
+def _period_take_html(take: dict | None, title: str) -> str:
+    """주간·월간 해석 섹션. 해석 한 문장 + 근거 + 대표 문서 목록."""
+    take = take or {}
+    if not take.get("headline"):
+        return ""
+    body = f'<p class="take-body">{_e(take["body"])}</p>' if take.get("body") else ""
+    picks = ""
+    if take.get("picks"):
+        rows = "".join(
+            f'<li><a href="{p["url"]}" target="_blank" rel="noopener">{_e(p.get("text",""))}</a>'
+            + (f'<span class="pick-why">{_e(p["why"])}</span>' if p.get("why") else "")
+            + "</li>"
+            for p in take["picks"] if p.get("url"))
+        if rows:
+            picks = f'<div class="picks"><span class="picks-label">핵심 문서</span><ol>{rows}</ol></div>'
+    return f"""<div class="section highlight-section" id="take">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">{title}</span>
+  </div>
+  <div class="take"><p class="take-headline">{_e(take["headline"])}</p>{body}{picks}</div>
+</div>"""
+
+
 def render_weekly_page(week_data: dict) -> str:
     """
     week_data: {
@@ -374,6 +408,8 @@ def render_weekly_page(week_data: dict) -> str:
     label = week_data.get("week_label", week_id)
     highlights = week_data.get("highlights", [])
     days = week_data.get("days", [])
+
+    take_html = _period_take_html(week_data.get("week_take"), "이 주의 해석")
 
     hl_html = ""
     if highlights:
@@ -419,6 +455,7 @@ def render_weekly_page(week_data: dict) -> str:
 </div>
 <div class="page-meta">{week_id}</div>
 <h1><em>{label.split("(")[0].strip()}</em></h1>
+{take_html}
 {hl_html}
 <div class="days-section">
   <div class="days-section-title">이번 주 일별 보기</div>
@@ -550,5 +587,48 @@ function showYear(y) {{
 }}
 if ('{first_year}') showYear('{first_year}');
 </script>
+</body>
+</html>"""
+
+
+def render_monthly_page(month_data: dict) -> str:
+    """월간 페이지. 이 달의 해석 + 대표 문서 + 그 달의 주간 링크 목록."""
+    mid = month_data["month_id"]
+    label = month_data.get("month_label", mid)
+    take_html = _period_take_html(month_data.get("month_take"), "이 달의 해석")
+
+    weeks_html = ""
+    for w in month_data.get("weeks", []):
+        weeks_html += (f'<a href="./{w["url"]}" class="day-link">'
+                       f'<span class="day-label">{_e(w["label"])}</span>'
+                       f'<span class="day-date">{_e(w.get("range",""))}</span>'
+                       f'<span class="day-arrow">&rarr;</span></a>')
+
+    return f"""<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{label} — Trending Tech</title>
+{_FAVICON}
+{_FONTS}
+{_BASE_CSS}
+{_DAILY_CSS}
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; 목록</a>
+  <span class="page-meta">{mid}</span>
+</div>
+<div class="page-meta">MONTHLY DIGEST</div>
+<h1>{label} <em>기술 흐름</em></h1>
+{take_html}
+<div class="section" id="weeks">
+  <div class="section-header">
+    <span class="section-icon">주간</span>
+    <span class="section-title">이 달의 주차</span>
+  </div>
+  {weeks_html}
+</div>
 </body>
 </html>"""
