@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-08-24 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { color: var(--accent-deep); text-decoration: none; font-weight: 500; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.78rem; color: var(--ink-faint); margin-top: 0.15rem; }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent); margin-right: 0.35rem; font-size: 0.85rem; }
+  .item.important .item-name { color: var(--accent-deep); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin-top: 0.9rem; padding: 0.8rem 1rem; border: 1px solid var(--rule); background: var(--paper-deep); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--accent-deep); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { padding: 1rem 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; line-height: 1.4; color: var(--ink); min-width: 0; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint);
+    letter-spacing: 0.04em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
+  .item-body { padding: 0 0 1.2rem; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
+  .item-diagram .diagram { margin: 0; padding: 1rem 1rem 0.7rem; background: var(--paper-deep);
+    border: 1px solid var(--rule); color: var(--ink); }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; margin: 0 auto; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule);
+    font-size: 0.72rem; color: var(--ink-faint); text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--accent-deep); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-08-24</div>
+<h1><em>24</em> Aug 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">개발 워크플로우의 에이전트 기반 재설계로 인해, 모델의 성능 격차보다 에이전트 아키텍처의 체계성이 실질적 경쟁 요소가 되기 시작했다</p><p class="take-body">무신사 사례는 개발 방식이 에이전트 기반 워크플로우로 재설계되고 있음을 보여주며, SDAD·메모리 에이전트·터미널 에이전트 논문들이 이를 기술적으로 뒷받침한다. Simon Willison의 관찰(Claude 최고 모델의 시장 진입 어려움 vs 저가 도구 성장)은 모델 성능보다 에이전트 아키텍처 자체가 실질 경쟁력이 되고 있음을 시사한다.</p><div class="take-refs"><span>근거</span><a href="https://simonwillison.net/2026/Aug/23/anthropics-best-ai-model-struggles-to-attract-users-as-cheaper-t/" target="_blank" rel="noopener">Anthropic의 최고의 AI 모델, 저렴한 도구들의 성장 속에서 사용자 확보에 어려움</a> · <a href="https://techblog.musinsa.com/%EC%BD%94%EB%94%A9%EB%A7%8C-%EB%B9%A8%EB%9D%BC%EC%A1%8C%EB%8B%A4%EA%B3%A0%EC%9A%94-%EC%95%84%EB%87%A8-%EC%9D%BC%ED%95%98%EB%8A%94-%EB%B0%A9%EC%8B%9D%EC%9D%B4-%EB%8B%A4-%EB%9C%AF%EC%96%B4%EA%B3%A0%EC%B3%90%EC%A1%8C%EC%8A%B5%EB%8B%88%EB%8B%A4-8de60dd4eb4a?source=rss----f107b03c406e---4" target="_blank" rel="noopener">코딩만 빨라졌다고요? 아뇨, 일하는 방식이 다 뜯어고쳐졌습니다.</a> · <a href="https://arxiv.org/abs/2608.20341" target="_blank" rel="noopener">SDAD: AI 네이티브 SDLC를 위한 명세 기반 에이전트 개발</a> · <a href="https://arxiv.org/abs/2608.20342" target="_blank" rel="noopener">PrimeAgentOrchestrator: 메모리 기반 에이전트 생성 시스템</a> · <a href="https://arxiv.org/abs/2608.20485" target="_blank" rel="noopener">터미널 에이전트: 커맨드라인 환경의 AI 에이전트 조사</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/a3fd499b-258e-4946-a8e9-b93c8d58f4a0" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">1개</span>
+  </div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>코딩만 빨라졌다고요? 아뇨, 일하는 방식이 다 뜯어고쳐졌습니다.</span>
+      <span class="item-meta">무신사 기술블로그</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 514 232" style="width:514px;max-width:100%" role="img" aria-label="수동 검증·플랫폼별 개발에서 AI 자동화로 전환" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="257" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">AI 개발 프로세스 혁신</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">기존</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">수동 QA 검증</text><text x="116" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">트래픽 수동 재현</text><line x1="116" y1="130" x2="116" y2="161" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="164" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="187" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">플랫폼별 UI 개발</text><text x="116" y="204" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">4개 팀 독립 개발</text><text x="398" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">신규 AI 기반</text><rect x="310" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AI 자동 채점</text><text x="398" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">기획·이전 빌드 기준</text><line x1="398" y1="130" x2="398" y2="161" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="310" y="164" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="187" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Figma 자동 생성</text><text x="398" y="204" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">4개 플랫폼 동시</text><line x1="257" y1="50" x2="257" y2="224" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>수동 검증·플랫폼별 개발에서 AI 자동화로 전환</figcaption></figure></div><div class="item-summary">무신사 패턴 '26 테크 컨퍼런스에서 소개한 AI 기반 개발 프로세스 혁신 사례.<br>- AI가 이전 빌드와 기획 문서를 정답지로 삼아 새 빌드를 자동 채점하고, 운영 서버 트래픽을 재현해 달라진 부분만 QA가 확인<br>- Figma 시안 하나로 4개 플랫폼의 UI 코드를 자동 생성<br>- 팀별로 따로 만들던 대용량 조회 시스템을 전사 플랫폼 하나로 통합</div>
+      <div class="item-link"><a href="https://techblog.musinsa.com/%EC%BD%94%EB%94%A9%EB%A7%8C-%EB%B9%A8%EB%9D%BC%EC%A1%8C%EB%8B%A4%EA%B3%A0%EC%9A%94-%EC%95%84%EB%87%A8-%EC%9D%BC%ED%95%98%EB%8A%94-%EB%B0%A9%EC%8B%9D%EC%9D%B4-%EB%8B%A4-%EB%9C%AF%EC%96%B4%EA%B3%A0%EC%B3%90%EC%A1%8C%EC%8A%B5%EB%8B%88%EB%8B%A4-8de60dd4eb4a?source=rss----f107b03c406e---4" target="_blank" rel="noopener">코딩만 빨라졌다고요? 아뇨, 일하는 방식이 다 뜯어고쳐졌습니다.</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/24/your-executable-is-a-sqlite-database/" target="_blank" rel="noopener">당신의 실행 파일은 SQLite 데이터베이스다</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://simonwillison.net/2026/Aug/23/anthropics-best-ai-model-struggles-to-attract-users-as-cheaper-t/" target="_blank" rel="noopener">Anthropic의 최고의 AI 모델, 저렴한 도구들의 성장 속에서 사용자 확보에 어려움</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/23/drew-breunig/" target="_blank" rel="noopener">Drew Breunig 인용</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>SDAD: AI 네이티브 SDLC를 위한 명세 기반 에이전트 개발</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 118" style="width:982px;max-width:100%" role="img" aria-label="LLM이 대규모 명세와 코드베이스를 처리하여 자동 배포를 실행" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">SDAD: AI-네이티브 개발</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">FRD</text><text x="104" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">수십만 토큰 규모</text><rect x="274" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">저장소 컨텍스트</text><text x="362" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">수백만 토큰 규모</text><rect x="532" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">LLM 에이전트</text><text x="620" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">다단계 추론</text><rect x="790" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">자율 배포 실행</text><text x="878" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">명세 기반</text><line x1="192" y1="77" x2="529" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="340" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="362" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">명세 입력</text><line x1="450" y1="77" x2="529" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="470" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">코드 입력</text><line x1="708" y1="77" x2="787" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="724" y="61" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">개발 자동화</text></svg><figcaption>LLM이 대규모 명세와 코드베이스를 처리하여 자동 배포를 실행</figcaption></figure></div><div class="item-summary">LLM 기반 코딩 에이전트가 대규모 컨텍스트를 통해 소프트웨어 개발 생명주기를 재구조화하는 방식에 관한 연구.<br>- LLM 기반 에이전트가 수십만~수백만 토큰의 컨텍스트 윈도우로 SDLC를 재구조화<br>- 다단계 추론과 풍부한 컨텍스트 처리로 대규모 FRD와 저장소 컨텍스트를 단일 워크플로우에서 처리 가능<br>- 명세의 품질이 자율 배포 실행의 핵심 요소</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.20341" target="_blank" rel="noopener">SDAD: AI 네이티브 SDLC를 위한 명세 기반 에이전트 개발</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>PrimeAgentOrchestrator: 메모리 기반 에이전트 생성 시스템</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 240" style="width:982px;max-width:100%" role="img" aria-label="개인 데이터 메모리를 두 백엔드에서 병렬 검색해 새 에이전트에 사전 로드" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">메모리 지식 복구 파이프라인</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">사용자 개인 데이터</text><text x="104" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">누적 작업 기록</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">PostgreSQL</text><text x="362" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">엔티티-관찰 DB</text><text x="362" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">메모리 백엔드 1</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Cloudflare</text><text x="620" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">의미검색</text><text x="620" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">메모리 백엔드 2</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">PrimeAgentOr</text><text x="878" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">chestrator</text><text x="878" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">메모리 통합·조율</text><rect x="16" y="155" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="178" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Claude Code</text><text x="104" y="195" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">인스턴스</text><text x="104" y="212" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">새 에이전트 세션</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="218" y="70" width="29" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">컴파일</text><line x1="192" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="348" y="70" width="29" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="362" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">컴파일</text><line x1="450" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="598" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="620" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">병렬 쿼리</text><line x1="708" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="728" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">병렬 쿼리</text><path d="M 878 121 L 878 138 L 104 138 L 104 152" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="466" y="122" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="133" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">메모리 로드</text></svg><figcaption>개인 데이터 메모리를 두 백엔드에서 병렬 검색해 새 에이전트에 사전 로드</figcaption></figure></div><div class="item-summary">LLM 코딩 에이전트의 누적 지식 손실 문제를 메모리로 해결하는 시스템.<br>- LLM 코딩 에이전트가 매 세션마다 빈 컨텍스트에서 시작해 이전 작업의 지식을 상실<br>- PrimeAgentOrchestrator는 사용자 개인 데이터베이스에서 컴파일한 관련 메모리를 사전 로드한 Claude Code 새 인스턴스 생성<br>- PostgreSQL 엔티티-관찰 데이터베이스와 Cloudflare Worker 의미 검색 인덱스 두 메모리 백엔드를 병렬 쿼리해 결과 통합</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.20342" target="_blank" rel="noopener">PrimeAgentOrchestrator: 메모리 기반 에이전트 생성 시스템</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">멀티모달 에이전트 프레임워크의 기초와 최전선: 기법과 응용</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 240" style="width:982px;max-width:100%" role="img" aria-label="다양 모달리티 입력이 LLM 기반 세 구성요소를 거쳐 에이전시로" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">멀티모달 에이전트 프레임워크</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Multimodal</text><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Input</text><text x="104" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">이미지, 오디오,…</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Perception</text><text x="362" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">다양 모달리티 지각</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Memory</text><text x="620" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">정보 저장</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Decision-mak</text><text x="878" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">ing</text><text x="878" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">의사결정</text><rect x="16" y="155" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="178" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Agent</text><text x="104" y="195" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Capabilities</text><text x="104" y="212" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">추론, 계획, 행동</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="194" y="70" width="78" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">모달리티 입력 수신</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="459" y="70" width="64" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">지각 결과 저장</text><line x1="708" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="714" y="70" width="71" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">저장된 기억 활용</text><path d="M 878 121 L 878 138 L 104 138 L 104 152" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="459" y="122" width="64" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="133" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">결정을 행동으로</text></svg><figcaption>다양 모달리티 입력이 LLM 기반 세 구성요소를 거쳐 에이전시로</figcaption></figure></div><div class="item-summary">대규모 언어모델 기반 에이전트, 특히 멀티모달 모델의 통합에 관한 조사<br>- 대규모 언어모델의 발전이 에이전시(추론, 계획, 행동 능력) 연구를 촉발<br>- 에이전트 프레임워크는 지각(perception), 기억(memory), 의사결정(decision-making)을 LLM 중심으로 조율<br>- 대규모 멀티모달 모델을 통해 이미지, 오디오, 비디오 등 다양한 모달리티 처리 및 통합 가능</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.20379" target="_blank" rel="noopener">멀티모달 에이전트 프레임워크의 기초와 최전선: 기법과 응용</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Nexus: 에이전틱 LLM을 위한 깊이-적응형 KV 캐시 스플라이싱과 검색-분리 도구 라우팅</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 514 337" style="width:514px;max-width:100%" role="img" aria-label="도구 스키마 반복 인코딩 오버헤드를 검색 기반 라우팅과 텍스트 서명으로 개선" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="257" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Nexus: 도구 라우팅 분리</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">기존 방식</text><rect x="28" y="76" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="108" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">도구 스키마 프리필</text><text x="116" y="124" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">TTFT 오버헤드 발생</text><line x1="116" y1="147" x2="116" y2="178" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="181" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="204" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">KV 캐시 스플라이싱</text><text x="116" y="221" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">캐시 처리 필요</text><text x="398" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">Nexus (새로운)</text><rect x="310" y="76" width="176" height="71" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">텍스트</text><text x="398" y="116" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">signature</text><text x="398" y="133" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">평균 19 tokens</text><line x1="398" y1="147" x2="398" y2="178" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="310" y="181" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="204" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">검색 기반 도구 선택</text><text x="398" y="221" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">SLB +…</text><line x1="398" y1="235" x2="398" y2="266" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="310" y="269" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="292" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">argument 생성</text><text x="398" y="309" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">signature에서…</text><line x1="257" y1="50" x2="257" y2="329" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>도구 스키마 반복 인코딩 오버헤드를 검색 기반 라우팅과 텍스트 서명으로 개선</figcaption></figure></div><div class="item-summary">Agentic LLM이 MCP에서 도구 스키마를 반복 인코딩할 때 프리필 오버헤드로 인한 TTFT 성능 저하 문제를 해결하는 시스템.<br>- 도구 라우팅을 스키마 프리필 비용에서 분리하는 구조로 설계<br>- INT8 semantic lookaside buffer(SLB)와 calibrated cross-encoder margin gate를 활용해 검색 기반 도구 선택<br>- KV 캐시 스플라이싱 대신 압축된 텍스트 signature(중간값 19 tokens)에서 argument 생성</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.20397" target="_blank" rel="noopener">Nexus: 에이전틱 LLM을 위한 깊이-적응형 KV 캐시 스플라이싱과 검색-분리 도구 라우팅</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>터미널 에이전트: 커맨드라인 환경의 AI 에이전트 조사</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 118" style="width:982px;max-width:100%" role="img" aria-label="LLM이 터미널 명령으로 환경과 상호작용" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">터미널 에이전트 루프</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">LLM 에이전트</text><text x="104" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">의사결정 주체</text><rect x="274" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">터미널 실행</text><text x="362" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">명령 실행</text><rect x="532" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">텍스트 피드백</text><text x="620" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">실행 결과</text><rect x="790" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">환경 상태</text><text x="878" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">상태 관찰</text><line x1="192" y1="77" x2="271" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="212" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">명령 생성</text><line x1="450" y1="77" x2="529" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="470" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">결과 반환</text><line x1="708" y1="77" x2="787" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="728" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">상태 갱신</text><path d="M 878 104 L 878 77 L 104 77 L 104 47" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="470" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">관찰 제공</text></svg><figcaption>LLM이 터미널 명령으로 환경과 상호작용</figcaption></figure></div><div class="item-summary">커맨드라인 환경에서 작동하는 대규모 언어 모델 에이전트에 관한 조사 논문.<br>- 터미널 에이전트를 터미널 명령 실행, 텍스트 피드백, 상태 환경 상호작용으로 매개되는 action-observation 루프를 갖는 시스템으로 정의<br>- 터미널 실행을 organizing lens로 사용하여 workload 수준의 경계를 설정<br>- 시스템 아키텍처, 역량 획득과의 연결성을 제시</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.20485" target="_blank" rel="noopener">터미널 에이전트: 커맨드라인 환경의 AI 에이전트 조사</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">무료 Claude Code</span>
+      <span class="item-meta">48,599</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Use Claude Code, Codex, Pi, and OpenCode for free (1.3B+ free tokens) from your terminal, app, IDE, or phone like OpenClaw (voice supported + ToS friendly)</div>
+      <div class="item-link"><a href="https://github.com/Alishahryar1/free-claude-code" target="_blank" rel="noopener">무료 Claude Code</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">AI 구직 검색</span>
+      <span class="item-meta">33,592</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Claude Code 기반의 개인 머신에서 실행되는 AI 구직 신청 프레임워크<br>- 채용공고 평가, CV 맞춤화, 자기소개서 작성, 면접 준비를 자동화<br>- 리포지토리를 Fork해서 개인 프로필을 채워 사용<br>- Anthropic과 무관한 독립 오픈소스 프로젝트</div>
+      <div class="item-link"><a href="https://github.com/MadsLorentzen/ai-job-search" target="_blank" rel="noopener">AI 구직 검색</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Karpathy에 영감받은 Claude Code 가이드라인</span>
+      <span class="item-meta">206,226</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Andrej Karpathy의 LLM 코딩 문제점 관찰을 바탕으로 Claude Code 동작을 개선하기 위한 4가지 원칙을 담은 CLAUDE.md 파일 기반 가이드<br>- Think Before Coding: 잘못된 가정, 혼동, 누락된 트레이드오프를 해결<br>- Simplicity First: 과도한 복잡성과 비대한 추상화 제거<br>- Surgical Changes: 직교하는 편집이나 불충분히 이해한 코드 변경 방지</div>
+      <div class="item-link"><a href="https://github.com/multica-ai/andrej-karpathy-skills" target="_blank" rel="noopener">Karpathy에 영감받은 Claude Code 가이드라인</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Plane - 모든 팀을 위한 현대적 프로젝트 관리</span>
+      <span class="item-meta">57,723</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">오픈소스 프로젝트 관리 도구 Plane에 관한 소개.<br>- 이슈 추적, 사이클 실행, 제품 로드맵 관리를 지원<br>- Plane Cloud와 Self-host 두 가지 설치 옵션 제공<br>- Forum과 GitHub을 통한 커뮤니티 피드백으로 지속 발전</div>
+      <div class="item-link"><a href="https://github.com/makeplane/plane" target="_blank" rel="noopener">Plane - 모든 팀을 위한 현대적 프로젝트 관리</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">NousResearch/hermes-agent</span>
+      <span class="item-meta">235,537</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">The agent that grows with you</div>
+      <div class="item-link"><a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">NousResearch/hermes-agent</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div>
+</body>
+</html>
