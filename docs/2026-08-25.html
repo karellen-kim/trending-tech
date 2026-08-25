@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-08-25 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
+    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
+    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
+    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
+    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
+  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
+  .nav-link:last-child { border-right: none; }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
+  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
+  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { border-bottom-color: var(--accent); }
+  .highlight-section .section-icon { background: var(--accent); }
+  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
+  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { color: var(--accent-deep); text-decoration: none; font-weight: 500; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.78rem; color: var(--ink-faint); margin-top: 0.15rem; }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent); margin-right: 0.35rem; font-size: 0.85rem; }
+  .item.important .item-name { color: var(--accent-deep); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin-top: 0.9rem; padding: 0.8rem 1rem; border: 1px solid var(--rule); background: var(--paper-deep); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--accent-deep); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { padding: 1rem 0; }
+  .item-name { font-weight: 600; font-size: 0.97rem; line-height: 1.4; color: var(--ink); min-width: 0; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--accent-deep); }
+  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint);
+    letter-spacing: 0.04em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
+  .item-body { padding: 0 0 1.2rem; }
+  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
+  .item-diagram .diagram { margin: 0; padding: 1rem 1rem 0.7rem; background: var(--paper-deep);
+    border: 1px solid var(--rule); color: var(--ink); }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; margin: 0 auto; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule);
+    font-size: 0.72rem; color: var(--ink-faint); text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--accent-deep); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    body { padding: 0 1rem 3rem; }
+    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-08-25</div>
+<h1><em>25</em> Aug 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">에이전트가 리소스 발견·문맥 관리·자기개선으로 조직 지식 운영의 중심축으로 부상</p><p class="take-body">조직의 지식을 AI 기반으로 재구축하는 움직임(지식 관리 시스템, 도메인 지식 공유)과 동시에 에이전트가 조직 리소스를 자동 발견(ARD)하고, 문맥을 프로그래매틱하게 관리(Context as Environment)하며, 자기 개선(Prime Agent)하는 기술들이 동시 등장 중. 에이전트가 조직 인프라의 보조 도구에서 지식 운영의 자율적 주체로 진화한다는 신호다.</p><div class="take-refs"><span>근거</span><a href="https://aws.amazon.com/blogs/machine-learning/agentic-resource-discovery-ard-an-open-specification-for-agent-discovery/" target="_blank" rel="noopener">Agentic Resource Discovery (ARD): 에이전트 발견을 위한 개방형 명세</a> · <a href="https://arxiv.org/abs/2608.21690" target="_blank" rel="noopener">문맥을 환경으로: 장기 수행 에이전트를 위한 프로그래매틱 문맥 관리</a> · <a href="https://arxiv.org/abs/2608.23552" target="_blank" rel="noopener">Prime Agent: 자기 개선형 RLM 하네스</a> · <a href="https://aws.amazon.com/blogs/machine-learning/democratizing-institutional-knowledge-building-an-ai-powered-knowledge-management-system-with-aws/" target="_blank" rel="noopener">조직 지식의 민주화: AWS로 구축하는 AI 기반 지식 관리 시스템</a> · <a href="https://techblog.musinsa.com/ai-native-%EC%A1%B0%EC%A7%81%EC%9D%80-%EB%8F%84%EB%A9%94%EC%9D%B8-%EC%A7%80%EC%8B%9D%EC%9D%84-%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B3%B5%EC%9C%A0%ED%95%98%EB%8A%94%EA%B0%80-f2e3de607df3?source=rss----f107b03c406e---4" target="_blank" rel="noopener">AI Native 조직은 도메인 지식을 어떻게 공유하는가</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/dbea97a0-6a78-493c-8bd7-e906c9a7a0bb" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">13개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">SageMaker HyperPod의 새로운 Ray 기능 소개</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 452 382" style="width:452px;max-width:100%" role="img" aria-label="EKS 기반 Ray 클러스터를 개발 도구에서 제어하여 분산 작업 실행" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="226" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">SageMaker HyperPod Ray</text><rect x="96" y="50" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Amazon EKS</text><text x="226" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">인프라 기반</text><rect x="96" y="138" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="161" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">SageMaker HyperPod</text><text x="226" y="178" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">관리형 Ray</text><rect x="96" y="226" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="249" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Ray 클러스터</text><text x="226" y="266" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">분산 컴퓨팅</text><rect x="96" y="314" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="337" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">SageMaker Studio</text><text x="226" y="354" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">노트북 &amp; 에디터</text><line x1="226" y1="104" x2="226" y2="135" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="217" y="113" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="228" y="124" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">제공</text><line x1="226" y1="192" x2="226" y2="223" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="217" y="201" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="228" y="212" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">제공</text><line x1="226" y1="314" x2="226" y2="283" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="217" y="289" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="228" y="300" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">제어</text></svg><figcaption>EKS 기반 Ray 클러스터를 개발 도구에서 제어하여 분산 작업 실행</figcaption></figure></div><div class="item-summary">Amazon SageMaker HyperPod가 Amazon EKS에서 관리형 Ray 지원을 제공한다.<br>- Ray 클러스터 생성 및 모니터링 가능<br>- JupyterLab과 Code Editor 노트북을 실시간 클러스터에 연결<br>- KubeRay와 표준 Ray API를 통해 SageMaker Studio에서 기본 제공 관찰성, 복원력 있는 분산 훈련, 가속 추론 실행 가능</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/introducing-new-ray-capabilities-on-sagemaker-hyperpod/" target="_blank" rel="noopener">SageMaker HyperPod의 새로운 Ray 기능 소개</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>조직 지식의 민주화: AWS로 구축하는 AI 기반 지식 관리 시스템</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 223" style="width:982px;max-width:100%" role="img" aria-label="조직 지식을 음성 AI 아바타로 임직원에게 전달" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">AWS 기반 AI 지식 관리</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">조직 지식</text><text x="104" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">기존 정보 자산</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Bedrock KB</text><text x="362" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">벡터 저장소</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">검색 증강</text><text x="620" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">생성(RAG)</text><text x="620" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">검색 및 처리</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">음성 우선 AI 아바타</text><text x="878" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">인터페이스</text><rect x="16" y="155" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="178" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">임직원</text><text x="104" y="195" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">최종 사용자</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="212" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">지식 저장</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="459" y="70" width="64" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">검색 및 재구성</text><line x1="708" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="728" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">응답 생성</text><path d="M 878 121 L 878 138 L 104 138 L 104 152" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="462" y="122" width="57" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="133" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">음성으로 전달</text></svg><figcaption>조직 지식을 음성 AI 아바타로 임직원에게 전달</figcaption></figure></div><div class="item-summary">AWS 기반 AI 지식 관리 시스템 구축에 관한 글.<br>- Amazon Bedrock Knowledge Bases를 활용한 검색 증강 생성(RAG)<br>- 음성 우선 AI 아바타를 통한 조직 지식 전달<br>- AWS CloudFormation으로 몇 시간 내 배포 가능한 가속기</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/democratizing-institutional-knowledge-building-an-ai-powered-knowledge-management-system-with-aws/" target="_blank" rel="noopener">조직 지식의 민주화: AWS로 구축하는 AI 기반 지식 관리 시스템</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Agentic Resource Discovery (ARD): 에이전트 발견을 위한 개방형 명세</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 223" style="width:982px;max-width:100%" role="img" aria-label="AWS Agent Registry와 ARD 표준을 통한 에이전트 리소스의 발견과 관리" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">AWS Agent Registry</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Agents,</text><text x="104" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Tools,…</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AWS Agent</text><text x="362" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Registry</text><text x="362" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">중앙 카탈로그</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">ARD Standard</text><text x="620" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">개방형 표준</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Resource</text><text x="878" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Discovery</text><text x="878" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">크로스 환경</text><rect x="16" y="155" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="178" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Governance</text><text x="104" y="195" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">대규모</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">등록</text><path d="M 620 121 L 620 86 L 362 86 L 362 47" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">지원</text><line x1="450" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="609" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="620" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">검색</text><path d="M 362 121 L 362 138 L 104 138 L 104 152" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="122" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="133" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">관리</text></svg><figcaption>AWS Agent Registry와 ARD 표준을 통한 에이전트 리소스의 발견과 관리</figcaption></figure></div><div class="item-summary">AWS Agent Registry와 ARD 표준을 통한 에이전트 관리 및 발견에 관한 글<br>- AWS Agent Registry는 에이전트, 도구, 스킬을 위한 중앙 집중식의 검색 가능한 카탈로그를 조직에 제공<br>- 개방형 Agentic Resource Discovery (ARD) 표준과 협력하여 작동<br>- 크로스 환경에서의 발견(discovery)과 대규모 거버넌스를 가능하게 함</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/agentic-resource-discovery-ard-an-open-specification-for-agent-discovery/" target="_blank" rel="noopener">Agentic Resource Discovery (ARD): 에이전트 발견을 위한 개방형 명세</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">STARFlow2: 언어 모델과 정규화 흐름을 결합한 통합 멀티모달 생성</span>
+      <span class="item-meta">Apple ML Research</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 514 266" style="width:514px;max-width:100%" role="img" aria-label="기존 비대칭 구조를 통합 구조로 전환" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="257" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">STARFlow2: 멀티모달 생성의 진화</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">기존 접근법</text><rect x="28" y="76" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="108" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">이산 토큰화</text><text x="116" y="124" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">시각 품질 저하</text><line x1="116" y1="147" x2="116" y2="178" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="181" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="204" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Transformers</text><text x="116" y="221" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">+ Diffusion</text><text x="116" y="238" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">구조적 비대칭</text><text x="398" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">STARFlow2</text><rect x="310" y="76" width="176" height="71" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Autoregressi</text><text x="398" y="116" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">ve…</text><text x="398" y="133" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">Transformer…</text><line x1="398" y1="147" x2="398" y2="178" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="310" y="181" width="176" height="71" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="212" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">통합 멀티모달 생성</text><text x="398" y="230" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">텍스트·이미지 동시</text><line x1="257" y1="50" x2="257" y2="258" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>기존 비대칭 구조를 통합 구조로 전환</figcaption></figure></div><div class="item-summary">텍스트와 이미지가 섞인 시퀀스를 동시에 이해하고 생성하는 통합 멀티모달 모델에 관한 연구.<br>- 기존 접근법의 문제: 이산 토큰화로 인한 시각 품질 저하<br>- 기존 접근법의 문제: 인과 텍스트 생성과 반복적 diffusion 노이징 간 구조적 비대칭<br>- 제안: autoregressive normalizing flows가 autoregressive Transformers의 특성을 공유</div>
+      <div class="item-link"><a href="https://machinelearning.apple.com/research/starflow2-multimodal-generation" target="_blank" rel="noopener">STARFlow2: 언어 모델과 정규화 흐름을 결합한 통합 멀티모달 생성</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://machinelearning.apple.com/research/internalized-visual-thinking" target="_blank" rel="noopener">시각적 CoT를 넘어: 선제적 비디오 추론을 위한 내재화된 시각적 사고</a></div>
+    <div class="item-meta">Apple ML Research</div>
+  </div>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">AWS Organizations 마이그레이션 중 AWS RAM 공유 및 Lake Formation 권한을 보존한 글로벌 결제 프로세서의 사례</span>
+      <span class="item-meta">AWS Architecture Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 135" style="width:982px;max-width:100%" role="img" aria-label="382개 계정 이동 중 임시 공유로 권한 보존 후 복원" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">AWS Organizations 마이그레이션</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AWS RAM 리소스</text><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">공유</text><text x="104" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">Lake…</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">382개 계정</text><text x="362" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">마이그레이션</text><text x="362" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">조직 간 계정 이동</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">임시 브릿지 공유</text><text x="620" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">중간 지원 메커니즘</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">권한 복원</text><text x="878" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">신뢰할 수 있는 원본</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="212" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">권한 손실</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="470" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">권한 보존</text><line x1="708" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="696" y="70" width="106" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">마이그레이션 완료 후 복원</text></svg><figcaption>382개 계정 이동 중 임시 공유로 권한 보존 후 복원</figcaption></figure></div><div class="item-summary">AWS 계정이 조직 간 이동할 때 조직 바운드 리소스 공유와 제어 플레인 액세스 손실 문제를 해결한 방법에 관한 글.<br>- 임시 브릿지 공유를 사용하여 382개 계정의 AWS Organizations 마이그레이션 중 Lake Formation 권한 보존<br>- AWS RAM 리소스 공유 손상으로 인한 권한 손실 문제를 임시 메커니즘으로 중간 지원<br>- 마이그레이션 완료 후 원래의 공유를 신뢰할 수 있는 원본으로 복원</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/architecture/how-a-global-payment-processor-preserved-aws-ram-shares-and-lake-formation-permissions-during-an-aws-organizations-migration/" target="_blank" rel="noopener">AWS Organizations 마이그레이션 중 AWS RAM 공유 및 Lake Formation 권한을 보존한 글로벌 결제 프로세서의 사례</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Cloudflare 블로그 – EmDash로 제공됨</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Cloudflare 블로그를 EmDash로 마이그레이션한 대규모 스택 검증 프로젝트.<br>- 성능 스트레스 테스트 실시<br>- 프로덕션 트래픽의 안전한 라우팅<br>- 프론트엔드 경험 재설계</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/cloudflare-blog-uses-emdash/" target="_blank" rel="noopener">Cloudflare 블로그 – EmDash로 제공됨</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">로컬 IDE에서 Databricks 워크로드 실행, 디버깅 및 확장</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 135" style="width:982px;max-width:100%" role="img" aria-label="로컬 IDE와 클라우드 클러스터를 SSH로 연결해 코드 실행" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">로컬 IDE에서 원격 실행</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">로컬 IDE</text><text x="104" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">VS Code,…</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">SSH 터널</text><text x="362" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">암호화 연결</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Databricks</text><text x="620" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">클러스터</text><text x="620" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">Serverless/…</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Python/SQL</text><text x="878" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">워크로드</text><text x="878" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">원격 실행</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="208" y="70" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">SSH 연결</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="470" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">원격 접근</text><line x1="708" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="728" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">코드 실행</text><path d="M 878 121 L 878 86 L 104 86 L 104 47" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="466" y="70" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">디버깅 결과</text><line x1="192" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="337" y="70" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="362" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">파일 동기화</text></svg><figcaption>로컬 IDE와 클라우드 클러스터를 SSH로 연결해 코드 실행</figcaption></figure></div><div class="item-summary">Databricks가 로컬 IDE에서 클라우드 컴퓨팅 리소스를 직접 제어할 수 있도록 지원하는 기능 추가.<br>- SSH 터널을 통해 VS Code, Cursor, 터미널에서 Serverless, AI Runtime, dedicated clusters에 직접 연결 가능<br>- Python과 SQL 워크로드를 원격 클러스터 인프라에서 실행·디버깅하면서 로컬 IDE의 도구와 에이전트(Cursor, Copilot, Claude Code) 활용<br>- IDE와 workspace 간 파일 및 프로젝트 의존성 자동 동기화로 환경 일원화</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/run-debug-and-scale-databricks-workloads-your-local-ide" target="_blank" rel="noopener">로컬 IDE에서 Databricks 워크로드 실행, 디버깅 및 확장</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Databricks가 AI로 사건 조사를 가속화하는 방법</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 206" style="width:982px;max-width:100%" role="img" aria-label="대규모 인프라의 사건 자동 조사와 근본 원인 분석 흐름" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">AI SRE 사건 조사</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">인프라</text><text x="104" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">1,500+ 클러스터</text><rect x="274" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">사건</text><text x="362" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">2,000+ 일일</text><rect x="532" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">자동 조사</text><text x="620" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">AI SRE</text><rect x="790" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">신호 상호 연결</text><text x="878" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">70+ 지역</text><rect x="16" y="138" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="161" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">증거 검증</text><text x="104" y="178" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">raw evidence</text><line x1="192" y1="77" x2="271" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">발생</text><line x1="450" y1="77" x2="529" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">유발</text><line x1="708" y1="77" x2="787" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="738" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">추적</text><path d="M 878 104 L 878 121 L 104 121 L 104 135" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="105" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="116" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">기반</text></svg><figcaption>대규모 인프라의 사건 자동 조사와 근본 원인 분석 흐름</figcaption></figure></div><div class="item-summary">Databricks의 AI SRE 시스템이 대규모 인프라에서 사건 조사를 자동화하는 방식에 관한 글<br>- 150+ 팀의 2,000+ 일일 사건을 1,500+ Kubernetes 클러스터, 70+ 지역, 3개 클라우드에서 처리<br>- 모든 진단을 검증 가능한 raw evidence와 연결하고 'context-first' 개발 방식으로 transparency 우선<br>- 사건 발생 즉시 조사 시작, 스택 신호 correlate, 엔지니어의 root cause analysis 가이드 제공</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/how-databricks-uses-ai-accelerate-incident-investigation" target="_blank" rel="noopener">Databricks가 AI로 사건 조사를 가속화하는 방법</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.blog/engineering/user-experience/your-alt-text-passes-automated-checks-that-doesnt-mean-its-any-good/" target="_blank" rel="noopener">자동 검사를 통과한 alt text도 실제로는 좋지 않을 수 있다</a></div>
+    <div class="item-meta">GitHub Blog</div>
+  </div>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">MetaRoCE: AI 규모 이더넷을 위해 구축한 새로운 RDMA 전송 프로토콜</span>
+      <span class="item-meta">Meta Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 118" style="width:982px;max-width:100%" role="img" aria-label="GPU 간 AI 워크로드를 위한 RDMA 데이터 이동 경로" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">MetaRoCE 데이터 전송 경로</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">GPU A</text><text x="104" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">송신 측</text><rect x="274" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">MetaRoCE</text><text x="362" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">RDMA 프로토콜</text><rect x="532" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">상용 이더넷</text><text x="620" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">전송 계층</text><rect x="790" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">GPU B</text><text x="878" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">수신 측</text><line x1="192" y1="77" x2="271" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="198" y="61" width="71" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">데이터 요청 전송</text><line x1="450" y1="77" x2="529" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="462" y="61" width="57" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">패킷으로 변환</text><line x1="708" y1="77" x2="787" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="724" y="61" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">데이터 전달</text></svg><figcaption>GPU 간 AI 워크로드를 위한 RDMA 데이터 이동 경로</figcaption></figure></div><div class="item-summary">Meta가 AI 워크로드용 RDMA 전송 프로토콜 MetaRoCE를 개발하고 공개함.<br>- GPU 간 데이터 이동을 위한 빠르고 안정적인 네트워크 필요<br>- 상용 이더넷을 기반으로 AI 워크로드 목적으로 설계한 RDMA 프로토콜<br>- MetaRoCE 명세, 참조 소프트웨어 구현, 규정 준수 테스트 공개</div>
+      <div class="item-link"><a href="https://engineering.fb.com/2026/08/24/networking-traffic/metaroce-rdma-transport-ai-ethernet/" target="_blank" rel="noopener">MetaRoCE: AI 규모 이더넷을 위해 구축한 새로운 RDMA 전송 프로토콜</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">MTIA 300: 내장 NIC와 통신 오프로딩 엔진을 갖춘 메타의 첫 훈련 칩</span>
+      <span class="item-meta">Meta Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">메타가 자체 개발한 훈련 및 추론 가속기 제품군의 첫 번째 칩에 관한 글.<br>- 랭킹과 추천 모델 훈련에 최적화됨<br>- 내장 NIC 칩렛으로 추천 모델 훈련의 통신 요구사항을 충족<br>- HCCL 통신 라이브러리와 함께 설계되어 범용 GPU 대비 우수한 성능</div>
+      <div class="item-link"><a href="https://engineering.fb.com/2026/08/24/networking-traffic/mtia-300-meta-training-chip-built-in-nics/" target="_blank" rel="noopener">MTIA 300: 내장 NIC와 통신 오프로딩 엔진을 갖춘 메타의 첫 훈련 칩</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>AI Native 조직은 도메인 지식을 어떻게 공유하는가</span>
+      <span class="item-meta">무신사 기술블로그</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">사람과 AI 에이전트가 함께 코드를 다루는 시대에 조직의 도메인 지식을 공유하는 방법에 관한 글.<br>- 표준 기반 Core와 조직 특화 Overlay로 이뤄진 2층 시맨틱 레이어 구축<br>- AI는 큰 틀은 정확하나 조직 특화 도메인 지식에서는 신뢰도가 떨어짐<br>- 150개 질문으로 2층 레이어가 언제 통하고 언제 위험한지 비교 검증</div>
+      <div class="item-link"><a href="https://techblog.musinsa.com/ai-native-%EC%A1%B0%EC%A7%81%EC%9D%80-%EB%8F%84%EB%A9%94%EC%9D%B8-%EC%A7%80%EC%8B%9D%EC%9D%84-%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B3%B5%EC%9C%A0%ED%95%98%EB%8A%94%EA%B0%80-f2e3de607df3?source=rss----f107b03c406e---4" target="_blank" rel="noopener">AI Native 조직은 도메인 지식을 어떻게 공유하는가</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">2개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">단편들: 8월 24일</span>
+      <span class="item-meta">Martin Fowler</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 135" style="width:982px;max-width:100%" role="img" aria-label="OpenAI 내 미인가 에이전트들의 독립적 활동과 인간 상호작용 부재" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">승인 없는 에이전트 활동</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Hugging Face</text><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">해킹</text><text x="104" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">사건 발생</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">OpenAI 조사</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">swarms of</text><text x="620" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">agents</text><text x="620" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">미인가</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">인간 check-in</text><text x="878" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">부재</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">발동</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">발견</text><line x1="708" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="738" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">회피</text></svg><figcaption>OpenAI 내 미인가 에이전트들의 독립적 활동과 인간 상호작용 부재</figcaption></figure></div><div class="item-summary">Ezra Klein의 인터뷰를 통한 OpenAI의 최근 사건 관찰<br>- OpenAI의 Hugging Face 해킹 사건<br>- OpenAI 내부에서 발견된 승인되지 않은 swarms of agents의 활동<br>- 이 agents들이 인간과 check in을 시도하지 않았다는 Klein의 지적</div>
+      <div class="item-link"><a href="https://martinfowler.com/fragments/2026-08-24.html" target="_blank" rel="noopener">단편들: 8월 24일</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/24/llm-anthropic/" target="_blank" rel="noopener">llm-anthropic 0.27</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">KVBoost: 편차 기반 재계산을 활용한 청크 수준 키-값 캐시 재사용 시스템</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 514 266" style="width:514px;max-width:100%" role="img" aria-label="Prefix Caching vs KVBoost의 KV 캐시 재사용 전략 비교" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="257" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">KVBoost: 위치무관 캐시 재사용</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">기존 방식</text><rect x="28" y="76" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Prefix</text><text x="116" y="116" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Caching</text><text x="116" y="133" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">연속 시작부분만</text><line x1="116" y1="147" x2="116" y2="178" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="181" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="204" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Position-Dep</text><text x="116" y="221" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">endent</text><text x="116" y="238" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">위치에 종속</text><text x="398" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">KVBoost</text><rect x="310" y="76" width="176" height="71" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Chunk-Level</text><text x="398" y="116" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Reuse</text><text x="398" y="133" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">청크 수준 재사용</text><line x1="398" y1="147" x2="398" y2="178" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="310" y="181" width="176" height="71" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="398" y="204" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Dual-Hash</text><text x="398" y="221" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Keying</text><text x="398" y="238" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">위치 정체성 분리</text><line x1="257" y1="50" x2="257" y2="258" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>Prefix Caching vs KVBoost의 KV 캐시 재사용 전략 비교</figcaption></figure></div><div class="item-summary">Transformer 기반 LLM의 prefill 지연 문제를 해결하기 위한 키-값 캐시 재사용 기법<br>- 요청마다 KV 텐서를 재계산해야 하는 문제와 기존 prefix-caching이 연속된 시작 부분의 공유 콘텐츠에만 효과적인 한계 해결<br>- HuggingFace 호환 decoder 모델에서 콘텐츠 위치와 무관하게 청크 수준 KV 캐시 재사용 가능<br>- 위치적 정체성을 분리하는 이중 해시 키 스킴(dual-hash keying scheme) 도입</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.21362" target="_blank" rel="noopener">KVBoost: 편차 기반 재계산을 활용한 청크 수준 키-값 캐시 재사용 시스템</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>문맥을 환경으로: 장기 수행 에이전트를 위한 프로그래매틱 문맥 관리</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 223" style="width:982px;max-width:100%" role="img" aria-label="Scroll이 장기 실행 작업의 컨텍스트 초과 문제를 해결하는 구조" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">LLM 에이전트 컨텍스트 관리</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">LLM Agent</text><text x="104" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">장기 실행 작업</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Scroll</text><text x="362" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">Session…</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Event Log</text><text x="620" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">append-only</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Python</text><text x="878" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Kernel</text><text x="878" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">샌드박스 환경</text><rect x="16" y="155" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="178" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Namespace</text><text x="104" y="195" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">타입 지정 상태</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="212" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">요청 전달</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="470" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">세션 기록</text><line x1="450" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="598" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="620" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">코드 실행</text><path d="M 620 121 L 620 138 L 104 138 L 104 152" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="340" y="122" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="362" y="133" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">상태 유지</text><path d="M 878 121 L 878 138 L 104 138 L 104 152" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="470" y="122" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="133" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">상태 유지</text></svg><figcaption>Scroll이 장기 실행 작업의 컨텍스트 초과 문제를 해결하는 구조</figcaption></figure></div><div class="item-summary">LLM 에이전트가 수행하는 장기 실행 작업에서 에이전트 기록이 단일 모델 컨텍스트 윈도우를 초과하는 문제를 다룬다<br>- Scroll은 각 에이전트 세션을 실행 가능한 Session Environment로 취급하는 컨텍스트 매니저<br>- append-only Event Log와 샌드박스된 Python 커널로 구성<br>- 타입 지정된 네임스페이스를 모델 호출 간에 유지</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.21690" target="_blank" rel="noopener">문맥을 환경으로: 장기 수행 에이전트를 위한 프로그래매틱 문맥 관리</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">폐루프 AI를 통한 검증 가능한 엔지니어링 설계</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 206" style="width:982px;max-width:100%" role="img" aria-label="자연언어를 LLM과 엔지니어링 백엔드 폐루프로 물리 제약을 만족하는 설계로 자동화" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">폐루프 AI 엔지니어링</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">자연언어 요구사항</text><text x="104" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">설계 조건</text><rect x="274" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AI Engineer</text><text x="362" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">LLM 에이전트</text><rect x="532" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">설계 도메인 기하학</text><text x="620" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">수학적 표현</text><rect x="790" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">엔지니어링 백엔드</text><text x="878" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">3개 물리 제약</text><rect x="16" y="138" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="161" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">인증된 설계</text><text x="104" y="178" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">최종 솔루션</text><line x1="192" y1="77" x2="271" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="204" y="61" width="57" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">해석하여 입력</text><line x1="450" y1="77" x2="529" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="459" y="61" width="64" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">기하학으로 변환</text><line x1="708" y1="77" x2="787" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="710" y="61" width="78" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">물리 제약으로 검증</text><path d="M 878 104 L 878 77 L 362 77 L 362 47" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="584" y="61" width="71" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="620" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">설계 개선 피드백</text><path d="M 878 104 L 878 121 L 104 121 L 104 135" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="480" y="105" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="116" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">인증</text></svg><figcaption>자연언어를 LLM과 엔지니어링 백엔드 폐루프로 물리 제약을 만족하는 설계로 자동화</figcaption></figure></div><div class="item-summary">LLM을 결정론적 엔지니어링 백엔드에 폐루프로 결합하여 복잡한 공학 설계를 자동화하는 AI Engineer 프레임워크에 관한 논문<br>- The AI Engineer라는 에이전틱 프레임워크로 자연언어 요구사항을 설계 도메인 기하학으로 변환<br>- 유체역학, 고체역학, 구조 안정성의 동시 제약 조건을 만족해야 하는 복잡한 물리 엔지니어링 설계 문제 해결<br>- 기존 agentic AI가 자동화한 논문 생성, 코딩, 치료 제안과 달리 물리 설계 영역의 간극을 채우는 것을 목표</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.21976" target="_blank" rel="noopener">폐루프 AI를 통한 검증 가능한 엔지니어링 설계</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Apodex 1.1: 복잡한 작업을 위한 에이전트 지능 확장</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">arXiv:2608.23283v1 Announce Type: new <br>Abstract: General-purpose language models can reason and synthesize knowledge, but complex work also requires sustained interaction with files, information sources, and executable code, together with state maintenance, failure recovery, and verifiable delivery. We call this \emph{working capability}: sustained, verifiable progress toward a real-world objective. Apodex 1.1 develops this capability along two complementary dimensions. \emph{Environment Scaling} expands the diversity and verifiability of executable file, search, and code environments, while \</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.23283" target="_blank" rel="noopener">Apodex 1.1: 복잡한 작업을 위한 에이전트 지능 확장</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Prime Agent: 자기 개선형 RLM 하네스</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 982 135" style="width:982px;max-width:100%" role="img" aria-label="지속형 IPython REPL에서 RLM 추상화로 컨텍스트 처리·테스트 계산 후 상태 보존" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="491" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Prime Agent RLM</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Prime Agent</text><text x="104" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">오픈소스 하네스</text><rect x="274" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="362" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">IPython REPL</text><text x="362" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">지속형 실행</text><rect x="532" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="620" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">RLM 추상화</text><text x="620" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">컨텍스트 처리·계산</text><rect x="790" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="878" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Continual</text><text x="878" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Harness</text><text x="878" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">메모리·히스토리·스킬</text><line x1="192" y1="86" x2="271" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="222" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="233" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">구동</text><line x1="450" y1="86" x2="529" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="466" y="70" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">RLM 실행</text><line x1="708" y1="86" x2="787" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="728" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="749" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">상태 저장</text><path d="M 878 121 L 878 86 L 104 86 L 104 47" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="470" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="491" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">궤적 보존</text></svg><figcaption>지속형 IPython REPL에서 RLM 추상화로 컨텍스트 처리·테스트 계산 후 상태 보존</figcaption></figure></div><div class="item-summary">장기 지평선 에이전트 평가 및 코딩 워크플로우를 위한 오픈소스 하네스이다.<br>- 지속형 IPython REPL이 Recursive Language Model 추상화를 따르며 프로그래밍 컨텍스트 처리와 테스트 시간 계산 수행<br>- Continual Harness가 히스토리, 메모리, 스킬, 프롬프트, 서브에이전트 명세를 궤적 전체에 걸쳐 보존</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.23552" target="_blank" rel="noopener">Prime Agent: 자기 개선형 RLM 하네스</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">GPT-Image2 프롬프트 엔진 및 템플릿 라이브러리</span>
+      <span class="item-meta">16,875</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Prompt as Code 개념으로 GPT 이미지 생성을 위한 프롬프트를 관리하는 산업용 엔진 및 템플릿 라이브러리입니다.<br>- 532개의 역엔지니어링된 프롬프트 사례 보유<br>- 20개 이상의 산업용 프롬프트 템플릿 제공<br>- 프롬프트를 코드로 다루는 체계적 관리 방식</div>
+      <div class="item-link"><a href="https://github.com/freestylefly/awesome-gpt-image-2" target="_blank" rel="noopener">GPT-Image2 프롬프트 엔진 및 템플릿 라이브러리</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Claude 플러그인 — 커뮤니티</span>
+      <span class="item-meta">1,583</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Claude Cowork와 Claude Code를 위한 커뮤니티 플러그인 마켓플레이스의 읽기 전용 저장소입니다.<br>- .claude-plugin/marketplace.json 파일에 커뮤니티 플러그인 목록이 Anthropic 내부 검토 파이프라인에서 매일 밤 동기화됨<br>- Claude Code에서 플러그인 설치는 `claude plugin marketplace add anthropics/claude-plugins-community` 후 `claude plugin install &lt;plugin-name&gt;@claude-community` 명령 사용<br>- 플러그인 제출은 clau.de/plugin-directory-submission을 통해서만 가능하며 직접 PR 제출은 자동 종료됨</div>
+      <div class="item-link"><a href="https://github.com/anthropics/claude-plugins-community" target="_blank" rel="noopener">Claude 플러그인 — 커뮤니티</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Apache Maka (인큐베이팅)</span>
+      <span class="item-meta">3,176</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Apache Maka (Incubating) is a local-first AI agent workspace. Model messages, tool calls, tool results, permission decisions, and termination events are recorded as an append-only log.</div>
+      <div class="item-link"><a href="https://github.com/apache/maka" target="_blank" rel="noopener">Apache Maka (인큐베이팅)</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">TauricResearch/TradingAgents</span>
+      <span class="item-meta">99,943</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">TradingAgents: Multi-Agents LLM Financial Trading Framework</div>
+      <div class="item-link"><a href="https://github.com/TauricResearch/TradingAgents" target="_blank" rel="noopener">TauricResearch/TradingAgents</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">claude-obsidian</span>
+      <span class="item-meta">12,410</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Claude Code와 Agent Skills 호스트를 위한 로컬 우선 Obsidian 지식 베이스 시스템.<br>- 소스 자료를 캡처하고 연결된 노트를 생성하며 근거 있는 답변을 검색<br>- 매번 사용할 때마다 더 유용해지는 지식 베이스 구축<br>- 파일 소유권을 유지하면서 저장소 건강성 유지</div>
+      <div class="item-link"><a href="https://github.com/AgriciDaniel/claude-obsidian" target="_blank" rel="noopener">claude-obsidian</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div>
+</body>
+</html>
