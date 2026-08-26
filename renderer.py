@@ -137,10 +137,18 @@ _INDEX_CSS = """<style>
   .year-btn { width: 100%; padding: 0.7rem 1.4rem; display: block; cursor: pointer; background: none; border: none; font-family: var(--sans); text-align: left; font-size: 0.9rem; font-weight: 500; color: var(--ink-soft); border-left: 2px solid transparent; transition: all 0.12s; }
   .year-btn:hover { background: var(--paper-deep); }
   .year-btn.active { background: var(--accent-wash); border-left-color: var(--accent); color: var(--accent-deep); font-weight: 600; }
+  .year-btn::after { content: "▾"; float: right; font-size: 0.7rem; color: var(--ink-faint); transition: transform 0.15s; }
+  .year-btn.open::after { transform: rotate(180deg); display: inline-block; }
+  .month-list { display: none; padding: 0.15rem 0 0.6rem; background: var(--paper-deep); }
+  .month-list.open { display: block; }
+  .month-btn { width: 100%; padding: 0.42rem 1.4rem 0.42rem 2.3rem; display: block; cursor: pointer; background: none; border: none; font-family: var(--sans); text-align: left; font-size: 0.8rem; font-weight: 500; color: var(--ink-soft); border-left: 2px solid transparent; transition: all 0.12s; }
+  .month-btn:hover { color: var(--ink); }
+  .month-btn.active { border-left-color: var(--accent); color: var(--accent-deep); font-weight: 600; }
 
   /* ── 메인 ── */
   .main { flex: 1; overflow-y: auto; min-width: 0; }
   .year-section { display: none; }
+  .m-section { display: none; }
 
   /* ── 히어로 ── */
   .main-hero { padding: clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3.5rem) clamp(2.5rem,5vw,4rem); max-width: 900px; position: relative; }
@@ -492,9 +500,14 @@ def render_index_page(entries: list[dict]) -> str:
     last_date = all_dates[-1] if all_dates else "—"
     total_days = len(all_dates)
 
-    sidebar = "".join(
-        f'<button class="year-btn" data-year="{y}" onclick="showYear(\'{y}\')">{y}</button>'
-        for y in years)
+    sidebar = ""
+    for y in years:
+        mo_btns = "".join(
+            f'<button class="month-btn" data-month="{y}-{mo}" '
+            f'onclick="showMonth(\'{y}\',\'{mo}\')">{int(mo)}\uc6d4</button>'
+            for mo in sorted(by_year[y].keys(), reverse=True))
+        sidebar += (f'<button class="year-btn" data-year="{y}" onclick="toggleYear(\'{y}\')">{y}</button>'
+                    f'<div class="month-list" id="months-{y}">{mo_btns}</div>')
 
     year_sections = ""
     for y in years:
@@ -534,7 +547,7 @@ def render_index_page(entries: list[dict]) -> str:
   </div>
 </a>"""
 
-            months_html += f"""<div class="m-section">
+            months_html += f"""<div class="m-section" id="m-{y}-{mo}">
   <div class="section-head">
     <div class="section-num">{mo:>02}</div>
     <div class="section-titles">
@@ -548,6 +561,8 @@ def render_index_page(entries: list[dict]) -> str:
         year_sections += f'<div class="year-section" id="year-{y}">{months_html}</div>'
 
     first_year = years[0] if years else ""
+    first_month = (sorted(by_year[first_year].keys(), reverse=True)[0]
+                   if first_year else "")
 
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -579,13 +594,30 @@ def render_index_page(entries: list[dict]) -> str:
   {year_sections}
 </main>
 <script>
-function showYear(y) {{
-  document.querySelectorAll('.year-section').forEach(function(s) {{ s.style.display = 'none'; }});
-  document.querySelectorAll('.year-btn').forEach(function(b) {{ b.classList.remove('active'); }});
-  document.getElementById('year-' + y).style.display = 'block';
-  document.querySelector('[data-year="' + y + '"]').classList.add('active');
+function toggleYear(y) {{
+  var list = document.getElementById('months-' + y);
+  var wasOpen = list.classList.contains('open');
+  document.querySelectorAll('.month-list').forEach(function(l) {{ l.classList.remove('open'); }});
+  document.querySelectorAll('.year-btn').forEach(function(b) {{ b.classList.remove('open'); }});
+  if (!wasOpen) {{
+    list.classList.add('open');
+    document.querySelector('.year-btn[data-year="' + y + '"]').classList.add('open');
+  }}
 }}
-if ('{first_year}') showYear('{first_year}');
+function showMonth(y, mo) {{
+  document.querySelectorAll('.year-section').forEach(function(s) {{ s.style.display = 'none'; }});
+  document.querySelectorAll('.m-section').forEach(function(s) {{ s.style.display = 'none'; }});
+  document.querySelectorAll('.year-btn').forEach(function(b) {{ b.classList.remove('active'); }});
+  document.querySelectorAll('.month-btn').forEach(function(b) {{ b.classList.remove('active'); }});
+  document.getElementById('year-' + y).style.display = 'block';
+  document.getElementById('m-' + y + '-' + mo).style.display = 'block';
+  document.querySelector('.year-btn[data-year="' + y + '"]').classList.add('active');
+  document.querySelector('.month-btn[data-month="' + y + '-' + mo + '"]').classList.add('active');
+}}
+if ('{first_year}') {{
+  toggleYear('{first_year}');
+  showMonth('{first_year}', '{first_month}');
+}}
 </script>
 </body>
 </html>"""

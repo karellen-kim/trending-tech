@@ -33,10 +33,18 @@
   .year-btn { width: 100%; padding: 0.7rem 1.4rem; display: block; cursor: pointer; background: none; border: none; font-family: var(--sans); text-align: left; font-size: 0.9rem; font-weight: 500; color: var(--ink-soft); border-left: 2px solid transparent; transition: all 0.12s; }
   .year-btn:hover { background: var(--paper-deep); }
   .year-btn.active { background: var(--accent-wash); border-left-color: var(--accent); color: var(--accent-deep); font-weight: 600; }
+  .year-btn::after { content: "▾"; float: right; font-size: 0.7rem; color: var(--ink-faint); transition: transform 0.15s; }
+  .year-btn.open::after { transform: rotate(180deg); display: inline-block; }
+  .month-list { display: none; padding: 0.15rem 0 0.6rem; background: var(--paper-deep); }
+  .month-list.open { display: block; }
+  .month-btn { width: 100%; padding: 0.42rem 1.4rem 0.42rem 2.3rem; display: block; cursor: pointer; background: none; border: none; font-family: var(--sans); text-align: left; font-size: 0.8rem; font-weight: 500; color: var(--ink-soft); border-left: 2px solid transparent; transition: all 0.12s; }
+  .month-btn:hover { color: var(--ink); }
+  .month-btn.active { border-left-color: var(--accent); color: var(--accent-deep); font-weight: 600; }
 
   /* ── 메인 ── */
   .main { flex: 1; overflow-y: auto; min-width: 0; }
   .year-section { display: none; }
+  .m-section { display: none; }
 
   /* ── 히어로 ── */
   .main-hero { padding: clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3.5rem) clamp(2.5rem,5vw,4rem); max-width: 900px; position: relative; }
@@ -92,7 +100,7 @@
     <div class="s-label">trending</div>
     <div class="s-title">tech</div>
   </div>
-  <button class="year-btn" data-year="2026" onclick="showYear('2026')">2026</button>
+  <button class="year-btn" data-year="2026" onclick="toggleYear('2026')">2026</button><div class="month-list" id="months-2026"><button class="month-btn" data-month="2026-08" onclick="showMonth('2026','08')">8월</button><button class="month-btn" data-month="2026-07" onclick="showMonth('2026','07')">7월</button><button class="month-btn" data-month="2026-06" onclick="showMonth('2026','06')">6월</button><button class="month-btn" data-month="2026-05" onclick="showMonth('2026','05')">5월</button></div>
 </nav>
 <main class="main">
   <div class="main-hero">
@@ -102,7 +110,7 @@
     </div>
     <h1 class="main-title">trending<br><em>tech</em></h1>
   </div>
-  <div class="year-section" id="year-2026"><div class="m-section">
+  <div class="year-section" id="year-2026"><div class="m-section" id="m-2026-08">
   <div class="section-head">
     <div class="section-num">08</div>
     <div class="section-titles">
@@ -161,7 +169,7 @@
     <span class="arrow">&rarr;</span>
   </div>
 </a></div>
-</div><div class="m-section">
+</div><div class="m-section" id="m-2026-07">
   <div class="section-head">
     <div class="section-num">07</div>
     <div class="section-titles">
@@ -220,7 +228,7 @@
     <span class="arrow">&rarr;</span>
   </div>
 </a></div>
-</div><div class="m-section">
+</div><div class="m-section" id="m-2026-06">
   <div class="section-head">
     <div class="section-num">06</div>
     <div class="section-titles">
@@ -279,7 +287,7 @@
     <span class="arrow">&rarr;</span>
   </div>
 </a></div>
-</div><div class="m-section">
+</div><div class="m-section" id="m-2026-05">
   <div class="section-head">
     <div class="section-num">05</div>
     <div class="section-titles">
@@ -301,13 +309,30 @@
 </div></div>
 </main>
 <script>
-function showYear(y) {
-  document.querySelectorAll('.year-section').forEach(function(s) { s.style.display = 'none'; });
-  document.querySelectorAll('.year-btn').forEach(function(b) { b.classList.remove('active'); });
-  document.getElementById('year-' + y).style.display = 'block';
-  document.querySelector('[data-year="' + y + '"]').classList.add('active');
+function toggleYear(y) {
+  var list = document.getElementById('months-' + y);
+  var wasOpen = list.classList.contains('open');
+  document.querySelectorAll('.month-list').forEach(function(l) { l.classList.remove('open'); });
+  document.querySelectorAll('.year-btn').forEach(function(b) { b.classList.remove('open'); });
+  if (!wasOpen) {
+    list.classList.add('open');
+    document.querySelector('.year-btn[data-year="' + y + '"]').classList.add('open');
+  }
 }
-if ('2026') showYear('2026');
+function showMonth(y, mo) {
+  document.querySelectorAll('.year-section').forEach(function(s) { s.style.display = 'none'; });
+  document.querySelectorAll('.m-section').forEach(function(s) { s.style.display = 'none'; });
+  document.querySelectorAll('.year-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.month-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('year-' + y).style.display = 'block';
+  document.getElementById('m-' + y + '-' + mo).style.display = 'block';
+  document.querySelector('.year-btn[data-year="' + y + '"]').classList.add('active');
+  document.querySelector('.month-btn[data-month="' + y + '-' + mo + '"]').classList.add('active');
+}
+if ('2026') {
+  toggleYear('2026');
+  showMonth('2026', '08');
+}
 </script>
 </body>
 </html>
