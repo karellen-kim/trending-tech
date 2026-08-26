@@ -46,6 +46,18 @@
   .year-section { display: none; }
   .m-section { display: none; }
 
+  /* ── 목록에서 보는 이 달의 해석 ── */
+  .m-take { display: block; margin: 0 clamp(1.5rem,4vw,3.5rem) 2rem; padding: 1.3rem 1.5rem;
+    background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); text-decoration: none; }
+  .m-take:hover { border-color: var(--accent); }
+  .m-take-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent-deep); }
+  .m-take-headline { margin-top: 0.5rem; font-size: 1.02rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .m-take-body { margin-top: 0.7rem; font-size: 0.85rem; line-height: 1.7; color: var(--ink-soft); }
+  .m-take-more { display: inline-block; margin-top: 0.9rem; font-family: var(--mono);
+    font-size: 0.68rem; color: var(--accent-deep); }
+
   /* ── 히어로 ── */
   .main-hero { padding: clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3.5rem) clamp(2.5rem,5vw,4rem); max-width: 900px; position: relative; }
   .main-hero::before { content: ""; position: absolute; top: 2rem; left: clamp(1.5rem,4vw,3.5rem); right: clamp(1.5rem,4vw,3.5rem); height: 1px; background: var(--ink); }
@@ -118,6 +130,7 @@
       <h2 class="section-title">8월 Aug</h2>
     </div>
   </div>
+  <a class="m-take" href="./2026-08.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">에이전트 플랫폼 통합→표준화→규제산업 진출 거쳐 성능에서 거버넌스로 병목 이동</p><p class="m-take-body">W32는 클라우드 기업들의 에이전트 중심 플랫폼 통합, W33은 AWS 주도의 표준 워크플로우 확립을 보였다. W34에선 금융 결제까지 에이전트가 손대면서 안전 제어 아키텍처 필요성이 부각됐고, W35 들어 아키텍처 명세화와 자율 추론 기술이 논의되는 와중 프로덕션의 병목이 성능이 아닌 평가·관찰성·거버넌스임이 명확해졌다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a>
   <div class="notes"><a class="note" href="./2026-W35.html">
   <div class="n">W35</div>
   <div class="body">
@@ -177,6 +190,7 @@
       <h2 class="section-title">7월 Jul</h2>
     </div>
   </div>
+  <a class="m-take" href="./2026-07.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">에이전트가 프로덕션을 자동화하자, 검증·제어가 따라가지 못하고 있다</p><p class="m-take-body">W28-29에서 우버 uReview(주간 6.5만 건 90%), Spotify 데이터 어시스턴트 등 에이전트가 실제 프로덕션을 자동화하기 시작했다. W30에서 Claude 5 컨텍스트 엔지니어링이 그것을 기술적으로 가능하게 했음이 드러났다. W31에서 자동화가 검증을 압도하면서 에이전트의 자기기만·기만·제어 불가능성이 대두된다—제어·검증 메커니즘의 공백이 명백해졌다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a>
   <div class="notes"><a class="note" href="./2026-W31.html">
   <div class="n">W31</div>
   <div class="body">
@@ -236,6 +250,7 @@
       <h2 class="section-title">6월 Jun</h2>
     </div>
   </div>
+  <a class="m-take" href="./2026-06.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">AI 개발 자동화가 90% 효율을 달성한 후, 기업의 경쟁축이 비용·거버넌스에서 도메인 컨텍스트·학습 루프로 전환</p><p class="m-take-body">W23에서 개발 자동화가 90% 효율을 달성했고 비용이 병목으로 부상했다. W24~W25에서는 거버넌스와 컨텍스트 관리가 대두되고, W26~W27에서 도메인 전문화와 지속 학습 루프가 차세대 경쟁력으로 제시된다. 단순 자동화에서 적응형 시스템으로의 진화가 이번 달의 핵심 흐름이다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a>
   <div class="notes"><a class="note" href="./2026-W27.html">
   <div class="n">W27</div>
   <div class="body">
@@ -295,6 +310,7 @@
       <h2 class="section-title">5월 May</h2>
     </div>
   </div>
+  <a class="m-take" href="./2026-05.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">Uber·Spotify, 프로덕션 규모에서 GenAI 에이전트 정상 운영 진입</p><p class="m-take-body">W22에서 Uber의 uReview(주당 65K 변경의 90%)와 Spotify의 자동화된 데이터 마이그레이션 에이전트가 나란히 주목받은 것은 실험 단계를 넘어 실제 프로덕션에서 AI 에이전트가 정상 궤도에 올랐음을 보여준다. Spotify x Anthropic의 대담은 이런 전환이 단순 도구 추가가 아니라 개발 프로세스 자체의 재구성이라는 업계 인식을 반영한다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a>
   <div class="notes"><a class="note" href="./2026-W22.html">
   <div class="n">W22</div>
   <div class="body">

@@ -150,6 +150,18 @@ _INDEX_CSS = """<style>
   .year-section { display: none; }
   .m-section { display: none; }
 
+  /* ── 목록에서 보는 이 달의 해석 ── */
+  .m-take { display: block; margin: 0 clamp(1.5rem,4vw,3.5rem) 2rem; padding: 1.3rem 1.5rem;
+    background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); text-decoration: none; }
+  .m-take:hover { border-color: var(--accent); }
+  .m-take-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent-deep); }
+  .m-take-headline { margin-top: 0.5rem; font-size: 1.02rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .m-take-body { margin-top: 0.7rem; font-size: 0.85rem; line-height: 1.7; color: var(--ink-soft); }
+  .m-take-more { display: inline-block; margin-top: 0.9rem; font-family: var(--mono);
+    font-size: 0.68rem; color: var(--accent-deep); }
+
   /* ── 히어로 ── */
   .main-hero { padding: clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3.5rem) clamp(2.5rem,5vw,4rem); max-width: 900px; position: relative; }
   .main-hero::before { content: ""; position: absolute; top: 2rem; left: clamp(1.5rem,4vw,3.5rem); right: clamp(1.5rem,4vw,3.5rem); height: 1px; background: var(--ink); }
@@ -480,7 +492,9 @@ def render_weekly_page(week_data: dict) -> str:
 </body>
 </html>"""
 
-def render_index_page(entries: list[dict]) -> str:
+def render_index_page(entries: list[dict], month_takes: dict | None = None) -> str:
+    """month_takes: {"2026-07": {"headline":..., "body":...}} — 월 페이지의 해석을
+    목록에서도 보여준다. 렌더러가 파일을 읽지 않도록 호출부에서 넘긴다."""
     from datetime import datetime
 
     def _week_id(d: str) -> str:
@@ -555,6 +569,15 @@ def render_index_page(entries: list[dict]) -> str:
   </div>
 </a>"""
 
+            mt = (month_takes or {}).get(f"{y}-{mo}") or {}
+            take_html = ""
+            if mt.get("headline"):
+                mt_body = f'<p class="m-take-body">{_e(mt["body"])}</p>' if mt.get("body") else ""
+                take_html = (f'<a class="m-take" href="./{y}-{mo}.html">'
+                             f'<span class="m-take-label">이 달의 해석</span>'
+                             f'<p class="m-take-headline">{_e(mt["headline"])}</p>'
+                             f'{mt_body}<span class="m-take-more">월간 페이지 &rarr;</span></a>')
+
             months_html += f"""<div class="m-section" id="m-{y}-{mo}">
   <div class="section-head">
     <div class="section-num">{mo:>02}</div>
@@ -563,6 +586,7 @@ def render_index_page(entries: list[dict]) -> str:
       <h2 class="section-title">{int(mo)}월 {_MONTH_NAMES[mo]}</h2>
     </div>
   </div>
+  {take_html}
   <div class="notes">{notes_html}</div>
 </div>"""
 

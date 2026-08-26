@@ -176,6 +176,19 @@ def make_audio(data: dict) -> str:
         return ""
 
 
+def load_month_takes() -> dict:
+    """월간 페이지의 해석을 {"2026-07": {...}} 로 모은다. 목록에서도 보여주기 위해서다."""
+    out = {}
+    for jf in sorted(DOCS_DIR.glob("????-??.json")):
+        try:
+            take = json.loads(jf.read_text(encoding="utf-8")).get("month_take") or {}
+        except Exception:
+            continue
+        if take.get("headline"):
+            out[jf.stem] = {"headline": take["headline"], "body": take.get("body", "")}
+    return out
+
+
 def save_html(data: dict) -> list[str]:
     DOCS_DIR.mkdir(exist_ok=True)
     today = data["date"]
@@ -209,7 +222,8 @@ def save_html(data: dict) -> list[str]:
             entries.append(json.loads(jf.read_text(encoding="utf-8")))
         except Exception:
             pass
-    (DOCS_DIR / "index.html").write_text(render_index_page(entries), encoding="utf-8")
+    (DOCS_DIR / "index.html").write_text(
+        render_index_page(entries, load_month_takes()), encoding="utf-8")
     print("[HTML] docs/index.html 업데이트")
     return highlights
 
