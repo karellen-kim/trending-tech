@@ -379,6 +379,19 @@ def render_daily_page(data: dict) -> str:
 </body>
 </html>"""
 
+_DAY_LINK_CSS = """<style>
+  .days-section { margin-top: 3rem; }
+  .days-section-title { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; padding-bottom: 0.6rem; border-bottom: 2px solid var(--ink); margin-bottom: 0; }
+  .day-link { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); transition: background 0.1s; }
+  .day-link:last-child { border-bottom: none; }
+  .day-link:hover { color: var(--accent-deep); }
+  .day-label { font-weight: 600; font-size: 0.95rem; min-width: 4rem; }
+  .day-date { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); }
+  .day-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); margin-left: auto; }
+  .day-link:hover .day-arrow { color: var(--accent); }
+</style>"""
+
+
 def _period_take_html(take: dict | None, title: str) -> str:
     """주간·월간 해석 섹션. 해석 한 문장 + 근거 + 대표 문서 목록."""
     take = take or {}
@@ -421,7 +434,12 @@ def render_weekly_page(week_data: dict) -> str:
 
     hl_html = ""
     if highlights:
-        rows = "".join(f'<li>{_e(h)}</li>' for h in highlights)
+        # 예전 주간 페이지에는 문장만 남아 있어 링크를 걸 수 없다
+        rows = "".join(
+            (f'<li><a href="{h["url"]}" target="_blank" rel="noopener">{_e(h.get("text",""))}</a></li>'
+             if isinstance(h, dict) and h.get("url")
+             else f'<li>{_e(h.get("text","") if isinstance(h, dict) else h)}</li>')
+            for h in highlights)
         hl_html = f"""<div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
@@ -444,17 +462,7 @@ def render_weekly_page(week_data: dict) -> str:
 {_FONTS}
 {_BASE_CSS}
 {_DAILY_CSS}
-<style>
-  .days-section {{ margin-top: 3rem; }}
-  .days-section-title {{ font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; padding-bottom: 0.6rem; border-bottom: 2px solid var(--ink); margin-bottom: 0; }}
-  .day-link {{ display: flex; align-items: center; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); transition: background 0.1s; }}
-  .day-link:last-child {{ border-bottom: none; }}
-  .day-link:hover {{ color: var(--accent-deep); }}
-  .day-label {{ font-weight: 600; font-size: 0.95rem; min-width: 4rem; }}
-  .day-date {{ font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); }}
-  .day-arrow {{ font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); margin-left: auto; }}
-  .day-link:hover .day-arrow {{ color: var(--accent); }}
-</style>
+{_DAY_LINK_CSS}
 </head>
 <body>
 <div class="top-bar">
@@ -646,6 +654,7 @@ def render_monthly_page(month_data: dict) -> str:
 {_FONTS}
 {_BASE_CSS}
 {_DAILY_CSS}
+{_DAY_LINK_CSS}
 </head>
 <body>
 <div class="top-bar">
