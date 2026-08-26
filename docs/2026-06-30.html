@@ -20,6 +20,18 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── 오늘의 해석 (backfill) ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
 </style>
 <style>
   body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
@@ -84,7 +96,14 @@
 <div class="page-meta">2026-06-30</div>
 <h1><em>30</em> Jun 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section highlight-section" id="highlights">
+<div class="section" id="today-take">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">에이전트가 코드 리뷰·라우팅 같은 프로덕션 업무로 확산되면서, 개발 인프라와 성능 최적화가 뒤따르고 있다</p><p class="take-body">Uber가 주간 65,000개 코드 변경사항 90%를 GenAI로 자동 리뷰하고 있고, Alibaba가 에이전트 개발 플랫폼을 발표했으며, 동시에 Uber가 CPU 효율 10% 절약 최적화를 단행했다. 에이전트가 더 이상 실험 단계가 아니라 대규모 프로덕션 작업으로 이동 중임을 보여준다.</p><div class="take-refs"><span>근거</span><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: GenAI 코드 리뷰로 우버의 주간 약 65,000개 변경사항 90% 분석</a> · <a href="https://www.alibabacloud.com/blog/agents-are-here--are-you-ready-to-build-for-them_603315" target="_blank" rel="noopener">에이전트의 시대가 왔다. 이들을 위해 개발할 준비는 되셨나?</a> · <a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">제로 그로스 스택, 실질적 이득: 스택 할당으로 CPU 10% 절약하기 Go의 기본 2KB 스택 할당으로 인한 낭비적인 확장 사이클이 Uber의 고처리량 서비스에서 CPU 10%를 소비했습니다. 팀은 CPU 프로필과 바이너리 심볼을 읽어 서비스별 최적 스택 크기를 계산하는 프로필 기반 자동화 시스템을 개발했습니다. 결과: CPU 오버헤드가 1% 이하로 감소했고, 2M 코어에서 메모리 오버헤드를 2% 미만으로 유지하면서 16% 효율성 향상을 실현했습니다.</a></div></div>
+</div><div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 하이라이트</span>

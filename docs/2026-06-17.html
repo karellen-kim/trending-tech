@@ -20,6 +20,18 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── 오늘의 해석 (backfill) ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
 </style>
 <style>
   body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
@@ -84,7 +96,14 @@
 <div class="page-meta">2026-06-17</div>
 <h1><em>17</em> Jun 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section highlight-section" id="highlights">
+<div class="section" id="today-take">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">AI 자동화가 코드 리뷰·코딩을 대체하면서 엔지니어링 병목이 대규모 데이터 처리와 비용 최적화로 이동</p><p class="take-body">Uber의 uReview는 주당 65,000개 변경 중 90%를 GenAI로 자동 분석하고, Alibaba와 Spotify는 AI IDE·자율 개발 도구로 코딩 자체를 자동화한다. 그 결과 기존에는 엔지니어가 소비하던 시간이 Uber의 19,500 dataset 관리, Alibaba의 LLM API 비용 79% 절감 같은 인프라·비용 최적화 문제로 재할당되고 있다.</p><div class="take-refs"><span>근거</span><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">번역만 출력하라는 규칙에 따라 바로 답합니다. uReview: Uber의 주당 약 6만 5천 건 변경 중 90%를 분석하는 GenAI 코드 리뷰</a> · <a href="https://www.alibabacloud.com/blog/alibaba-cloud-amplifies-malaysia-infrastructure-with-public-cloud-region-in-johor-to-meet-growing-demand_603235" target="_blank" rel="noopener">번역만 출력하라는 규칙에 따라 바로 처리하겠습니다. Alibaba Cloud, 수요 증가에 대응해 조호르 퍼블릭 클라우드 리전으로 말레이시아 인프라 강화</a> · <a href="https://www.alibabacloud.com/blog/qoderwork-custom-desk_603259" target="_blank" rel="noopener">번역만 출력하겠습니다. 다만 "QoderWork Custom Desk"는 제품명/고유명사 조합이라 그대로 두는 게 적절한지 판단하겠습니다. QoderWork 커스텀 데스크</a> · <a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">Apache Hudi: 19,500 datasets, 6 trillion daily rows, 10 PB ingestion</a> · <a href="https://www.alibabacloud.com/blog/code-harness-or-natural-language-harnesses_603240" target="_blank" rel="noopener">번역만 출력하라는 규칙이므로 바로 답한다. 이건 스킬이 필요없는 단순 번역 작업이다. 코드 하네스인가, 자연어 하네스인가?</a></div></div>
+</div><div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 하이라이트</span>

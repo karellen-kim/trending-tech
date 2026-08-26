@@ -125,6 +125,17 @@
     .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
   }
 </style>
+<style>
+  .days-section { margin-top: 3rem; }
+  .days-section-title { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; padding-bottom: 0.6rem; border-bottom: 2px solid var(--ink); margin-bottom: 0; }
+  .day-link { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); transition: background 0.1s; }
+  .day-link:last-child { border-bottom: none; }
+  .day-link:hover { color: var(--accent-deep); }
+  .day-label { font-weight: 600; font-size: 0.95rem; min-width: 4rem; }
+  .day-date { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); }
+  .day-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); margin-left: auto; }
+  .day-link:hover .day-arrow { color: var(--accent); }
+</style>
 </head>
 <body>
 <div class="top-bar">
@@ -138,14 +149,14 @@
     <span class="section-icon">★</span>
     <span class="section-title">이 달의 해석</span>
   </div>
-  <div class="take"><p class="take-headline">도구 호출에서 금융·보안·데이터 자율 실행으로 확대되면서, 기업 기술 경쟁이 모델 성능에서 거버넌스 아키텍처로 전환</p><p class="take-body">W34에서 Bedrock AgentCore Payments와 ADOP는 에이전트가 금융과 데이터 업무를 자율적으로 수행함을 보여준다. W35 Musinsa 사례는 에이전트 도입이 업무 프로세스 자체를 재편한다는 것을 증명한다. 따라서 경쟁의 축이 '모델의 능력'에서 '조직의 거버넌스 아키텍처'로 이동하고 있으며, Governance Hub와 Gateway 같은 거버넌스 인프라 경쟁이 본격화되고 있다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-agentcore-payments-is-now-generally-available-enabling-agents-to-transact-safely-and-autonomously-at-scale/" target="_blank" rel="noopener">Amazon Bedrock AgentCore payments 일반 공개: 에이전트가 안전하게 자율적으로 대규모 거래하도록 지원</a><span class="pick-why">자율 실행 범위가 금융까지 확대된 이정표</span></li><li><a href="https://techblog.musinsa.com/%EC%BD%94%EB%94%A9%EB%A7%8C-%EB%B9%A8%EB%9D%BC%EC%A1%8C%EB%8B%A4%EA%B3%A0%EC%9A%94-%EC%95%84%EB%87%A8-%EC%9D%BC%ED%95%98%EB%8A%94-%EB%B0%A9%EC%8B%9D%EC%9D%B4-%EB%8B%A4-%EB%9C%AF%EC%96%B4%EA%B3%A0%EC%B3%90%EC%A1%8C%EC%8A%B5%EB%8B%88%EB%8B%A4-8de60dd4eb4a?source=rss----f107b03c406e---4" target="_blank" rel="noopener">코딩만 빨라졌다고요? 아뇨, 일하는 방식이 다 뜯어고쳤습니다.</a><span class="pick-why">에이전트 도입이 업무 프로세스를 근본적으로 변화</span></li><li><a href="https://www.databricks.com/blog/introducing-governance-hub-intelligent-account-level-governance-over-your-databricks-estate" target="_blank" rel="noopener">Governance Hub 소개: Databricks 환경 전체의 지능형 계정 수준 거버넌스</a><span class="pick-why">기업 규모에서의 에이전트 거버넌스 체계 구체화</span></li><li><a href="https://techblog.lycorp.co.jp/ko/ai-agent-platform-sage-dev-log-part-1" target="_blank" rel="noopener">보안 업무를 위한 AI 에이전트 플랫폼 「SAGE」 개발기 1편: 판단은 사람에게 남기는 설계</a><span class="pick-why">인간-에이전트 협력의 거버넌스 설계 원칙</span></li></ol></div></div>
+  <div class="take"><p class="take-headline">에이전트가 프로덕션 워크로드 표준이 되면서 클라우드는 인프라 통합에서 거버넌스 중심으로 전환</p><p class="take-body">초반(W32~W33)에는 Cloudflare OS, Apache Fluss 등 플랫폼·데이터 통합이 주도했으나, 중후반(W34~W35)에는 Bedrock AgentCore Payments, Governance Hub 등 거버넌스 아키텍처가 경쟁의 중심이 되었다. 에이전트가 금융거래, 의료판단 등 자율적 고위험 의사결정으로 범위를 넓히면서, 기술 성능에서 안전·제어 아키텍처로의 패러다임 이동이 가속화되고 있다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://blog.cloudflare.com/cloudflare-os/" target="_blank" rel="noopener">Cloudflare OS: 에이전트, 앱, 작업을 위한 오픈 플랫폼</a><span class="pick-why">에이전트 플랫폼 경쟁의 신호탄</span></li><li><a href="https://www.alibabacloud.com/blog/apache-fluss-graduates-to-a-top-level-project-making-agentic-lake-fully-real-time-with-lakestream_603435" target="_blank" rel="noopener">Apache Fluss가 톱 레벨 프로젝트로 승격, Lakestream으로 Agentic Lake 완전 실시간화 실현</a><span class="pick-why">데이터 인프라의 에이전트 실시간화</span></li><li><a href="https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-agentcore-payments-is-now-generally-available-enabling-agents-to-transact-safely-and-autonomously-at-scale/" target="_blank" rel="noopener">Amazon Bedrock AgentCore payments 일반 공개: 에이전트가 안전하게 자율적으로 대규모 거래하도록 지원</a><span class="pick-why">자율거래로 거버넌스 중심 전환</span></li><li><a href="https://www.databricks.com/blog/introducing-governance-hub-intelligent-account-level-governance-over-your-databricks-estate" target="_blank" rel="noopener">Governance Hub 소개: Databricks 환경 전체의 지능형 계정 수준 거버넌스</a><span class="pick-why">에이전트 환경의 거버넌스 표준화</span></li></ol></div></div>
 </div>
 <div class="section" id="weeks">
   <div class="section-header">
     <span class="section-icon">주간</span>
     <span class="section-title">이 달의 주차</span>
   </div>
-  <a href="./2026-W34.html" class="day-link"><span class="day-label">2026년 8월 17일 ~ 8월 23일</span><span class="day-date">2026-W34</span><span class="day-arrow">&rarr;</span></a><a href="./2026-W35.html" class="day-link"><span class="day-label">2026년 8월 24일 ~ 8월 30일</span><span class="day-date">2026-W35</span><span class="day-arrow">&rarr;</span></a>
+  <a href="./2026-W32.html" class="day-link"><span class="day-label">2026년 8월 3일 ~ 8월 9일</span><span class="day-date">2026-W32</span><span class="day-arrow">&rarr;</span></a><a href="./2026-W33.html" class="day-link"><span class="day-label">2026년 8월 10일 ~ 8월 16일</span><span class="day-date">2026-W33</span><span class="day-arrow">&rarr;</span></a><a href="./2026-W34.html" class="day-link"><span class="day-label">2026년 8월 17일 ~ 8월 23일</span><span class="day-date">2026-W34</span><span class="day-arrow">&rarr;</span></a><a href="./2026-W35.html" class="day-link"><span class="day-label">2026년 8월 24일 ~ 8월 30일</span><span class="day-date">2026-W35</span><span class="day-arrow">&rarr;</span></a>
 </div>
 </body>
 </html>

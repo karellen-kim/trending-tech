@@ -20,6 +20,18 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── 오늘의 해석 (backfill) ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
 </style>
 <style>
   body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
@@ -84,7 +96,14 @@
 <div class="page-meta">2026-06-07</div>
 <h1><em>07</em> Jun 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section highlight-section" id="highlights">
+<div class="section" id="today-take">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">코드와 인프라 작업이 AI 에이전트로 옮겨가는 중: 리뷰부터 최적화까지</p><p class="take-body">Uber는 주당 6.5만 건 코드 변경을 GenAI로 리뷰하고(uReview), Spotify는 팀과 에이전트로 개발자 경험을 확장하며 Claude Plugins로 자연어 인터페이스를 제공 중이다. 동시에 Alibaba는 AI로 10배 성능 개선 기회를 자동 발견하는 등, 규모 있는 조직들이 개발과 인프라의 일상적 작업을 에이전트에 위임하고 있다. HN의 "LLM이 SE 커리어를 갉아먹는다"는 글(303pts)은 이런 변화가 단순 도구 수준이 아니라 커리어 경로 자체를 재구성하는 현실임을 보여준다.</p><div class="take-refs"><span>근거</span><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주당 ~6만 5천 건 변경의 90%를 분석하는 GenAI 코드 리뷰</a> · <a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 병목이 아니다: Spotify에서 팀과 에이전트로 개발자 경험 확장하기</a> · <a href="https://www.alibabacloud.com/blog/ai-powered-dragonwell-native-acceleration-automatic-discovery-of-10x-performance-improvement-opportunities_603222" target="_blank" rel="noopener">AI 기반 Dragonwell 네이티브 가속: 10배 성능 개선 기회 자동 발견</a> · <a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">Claude Code Plugins로 Spotify Ads API 자연어 인터페이스 구축하기</a> · <a href="https://human-in-the-loop.bearblog.dev/llms-are-eroding-my-software-engineering-career-and-i-dont-know-what-to-do/" target="_blank" rel="noopener">LLM이 내 소프트웨어 엔지니어링 커리어를 갉아먹고 있는데 어떻게 해야 할지 모르겠다</a></div></div>
+</div><div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 하이라이트</span>

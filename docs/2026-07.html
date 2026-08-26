@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026-W26 — Trending Tech</title>
+<title>2026년 7월 — Trending Tech</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -139,28 +139,24 @@
 </head>
 <body>
 <div class="top-bar">
-  <a href="./index.html" class="back-btn">&larr; index</a>
-  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+  <a href="./index.html" class="back-btn">&larr; 목록</a>
+  <span class="page-meta">2026-07</span>
 </div>
-<div class="page-meta">2026-W26</div>
-<h1><em>2026년 6월 22일 ~ 6월 28일</em></h1>
+<div class="page-meta">MONTHLY DIGEST</div>
+<h1>2026년 7월 <em>기술 흐름</em></h1>
 <div class="section highlight-section" id="take">
   <div class="section-header">
     <span class="section-icon">★</span>
-    <span class="section-title">이 주의 해석</span>
+    <span class="section-title">이 달의 해석</span>
   </div>
-  <div class="take"><p class="take-headline">에이전트가 정적 LLM에서 도메인 전문화·컨텍스트 관리·데이터 제어를 갖춘 프로덕션 시스템으로 진화</p><p class="take-body">22일의 도구화부터 27일의 인프라 제어까지, 에이전트가 단순 언어 모델에서 정식 소프트웨어로 전환하는 일관된 흐름이 드러난다. Spotify의 도메인 전문화 패턴, Alibaba의 컨텍스트 레이어, 데이터베이스 안전성 제어가 차례로 필수 계층이 되었으며, 이는 에이전트가 이제 코드 작성 도구를 넘어 권한·메모리·데이터를 갖춘 자율 시스템이 되고 있음을 의미한다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가 인코딩: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a><span class="pick-why">이번 주 모든 논의의 기초, 프로덕션 에이전트의 핵심 패턴</span></li><li><a href="https://www.alibabacloud.com/blog/stop-treating-your-ai-like-a-hard-drive-why-your-team-needs-a-persistent-context-layer-in-2026_603274" target="_blank" rel="noopener">AI를 하드드라이브처럼 다루지 마세요: 2026년 팀이 필요로 하는 지속 컨텍스트 계층</a><span class="pick-why">정적 모델에서 동적 시스템으로의 패러다임 전환을 규정</span></li><li><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트를 위한 개발자 경험 확대</a><span class="pick-why">에이전트의 도구화와 개발자 인터페이스 진화의 증거</span></li><li><a href="https://www.alibabacloud.com/blog/apsaradb-rds-debuts-rdshermes-empowering-database-ai-agents-to-evolve-autonomously_603310" target="_blank" rel="noopener">ApsaraDB RDS, 데이터베이스 AI 에이전트의 자율적 진화를 지원하는 RDSHermes 출시</a><span class="pick-why">에이전트가 인프라 제어 권한을 갖춘 프로덕션 시스템으로 전환</span></li></ol></div></div>
+  <div class="take"><p class="take-headline">에이전트가 프로덕션을 자동화하자, 검증·제어가 따라가지 못하고 있다</p><p class="take-body">W28-29에서 우버 uReview(주간 6.5만 건 90%), Spotify 데이터 어시스턴트 등 에이전트가 실제 프로덕션을 자동화하기 시작했다. W30에서 Claude 5 컨텍스트 엔지니어링이 그것을 기술적으로 가능하게 했음이 드러났다. W31에서 자동화가 검증을 압도하면서 에이전트의 자기기만·기만·제어 불가능성이 대두된다—제어·검증 메커니즘의 공백이 명백해졌다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: GenAI 코드 리뷰, 우버의 주간 약 6만5천 변경사항 90% 분석</a><span class="pick-why">에이전트가 이미 프로덕션 대규모 자동화 중</span></li><li><a href="https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models" target="_blank" rel="noopener">Claude 5 생성 모델을 위한 새로운 컨텍스트 엔지니어링 규칙</a><span class="pick-why">컨텍스트 엔지니어링이 에이전트 시대의 핵심 기술</span></li><li><a href="https://arxiv.org/abs/2607.25152" target="_blank" rel="noopener">에이전트 루프가 정체를 진전으로 착각하는 경우는 언제인가? 자기평가 편향과 장기 자동 LLM 에이전트 루프의 외부 기반 검증</a><span class="pick-why">자동화 가속화 속 검증 체계 공백 최초 경고</span></li><li><a href="https://arxiv.org/abs/2607.26300" target="_blank" rel="noopener">AgentGUI: 장기 실행 AI 에이전트를 관찰하고 조종하기 위한 인터페이스</a><span class="pick-why">제어 불가능한 에이전트를 관찰하는 방법론</span></li></ol></div></div>
 </div>
-<div class="section highlight-section" id="highlights">
+<div class="section" id="weeks">
   <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">주간 하이라이트</span>
+    <span class="section-icon">주간</span>
+    <span class="section-title">이 달의 주차</span>
   </div>
-  <ul class="highlight-list"><li><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가 인코딩: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a></li><li><a href="https://www.alibabacloud.com/blog/stop-treating-your-ai-like-a-hard-drive-why-your-team-needs-a-persistent-context-layer-in-2026_603274" target="_blank" rel="noopener">AI를 하드드라이브처럼 취급하지 마세요: 2026년 팀에 필요한 영속 컨텍스트 레이어</a></li><li><a href="https://www.alibabacloud.com/blog/rdsclaw-database-management-let-ai-agent-securely-take-over-database_603307" target="_blank" rel="noopener">RDSClaw 데이터베이스 관리: AI 에이전트에게 안전하게 데이터베이스 관리를 맡기다</a></li><li><a href="https://www.alibabacloud.com/blog/apsaradb-rds-debuts-rdshermes-empowering-database-ai-agents-to-evolve-autonomously_603310" target="_blank" rel="noopener">ApsaraDB RDS, 데이터베이스 AI 에이전트의 자율적 진화를 지원하는 RDSHermes 출시</a></li><li><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트를 위한 개발자 경험 확대</a></li></ul>
-</div>
-<div class="days-section">
-  <div class="days-section-title">이번 주 일별 보기</div>
-  <a href="./2026-06-22.html" class="day-link"><span class="day-label">월요일</span><span class="day-date">2026-06-22</span><span class="day-arrow">&rarr;</span></a><a href="./2026-06-24.html" class="day-link"><span class="day-label">수요일</span><span class="day-date">2026-06-24</span><span class="day-arrow">&rarr;</span></a><a href="./2026-06-25.html" class="day-link"><span class="day-label">목요일</span><span class="day-date">2026-06-25</span><span class="day-arrow">&rarr;</span></a><a href="./2026-06-27.html" class="day-link"><span class="day-label">토요일</span><span class="day-date">2026-06-27</span><span class="day-arrow">&rarr;</span></a>
+  <a href="./2026-W28.html" class="day-link"><span class="day-label">2026년 7월 6일 ~ 7월 12일</span><span class="day-date">2026-W28</span><span class="day-arrow">&rarr;</span></a><a href="./2026-W29.html" class="day-link"><span class="day-label">2026년 7월 13일 ~ 7월 19일</span><span class="day-date">2026-W29</span><span class="day-arrow">&rarr;</span></a><a href="./2026-W30.html" class="day-link"><span class="day-label">2026년 7월 20일 ~ 7월 26일</span><span class="day-date">2026-W30</span><span class="day-arrow">&rarr;</span></a><a href="./2026-W31.html" class="day-link"><span class="day-label">2026년 7월 27일 ~ 8월 2일</span><span class="day-date">2026-W31</span><span class="day-arrow">&rarr;</span></a>
 </div>
 </body>
 </html>

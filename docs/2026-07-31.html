@@ -20,6 +20,18 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── 오늘의 해석 (backfill) ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
 </style>
 <style>
   body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
@@ -84,7 +96,14 @@
 <div class="page-meta">2026-07-31</div>
 <h1><em>31</em> Jul 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section highlight-section" id="highlights">
+<div class="section" id="today-take">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">에이전트가 실무 도구로 배치되자, 그것을 관찰·제어하고 학습시키는 메타레이어가 새로운 과제로 부상했다.</p><p class="take-body">Spotify는 에이전트를 데이터 쿼리, 개발자 생산성 도구로 실제 배치하고 있으며(3, 4), 논문들은 에이전트의 자율 학습·진화·제어 메커니즘을 연구 중이다(18, 19). AgentGUI, Agent-Manager 같은 도구들이 실행 중인 에이전트를 관찰·조종하는 인터페이스를 제시하는 것은, 에이전트 자체를 제어하는 메타레이어가 새로운 기술 계층으로 부상했음을 의미한다.</p><div class="take-refs"><span>근거</span><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩이 더 이상 제약이 아니다: Spotify에서 팀과 에이전트로 개발자 경험 확장</a> · <a href="https://arxiv.org/abs/2605.22148" target="_blank" rel="noopener">Ratchet: 자기 진화하는 LLM 에이전트를 위한 최소 위생 레시피</a> · <a href="https://arxiv.org/abs/2607.26300" target="_blank" rel="noopener">AgentGUI: 장기 실행 AI 에이전트를 관찰하고 조종하기 위한 인터페이스</a> · <a href="https://arxiv.org/abs/2607.26784" target="_blank" rel="noopener">SkillRise: 에이전트 강화학습을 통한 작업 간 기술 진화</a> · <a href="https://arxiv.org/abs/2607.26119" target="_blank" rel="noopener">추론 성능의 기원 탐색: 수학 문제 해결을 위한 RL과 SFT 미세조정 모델의 표현 품질</a></div></div>
+</div><div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 하이라이트</span>

@@ -20,6 +20,18 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── 오늘의 해석 (backfill) ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
 </style>
 <style>
   body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
@@ -84,7 +96,14 @@
 <div class="page-meta">2026-08-09</div>
 <h1><em>09</em> Aug 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section highlight-section" id="highlights">
+<div class="section" id="today-take">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">데이터 시스템이 배치·실시간·온라인 쿼리를 각각 최적화하는 방향으로 분화하는 중</p><p class="take-body">Alibaba의 Fluss는 실시간 스트림과 배치를 통합한 Agentic Lake를 완전 실시간으로 구현하고(1), Spotify는 대규모 배치 데이터를 온라인 포인트 쿼리에도 활용 가능하도록 데이터 레이크 인덱싱 기술을 개발했으며(6), Shopify는 재고 예약 워크로드를 Redis에서 MySQL로 마이그레이션해 스케일을 달성했다(13). 세 곳 모두 '모든 데이터를 한 도구로'라는 모노리식 접근에서 벗어나 워크로드와 시간축에 맞춰 데이터 아키텍처를 재설계하는 중이다.</p><div class="take-refs"><span>근거</span><a href="https://www.alibabacloud.com/blog/apache-fluss-graduates-to-a-top-level-project-making-agentic-lake-fully-real-time-with-lakestream_603435" target="_blank" rel="noopener">Apache Fluss의 Top Level Project 승격으로 Lakestream이 Agentic Lake를 완전 실시간으로 구현</a> · <a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">온라인 포인트 쿼리를 위한 데이터 레이크 인덱싱</a> · <a href="https://shopify.engineering/scaling-inventory-reservations" target="_blank" rel="noopener">Shopify가 재고 예약용 Redis를 MySQL로 대체했다–그리고 확장에 성공했다</a></div></div>
+</div><div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 하이라이트</span>

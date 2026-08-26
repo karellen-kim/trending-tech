@@ -20,6 +20,18 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── 오늘의 해석 (backfill) ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
 </style>
 <style>
   body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
@@ -84,7 +96,14 @@
 <div class="page-meta">2026-07-27</div>
 <h1><em>27</em> Jul 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section highlight-section" id="highlights">
+<div class="section" id="today-take">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">LLM을 팀 규모로 확대하려니 도메인 정확성, 토큰 비용 투명성, 데이터 출처 신뢰성이 핵심이 됐다</p><p class="take-body">Spotify의 데이터 어시스턴트와 에이전트는 도메인 지식을 명시적으로 인코딩해야 LLM을 정확하게 운영할 수 있다는 점을 보여준다. Simon Willison의 토큰 재판매 시장 분석과 AI 회사들의 희귀 도서 무단 수집 문제는 각각 LLM 토큰 시장의 신뢰성과 학습 데이터 출처가 동시에 훼손되고 있음을 드러낸다.</p><div class="take-refs"><span>근거</span><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가 지식의 인코딩: Spotify 데이터 어시스턴트를 뒷받침하는 컨텍스트 레이어</a> · <a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트 규모의 개발자 경험 확장</a> · <a href="https://simonwillison.net/2026/Jul/26/relay-market/#atom-everything" target="_blank" rel="noopener">토큰 재판매자와 사기를 움직이는 Relay Market의 내부 모습</a> · <a href="https://xcancel.com/HedgieMarkets/status/2081534588485296565" target="_blank" rel="noopener">AI 회사들이 희귀 도서를 파괴하고 있다</a></div></div>
+</div><div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 하이라이트</span>

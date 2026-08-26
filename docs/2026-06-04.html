@@ -20,6 +20,18 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── 오늘의 해석 (backfill) ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
 </style>
 <style>
   body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
@@ -84,7 +96,14 @@
 <div class="page-meta">2026-06-04</div>
 <h1><em>04</em> Jun 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section highlight-section" id="highlights">
+<div class="section" id="today-take">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">개발 워크플로우의 중요 부분이 인간에서 AI 에이전트로 주도권 이동</p><p class="take-body">대규모 기업(Uber, Spotify, Alibaba)이 코드 리뷰, 성능 분석, 인프라 최적화를 AI 에이전트로 자동화하고 있다. Uber의 uReview는 주간 6.5만 건 변경 중 90%를 분석하고, Hermes Agent는 자기개선을 달성하며, Spotify는 에이전트로 개발자 경험을 확장한다. 이를 가능하게 한 것은 DeepSeek, Gemma 등 오픈 LLM이 벤치마크로 검증된 성숙도에 도달했기 때문이다.</p><div class="take-refs"><span>근거</span><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">번역문만 출력하라는 규칙에 따라 바로 답한다. uReview: Uber의 주간 약 6만 5천 건 변경 중 90%를 분석하는 GenAI 코드 리뷰</a> · <a href="https://www.alibabacloud.com/blog/deep-dive-into-source-code-how-hermes-agent-achieves-self-improving_603216" target="_blank" rel="noopener">번역만 출력하라는 규칙이므로 바로 답한다. 소스 코드 심층 분석: Hermes Agent는 어떻게 자기개선을 달성하는가</a> · <a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify의 팀과 에이전트로 개발자 경험 확장하기</a> · <a href="https://www.alibabacloud.com/blog/deepseek-v4-flash-tr%C3%AAn-quy-m%C3%B4-l%E1%BB%9Bn-h%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-tri%E1%BB%83n-khai-d%E1%BB%B1a-tr%C3%AAn-%C4%91i%E1%BB%83m-chu%E1%BA%A9n_603214" target="_blank" rel="noopener">대규모 환경의 DeepSeek V4-Flash: 벤치마크 기반 배포 가이드</a> · <a href="https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/" target="_blank" rel="noopener">번역문만 출력하라는 규칙이지만, 이건 단순 번역 작업이라 스킬 트리거 없이 바로 답하겠다. Gemma 4 12B: 통합 인코더-프리 멀티모달 모델</a></div></div>
+</div><div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 하이라이트</span>

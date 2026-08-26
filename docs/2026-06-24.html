@@ -20,6 +20,18 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── 오늘의 해석 (backfill) ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
 </style>
 <style>
   body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
@@ -84,7 +96,14 @@
 <div class="page-meta">2026-06-24</div>
 <h1><em>24</em> Jun 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section highlight-section" id="highlights">
+<div class="section" id="today-take">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">AI가 정적 모델에서 동적 컨텍스트 관리 시스템으로 진화하고 있다</p><p class="take-body">Alibaba의 '영속 컨텍스트 레이어'가 AI 컨텍스트를 지속적 갱신 대상으로 재정의하면, Spotify의 도메인 전문가 인코딩과 Claude Code Plugins는 이를 도메인 지식과 자연어 인터페이스로 구현한다. 결과적으로 AI가 일회용 프롬프트 도구에서 누적 학습 시스템으로 진화하는 중이다.</p><div class="take-refs"><span>근거</span><a href="https://www.alibabacloud.com/blog/stop-treating-your-ai-like-a-hard-drive-why-your-team-needs-a-persistent-context-layer-in-2026_603274" target="_blank" rel="noopener">AI를 하드드라이브처럼 취급하지 마세요: 2026년 팀에 필요한 영속 컨텍스트 레이어</a> · <a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가 인코딩: Spotify 데이터 어시스턴트의 컨텍스트 계층</a> · <a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">Claude Code Plugins를 이용한 Spotify Ads API 자연어 인터페이스 구축</a></div></div>
+</div><div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 하이라이트</span>

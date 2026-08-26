@@ -20,6 +20,18 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── 오늘의 해석 (backfill) ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
 </style>
 <style>
   body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
@@ -84,7 +96,14 @@
 <div class="page-meta">2026-07-30</div>
 <h1><em>30</em> Jul 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section highlight-section" id="highlights">
+<div class="section" id="today-take">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">LLM 에이전트의 자동 실행 신뢰성이 기술적 과제로 부상</p><p class="take-body">5개 논문(11-15)이 에이전트 운영체제, 마트료시카 배치, 자기평가 편향 진단, Agent-Speculator 예측, 계층적 스킬 강화라는 해답을 동시에 제시하고 있다. 이는 LLM을 단순 추론 엔진에서 자율 실행 시스템으로 보는 패러다임이 실무화되면서, 장시간 자동 실행 시 신뢰성 보장이 핵심 문제로 구체화되고 있음을 의미한다.</p><div class="take-refs"><span>근거</span><a href="https://arxiv.org/abs/2607.25076" target="_blank" rel="noopener">에이전트 운영체제를 향하여 - 클래식 및 클라우드 OS의 교훈</a> · <a href="https://arxiv.org/abs/2607.25152" target="_blank" rel="noopener">에이전트 루프가 정체를 진전으로 착각하는 경우는 언제인가? 자기평가 편향과 장기 자동 LLM 에이전트 루프의 외부 기반 검증</a> · <a href="https://arxiv.org/abs/2607.25090" target="_blank" rel="noopener">마트료시카 에이전트: 장기 머신러닝 엔지니어링을 위한 하위 에이전트 전개</a> · <a href="https://arxiv.org/abs/2607.25816" target="_blank" rel="noopener">추론하면서 추측하기: Joint Agent-Speculator RL을 통한 도구 호출 예측 학습</a> · <a href="https://arxiv.org/abs/2607.25853" target="_blank" rel="noopener">HiSkill: 계층적 스킬 그래프로 LLM 에이전트 강화하기</a></div></div>
+</div><div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 하이라이트</span>

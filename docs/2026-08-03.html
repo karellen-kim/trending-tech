@@ -20,6 +20,18 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── 오늘의 해석 (backfill) ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
 </style>
 <style>
   body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
@@ -84,7 +96,14 @@
 <div class="page-meta">2026-08-03</div>
 <h1><em>03</em> Aug 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section highlight-section" id="highlights">
+<div class="section" id="today-take">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">에이전트가 인프라가 되고, 개발자의 역할이 협업자로 전환되는 중</p><p class="take-body">Cloudflare가 에이전트 전용 컴퓨트(@cloudflare/computer)를 출시하고 Workers RPC로 Python/JavaScript를 지원하며 에이전트를 일급 인프라로 격상시켰다. 동시에 개발 커뮤니티는 AI 생성 코드의 무비판적 수용을 경고하고, 개발자가 도구가 아닌 협업자로서의 주체성을 유지하는 것의 중요성을 강조하고 있다.</p><div class="take-refs"><span>근거</span><a href="https://blog.cloudflare.com/cloudflare-computer/" target="_blank" rel="noopener">에이전트는 컨테이너가 아닌 컴퓨터가 필요하다 — @cloudflare/computer 소개</a> · <a href="https://blog.cloudflare.com/grpc-workers/" target="_blank" rel="noopener">Cloudflare Workers and Containers, 이제 인바운드 TCP 연결과 gRPC 지원</a> · <a href="https://blog.cloudflare.com/python-workers-rpc/" target="_blank" rel="noopener">Workers RPC가 이제 Python과 JavaScript에서 작동합니다</a> · <a href="https://gruhn.me/blog/2026-08-03/" target="_blank" rel="noopener">생각 없는 도구가 되지 마라</a> · <a href="https://qwen.ai/blog?id=qwen3.8" target="_blank" rel="noopener">Qwen3.8-Max: 코딩과 협업의 새로운 기준</a></div></div>
+</div><div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 하이라이트</span>

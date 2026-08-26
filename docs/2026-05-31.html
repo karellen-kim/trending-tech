@@ -20,6 +20,18 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── 오늘의 해석 (backfill) ── */
+  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
+  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
+    color: var(--ink); }
+  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
+    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a:hover { text-decoration: underline; }
 </style>
 <style>
   body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
@@ -84,7 +96,14 @@
 <div class="page-meta">2026-05-31</div>
 <h1><em>31</em> May 2026</h1>
 <nav class="page-nav"><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section" id="tech-blog">
+<div class="section" id="today-take">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">개발 조직들이 코드 리뷰·데이터 마이그레이션 같은 핵심 병목을 GenAI로 자동화, 프로덕션 워크플로우 편입</p><p class="take-body">Uber uReview는 주당 65K 변경의 90%를 자동 분석하고, Spotify는 에이전트로 대규모 데이터 마이그레이션을 자동화했다. 단순 보조 도구를 넘어 개발 프로세스의 핵심 병목(코드 검수, 데이터 처리)을 AI가 직접 담당하는 단계로 진입했다. Spotify는 Anthropic과 직접 협력하며 이런 패턴이 조직적 표준으로 정착되고 있음을 보여준다.</p><div class="take-refs"><span>근거</span><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: GenAI code review analyzing 90% of Uber's ~65K weekly changes</a> · <a href="https://engineering.atspotify.com/2026/4/background-coding-agents-dataset-migrations-honk-part-4" target="_blank" rel="noopener">Background Coding Agents: Supercharging Downstream Consumer Dataset Migrations (Honk, Part 4)</a> · <a href="https://engineering.atspotify.com/2026/4/anthropic-agentic-development" target="_blank" rel="noopener">Let’s Talk Agentic Development: Spotify x Anthropic Live</a></div></div>
+</div><div class="section" id="tech-blog">
   <div class="section-header">
     <span class="section-icon">TECH</span>
     <span class="section-title">기술 블로그</span>
