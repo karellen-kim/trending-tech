@@ -1,8 +1,21 @@
 import os
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
+
+KST = timezone(timedelta(hours=9))
+
+def now_kst() -> datetime:
+    """'지금'의 단일 출처. RUN_DATE(YYYY-MM-DD)가 있으면 그날 정오를 지금으로 본다.
+    빠진 날짜를 소급해서 배치를 돌릴 때 수집 윈도우·날짜 판정·파일명이 함께 그날로 맞춰진다.
+    정오를 쓰는 이유는 자정 경계에서 날짜가 흔들리지 않게 하기 위해서다."""
+    s = os.getenv("RUN_DATE", "").strip()
+    if not s:
+        return datetime.now(KST)
+    d = datetime.strptime(s, "%Y-%m-%d").date()
+    return datetime(d.year, d.month, d.day, 12, tzinfo=KST)
 
 BASE_DIR = Path(__file__).parent
 DOCS_DIR = BASE_DIR / "docs"

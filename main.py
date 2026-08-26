@@ -1,10 +1,11 @@
 import json
+import os
 import signal
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, timedelta, datetime
 
-from config import (DOCS_DIR, SLACK_WEBHOOK_URL, MAX_PAPER_ITEMS, SUMMARY_WORKERS,
+from config import (DOCS_DIR, SLACK_WEBHOOK_URL, MAX_PAPER_ITEMS, SUMMARY_WORKERS, now_kst,
                     MAX_COMPANY_TOTAL, MAX_DEV_TOTAL, ENABLE_SVG, MAX_SVG_ITEMS,
                     ENABLE_NOTEBOOKLM)
 from sources.github import fetch_trending
@@ -27,7 +28,7 @@ def _analyze_items(items: list[dict], content_key: str, filter_today: bool = Tru
     오늘 글이 아닌 항목은 리스트에서 제외한다."""
     if not items:
         return items
-    today = str(date.today())
+    today = str(now_kst().date())
 
     def one(item):
         # 짧은 RSS 요약이 truthy 라는 이유로 받아온 본문을 가리던 문제가 있었다
@@ -59,7 +60,7 @@ def _analyze_items(items: list[dict], content_key: str, filter_today: bool = Tru
 
 
 def _load_yesterday_github() -> set[str]:
-    yesterday = str(date.today() - timedelta(days=1))
+    yesterday = str(now_kst().date() - timedelta(days=1))
     jf = DOCS_DIR / f"{yesterday}.json"
     if not jf.exists():
         return set()
@@ -75,7 +76,7 @@ def _load_recent_urls(days: int = 7) -> set[str]:
     어제 글이 오늘 페이지에 다시 올라오므로 여기서 걸러낸다."""
     urls = set()
     for i in range(1, days + 1):
-        jf = DOCS_DIR / f"{date.today() - timedelta(days=i)}.json"
+        jf = DOCS_DIR / f"{now_kst().date() - timedelta(days=i)}.json"
         if not jf.exists():
             continue
         try:
@@ -332,7 +333,7 @@ def main():
     signal.signal(signal.SIGALRM, _timeout_handler)
     signal.alarm(3600)
 
-    today = date.today()
+    today = now_kst().date()
     today_str = str(today)
     data = collect(today_str)
     data = summarize(data)
@@ -352,8 +353,11 @@ def main():
     save_weekly_page(today, weekly_hl)
     mid = save_monthly_page(today)
 
-    git_commit_push(today_str, mid)
-    send_slack(SLACK_WEBHOOK_URL, today_str, highlights, data.get("today_take"))
+    if os.getenv("DRY") == "1":
+        print("[DRY] 커밋·푸시·Slack 건너뜀")
+    else:
+        git_commit_push(today_str, mid)
+        send_slack(SLACK_WEBHOOK_URL, today_str, highlights, data.get("today_take"))
     print(f"[완료] {today_str}")
 
 

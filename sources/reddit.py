@@ -1,14 +1,15 @@
 import feedparser
 import requests
 from datetime import datetime, timezone, timedelta, time
+from config import now_kst
 from config import REDDIT_SUBREDDITS, MAX_REDDIT_ITEMS
 
 _HEADERS = {"User-Agent": "trending-tech-bot/1.0"}
 KST = timezone(timedelta(hours=9))
 
 def _today_cutoff() -> datetime:
-    now_kst = datetime.now(KST)
-    return now_kst.replace(hour=0, minute=0, second=0, microsecond=0).astimezone(timezone.utc)
+    n = now_kst()
+    return n.replace(hour=0, minute=0, second=0, microsecond=0).astimezone(timezone.utc)
 
 def fetch_subreddit(name: str, max_items: int = MAX_REDDIT_ITEMS) -> list[dict]:
     url = f"https://www.reddit.com/r/{name}/top.rss?t=day"

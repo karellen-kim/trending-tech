@@ -3,6 +3,7 @@ import feedparser
 import requests
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone, timedelta, time
+from config import now_kst
 from config import RSS_SOURCES, MAX_BLOG_ITEMS, MAX_BODY_FETCH, RSS_WORKERS, COLLECT_DAYS
 from sources.scraper import _fetch_article_text
 
@@ -52,7 +53,7 @@ def _pub_hint(entry) -> str:
 def _recent_range(days: int = COLLECT_DAYS) -> tuple[datetime, datetime]:
     """(N일 전 00:00 KST, 내일 00:00 KST)를 UTC로. 상한이 있어야 발행일을
     미래로 찍은 글이 매일 다시 올라오지 않는다."""
-    start_kst = datetime.now(KST).replace(hour=0, minute=0, second=0, microsecond=0)
+    start_kst = now_kst().replace(hour=0, minute=0, second=0, microsecond=0)
     start = start_kst - timedelta(days=days - 1)
     end = start_kst + timedelta(days=1)
     return start.astimezone(timezone.utc), end.astimezone(timezone.utc)

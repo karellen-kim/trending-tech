@@ -2,6 +2,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, date, timezone, timedelta
+from config import now_kst
 from config import SCRAPER_SOURCES, MAX_SCRAPER_ITEMS, COLLECT_DAYS
 
 KST = timezone(timedelta(hours=9))
@@ -21,14 +22,14 @@ def _parse_date(date_str: str) -> date | None:
 
 def _is_today(date_str: str) -> bool:
     d = _parse_date(date_str)
-    return d is not None and d == datetime.now(KST).date()
+    return d is not None and d == now_kst().date()
 
 def _is_recent(date_str: str, days: int = COLLECT_DAYS) -> bool:
     """최근 days 일(오늘 포함) 이내인지. 날짜를 못 읽으면 False."""
     d = _parse_date(date_str)
     if d is None:
         return False
-    today = datetime.now(KST).date()
+    today = now_kst().date()
     return today - timedelta(days=days - 1) <= d <= today
 
 _HEADERS = {
