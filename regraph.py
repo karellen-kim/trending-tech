@@ -122,7 +122,7 @@ def _plain(svg: str) -> list[str]:
     return sorted(t["text"] for t in _texts(svg) if t["text"])
 
 
-def main(check: bool) -> None:
+def main(check: bool, force: bool = False) -> None:
     files = sorted(DOCS_DIR.glob("????-??-??.html"))
     total = redrawn = failed = 0
     lost = []
@@ -151,7 +151,8 @@ def main(check: bool) -> None:
             missing = before - after
             if missing:
                 lost.append(f"{f.stem}: {sorted(missing)[:3]}")
-                continue
+                if not force:
+                    continue
             redrawn += 1
             changed = True
             out.append(h[pos:m.start()]); out.append(new); pos = m.end()
@@ -161,7 +162,8 @@ def main(check: bool) -> None:
 
     print(f"SVG {total}개 / 다시 그림 {redrawn} / 되읽기 실패 {failed}")
     if lost:
-        print(f"손실이 나서 원본을 둔 것 {len(lost)}건:")
+        head = "손실을 감수하고 다시 그린 것" if force else "손실이 나서 원본을 둔 것"
+        print(f"{head} {len(lost)}건:")
         for l in lost[:12]:
             print("  ", l)
     else:
@@ -171,4 +173,4 @@ def main(check: bool) -> None:
 
 
 if __name__ == "__main__":
-    main(check="--check" in sys.argv)
+    main(check="--check" in sys.argv, force="--force" in sys.argv)

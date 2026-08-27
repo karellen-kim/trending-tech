@@ -185,12 +185,21 @@ def _render_flow(spec: dict) -> str:
         a, b = pos.get(e.get("from")), pos.get(e.get("to"))
         if not a or not b:
             continue
-        if a[1] == b[1] and b[0] > a[0]:                      # 같은 줄, 오른쪽으로
+        adjacent = a[1] == b[1] and 0 < b[0] - (a[0] + NODE_W) <= GAP_X + 1
+        if adjacent:                                          # 바로 옆 칸이면 직선
             x1, x2 = a[0] + NODE_W, b[0]
             cy = a[1] + a[2] / 2
             body += (f'<line x1="{x1}" y1="{cy:.0f}" x2="{x2 - 3}" y2="{cy:.0f}" '
                      f'stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/>')
             body += _edge_label((x1 + x2) / 2, cy, e.get("label", ""))
+        elif a[1] == b[1] and b[0] > a[0]:                    # 같은 줄이지만 한 칸 건너
+            # 직선으로 그으면 사이에 있는 상자를 뚫는다. 아래로 돌아간다.
+            x1, x2 = a[0] + NODE_W / 2, b[0] + NODE_W / 2
+            top, dip = a[1] + a[2], a[1] + a[2] + GAP_Y / 2
+            body += (f'<path d="M {x1:.0f} {top:.0f} L {x1:.0f} {dip:.0f} L {x2:.0f} {dip:.0f} '
+                     f'L {x2:.0f} {top + 3:.0f}" stroke="currentColor" stroke-width="1.5" '
+                     f'marker-end="url(#ar)"/>')
+            body += _edge_label((x1 + x2) / 2, dip + 14, e.get("label", ""))
         else:                                                  # 줄바꿈·역방향은 세로 경유
             x1, y1 = a[0] + NODE_W / 2, a[1] + a[2]
             x2, y2 = b[0] + NODE_W / 2, b[1]
