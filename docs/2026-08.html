@@ -133,14 +133,17 @@
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
   .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
-  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
+    padding: 1rem 0.9rem 0.7rem;
+    /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
+    --accent: #b08a2a; --accent-wash: #f6f1e2; }
   /* svg 인라인 max-width:100% 가 좁은 화면에서 그림을 1/3 로 압착해 글자를 뭉갠다.
-     원본 크기를 지키고 컨테이너에서 옆으로 밀어 본다. */
+     원본 크기를 지키고 상자에서 옆으로 밀어 본다. */
   .item-diagram svg { max-width: none !important; }
-  /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
-  .item-diagram { --accent: #b08a2a; --accent-wash: #f6f1e2; }
-  .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: var(--paper); border: 1px solid var(--rule-strong); }
+  .item-diagram .diagram { margin: 0; padding: 0; border: none; background: none; color: var(--ink);
+    width: max-content; min-width: 100%; }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -156,6 +159,15 @@
     body { padding-bottom: 3rem; }
     .nav-link { font-size: 0.68rem; padding: 0.32rem 0.66rem; }
     h1 { font-size: 1.85rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    .item details > summary { grid-template-columns: 1fr auto; }
+    /* 제목은 한 줄을 통째로 쓴다. 토글을 옆에 두면 그만큼 폭을 잃는다. */
+    .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
+    .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
+    .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
   }
 </style>
 <style>
@@ -186,7 +198,7 @@
     <span class="section-icon">★</span>
     <span class="section-title">이 달의 해석</span>
   </div>
-  <div class="take"><p class="take-headline">에이전트 플랫폼 통합→표준화→규제산업 진출 거쳐 성능에서 거버넌스로 병목 이동</p><p class="take-body">W32는 클라우드 기업들의 에이전트 중심 플랫폼 통합, W33은 AWS 주도의 표준 워크플로우 확립을 보였다. W34에선 금융 결제까지 에이전트가 손대면서 안전 제어 아키텍처 필요성이 부각됐고, W35 들어 아키텍처 명세화와 자율 추론 기술이 논의되는 와중 프로덕션의 병목이 성능이 아닌 평가·관찰성·거버넌스임이 명확해졌다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://blog.cloudflare.com/cloudflare-os/" target="_blank" rel="noopener">Cloudflare OS: 에이전트, 앱, 작업을 위한 오픈 플랫폼</a><span class="pick-why">개방형 플랫폼 표준 제시</span></li><li><a href="https://aws.amazon.com/blogs/machine-learning/building-agentic-workflows-with-sagemaker-ai-and-bedrock-agentcore/" target="_blank" rel="noopener">SageMaker AI와 Bedrock AgentCore를 활용한 에이전트 워크플로우 구축</a><span class="pick-why">표준 워크플로우 아키텍처 정의</span></li><li><a href="https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-agentcore-payments-is-now-generally-available-enabling-agents-to-transact-safely-and-autonomously-at-scale/" target="_blank" rel="noopener">Amazon Bedrock AgentCore payments 일반 공개: 에이전트가 안전하게 자율적으로 대규모 거래하도록 지원</a><span class="pick-why">금융산업 진출의 신호탄, 안전 제어 설계</span></li><li><a href="https://github.blog/ai-and-ml/llms/how-to-evaluate-llms-before-production/" target="_blank" rel="noopener">프로덕션 배포 전 LLM 평가하기</a><span class="pick-why">거버넌스·평가 시스템의 중요성</span></li></ol></div></div>
+  <div class="take"><p class="take-headline">클라우드 인프라가 에이전트 중심으로 재편되고, 금융·의료 실무로 확산되며, 평가·거버넌스 표준이 수렴</p><p class="take-body">W32에서 Cloudflare OS 같은 에이전트 통합 플랫폼이 등장하며 인프라 전층 재편의 신호를 보냈고, W33은 에이전트가 프로덕션 표준 워크로드로 격상되는 모습을 보였다. W34는 Bedrock AgentCore payments 일반 공개와 SAGE 같은 도메인별 솔루션으로 금융, 의료, 보안 등 실제 사업으로의 확산을 드러냈다. W35는 Bedrock AgentCore Evaluations와 SDAD로 평가와 개발 방식의 표준화가 진행 중임을 보여준다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://blog.cloudflare.com/cloudflare-os/" target="_blank" rel="noopener">Cloudflare OS: 에이전트, 앱, 작업을 위한 오픈 플랫폼</a><span class="pick-why">에이전트 기반 인프라 재편의 시발점</span></li><li><a href="https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-agentcore-payments-is-now-generally-available-enabling-agents-to-transact-safely-and-autonomously-at-scale/" target="_blank" rel="noopener">Amazon Bedrock AgentCore payments 일반 공개: 에이전트가 안전하게 자율적으로 대규모 거래하도록 지원</a><span class="pick-why">에이전트 기술이 금융 실무 도메인에 진입하는 분수령</span></li><li><a href="https://aws.amazon.com/blogs/machine-learning/evaluate-any-agent-framework-with-amazon-bedrock-agentcore-evaluations/" target="_blank" rel="noopener">Amazon Bedrock AgentCore Evaluations으로 모든 에이전트 프레임워크 평가하기</a><span class="pick-why">에이전트 운영의 표준 평가 프레임워크 확립</span></li><li><a href="https://www.alibabacloud.com/blog/apache-fluss-graduates-to-a-top-level-project-making-agentic-lake-fully-real-time-with-lakestream_603435" target="_blank" rel="noopener">Apache Fluss가 톱 레벨 프로젝트로 승격, Lakestream으로 Agentic Lake 완전 실시간화 실현</a><span class="pick-why">데이터 계층 실시간화로 에이전트 기반 아키텍처의 근간 강화</span></li></ol></div></div>
 </div>
 <div class="section" id="weeks">
   <div class="section-header">

@@ -133,14 +133,17 @@
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
   .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
-  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
+    padding: 1rem 0.9rem 0.7rem;
+    /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
+    --accent: #b08a2a; --accent-wash: #f6f1e2; }
   /* svg 인라인 max-width:100% 가 좁은 화면에서 그림을 1/3 로 압착해 글자를 뭉갠다.
-     원본 크기를 지키고 컨테이너에서 옆으로 밀어 본다. */
+     원본 크기를 지키고 상자에서 옆으로 밀어 본다. */
   .item-diagram svg { max-width: none !important; }
-  /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
-  .item-diagram { --accent: #b08a2a; --accent-wash: #f6f1e2; }
-  .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: var(--paper); border: 1px solid var(--rule-strong); }
+  .item-diagram .diagram { margin: 0; padding: 0; border: none; background: none; color: var(--ink);
+    width: max-content; min-width: 100%; }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -156,6 +159,15 @@
     body { padding-bottom: 3rem; }
     .nav-link { font-size: 0.68rem; padding: 0.32rem 0.66rem; }
     h1 { font-size: 1.85rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    .item details > summary { grid-template-columns: 1fr auto; }
+    /* 제목은 한 줄을 통째로 쓴다. 토글을 옆에 두면 그만큼 폭을 잃는다. */
+    .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
+    .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
+    .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
   }
 </style>
 <style>
@@ -186,7 +198,7 @@
     <span class="section-icon">★</span>
     <span class="section-title">이 주의 해석</span>
   </div>
-  <div class="take"><p class="take-headline">에이전트 아키텍처 명세화에서 자율 추론으로 진화하는 와중, 프로덕션의 병목은 성능에서 평가·관찰성·거버넌스로 이동했다.</p><p class="take-body">에이전트 기반 개발 워크플로우(SDAD)의 체계화에서 시작해 자원 발견(ARD)과 자기 개선(Prime Agent)으로 능력이 강화됐다. 그러나 동시에 8월 26-27일의 문서들은 이미 기술은 준비됐고, 프로덕션의 관문은 성능이 아니라 평가·거버넌스·관찰성을 어떻게 구축할 것인가로 이동했음을 명시하고 있다. 즉, 에이전트 성능 강화의 시대에서 에이전트 운영 기술의 시대로의 전환점이다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://arxiv.org/abs/2608.20341" target="_blank" rel="noopener">SDAD: AI 네이티브 SDLC를 위한 명세 기반 에이전트 개발</a><span class="pick-why">에이전트 아키텍처 체계화의 출발점</span></li><li><a href="https://aws.amazon.com/blogs/machine-learning/agentic-resource-discovery-ard-an-open-specification-for-agent-discovery/" target="_blank" rel="noopener">Agentic Resource Discovery (ARD): 에이전트 발견을 위한 개방형 명세</a><span class="pick-why">에이전트 생태계 확장의 기반 기술</span></li><li><a href="https://arxiv.org/abs/2608.23552" target="_blank" rel="noopener">Prime Agent: 자기 개선형 RLM 하네스</a><span class="pick-why">에이전트 자율성 강화의 기술적 토대</span></li><li><a href="https://github.blog/ai-and-ml/llms/how-to-evaluate-llms-before-production/" target="_blank" rel="noopener">프로덕션 배포 전 LLM 평가하기</a><span class="pick-why">에이전트 프로덕션 운영의 새 게이트</span></li></ol></div></div>
+  <div class="take"><p class="take-headline">모델 경쟁이 에이전트 아키텍처 경쟁으로 전환되고, 동시에 평가·거버넌스가 표준화되는 주</p><p class="take-body">SDAD·Prime Agent 등 에이전트 개발 기술이 표준화되고, Amazon Bedrock 평가 프레임워크 등 거버넌스 기술도 정규화됐다. Gallup·Natera·GoDaddy 등이 수천 명 규모 서비스를 에이전트로 운영 중이면서, 이제 에이전트는 실험 대상이 아닌 운영 인프라가 되었다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://arxiv.org/abs/2608.20341" target="_blank" rel="noopener">SDAD: AI 네이티브 SDLC를 위한 명세 기반 에이전트 개발</a><span class="pick-why">에이전트 기반 소프트웨어 개발의 기술 기초</span></li><li><a href="https://aws.amazon.com/blogs/machine-learning/evaluate-any-agent-framework-with-amazon-bedrock-agentcore-evaluations/" target="_blank" rel="noopener">Amazon Bedrock AgentCore Evaluations으로 모든 에이전트 프레임워크 평가하기</a><span class="pick-why">평가·거버넌스의 산업 표준 확립</span></li><li><a href="https://aws.amazon.com/blogs/architecture/gallup-delivers-real-time-workplace-coaching-to-thousands-of-leaders-with-amazon-bedrock/" target="_blank" rel="noopener">Gallup, Amazon Bedrock으로 수천 명 규모 실시간 코칭 확대</a><span class="pick-why">에이전트 기반 대규모 비즈니스 운영 사례</span></li></ol></div></div>
 </div>
 <div class="days-section">
   <div class="days-section-title">이번 주 일별 보기</div>
