@@ -132,11 +132,16 @@ _DAILY_CSS = """<style>
   .item details[open] > summary .item-toggle::before { content: "\2212"; color: var(--accent); }
   .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
-  .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* svg 인라인 max-width:100% 가 좁은 화면에서 그림을 1/3 로 압착해 글자를 뭉갠다.
+     원본 크기를 지키고 컨테이너에서 옆으로 밀어 본다. */
+  .item-diagram svg { max-width: none !important; }
+  /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
+  .item-diagram { --accent: #b08a2a; --accent-wash: #f6f1e2; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
     background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
-  .item-diagram svg { height: auto; display: block; margin: 0 auto; }
+  .item-diagram svg { height: auto; display: block; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
     font-family: var(--serif); font-style: italic; font-size: 0.74rem; color: #7d7364; text-align: center; }
   .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }

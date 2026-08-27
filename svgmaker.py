@@ -29,13 +29,24 @@ JSON만 출력해. 마크다운 펜스나 설명 없이.
 
 규칙:
 - label 은 [내용]에 나온 구체적인 이름을 쓴다. "시스템", "데이터", "처리" 같은 뭉뚱그린 말은 금지.
-- edge 의 label 은 반드시 채운다. 동사로 쓴다. "연결", "관련"은 금지.
+- edge 의 label 은 반드시 채운다. 동사로 쓴다. "연결", "관련"은 금지. 12자를 넘기지 않는다.
 - [내용]에 수치가 있으면 note 나 edge label 에 넣는다. 없는 수치를 지어내지 않는다.
-- node 는 3~5개.
+- node 는 3~4개. 좁은 화면에서 읽혀야 하므로 5개를 넘기지 않는다.
 - compare 일 때만 groups 를 정확히 2개 만들고, 각 그룹에 노드를 2개 이상 담는다.
   두 그룹이 같은 축으로 대응돼야 한다. 수치가 있으면 양쪽 note 에 넣어 차이가 보이게 한다.
   나머지 type 은 groups 를 생략한다.
-- 그릴 구조가 없는 글이면 {{"type":"none"}} 만 출력한다.
+
+빼는 것이 먼저다:
+- 항상 붙어 다니는 두 노드는 하나로 합친다.
+- 배치만 봐도 관계가 뻔하면 edge 를 넣지 않는다. edge 는 정보를 나를 때만 그린다.
+- note 는 수치나 조건이 있을 때만 넣는다. 없으면 빈 문자열로 둔다.
+- 지울 것이 없을 때가 완성이다. 채울 것이 없을 때가 아니다.
+
+그리지 않아야 할 때 — 아래에 하나라도 해당하면 {{"type":"none"}} 만 출력한다:
+- 잘 쓴 문단 하나가 같은 일을 하는 경우.
+- 항목을 늘어놓기만 하는 글(릴리스 목록, 링크 모음, 단순 공지, 인용).
+- 노드가 2개 이하로만 나오는 경우.
+- [내용]에 근거가 없어 이름을 지어내야 하는 경우.
 """
 
 MIN_CONTENT = 150
@@ -43,7 +54,7 @@ _ESC = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}
 
 # ── 레이아웃 상수 (그리드 정렬용) ──
 NODE_W = 176
-GAP_X, GAP_Y = 82, 34
+GAP_X, GAP_Y = 48, 32   # 좁은 화면을 생각해 가로 간격을 좁게 잡는다
 PAD_X, PAD_Y = 16, 50
 CHAR_W = 7.0          # 13px 한글 기준 대략 폭
 LABEL_MAX = 13        # 노드 라벨 한 줄 최대 글자 (한글 13자 ≈ 168px)
@@ -153,9 +164,10 @@ def _title_text(w: int, title: str) -> str:
 
 
 def _render_flow(spec: dict) -> str:
-    """좌→우 파이프라인. 노드가 4개를 넘으면 2줄로 접어 가로 폭을 억제한다."""
+    """좌→우 파이프라인. 한 줄에 3개까지만 두어 가로 폭을 억제한다.
+    노드 4개를 한 줄에 놓으면 982px 가 되어 모바일에서 1/3 로 압착됐다."""
     nodes = spec["nodes"]
-    per_row = 4 if len(nodes) > 4 else len(nodes)
+    per_row = 3 if len(nodes) > 3 else len(nodes)
     rows = [nodes[i:i + per_row] for i in range(0, len(nodes), per_row)]
     row_h = [max(_node_height(n.get("label", ""), n.get("note", "")) for n in row) for row in rows]
     w = PAD_X * 2 + per_row * NODE_W + (per_row - 1) * GAP_X
