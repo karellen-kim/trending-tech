@@ -285,7 +285,7 @@ def save_weekly_page(today: date) -> None:
 def save_monthly_page(today: date) -> str:
     """그 달의 주간 해석들을 모아 월간 페이지를 만든다. 만든 파일명을 돌려준다."""
     mid = digest.month_id(today.year, today.month)
-    weeks = digest.load_month(today.year, today.month)
+    weeks = list(reversed(digest.load_month(today.year, today.month)))
     if not weeks:
         return ""
 

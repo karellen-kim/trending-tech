@@ -102,7 +102,9 @@ def load_month(year: int, month: int) -> list[dict]:
         if not days:
             continue
         try:
-            first = date.fromisoformat(days[0]["date"])
+            # days 는 최신순으로 저장돼 있어 [0] 이 그 주의 마지막 날이다.
+            # 월 경계에 걸친 주(예: 7/27~8/2)를 잘못된 달로 넣지 않으려면 min 을 쓴다.
+            first = min(date.fromisoformat(d["date"]) for d in days)
         except Exception:
             continue
         if (first.year, first.month) != (year, month):
