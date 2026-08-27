@@ -118,20 +118,20 @@
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
   .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
     align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
-    letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0; }
   .item-name a { color: var(--ink); text-decoration: none; }
   .item-name a:hover { color: var(--green); }
   .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 1.15rem 1.2rem; }
+  .item-body { padding: 0 1rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
