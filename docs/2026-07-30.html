@@ -28,9 +28,9 @@
 </style>
 <style>
   body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
-  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
-  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
-  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
   .top-bar { display: flex; align-items: center; justify-content: space-between;
@@ -73,9 +73,9 @@
   .highlight-section .section-icon { color: var(--accent-deep); }
   .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
   .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
@@ -118,10 +118,11 @@
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
-  .item-head { padding: 1rem 0; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
     letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
@@ -130,12 +131,11 @@
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 0 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
-    border: 1px dashed #d3c9b1; }
+    background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -162,61 +162,79 @@
 <div class="page-meta">2026-07-30</div>
 <h1><em>30</em> Jul 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section" id="today-take">
+<div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 해석</span>
     
   </div>
   <div class="take"><p class="take-headline">LLM 에이전트의 자동 실행 신뢰성이 기술적 과제로 부상</p><p class="take-body">5개 논문(11-15)이 에이전트 운영체제, 마트료시카 배치, 자기평가 편향 진단, Agent-Speculator 예측, 계층적 스킬 강화라는 해답을 동시에 제시하고 있다. 이는 LLM을 단순 추론 엔진에서 자율 실행 시스템으로 보는 패러다임이 실무화되면서, 장시간 자동 실행 시 신뢰성 보장이 핵심 문제로 구체화되고 있음을 의미한다.</p><div class="take-refs"><span>근거</span><a href="https://arxiv.org/abs/2607.25076" target="_blank" rel="noopener">에이전트 운영체제를 향하여 - 클래식 및 클라우드 OS의 교훈</a> · <a href="https://arxiv.org/abs/2607.25152" target="_blank" rel="noopener">에이전트 루프가 정체를 진전으로 착각하는 경우는 언제인가? 자기평가 편향과 장기 자동 LLM 에이전트 루프의 외부 기반 검증</a> · <a href="https://arxiv.org/abs/2607.25090" target="_blank" rel="noopener">마트료시카 에이전트: 장기 머신러닝 엔지니어링을 위한 하위 에이전트 전개</a> · <a href="https://arxiv.org/abs/2607.25816" target="_blank" rel="noopener">추론하면서 추측하기: Joint Agent-Speculator RL을 통한 도구 호출 예측 학습</a> · <a href="https://arxiv.org/abs/2607.25853" target="_blank" rel="noopener">HiSkill: 계층적 스킬 그래프로 LLM 에이전트 강화하기</a></div></div>
-</div><div class="section highlight-section" id="highlights">
-  <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">오늘의 하이라이트</span>
-    
-  </div>
-  <ul class="highlight-list"><li>에이전트용 OS: 클래식/클라우드 운영체제의 설계 원리 및 교훈을 에이전트 시스템에 적용</li><li>장시간 에이전트 루프의 자기평가 편향 분석: 정체를 진전으로 착각하는 문제 진단</li><li>계층적 부분 에이전트: 복잡한 ML 엔지니어링을 작은 단계로 분해하여 해결</li><li>에이전트 성능 최적화 시스템: 스킬과 메모리 실행 구조를 통합하여 효율성 강화</li><li>클라우드 네이티브 GIS 플랫폼: 가벼운 아키텍처로 지리정보 시각화의 접근성 향상</li></ul>
 </div><div class="section" id="papers">
   <div class="section-header">
     <span class="section-icon">PAPER</span>
     <span class="section-title">AI / LLM 논문</span>
     <span class="section-count">5개</span>
   </div>
-  <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.25076" target="_blank" rel="noopener">에이전트 운영체제를 향하여 - 클래식 및 클라우드 OS의 교훈</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">내용이 불충분합니다. Abstract가 "are curr"로 끝나 완전하지 않아 정확한 요약이 불가능합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.25076" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.25090" target="_blank" rel="noopener">마트료시카 에이전트: 장기 머신러닝 엔지니어링을 위한 하위 에이전트 전개</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">기계학습 엔지니어링(MLE) 작업은 반복적인 디버깅과 개선을 통해 장기적 의사결정을 요구합니다. 단일 에이전트로 이를 수행하기는 어려운데, 긴 문맥과 많은 노이즈를 관리하면서 광대한 해결 공간을 탐색하고 제한된 모델 용량 및 계산 예산 내에서 효과적이어야 하기 때문입니다. 이를 해결하기 위해 저자들은 계층적 에이전트 프레임워크인 Matryoshka Agent를 제안합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.25090" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.25152" target="_blank" rel="noopener">에이전트 루프가 정체를 진전으로 착각하는 경우는 언제인가? 자기평가 편향과 장기 자동 LLM 에이전트 루프의 외부 기반 검증</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">자율 LLM 에이전트가 장시간 실행될 때 자기 평가 편향으로 인해 실제 진전이 없는데도 진행 중이라고 착각하는 "진행 환상(progress mirage)" 문제를 다룬다. 에이전트가 자신의 작업을 스스로 평가하면 그럴듯한 변화를 진전으로 인정하지만 실제 결과는 정체되거나 악화될 수 있다. 이는 평가자가 어떤 정보를 기반으로 판단하는지의 문제이며, 연구팀은 에이전트와 도구는 고정하고 평가자의 정보 채널만 조작하는 테스트베드를 구축했다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.25152" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.25816" target="_blank" rel="noopener">추론하면서 추측하기: Joint Agent-Speculator RL을 통한 도구 호출 예측 학습</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">LLM 에이전트가 도구 호출 결과를 기다리는 동안 다음 도구 호출을 미리 예측하는 speculation 기법을 다룬다. 기존 speculator는 별도의 draft model이나 cached trace를 사용하지만, speculator-agent gap 문제가 있다. 논문은 타겟 에이전트 자체가 강한 next-call speculator 역할을 할 수 있다고 주장하며, 이를 통해 더 단순한 설계가 가능함을 보인다. (초록이 미완성으로 끝나 전체 내용 파악에 제약이 있음)</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.25816" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.25853" target="_blank" rel="noopener">HiSkill: 계층적 스킬 그래프로 LLM 에이전트 강화하기</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">HiSkill은 LLM 에이전트가 long-horizon 작업에서 경험을 재사용하기 위한 hierarchical skill graph 프레임워크입니다. 기존의 trajectory-to-skill 방법들이 독립적으로 저장/검색되는 평면 구조의 high-level textual skills을 생성하면서 skill 관계를 충분히 활용하지 못하고 high-level skills와 executable actions 간 격차를 유지하는 문제를 해결합니다. HiSkill은 상호작용 궤적들을 directed graph로 조직화합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.25853" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>에이전트 운영체제를 향하여 - 클래식 및 클라우드 OS의 교훈</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">내용이 불충분합니다. Abstract가 "are curr"로 끝나 완전하지 않아 정확한 요약이 불가능합니다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.25076" target="_blank" rel="noopener">에이전트 운영체제를 향하여 - 클래식 및 클라우드 OS의 교훈</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>마트료시카 에이전트: 장기 머신러닝 엔지니어링을 위한 하위 에이전트 전개</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">기계학습 엔지니어링(MLE) 작업은 반복적인 디버깅과 개선을 통해 장기적 의사결정을 요구합니다. 단일 에이전트로 이를 수행하기는 어려운데, 긴 문맥과 많은 노이즈를 관리하면서 광대한 해결 공간을 탐색하고 제한된 모델 용량 및 계산 예산 내에서 효과적이어야 하기 때문입니다. 이를 해결하기 위해 저자들은 계층적 에이전트 프레임워크인 Matryoshka Agent를 제안합니다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.25090" target="_blank" rel="noopener">마트료시카 에이전트: 장기 머신러닝 엔지니어링을 위한 하위 에이전트 전개</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>에이전트 루프가 정체를 진전으로 착각하는 경우는 언제인가? 자기평가 편향과 장기 자동 LLM 에이전트 루프의 외부 기반 검증</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">자율 LLM 에이전트가 장시간 실행될 때 자기 평가 편향으로 인해 실제 진전이 없는데도 진행 중이라고 착각하는 "진행 환상(progress mirage)" 문제를 다룬다. 에이전트가 자신의 작업을 스스로 평가하면 그럴듯한 변화를 진전으로 인정하지만 실제 결과는 정체되거나 악화될 수 있다. 이는 평가자가 어떤 정보를 기반으로 판단하는지의 문제이며, 연구팀은 에이전트와 도구는 고정하고 평가자의 정보 채널만 조작하는 테스트베드를 구축했다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.25152" target="_blank" rel="noopener">에이전트 루프가 정체를 진전으로 착각하는 경우는 언제인가? 자기평가 편향과 장기 자동 LLM 에이전트 루프의 외부 기반 검증</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>추론하면서 추측하기: Joint Agent-Speculator RL을 통한 도구 호출 예측 학습</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">LLM 에이전트가 도구 호출 결과를 기다리는 동안 다음 도구 호출을 미리 예측하는 speculation 기법을 다룬다. 기존 speculator는 별도의 draft model이나 cached trace를 사용하지만, speculator-agent gap 문제가 있다. 논문은 타겟 에이전트 자체가 강한 next-call speculator 역할을 할 수 있다고 주장하며, 이를 통해 더 단순한 설계가 가능함을 보인다. (초록이 미완성으로 끝나 전체 내용 파악에 제약이 있음)</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.25816" target="_blank" rel="noopener">추론하면서 추측하기: Joint Agent-Speculator RL을 통한 도구 호출 예측 학습</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>HiSkill: 계층적 스킬 그래프로 LLM 에이전트 강화하기</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">HiSkill은 LLM 에이전트가 long-horizon 작업에서 경험을 재사용하기 위한 hierarchical skill graph 프레임워크입니다. 기존의 trajectory-to-skill 방법들이 독립적으로 저장/검색되는 평면 구조의 high-level textual skills을 생성하면서 skill 관계를 충분히 활용하지 못하고 high-level skills와 executable actions 간 격차를 유지하는 문제를 해결합니다. HiSkill은 상호작용 궤적들을 directed graph로 조직화합니다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.25853" target="_blank" rel="noopener">HiSkill: 계층적 스킬 그래프로 LLM 에이전트 강화하기</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="hn-reddit">
   <div class="section-header">
@@ -225,75 +243,55 @@
     <span class="section-count">10개</span>
   </div>
   <div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/openai/codex-security" target="_blank" rel="noopener">Codex 보안</a></div>
     <div class="item-meta">HN · 565 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/openai/codex-security" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/twalichiewicz/HNewhere" target="_blank" rel="noopener">Show HN: HN 링크마다 탭 2개씩 열어야 해서 지쳐 사용자스크립트를 만들었다</a></div>
     <div class="item-meta">HN · 389 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/twalichiewicz/HNewhere" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://koreader.rocks/" target="_blank" rel="noopener">KOReader</a></div>
     <div class="item-meta">HN · 356 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://koreader.rocks/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://tailscale.com/blog/jailbroken-kindle-proxy-tun-modes" target="_blank" rel="noopener">탈옥 Kindle을 위한 더 많은 Tailscale 팁</a></div>
     <div class="item-meta">HN · 321 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://tailscale.com/blog/jailbroken-kindle-proxy-tun-modes" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.datagubbe.se/scenegui/" target="_blank" rel="noopener">Demo Scene의 사용자 인터페이스</a></div>
     <div class="item-meta">HN · 315 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.datagubbe.se/scenegui/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://mac-classic.com/news/half-life-ported-to-mac-os-9/" target="_blank" rel="noopener">Half-Life Mac OS 9로 포팅</a></div>
     <div class="item-meta">HN · 288 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://mac-classic.com/news/half-life-ported-to-mac-os-9/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.euronews.com/culture/2026/07/29/dj-kavinsky-known-for-his-track-nightcall-found-dead-at-his-paris-home" target="_blank" rel="noopener">프랑스 음악가 Kavinsky 사망</a></div>
     <div class="item-meta">HN · 202 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.euronews.com/culture/2026/07/29/dj-kavinsky-known-for-his-track-nightcall-found-dead-at-his-paris-home" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://reframe.camera/" target="_blank" rel="noopener">ReFrame – 전자잉크 카메라</a></div>
     <div class="item-meta">HN · 191 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://reframe.camera/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://enklypesalt.com/posts/context-collapse-part3-ai-worming-through-word/" target="_blank" rel="noopener">Copilot for Word를 통해 자가 전파하는 문서 기반 AI 웜</a></div>
     <div class="item-meta">HN · 174 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://enklypesalt.com/posts/context-collapse-part3-ai-worming-through-word/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://micrologics.org/blog/sqlite-in-production-optimizing-wal-mode-concurrency-and-vfs-layers-for-low-latency-app-servers" target="_blank" rel="noopener">프로덕션 SQLite: WAL 모드, 동시성, VFS 계층 최적화</a></div>
     <div class="item-meta">HN · 167 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://micrologics.org/blog/sqlite-in-production-optimizing-wal-mode-concurrency-and-vfs-layers-for-low-latency-app-servers" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="github">
   <div class="section-header">
@@ -302,40 +300,51 @@
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/opengeos/GeoLibre" target="_blank" rel="noopener">opengeos/GeoLibre</a></div>
-    <div class="item-meta">3,806</div>
-    <div class="item-summary">GeoLibre는 경량의 클라우드 네이티브 GIS 플랫폼이다. 지리공간 데이터의 시각화, 탐색, 분석을 위해 설계되었다. 웹 브라우저, 데스크톱, 모바일, Jupyter 노트북 등 다양한 환경에서 실행된다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/opengeos/GeoLibre" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">opengeos/GeoLibre</span>
+      <span class="item-meta">3,806</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">GeoLibre는 경량의 클라우드 네이티브 GIS 플랫폼이다. 지리공간 데이터의 시각화, 탐색, 분석을 위해 설계되었다. 웹 브라우저, 데스크톱, 모바일, Jupyter 노트북 등 다양한 환경에서 실행된다.</div>
+      <div class="item-link"><a href="https://github.com/opengeos/GeoLibre" target="_blank" rel="noopener">opengeos/GeoLibre</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/moeru-ai/airi" target="_blank" rel="noopener">moeru-ai/airi</a></div>
-    <div class="item-meta">45,221</div>
-    <div class="item-summary">Airi는 자체 호스팅이 가능한 개인 소유의 Grok 컴패니언입니다. 와이후의 영혼과 사이버 생명을 담아내어 Neuro-sama의 수준을 목표로 합니다. 실시간 음성 채팅, 마인크래프트, 팩토리오 플레이 기능을 지원하며, Web, macOS, Windows 플랫폼에서 이용 가능합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/moeru-ai/airi" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">moeru-ai/airi</span>
+      <span class="item-meta">45,221</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Airi는 자체 호스팅이 가능한 개인 소유의 Grok 컴패니언입니다. 와이후의 영혼과 사이버 생명을 담아내어 Neuro-sama의 수준을 목표로 합니다. 실시간 음성 채팅, 마인크래프트, 팩토리오 플레이 기능을 지원하며, Web, macOS, Windows 플랫폼에서 이용 가능합니다.</div>
+      <div class="item-link"><a href="https://github.com/moeru-ai/airi" target="_blank" rel="noopener">moeru-ai/airi</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">affaan-m/ECC</a></div>
-    <div class="item-meta">235,331</div>
-    <div class="item-summary">affaan-m/ECC는 에이전트 하네스 성능 최적화 시스템입니다. Skills, instincts, memory, security, research-first development 등의 기능을 포함하며, Claude Code, Codex, Opencode, Cursor 등 다양한 플랫폼을 지원합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">affaan-m/ECC</span>
+      <span class="item-meta">235,331</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">affaan-m/ECC는 에이전트 하네스 성능 최적화 시스템입니다. Skills, instincts, memory, security, research-first development 등의 기능을 포함하며, Claude Code, Codex, Opencode, Cursor 등 다양한 플랫폼을 지원합니다.</div>
+      <div class="item-link"><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">affaan-m/ECC</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/huggingface/speech-to-speech" target="_blank" rel="noopener">huggingface/speech-to-speech</a></div>
     <div class="item-meta">7,675</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/huggingface/speech-to-speech" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/1jehuang/jcode" target="_blank" rel="noopener">1jehuang/jcode</a></div>
     <div class="item-meta">13,190</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/1jehuang/jcode" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div>
 </body>

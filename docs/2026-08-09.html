@@ -28,9 +28,9 @@
 </style>
 <style>
   body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
-  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
-  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
-  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
   .top-bar { display: flex; align-items: center; justify-content: space-between;
@@ -73,9 +73,9 @@
   .highlight-section .section-icon { color: var(--accent-deep); }
   .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
   .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
@@ -118,10 +118,11 @@
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
-  .item-head { padding: 1rem 0; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
     letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
@@ -130,12 +131,11 @@
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 0 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
-    border: 1px dashed #d3c9b1; }
+    background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -162,75 +162,68 @@
 <div class="page-meta">2026-08-09</div>
 <h1><em>09</em> Aug 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section" id="today-take">
+<div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 해석</span>
     
   </div>
   <div class="take"><p class="take-headline">데이터 시스템이 배치·실시간·온라인 쿼리를 각각 최적화하는 방향으로 분화하는 중</p><p class="take-body">Alibaba의 Fluss는 실시간 스트림과 배치를 통합한 Agentic Lake를 완전 실시간으로 구현하고(1), Spotify는 대규모 배치 데이터를 온라인 포인트 쿼리에도 활용 가능하도록 데이터 레이크 인덱싱 기술을 개발했으며(6), Shopify는 재고 예약 워크로드를 Redis에서 MySQL로 마이그레이션해 스케일을 달성했다(13). 세 곳 모두 '모든 데이터를 한 도구로'라는 모노리식 접근에서 벗어나 워크로드와 시간축에 맞춰 데이터 아키텍처를 재설계하는 중이다.</p><div class="take-refs"><span>근거</span><a href="https://www.alibabacloud.com/blog/apache-fluss-graduates-to-a-top-level-project-making-agentic-lake-fully-real-time-with-lakestream_603435" target="_blank" rel="noopener">Apache Fluss의 Top Level Project 승격으로 Lakestream이 Agentic Lake를 완전 실시간으로 구현</a> · <a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">온라인 포인트 쿼리를 위한 데이터 레이크 인덱싱</a> · <a href="https://shopify.engineering/scaling-inventory-reservations" target="_blank" rel="noopener">Shopify가 재고 예약용 Redis를 MySQL로 대체했다–그리고 확장에 성공했다</a></div></div>
-</div><div class="section highlight-section" id="highlights">
-  <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">오늘의 하이라이트</span>
-    
-  </div>
-  <ul class="highlight-list"><li>알리바바, 최고 성능 대규모 언어모델 Qwen3.8-Max 출시로 LLM 경쟁 심화.</li><li>Claude Code, Pro/Max/Team에서 자동 모드 기본화로 개발 효율성 대폭 향상.</li><li>Apache Fluss 정식 프로젝트 졸업으로 실시간 데이터 레이크 표준화 가속.</li><li>자기 개선 RLM 에이전트 오픈소스화로 자동화된 코딩 워크플로우 현실화.</li><li>모노레포 전용 그래프 RAG로 대규모 코드베이스 검색 및 이해도 획기적 개선.</li></ul>
 </div><div class="section" id="tech-blog">
   <div class="section-header">
     <span class="section-icon">TECH</span>
     <span class="section-title">기술 블로그</span>
     <span class="section-count">7개</span>
   </div>
-  <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.alibabacloud.com/blog/apache-fluss-graduates-to-a-top-level-project-making-agentic-lake-fully-real-time-with-lakestream_603435" target="_blank" rel="noopener">Apache Fluss의 Top Level Project 승격으로 Lakestream이 Agentic Lake를 완전 실시간으로 구현</a></div>
+  <div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.alibabacloud.com/blog/apache-fluss-graduates-to-a-top-level-project-making-agentic-lake-fully-real-time-with-lakestream_603435" target="_blank" rel="noopener">Apache Fluss의 Top Level Project 승격으로 Lakestream이 Agentic Lake를 완전 실시간으로 구현</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/apache-fluss-graduates-to-a-top-level-project-making-agentic-lake-fully-real-time-with-lakestream_603435" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-id-verification-qwen-powered-detection-and-response-for-financial-grade-identity-security_603418" target="_blank" rel="noopener">Alibaba Cloud 신원 검증: 금융급 신원 보안을 위한 Qwen 기반 탐지 및 대응</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-id-verification-qwen-powered-detection-and-response-for-financial-grade-identity-security_603418" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-unveils-qwen3-8-max-its-largest-and-most-capable-flagship-model-to-date_603420" target="_blank" rel="noopener">Alibaba가 Qwen3.8-Max 공개: 지금까지 가장 크고 강력한 주력 모델</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-unveils-qwen3-8-max-its-largest-and-most-capable-flagship-model-to-date_603420" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-smart-studio-self-service-edition-now-live-internationally_603440" target="_blank" rel="noopener">Alibaba Cloud Smart Studio Self-Service Edition 국제 출시</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-smart-studio-self-service-edition-now-live-internationally_603440" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-unveils-wan3-0-with-twice-as-long-video-outputs-from-a-richer-variety-of-inputs_603439" target="_blank" rel="noopener">알리바바 Wan3.0 공개, 더욱 다양한 입력에서 2배 길이의 비디오 생성 가능</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-unveils-wan3-0-with-twice-as-long-video-outputs-from-a-richer-variety-of-inputs_603439" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>온라인 포인트 쿼리를 위한 데이터 레이크 인덱싱</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify 같은 기업들이 AI Agents와 온라인 서비스를 위해 페타바이트 규모의 데이터에 빠르게 접근해야 하는데, 기존의 분산 SQL 엔진(Trino, BigQuery)은 쿼리 계획 오버헤드로 인해 단일 행 조회도 느리다. Random Access Parquet(RAP)은 외부 인덱스로 키를 파일 위치에 직접 매핑하여 필요한 바이트만 정확히 읽음으로써 이 문제를 해결한다. RAP는 기존 Parquet 파일에서 작동하므로 ML 파이프라인, 분석 시스템과 같은 공간에서 저장소를 통합하고 비용 효율성을 높일 수 있다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">온라인 포인트 쿼리를 위한 데이터 레이크 인덱싱</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">온라인 포인트 쿼리를 위한 데이터 레이크 인덱싱</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify 같은 기업들이 AI Agents와 온라인 서비스를 위해 페타바이트 규모의 데이터에 빠르게 접근해야 하는데, 기존의 분산 SQL 엔진(Trino, BigQuery)은 쿼리 계획 오버헤드로 인해 단일 행 조회도 느리다. Random Access Parquet(RAP)은 외부 인덱스로 키를 파일 위치에 직접 매핑하여 필요한 바이트만 정확히 읽음으로써 이 문제를 해결한다. RAP는 기존 Parquet 파일에서 작동하므로 ML 파이프라인, 분석 시스템과 같은 공간에서 저장소를 통합하고 비용 효율성을 높일 수 있다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 비디오 장애 보고서</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify 팟캐스트 크리에이터들이 경험한 2개월간의 신뢰도 문제를 다룬 보고서다. 6월 24일 비디오 트랜스코딩 인프라가 최대 용량에 도달하면서 새 에피소드 발행이 수 시간 지연되었다. 시스템이 업로드 수신을 제대로 확인하지 못해 크리에이터들이 에피소드를 재업로드했고, 이로 인해 추가 부하가 발생했다. 트랜스코딩 인프라의 불충분한 여유 용량과 정기적인 배치 처리 작업이 복합적으로 작용했다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">콘텐츠 수집 및 팟캐스트 비디오 장애 보고서</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify 팟캐스트 크리에이터들이 경험한 2개월간의 신뢰도 문제를 다룬 보고서다. 6월 24일 비디오 트랜스코딩 인프라가 최대 용량에 도달하면서 새 에피소드 발행이 수 시간 지연되었다. 시스템이 업로드 수신을 제대로 확인하지 못해 크리에이터들이 에피소드를 재업로드했고, 이로 인해 추가 부하가 발생했다. 트랜스코딩 인프라의 불충분한 여유 용량과 정기적인 배치 처리 작업이 복합적으로 작용했다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 비디오 장애 보고서</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="dev-blogs">
   <div class="section-header">
@@ -239,12 +232,17 @@
     <span class="section-count">1개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/8/auto-mode/#atom-everything" target="_blank" rel="noopener">Claude Code의 Pro, Max, Team 플랜에서 자동 모드가 이제 기본값입니다</a></div>
-    <div class="item-meta">Simon Willison</div>
-    <div class="item-summary">Claude Code의 auto mode가 8월 14일부터 Pro, Max, Team plans에서 새 세션의 기본 설정으로 변경된다. Anthropic은 auto mode의 성능에 충분히 자신감을 가지고 있어 이번 변경을 결정했다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/Aug/8/auto-mode/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">Claude Code의 Pro, Max, Team 플랜에서 자동 모드가 이제 기본값입니다</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Claude Code의 auto mode가 8월 14일부터 Pro, Max, Team plans에서 새 세션의 기본 설정으로 변경된다. Anthropic은 auto mode의 성능에 충분히 자신감을 가지고 있어 이번 변경을 결정했다.</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Aug/8/auto-mode/#atom-everything" target="_blank" rel="noopener">Claude Code의 Pro, Max, Team 플랜에서 자동 모드가 이제 기본값입니다</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="hn-reddit">
   <div class="section-header">
@@ -253,110 +251,80 @@
     <span class="section-count">15개</span>
   </div>
   <div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.fastmail.com/blog/fastmail-offers-eu-data-region/" target="_blank" rel="noopener">Fastmail이 EU 데이터 리전 지원</a></div>
     <div class="item-meta">HN · 466 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.fastmail.com/blog/fastmail-offers-eu-data-region/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://seg6.space/posts/phone-server/" target="_blank" rel="noopener">이제 내 서버는 휴대폰</a></div>
     <div class="item-meta">HN · 418 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://seg6.space/posts/phone-server/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.redblobgames.com/pathfinding/heuristics/differential.html" target="_blank" rel="noopener">A* 경로 탐색을 위한 휴리스틱 개선</a></div>
     <div class="item-meta">HN · 306 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.redblobgames.com/pathfinding/heuristics/differential.html" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.andrewt.net/dithered-qr-codes/wtf/" target="_blank" rel="noopener">디더링 QR 코드</a></div>
     <div class="item-meta">HN · 289 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.andrewt.net/dithered-qr-codes/wtf/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://shopify.engineering/scaling-inventory-reservations" target="_blank" rel="noopener">Shopify가 재고 예약용 Redis를 MySQL로 대체했다–그리고 확장에 성공했다</a></div>
     <div class="item-meta">HN · 275 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://shopify.engineering/scaling-inventory-reservations" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://os8088.com/" target="_blank" rel="noopener">Os8088: IBM XT·286·386용 강력한 Mac 계열 OS</a></div>
     <div class="item-meta">HN · 211 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://os8088.com/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="http://longbets.org/601/" target="_blank" rel="noopener">이 예측의 원본 URL은 11년 뒤(2011년) 더 이상 이용할 수 없을 것입니다</a></div>
     <div class="item-meta">HN · 177 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="http://longbets.org/601/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://eclipsefan.org/?v=2&t=max&layers=eclipse%2Cbesselian%2Cumbra-live%2Cshadow-3d%2Ccloud-projection%2Cosm&lat=43.4623&lon=-3.8099&opacity=besselian%3A0.2%2Cumbra-live%3A0.2&zoom=6&palier=minute" target="_blank" rel="noopener">8월 12일 개기일식을 위한 오픈소스 인터랙티브 지도</a></div>
     <div class="item-meta">HN · 175 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://eclipsefan.org/?v=2&t=max&layers=eclipse%2Cbesselian%2Cumbra-live%2Cshadow-3d%2Ccloud-projection%2Cosm&lat=43.4623&lon=-3.8099&opacity=besselian%3A0.2%2Cumbra-live%3A0.2&zoom=6&palier=minute" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="http://www.davetech.co.uk/difficultycurves" target="_blank" rel="noopener">게임의 난이도 곡선 만들기</a></div>
     <div class="item-meta">HN · 145 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="http://www.davetech.co.uk/difficultycurves" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://blog.terrygodier.com/2026/08/09/mea-culpa-dark-hours.html" target="_blank" rel="noopener">내 잘못 – 어두운 시간</a></div>
     <div class="item-meta">HN · 131 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://blog.terrygodier.com/2026/08/09/mea-culpa-dark-hours.html" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vj8lag/73_neurips_workshops_and_not_a_single_one_on/" target="_blank" rel="noopener">73개의 NeurIPS 워크숍, 인과성에 관한 것은 단 하나도 없다 [R]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vj8lag/73_neurips_workshops_and_not_a_single_one_on/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vj3oqr/neurips_ai_assisted_review_authorsreviewers_d/" target="_blank" rel="noopener">NeurIPS AI Assisted Review 저자/심사자? [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vj3oqr/neurips_ai_assisted_review_authorsreviewers_d/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1viyloc/aaclijcnlp_commitment_submission_number_d/" target="_blank" rel="noopener">AACL-IJCNLP 기여 제출 번호 [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1viyloc/aaclijcnlp_commitment_submission_number_d/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vj1oq6/icde_results_d/" target="_blank" rel="noopener">ICDE 결과 [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vj1oq6/icde_results_d/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vjmw53/noiseaware_training_for_analog_hardware_accuracy/" target="_blank" rel="noopener">아날로그 하드웨어를 위한 노이즈 인식 학습: 정확도가 점진적으로 저하되기보다 임계값에서 붕괴한다 [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vjmw53/noiseaware_training_for_analog_hardware_accuracy/" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="github">
   <div class="section-header">
@@ -365,40 +333,65 @@
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/PrimeIntellect-ai/prime-agent" target="_blank" rel="noopener">PrimeIntellect-ai/prime-agent</a></div>
-    <div class="item-meta">10,224</div>
-    <div class="item-summary">Prime Agent는 일반 및 장기 작업용 오픈소스 코딩·연구 에이전트이다. RLM(Recursive Language Model)을 통해 컨텍스트를 변수로, 도구와 서브에이전트를 함수 호출처럼 취급하며 지속적인 REPL 내에서 작동한다. Continual Harness는 프롬프트, 메모리, 스킬 설명, 재사용 가능한 서브에이전트 사양을 지속 가능한 상태로 저장하여 Prime Agent가 개선할 수 있도록 설계되었다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/PrimeIntellect-ai/prime-agent" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">PrimeIntellect-ai/prime-agent</span>
+      <span class="item-meta">10,224</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Prime Agent는 일반 및 장기 작업용 오픈소스 코딩·연구 에이전트이다. RLM(Recursive Language Model)을 통해 컨텍스트를 변수로, 도구와 서브에이전트를 함수 호출처럼 취급하며 지속적인 REPL 내에서 작동한다. Continual Harness는 프롬프트, 메모리, 스킬 설명, 재사용 가능한 서브에이전트 사양을 지속 가능한 상태로 저장하여 Prime Agent가 개선할 수 있도록 설계되었다.</div>
+      <div class="item-link"><a href="https://github.com/PrimeIntellect-ai/prime-agent" target="_blank" rel="noopener">PrimeIntellect-ai/prime-agent</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/vitali87/code-graph-rag" target="_blank" rel="noopener">vitali87/code-graph-rag</a></div>
-    <div class="item-meta">2,755</div>
-    <div class="item-summary">요약: 내용이 불충분합니다. 제공된 텍스트는 로고 경로, CI/코드 품질 배지 정보, 그리고 GitHub 계정 정지 상태를 언급하는 주석만 포함하고 있으며, 프로젝트의 기능이나 목적에 대한 실질적 설명이 없습니다.<br><br>규칙에 따라 빈 문자열만 반환합니다:<br><br>``</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/vitali87/code-graph-rag" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">vitali87/code-graph-rag</span>
+      <span class="item-meta">2,755</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">요약: 내용이 불충분합니다. 제공된 텍스트는 로고 경로, CI/코드 품질 배지 정보, 그리고 GitHub 계정 정지 상태를 언급하는 주석만 포함하고 있으며, 프로젝트의 기능이나 목적에 대한 실질적 설명이 없습니다.규칙에 따라 빈 문자열만 반환합니다:``</div>
+      <div class="item-link"><a href="https://github.com/vitali87/code-graph-rag" target="_blank" rel="noopener">vitali87/code-graph-rag</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/msitarzewski/agency-agents" target="_blank" rel="noopener">msitarzewski/agency-agents</a></div>
-    <div class="item-meta">140,247</div>
-    <div class="item-summary">"The Agency"는 프론트엔드 개발자부터 Reddit 커뮤니티 전문가까지 다양한 분야의 전문화된 AI 에이전트 모음입니다. 각 에이전트는 독특한 성격과 실행 가능한 결과물을 제공하며 프로덕션 환경에 적합합니다. macOS, Linux, Windows용 네이티브 앱을 통해 Claude Code, Cursor, Codex, Gemini 등에 설치할 수 있으며, MIT 라이선스로 공개되어 있습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/msitarzewski/agency-agents" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">msitarzewski/agency-agents</span>
+      <span class="item-meta">140,247</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">"The Agency"는 프론트엔드 개발자부터 Reddit 커뮤니티 전문가까지 다양한 분야의 전문화된 AI 에이전트 모음입니다. 각 에이전트는 독특한 성격과 실행 가능한 결과물을 제공하며 프로덕션 환경에 적합합니다. macOS, Linux, Windows용 네이티브 앱을 통해 Claude Code, Cursor, Codex, Gemini 등에 설치할 수 있으며, MIT 라이선스로 공개되어 있습니다.</div>
+      <div class="item-link"><a href="https://github.com/msitarzewski/agency-agents" target="_blank" rel="noopener">msitarzewski/agency-agents</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/pranshuparmar/witr" target="_blank" rel="noopener">pranshuparmar/witr</a></div>
-    <div class="item-meta">20,344</div>
-    <div class="item-summary">witr은 프로세스, 포트, 컨테이너, 파일을 추적해서 그것을 시작한 정확한 체인을 찾는 도구입니다. 한 명령으로 동작하며 기계 가독성 JSON 형식 또는 대화형 TUI로 결과를 제공합니다. Linux, macOS, Windows, FreeBSD 등 여러 플랫폼을 지원하고, brew, conda, npm 등 다양한 패키지 매니저로 설치할 수 있습니다. 브라우저에서 시뮬레이션된 Linux 환경으로 설치 없이 직접 시도해볼 수 있습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/pranshuparmar/witr" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">pranshuparmar/witr</span>
+      <span class="item-meta">20,344</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">witr은 프로세스, 포트, 컨테이너, 파일을 추적해서 그것을 시작한 정확한 체인을 찾는 도구입니다. 한 명령으로 동작하며 기계 가독성 JSON 형식 또는 대화형 TUI로 결과를 제공합니다. Linux, macOS, Windows, FreeBSD 등 여러 플랫폼을 지원하고, brew, conda, npm 등 다양한 패키지 매니저로 설치할 수 있습니다. 브라우저에서 시뮬레이션된 Linux 환경으로 설치 없이 직접 시도해볼 수 있습니다.</div>
+      <div class="item-link"><a href="https://github.com/pranshuparmar/witr" target="_blank" rel="noopener">pranshuparmar/witr</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/google-deepmind/weathernext" target="_blank" rel="noopener">google-deepmind/weathernext</a></div>
-    <div class="item-meta">6,946</div>
-    <div class="item-summary">WeatherNext는 Google DeepMind와 Google Research가 개발한 전 지구적 중기 대기 및 사이클론 예측 모델(WN2)의 코드 저장소입니다. GraphCast, GenCast 등 이전 세대 모델 코드도 포함합니다. WN2 모델의 일일 예측 데이터는 Google Cloud, WeatherLab, OpenMeteo 등 여러 플랫폼을 통해 제공되며, 개발자 가이드, 기술 보고서, 논문 등의 자료가 함께 제공됩니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/google-deepmind/weathernext" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">google-deepmind/weathernext</span>
+      <span class="item-meta">6,946</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">WeatherNext는 Google DeepMind와 Google Research가 개발한 전 지구적 중기 대기 및 사이클론 예측 모델(WN2)의 코드 저장소입니다. GraphCast, GenCast 등 이전 세대 모델 코드도 포함합니다. WN2 모델의 일일 예측 데이터는 Google Cloud, WeatherLab, OpenMeteo 등 여러 플랫폼을 통해 제공되며, 개발자 가이드, 기술 보고서, 논문 등의 자료가 함께 제공됩니다.</div>
+      <div class="item-link"><a href="https://github.com/google-deepmind/weathernext" target="_blank" rel="noopener">google-deepmind/weathernext</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div>
 </body>

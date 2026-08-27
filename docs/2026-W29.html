@@ -28,9 +28,9 @@
 </style>
 <style>
   body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
-  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
-  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
-  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
   .top-bar { display: flex; align-items: center; justify-content: space-between;
@@ -73,9 +73,9 @@
   .highlight-section .section-icon { color: var(--accent-deep); }
   .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
   .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
@@ -118,10 +118,11 @@
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
-  .item-head { padding: 1rem 0; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
     letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
@@ -130,12 +131,11 @@
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 0 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
-    border: 1px dashed #d3c9b1; }
+    background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -158,6 +158,8 @@
   .days-section-title { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; color: var(--green);
     background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green);
     padding: 0.8rem 1.15rem; margin-bottom: 0.9rem; text-transform: none; }
+  /* 월간 페이지는 섹션 헤더 바로 아래에 주차 카드가 온다 — 붙지 않게 띄운다 */
+  .section-header + .day-link { margin-top: 0.9rem; }
   .day-link { display: flex; align-items: center; gap: 0.9rem; margin: 0 1.15rem 0.6rem;
     padding: 0.85rem 1rem; border: 1px solid var(--rule-strong); border-radius: 14px;
     background: var(--paper); text-decoration: none; color: var(--ink); transition: all 0.12s; }
@@ -180,13 +182,6 @@
     <span class="section-title">이 주의 해석</span>
   </div>
   <div class="take"><p class="take-headline">코드 리뷰·데이터 쿼리·의사결정이 AI 에이전트로 이양되며 개발팀 인프라의 주체가 교체되는 중</p><p class="take-body">Uber uReview는 주당 65K 변경의 90%를 자동 분석하고, Spotify는 개발자 경험을 '팀과 에이전트' 양쪽을 위해 재설계했으며, 이를 가능하게 한 건 도메인 컨텍스트와 DSL 아키텍처다. 개발자의 역할이 코드 저자에서 에이전트의 컨텍스트 제공자로 재정의되는 과정이 이번 주 전체를 관통한다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: 우버의 주간 약 65,000개 변경사항 중 90%를 분석하는 GenAI 코드 리뷰</a><span class="pick-why">주당 65K 변경의 90%를 자동화, 의사결정 이양의 증거</span></li><li><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩이 더 이상 제약이 아니다: Spotify에서 팀과 에이전트로 개발자 경험 확장하기</a><span class="pick-why">개발자·에이전트 역할 재정의의 가장 직접적 표현</span></li><li><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a><span class="pick-why">신뢰할 수 있는 에이전트 아키텍처의 기술적 기초</span></li><li><a href="https://www.alibabacloud.com/blog/giving-your-ai-agent-a-disposable-workspace-with-alibaba-cloud-agentrun_603324" target="_blank" rel="noopener">Alibaba Cloud AgentRun으로 AI 에이전트에 일회용 작업공간 제공하기</a><span class="pick-why">에이전트 인프라 전환의 구체적 기술 구현</span></li></ol></div></div>
-</div>
-<div class="section highlight-section" id="highlights">
-  <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">주간 하이라이트</span>
-  </div>
-  <ul class="highlight-list"><li><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: 우버의 주간 약 65,000개 변경사항 중 90%를 분석하는 GenAI 코드 리뷰</a></li><li><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">당신의 도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a></li><li><a href="https://martinfowler.com/articles/llm-and-dsls.html" target="_blank" rel="noopener">DSL이 LLM의 신뢰할 수 있는 사용을 가능하게 한다</a></li><li><a href="https://www.uber.com/blog/modernizing-artifact-storage/" target="_blank" rel="noopener">Uber의 아티팩트 스토리지 현대화 Uber의 10년 된 온프레미스 아티팩트 스토어는 월 5페타바이트 이상의 다운로드를 서빙해왔지만, 쓰기 장애, 무음 복제 실패, 수시간의 수동 재조정 위험에 처해 있었습니다. 팀은 MySQL 메타데이터 스토어를 기반으로 조건부 HTTP 요청을 통해 신선성을 검증하는 프록시 뒤의 다중 지역 클라우드 블롭 스토리지로 마이그레이션했습니다. 결과적으로 이그레스는 99% 이상 감소했으며, 99.99% 가용성을 유지하면서 아티팩트 이그레스 비용을 거의 90% 절감했습니다.</a></li><li><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify의 팀과 에이전트를 위한 개발자 경험 확대</a></li></ul>
 </div>
 <div class="days-section">
   <div class="days-section-title">이번 주 일별 보기</div>

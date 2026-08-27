@@ -28,9 +28,9 @@
 </style>
 <style>
   body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
-  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
-  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
-  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
   .top-bar { display: flex; align-items: center; justify-content: space-between;
@@ -73,9 +73,9 @@
   .highlight-section .section-icon { color: var(--accent-deep); }
   .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
   .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
@@ -118,10 +118,11 @@
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
-  .item-head { padding: 1rem 0; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
     letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
@@ -130,12 +131,11 @@
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 0 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
-    border: 1px dashed #d3c9b1; }
+    background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -161,8 +161,8 @@
 </div>
 <div class="page-meta">2026-05-31</div>
 <h1><em>31</em> May 2026</h1>
-<nav class="page-nav"><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section" id="today-take">
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 해석</span>
@@ -175,69 +175,51 @@
     <span class="section-title">기술 블로그</span>
     <span class="section-count">9개</span>
   </div>
-  <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: GenAI code review analyzing 90% of Uber's ~65K weekly changes</a></div>
+  <div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: GenAI code review analyzing 90% of Uber's ~65K weekly changes</a></div>
     <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">Apache Hudi: 19,500 datasets, 6 trillion daily rows, 10 PB ingestion</a></div>
     <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/apache-hudi-at-uber/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">Moirai: Lossless Straggler Mitigation â accepted at SOSP 2025</a></div>
     <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">Building Uber's Multi-Cloud Secrets Management Platform</a></div>
     <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">Zero-Growth Stack, Real Gains: How Stack Allocation Can Save 10% CPU in GoGo's default 2KB stack allocation triggered wasteful expansion cycles consuming 10% CPU in Uber's high-throughput services. The team built a profile-guided automation system reading CPU profiles and binary symbols to compute optimal per-service stack sizes. Result: CPU overhead dropped below 1%, enabling 16% efficiency gains while keeping memory overhead under 2% across 2M cores.Read more →</a></div>
     <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/zero-growth-stack/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">Better Experiments with LLM Evals — A funnel, not a fork</a></div>
     <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/better-experiments-with-llm-evals-a-funnel-not-a-fork" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">Building a Natural Language Interface to the Spotify Ads API with Claude Code Plugins</a></div>
     <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/5/spotify-ads-api-claude-plugins" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/4/background-coding-agents-dataset-migrations-honk-part-4" target="_blank" rel="noopener">Background Coding Agents: Supercharging Downstream Consumer Dataset Migrations (Honk, Part 4)</a></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://engineering.atspotify.com/2026/4/background-coding-agents-dataset-migrations-honk-part-4" target="_blank" rel="noopener">Background Coding Agents: Supercharging Downstream Consumer Dataset Migrations (Honk, Part 4)</a></div>
     <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/4/background-coding-agents-dataset-migrations-honk-part-4" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/4/anthropic-agentic-development" target="_blank" rel="noopener">Let’s Talk Agentic Development: Spotify x Anthropic Live</a></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://engineering.atspotify.com/2026/4/anthropic-agentic-development" target="_blank" rel="noopener">Let’s Talk Agentic Development: Spotify x Anthropic Live</a></div>
     <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/4/anthropic-agentic-development" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="dev-blogs">
   <div class="section-header">
@@ -246,40 +228,30 @@
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://simonwillison.net/2026/May/31/anthropic-run-rate/#atom-everything" target="_blank" rel="noopener">Quoting Karen Kwok for Reuters Breakingviews</a></div>
     <div class="item-meta">Simon Willison</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/May/31/anthropic-run-rate/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://simonwillison.net/2026/May/30/how-we-contain-claude/#atom-everything" target="_blank" rel="noopener">How we contain Claude across products</a></div>
     <div class="item-meta">Simon Willison</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/May/30/how-we-contain-claude/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://simonwillison.net/2026/May/30/pyodide-asgi-browser/#atom-everything" target="_blank" rel="noopener">Running Python ASGI apps in the browser via Pyodide + a service worker</a></div>
     <div class="item-meta">Simon Willison</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/May/30/pyodide-asgi-browser/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://simonwillison.net/2026/May/30/retiring-from-tech-to-live-offline/#atom-everything" target="_blank" rel="noopener">I Am Retiring from Tech to Live Offline</a></div>
     <div class="item-meta">Simon Willison</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/May/30/retiring-from-tech-to-live-offline/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://simonwillison.net/2026/May/30/daniel-jalkut/#atom-everything" target="_blank" rel="noopener">Quoting Daniel Jalkut</a></div>
     <div class="item-meta">Simon Willison</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/May/30/daniel-jalkut/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="hn-reddit">
   <div class="section-header">
@@ -288,243 +260,175 @@
     <span class="section-count">34개</span>
   </div>
   <div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://consumerrights.wiki/w/Microsoft_Office_2019_and_2021_for_Mac_view-only_conversion_(2026)" target="_blank" rel="noopener">Microsoft degrades functionality of perpetually-licensed offline products</a></div>
     <div class="item-meta">HN · 395 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://consumerrights.wiki/w/Microsoft_Office_2019_and_2021_for_Mac_view-only_conversion_(2026)" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://pandoc-templates.org/" target="_blank" rel="noopener">Pandoc Templates</a></div>
     <div class="item-meta">HN · 364 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://pandoc-templates.org/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://openrouter.ai/announcements/series-b" target="_blank" rel="noopener">OpenRouter raises $113M Series B</a></div>
     <div class="item-meta">HN · 362 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://openrouter.ai/announcements/series-b" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/kristapsdz/openrsync" target="_blank" rel="noopener">Openrsync: An implementation of rsync, by the OpenBSD team</a></div>
     <div class="item-meta">HN · 323 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/kristapsdz/openrsync" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://ziglang.org/devlog/2026/#2026-05-26" target="_blank" rel="noopener">Zig: Build System Reworked</a></div>
     <div class="item-meta">HN · 321 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://ziglang.org/devlog/2026/#2026-05-26" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.brethorsting.com/blog/2026/05/domain-expertise-has-always-been-the-real-moat/" target="_blank" rel="noopener">Domain expertise has always been the real moat</a></div>
     <div class="item-meta">HN · 303 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.brethorsting.com/blog/2026/05/domain-expertise-has-always-been-the-real-moat/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://s-macke.github.io/VoxelSpace/" target="_blank" rel="noopener">Voxel Space (2017)</a></div>
     <div class="item-meta">HN · 252 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://s-macke.github.io/VoxelSpace/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://newsroom.accenture.com/news/2026/accenture-to-acquire-ookla-to-strengthen-network-intelligence-and-experience-with-data-and-ai-for-enterprises" target="_blank" rel="noopener">Accenture to acquire Ookla</a></div>
     <div class="item-meta">HN · 243 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://newsroom.accenture.com/news/2026/accenture-to-acquire-ookla-to-strengthen-network-intelligence-and-experience-with-data-and-ai-for-enterprises" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/Hawzen/I-found-a-seashell-in-the-middle-of-the-desert" target="_blank" rel="noopener">I found a seashell in the middle of the desert</a></div>
     <div class="item-meta">HN · 227 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/Hawzen/I-found-a-seashell-in-the-middle-of-the-desert" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.economist.com/europe/2026/05/28/leos-first-encyclical-attacks-technological-messianism" target="_blank" rel="noopener">Leo's first encyclical attacks technological messianism</a></div>
     <div class="item-meta">HN · 187 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.economist.com/europe/2026/05/28/leos-first-encyclical-attacks-technological-messianism" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1ts2m9n/workshop_submission_for_main_conference_paper/" target="_blank" rel="noopener">Workshop submission for main conference paper under review [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1ts2m9n/workshop_submission_for_main_conference_paper/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1ts6j6j/nvidiaqwen3635ba3bnvfp4_hugging_face/" target="_blank" rel="noopener">nvidia/Qwen3.6-35B-A3B-NVFP4 · Hugging Face</a></div>
     <div class="item-meta">r/LocalLLaMA</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1ts6j6j/nvidiaqwen3635ba3bnvfp4_hugging_face/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tsd41n/someone_out_there_likely_needs_this/" target="_blank" rel="noopener">Someone out there likely needs this</a></div>
     <div class="item-meta">r/LocalLLaMA</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tsd41n/someone_out_there_likely_needs_this/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tsbl9j/cost_analysis_of_my_64k_local_llm_server/" target="_blank" rel="noopener">Cost Analysis of my $6.4k Local LLM Server</a></div>
     <div class="item-meta">r/LocalLLaMA</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tsbl9j/cost_analysis_of_my_64k_local_llm_server/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tshmxa/my_home_data_center/" target="_blank" rel="noopener">My home data center</a></div>
     <div class="item-meta">r/LocalLLaMA</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tshmxa/my_home_data_center/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tse423/psa_5060ti_16gb_for_30099_5070ti_16gb_for_69999/" target="_blank" rel="noopener">[PSA] 5060ti 16GB for $300.99. 5070ti 16GB for $699.99. Best Buy in store clearance.</a></div>
     <div class="item-meta">r/LocalLLaMA</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tse423/psa_5060ti_16gb_for_30099_5070ti_16gb_for_69999/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1ts97an/the_gold_standard_of_optimization_a_look_under/" target="_blank" rel="noopener">The gold standard of optimization: A look under the hood of RollerCoaster Tycoon</a></div>
     <div class="item-meta">r/programming</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1ts97an/the_gold_standard_of_optimization_a_look_under/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1ts7ahi/when_architecture_diagrams_stop_scaling/" target="_blank" rel="noopener">When Architecture Diagrams Stop Scaling</a></div>
     <div class="item-meta">r/programming</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1ts7ahi/when_architecture_diagrams_stop_scaling/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/programming/comments/1ts7u6m/looking_at_code_behind_file_pilot/" target="_blank" rel="noopener">Looking at code behind File Pilot</a></div>
     <div class="item-meta">r/programming</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/programming/comments/1ts7u6m/looking_at_code_behind_file_pilot/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1ts8trn/why_pope_leo_is_right_to_call_on_eu_to_disarm/" target="_blank" rel="noopener">Why Pope Leo is right to call on EU to disarm lethal AI weapons</a></div>
     <div class="item-meta">r/artificial</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1ts8trn/why_pope_leo_is_right_to_call_on_eu_to_disarm/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1ts6q6b/how_has_ai_actually_benefited_you_in_daytoday_life/" target="_blank" rel="noopener">How has AI actually benefited you in day-to-day life?</a></div>
     <div class="item-meta">r/artificial</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1ts6q6b/how_has_ai_actually_benefited_you_in_daytoday_life/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1ts5ql9/i_built_a_tool_that_generates_3d_objects/" target="_blank" rel="noopener">I built a tool that generates 3D objects assembled with separate, logical parts (e.g. it generated a microwave in the video with complete internal assembly and a door that swings open)</a></div>
     <div class="item-meta">r/artificial</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1ts5ql9/i_built_a_tool_that_generates_3d_objects/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1ts7b48/prompt_logic_gates_plg_are_prompts_becoming/" target="_blank" rel="noopener">🚀 Prompt Logic Gates (PLG): Are Prompts Becoming Systems?</a></div>
     <div class="item-meta">r/artificial</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1ts7b48/prompt_logic_gates_plg_are_prompts_becoming/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/artificial/comments/1tshkls/llama_surgery_continuous_sparsification_of/" target="_blank" rel="noopener">Llama Surgery: Continuous Sparsification of Pre-Trained Language Models via Differentiable Ultrametric Topology Injection</a></div>
     <div class="item-meta">r/artificial</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/artificial/comments/1tshkls/llama_surgery_continuous_sparsification_of/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1ts36ns/i_built_a_site_that_shows_you_what_cities/" target="_blank" rel="noopener">I built a site that shows you what cities actually look like, not only the famous spots.</a></div>
     <div class="item-meta">r/webdev</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1ts36ns/i_built_a_site_that_shows_you_what_cities/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1ts4yxu/i_made_a_tiny_website_about_stuff_my_dog_loves/" target="_blank" rel="noopener">I made a tiny website about stuff my dog loves</a></div>
     <div class="item-meta">r/webdev</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1ts4yxu/i_made_a_tiny_website_about_stuff_my_dog_loves/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1tsdv5j/are_guest_books_on_personal_websites_making_a/" target="_blank" rel="noopener">Are guest books on personal websites making a comeback?</a></div>
     <div class="item-meta">r/webdev</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1tsdv5j/are_guest_books_on_personal_websites_making_a/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1ts2tnq/got_an_interview_afraid_of_technical_questions/" target="_blank" rel="noopener">Got an interview. Afraid of technical questions. How to prepare?</a></div>
     <div class="item-meta">r/webdev</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1ts2tnq/got_an_interview_afraid_of_technical_questions/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/webdev/comments/1tscwhm/if_any_of_you_order_cheap_glasses_from_zenni_its/" target="_blank" rel="noopener">If any of you order cheap glasses from Zenni, it's really fun to look at the network tab of your myOrders page to see how not to do website design / architecture.</a></div>
     <div class="item-meta">r/webdev</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/webdev/comments/1tscwhm/if_any_of_you_order_cheap_glasses_from_zenni_its/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1ts3s3q/do_you_still_manually_maintain_dockercompose/" target="_blank" rel="noopener">Do you still manually maintain docker-compose files across projects, or do you have a better workflow now?</a></div>
     <div class="item-meta">r/devops</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1ts3s3q/do_you_still_manually_maintain_dockercompose/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1ts78fq/when_architecture_diagrams_stop_scaling/" target="_blank" rel="noopener">When Architecture Diagrams Stop Scaling</a></div>
     <div class="item-meta">r/devops</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1ts78fq/when_architecture_diagrams_stop_scaling/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1ts5co6/kodekloud_platform/" target="_blank" rel="noopener">Kodekloud platform</a></div>
     <div class="item-meta">r/devops</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1ts5co6/kodekloud_platform/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1tsbew6/case_study_for_infrastructure_lead_any_ideas/" target="_blank" rel="noopener">Case study for Infrastructure lead: any ideas?</a></div>
     <div class="item-meta">r/devops</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1tsbew6/case_study_for_infrastructure_lead_any_ideas/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/devops/comments/1ts55w3/i_made_a_roadmap_for_3_months_to_land_a_job_as/" target="_blank" rel="noopener">I made a roadmap for 3 months, to land a job as Junior DevOps Engineer</a></div>
     <div class="item-meta">r/devops</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/devops/comments/1ts55w3/i_made_a_roadmap_for_3_months_to_land_a_job_as/" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="github">
   <div class="section-header">
@@ -533,40 +437,30 @@
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/microsoft/markitdown" target="_blank" rel="noopener">microsoft/markitdown</a></div>
     <div class="item-meta">132,534</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/microsoft/markitdown" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" rel="noopener">harry0703/MoneyPrinterTurbo</a></div>
     <div class="item-meta">72,079</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener">anthropics/claude-code</a></div>
     <div class="item-meta">128,426</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/cursor/plugins" target="_blank" rel="noopener">cursor/plugins</a></div>
     <div class="item-meta">1,472</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/cursor/plugins" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/revfactory/harness" target="_blank" rel="noopener">revfactory/harness</a></div>
     <div class="item-meta">4,281</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/revfactory/harness" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div>
 </body>

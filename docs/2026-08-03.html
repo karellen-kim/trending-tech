@@ -28,9 +28,9 @@
 </style>
 <style>
   body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
-  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
-  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
-  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
   .top-bar { display: flex; align-items: center; justify-content: space-between;
@@ -73,9 +73,9 @@
   .highlight-section .section-icon { color: var(--accent-deep); }
   .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
   .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
@@ -118,10 +118,11 @@
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
-  .item-head { padding: 1rem 0; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
     letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
@@ -130,12 +131,11 @@
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 0 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
-    border: 1px dashed #d3c9b1; }
+    background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -162,82 +162,115 @@
 <div class="page-meta">2026-08-03</div>
 <h1><em>03</em> Aug 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section" id="today-take">
+<div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 해석</span>
     
   </div>
   <div class="take"><p class="take-headline">에이전트가 인프라가 되고, 개발자의 역할이 협업자로 전환되는 중</p><p class="take-body">Cloudflare가 에이전트 전용 컴퓨트(@cloudflare/computer)를 출시하고 Workers RPC로 Python/JavaScript를 지원하며 에이전트를 일급 인프라로 격상시켰다. 동시에 개발 커뮤니티는 AI 생성 코드의 무비판적 수용을 경고하고, 개발자가 도구가 아닌 협업자로서의 주체성을 유지하는 것의 중요성을 강조하고 있다.</p><div class="take-refs"><span>근거</span><a href="https://blog.cloudflare.com/cloudflare-computer/" target="_blank" rel="noopener">에이전트는 컨테이너가 아닌 컴퓨터가 필요하다 — @cloudflare/computer 소개</a> · <a href="https://blog.cloudflare.com/grpc-workers/" target="_blank" rel="noopener">Cloudflare Workers and Containers, 이제 인바운드 TCP 연결과 gRPC 지원</a> · <a href="https://blog.cloudflare.com/python-workers-rpc/" target="_blank" rel="noopener">Workers RPC가 이제 Python과 JavaScript에서 작동합니다</a> · <a href="https://gruhn.me/blog/2026-08-03/" target="_blank" rel="noopener">생각 없는 도구가 되지 마라</a> · <a href="https://qwen.ai/blog?id=qwen3.8" target="_blank" rel="noopener">Qwen3.8-Max: 코딩과 협업의 새로운 기준</a></div></div>
-</div><div class="section highlight-section" id="highlights">
-  <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">오늘의 하이라이트</span>
-    
-  </div>
-  <ul class="highlight-list"><li>AI 에이전트용 컴퓨터 기능 제공, 클라우드플레어 엣지 인프라 확장</li><li>70B LLM을 4GB GPU로 실행, 효율성과 접근성 혁신</li><li>자율적 AI 에이전트의 완전 자동화 및 확장성 실현</li><li>Qwen3.8-Max, 코딩과 협업 분야 새로운 성능 기준 수립</li><li>AI가 AI 과학자 연구 성과를 평가하는 자동 벤치마크 구축</li></ul>
 </div><div class="section" id="tech-blog">
   <div class="section-header">
     <span class="section-icon">TECH</span>
     <span class="section-title">기술 블로그</span>
     <span class="section-count">8개</span>
   </div>
-  <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://blog.cloudflare.com/cloudflare-computer/" target="_blank" rel="noopener">에이전트는 컨테이너가 아닌 컴퓨터가 필요하다 — @cloudflare/computer 소개</a></div>
-    <div class="item-meta">Cloudflare Blog</div>
-    <div class="item-summary">Cloudflare가 새로운 agent runtime인 @cloudflare/computer를 소개했다. 기존의 컨테이너 기반 접근방식을 넘어, 빠르고 효율적인 isolate와 완전한 Linux 컨테이너 사이를 동적으로 조율하는 방식을 제공한다. 이를 통해 각 agent가 자신만의 컴퓨터를 갖게 되어 더 효과적으로 확장할 수 있다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://blog.cloudflare.com/cloudflare-computer/" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>에이전트는 컨테이너가 아닌 컴퓨터가 필요하다 — @cloudflare/computer 소개</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Cloudflare가 새로운 agent runtime인 @cloudflare/computer를 소개했다. 기존의 컨테이너 기반 접근방식을 넘어, 빠르고 효율적인 isolate와 완전한 Linux 컨테이너 사이를 동적으로 조율하는 방식을 제공한다. 이를 통해 각 agent가 자신만의 컴퓨터를 갖게 되어 더 효과적으로 확장할 수 있다.</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/cloudflare-computer/" target="_blank" rel="noopener">에이전트는 컨테이너가 아닌 컴퓨터가 필요하다 — @cloudflare/computer 소개</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Cloudflare Workers and Containers, 이제 인바운드 TCP 연결과 gRPC 지원</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Cloudflare Workers가 Spectrum을 통해 인바운드 TCP 연결을 지원하기 시작했다. 이를 통해 Durable Objects와 Containers로 직접 소켓을 포워딩할 수 있다. 개발자들은 Workers 내에서 full-duplex gRPC 애플리케이션을 실행하거나 자동 gRPC-to-gRPC-web 변환 기능을 활용할 수 있게 됐다.</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/grpc-workers/" target="_blank" rel="noopener">Cloudflare Workers and Containers, 이제 인바운드 TCP 연결과 gRPC 지원</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://blog.cloudflare.com/grpc-workers/" target="_blank" rel="noopener">Cloudflare Workers and Containers, 이제 인바운드 TCP 연결과 gRPC 지원</a></div>
-    <div class="item-meta">Cloudflare Blog</div>
-    <div class="item-summary">Cloudflare Workers가 Spectrum을 통해 인바운드 TCP 연결을 지원하기 시작했다. 이를 통해 Durable Objects와 Containers로 직접 소켓을 포워딩할 수 있다. 개발자들은 Workers 내에서 full-duplex gRPC 애플리케이션을 실행하거나 자동 gRPC-to-gRPC-web 변환 기능을 활용할 수 있게 됐다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://blog.cloudflare.com/grpc-workers/" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">Billable Usage API 소개: Cloudflare를 위한 프로그래매틱 비용 투명성</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Cloudflare가 새로운 Billable Usage API를 출시했습니다. 이 API는 개발자와 FinOps 팀이 단일 엔드포인트를 통해 모든 self-serve 제품의 비용과 사용량을 프로그래매틱하게 확인할 수 있도록 합니다. FOCUS 스펙을 기반으로 구축되었으며, 클라우드 스택의 다른 부분과 함께 지출을 원활하게 추적할 수 있습니다.</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/billable-usage-api/" target="_blank" rel="noopener">Billable Usage API 소개: Cloudflare를 위한 프로그래매틱 비용 투명성</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://blog.cloudflare.com/billable-usage-api/" target="_blank" rel="noopener">Billable Usage API 소개: Cloudflare를 위한 프로그래매틱 비용 투명성</a></div>
-    <div class="item-meta">Cloudflare Blog</div>
-    <div class="item-summary">Cloudflare가 새로운 Billable Usage API를 출시했습니다. 이 API는 개발자와 FinOps 팀이 단일 엔드포인트를 통해 모든 self-serve 제품의 비용과 사용량을 프로그래매틱하게 확인할 수 있도록 합니다. FOCUS 스펙을 기반으로 구축되었으며, 클라우드 스택의 다른 부분과 함께 지출을 원활하게 추적할 수 있습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://blog.cloudflare.com/billable-usage-api/" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">더 작고, 더 빠르고, 더 안전하게: Kimi와 GLM을 대규모로 운영하기</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Kimi와 GLM 같은 최신형 모델을 대규모로 서빙할 때 주요 과제는 GPU 메모리 부족입니다. 이를 해결하기 위해 KV 캐시를 양자화하고, 모델 가중치를 압축하며, 무결성 검사를 추가하는 방법을 사용합니다. 이러한 기법들은 모델을 더 빠르고 저렴하며 안전하게 서빙할 수 있게 합니다.</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/smaller-faster-safer-models/" target="_blank" rel="noopener">더 작고, 더 빠르고, 더 안전하게: Kimi와 GLM을 대규모로 운영하기</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Workers RPC가 이제 Python과 JavaScript에서 작동합니다</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Workers RPC가 Python과 JavaScript 간에 작동하도록 확대되었습니다. 서로 다른 언어로 작성된 Python Worker와 JavaScript Worker가 런타임에 라이브 객체의 참조를 교환하고 직접 메서드를 호출할 수 있습니다. 이때 API 정의, 스키마, 직렬화 코드를 작성할 필요가 없습니다.</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/python-workers-rpc/" target="_blank" rel="noopener">Workers RPC가 이제 Python과 JavaScript에서 작동합니다</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://blog.cloudflare.com/smaller-faster-safer-models/" target="_blank" rel="noopener">더 작고, 더 빠르고, 더 안전하게: Kimi와 GLM을 대규모로 운영하기</a></div>
-    <div class="item-meta">Cloudflare Blog</div>
-    <div class="item-summary">Kimi와 GLM 같은 최신형 모델을 대규모로 서빙할 때 주요 과제는 GPU 메모리 부족입니다. 이를 해결하기 위해 KV 캐시를 양자화하고, 모델 가중치를 압축하며, 무결성 검사를 추가하는 방법을 사용합니다. 이러한 기법들은 모델을 더 빠르고 저렴하며 안전하게 서빙할 수 있게 합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://blog.cloudflare.com/smaller-faster-safer-models/" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">Agents Week에 오신 것을 환영합니다</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Agents Week는 클라우드 인프라가 인간 브라우저 중심에서 벗어나 자동 에이전트를 지원하도록 어떻게 진화해야 하는지를 탐구한다. 에이전트 중심 웹 구축에 필요한 저장소, 실행, 보안 관련 기본 원칙들을 분석하고 설명한다.</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/agents-week-welcome/" target="_blank" rel="noopener">Agents Week에 오신 것을 환영합니다</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://blog.cloudflare.com/python-workers-rpc/" target="_blank" rel="noopener">Workers RPC가 이제 Python과 JavaScript에서 작동합니다</a></div>
-    <div class="item-meta">Cloudflare Blog</div>
-    <div class="item-summary">Workers RPC가 Python과 JavaScript 간에 작동하도록 확대되었습니다. 서로 다른 언어로 작성된 Python Worker와 JavaScript Worker가 런타임에 라이브 객체의 참조를 교환하고 직접 메서드를 호출할 수 있습니다. 이때 API 정의, 스키마, 직렬화 코드를 작성할 필요가 없습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://blog.cloudflare.com/python-workers-rpc/" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">온라인 포인트 쿼리를 위한 데이터 레이크 인덱싱</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify 같은 회사들은 온라인 서비스와 AI 에이전트를 위해 사용자 데이터에 대한 저지연 포인트 쿼리가 필요합니다. 페타바이트 규모는 Bigtable에, 엑사바이트 규모는 GCS 데이터 레이크에 저장되어 있지만, Trino와 BigQuery 같은 분산 SQL 엔진은 단일 행 조회도 초 단위 오버헤드를 추가합니다. Random Access Parquet(RAP)은 외부 인덱스로 키를 파일 위치에 직접 매핑하고 필요한 바이트만 가져와 이 문제를 해결하며, 기존 Parquet 파일에서 작동하므로 별도 시스템 유지가 불필요합니다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">온라인 포인트 쿼리를 위한 데이터 레이크 인덱싱</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://blog.cloudflare.com/agents-week-welcome/" target="_blank" rel="noopener">Agents Week에 오신 것을 환영합니다</a></div>
-    <div class="item-meta">Cloudflare Blog</div>
-    <div class="item-summary">Agents Week는 클라우드 인프라가 인간 브라우저 중심에서 벗어나 자동 에이전트를 지원하도록 어떻게 진화해야 하는지를 탐구한다. 에이전트 중심 웹 구축에 필요한 저장소, 실행, 보안 관련 기본 원칙들을 분석하고 설명한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://blog.cloudflare.com/agents-week-welcome/" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">온라인 포인트 쿼리를 위한 데이터 레이크 인덱싱</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify 같은 회사들은 온라인 서비스와 AI 에이전트를 위해 사용자 데이터에 대한 저지연 포인트 쿼리가 필요합니다. 페타바이트 규모는 Bigtable에, 엑사바이트 규모는 GCS 데이터 레이크에 저장되어 있지만, Trino와 BigQuery 같은 분산 SQL 엔진은 단일 행 조회도 초 단위 오버헤드를 추가합니다. Random Access Parquet(RAP)은 외부 인덱스로 키를 파일 위치에 직접 매핑하고 필요한 바이트만 가져와 이 문제를 해결하며, 기존 Parquet 파일에서 작동하므로 별도 시스템 유지가 불필요합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 인제스션 및 Podcast 비디오 인시던트 리포트</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify 팟캐스트 발행 시스템에서 6월 24일 영상 트랜스코딩 인프라가 최대 용량에 도달해 새 에피소드 발행이 수 시간 지연되는 장애가 발생했다. 본래 분 단위로 발행되어야 할 영상이 큐에 쌓여 지연됐으며, 크리에이터들이 미발행 에피소드를 재업로드해 추가 부하를 초래했다. 원인은 대량 콘텐츠 배달 스파이크에 대응할 충분한 시스템 여유 용량 부족과 예약된 배치 처리 작업이 동시에 실행되었기 때문이다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">콘텐츠 인제스션 및 Podcast 비디오 인시던트 리포트</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify 팟캐스트 발행 시스템에서 6월 24일 영상 트랜스코딩 인프라가 최대 용량에 도달해 새 에피소드 발행이 수 시간 지연되는 장애가 발생했다. 본래 분 단위로 발행되어야 할 영상이 큐에 쌓여 지연됐으며, 크리에이터들이 미발행 에피소드를 재업로드해 추가 부하를 초래했다. 원인은 대량 콘텐츠 배달 스파이크에 대응할 충분한 시스템 여유 용량 부족과 예약된 배치 처리 작업이 동시에 실행되었기 때문이다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 인제스션 및 Podcast 비디오 인시던트 리포트</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="dev-blogs">
   <div class="section-header">
@@ -246,19 +279,22 @@
     <span class="section-count">2개</span>
   </div>
   <div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.interconnects.ai/p/introducing-our-artifacts-hub-and" target="_blank" rel="noopener">Artifacts Hub와 Adoption Dashboard 소개합니다</a></div>
     <div class="item-meta">Nathan Lambert</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.interconnects.ai/p/introducing-our-artifacts-hub-and" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/2/condense-json/#atom-everything" target="_blank" rel="noopener">condense-json 1.0</a></div>
-    <div class="item-meta">Simon Willison</div>
-    <div class="item-summary">condense-json 라이브러리가 1.0 버전으로 출시되었다. 이 라이브러리는 약 1년 반간 개발되어 왔으며, 개발자가 합리적이고 비파괴적인 수정사항을 적용하여 1.0 릴리스를 배포했다. README에서 라이브러리의 기능과 사용 예시를 확인할 수 있다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/Aug/2/condense-json/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">condense-json 1.0</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">condense-json 라이브러리가 1.0 버전으로 출시되었다. 이 라이브러리는 약 1년 반간 개발되어 왔으며, 개발자가 합리적이고 비파괴적인 수정사항을 적용하여 1.0 릴리스를 배포했다. README에서 라이브러리의 기능과 사용 예시를 확인할 수 있다.</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Aug/2/condense-json/#atom-everything" target="_blank" rel="noopener">condense-json 1.0</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="papers">
   <div class="section-header">
@@ -267,40 +303,65 @@
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.28629" target="_blank" rel="noopener">OpenClaw와 Ollama를 이용한 에이전틱 AI: 완전 자율적이고 확장 가능한 AI 에이전트 시스템 구축</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">이 논문은 반응형 LLM에서 지속적이고 자율적인 행동 시스템으로의 전환에서 드러난 Agentic AI의 건축학적 격차를 다룬다. 추론, 오케스트레이션, 실행 계층을 분리하여 자율적 AI 에이전트를 설계하는 것의 중요성을 강조한다. 현재 완전한 스택의 에이전트 시스템을 설계하고 평가하는 통합 프레임워크가 부족한 상황에서, 이 논문은 계층화된 건축을 제시한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.28629" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">OpenClaw와 Ollama를 이용한 에이전틱 AI: 완전 자율적이고 확장 가능한 AI 에이전트 시스템 구축</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">이 논문은 반응형 LLM에서 지속적이고 자율적인 행동 시스템으로의 전환에서 드러난 Agentic AI의 건축학적 격차를 다룬다. 추론, 오케스트레이션, 실행 계층을 분리하여 자율적 AI 에이전트를 설계하는 것의 중요성을 강조한다. 현재 완전한 스택의 에이전트 시스템을 설계하고 평가하는 통합 프레임워크가 부족한 상황에서, 이 논문은 계층화된 건축을 제시한다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.28629" target="_blank" rel="noopener">OpenClaw와 Ollama를 이용한 에이전틱 AI: 완전 자율적이고 확장 가능한 AI 에이전트 시스템 구축</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.28631" target="_blank" rel="noopener">AI가 AI 과학자를 평가할 수 있을까? 자동화된 다중 모델 검증을 활용한 자율 연구 생성 시스템의 벤치마킹 연구</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">AI Scientist 시스템의 자율적 연구 생성 능력을 평가하기 위한 벤치마킹 연구이다. 자동화된 대규모 언어 모델 기반 피어 리뷰 시스템을 개발하여 AI가 생성한 논문을 독창성, 과학적 엄밀성, 명확성, 중요성 네 가지 차원에서 평가한다. Sakana AI(v1 &amp; v2) 등 4개의 주요 AI Scientist 프레임워크를 벤치마킹하였다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.28631" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">AI가 AI 과학자를 평가할 수 있을까? 자동화된 다중 모델 검증을 활용한 자율 연구 생성 시스템의 벤치마킹 연구</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI Scientist 시스템의 자율적 연구 생성 능력을 평가하기 위한 벤치마킹 연구이다. 자동화된 대규모 언어 모델 기반 피어 리뷰 시스템을 개발하여 AI가 생성한 논문을 독창성, 과학적 엄밀성, 명확성, 중요성 네 가지 차원에서 평가한다. Sakana AI(v1 &amp; v2) 등 4개의 주요 AI Scientist 프레임워크를 벤치마킹하였다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.28631" target="_blank" rel="noopener">AI가 AI 과학자를 평가할 수 있을까? 자동화된 다중 모델 검증을 활용한 자율 연구 생성 시스템의 벤치마킹 연구</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.28642" target="_blank" rel="noopener">ThinkReset: 경계된 맥락의 장기 추론을 위한 학습 가능한 중간 인터페이스 구축</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">장기 추론(chain-of-thought)은 복잡한 문제 해결에 효과적이지만 중복 축적, 컨텍스트 오버플로우, 오류 고착의 문제를 야기한다. 본 논문은 제한된 컨텍스트 윈도우에서 핵심 병목이 궤적 압축이나 테스트 시간 제어가 아니라, 버려진 히스토리를 대체하고 계속되는 문제 풀이를 지원할 재사용 가능한 중간 인터페이스의 부재라고 주장한다. 또한 보상 기반 장기 강화학습의 실패 모드—모델이 윈도우 내에서 과제를 해결하지 못할 경우—를 식별한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.28642" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">ThinkReset: 경계된 맥락의 장기 추론을 위한 학습 가능한 중간 인터페이스 구축</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">장기 추론(chain-of-thought)은 복잡한 문제 해결에 효과적이지만 중복 축적, 컨텍스트 오버플로우, 오류 고착의 문제를 야기한다. 본 논문은 제한된 컨텍스트 윈도우에서 핵심 병목이 궤적 압축이나 테스트 시간 제어가 아니라, 버려진 히스토리를 대체하고 계속되는 문제 풀이를 지원할 재사용 가능한 중간 인터페이스의 부재라고 주장한다. 또한 보상 기반 장기 강화학습의 실패 모드—모델이 윈도우 내에서 과제를 해결하지 못할 경우—를 식별한다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.28642" target="_blank" rel="noopener">ThinkReset: 경계된 맥락의 장기 추론을 위한 학습 가능한 중간 인터페이스 구축</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.28942" target="_blank" rel="noopener">NeSyFS: 부분 관찰성 환경의 LLM 에이전트를 위한 뉴로-심볼릭 빠름-느림 사고 프레임워크</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">내용이 불충분합니다 (초록이 미완성 상태).</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.28942" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">NeSyFS: 부분 관찰성 환경의 LLM 에이전트를 위한 뉴로-심볼릭 빠름-느림 사고 프레임워크</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">내용이 불충분합니다 (초록이 미완성 상태).</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.28942" target="_blank" rel="noopener">NeSyFS: 부분 관찰성 환경의 LLM 에이전트를 위한 뉴로-심볼릭 빠름-느림 사고 프레임워크</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.29002" target="_blank" rel="noopener">MMShopBench: 멀티모달 멀티턴 쇼핑 에이전트를 위한 실제 로그 기반 벤치마크</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">온라인 쇼핑객들이 이미지와 멀티턴 대화로 AI 어시스턴트에 제품 필요사항을 표현한다. 그러나 기존 벤치마크는 텍스트 중심이거나 합성된 데이터에 의존하여 이미지와 언어를 함께 사용한 복잡한 실제 쇼핑 요구사항을 제대로 반영하지 못한다. 이 논문은 MMShopBench라는 멀티모달, 멀티턴 쇼핑 에이전트 벤치마크를 제안하며, 정제되고 수동으로 주석이 달린 실제 쇼핑 로그로부터 구축되었다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.29002" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">MMShopBench: 멀티모달 멀티턴 쇼핑 에이전트를 위한 실제 로그 기반 벤치마크</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">온라인 쇼핑객들이 이미지와 멀티턴 대화로 AI 어시스턴트에 제품 필요사항을 표현한다. 그러나 기존 벤치마크는 텍스트 중심이거나 합성된 데이터에 의존하여 이미지와 언어를 함께 사용한 복잡한 실제 쇼핑 요구사항을 제대로 반영하지 못한다. 이 논문은 MMShopBench라는 멀티모달, 멀티턴 쇼핑 에이전트 벤치마크를 제안하며, 정제되고 수동으로 주석이 달린 실제 쇼핑 로그로부터 구축되었다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.29002" target="_blank" rel="noopener">MMShopBench: 멀티모달 멀티턴 쇼핑 에이전트를 위한 실제 로그 기반 벤치마크</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="hn-reddit">
   <div class="section-header">
@@ -309,110 +370,80 @@
     <span class="section-count">15개</span>
   </div>
   <div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://gruhn.me/blog/2026-08-03/" target="_blank" rel="noopener">생각 없는 도구가 되지 마라</a></div>
     <div class="item-meta">HN · 1172 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://gruhn.me/blog/2026-08-03/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://qwen.ai/blog?id=qwen3.8" target="_blank" rel="noopener">Qwen3.8-Max: 코딩과 협업의 새로운 기준</a></div>
     <div class="item-meta">HN · 838 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://qwen.ai/blog?id=qwen3.8" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://research.jfrog.com/post/sqlite-critical-cves-or-llm-slops/" target="_blank" rel="noopener">거짓된 SQLite 취약점에 대해 발급된 중요 CVE</a></div>
     <div class="item-meta">HN · 397 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://research.jfrog.com/post/sqlite-critical-cves-or-llm-slops/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://sf.isopolis.city/" target="_blank" rel="noopener">Show HN: Isopolis – SF의 아이소메트릭 픽셀 지도</a></div>
     <div class="item-meta">HN · 287 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://sf.isopolis.city/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://ykvm.com/2026/07/swiftui-a-story-of-mediocrity/" target="_blank" rel="noopener">SwiftUI After 7 Years</a></div>
     <div class="item-meta">HN · 232 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://ykvm.com/2026/07/swiftui-a-story-of-mediocrity/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://unattributed.cc/note-taking-and-personal-knowledge-management" target="_blank" rel="noopener">노트 작성과 개인 지식 관리</a></div>
     <div class="item-meta">HN · 229 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://unattributed.cc/note-taking-and-personal-knowledge-management" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://ankursethi.com/blog/prevent-cognitive-debt-by-manually-retyping-llm-generated-code/" target="_blank" rel="noopener">LLM 생성 코드를 수동으로 재입력하여 인지 부채 방지하기</a></div>
     <div class="item-meta">HN · 213 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://ankursethi.com/blog/prevent-cognitive-debt-by-manually-retyping-llm-generated-code/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/janestreet/bonsai" target="_blank" rel="noopener">Bonsai: Jane Street의 UI 라이브러리</a></div>
     <div class="item-meta">HN · 159 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/janestreet/bonsai" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://ssh.place" target="_blank" rel="noopener">Show HN: ssh ssh.place</a></div>
     <div class="item-meta">HN · 157 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://ssh.place" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/rust-lang/rust-project-goals/blob/main/src/2026/move-trait.md" target="_blank" rel="noopener">Rust 프로젝트 목표: 부동 타입과 보장된 소멸자</a></div>
     <div class="item-meta">HN · 154 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/rust-lang/rust-project-goals/blob/main/src/2026/move-trait.md" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1ve7chh/is_it_too_late_regain_some_coherence_in_the_ml/" target="_blank" rel="noopener">우리 생애 동안 ML 연구 분야에서 어느 정도의 응집력을 되찾기에는 너무 늦지 않았을까? [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1ve7chh/is_it_too_late_regain_some_coherence_in_the_ml/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vdu92a/neurips_2026_acs_and_reviewers_have_disappeared_d/" target="_blank" rel="noopener">NeurIPS 2026: AC와 리뷰어들이 사라졌다 [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vdu92a/neurips_2026_acs_and_reviewers_have_disappeared_d/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vdz19e/no_rebuttals_from_neurips_authors_d/" target="_blank" rel="noopener">NeurIPS 저자들의 재반박 없음 [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vdz19e/no_rebuttals_from_neurips_authors_d/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vdvkp5/neurips_2026_does_every_metareview_recommend/" target="_blank" rel="noopener">NeurIPS 2026: 모든 메타리뷰가 수락/거절을 권고하는가? [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vdvkp5/neurips_2026_does_every_metareview_recommend/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vdl461/conference_reviews_asking_too_much_d/" target="_blank" rel="noopener">컨퍼런스 리뷰: 너무 많은 것을 요구하는가? [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vdl461/conference_reviews_asking_too_much_d/" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="github">
   <div class="section-header">
@@ -421,40 +452,65 @@
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/lyogavin/airllm" target="_blank" rel="noopener">lyogavin/airllm</a></div>
-    <div class="item-meta">26,517</div>
-    <div class="item-summary">AirLLM은 양자화, 증류, 가지치기 없이 대규모 언어 모델의 추론 메모리를 대폭 줄인다. 70B 모델을 4GB GPU에서 실행하거나, 405B Llama 3.1을 8GB에서, DeepSeek-V3(671B)을 약 12GB에서, Kimi K3(2.8T)를 4GB 미만에서 실행할 수 있다. 이는 희소 MoE 모델이 전체 레이어 대신 한 번에 하나의 전문가만 스트리밍하기 때문이다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/lyogavin/airllm" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">lyogavin/airllm</span>
+      <span class="item-meta">26,517</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AirLLM은 양자화, 증류, 가지치기 없이 대규모 언어 모델의 추론 메모리를 대폭 줄인다. 70B 모델을 4GB GPU에서 실행하거나, 405B Llama 3.1을 8GB에서, DeepSeek-V3(671B)을 약 12GB에서, Kimi K3(2.8T)를 4GB 미만에서 실행할 수 있다. 이는 희소 MoE 모델이 전체 레이어 대신 한 번에 하나의 전문가만 스트리밍하기 때문이다.</div>
+      <div class="item-link"><a href="https://github.com/lyogavin/airllm" target="_blank" rel="noopener">lyogavin/airllm</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/firecrawl/pdf-inspector" target="_blank" rel="noopener">firecrawl/pdf-inspector</a></div>
-    <div class="item-meta">7,143</div>
-    <div class="item-summary">PDF Inspector는 Firecrawl에서 만든 Rust 기반 PDF 분류 및 텍스트 추출 라이브러리다. PDF가 텍스트 기반인지 스캔 이미지인지 감지하고, OCR 없이도 텍스트를 추출하여 Markdown으로 변환한다. Python, Node.js, WebAssembly 바인딩을 지원하며, 약 200ms 이내에 처리할 수 있다. 스마트 분류, 위치 인식 텍스트 추출, 테이블 감지, 다중 칼럼 레이아웃 등의 기능을 제공한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/firecrawl/pdf-inspector" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">firecrawl/pdf-inspector</span>
+      <span class="item-meta">7,143</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">PDF Inspector는 Firecrawl에서 만든 Rust 기반 PDF 분류 및 텍스트 추출 라이브러리다. PDF가 텍스트 기반인지 스캔 이미지인지 감지하고, OCR 없이도 텍스트를 추출하여 Markdown으로 변환한다. Python, Node.js, WebAssembly 바인딩을 지원하며, 약 200ms 이내에 처리할 수 있다. 스마트 분류, 위치 인식 텍스트 추출, 테이블 감지, 다중 칼럼 레이아웃 등의 기능을 제공한다.</div>
+      <div class="item-link"><a href="https://github.com/firecrawl/pdf-inspector" target="_blank" rel="noopener">firecrawl/pdf-inspector</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener">esengine/DeepSeek-Reasonix</a></div>
-    <div class="item-meta">29,676</div>
-    <div class="item-summary">빈 문자열<br><br>이유: 제공된 내용에는 프로젝트의 설명이나 기능에 대한 정보가 없고, 로고, 링크, 배지만 포함되어 있습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">esengine/DeepSeek-Reasonix</span>
+      <span class="item-meta">29,676</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">빈 문자열이유: 제공된 내용에는 프로젝트의 설명이나 기능에 대한 정보가 없고, 로고, 링크, 배지만 포함되어 있습니다.</div>
+      <div class="item-link"><a href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener">esengine/DeepSeek-Reasonix</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/microsoft/AI-For-Beginners" target="_blank" rel="noopener">microsoft/AI-For-Beginners</a></div>
-    <div class="item-meta">60,418</div>
-    <div class="item-summary">내용이 불충분합니다. 제목과 배지만 있고 프로젝트 설명이 미완성(마지막 문장이 끝나지 않음)이어서 3~5줄로 요약할 실질적인 정보가 없습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/microsoft/AI-For-Beginners" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">microsoft/AI-For-Beginners</span>
+      <span class="item-meta">60,418</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">내용이 불충분합니다. 제목과 배지만 있고 프로젝트 설명이 미완성(마지막 문장이 끝나지 않음)이어서 3~5줄로 요약할 실질적인 정보가 없습니다.</div>
+      <div class="item-link"><a href="https://github.com/microsoft/AI-For-Beginners" target="_blank" rel="noopener">microsoft/AI-For-Beginners</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/donnemartin/system-design-primer" target="_blank" rel="noopener">donnemartin/system-design-primer</a></div>
-    <div class="item-meta">360,332</div>
-    <div class="item-summary">`donnemartin/system-design-primer`는 대규모 시스템 설계 방법을 배우고 시스템 디자인 인터뷰에 준비하기 위한 가이드입니다. 확장 가능한 시스템 설계를 학습하면 더 나은 엔지니어가 될 수 있으며, 웹에 산재된 시스템 디자인 원칙 관련 자료들을 체계적으로 정리한 컬렉션입니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/donnemartin/system-design-primer" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">donnemartin/system-design-primer</span>
+      <span class="item-meta">360,332</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">`donnemartin/system-design-primer`는 대규모 시스템 설계 방법을 배우고 시스템 디자인 인터뷰에 준비하기 위한 가이드입니다. 확장 가능한 시스템 설계를 학습하면 더 나은 엔지니어가 될 수 있으며, 웹에 산재된 시스템 디자인 원칙 관련 자료들을 체계적으로 정리한 컬렉션입니다.</div>
+      <div class="item-link"><a href="https://github.com/donnemartin/system-design-primer" target="_blank" rel="noopener">donnemartin/system-design-primer</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div>
 </body>

@@ -28,9 +28,9 @@
 </style>
 <style>
   body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
-  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
-  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
-  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
   .top-bar { display: flex; align-items: center; justify-content: space-between;
@@ -73,9 +73,9 @@
   .highlight-section .section-icon { color: var(--accent-deep); }
   .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
   .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
@@ -118,10 +118,11 @@
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
-  .item-head { padding: 1rem 0; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
     letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
@@ -130,12 +131,11 @@
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 0 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
-    border: 1px dashed #d3c9b1; }
+    background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -162,20 +162,13 @@
 <div class="page-meta">2026-07-14</div>
 <h1><em>14</em> Jul 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section" id="today-take">
+<div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 해석</span>
     
   </div>
   <div class="take"><p class="take-headline">개발팀이 에이전트를 표준 도구로 채택하면서, 신뢰성을 위한 도메인 컨텍스트와 DSL 기반 설계가 표준 아키텍처가 되고 있다</p><p class="take-body">Spotify의 데이터 어시스턴트 컨텍스트 레이어, Fowler의 DSL-LLM 신뢰성 패턴, Uber의 주간 65,000건 변경 중 90%를 자동 분석하는 uReview는 에이전트가 일상 도구가 되면서 신뢰성을 사후 검증에서 설계 단계로 옮기는 움직임을 보여준다. Alibaba의 AgentRun 같은 프로덕션급 에이전트 인프라 투자도 이 추세를 뒷받침한다.</p><div class="take-refs"><span>근거</span><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">당신의 도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a> · <a href="https://martinfowler.com/articles/llm-and-dsls.html" target="_blank" rel="noopener">DSL이 LLM의 신뢰할 수 있는 사용을 가능하게 한다</a> · <a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주간 약 65,000개 변경의 90%를 분석하는 GenAI 코드 리뷰</a> · <a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트를 위한 개발자 경험 확장</a> · <a href="https://www.alibabacloud.com/blog/giving-your-ai-agent-a-disposable-workspace-with-alibaba-cloud-agentrun_603324" target="_blank" rel="noopener">Alibaba Cloud AgentRun으로 AI 에이전트에 일회용 작업 공간 제공하기</a></div></div>
-</div><div class="section highlight-section" id="highlights">
-  <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">오늘의 하이라이트</span>
-    
-  </div>
-  <ul class="highlight-list"><li>AI 에이전트 스케일링 기술 SCALECUA 발표</li><li>생애주기 메모리 탑재 범용 로봇 에이전트 OS</li><li>메타, 커널 스케줄러로 광고 서비스 현대화</li><li>넷플릭스 대규모 서비스 토폴로지 설계 기법 공개</li><li>알리바바 AgentRun: AI 에이전트용 격리 워크스페이스</li></ul>
 </div><div class="section" id="tech-blog">
   <div class="section-header">
     <span class="section-icon">TECH</span>
@@ -183,103 +176,131 @@
     <span class="section-count">14개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://netflixtechblog.com/building-service-topology-at-scale-architecture-challenges-and-lessons-learned-f4b792f3f0d8?source=rss----2615bd06b42e---4" target="_blank" rel="noopener">대규모 서비스 토폴로지 구축: 아키텍처, 도전과제, 그리고 배운 교훈</a></div>
-    <div class="item-meta">Netflix Tech Blog</div>
-    <div class="item-summary">내용이 불완전하여 요약할 수 없습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://netflixtechblog.com/building-service-topology-at-scale-architecture-challenges-and-lessons-learned-f4b792f3f0d8?source=rss----2615bd06b42e---4" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">대규모 서비스 토폴로지 구축: 아키텍처, 도전과제, 그리고 배운 교훈</span>
+      <span class="item-meta">Netflix Tech Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">내용이 불완전하여 요약할 수 없습니다.</div>
+      <div class="item-link"><a href="https://netflixtechblog.com/building-service-topology-at-scale-architecture-challenges-and-lessons-learned-f4b792f3f0d8?source=rss----2615bd06b42e---4" target="_blank" rel="noopener">대규모 서비스 토폴로지 구축: 아키텍처, 도전과제, 그리고 배운 교훈</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.fb.com/2026/07/13/ml-applications/modernizing-the-meta-ads-service-with-an-open-source-kernel-scheduler/" target="_blank" rel="noopener">오픈소스 커널 스케줄러로 Meta Ads Service 현대화하기</a></div>
-    <div class="item-meta">Meta Engineering</div>
-    <div class="item-summary">Meta의 광고 서빙 규모에서 밀리초 단위의 레이턴시 저하도 광고 성능에 심각한 영향을 미친다. Linux 커널 업그레이드 시 전체 광고 서빙 플릿에 레이턴시 회귀가 발생할 위험이 있었다. 이를 해결하기 위해 BPF 기반의 오픈소스 스케줄링 프레임워크인 sched_ext를 활용해 광고 배달에 최적화된 커스텀 스케줄링 정책을 개발했다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.fb.com/2026/07/13/ml-applications/modernizing-the-meta-ads-service-with-an-open-source-kernel-scheduler/" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.alibabacloud.com/blog/giving-your-ai-agent-a-disposable-workspace-with-alibaba-cloud-agentrun_603324" target="_blank" rel="noopener">Alibaba Cloud AgentRun으로 AI 에이전트에 일회용 작업 공간 제공하기</a></div>
+  <details>
+    <summary>
+      <span class="item-name">오픈소스 커널 스케줄러로 Meta Ads Service 현대화하기</span>
+      <span class="item-meta">Meta Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Meta의 광고 서빙 규모에서 밀리초 단위의 레이턴시 저하도 광고 성능에 심각한 영향을 미친다. Linux 커널 업그레이드 시 전체 광고 서빙 플릿에 레이턴시 회귀가 발생할 위험이 있었다. 이를 해결하기 위해 BPF 기반의 오픈소스 스케줄링 프레임워크인 sched_ext를 활용해 광고 배달에 최적화된 커스텀 스케줄링 정책을 개발했다.</div>
+      <div class="item-link"><a href="https://engineering.fb.com/2026/07/13/ml-applications/modernizing-the-meta-ads-service-with-an-open-source-kernel-scheduler/" target="_blank" rel="noopener">오픈소스 커널 스케줄러로 Meta Ads Service 현대화하기</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.alibabacloud.com/blog/giving-your-ai-agent-a-disposable-workspace-with-alibaba-cloud-agentrun_603324" target="_blank" rel="noopener">Alibaba Cloud AgentRun으로 AI 에이전트에 일회용 작업 공간 제공하기</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/giving-your-ai-agent-a-disposable-workspace-with-alibaba-cloud-agentrun_603324" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-emr-serverless-starrocks-lakehouse-multimodal-retrieval-one-sql-for-full-text-scalar-and-vector-hybrid-search_603345" target="_blank" rel="noopener">Alibaba Cloud EMR Serverless StarRocks 레이크하우스 멀티모달 검색: 전문 검색, 스칼라, 벡터 하이브리드 검색을 위한 하나의 SQL</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-emr-serverless-starrocks-lakehouse-multimodal-retrieval-one-sql-for-full-text-scalar-and-vector-hybrid-search_603345" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/qwen-enables-rapidly-expanding-ai-hardware-ecosystem_603348" target="_blank" rel="noopener">Qwen이 빠르게 확대되는 AI 하드웨어 생태계를 주도</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/qwen-enables-rapidly-expanding-ai-hardware-ecosystem_603348" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/agentteams-and-claude-tag-both-enter-group-chatmode-is-it-a-new-paradigm-or-a-new-narrative_603358" target="_blank" rel="noopener">AgentTeams과 Claude Tag의 Group ChatMode 동시 진입: 새로운 패러다임인가 새로운 내러티브인가?</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/agentteams-and-claude-tag-both-enter-group-chatmode-is-it-a-new-paradigm-or-a-new-narrative_603358" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/apsaramq-for-kafka-launches-native-data-lake-ingestion-unifying-real-time-streams-and-data-lakes-with-one-click_603357" target="_blank" rel="noopener">ApsaraMQ for Kafka 네이티브 데이터 레이크 수집 기능 출시: 실시간 스트림과 데이터 레이크를 한 번의 클릭으로 통합</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/apsaramq-for-kafka-launches-native-data-lake-ingestion-unifying-real-time-streams-and-data-lakes-with-one-click_603357" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>당신의 도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트의 컨텍스트 레이어</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify는 70,000개 이상의 데이터셋 관리에 따른 데이터 인사이트 수요 증가에 대응하기 위해 AI 데이터 어시스턴트를 개발했다. 스키마만으로는 완전한 정보를 전달할 수 없어 도메인 전문가가 관리하는 중간 계층을 구성했다. 2025년 8월부터 2,100명 이상의 사용자가 177개 클러스터(광고, 팟캐스트, 음악 등)에서 6만여 개의 메시지를 통해 활용 중이며, SQL 미경험자도 포함되어 있다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">당신의 도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트를 위한 개발자 경험 확장</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify는 AI 코딩 도구의 채택률이 매우 높아 엔지니어의 99%가 주 1회 이상 사용하며, Opus 4.5 출시 후 급증했다. 개발자의 94%가 AI로 생산성이 향상됐다고 보고했고, PR 빈도는 76% 증가했으며 대부분이 개발자와 AI 에이전트의 협업으로 작성되었다. 코드베이스 성장(7배)이 엔지니어 수 증가보다 빨라지면서 개발자들이 의존성 업그레이드·API 마이그레이션·취약점 패치 등 유지보수에 많은 시간을 소비했고, 마이그레이션이 가장 큰 불만사항이었다. Spotify는 자동화를 통해 수백 개의 소프트웨어 컴포넌트를 한 번에 변경하는 방식을 도입했다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트를 위한 개발자 경험 확장</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">당신의 도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify는 70,000개 이상의 데이터셋 관리에 따른 데이터 인사이트 수요 증가에 대응하기 위해 AI 데이터 어시스턴트를 개발했다. 스키마만으로는 완전한 정보를 전달할 수 없어 도메인 전문가가 관리하는 중간 계층을 구성했다. 2025년 8월부터 2,100명 이상의 사용자가 177개 클러스터(광고, 팟캐스트, 음악 등)에서 6만여 개의 메시지를 통해 활용 중이며, SQL 미경험자도 포함되어 있다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">GitFarm: Git-as-a-Service – 500ms 미만 체크아웃, 80% 이상 리소스 절감</span>
+      <span class="item-meta">Uber Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Uber가 개발한 GitFarm은 gRPC 기반 Git-as-a-Service 플랫폼으로, 클라우드의 중앙화된 Git 클라이언트 역할을 합니다. 로컬 clone 없이 500ms 이하의 빠른 체크아웃을 제공하며, 클라이언트 측 리소스 사용량을 80% 이상 감소시킵니다. 안전한 임시 샌드박스에서 표준 Git 명령을 실행하고, 대규모 모노레포 환경에서 기존 Git 워크플로우의 병목(clone, fetch, push 등)을 해결합니다.</div>
+      <div class="item-link"><a href="https://www.uber.com/blog/gitfarm-as-a-service/" target="_blank" rel="noopener">GitFarm: Git-as-a-Service – 500ms 미만 체크아웃, 80% 이상 리소스 절감</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트를 위한 개발자 경험 확장</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify는 AI 코딩 도구의 채택률이 매우 높아 엔지니어의 99%가 주 1회 이상 사용하며, Opus 4.5 출시 후 급증했다. 개발자의 94%가 AI로 생산성이 향상됐다고 보고했고, PR 빈도는 76% 증가했으며 대부분이 개발자와 AI 에이전트의 협업으로 작성되었다. 코드베이스 성장(7배)이 엔지니어 수 증가보다 빨라지면서 개발자들이 의존성 업그레이드·API 마이그레이션·취약점 패치 등 유지보수에 많은 시간을 소비했고, 마이그레이션이 가장 큰 불만사항이었다. Spotify는 자동화를 통해 수백 개의 소프트웨어 컴포넌트를 한 번에 변경하는 방식을 도입했다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/gitfarm-as-a-service/" target="_blank" rel="noopener">GitFarm: Git-as-a-Service – 500ms 미만 체크아웃, 80% 이상 리소스 절감</a></div>
-    <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary">Uber가 개발한 GitFarm은 gRPC 기반 Git-as-a-Service 플랫폼으로, 클라우드의 중앙화된 Git 클라이언트 역할을 합니다. 로컬 clone 없이 500ms 이하의 빠른 체크아웃을 제공하며, 클라이언트 측 리소스 사용량을 80% 이상 감소시킵니다. 안전한 임시 샌드박스에서 표준 Git 명령을 실행하고, 대규모 모노레포 환경에서 기존 Git 워크플로우의 병목(clone, fetch, push 등)을 해결합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/gitfarm-as-a-service/" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">Moirai: 무손실 낙오자 완화 — SOSP 2025 채택</a></div>
     <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>uReview: Uber의 주간 약 65,000개 변경의 90%를 분석하는 GenAI 코드 리뷰</span>
+      <span class="item-meta">Uber Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Uber의 uReview는 주당 약 65,000건의 코드 변경의 90%를 분석하는 AI 코드 리뷰 플랫폼이다. 이 시스템은 기능적 버그, 에러 처리, 보안 취약점, 코딩 표준 준수를 식별하는 Commenter와 변경안을 제안하는 Fixer로 구성된다. AI 코드 리뷰의 핵심 과제는 LLM 환각이나 불필요한 지적으로 인한 거짓 양성이 높아서 도구의 신뢰성을 해친다는 것이다. uReview는 이러한 문제를 해결하여 신호 대 잡음 비율을 높이는 것을 목표로 한다.</div>
+      <div class="item-link"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주간 약 65,000개 변경의 90%를 분석하는 GenAI 코드 리뷰</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주간 약 65,000개 변경의 90%를 분석하는 GenAI 코드 리뷰</a></div>
-    <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary">Uber의 uReview는 주당 약 65,000건의 코드 변경의 90%를 분석하는 AI 코드 리뷰 플랫폼이다. 이 시스템은 기능적 버그, 에러 처리, 보안 취약점, 코딩 표준 준수를 식별하는 Commenter와 변경안을 제안하는 Fixer로 구성된다. AI 코드 리뷰의 핵심 과제는 LLM 환각이나 불필요한 지적으로 인한 거짓 양성이 높아서 도구의 신뢰성을 해친다는 것이다. uReview는 이러한 문제를 해결하여 신호 대 잡음 비율을 높이는 것을 목표로 한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">Uber의 멀티클라우드 시크릿 관리 플랫폼 구축</span>
+      <span class="item-meta">Uber Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Uber는 5,000개 이상의 마이크로서비스와 150,000개 이상의 시크릿을 관리하면서 사이버공격으로 인한 자격증명 노출 위험에 대응하기 위해 중앙집중식 Secret Management Platform을 구축했다. 이 플랫폼은 시크릿 분산, shadow IT vaults, 불안전한 시크릿 공유 문제를 해결하고 필요시 시크릿 로테이션을 지원한다. Git pre-commit hook을 통해 개발 과정 초기 단계에서 시크릿이 코드에 포함되는 것을 차단한다.</div>
+      <div class="item-link"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">Uber의 멀티클라우드 시크릿 관리 플랫폼 구축</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">Uber의 멀티클라우드 시크릿 관리 플랫폼 구축</a></div>
-    <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary">Uber는 5,000개 이상의 마이크로서비스와 150,000개 이상의 시크릿을 관리하면서 사이버공격으로 인한 자격증명 노출 위험에 대응하기 위해 중앙집중식 Secret Management Platform을 구축했다. 이 플랫폼은 시크릿 분산, shadow IT vaults, 불안전한 시크릿 공유 문제를 해결하고 필요시 시크릿 로테이션을 지원한다. Git pre-commit hook을 통해 개발 과정 초기 단계에서 시크릿이 코드에 포함되는 것을 차단한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/modernizing-artifact-storage/" target="_blank" rel="noopener">Uber의 아티팩트 저장소 현대화 - Uber의 10년된 온프레미스 아티팩트 저장소는 매월 5+ 페타바이트의 다운로드를 제공하며 쓰기 중단, 자동 복제 실패, 수 시간의 수동 재조정 위험에 노출되었습니다. 팀은 MySQL 메타데이터 저장소에 대한 조건부 HTTP 요청을 통해 신선도를 확인하는 검증 프록시 뒤의 다중 지역 클라우드 Blob 저장소로 마이그레이션했습니다. Egress는 99% 이상 감소했으며, 99.99% 가용성에서 아티팩트 egress 비용을 거의 90% 절감했습니다. 자세히 보기 →</a></div>
-    <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary">Uber는 10년 이상 온프레미스 아티팩트 스토어를 운영했으며, 월 5+ 페타바이트의 다운로드를 2개 데이터센터의 클러스터에서 처리했습니다. 기존 시스템은 쓰기 장애와 침묵 복제 실패 위험이 있었고, 수동 리밸런싱이 여러 시간 소요되었습니다. 다중 지역 클라우드 블롭 스토리지와 유효성 검사 프록시로 마이그레이션한 결과, 송신량 99% 이상 감소, 비용 90% 절감, 99.99% 가용성을 달성했습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/modernizing-artifact-storage/" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">Uber의 아티팩트 저장소 현대화 - Uber의 10년된 온프레미스 아티팩트 저장소는 매월 5+ 페타바이트의 다운로드를 제공하며 쓰기 중단, 자동 복제 실패, 수 시간의 수동 재조정 위험에 노출되었습니다. 팀은 MySQL 메타데이터 저장소에 대한 조건부 HTTP 요청을 통해 신선도를 확인하는 검증 프록시 뒤의 다중 지역 클라우드 Blob 저장소로 마이그레이션했습니다. Egress는 99% 이상 감소했으며, 99.99% 가용성에서 아티팩트 egress 비용을 거의 90% 절감했습니다. 자세히 보기 →</span>
+      <span class="item-meta">Uber Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Uber는 10년 이상 온프레미스 아티팩트 스토어를 운영했으며, 월 5+ 페타바이트의 다운로드를 2개 데이터센터의 클러스터에서 처리했습니다. 기존 시스템은 쓰기 장애와 침묵 복제 실패 위험이 있었고, 수동 리밸런싱이 여러 시간 소요되었습니다. 다중 지역 클라우드 블롭 스토리지와 유효성 검사 프록시로 마이그레이션한 결과, 송신량 99% 이상 감소, 비용 90% 절감, 99.99% 가용성을 달성했습니다.</div>
+      <div class="item-link"><a href="https://www.uber.com/blog/modernizing-artifact-storage/" target="_blank" rel="noopener">Uber의 아티팩트 저장소 현대화 - Uber의 10년된 온프레미스 아티팩트 저장소는 매월 5+ 페타바이트의 다운로드를 제공하며 쓰기 중단, 자동 복제 실패, 수 시간의 수동 재조정 위험에 노출되었습니다. 팀은 MySQL 메타데이터 저장소에 대한 조건부 HTTP 요청을 통해 신선도를 확인하는 검증 프록시 뒤의 다중 지역 클라우드 Blob 저장소로 마이그레이션했습니다. Egress는 99% 이상 감소했으며, 99.99% 가용성에서 아티팩트 egress 비용을 거의 90% 절감했습니다. 자세히 보기 →</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="dev-blogs">
   <div class="section-header">
@@ -288,47 +309,70 @@
     <span class="section-count">6개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Jul/14/uvx-github-actions-cache/#atom-everything" target="_blank" rel="noopener">GitHub Actions에서 uvx를 캐시 친화적으로 사용하기</a></div>
-    <div class="item-meta">Simon Willison</div>
-    <div class="item-summary">GitHub Actions 워크플로우에서 `uvx` 도구를 캐시 친화적으로 사용하는 방법이 소개되었습니다. 워크플로우 시작 시 `UV_EXCLUDE_NEWER: "2026-07-12"` 환경 변수를 설정하고, 이를 GitHub Actions 캐시 키의 일부로 포함시키면 됩니다. 이 방식으로 uvx 도구의 캐싱 효율성을 개선할 수 있습니다.<br><br>(참고: 제공된 내용이 중간에 끊겨있어 전체 맥락의 완전한 요약이 제한됩니다.)</div>
-  </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jul/14/uvx-github-actions-cache/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">GitHub Actions에서 uvx를 캐시 친화적으로 사용하기</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">GitHub Actions 워크플로우에서 `uvx` 도구를 캐시 친화적으로 사용하는 방법이 소개되었습니다. 워크플로우 시작 시 `UV_EXCLUDE_NEWER: "2026-07-12"` 환경 변수를 설정하고, 이를 GitHub Actions 캐시 키의 일부로 포함시키면 됩니다. 이 방식으로 uvx 도구의 캐싱 효율성을 개선할 수 있습니다.(참고: 제공된 내용이 중간에 끊겨있어 전체 맥락의 완전한 요약이 제한됩니다.)</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Jul/14/uvx-github-actions-cache/#atom-everything" target="_blank" rel="noopener">GitHub Actions에서 uvx를 캐시 친화적으로 사용하기</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Jul/13/doomql/#atom-everything" target="_blank" rel="noopener">DOOMQL</a></div>
-    <div class="item-meta">Simon Willison</div>
-    <div class="item-summary">DOOMQL은 Peter Gostev가 만든 프로젝트로, SQLite를 게임 엔진으로 사용하는 Doom 스타일의 독창적인 게임이다. SQL이 게임의 캐릭터 움직임, 충돌 감지, 적 AI, 전투, 진행도, 그리고 화면의 모든 RGB 픽셀을 제어한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jul/13/doomql/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">DOOMQL</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">DOOMQL은 Peter Gostev가 만든 프로젝트로, SQLite를 게임 엔진으로 사용하는 Doom 스타일의 독창적인 게임이다. SQL이 게임의 캐릭터 움직임, 충돌 감지, 적 AI, 전투, 진행도, 그리고 화면의 모든 RGB 픽셀을 제어한다.</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Jul/13/doomql/#atom-everything" target="_blank" rel="noopener">DOOMQL</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Jul/13/datasette-code-frequency/#atom-everything" target="_blank" rel="noopener">Datasette의 GitHub 코드 주파수 차트</a></div>
-    <div class="item-meta">Simon Willison</div>
-    <div class="item-summary">작가가 Datasette 오픈 소스 프로젝트의 GitHub code-frequency 차트를 통해 coding agents와 Claude Opus 4.5 모델이 자신의 개발 산출량에 미친 영향을 분석했다. 이 차트는 코드 변경의 빈도를 시각적으로 보여준다. (이미지 내용이 잘려 있어 추가 분석 내용 확인 불가)</div>
-  </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jul/13/datasette-code-frequency/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">Datasette의 GitHub 코드 주파수 차트</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">작가가 Datasette 오픈 소스 프로젝트의 GitHub code-frequency 차트를 통해 coding agents와 Claude Opus 4.5 모델이 자신의 개발 산출량에 미친 영향을 분석했다. 이 차트는 코드 변경의 빈도를 시각적으로 보여준다. (이미지 내용이 잘려 있어 추가 분석 내용 확인 불가)</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Jul/13/datasette-code-frequency/#atom-everything" target="_blank" rel="noopener">Datasette의 GitHub 코드 주파수 차트</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://newsletter.kentbeck.com/p/the-beginnings-of-an-idea-xp-is-long" target="_blank" rel="noopener">아이디어의 시작: XP는 롱 변동성</a></div>
     <div class="item-meta">Kent Beck</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://newsletter.kentbeck.com/p/the-beginnings-of-an-idea-xp-is-long" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>DSL이 LLM의 신뢰할 수 있는 사용을 가능하게 한다</span>
+      <span class="item-meta">Martin Fowler</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">LLM은 코드를 빠르게 생성하지만, 의도한 정확한 결과를 얻으려면 명확한 경계가 필요하다. 도메인 특화 언어(DSL)와 추상화는 LLM을 처음부터 올바른 방향으로 안내하는 강력한 틀을 제공한다. Unmesh Joshi는 분산 시스템 동작을 설명하는 도메인 모델과 DSL인 Tickloom을 예로 들어 신뢰할 수 있는 LLM 사용 방법을 설명한다.</div>
+      <div class="item-link"><a href="https://martinfowler.com/articles/llm-and-dsls.html" target="_blank" rel="noopener">DSL이 LLM의 신뢰할 수 있는 사용을 가능하게 한다</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://martinfowler.com/articles/llm-and-dsls.html" target="_blank" rel="noopener">DSL이 LLM의 신뢰할 수 있는 사용을 가능하게 한다</a></div>
-    <div class="item-meta">Martin Fowler</div>
-    <div class="item-summary">LLM은 코드를 빠르게 생성하지만, 의도한 정확한 결과를 얻으려면 명확한 경계가 필요하다. 도메인 특화 언어(DSL)와 추상화는 LLM을 처음부터 올바른 방향으로 안내하는 강력한 틀을 제공한다. Unmesh Joshi는 분산 시스템 동작을 설명하는 도메인 모델과 DSL인 Tickloom을 예로 들어 신뢰할 수 있는 LLM 사용 방법을 설명한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://martinfowler.com/articles/llm-and-dsls.html" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://martinfowler.com/fragments/2026-07-13.html" target="_blank" rel="noopener">조각들: 7월 13일</a></div>
-    <div class="item-meta">Martin Fowler</div>
-    <div class="item-summary">내용이 미완성되어 있습니다. 제공된 텍스트가 "While context window..."에서 끝나 전체 맥락을 파악할 수 없으니, 정확한 요약을 위해 완전한 [내용]을 제공해주세요.</div>
-  </div>
-  <div class="item-arrow"><a href="https://martinfowler.com/fragments/2026-07-13.html" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">조각들: 7월 13일</span>
+      <span class="item-meta">Martin Fowler</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">내용이 미완성되어 있습니다. 제공된 텍스트가 "While context window..."에서 끝나 전체 맥락을 파악할 수 없으니, 정확한 요약을 위해 완전한 [내용]을 제공해주세요.</div>
+      <div class="item-link"><a href="https://martinfowler.com/fragments/2026-07-13.html" target="_blank" rel="noopener">조각들: 7월 13일</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="papers">
   <div class="section-header">
@@ -337,40 +381,65 @@
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.11138" target="_blank" rel="noopener">에이전트 오케스트레이션을 위한 스택 기반 실행 및 지연 발견을 갖춘 형식적 계층 구조 아키텍처</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">LLM 에이전트가 수백~수천 개의 도구를 담은 flat한 레지스트리에 접근할 때 발생하는 의사결정 공간 폭발, 컨텍스트 윈도우 포화, 라우팅 정확도 저하 문제를 다룬다. 이를 해결하기 위해 capability를 계층적 트리 구조로 조직화한 skill-based agentic orchestration 아키텍처를 제안한다. 내부 노드가 의사결정을 수행하는 rooted tree 구조를 사용한다.<br><br>(주: 제공된 Abstract가 문장 중간에 끝나 완전한 설명은 제한적입니다)</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.11138" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">에이전트 오케스트레이션을 위한 스택 기반 실행 및 지연 발견을 갖춘 형식적 계층 구조 아키텍처</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">LLM 에이전트가 수백~수천 개의 도구를 담은 flat한 레지스트리에 접근할 때 발생하는 의사결정 공간 폭발, 컨텍스트 윈도우 포화, 라우팅 정확도 저하 문제를 다룬다. 이를 해결하기 위해 capability를 계층적 트리 구조로 조직화한 skill-based agentic orchestration 아키텍처를 제안한다. 내부 노드가 의사결정을 수행하는 rooted tree 구조를 사용한다.(주: 제공된 Abstract가 문장 중간에 끝나 완전한 설명은 제한적입니다)</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.11138" target="_blank" rel="noopener">에이전트 오케스트레이션을 위한 스택 기반 실행 및 지연 발견을 갖춘 형식적 계층 구조 아키텍처</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.11185" target="_blank" rel="noopener">SCALECUA: 검증 가능한 작업 합성과 효율적 온라인 강화학습을 통한 컴퓨터 사용 에이전트 확장</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">SCALECUA는 컴퓨터 사용 에이전트(CUAs)의 능력을 확장하기 위한 프레임워크다. CUAs는 시각적 인식과 GUI 실행을 통해 복잡한 디지털 워크플로우를 자동화한다. 현재 온라인 강화학습 방식은 검증 가능한 데이터 부족과 학습 비효율이 병목이다. ScaleCUA는 검증 가능한 작업 합성과 효율적인 학습을 통해 이러한 문제를 해결한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.11185" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">SCALECUA: 검증 가능한 작업 합성과 효율적 온라인 강화학습을 통한 컴퓨터 사용 에이전트 확장</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">SCALECUA는 컴퓨터 사용 에이전트(CUAs)의 능력을 확장하기 위한 프레임워크다. CUAs는 시각적 인식과 GUI 실행을 통해 복잡한 디지털 워크플로우를 자동화한다. 현재 온라인 강화학습 방식은 검증 가능한 데이터 부족과 학습 비효율이 병목이다. ScaleCUA는 검증 가능한 작업 합성과 효율적인 학습을 통해 이러한 문제를 해결한다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.11185" target="_blank" rel="noopener">SCALECUA: 검증 가능한 작업 합성과 효율적 온라인 강화학습을 통한 컴퓨터 사용 에이전트 확장</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.10350" target="_blank" rel="noopener">ABot-AgentOS: 평생 다중모달 메모리를 갖춘 범용 로봇 에이전트 OS</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">제공된 내용이 불완전합니다 (Abstract가 "we int"로 중단됨). 요약을 위해 전체 내용이 필요합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.10350" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">ABot-AgentOS: 평생 다중모달 메모리를 갖춘 범용 로봇 에이전트 OS</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">제공된 내용이 불완전합니다 (Abstract가 "we int"로 중단됨). 요약을 위해 전체 내용이 필요합니다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.10350" target="_blank" rel="noopener">ABot-AgentOS: 평생 다중모달 메모리를 갖춘 범용 로봇 에이전트 OS</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.10110" target="_blank" rel="noopener">적응형 종료-상태 선택을 갖춘 반복형 상태-공간 언어 모델</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">최근 연구에서 로프된 언어 모델이 추가 매개변수보다는 계산 깊이가 깊을수록 추론 문제 해결에 유리함을 시사했다. 기존 연구는 Transformer에 집중했으나, 이 논문은 상태 공간 모델에도 동일한 원리가 적용되는지 조사한다. Looped Mamba와 Looped Hybrid Mamba-Transformer 아키텍처를 통해 공유 블록을 반복 적용하여 명시적인 유한-깊이 재귀 계산을 도입한다.<br><br>*(초록이 미완성되어 전체 내용 파악 제한)*</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.10110" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">적응형 종료-상태 선택을 갖춘 반복형 상태-공간 언어 모델</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">최근 연구에서 로프된 언어 모델이 추가 매개변수보다는 계산 깊이가 깊을수록 추론 문제 해결에 유리함을 시사했다. 기존 연구는 Transformer에 집중했으나, 이 논문은 상태 공간 모델에도 동일한 원리가 적용되는지 조사한다. Looped Mamba와 Looped Hybrid Mamba-Transformer 아키텍처를 통해 공유 블록을 반복 적용하여 명시적인 유한-깊이 재귀 계산을 도입한다.*(초록이 미완성되어 전체 내용 파악 제한)*</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.10110" target="_blank" rel="noopener">적응형 종료-상태 선택을 갖춘 반복형 상태-공간 언어 모델</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.10878" target="_blank" rel="noopener">LOGOS: 인간과 함께 진화하는 AI 에이전트 팀의 살아있는 논리</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">AI 에이전트가 도구 사용, 작업 위임, 경험 학습을 통해 진화하는 지속적인 팀으로 변화하고 있다. LOGOS는 이러한 에이전트 팀의 자가진화와 거버넌스를 제어하는 플러그 가능한 레이어로, 기존 멀티에이전트 프레임워크를 대체하지 않고 강화한다. 핵심은 에이전트가 무엇을 할 수 있느냐가 아니라 누가 그들의 진화를 제어할 수 있느냐에 있다. LOGOS는 문서, 이미지, 오디오, 테이블, 데이터베이스 등 다양한 입력 형식을 처리한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.10878" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">LOGOS: 인간과 함께 진화하는 AI 에이전트 팀의 살아있는 논리</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 에이전트가 도구 사용, 작업 위임, 경험 학습을 통해 진화하는 지속적인 팀으로 변화하고 있다. LOGOS는 이러한 에이전트 팀의 자가진화와 거버넌스를 제어하는 플러그 가능한 레이어로, 기존 멀티에이전트 프레임워크를 대체하지 않고 강화한다. 핵심은 에이전트가 무엇을 할 수 있느냐가 아니라 누가 그들의 진화를 제어할 수 있느냐에 있다. LOGOS는 문서, 이미지, 오디오, 테이블, 데이터베이스 등 다양한 입력 형식을 처리한다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.10878" target="_blank" rel="noopener">LOGOS: 인간과 함께 진화하는 AI 에이전트 팀의 살아있는 논리</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="hn-reddit">
   <div class="section-header">
@@ -379,110 +448,87 @@
     <span class="section-count">15개</span>
   </div>
   <div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://tech.supercarblondie.com/japan-recovers-up-to-90-of-lithium-from-used-ev-batteries/" target="_blank" rel="noopener">일본, 폐 EV 배터리에서 리튬 최대 90% 회수 방법 개발</a></div>
     <div class="item-meta">HN · 663 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://tech.supercarblondie.com/japan-recovers-up-to-90-of-lithium-from-used-ev-batteries/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://lalitm.com/post/git-history/" target="_blank" rel="noopener">git history 명령어</a></div>
     <div class="item-meta">HN · 378 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://lalitm.com/post/git-history/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/openai/codex/issues/28058" target="_blank" rel="noopener">Codex, 서브 에이전트 프롬프트 암호화 시작</a></div>
     <div class="item-meta">HN · 321 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/openai/codex/issues/28058" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.bbc.com/news/articles/cm2drrv6q54o" target="_blank" rel="noopener">사진술이 등장하기 전 인도를 스케치한 영국 여성</a></div>
     <div class="item-meta">HN · 202 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.bbc.com/news/articles/cm2drrv6q54o" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://lenergy.com.au/free-daytime-electricity-is-coming-heres-how-it-actually-works/" target="_blank" rel="noopener">호주 에너지 소매업체는 3시간의 무료 주간 전기를 제공해야 한다</a></div>
     <div class="item-meta">HN · 178 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://lenergy.com.au/free-daytime-electricity-is-coming-heres-how-it-actually-works/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://web.stanford.edu/~dntse/wireless_book.html" target="_blank" rel="noopener">무선 통신 기초 (2005)</a></div>
     <div class="item-meta">HN · 161 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://web.stanford.edu/~dntse/wireless_book.html" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/JetBrains/youtrackdb" target="_blank" rel="noopener">YouTrackDB는 범용 객체지향 그래프 데이터베이스입니다.</a></div>
     <div class="item-meta">HN · 155 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/JetBrains/youtrackdb" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.dw.com/en/germany-freedom-of-information-act/a-77939695" target="_blank" rel="noopener">독일, 정보자유법 제한 추진</a></div>
     <div class="item-meta">HN · 147 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.dw.com/en/germany-freedom-of-information-act/a-77939695" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.bbc.com/news/articles/cg53l737v1qo" target="_blank" rel="noopener">인도 과학자들이 인간 뇌간의 가장 정밀한 3D 지도 제작</a></div>
     <div class="item-meta">HN · 126 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.bbc.com/news/articles/cg53l737v1qo" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://phemex.com/news/article/2026-fields-medal-winners-list-leaked-includes-two-peking-university-alumni-92948" target="_blank" rel="noopener">Codex가 ICM 웹사이트를 크롤링해 2026년 Fields Medal 수상자 명단을 발견했다</a></div>
     <div class="item-meta">HN · 123 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://phemex.com/news/article/2026-fields-medal-winners-list-leaked-includes-two-peking-university-alumni-92948" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1uviru5/chain_of_thought_is_a_scaling_trap_the_next_wave/" target="_blank" rel="noopener">사고의 연쇄는 스케일링 함정이다. 다음 물결은 잠재 추론(Coconut / HRM / RecursiveMAS)... 하지만 곧 블랙박스 벽에 부딪힌다. BDH는 어디에 맞는가? [D]</a></div>
-    <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary">내용이 불충분합니다. 각 개념(Chain of Thought, latent reasoning, Coconut, HRM, RecrusiveMAS, black box wall, BDH)에 대한 구체적인 설명이나 맥락이 없어 3~5줄 요약을 작성할 수 없습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1uviru5/chain_of_thought_is_a_scaling_trap_the_next_wave/" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">사고의 연쇄는 스케일링 함정이다. 다음 물결은 잠재 추론(Coconut / HRM / RecursiveMAS)... 하지만 곧 블랙박스 벽에 부딪힌다. BDH는 어디에 맞는가? [D]</span>
+      <span class="item-meta">r/MachineLearning</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">내용이 불충분합니다. 각 개념(Chain of Thought, latent reasoning, Coconut, HRM, RecrusiveMAS, black box wall, BDH)에 대한 구체적인 설명이나 맥락이 없어 3~5줄 요약을 작성할 수 없습니다.</div>
+      <div class="item-link"><a href="https://www.reddit.com/r/MachineLearning/comments/1uviru5/chain_of_thought_is_a_scaling_trap_the_next_wave/" target="_blank" rel="noopener">사고의 연쇄는 스케일링 함정이다. 다음 물결은 잠재 추론(Coconut / HRM / RecursiveMAS)... 하지만 곧 블랙박스 벽에 부딪힌다. BDH는 어디에 맞는가? [D]</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1uw4j6a/llm_hallucination_paperusing_math_accepted_to/" target="_blank" rel="noopener">LLM 할루시네이션 논문(수학 활용) ICML 워크숍 채택됨[R]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1uw4j6a/llm_hallucination_paperusing_math_accepted_to/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1uvuavs/are_the_contents_of_this_monograph_reliable_with/" target="_blank" rel="noopener">이 단행본의 내용이 딥 신경망의 현대 이론적 이해와 관련하여 신뢰할 수 있는가? [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1uvuavs/are_the_contents_of_this_monograph_reliable_with/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1uvlb6h/gpuhedge_hedging_serverless_gpu_providers/" target="_blank" rel="noopener">GPUHedge: 서버리스 GPU 공급자 헤징으로 콜드 스타트 P95 레이턴시를 117초에서 30초로 개선 [P]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1uvlb6h/gpuhedge_hedging_serverless_gpu_providers/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1uvxt70/how_many_onthefly_augmentations_per_image_for_a/" target="_blank" rel="noopener">단일 클래스 분할 모드에서 이미지당 몇 개의 온-더-플라이 증강을 할 것인가 [R]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1uvxt70/how_many_onthefly_augmentations_per_image_for_a/" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="github">
   <div class="section-header">
@@ -491,40 +537,65 @@
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/Shubhamsaboo/awesome-llm-apps" target="_blank" rel="noopener">Shubhamsaboo/awesome-llm-apps</a></div>
-    <div class="item-meta">120,454</div>
-    <div class="item-summary">**Awesome LLM Apps**는 100개 이상의 오픈소스 AI 에이전트, 에이전트 스킬, RAG 앱을 모아놓은 저장소입니다. Apache-2.0 라이선스로 자유롭게 복제, 배포, 판매할 수 있으며, Claude, Gemini, GPT, DeepSeek, Llama, Qwen 등 다양한 모델을 지원합니다. 모든 앱은 손으로 만들어지고 엔드투엔드 테스트를 거쳤으며, Unwind AI에서 단계별 튜토리얼을 제공합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/Shubhamsaboo/awesome-llm-apps" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">Shubhamsaboo/awesome-llm-apps</span>
+      <span class="item-meta">120,454</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">**Awesome LLM Apps**는 100개 이상의 오픈소스 AI 에이전트, 에이전트 스킬, RAG 앱을 모아놓은 저장소입니다. Apache-2.0 라이선스로 자유롭게 복제, 배포, 판매할 수 있으며, Claude, Gemini, GPT, DeepSeek, Llama, Qwen 등 다양한 모델을 지원합니다. 모든 앱은 손으로 만들어지고 엔드투엔드 테스트를 거쳤으며, Unwind AI에서 단계별 튜토리얼을 제공합니다.</div>
+      <div class="item-link"><a href="https://github.com/Shubhamsaboo/awesome-llm-apps" target="_blank" rel="noopener">Shubhamsaboo/awesome-llm-apps</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">mattpocock/skills</a></div>
-    <div class="item-meta">169,653</div>
-    <div class="item-summary">mattpocock의 Skills는 실제 엔지니어링 업무를 위한 에이전트 스킬 모음으로, GSD나 Spec-Kit 같은 기존 접근법과 달리 사용자 제어권을 유지하도록 설계되었다. 작고 적응 가능하며 조합 가능한 형태이고 모든 모델과 호환되며, 수십 년의 엔지니어링 경험을 기반으로 한다. `npx skills@latest add mattpocock/skills`로 설치 후 issue tracker(GitHub, Linear 등)와 문서 저장 위치를 설정하면 사용할 수 있다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">mattpocock/skills</span>
+      <span class="item-meta">169,653</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">mattpocock의 Skills는 실제 엔지니어링 업무를 위한 에이전트 스킬 모음으로, GSD나 Spec-Kit 같은 기존 접근법과 달리 사용자 제어권을 유지하도록 설계되었다. 작고 적응 가능하며 조합 가능한 형태이고 모든 모델과 호환되며, 수십 년의 엔지니어링 경험을 기반으로 한다. `npx skills@latest add mattpocock/skills`로 설치 후 issue tracker(GitHub, Linear 등)와 문서 저장 위치를 설정하면 사용할 수 있다.</div>
+      <div class="item-link"><a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">mattpocock/skills</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/Dicklesworthstone/destructive_command_guard" target="_blank" rel="noopener">Dicklesworthstone/destructive_command_guard</a></div>
-    <div class="item-meta">4,175</div>
-    <div class="item-summary">**dcg (Destructive Command Guard)**는 AI 코딩 에이전트용 훅 도구로, 파괴적인 명령어(삭제 등)를 실행 전에 차단하여 작업물을 보호한다. Claude Code, Codex CLI, Gemini CLI, GitHub Copilot CLI, VS Code Copilot Chat, Cursor 등 다양한 IDE와 에이전트를 지원한다. 고성능이며 MIT 라이선스로 배포된다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/Dicklesworthstone/destructive_command_guard" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">Dicklesworthstone/destructive_command_guard</span>
+      <span class="item-meta">4,175</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">**dcg (Destructive Command Guard)**는 AI 코딩 에이전트용 훅 도구로, 파괴적인 명령어(삭제 등)를 실행 전에 차단하여 작업물을 보호한다. Claude Code, Codex CLI, Gemini CLI, GitHub Copilot CLI, VS Code Copilot Chat, Cursor 등 다양한 IDE와 에이전트를 지원한다. 고성능이며 MIT 라이선스로 배포된다.</div>
+      <div class="item-link"><a href="https://github.com/Dicklesworthstone/destructive_command_guard" target="_blank" rel="noopener">Dicklesworthstone/destructive_command_guard</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/virattt/ai-hedge-fund" target="_blank" rel="noopener">virattt/ai-hedge-fund</a></div>
-    <div class="item-meta">61,732</div>
-    <div class="item-summary">AI 기반 헤지펀드의 개념 증명으로, AI를 사용하여 거래 결정을 탐색하는 프로젝트입니다. 교육 목적만 제공되며 실제 투자용이 아닙니다. 현재 영구적인 AI 헤지펀드로 재구축 중이며, 백테스트와 모의거래, 선택적 라이브 실행이 가능합니다. 시스템은 워렌 버핏, 캐시 우드, 마이클 배리 등 유명 투자자 스타일을 모방한 15개의 에이전트가 함께 작동합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/virattt/ai-hedge-fund" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">virattt/ai-hedge-fund</span>
+      <span class="item-meta">61,732</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 기반 헤지펀드의 개념 증명으로, AI를 사용하여 거래 결정을 탐색하는 프로젝트입니다. 교육 목적만 제공되며 실제 투자용이 아닙니다. 현재 영구적인 AI 헤지펀드로 재구축 중이며, 백테스트와 모의거래, 선택적 라이브 실행이 가능합니다. 시스템은 워렌 버핏, 캐시 우드, 마이클 배리 등 유명 투자자 스타일을 모방한 15개의 에이전트가 함께 작동합니다.</div>
+      <div class="item-link"><a href="https://github.com/virattt/ai-hedge-fund" target="_blank" rel="noopener">virattt/ai-hedge-fund</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/HKUDS/Vibe-Trading" target="_blank" rel="noopener">HKUDS/Vibe-Trading</a></div>
-    <div class="item-meta">22,569</div>
-    <div class="item-summary">Vibe-Trading은 개인 트레이딩 에이전트로, 포괄적인 거래 기능을 한 명령으로 제공합니다. Python 3.11+, FastAPI 백엔드, React 19 프론트엔드로 구성되며, PyPI를 통해 vibe-trading-ai 패키지로 배포됩니다. MIT 라이선스 오픈소스 프로젝트이며 Feishu, WeChat, Discord 커뮤니티를 지원합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/HKUDS/Vibe-Trading" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">HKUDS/Vibe-Trading</span>
+      <span class="item-meta">22,569</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Vibe-Trading은 개인 트레이딩 에이전트로, 포괄적인 거래 기능을 한 명령으로 제공합니다. Python 3.11+, FastAPI 백엔드, React 19 프론트엔드로 구성되며, PyPI를 통해 vibe-trading-ai 패키지로 배포됩니다. MIT 라이선스 오픈소스 프로젝트이며 Feishu, WeChat, Discord 커뮤니티를 지원합니다.</div>
+      <div class="item-link"><a href="https://github.com/HKUDS/Vibe-Trading" target="_blank" rel="noopener">HKUDS/Vibe-Trading</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div>
 </body>

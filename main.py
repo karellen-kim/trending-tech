@@ -3,7 +3,6 @@ import os
 import signal
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
-from itertools import zip_longest
 from datetime import date, timedelta, datetime
 
 from config import (DOCS_DIR, SLACK_WEBHOOK_URL, MAX_PAPER_ITEMS, SUMMARY_WORKERS, now_kst,
@@ -240,24 +239,7 @@ def _week_label(week_id: str) -> str:
     end = datetime.strptime(f"{y}-W{w}-7", "%G-W%V-%u").date()
     return f"{y}년 {start.month}월 {start.day}일 ~ {end.month}월 {end.day}일"
 
-def _week_highlights(day_takes: list[dict], limit: int = 5) -> list[dict]:
-    """그 주 일별 페이지의 ★ 글을 모아 주간 하이라이트로 쓴다.
-    예전에는 일요일 당일 데이터로 문장만 만들어 원문 링크가 없었다.
-    하루에 몰리지 않게 날짜를 돌아가며 한 건씩 집는다."""
-    out, seen = [], set()
-    for tier in zip_longest(*[d.get("links", []) for d in day_takes]):
-        for l in tier:
-            url = (l or {}).get("url", "")
-            if not url or url in seen:
-                continue
-            seen.add(url)
-            out.append({"text": l.get("text", ""), "url": url})
-            if len(out) >= limit:
-                return out
-    return out
-
-
-def save_weekly_page(today: date, weekly_highlights: list[str] | None = None) -> None:
+def save_weekly_page(today: date) -> None:
     wid = _week_id(today)
     # 이번 주에 속한 일별 JSON 수집
     days = []
@@ -290,10 +272,6 @@ def save_weekly_page(today: date, weekly_highlights: list[str] | None = None) ->
     })
     # 그 주의 일별 해석을 모아 주간 해석을 만든다 (매일 갱신)
     day_takes = digest.load_week(days)
-    if weekly_highlights is None:
-        weekly_highlights = _week_highlights(day_takes)
-    if weekly_highlights:
-        wdata["highlights"] = weekly_highlights
     if day_takes:
         take = generate_week_take(day_takes)
         if take:

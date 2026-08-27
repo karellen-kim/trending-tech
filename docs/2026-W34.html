@@ -28,9 +28,9 @@
 </style>
 <style>
   body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
-  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
-  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
-  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
   .top-bar { display: flex; align-items: center; justify-content: space-between;
@@ -73,9 +73,9 @@
   .highlight-section .section-icon { color: var(--accent-deep); }
   .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
   .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
@@ -118,10 +118,11 @@
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
-  .item-head { padding: 1rem 0; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
     letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
@@ -130,12 +131,11 @@
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 0 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
-    border: 1px dashed #d3c9b1; }
+    background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -158,6 +158,8 @@
   .days-section-title { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; color: var(--green);
     background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green);
     padding: 0.8rem 1.15rem; margin-bottom: 0.9rem; text-transform: none; }
+  /* 월간 페이지는 섹션 헤더 바로 아래에 주차 카드가 온다 — 붙지 않게 띄운다 */
+  .section-header + .day-link { margin-top: 0.9rem; }
   .day-link { display: flex; align-items: center; gap: 0.9rem; margin: 0 1.15rem 0.6rem;
     padding: 0.85rem 1rem; border: 1px solid var(--rule-strong); border-radius: 14px;
     background: var(--paper); text-decoration: none; color: var(--ink); transition: all 0.12s; }
@@ -180,13 +182,6 @@
     <span class="section-title">이 주의 해석</span>
   </div>
   <div class="take"><p class="take-headline">금융·의료로 확대되는 에이전트 기술, AWS Bedrock 중심의 안전 제어 아키텍처로 수렴</p><p class="take-body">소형 LLM 에이전트가 실전 배포 가능해진 이후, 금융거래와 의료분석 같은 고위험 도메인으로 확장되고 있다. 이 과정에서 자율성 제어, 거버넌스, 컨텍스트 관리가 프로덕션의 핵심이 되었고, AWS Bedrock AgentCore가 이를 지배하는 표준 플랫폼으로 수렴 중이다. 8월 23일 데이터 엔지니어링과의 통합까지 진행되면서 데이터에서 비즈니스 실행까지의 end-to-end 파이프라인이 단일 스택으로 구체화되는 중이다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-agentcore-payments-is-now-generally-available-enabling-agents-to-transact-safely-and-autonomously-at-scale/" target="_blank" rel="noopener">Amazon Bedrock AgentCore payments 일반 공개: 에이전트가 안전하게 자율적으로 대규모 거래하도록 지원</a><span class="pick-why">금융 도메인 진입의 구체적 이정표</span></li><li><a href="https://techblog.lycorp.co.jp/ko/ai-agent-platform-sage-dev-log-part-1" target="_blank" rel="noopener">보안 업무를 위한 AI 에이전트 플랫폼 「SAGE」 개발기 1편: 판단은 사람에게 남기는 설계</a><span class="pick-why">거버넌스 설계의 실전 사례</span></li><li><a href="https://aws.amazon.com/blogs/machine-learning/govern-ai-agent-tool-access-with-amazon-bedrock-agentcore-gateway/" target="_blank" rel="noopener">Amazon Bedrock AgentCore Gateway로 AI 에이전트 도구 접근 제어하기</a><span class="pick-why">AWS 중심 제어 아키텍처 표준화</span></li><li><a href="https://aws.amazon.com/blogs/machine-learning/agentic-data-operations-platform-adop-data-engineering-into-hours/" target="_blank" rel="noopener">에이전틱 데이터 운영 플랫폼(ADOP): 데이터 엔지니어링을 시간 단위로</a><span class="pick-why">데이터까지 통합되는 단일 스택 형성</span></li></ol></div></div>
-</div>
-<div class="section highlight-section" id="highlights">
-  <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">주간 하이라이트</span>
-  </div>
-  <ul class="highlight-list"><li><a href="https://simonwillison.net/2026/Aug/16/qwen-38-27b/" target="_blank" rel="noopener">Qwen 3.8 27B는 우수하지만 기본적으로 과도하게 생각하는 경향이 있다</a></li><li><a href="https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-agentcore-payments-is-now-generally-available-enabling-agents-to-transact-safely-and-autonomously-at-scale/" target="_blank" rel="noopener">Amazon Bedrock AgentCore payments 일반 공개: 에이전트가 안전하게 자율적으로 대규모 거래하도록 지원</a></li><li><a href="https://aws.amazon.com/blogs/machine-learning/domain-and-publish-date-filters-for-web-search-on-agentcore/" target="_blank" rel="noopener">AgentCore Web Search의 도메인 및 발행 날짜 필터</a></li><li><a href="https://aws.amazon.com/blogs/machine-learning/agentic-data-operations-platform-adop-data-engineering-into-hours/" target="_blank" rel="noopener">에이전틱 데이터 운영 플랫폼(ADOP): 데이터 엔지니어링을 시간 단위로</a></li><li><a href="https://arxiv.org/abs/2608.13574" target="_blank" rel="noopener">Agentao: 도구 사용 LLM 에이전트를 위한 관리된 로컬 우선 런타임</a></li></ul>
 </div>
 <div class="days-section">
   <div class="days-section-title">이번 주 일별 보기</div>

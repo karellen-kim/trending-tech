@@ -27,9 +27,9 @@ _BASE_CSS = """<style>
 
 _DAILY_CSS = """<style>
   body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
-  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
-  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
-  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
   .top-bar { display: flex; align-items: center; justify-content: space-between;
@@ -72,9 +72,9 @@ _DAILY_CSS = """<style>
   .highlight-section .section-icon { color: var(--accent-deep); }
   .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
   .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
@@ -117,10 +117,11 @@ _DAILY_CSS = """<style>
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
-  .item-head { padding: 1rem 0; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
     letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
@@ -129,12 +130,11 @@ _DAILY_CSS = """<style>
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "\2212"; color: var(--accent); }
-  .item-body { padding: 0 0 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
-    border: 1px dashed #d3c9b1; }
+    background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -198,9 +198,6 @@ _INDEX_CSS = """<style>
   .note { display: flex; gap: 0.9rem; padding: 1.15rem 1.6rem; border-bottom: 1px solid var(--rule);
     text-decoration: none; color: var(--ink); }
   .note:hover { background: var(--paper-deep); }
-  .note-rail { display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 7px; }
-  .note-dot { width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
-  .note-line { flex: 1; width: 1px; background: var(--rule-strong); }
   .note-body { flex: 1; min-width: 0; }
   .note-top { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.45rem; }
   .note-range { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; color: var(--green); }
@@ -404,6 +401,8 @@ _DAY_LINK_CSS = """<style>
   .days-section-title { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; color: var(--green);
     background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green);
     padding: 0.8rem 1.15rem; margin-bottom: 0.9rem; text-transform: none; }
+  /* 월간 페이지는 섹션 헤더 바로 아래에 주차 카드가 온다 — 붙지 않게 띄운다 */
+  .section-header + .day-link { margin-top: 0.9rem; }
   .day-link { display: flex; align-items: center; gap: 0.9rem; margin: 0 1.15rem 0.6rem;
     padding: 0.85rem 1rem; border: 1px solid var(--rule-strong); border-radius: 14px;
     background: var(--paper); text-decoration: none; color: var(--ink); transition: all 0.12s; }
@@ -448,26 +447,9 @@ def render_weekly_page(week_data: dict) -> str:
     """
     week_id = week_data["week_id"]
     label = week_data.get("week_label", week_id)
-    highlights = week_data.get("highlights", [])
     days = week_data.get("days", [])
 
     take_html = _period_take_html(week_data.get("week_take"), "이 주의 해석")
-
-    hl_html = ""
-    if highlights:
-        # 예전 주간 페이지에는 문장만 남아 있어 링크를 걸 수 없다
-        rows = "".join(
-            (f'<li><a href="{h["url"]}" target="_blank" rel="noopener">{_e(h.get("text",""))}</a></li>'
-             if isinstance(h, dict) and h.get("url")
-             else f'<li>{_e(h.get("text","") if isinstance(h, dict) else h)}</li>')
-            for h in highlights)
-        hl_html = f"""<div class="section highlight-section" id="highlights">
-  <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">주간 하이라이트</span>
-  </div>
-  <ul class="highlight-list">{rows}</ul>
-</div>"""
 
     days_html = ""
     for d in days:
@@ -493,7 +475,6 @@ def render_weekly_page(week_data: dict) -> str:
 <div class="page-meta">{week_id}</div>
 <h1>{label.split("(")[0].strip()}</h1>
 {take_html}
-{hl_html}
 <div class="days-section">
   <div class="days-section-title">이번 주 일별 보기</div>
   {days_html}
@@ -568,7 +549,6 @@ def render_index_page(entries: list[dict], month_takes: dict | None = None) -> s
             b = f'<div class="note-b">{_e(hl[1])}</div>' if len(hl) > 1 else ""
 
             body += f"""<a class="note" href="./{wid}.html">
-  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
   <div class="note-body">
     <div class="note-top"><span class="note-range">{label}</span><span class="note-ago">{ago}</span></div>
     <div class="note-a">{a}</div>

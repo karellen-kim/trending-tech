@@ -28,9 +28,9 @@
 </style>
 <style>
   body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
-  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
-  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
-  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
   .top-bar { display: flex; align-items: center; justify-content: space-between;
@@ -73,9 +73,9 @@
   .highlight-section .section-icon { color: var(--accent-deep); }
   .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
   .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
@@ -118,10 +118,11 @@
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
-  .item-head { padding: 1rem 0; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
     letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
@@ -130,12 +131,11 @@
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 0 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
-    border: 1px dashed #d3c9b1; }
+    background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -162,20 +162,13 @@
 <div class="page-meta">2026-07-31</div>
 <h1><em>31</em> Jul 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section" id="today-take">
+<div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 해석</span>
     
   </div>
   <div class="take"><p class="take-headline">에이전트가 실무 도구로 배치되자, 그것을 관찰·제어하고 학습시키는 메타레이어가 새로운 과제로 부상했다.</p><p class="take-body">Spotify는 에이전트를 데이터 쿼리, 개발자 생산성 도구로 실제 배치하고 있으며(3, 4), 논문들은 에이전트의 자율 학습·진화·제어 메커니즘을 연구 중이다(18, 19). AgentGUI, Agent-Manager 같은 도구들이 실행 중인 에이전트를 관찰·조종하는 인터페이스를 제시하는 것은, 에이전트 자체를 제어하는 메타레이어가 새로운 기술 계층으로 부상했음을 의미한다.</p><div class="take-refs"><span>근거</span><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩이 더 이상 제약이 아니다: Spotify에서 팀과 에이전트로 개발자 경험 확장</a> · <a href="https://arxiv.org/abs/2605.22148" target="_blank" rel="noopener">Ratchet: 자기 진화하는 LLM 에이전트를 위한 최소 위생 레시피</a> · <a href="https://arxiv.org/abs/2607.26300" target="_blank" rel="noopener">AgentGUI: 장기 실행 AI 에이전트를 관찰하고 조종하기 위한 인터페이스</a> · <a href="https://arxiv.org/abs/2607.26784" target="_blank" rel="noopener">SkillRise: 에이전트 강화학습을 통한 작업 간 기술 진화</a> · <a href="https://arxiv.org/abs/2607.26119" target="_blank" rel="noopener">추론 성능의 기원 탐색: 수학 문제 해결을 위한 RL과 SFT 미세조정 모델의 표현 품질</a></div></div>
-</div><div class="section highlight-section" id="highlights">
-  <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">오늘의 하이라이트</span>
-    
-  </div>
-  <ul class="highlight-list"><li>도메인 전문가 지식을 AI 어시스턴트에 직접 임베딩하는 기술 혁신.</li><li>AI 에이전트가 스스로 오픈-엔드 AI 연구를 수행할 수 있음을 입증.</li><li>강화학습 대비 감독학습의 수학적 문제해결 능력 우수성 분석.</li><li>오래 실행되는 AI 에이전트를 관찰하고 제어하는 사용자 인터페이스.</li><li>데이터 레이크에서 실시간 포인트 쿼리를 효율적으로 인덱싱하는 기법.</li></ul>
 </div><div class="section" id="tech-blog">
   <div class="section-header">
     <span class="section-icon">TECH</span>
@@ -183,33 +176,53 @@
     <span class="section-count">4개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">온라인 포인트 쿼리를 위한 데이터 레이크 인덱싱</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify 같은 기업은 온라인 서비스와 AI Agent가 사용자 데이터에 저지연 접근해야 하는데, 데이터가 너무 커서 KV 저장소(Bigtable, DynamoDB)에 저장할 수 없고 데이터 레이크(GCS, S3)에 보관됩니다. Trino나 BigQuery 같은 분산 SQL 엔진은 쿼리 계획 오버헤드로 단일 행 조회도 느려서 병목입니다. Random Access Parquet(RAP)는 외부 인덱스로 키를 파일 위치에 직접 매핑하고 필요한 바이트만 가져와 이를 해결하며, 기존 Parquet 파일을 재사용하므로 저장소와 비용을 절감합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">온라인 포인트 쿼리를 위한 데이터 레이크 인덱싱</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify 같은 기업은 온라인 서비스와 AI Agent가 사용자 데이터에 저지연 접근해야 하는데, 데이터가 너무 커서 KV 저장소(Bigtable, DynamoDB)에 저장할 수 없고 데이터 레이크(GCS, S3)에 보관됩니다. Trino나 BigQuery 같은 분산 SQL 엔진은 쿼리 계획 오버헤드로 단일 행 조회도 느려서 병목입니다. Random Access Parquet(RAP)는 외부 인덱스로 키를 파일 위치에 직접 매핑하고 필요한 바이트만 가져와 이를 해결하며, 기존 Parquet 파일을 재사용하므로 저장소와 비용을 절감합니다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">온라인 포인트 쿼리를 위한 데이터 레이크 인덱싱</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 영상 인시던트 보고서</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify 팟캐스트 플랫폼에서 6월 24일 영상 트랜스코딩 인프라가 최대 용량에 도달해 새 에피소드 발행이 수 시간 지연되었다. 영상이 예상대로 나타나지 않자 크리에이터들이 에피소드를 재업로드했고, 시스템이 업로드 수신 및 대기열 상태를 제대로 확인해주지 않아 추가 부하가 발생했다. 원인은 대량 콘텐츠 스파이크 시 인프라 확장 여유 부족, 예정된 배치 처리 작업 실행 등 4가지 요인이 겹쳤기 때문이다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">콘텐츠 수집 및 팟캐스트 영상 인시던트 보고서</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify 팟캐스트 플랫폼에서 6월 24일 영상 트랜스코딩 인프라가 최대 용량에 도달해 새 에피소드 발행이 수 시간 지연되었다. 영상이 예상대로 나타나지 않자 크리에이터들이 에피소드를 재업로드했고, 시스템이 업로드 수신 및 대기열 상태를 제대로 확인해주지 않아 추가 부하가 발생했다. 원인은 대량 콘텐츠 스파이크 시 인프라 확장 여유 부족, 예정된 배치 처리 작업 실행 등 4가지 요인이 겹쳤기 때문이다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 영상 인시던트 보고서</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">당신의 도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트 뒤의 컨텍스트 레이어</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify는 70,000개 이상의 데이터셋을 보유한 대규모 환경에서 AI 데이터 어시스턴트를 개발했다. 단순히 스키마를 LLM에 입력하는 방식은 컨텍스트 윈도우 제한과 스키마의 불완전성으로 인해 작동하지 않았기에, 도메인 전문가의 지식을 캡처하는 "컨텍스트 레이어"를 구축했다. 2025년 8월부터 2,100명 이상의 사용자가 13,000개 이상의 대화에서 활용하고 있으며, SQL을 모르는 사용자도 포함해 다양한 분야의 데이터 질문에 답하고 있다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩이 더 이상 제약이 아니다: Spotify에서 팀과 에이전트로 개발자 경험 확장</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify의 엔지니어링 플랫폼 투자로 AI 도구 도입이 급증했다. 99% 엔지니어가 주간 AI 코딩 도구를 사용하며, Opus 4.5 출시 이후 Claude Code 도입이 급速히 증가했다. PR 빈도는 76% 증가하고 94%가 생산성 향상을 보고했다. Spotify는 생산 코드가 엔지니어보다 7배 빠르게 증가하는 문제에 직면해 자동화로 대규모 코드 변경을 처리하고자 했다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">당신의 도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트 뒤의 컨텍스트 레이어</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify는 70,000개 이상의 데이터셋을 보유한 대규모 환경에서 AI 데이터 어시스턴트를 개발했다. 단순히 스키마를 LLM에 입력하는 방식은 컨텍스트 윈도우 제한과 스키마의 불완전성으로 인해 작동하지 않았기에, 도메인 전문가의 지식을 캡처하는 "컨텍스트 레이어"를 구축했다. 2025년 8월부터 2,100명 이상의 사용자가 13,000개 이상의 대화에서 활용하고 있으며, SQL을 모르는 사용자도 포함해 다양한 분야의 데이터 질문에 답하고 있다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">당신의 도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트 뒤의 컨텍스트 레이어</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>코딩이 더 이상 제약이 아니다: Spotify에서 팀과 에이전트로 개발자 경험 확장</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify의 엔지니어링 플랫폼 투자로 AI 도구 도입이 급증했다. 99% 엔지니어가 주간 AI 코딩 도구를 사용하며, Opus 4.5 출시 이후 Claude Code 도입이 급速히 증가했다. PR 빈도는 76% 증가하고 94%가 생산성 향상을 보고했다. Spotify는 생산 코드가 엔지니어보다 7배 빠르게 증가하는 문제에 직면해 자동화로 대규모 코드 변경을 처리하고자 했다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩이 더 이상 제약이 아니다: Spotify에서 팀과 에이전트로 개발자 경험 확장</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="papers">
   <div class="section-header">
@@ -217,41 +230,66 @@
     <span class="section-title">AI / LLM 논문</span>
     <span class="section-count">5개</span>
   </div>
-  <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.26119" target="_blank" rel="noopener">추론 성능의 기원 탐색: 수학 문제 해결을 위한 RL과 SFT 미세조정 모델의 표현 품질</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">이 논문은 강화학습(RL)으로 훈련된 대형 추론 모델이 감독학습(SFT) 모델보다 수학 문제 해결에서 더 잘 수행하는 이유를 규명합니다. 연구진은 계층별 숨겨진 상태에 대해 훈련된 선형 프로브를 사용하여 RL 모델이 정답 정확성 예측에서 더 높은 정확도를 달성함을 발견했습니다. 이를 통해 RL 모델의 우월한 성능을 가능하게 하는 내부 표현의 차이를 분석합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.26119" target="_blank" rel="noopener">&rarr;</a></div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>추론 성능의 기원 탐색: 수학 문제 해결을 위한 RL과 SFT 미세조정 모델의 표현 품질</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">이 논문은 강화학습(RL)으로 훈련된 대형 추론 모델이 감독학습(SFT) 모델보다 수학 문제 해결에서 더 잘 수행하는 이유를 규명합니다. 연구진은 계층별 숨겨진 상태에 대해 훈련된 선형 프로브를 사용하여 RL 모델이 정답 정확성 예측에서 더 높은 정확도를 달성함을 발견했습니다. 이를 통해 RL 모델의 우월한 성능을 가능하게 하는 내부 표현의 차이를 분석합니다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.26119" target="_blank" rel="noopener">추론 성능의 기원 탐색: 수학 문제 해결을 위한 RL과 SFT 미세조정 모델의 표현 품질</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.27191" target="_blank" rel="noopener">AI 에이전트가 개방형 AI 연구를 수행할 수 있을까? 두 사례 연구의 초기 증거</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">AI 에이전트가 개방형 AI 연구를 수행할 수 있는지에 대한 증거가 부족한 상황에서, 논문은 기존 평가 방식의 한계를 지적한다. 현재 평가는 좁은 검증 작업만 테스트하거나 AI 생성 논문을 맹검 피어 리뷰에 맡기는데, 둘 다 개방형 연구를 제대로 측정하지 못한다. 이를 해결하기 위해 논문은 AI R&amp;D 자동화 진행을 측정하는 새로운 방법을 제안하며, 미발표 고품질 논문의 핵심 연구 질문에 에이전트가 착수하는 사례 연구를 진행한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.27191" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.26300" target="_blank" rel="noopener">AgentGUI: 장기 실행 AI 에이전트를 관찰하고 조종하기 위한 인터페이스</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">AI agents가 복잡한 장기 작업에 능해지면서 자동화 기능은 빠르게 발전하지만, 인간 감시 능력이 뒤처지고 있습니다. 이를 해결하기 위해 AgentGUI는 로컬 호스팅 GUI로 여러 concurrent 세션에서 AI agents를 관찰하고 조종할 수 있는 인터페이스를 제공합니다. 주요 기능은 1) agent trajectory의 rich visualization, 2) manual과 automated steering, 3) 작동 간 통합 및 조정입니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.26300" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.26784" target="_blank" rel="noopener">SkillRise: 에이전트 강화학습을 통한 작업 간 기술 진화</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">요약:<br><br>SkillRise는 LLM 에이전트가 여러 관련 작업에서 재사용 가능한 스킬을 학습하도록 하는 통합 강화학습 프레임워크다. 기존 방식은 작업을 독립적으로 취급하거나 단일 작업 반복에만 집중하는 한계가 있었다. SkillRise는 관련 인스턴스를 점진적으로 도전적인 시퀀스로 조직화하여 교차 작업 스킬 진화를 실현한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.26784" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2605.22148" target="_blank" rel="noopener">Ratchet: 자기 진화하는 LLM 에이전트를 위한 최소 위생 레시피</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">Voyager가 개척한 자가 진화하는 스킬 라이브러리는 동결된 LLM 에이전트가 가중치 업데이트 없이 재사용 가능한 지식을 축적하게 합니다. 하지만 평가 결과 LLM이 저작한 스킬은 성능 향상이 0.0pp인 반면 인간이 큐레이션한 스킬은 +16.2pp를 달성해, 병목이 스킬 저작이 아니라 라이프사이클 관리임을 드러냅니다. 이에 Ratchet은 동결된 LLM이 자신의 자연어 스킬을 직접 작성, 검색, 큐레이션, 폐기하는 단일 에이전트 루프를 제안하며, 네 가지 위생 메커니즘을 통합합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2605.22148" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">AI 에이전트가 개방형 AI 연구를 수행할 수 있을까? 두 사례 연구의 초기 증거</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 에이전트가 개방형 AI 연구를 수행할 수 있는지에 대한 증거가 부족한 상황에서, 논문은 기존 평가 방식의 한계를 지적한다. 현재 평가는 좁은 검증 작업만 테스트하거나 AI 생성 논문을 맹검 피어 리뷰에 맡기는데, 둘 다 개방형 연구를 제대로 측정하지 못한다. 이를 해결하기 위해 논문은 AI R&amp;D 자동화 진행을 측정하는 새로운 방법을 제안하며, 미발표 고품질 논문의 핵심 연구 질문에 에이전트가 착수하는 사례 연구를 진행한다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.27191" target="_blank" rel="noopener">AI 에이전트가 개방형 AI 연구를 수행할 수 있을까? 두 사례 연구의 초기 증거</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>AgentGUI: 장기 실행 AI 에이전트를 관찰하고 조종하기 위한 인터페이스</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI agents가 복잡한 장기 작업에 능해지면서 자동화 기능은 빠르게 발전하지만, 인간 감시 능력이 뒤처지고 있습니다. 이를 해결하기 위해 AgentGUI는 로컬 호스팅 GUI로 여러 concurrent 세션에서 AI agents를 관찰하고 조종할 수 있는 인터페이스를 제공합니다. 주요 기능은 1) agent trajectory의 rich visualization, 2) manual과 automated steering, 3) 작동 간 통합 및 조정입니다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.26300" target="_blank" rel="noopener">AgentGUI: 장기 실행 AI 에이전트를 관찰하고 조종하기 위한 인터페이스</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>SkillRise: 에이전트 강화학습을 통한 작업 간 기술 진화</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">요약:SkillRise는 LLM 에이전트가 여러 관련 작업에서 재사용 가능한 스킬을 학습하도록 하는 통합 강화학습 프레임워크다. 기존 방식은 작업을 독립적으로 취급하거나 단일 작업 반복에만 집중하는 한계가 있었다. SkillRise는 관련 인스턴스를 점진적으로 도전적인 시퀀스로 조직화하여 교차 작업 스킬 진화를 실현한다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.26784" target="_blank" rel="noopener">SkillRise: 에이전트 강화학습을 통한 작업 간 기술 진화</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Ratchet: 자기 진화하는 LLM 에이전트를 위한 최소 위생 레시피</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Voyager가 개척한 자가 진화하는 스킬 라이브러리는 동결된 LLM 에이전트가 가중치 업데이트 없이 재사용 가능한 지식을 축적하게 합니다. 하지만 평가 결과 LLM이 저작한 스킬은 성능 향상이 0.0pp인 반면 인간이 큐레이션한 스킬은 +16.2pp를 달성해, 병목이 스킬 저작이 아니라 라이프사이클 관리임을 드러냅니다. 이에 Ratchet은 동결된 LLM이 자신의 자연어 스킬을 직접 작성, 검색, 큐레이션, 폐기하는 단일 에이전트 루프를 제안하며, 네 가지 위생 메커니즘을 통합합니다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2605.22148" target="_blank" rel="noopener">Ratchet: 자기 진화하는 LLM 에이전트를 위한 최소 위생 레시피</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="hn-reddit">
   <div class="section-header">
@@ -260,75 +298,55 @@
     <span class="section-count">10개</span>
   </div>
   <div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://llm2human.pages.dev/" target="_blank" rel="noopener">LLM 허니팟</a></div>
     <div class="item-meta">HN · 351 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://llm2human.pages.dev/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://frantic.im/mirage/" target="_blank" rel="noopener">생산성의 신기루</a></div>
     <div class="item-meta">HN · 318 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://frantic.im/mirage/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://remysharp.com/links/2026-07-23-35890312" target="_blank" rel="noopener">'VPN은 합법적인 기술 도구'라고 EU 법원이 획기적인 저작권 판결에서 밝혀</a></div>
     <div class="item-meta">HN · 315 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://remysharp.com/links/2026-07-23-35890312" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://android-developers.googleblog.com/2026/07/google-play-age-signals-api-safer-experiences.html" target="_blank" rel="noopener">Google이 올해 말까지 Android의 연령 확인을 전 세계로 확대할 예정</a></div>
     <div class="item-meta">HN · 220 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://android-developers.googleblog.com/2026/07/google-play-age-signals-api-safer-experiences.html" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.grumpygamer.com/twp2_announce/" target="_blank" rel="noopener">Ron Gilbert가 Thimbleweed Park 2 제작을 시작했다</a></div>
     <div class="item-meta">HN · 144 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.grumpygamer.com/twp2_announce/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://en.wikipedia.org/wiki/Azulejo" target="_blank" rel="noopener">타일</a></div>
     <div class="item-meta">HN · 110 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://en.wikipedia.org/wiki/Azulejo" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://bennuttall.com/blog/2026/07/gpiozero-flow/" target="_blank" rel="noopener">Gpiozero 흐름</a></div>
     <div class="item-meta">HN · 97 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://bennuttall.com/blog/2026/07/gpiozero-flow/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://economist.com/leaders/2026/07/28/europes-fires-are-just-the-start" target="_blank" rel="noopener">유럽의 화재는 시작일 뿐이다</a></div>
     <div class="item-meta">HN · 80 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://economist.com/leaders/2026/07/28/europes-fires-are-just-the-start" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/YoanWai/agent-manager" target="_blank" rel="noopener">Agent-Manager: Claude Code, Codex, OpenCode를 위한 Tmux TUI</a></div>
     <div class="item-meta">HN · 69 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/YoanWai/agent-manager" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.construction-physics.com/p/why-is-everyone-trying-to-build-a" target="_blank" rel="noopener">왜 모두가 고체 전지를 만들려고 할까?</a></div>
     <div class="item-meta">HN · 63 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.construction-physics.com/p/why-is-everyone-trying-to-build-a" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="github">
   <div class="section-header">
@@ -337,40 +355,65 @@
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/microsoft/AI-For-Beginners" target="_blank" rel="noopener">microsoft/AI-For-Beginners</a></div>
-    <div class="item-meta">53,499</div>
-    <div class="item-summary">내용이 불충분합니다. 배지와 링크만 있고 실질적인 설명이 완성되지 않았으므로 요약할 정보가 없습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/microsoft/AI-For-Beginners" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">microsoft/AI-For-Beginners</span>
+      <span class="item-meta">53,499</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">내용이 불충분합니다. 배지와 링크만 있고 실질적인 설명이 완성되지 않았으므로 요약할 정보가 없습니다.</div>
+      <div class="item-link"><a href="https://github.com/microsoft/AI-For-Beginners" target="_blank" rel="noopener">microsoft/AI-For-Beginners</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/paperswithbacktest/awesome-systematic-trading" target="_blank" rel="noopener">paperswithbacktest/awesome-systematic-trading</a></div>
-    <div class="item-meta">10,822</div>
-    <div class="item-summary">체계적 거래 및 양적 거래 전략 개발을 위한 종합 리소스 모음입니다. 97개의 라이브러리와 패키지, 40개 이상의 전략, 55권의 책, 23개의 비디오 및 인터뷰, 블로그와 코스를 수집했습니다. paperswithbacktest.com에서 Python으로 구현된 거래 전략들의 포괄적인 컬렉션을 제공하고 있습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/paperswithbacktest/awesome-systematic-trading" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">paperswithbacktest/awesome-systematic-trading</span>
+      <span class="item-meta">10,822</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">체계적 거래 및 양적 거래 전략 개발을 위한 종합 리소스 모음입니다. 97개의 라이브러리와 패키지, 40개 이상의 전략, 55권의 책, 23개의 비디오 및 인터뷰, 블로그와 코스를 수집했습니다. paperswithbacktest.com에서 Python으로 구현된 거래 전략들의 포괄적인 컬렉션을 제공하고 있습니다.</div>
+      <div class="item-link"><a href="https://github.com/paperswithbacktest/awesome-systematic-trading" target="_blank" rel="noopener">paperswithbacktest/awesome-systematic-trading</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/different-ai/openwork" target="_blank" rel="noopener">different-ai/openwork</a></div>
-    <div class="item-meta">18,446</div>
-    <div class="item-summary">OpenWork는 AI 워크플로우 공유를 위한 무료 오픈소스 데스크톱 앱으로, Claude Cowork과 Codex의 대체재입니다. macOS, Windows, Linux를 지원하며, MCP를 통해 Claude Code, Cursor 등 다양한 에이전트에서 같은 스킬, MCP, 서비스를 재사용할 수 있습니다. 데스크톱 앱은 선택사항이며, 기존 에이전트에서도 사용 가능하고, 대규모 조직을 위한 관리자 인터페이스로 접근 권한과 공유 연결을 관리할 수 있습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/different-ai/openwork" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">different-ai/openwork</span>
+      <span class="item-meta">18,446</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">OpenWork는 AI 워크플로우 공유를 위한 무료 오픈소스 데스크톱 앱으로, Claude Cowork과 Codex의 대체재입니다. macOS, Windows, Linux를 지원하며, MCP를 통해 Claude Code, Cursor 등 다양한 에이전트에서 같은 스킬, MCP, 서비스를 재사용할 수 있습니다. 데스크톱 앱은 선택사항이며, 기존 에이전트에서도 사용 가능하고, 대규모 조직을 위한 관리자 인터페이스로 접근 권한과 공유 연결을 관리할 수 있습니다.</div>
+      <div class="item-link"><a href="https://github.com/different-ai/openwork" target="_blank" rel="noopener">different-ai/openwork</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/WhiskeySockets/Baileys" target="_blank" rel="noopener">WhiskeySockets/Baileys</a></div>
-    <div class="item-meta">10,362</div>
-    <div class="item-summary">Baileys는 WhatsApp Web API와 상호작용하기 위한 WebSockets 기반의 TypeScript 라이브러리다. 7.0.0 버전부터 breaking changes가 도입되었으므로 마이그레이션 가이드 확인이 필요하다. 엔터프라이즈급 지원은 현 메인테이너 Rajeh의 비디오 채팅으로 제공되며, 프로젝트 스폰서십도 가능하다. 이 프로젝트는 WhatsApp과 공식 제휴가 없음을 명시한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/WhiskeySockets/Baileys" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">WhiskeySockets/Baileys</span>
+      <span class="item-meta">10,362</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Baileys는 WhatsApp Web API와 상호작용하기 위한 WebSockets 기반의 TypeScript 라이브러리다. 7.0.0 버전부터 breaking changes가 도입되었으므로 마이그레이션 가이드 확인이 필요하다. 엔터프라이즈급 지원은 현 메인테이너 Rajeh의 비디오 채팅으로 제공되며, 프로젝트 스폰서십도 가능하다. 이 프로젝트는 WhatsApp과 공식 제휴가 없음을 명시한다.</div>
+      <div class="item-link"><a href="https://github.com/WhiskeySockets/Baileys" target="_blank" rel="noopener">WhiskeySockets/Baileys</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">pascalorg/editor</a></div>
-    <div class="item-meta">19,949</div>
-    <div class="item-summary">Pascal Editor는 React Three Fiber와 WebGPU로 만든 3D 빌딩 에디터이며, MIT 라이선스 하에 공개된다. @pascal-app/core, @pascal-app/viewer, @pascal-app/editor, @pascal-app/nodes 패키지로 제공되며, npm 설치 후 loadPlugin으로 builtinPlugin을 로드하여 사용한다. Turborepo 모노레포 구조로 core, viewer, editor, nodes, ui 등 4개의 주요 런타임 패키지로 구성되어 있다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">pascalorg/editor</span>
+      <span class="item-meta">19,949</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Pascal Editor는 React Three Fiber와 WebGPU로 만든 3D 빌딩 에디터이며, MIT 라이선스 하에 공개된다. @pascal-app/core, @pascal-app/viewer, @pascal-app/editor, @pascal-app/nodes 패키지로 제공되며, npm 설치 후 loadPlugin으로 builtinPlugin을 로드하여 사용한다. Turborepo 모노레포 구조로 core, viewer, editor, nodes, ui 등 4개의 주요 런타임 패키지로 구성되어 있다.</div>
+      <div class="item-link"><a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">pascalorg/editor</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div>
 </body>

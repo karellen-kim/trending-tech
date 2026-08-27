@@ -28,9 +28,9 @@
 </style>
 <style>
   body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
-  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
-  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
-  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
   .top-bar { display: flex; align-items: center; justify-content: space-between;
@@ -73,9 +73,9 @@
   .highlight-section .section-icon { color: var(--accent-deep); }
   .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
   .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
@@ -118,10 +118,11 @@
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
-  .item-head { padding: 1rem 0; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
     letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
@@ -130,12 +131,11 @@
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 0 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
-    border: 1px dashed #d3c9b1; }
+    background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -162,20 +162,13 @@
 <div class="page-meta">2026-08-13</div>
 <h1><em>13</em> Aug 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section" id="today-take">
+<div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 해석</span>
     
   </div>
   <div class="take"><p class="take-headline">에이전트가 프로덕션 워크로드로 전환되면서, 실시간 데이터와 LLM 보안이 기본 인프라 요구사항으로 부상</p><p class="take-body">Alibaba가 Apache Fluss 톱레벨 승격과 'Agentic Lake'로 에이전트 친화적 실시간 데이터 인프라를 표준화하고 있고(2), Spotify의 온라인 포인트 쿼리 인덱싱(7)도 같은 요구를 반영한다. Alibaba AI Gateway의 LLM 보안 계층(3)은 에이전트가 프로덕션 환경에서 안전하게 운영되어야 한다는 신호다.</p><div class="take-refs"><span>근거</span><a href="https://www.alibabacloud.com/blog/apache-fluss-graduates-to-a-top-level-project-making-agentic-lake-fully-real-time-with-lakestream_603435" target="_blank" rel="noopener">Apache Fluss가 톱레벨 프로젝트로 승격, Lakestream으로 Agentic Lake 완전 실시간화 실현</a> · <a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">데이터 레이크의 온라인 포인트 쿼리 인덱싱</a> · <a href="https://www.alibabacloud.com/blog/building-an-llm-security-layer-with-alibaba-cloud-ai-gateway_603425" target="_blank" rel="noopener">Alibaba Cloud AI Gateway로 LLM 보안 계층 구축하기</a></div></div>
-</div><div class="section highlight-section" id="highlights">
-  <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">오늘의 하이라이트</span>
-    
-  </div>
-  <ul class="highlight-list"><li>Apache Fluss가 프로젝트 정상 졸업, 실시간 데이터 레이크 시대 진입.</li><li>알리바바 클라우드의 LLM 보안 레이어, 에이전트 안전성 강화.</li><li>DeepSeek V4 Pro 0813 출시, 오픈소스 LLM 성능 경쟁 심화.</li><li>Anthropic Skills 공개 저장소 출범, AI 에이전트 확장성 표준화.</li><li>Needle 14MB 모델, 스마트폰과 웨어러블에 LLM 실장 가능.</li></ul>
 </div><div class="section" id="tech-blog">
   <div class="section-header">
     <span class="section-icon">TECH</span>
@@ -183,61 +176,66 @@
     <span class="section-count">8개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://blog.cloudflare.com/certificate-transparency-monitoring-ga/" target="_blank" rel="noopener">Certificate Transparency Monitoring 정식 공개</a></div>
-    <div class="item-meta">Cloudflare Blog</div>
-    <div class="item-summary">Cloudflare의 Certificate Transparency Monitoring 서비스가 일반 공개되었다. 주요 변경 사항은 Cloudflare가 발급한 도메인 인증서에 대한 이메일 알림을 더 이상 보내지 않는다는 것이다. 이로 인해 수신함에 도착하는 알림은 실제 외부 발급 인증서 관련이므로 반드시 확인할 필요가 있다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://blog.cloudflare.com/certificate-transparency-monitoring-ga/" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.alibabacloud.com/blog/apache-fluss-graduates-to-a-top-level-project-making-agentic-lake-fully-real-time-with-lakestream_603435" target="_blank" rel="noopener">Apache Fluss가 톱레벨 프로젝트로 승격, Lakestream으로 Agentic Lake 완전 실시간화 실현</a></div>
+  <details>
+    <summary>
+      <span class="item-name">Certificate Transparency Monitoring 정식 공개</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Cloudflare의 Certificate Transparency Monitoring 서비스가 일반 공개되었다. 주요 변경 사항은 Cloudflare가 발급한 도메인 인증서에 대한 이메일 알림을 더 이상 보내지 않는다는 것이다. 이로 인해 수신함에 도착하는 알림은 실제 외부 발급 인증서 관련이므로 반드시 확인할 필요가 있다.</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/certificate-transparency-monitoring-ga/" target="_blank" rel="noopener">Certificate Transparency Monitoring 정식 공개</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.alibabacloud.com/blog/apache-fluss-graduates-to-a-top-level-project-making-agentic-lake-fully-real-time-with-lakestream_603435" target="_blank" rel="noopener">Apache Fluss가 톱레벨 프로젝트로 승격, Lakestream으로 Agentic Lake 완전 실시간화 실현</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/apache-fluss-graduates-to-a-top-level-project-making-agentic-lake-fully-real-time-with-lakestream_603435" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.alibabacloud.com/blog/building-an-llm-security-layer-with-alibaba-cloud-ai-gateway_603425" target="_blank" rel="noopener">Alibaba Cloud AI Gateway로 LLM 보안 계층 구축하기</a></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.alibabacloud.com/blog/building-an-llm-security-layer-with-alibaba-cloud-ai-gateway_603425" target="_blank" rel="noopener">Alibaba Cloud AI Gateway로 LLM 보안 계층 구축하기</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/building-an-llm-security-layer-with-alibaba-cloud-ai-gateway_603425" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-unveils-wan3-0-with-twice-as-long-video-outputs-from-a-richer-variety-of-inputs_603439" target="_blank" rel="noopener">알리바바, 더 다양한 입력으로 2배 길이의 영상을 생성하는 Wan3.0 공개</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-unveils-wan3-0-with-twice-as-long-video-outputs-from-a-richer-variety-of-inputs_603439" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/one-key-one-cli-%E2%80%94-manage-your-alibaba-cloud-model-studio-token-plan-from-terminal-or-ai-agent_603453" target="_blank" rel="noopener">한 개 키, 한 개 CLI — 터미널 또는 AI 에이전트에서 Alibaba Cloud Model Studio 토큰 플랜 관리하기</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/one-key-one-cli-%E2%80%94-manage-your-alibaba-cloud-model-studio-token-plan-from-terminal-or-ai-agent_603453" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/wan3-0-30-second-ai-video-generation-from-any-input_603452" target="_blank" rel="noopener">Wan3.0: 모든 입력에서 30초 AI 동영상 생성</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/wan3-0-30-second-ai-video-generation-from-any-input_603452" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>데이터 레이크의 온라인 포인트 쿼리 인덱싱</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify 같은 회사들은 온라인 서비스와 AI Agents를 위해 데이터레이크의 대규모 데이터에 빠르게 접근해야 합니다. 저장소 자체는 빠르지만(30~100ms), 분산 SQL 엔진(Trino, BigQuery)의 스케줄링과 쿼리 계획 오버헤드로 인해 포인트 쿼리가 느립니다. 이를 해결하기 위해 Random Access Parquet(RAP)는 인덱스로 키를 파일 위치에 직접 매핑하고 필요한 바이트만 정확하게 읽습니다. RAP는 ML 파이프라인과 분석에 이미 사용되는 Parquet 파일에서 작동하여 데이터 중복 없이 비용 효율적입니다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">데이터 레이크의 온라인 포인트 쿼리 인덱싱</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">데이터 레이크의 온라인 포인트 쿼리 인덱싱</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify 같은 회사들은 온라인 서비스와 AI Agents를 위해 데이터레이크의 대규모 데이터에 빠르게 접근해야 합니다. 저장소 자체는 빠르지만(30~100ms), 분산 SQL 엔진(Trino, BigQuery)의 스케줄링과 쿼리 계획 오버헤드로 인해 포인트 쿼리가 느립니다. 이를 해결하기 위해 Random Access Parquet(RAP)는 인덱스로 키를 파일 위치에 직접 매핑하고 필요한 바이트만 정확하게 읽습니다. RAP는 ML 파이프라인과 분석에 이미 사용되는 Parquet 파일에서 작동하여 데이터 중복 없이 비용 효율적입니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/indexing-the-data-lake-for-online-point-queries" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 영상 인시던트 리포트</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">6월 24일 Spotify의 비디오 트랜스코딩 인프라가 최대 용량에 도달하여 팟캐스트 에피소드 발행이 수시간 지연되었다. 시스템이 업로드 수신을 확인하지 않아 제작자들이 에피소드를 재업로드했고, 이는 추가 부하를 야기했다. 트랜스코딩 인프라의 부족한 여유 용량과 예약된 배치 처리 작업이 동시에 실행되는 등 여러 요인이 복합적으로 작용했다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">콘텐츠 수집 및 팟캐스트 영상 인시던트 리포트</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">6월 24일 Spotify의 비디오 트랜스코딩 인프라가 최대 용량에 도달하여 팟캐스트 에피소드 발행이 수시간 지연되었다. 시스템이 업로드 수신을 확인하지 않아 제작자들이 에피소드를 재업로드했고, 이는 추가 부하를 야기했다. 트랜스코딩 인프라의 부족한 여유 용량과 예약된 배치 처리 작업이 동시에 실행되는 등 여러 요인이 복합적으로 작용했다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 영상 인시던트 리포트</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="dev-blogs">
   <div class="section-header">
@@ -246,33 +244,46 @@
     <span class="section-count">4개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/12/deepseek-v4-pro-0813/" target="_blank" rel="noopener">DeepSeek V4 Pro 0813 (OpenRouter에서)</a></div>
-    <div class="item-meta">Simon Willison</div>
-    <div class="item-summary">DeepSeek V4 Pro 0813은 OpenRouter를 통해 API로만 이용 가능한 최신 DeepSeek Pro 모델이다. DeepSeek 공식 발표 페이지가 명확하지 않아 OpenRouter 링크로 제공된다. 오픈 가중치 공개 계획은 아직 확인되지 않았다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/Aug/12/deepseek-v4-pro-0813/" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">DeepSeek V4 Pro 0813 (OpenRouter에서)</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">DeepSeek V4 Pro 0813은 OpenRouter를 통해 API로만 이용 가능한 최신 DeepSeek Pro 모델이다. DeepSeek 공식 발표 페이지가 명확하지 않아 OpenRouter 링크로 제공된다. 오픈 가중치 공개 계획은 아직 확인되지 않았다.</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Aug/12/deepseek-v4-pro-0813/" target="_blank" rel="noopener">DeepSeek V4 Pro 0813 (OpenRouter에서)</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/12/alchemy-utils/" target="_blank" rel="noopener">alchemy-utils 0.1a0</a></div>
-    <div class="item-meta">Simon Willison</div>
-    <div class="item-summary">```<br>제공된 [내용]이 불완전하여 요약할 수 없습니다. (blockquote가 끝나지 않음)<br>```</div>
-  </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/Aug/12/alchemy-utils/" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">alchemy-utils 0.1a0</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">```제공된 [내용]이 불완전하여 요약할 수 없습니다. (blockquote가 끝나지 않음)```</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Aug/12/alchemy-utils/" target="_blank" rel="noopener">alchemy-utils 0.1a0</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Aug/12/florian-herrengt/" target="_blank" rel="noopener">Florian Herrengt 인용</a></div>
-    <div class="item-meta">Simon Willison</div>
-    <div class="item-summary">팀이 4번 반복해서 AI(Fable)에게 버그 수정을 요청했으나 실패했다. 원래 그 기능을 만든 개발자에게 물어보니 자신이 만든 기능에서 데이터가 어디서 오는지 모르며, Claude에게 물어보자고 제안한다. AI에만 의존하는 개발 방식의 한계를 보여주는 장면이다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/Aug/12/florian-herrengt/" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">Florian Herrengt 인용</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">팀이 4번 반복해서 AI(Fable)에게 버그 수정을 요청했으나 실패했다. 원래 그 기능을 만든 개발자에게 물어보니 자신이 만든 기능에서 데이터가 어디서 오는지 모르며, Claude에게 물어보자고 제안한다. AI에만 의존하는 개발 방식의 한계를 보여주는 장면이다.</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Aug/12/florian-herrengt/" target="_blank" rel="noopener">Florian Herrengt 인용</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://newsletter.kentbeck.com/p/busy-is-short-volatility" target="_blank" rel="noopener">활발한 거래는 변동성 숏</a></div>
     <div class="item-meta">Kent Beck</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://newsletter.kentbeck.com/p/busy-is-short-volatility" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="papers">
   <div class="section-header">
@@ -281,40 +292,65 @@
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2608.11207" target="_blank" rel="noopener">협업 대화형 성과를 위한 다중 LLM 에이전트 시스템의 동적 거버넌스</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">상충하는 목표를 가진 두 LLM 에이전트가 상호작용할 때 공유 목표 함수가 없으면 경쟁이 아닌 붕괴가 발생한다. 본 논문은 제어 이론 기반 거버넌스 층이 누락된 목표 함수를 대체할 수 있는지 탐구한다. 이를 위해 금융 서비스 환경에서 사이트 에이전트와 방문자 에이전트 간 상호작용을 조율하는 Experience Orchestrator(EO)를 제안한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2608.11207" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">협업 대화형 성과를 위한 다중 LLM 에이전트 시스템의 동적 거버넌스</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">상충하는 목표를 가진 두 LLM 에이전트가 상호작용할 때 공유 목표 함수가 없으면 경쟁이 아닌 붕괴가 발생한다. 본 논문은 제어 이론 기반 거버넌스 층이 누락된 목표 함수를 대체할 수 있는지 탐구한다. 이를 위해 금융 서비스 환경에서 사이트 에이전트와 방문자 에이전트 간 상호작용을 조율하는 Experience Orchestrator(EO)를 제안한다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.11207" target="_blank" rel="noopener">협업 대화형 성과를 위한 다중 LLM 에이전트 시스템의 동적 거버넌스</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2608.11215" target="_blank" rel="noopener">간단한 에이전트 모델링: 랩톱에서 대규모 LLM 에이전트 사회 시뮬레이션</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">LLM 에이전트 사회의 대규모 시뮬레이션은 비용이 높지만, 거시적 특성(phase behavior, scaling)을 분석하는 것이 목표다. 이 논문은 통계 물리학의 관찰을 활용해 각 LLM 에이전트를 수백~수천 개의 저가 쿼리로 피팅한 저파라미터 모델로 대체하는 방법을 제안한다. 이를 통해 노트북에서 임의의 규모의 사회 시뮬레이션을 실행할 수 있으며, 작동 여부는 시뮬레이션 전에 결정된다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2608.11215" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">간단한 에이전트 모델링: 랩톱에서 대규모 LLM 에이전트 사회 시뮬레이션</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">LLM 에이전트 사회의 대규모 시뮬레이션은 비용이 높지만, 거시적 특성(phase behavior, scaling)을 분석하는 것이 목표다. 이 논문은 통계 물리학의 관찰을 활용해 각 LLM 에이전트를 수백~수천 개의 저가 쿼리로 피팅한 저파라미터 모델로 대체하는 방법을 제안한다. 이를 통해 노트북에서 임의의 규모의 사회 시뮬레이션을 실행할 수 있으며, 작동 여부는 시뮬레이션 전에 결정된다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.11215" target="_blank" rel="noopener">간단한 에이전트 모델링: 랩톱에서 대규모 LLM 에이전트 사회 시뮬레이션</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2608.11234" target="_blank" rel="noopener">InfraBench: 인프라 에이전트의 계층·생명주기·위험 평가</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">현대 컴퓨팅 인프라의 관리는 복잡성이 증가하고 있으며, AI 에이전트의 최근 발전은 인프라 관리 자동화의 기회를 제시합니다. InfraBench는 AI 에이전트가 실제 인프라의 복잡성을 얼마나 잘 처리할 수 있는지 평가하기 위한 벤치마크 스위트입니다. 이는 전체 시스템 스택과 전체 운영 생명주기에 걸친 현실적 인프라 작업을 세밀한 리스크 평가와 함께 포함하며, 15개의 에이전트-모델 구성으로 실험을 진행합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2608.11234" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">InfraBench: 인프라 에이전트의 계층·생명주기·위험 평가</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">현대 컴퓨팅 인프라의 관리는 복잡성이 증가하고 있으며, AI 에이전트의 최근 발전은 인프라 관리 자동화의 기회를 제시합니다. InfraBench는 AI 에이전트가 실제 인프라의 복잡성을 얼마나 잘 처리할 수 있는지 평가하기 위한 벤치마크 스위트입니다. 이는 전체 시스템 스택과 전체 운영 생명주기에 걸친 현실적 인프라 작업을 세밀한 리스크 평가와 함께 포함하며, 15개의 에이전트-모델 구성으로 실험을 진행합니다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.11234" target="_blank" rel="noopener">InfraBench: 인프라 에이전트의 계층·생명주기·위험 평가</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2608.11241" target="_blank" rel="noopener">RecSys Factory: 산업 추천 시스템 생명 주기의 의사결정 포인트로 LLM 에이전트 자율성 제한하기</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">RecSys Factory는 LLM 에이전트를 산업용 추천 시스템에 배포할 때 발생하는 자율성-결정론-효율성 삼중 트레이드오프를 다룬다. 일반적 자율성(operator intent 해석, 제로샷 코드 생성), 산업용 결정론(스키마 준수, non-crashing A/B, compliance 준수), 엔드-투-엔드 효율성 중 어느 두 개를 최대화하면 나머지 하나는 희생된다. RecSys Factory는 이 문제를 해결하는 LLM-에이전트 플랫폼으로, 텐센트의 세 개 이질적 추천 비즈니스 라인에서 78일간 배포되어 검증되었다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2608.11241" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">RecSys Factory: 산업 추천 시스템 생명 주기의 의사결정 포인트로 LLM 에이전트 자율성 제한하기</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">RecSys Factory는 LLM 에이전트를 산업용 추천 시스템에 배포할 때 발생하는 자율성-결정론-효율성 삼중 트레이드오프를 다룬다. 일반적 자율성(operator intent 해석, 제로샷 코드 생성), 산업용 결정론(스키마 준수, non-crashing A/B, compliance 준수), 엔드-투-엔드 효율성 중 어느 두 개를 최대화하면 나머지 하나는 희생된다. RecSys Factory는 이 문제를 해결하는 LLM-에이전트 플랫폼으로, 텐센트의 세 개 이질적 추천 비즈니스 라인에서 78일간 배포되어 검증되었다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.11241" target="_blank" rel="noopener">RecSys Factory: 산업 추천 시스템 생명 주기의 의사결정 포인트로 LLM 에이전트 자율성 제한하기</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2608.11584" target="_blank" rel="noopener">EnterpriseRAG: 이상적이지 않은 엔터프라이즈 검색 환경에서의 LLM 명령어 준수 및 강건성 벤치마킹</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">엔터프라이즈 RAG 배포 환경에서 신뢰성 문제를 분석한 연구로, LLM이 개별 제약은 80% 충족하지만 모든 요구사항을 동시에 만족하는 경우는 26.8%에 불과한 '조율 격차'를 발견했다. 기존 벤치마크는 깨끗한 검색 결과와 단순 쿼리를 가정하며 실제 운영 환경의 노이즈와 다차원 제약을 반영하지 못한다는 한계를 지적한다. 이를 해결하기 위해 6개 도메인의 983개 전문가 검증 샘플로 구성된 EnterpriseRAG 벤치마크를 제안하며, 기존 연구에서 다루지 않는 세 가지 실패 모드를 시뮬레이션한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2608.11584" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">EnterpriseRAG: 이상적이지 않은 엔터프라이즈 검색 환경에서의 LLM 명령어 준수 및 강건성 벤치마킹</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">엔터프라이즈 RAG 배포 환경에서 신뢰성 문제를 분석한 연구로, LLM이 개별 제약은 80% 충족하지만 모든 요구사항을 동시에 만족하는 경우는 26.8%에 불과한 '조율 격차'를 발견했다. 기존 벤치마크는 깨끗한 검색 결과와 단순 쿼리를 가정하며 실제 운영 환경의 노이즈와 다차원 제약을 반영하지 못한다는 한계를 지적한다. 이를 해결하기 위해 6개 도메인의 983개 전문가 검증 샘플로 구성된 EnterpriseRAG 벤치마크를 제안하며, 기존 연구에서 다루지 않는 세 가지 실패 모드를 시뮬레이션한다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2608.11584" target="_blank" rel="noopener">EnterpriseRAG: 이상적이지 않은 엔터프라이즈 검색 환경에서의 LLM 명령어 준수 및 강건성 벤치마킹</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="hn-reddit">
   <div class="section-header">
@@ -323,110 +359,80 @@
     <span class="section-count">15개</span>
   </div>
   <div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://openrouter.ai/deepseek/deepseek-v4-pro-0813" target="_blank" rel="noopener">DeepSeek V4 Pro 0813</a></div>
     <div class="item-meta">HN · 998 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://openrouter.ai/deepseek/deepseek-v4-pro-0813" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B" target="_blank" rel="noopener">Qwen3.8-2.4T</a></div>
     <div class="item-meta">HN · 689 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://zed.dev/blog/introducing-delta" target="_blank" rel="noopener">델타</a></div>
     <div class="item-meta">HN · 623 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://zed.dev/blog/introducing-delta" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://openai.com/codex/" target="_blank" rel="noopener">Linux용 ChatGPT Desktop (Codex Desktop)</a></div>
     <div class="item-meta">HN · 323 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://openai.com/codex/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://okmij.org/ftp/Computation/Impressions/PrincipiaMathematica.html" target="_blank" rel="noopener">Principia Mathematica는 현대적이고 통찰력이 넘친다</a></div>
     <div class="item-meta">HN · 237 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://okmij.org/ftp/Computation/Impressions/PrincipiaMathematica.html" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://tradersunion.com/news/central-banks/show/2973571-deutsche-bank-becomes/" target="_blank" rel="noopener">Deutsche Bank, 유럽 최초 외국계 위안화 결제은행 되다</a></div>
     <div class="item-meta">HN · 220 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://tradersunion.com/news/central-banks/show/2973571-deutsche-bank-becomes/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">DeepSeek 하네스</a></div>
     <div class="item-meta">HN · 180 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://en.wikipedia.org/wiki/Antiqua%E2%80%93Fraktur_dispute" target="_blank" rel="noopener">Antiqua–Fraktur 분쟁</a></div>
     <div class="item-meta">HN · 134 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://en.wikipedia.org/wiki/Antiqua%E2%80%93Fraktur_dispute" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.netlify.com/blog/one-prompt-11-models-very-different-results/" target="_blank" rel="noopener">AI 모델 선택하기: 한 개의 프롬프트, 11개 모델, 다양한 결과</a></div>
     <div class="item-meta">HN · 79 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.netlify.com/blog/one-prompt-11-models-very-different-results/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://jdh.hamkins.org/the-lattice-of-sets-of-natural-numbers-is-rich/" target="_blank" rel="noopener">자연수 집합의 격자는 풍부하다 (2021)</a></div>
     <div class="item-meta">HN · 78 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://jdh.hamkins.org/the-lattice-of-sets-of-natural-numbers-is-rich/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vn8oya/city2graph_a_python_library_for_heterogeneous/" target="_blank" rel="noopener">City2Graph: 도시 시스템에서 이질적 그래프 신경망과 공간 분석을 위한 파이썬 라이브러리 [R]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vn8oya/city2graph_a_python_library_for_heterogeneous/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vmhks7/would_you_choose_a_phd_advisor_who_gives_you/" target="_blank" rel="noopener">완전한 자유는 주지만 거의 지도하지 않는 박사학위 지도교수를 선택하겠는가? [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vmhks7/would_you_choose_a_phd_advisor_who_gives_you/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vmjb3p/the_loss_does_not_see_the_basis_but_adam_does_r/" target="_blank" rel="noopener">손실은 기저를 보지 못하지만 Adam은 본다 [R]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vmjb3p/the_loss_does_not_see_the_basis_but_adam_does_r/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vmvl4w/chessformer_lens_demo_ablating_1_of_a_chess/" target="_blank" rel="noopener">chessformer_lens 데모: 체스 트랜스포머의 128개 어텐션 헤드 중 1개를 절제하면 모델이 Morphy의 퀸 희생을 인식하지 못하게 된다 [P]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vmvl4w/chessformer_lens_demo_ablating_1_of_a_chess/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1vnb89z/neurips_2026_modified_date_on_reviews_d/" target="_blank" rel="noopener">Neurips 2026: 리뷰 수정 날짜 [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1vnb89z/neurips_2026_modified_date_on_reviews_d/" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="github">
   <div class="section-header">
@@ -435,40 +441,65 @@
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/semantica-agi/semantica" target="_blank" rel="noopener">semantica-agi/semantica</a></div>
-    <div class="item-meta">6,223</div>
-    <div class="item-summary">Semantica는 AI 에이전트를 위한 오픈소스 그래프 기반 인프라로, Context Graph와 Knowledge Graph를 구축하여 그래프 분석과 인과관계 분석을 수행한다. 완전한 의사결정 추적성을 제공하며 자체 호스팅 가능하고 규제 대상 도메인을 위해 설계되었다. RDF 및 LPG를 지원하는 다형 그래프 저장소를 통해 W3C 표준을 준수한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/semantica-agi/semantica" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">semantica-agi/semantica</span>
+      <span class="item-meta">6,223</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Semantica는 AI 에이전트를 위한 오픈소스 그래프 기반 인프라로, Context Graph와 Knowledge Graph를 구축하여 그래프 분석과 인과관계 분석을 수행한다. 완전한 의사결정 추적성을 제공하며 자체 호스팅 가능하고 규제 대상 도메인을 위해 설계되었다. RDF 및 LPG를 지원하는 다형 그래프 저장소를 통해 W3C 표준을 준수한다.</div>
+      <div class="item-link"><a href="https://github.com/semantica-agi/semantica" target="_blank" rel="noopener">semantica-agi/semantica</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">anthropics/skills</a></div>
-    <div class="item-meta">168,823</div>
-    <div class="item-summary">Anthropic의 Claude용 Skills 저장소입니다. Skills는 동적으로 로드되는 지침, 스크립트, 리소스 폴더로, 문서 작성, 데이터 분석, 작업 자동화 등 특정 작업을 반복 가능하게 수행하는 방법을 Claude에게 가르칩니다. 각 skill은 자체 폴더의 SKILL.md 파일에 지침과 메타데이터를 담고 있으며, 대부분 Apache 2.0 오픈소스입니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">anthropics/skills</span>
+      <span class="item-meta">168,823</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Anthropic의 Claude용 Skills 저장소입니다. Skills는 동적으로 로드되는 지침, 스크립트, 리소스 폴더로, 문서 작성, 데이터 분석, 작업 자동화 등 특정 작업을 반복 가능하게 수행하는 방법을 Claude에게 가르칩니다. 각 skill은 자체 폴더의 SKILL.md 파일에 지침과 메타데이터를 담고 있으며, 대부분 Apache 2.0 오픈소스입니다.</div>
+      <div class="item-link"><a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">anthropics/skills</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/cactus-compute/needle" target="_blank" rel="noopener">cactus-compute/needle</a></div>
-    <div class="item-meta">4,725</div>
-    <div class="item-summary">Needle 2는 45M 파라미터 규모의 경량 모델로 도구 호출과 구조화된 데이터 추출을 수행하며, 14MB 바이너리 단일 파일로 28MB RAM에서 전체 세션을 실행할 수 있습니다. Simple Attention Network 기반으로 CQ2-bit 압축되어 있으며, 다른 소형 모델들보다 5~70배 작으면서 성능을 경쟁합니다. Python 패키지로 제공되며 도구 호출 결과를 구조화된 JSON 형태로 반환하고, 256토큰 슬라이딩 윈도우 메모리 제한이 있습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/cactus-compute/needle" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">cactus-compute/needle</span>
+      <span class="item-meta">4,725</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Needle 2는 45M 파라미터 규모의 경량 모델로 도구 호출과 구조화된 데이터 추출을 수행하며, 14MB 바이너리 단일 파일로 28MB RAM에서 전체 세션을 실행할 수 있습니다. Simple Attention Network 기반으로 CQ2-bit 압축되어 있으며, 다른 소형 모델들보다 5~70배 작으면서 성능을 경쟁합니다. Python 패키지로 제공되며 도구 호출 결과를 구조화된 JSON 형태로 반환하고, 256토큰 슬라이딩 윈도우 메모리 제한이 있습니다.</div>
+      <div class="item-link"><a href="https://github.com/cactus-compute/needle" target="_blank" rel="noopener">cactus-compute/needle</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/altic-dev/FluidVoice" target="_blank" rel="noopener">altic-dev/FluidVoice</a></div>
-    <div class="item-meta">9,727</div>
-    <div class="item-summary">FluidVoice는 macOS용 오픈소스 음성-텍스트 변환 딕테이션 애플리케이션으로, 온디바이스 AI 개선 기능을 제공합니다. Nemotron Speech, Parakeet, Whisper 등 다양한 음성 모델을 지원하며, Homebrew로 설치 가능합니다. GPLv3 라이선스로 배포되고 있으며, iOS와 Windows 버전이 개발 중입니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/altic-dev/FluidVoice" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">altic-dev/FluidVoice</span>
+      <span class="item-meta">9,727</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">FluidVoice는 macOS용 오픈소스 음성-텍스트 변환 딕테이션 애플리케이션으로, 온디바이스 AI 개선 기능을 제공합니다. Nemotron Speech, Parakeet, Whisper 등 다양한 음성 모델을 지원하며, Homebrew로 설치 가능합니다. GPLv3 라이선스로 배포되고 있으며, iOS와 Windows 버전이 개발 중입니다.</div>
+      <div class="item-link"><a href="https://github.com/altic-dev/FluidVoice" target="_blank" rel="noopener">altic-dev/FluidVoice</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/unslothai/unsloth" target="_blank" rel="noopener">unslothai/unsloth</a></div>
-    <div class="item-meta">70,856</div>
-    <div class="item-summary">Unsloth는 모델을 실행하고 훈련할 수 있는 첫 번째 데스크톱 애플리케이션이다. Windows, macOS, Linux 등 다양한 플랫폼을 지원하며, v0.1.701-beta 버전을 다운로드할 수 있다. 공식 문서, 튜토리얼 노트북, 기능 안내 등의 리소스를 제공한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/unslothai/unsloth" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">unslothai/unsloth</span>
+      <span class="item-meta">70,856</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Unsloth는 모델을 실행하고 훈련할 수 있는 첫 번째 데스크톱 애플리케이션이다. Windows, macOS, Linux 등 다양한 플랫폼을 지원하며, v0.1.701-beta 버전을 다운로드할 수 있다. 공식 문서, 튜토리얼 노트북, 기능 안내 등의 리소스를 제공한다.</div>
+      <div class="item-link"><a href="https://github.com/unslothai/unsloth" target="_blank" rel="noopener">unslothai/unsloth</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div>
 </body>

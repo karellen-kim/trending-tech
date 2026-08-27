@@ -28,9 +28,9 @@
 </style>
 <style>
   body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
-  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
-  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
-  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
   .top-bar { display: flex; align-items: center; justify-content: space-between;
@@ -73,9 +73,9 @@
   .highlight-section .section-icon { color: var(--accent-deep); }
   .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
   .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
@@ -118,10 +118,11 @@
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
-  .item-head { padding: 1rem 0; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
     letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
@@ -130,12 +131,11 @@
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 0 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
-    border: 1px dashed #d3c9b1; }
+    background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -162,20 +162,13 @@
 <div class="page-meta">2026-07-26</div>
 <h1><em>26</em> Jul 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section" id="today-take">
+<div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 해석</span>
     
   </div>
   <div class="take"><p class="take-headline">LLM의 성능 경쟁 축이 파라미터 증가에서 컨텍스트 엔지니어링과 경량화로 전환</p><p class="take-body">Spotify와 Claude 5 같은 주요 서비스들이 더 큰 모델보다 도메인 컨텍스트 활용을 강조하기 시작했다. 동시에 $8 마이크로컨트롤러에서 수천만 파라미터 LLM이 작동하고 4B 모델이 최신 고급 모델 수준의 성능을 내는 사례들이 등장하면서, 규모 경쟁이 아닌 제약 환경에서의 실용성 중심으로 LLM 활용이 재편되는 중이다.</p><div class="take-refs"><span>근거</span><a href="https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models" target="_blank" rel="noopener">Claude 5 생성 모델을 위한 새로운 컨텍스트 엔지니어링 규칙</a> · <a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가 인코딩: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a> · <a href="https://github.com/slvDev/esp32-ai" target="_blank" rel="noopener">$8 마이크로컨트롤러에서 2890만 파라미터 LLM 실행하기</a> · <a href="https://www.reddit.com/r/MachineLearning/comments/1v71wds/openweight_4b_models_approach_o3level_medical/" target="_blank" rel="noopener">Open-weight 4B 모델이 스웨덴어 의료 질문 답변에서 o3 수준에 근접 [P]</a> · <a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트를 위한 개발자 경험 확장</a></div></div>
-</div><div class="section highlight-section" id="highlights">
-  <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">오늘의 하이라이트</span>
-    
-  </div>
-  <ul class="highlight-list"><li>AI 에이전트 도입으로 코딩이 더 이상 개발 병목이 아니라는 스포티파이의 실증사례.</li><li>Claude 5를 위한 컨텍스트 엔지니어링의 새로운 규칙과 기법.</li><li>$8 마이크로컨트롤러에서 2천9백만 파라미터 LLM 실행 - 에지 AI 민주화.</li><li>도메인 전문가의 지식을 LLM 컨텍스트로 인코딩하는 스포티파이의 데이터 어시스턴트.</li><li>ARM64 어셈블리로 YOLO26n 완전 구현 - ML 성능 최적화의 극한.</li></ul>
 </div><div class="section" id="tech-blog">
   <div class="section-header">
     <span class="section-icon">TECH</span>
@@ -183,26 +176,41 @@
     <span class="section-count">3개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 영상 장애 보고서</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">팟캐스트 크리에이터들이 Spotify에서 신뢰성 문제를 경험했으며, 특히 6월 24일 비디오 트랜스코딩 인프라가 최대 용량에 도달해 에피소드 발행이 수 시간 지연되었다. 시스템이 업로드 확인을 제대로 하지 못해 크리에이터들이 에피소드를 재업로드했다. 일반적인 기간에는 스케일링이 가능했지만 대량 콘텐츠의 급증에 대응할 충분한 여유가 없었으며, 예정된 배치 처리 작업도 동시에 실행 중이었다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가 인코딩: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify는 70,000개 이상의 데이터셋으로 인한 데이터 문제를 해결하기 위해 AI 데이터 어시스턴트를 개발했다. 단순히 모든 스키마를 LLM에 입력하는 것은 제한된 context window와 스키마의 불충분한 의미 정보 때문에 작동하지 않았다. 따라서 도메인 전문가가 소유·관리하는 중간 계층을 구축하여 데이터 웨어하우스의 핵심 정보만 캡처하는 방식을 채택했다. 이 어시스턴트는 2025년 8월부터 2,100명 이상의 Spotify 직원이 13,000개 이상의 대화에서 활용 중이며, SQL 경험이 없는 사용자도 간단한 영어 질문으로 신뢰할 수 있는 데이터를 빠르게 얻을 수 있게 되었다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트를 위한 개발자 경험 확장</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify에서 AI 코딩 도구 채택이 급증했으며, 99% 이상의 엔지니어가 주당 사용 중이고 Opus 4.5 출시 후 Claude Code 채택이 특히 급증했다. 94%의 개발자가 AI가 생산성을 높였다고 보고했으며, PR 빈도가 76% 증가했다. Spotify는 수년 전 프로덕션 코드베이스가 엔지니어 수보다 7배 빠르게 성장하면서 개발자들이 의존성 업그레이드, API 마이그레이션, 취약점 패치 같은 유지보수에 더 많은 시간을 쓰게 되자, 자동화를 통해 수백 개 팀의 컴포넌트를 한 번에 업데이트하는 방식으로 전환했다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">콘텐츠 수집 및 팟캐스트 영상 장애 보고서</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">팟캐스트 크리에이터들이 Spotify에서 신뢰성 문제를 경험했으며, 특히 6월 24일 비디오 트랜스코딩 인프라가 최대 용량에 도달해 에피소드 발행이 수 시간 지연되었다. 시스템이 업로드 확인을 제대로 하지 못해 크리에이터들이 에피소드를 재업로드했다. 일반적인 기간에는 스케일링이 가능했지만 대량 콘텐츠의 급증에 대응할 충분한 여유가 없었으며, 예정된 배치 처리 작업도 동시에 실행 중이었다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/7/content-ingestion-and-podcast-video-incident-report" target="_blank" rel="noopener">콘텐츠 수집 및 팟캐스트 영상 장애 보고서</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>도메인 전문가 인코딩: Spotify 데이터 어시스턴트의 컨텍스트 레이어</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify는 70,000개 이상의 데이터셋으로 인한 데이터 문제를 해결하기 위해 AI 데이터 어시스턴트를 개발했다. 단순히 모든 스키마를 LLM에 입력하는 것은 제한된 context window와 스키마의 불충분한 의미 정보 때문에 작동하지 않았다. 따라서 도메인 전문가가 소유·관리하는 중간 계층을 구축하여 데이터 웨어하우스의 핵심 정보만 캡처하는 방식을 채택했다. 이 어시스턴트는 2025년 8월부터 2,100명 이상의 Spotify 직원이 13,000개 이상의 대화에서 활용 중이며, SQL 경험이 없는 사용자도 간단한 영어 질문으로 신뢰할 수 있는 데이터를 빠르게 얻을 수 있게 되었다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가 인코딩: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트를 위한 개발자 경험 확장</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify에서 AI 코딩 도구 채택이 급증했으며, 99% 이상의 엔지니어가 주당 사용 중이고 Opus 4.5 출시 후 Claude Code 채택이 특히 급증했다. 94%의 개발자가 AI가 생산성을 높였다고 보고했으며, PR 빈도가 76% 증가했다. Spotify는 수년 전 프로덕션 코드베이스가 엔지니어 수보다 7배 빠르게 성장하면서 개발자들이 의존성 업그레이드, API 마이그레이션, 취약점 패치 같은 유지보수에 더 많은 시간을 쓰게 되자, 자동화를 통해 수백 개 팀의 컴포넌트를 한 번에 업데이트하는 방식으로 전환했다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify에서 팀과 에이전트를 위한 개발자 경험 확장</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="dev-blogs">
   <div class="section-header">
@@ -211,12 +219,17 @@
     <span class="section-count">1개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Jul/25/ruff/#atom-everything" target="_blank" rel="noopener">Ruff v0.16.0</a></div>
-    <div class="item-meta">Simon Willison</div>
-    <div class="item-summary">Astral이 7월 23일 Python 린팅 도구 Ruff v0.16.0을 출시했다. 이 버전에서는 기본 활성화 규칙이 59개에서 413개로 대폭 증가했다. 사용자가 unpinned "ruff" dev dependency를 사용 중이면 업데이트 후 새로운 기본 체크로 인해 CI 작업이 실패할 수 있다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://simonwillison.net/2026/Jul/25/ruff/#atom-everything" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">Ruff v0.16.0</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Astral이 7월 23일 Python 린팅 도구 Ruff v0.16.0을 출시했다. 이 버전에서는 기본 활성화 규칙이 59개에서 413개로 대폭 증가했다. 사용자가 unpinned "ruff" dev dependency를 사용 중이면 업데이트 후 새로운 기본 체크로 인해 CI 작업이 실패할 수 있다.</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Jul/25/ruff/#atom-everything" target="_blank" rel="noopener">Ruff v0.16.0</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="hn-reddit">
   <div class="section-header">
@@ -225,110 +238,80 @@
     <span class="section-count">15개</span>
   </div>
   <div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models" target="_blank" rel="noopener">Claude 5 생성 모델을 위한 새로운 컨텍스트 엔지니어링 규칙</a></div>
     <div class="item-meta">HN · 403 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://refp.se/articles/your-shell-and-the-magic-colon" target="_blank" rel="noopener">셸 콜론은 아무것도 하지 않는다. 그래도 사용해라</a></div>
     <div class="item-meta">HN · 306 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://refp.se/articles/your-shell-and-the-magic-colon" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/slvDev/esp32-ai" target="_blank" rel="noopener">$8 마이크로컨트롤러에서 2890만 파라미터 LLM 실행하기</a></div>
     <div class="item-meta">HN · 243 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/slvDev/esp32-ai" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://discuss.grapheneos.org/d/40700-grapheneos-protections-against-data-extraction-from-locked-devices" target="_blank" rel="noopener">GrapheneOS 잠긴 기기의 데이터 추출 방지 기능</a></div>
     <div class="item-meta">HN · 226 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://discuss.grapheneos.org/d/40700-grapheneos-protections-against-data-extraction-from-locked-devices" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://astral.sh/blog/ruff-v0.16.0" target="_blank" rel="noopener">Ruff v0.16.0 – 주요 새 업데이트 – 기본 규칙 59개에서 413개로 증가</a></div>
     <div class="item-meta">HN · 214 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://astral.sh/blog/ruff-v0.16.0" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://blog.ktz.me/esp32-plane-radar/" target="_blank" rel="noopener">내 책상용 ESP32 기반 항공기 레이더</a></div>
     <div class="item-meta">HN · 211 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://blog.ktz.me/esp32-plane-radar/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/demo-zexuan/liang-wenfeng-investor-meeting-2026-7-22/blob/master/%E6%A2%81%E6%96%87%E9%94%8B%E6%8A%95%E8%B5%84%E8%80%85%E4%BA%A4%E6%B5%81%E4%BC%9A-%E6%96%87%E5%AD%97%E7%A8%BF_1_18_translate_20260723201651.pdf" target="_blank" rel="noopener">DeepSeek, 미국과의 컴퓨팅 격차 언급 유출 후 자금 조달 중단 (트랜스크립트) [pdf]</a></div>
     <div class="item-meta">HN · 205 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/demo-zexuan/liang-wenfeng-investor-meeting-2026-7-22/blob/master/%E6%A2%81%E6%96%87%E9%94%8B%E6%8A%95%E8%B5%84%E8%80%85%E4%BA%A4%E6%B5%81%E4%BC%9A-%E6%96%87%E5%AD%97%E7%A8%BF_1_18_translate_20260723201651.pdf" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.debian.org/vote/2026/vote_002" target="_blank" rel="noopener">Debian의 LLM 활용: 세 가지 제안</a></div>
     <div class="item-meta">HN · 190 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.debian.org/vote/2026/vote_002" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://huggingface.co/owensong/Inflect-Micro-v2" target="_blank" rel="noopener">Inflect-Micro-v2: 9.36M 파라미터로 완전한 음성</a></div>
     <div class="item-meta">HN · 175 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://huggingface.co/owensong/Inflect-Micro-v2" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://golfcoursebrowser.com/" target="_blank" rel="noopener">Show HN: 미국 전역 골프장을 모두 지도에 표시했습니다</a></div>
     <div class="item-meta">HN · 174 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://golfcoursebrowser.com/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1v6w394/i_implemented_the_yolo26n_model_inference_from/" target="_blank" rel="noopener">ARM64 어셈블리 언어로 YOLO26n 모델 추론을 처음부터 구현했습니다 (프레임워크 없음) [P]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1v6w394/i_implemented_the_yolo26n_model_inference_from/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1v6gh43/paper_lengths_and_reasonable_assumptions_in_ml/" target="_blank" rel="noopener">ML 컨퍼런스의 논문 길이와 합리적인 가정 [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1v6gh43/paper_lengths_and_reasonable_assumptions_in_ml/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1v6qt8l/link_plotsfigures_in_neurips_rebuttal_r/" target="_blank" rel="noopener">NeurIPS 재반박문 내 플롯/그림 링크하기 [R]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1v6qt8l/link_plotsfigures_in_neurips_rebuttal_r/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1v6sjiu/understanding_gpu_inference_workloads_d/" target="_blank" rel="noopener">GPU 추론 워크로드 이해 [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1v6sjiu/understanding_gpu_inference_workloads_d/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1v71wds/openweight_4b_models_approach_o3level_medical/" target="_blank" rel="noopener">Open-weight 4B 모델이 스웨덴어 의료 질문 답변에서 o3 수준에 근접 [P]</a></div>
     <div class="item-meta">r/MachineLearning</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.reddit.com/r/MachineLearning/comments/1v71wds/openweight_4b_models_approach_o3level_medical/" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="github">
   <div class="section-header">
@@ -337,40 +320,65 @@
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/permissionlesstech/bitchat" target="_blank" rel="noopener">permissionlesstech/bitchat</a></div>
-    <div class="item-meta">29,531</div>
-    <div class="item-summary">비트챗(BitChat)은 Bluetooth 메시 네트워크(오프라인)와 Nostr 프로토콜(인터넷)을 결합한 분산형 P2P 메시징 앱이다. 계정이나 전화번호 없이 중앙 서버 없이 사용 가능하며, Noise 프로토콜 기반 E2E 암호화를 제공한다. iOS/macOS를 지원하며, 오프라인과 온라인 메시지를 자동으로 라우팅하고 삼중 탭으로 긴급 삭제 기능을 갖추고 있다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/permissionlesstech/bitchat" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">permissionlesstech/bitchat</span>
+      <span class="item-meta">29,531</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">비트챗(BitChat)은 Bluetooth 메시 네트워크(오프라인)와 Nostr 프로토콜(인터넷)을 결합한 분산형 P2P 메시징 앱이다. 계정이나 전화번호 없이 중앙 서버 없이 사용 가능하며, Noise 프로토콜 기반 E2E 암호화를 제공한다. iOS/macOS를 지원하며, 오프라인과 온라인 메시지를 자동으로 라우팅하고 삼중 탭으로 긴급 삭제 기능을 갖추고 있다.</div>
+      <div class="item-link"><a href="https://github.com/permissionlesstech/bitchat" target="_blank" rel="noopener">permissionlesstech/bitchat</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/citrolabs/ego-lite" target="_blank" rel="noopener">citrolabs/ego-lite</a></div>
-    <div class="item-meta">4,141</div>
-    <div class="item-summary">ego-lite는 AI 에이전트가 웹 자동화를 실행할 수 있는 가장 빠른 브라우저입니다. 에이전트가 자신의 공간(Spaces)에서 여러 브라우저 작업을 병렬로 실행하는 동안 사용자는 자신의 탭을 독립적으로 유지할 수 있습니다. 이를 통해 작업이 더 빠르게 완료되고 토큰 사용량이 감소합니다. 기존 browser-use나 agent-browser 같은 도구와 달리 별도 브라우저 구동이나 로그인 관리 문제를 해결합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/citrolabs/ego-lite" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">citrolabs/ego-lite</span>
+      <span class="item-meta">4,141</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">ego-lite는 AI 에이전트가 웹 자동화를 실행할 수 있는 가장 빠른 브라우저입니다. 에이전트가 자신의 공간(Spaces)에서 여러 브라우저 작업을 병렬로 실행하는 동안 사용자는 자신의 탭을 독립적으로 유지할 수 있습니다. 이를 통해 작업이 더 빠르게 완료되고 토큰 사용량이 감소합니다. 기존 browser-use나 agent-browser 같은 도구와 달리 별도 브라우저 구동이나 로그인 관리 문제를 해결합니다.</div>
+      <div class="item-link"><a href="https://github.com/citrolabs/ego-lite" target="_blank" rel="noopener">citrolabs/ego-lite</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/block/buzz" target="_blank" rel="noopener">block/buzz</a></div>
-    <div class="item-meta">12,757</div>
-    <div class="item-summary">Buzz는 인간과 AI 에이전트가 함께 작업할 수 있는 자체 호스팅 가능한 워크스페이스입니다. Nostr 릴레이 기반으로 모든 메시지, 리뷰 승인, git 이벤트 등이 서명된 이벤트 로그로 기록됩니다. 에이전트는 코드 리뷰, 워크플로우 실행, 리포지토리 관리, 채널 생성 등 인간 팀원과 동일한 기능을 수행할 수 있으며, 완전한 감사 추적을 제공합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/block/buzz" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">block/buzz</span>
+      <span class="item-meta">12,757</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Buzz는 인간과 AI 에이전트가 함께 작업할 수 있는 자체 호스팅 가능한 워크스페이스입니다. Nostr 릴레이 기반으로 모든 메시지, 리뷰 승인, git 이벤트 등이 서명된 이벤트 로그로 기록됩니다. 에이전트는 코드 리뷰, 워크플로우 실행, 리포지토리 관리, 채널 생성 등 인간 팀원과 동일한 기능을 수행할 수 있으며, 완전한 감사 추적을 제공합니다.</div>
+      <div class="item-link"><a href="https://github.com/block/buzz" target="_blank" rel="noopener">block/buzz</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/pingdotgg/t3code" target="_blank" rel="noopener">pingdotgg/t3code</a></div>
-    <div class="item-meta">14,951</div>
-    <div class="item-summary">T3 Code는 Codex, Claude, Cursor, OpenCode 등 코딩 에이전트를 위한 최소한의 웹 GUI입니다. Codex CLI, Claude Code, Cursor CLI, OpenCode 중 최소 하나를 설치하고 인증한 후 사용할 수 있으며, NPM이나 데스크톱 앱으로 설치 가능합니다. 프로젝트는 초기 단계이므로 버그가 예상되며, 현재 기여는 수용하지 않습니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/pingdotgg/t3code" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">pingdotgg/t3code</span>
+      <span class="item-meta">14,951</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">T3 Code는 Codex, Claude, Cursor, OpenCode 등 코딩 에이전트를 위한 최소한의 웹 GUI입니다. Codex CLI, Claude Code, Cursor CLI, OpenCode 중 최소 하나를 설치하고 인증한 후 사용할 수 있으며, NPM이나 데스크톱 앱으로 설치 가능합니다. 프로젝트는 초기 단계이므로 버그가 예상되며, 현재 기여는 수용하지 않습니다.</div>
+      <div class="item-link"><a href="https://github.com/pingdotgg/t3code" target="_blank" rel="noopener">pingdotgg/t3code</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/CoreBunch/Instatic" target="_blank" rel="noopener">CoreBunch/Instatic</a></div>
-    <div class="item-meta">5,432</div>
-    <div class="item-summary">Instatic은 CoreBunch에서 개발한 자체 호스팅 CMS로, 비주얼 에디터, 콘텐츠 엔진, 퍼블리셔가 모두 하나의 Bun 서버에 통합되어 있다. 생성된 페이지는 깨끗하게 작성되어 view-source로도 읽을 수 있다. 기존의 여러 CMS, 프레임워크, 호스트, 폼 서비스 등을 조합하는 방식과 달리, Instatic은 모든 기능이 하나의 서버에 통합된 올인원 솔루션을 제공한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/CoreBunch/Instatic" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">CoreBunch/Instatic</span>
+      <span class="item-meta">5,432</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Instatic은 CoreBunch에서 개발한 자체 호스팅 CMS로, 비주얼 에디터, 콘텐츠 엔진, 퍼블리셔가 모두 하나의 Bun 서버에 통합되어 있다. 생성된 페이지는 깨끗하게 작성되어 view-source로도 읽을 수 있다. 기존의 여러 CMS, 프레임워크, 호스트, 폼 서비스 등을 조합하는 방식과 달리, Instatic은 모든 기능이 하나의 서버에 통합된 올인원 솔루션을 제공한다.</div>
+      <div class="item-link"><a href="https://github.com/CoreBunch/Instatic" target="_blank" rel="noopener">CoreBunch/Instatic</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div>
 </body>

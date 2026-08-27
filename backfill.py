@@ -21,7 +21,6 @@ from datetime import date
 import digest
 from config import DOCS_DIR, SUMMARY_WORKERS
 from renderer import _e, _section_html, render_weekly_page
-from main import _week_highlights
 from summarizer import generate_today_take, generate_week_take
 
 # 예전 페이지에는 해석 블록이 없으니 그 CSS 도 함께 넣어야 한다
@@ -164,14 +163,6 @@ def backfill_week(wid: str) -> bool:
             changed.append(take["headline"][:46])
         else:
             print(f"  {wid} 해석 생성 실패")
-
-    # 예전 주간 하이라이트는 문장뿐이라 원문으로 갈 수 없었다
-    hl_old = wdata.get("highlights") or []
-    if not hl_old or isinstance(hl_old[0], str):
-        hl = _week_highlights(day_takes)
-        if hl:
-            wdata["highlights"] = hl
-            changed.append(f"하이라이트 {len(hl)}건")
 
     if not changed:
         return False

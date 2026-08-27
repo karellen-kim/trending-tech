@@ -28,9 +28,9 @@
 </style>
 <style>
   body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
-  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
-  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
-  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
   .top-bar { display: flex; align-items: center; justify-content: space-between;
@@ -73,9 +73,9 @@
   .highlight-section .section-icon { color: var(--accent-deep); }
   .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
   .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
@@ -118,10 +118,11 @@
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
-  .item-head { padding: 1rem 0; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
     letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
@@ -130,12 +131,11 @@
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 0 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
-    border: 1px dashed #d3c9b1; }
+    background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -162,20 +162,13 @@
 <div class="page-meta">2026-07-17</div>
 <h1><em>17</em> Jul 2026</h1>
 <nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section" id="today-take">
+<div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 해석</span>
     
   </div>
   <div class="take"><p class="take-headline">개발팀의 의사결정이 AI 에이전트로 이양된다 — 코드 리뷰·데이터 쿼리·워크플로우 선택까지</p><p class="take-body">Spotify와 Uber의 글들에서 코드리뷰의 90%(uReview), 데이터 쿼리(데이터 어시스턴트), 개발자 경험 결정(에이전트 파트너)이 이미 AI의 판단을 직접 따르고 있다. 이는 단순 자동화가 아니라 휴먼-엔이 아닌 에이-엔 의사결정 구조로의 이행이다. 동시에 Alibaba는 Kafka-레이크하우스 원클릭 통합, StarRocks 멀티모달 검색, PolarDB-X 1000억 행 성능 최적화를 통해 이 AI의 선택을 대규모로 처리할 인프라를 동시에 진화시키고 있다.</p><div class="take-refs"><span>근거</span><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주간 약 65K개 변경사항 중 90%를 분석하는 GenAI 코드 리뷰</a> · <a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify의 팀과 에이전트를 위한 개발자 경험 확대</a> · <a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a> · <a href="https://www.alibabacloud.com/blog/alibaba-cloud-emr-serverless-starrocks-lakehouse-multimodal-retrieval-one-sql-for-full-text-scalar-and-vector-hybrid-search_603345" target="_blank" rel="noopener">Alibaba Cloud EMR 서버리스 StarRocks Lakehouse 멀티모달 검색: 전문·스칼라·벡터 하이브리드 검색을 위한 단일 SQL</a> · <a href="https://www.alibabacloud.com/blog/pagination-at-scale-how-polardb-x-handles-10k%2B-qps-queries-over-100-billion-row-tables_603365" target="_blank" rel="noopener">대규모 페이지네이션: PolarDB-X가 1000억 행 이상의 테이블에서 10K+ QPS 쿼리를 처리하는 방법</a></div></div>
-</div><div class="section highlight-section" id="highlights">
-  <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">오늘의 하이라이트</span>
-    
-  </div>
-  <ul class="highlight-list"><li>주어진 항목들 중 가장 중요하고 임팩트 있는 5개를 선정하여 요약합니다:</li><li>Qwen의 AI 하드웨어 에코시스템 확대로 모델 배포 환경 급성장</li><li>에이전트 시스템의 자가개선 기법 연구로 AI 자율성 향상</li><li>실시간 데이터와 데이터레이크 통합으로 분석 인프라 간소화</li><li>에이전트 평가 표준 인프라로 생성형 AI 성능 검증 체계화</li></ul>
 </div><div class="section" id="tech-blog">
   <div class="section-header">
     <span class="section-icon">TECH</span>
@@ -183,90 +176,107 @@
     <span class="section-count">12개</span>
   </div>
   <div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/apsaramq-for-kafka-launches-native-data-lake-ingestion-unifying-real-time-streams-and-data-lakes-with-one-click_603357" target="_blank" rel="noopener">ApsaraMQ for Kafka 네이티브 데이터 레이크 인제스션 출시: 실시간 스트림과 데이터 레이크를 원클릭으로 통합</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/apsaramq-for-kafka-launches-native-data-lake-ingestion-unifying-real-time-streams-and-data-lakes-with-one-click_603357" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-emr-serverless-starrocks-lakehouse-multimodal-retrieval-one-sql-for-full-text-scalar-and-vector-hybrid-search_603345" target="_blank" rel="noopener">Alibaba Cloud EMR 서버리스 StarRocks Lakehouse 멀티모달 검색: 전문·스칼라·벡터 하이브리드 검색을 위한 단일 SQL</a></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.alibabacloud.com/blog/alibaba-cloud-emr-serverless-starrocks-lakehouse-multimodal-retrieval-one-sql-for-full-text-scalar-and-vector-hybrid-search_603345" target="_blank" rel="noopener">Alibaba Cloud EMR 서버리스 StarRocks Lakehouse 멀티모달 검색: 전문·스칼라·벡터 하이브리드 검색을 위한 단일 SQL</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/alibaba-cloud-emr-serverless-starrocks-lakehouse-multimodal-retrieval-one-sql-for-full-text-scalar-and-vector-hybrid-search_603345" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/qwen-enables-rapidly-expanding-ai-hardware-ecosystem_603348" target="_blank" rel="noopener">Qwen이 급속도로 확대되는 AI 하드웨어 생태계를 가능하게 한다</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/qwen-enables-rapidly-expanding-ai-hardware-ecosystem_603348" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.alibabacloud.com/blog/introduction-to-qoderwork-plugins_603366" target="_blank" rel="noopener">QoderWork Plugins 소개</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/introduction-to-qoderwork-plugins_603366" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.alibabacloud.com/blog/pagination-at-scale-how-polardb-x-handles-10k%2B-qps-queries-over-100-billion-row-tables_603365" target="_blank" rel="noopener">대규모 페이지네이션: PolarDB-X가 1000억 행 이상의 테이블에서 10K+ QPS 쿼리를 처리하는 방법</a></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.alibabacloud.com/blog/pagination-at-scale-how-polardb-x-handles-10k%2B-qps-queries-over-100-billion-row-tables_603365" target="_blank" rel="noopener">대규모 페이지네이션: PolarDB-X가 1000억 행 이상의 테이블에서 10K+ QPS 쿼리를 처리하는 방법</a></div>
     <div class="item-meta">Alibaba Cloud Blog</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.alibabacloud.com/blog/pagination-at-scale-how-polardb-x-handles-10k%2B-qps-queries-over-100-billion-row-tables_603365" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>코딩은 더 이상 제약이 아니다: Spotify의 팀과 에이전트를 위한 개발자 경험 확대</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify에서 AI 코딩 도구 채택률이 99% 수준으로 극히 높으며, Opus 4.5 출시 이후 Claude Code 사용이 급증했다. 개발자들의 생산성 향상(94%)과 PR 빈도 증가(76%)가 보고되었다. 프로덕션 코드베이스가 엔지니어 수보다 7배 빠르게 성장하면서 개발자들이 마이그레이션, 의존성 업그레이드, 취약점 패치 등 유지보수에 대부분의 시간을 소비하고 있었다. Spotify는 수백 개 팀이 개별적으로 업데이트하는 대신 자동화를 통해 대규모 변경을 한 번에 수행하는 접근 방식을 추진 중이다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify의 팀과 에이전트를 위한 개발자 경험 확대</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트의 컨텍스트 레이어</span>
+      <span class="item-meta">Spotify Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spotify는 70,000개 이상의 데이터셋 관리 문제를 해결하기 위해 AI 데이터 어시스턴트를 개발했다. 스키마만으로는 불충분하고 컨텍스트 윈도우 제한이 있어서, 도메인 전문가가 소유한 중간 레이어가 필요했다. 2025년 8월부터 이 어시스턴트는 2,100명 이상의 사용자가 13,000+ 대화에서 활용 중이며, SQL을 모르는 사용자도 간단한 영어로 질문하여 신뢰할 수 있는 데이터를 얻을 수 있다.</div>
+      <div class="item-link"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">코딩은 더 이상 제약이 아니다: Spotify의 팀과 에이전트를 위한 개발자 경험 확대</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify에서 AI 코딩 도구 채택률이 99% 수준으로 극히 높으며, Opus 4.5 출시 이후 Claude Code 사용이 급증했다. 개발자들의 생산성 향상(94%)과 PR 빈도 증가(76%)가 보고되었다. 프로덕션 코드베이스가 엔지니어 수보다 7배 빠르게 성장하면서 개발자들이 마이그레이션, 의존성 업그레이드, 취약점 패치 등 유지보수에 대부분의 시간을 소비하고 있었다. Spotify는 수백 개 팀이 개별적으로 업데이트하는 대신 자동화를 통해 대규모 변경을 한 번에 수행하는 접근 방식을 추진 중이다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/code-with-claude-coding-is-no-longer-the-constraint" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">GitFarm: Git-as-a-Service – 500ms 이하 체크아웃, 80% 이상 리소스 절감</span>
+      <span class="item-meta">Uber Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">우버의 대규모 모노레포에서 Git 워크플로우의 성능 병목을 해결하기 위해 GitFarm을 개발했다. GitFarm은 Git SCM이 아니라 클라우드 기반 Git 클라이언트로, gRPC API를 통해 표준 Git 명령을 중앙에서 수행한다. 500ms 이내에 전체 Git 체크아웃을 제공하며, 클라이언트 리소스 사용량을 80% 이상 감소시키고 초기 클론으로 인한 10-15분의 콜드 스타트 문제도 해결했다.</div>
+      <div class="item-link"><a href="https://www.uber.com/blog/gitfarm-as-a-service/" target="_blank" rel="noopener">GitFarm: Git-as-a-Service – 500ms 이하 체크아웃, 80% 이상 리소스 절감</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">도메인 전문가를 인코딩하기: Spotify 데이터 어시스턴트의 컨텍스트 레이어</a></div>
-    <div class="item-meta">Spotify Engineering</div>
-    <div class="item-summary">Spotify는 70,000개 이상의 데이터셋 관리 문제를 해결하기 위해 AI 데이터 어시스턴트를 개발했다. 스키마만으로는 불충분하고 컨텍스트 윈도우 제한이 있어서, 도메인 전문가가 소유한 중간 레이어가 필요했다. 2025년 8월부터 이 어시스턴트는 2,100명 이상의 사용자가 13,000+ 대화에서 활용 중이며, SQL을 모르는 사용자도 간단한 영어로 질문하여 신뢰할 수 있는 데이터를 얻을 수 있다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/gitfarm-as-a-service/" target="_blank" rel="noopener">GitFarm: Git-as-a-Service – 500ms 이하 체크아웃, 80% 이상 리소스 절감</a></div>
-    <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary">우버의 대규모 모노레포에서 Git 워크플로우의 성능 병목을 해결하기 위해 GitFarm을 개발했다. GitFarm은 Git SCM이 아니라 클라우드 기반 Git 클라이언트로, gRPC API를 통해 표준 Git 명령을 중앙에서 수행한다. 500ms 이내에 전체 Git 체크아웃을 제공하며, 클라이언트 리소스 사용량을 80% 이상 감소시키고 초기 클론으로 인한 10-15분의 콜드 스타트 문제도 해결했다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/gitfarm-as-a-service/" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">Moirai: 손실 없는 Straggler 완화 – SOSP 2025 채택</a></div>
     <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/moirai/" target="_blank" rel="noopener">&rarr;</a></div>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>uReview: Uber의 주간 약 65K개 변경사항 중 90%를 분석하는 GenAI 코드 리뷰</span>
+      <span class="item-meta">Uber Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Uber의 uReview는 매주 약 65K개 변경의 90%를 분석하는 AI 코드 리뷰 플랫폼이다. 기능 버그, 에러 처리, 보안 취약점, 코딩 표준 준수를 식별하는 Commenter 시스템과 코멘트에 대해 코드 변경을 제안하는 Fixer로 구성된다. 주요 과제는 LLM 할루시네이션과 거짓 양성으로 인한 신뢰도 저하이며, 신호 대 잡음비를 개선하는 것을 목표로 한다.</div>
+      <div class="item-link"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주간 약 65K개 변경사항 중 90%를 분석하는 GenAI 코드 리뷰</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주간 약 65K개 변경사항 중 90%를 분석하는 GenAI 코드 리뷰</a></div>
-    <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary">Uber의 uReview는 매주 약 65K개 변경의 90%를 분석하는 AI 코드 리뷰 플랫폼이다. 기능 버그, 에러 처리, 보안 취약점, 코딩 표준 준수를 식별하는 Commenter 시스템과 코멘트에 대해 코드 변경을 제안하는 Fixer로 구성된다. 주요 과제는 LLM 할루시네이션과 거짓 양성으로 인한 신뢰도 저하이며, 신호 대 잡음비를 개선하는 것을 목표로 한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">Uber의 Multi-Cloud 시크릿 관리 플랫폼 구축</span>
+      <span class="item-meta">Uber Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Uber는 마이크로서비스 5,000개, 데이터베이스 5,000개를 운영하며 150,000개 이상의 보안 자격증명을 관리합니다. 노출된 자격증명이 사이버 공격의 주요 원인이 되자, Uber는 중앙집중식이고 자동화된 Secret Management Platform을 구축했습니다. 이 플랫폼은 secrets 분산 문제 해결을 위해 Git pre-commit hook 방식의 CLI 도구를 도입하여 코드베이스에 자격증명이 저장되기 전에 차단합니다.</div>
+      <div class="item-link"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">Uber의 Multi-Cloud 시크릿 관리 플랫폼 구축</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">Uber의 Multi-Cloud 시크릿 관리 플랫폼 구축</a></div>
-    <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary">Uber는 마이크로서비스 5,000개, 데이터베이스 5,000개를 운영하며 150,000개 이상의 보안 자격증명을 관리합니다. 노출된 자격증명이 사이버 공격의 주요 원인이 되자, Uber는 중앙집중식이고 자동화된 Secret Management Platform을 구축했습니다. 이 플랫폼은 secrets 분산 문제 해결을 위해 Git pre-commit hook 방식의 CLI 도구를 도입하여 코드베이스에 자격증명이 저장되기 전에 차단합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/building-ubers-multi-cloud-secrets-management-platform/" target="_blank" rel="noopener">&rarr;</a></div>
-</div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://www.uber.com/blog/modernizing-artifact-storage/" target="_blank" rel="noopener">Uber의 아티팩트 저장소 현대화
-Uber의 10년 된 온프레미스 아티팩트 저장소는 월 5+ 페타바이트 규모의 다운로드를 처리했지만 쓰기 장애, 침묵한 복제 실패, 수 시간의 수동 재조정 위험이 있었습니다. 팀은 MySQL 메타데이터 저장소를 기반으로 조건부 HTTP 요청을 통해 신선도를 검증하는 프록시 뒤의 다중 지역 클라우드 Blob 저장소로 마이그레이션했습니다. Egress가 99% 이상 감소했고, 99.99% 가용성에서 아티팩트 Egress 비용을 약 90% 절감했습니다. 더 읽기 →</a></div>
-    <div class="item-meta">Uber Engineering</div>
-    <div class="item-summary">Uber는 10년 이상 운영된 온프레미스 아티팩트 저장소를 현대화했다. 기존 시스템은 2개 데이터센터에서 각각 5개 노드로 운영되었으며, 지역 디스크에 복제 계수 3으로 아티팩트를 저장했고 GeoDNS로 트래픽을 라우팅했다. 이를 클라우드 기반 다중 지역 블롭 스토리지로 마이그레이션하고 MySQL 메타데이터 스토어와 검증 프록시를 도입하여 Egress 비용을 90% 감소, 가용성을 99.99%로 개선했다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://www.uber.com/blog/modernizing-artifact-storage/" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">Uber의 아티팩트 저장소 현대화 Uber의 10년 된 온프레미스 아티팩트 저장소는 월 5+ 페타바이트 규모의 다운로드를 처리했지만 쓰기 장애, 침묵한 복제 실패, 수 시간의 수동 재조정 위험이 있었습니다. 팀은 MySQL 메타데이터 저장소를 기반으로 조건부 HTTP 요청을 통해 신선도를 검증하는 프록시 뒤의 다중 지역 클라우드 Blob 저장소로 마이그레이션했습니다. Egress가 99% 이상 감소했고, 99.99% 가용성에서 아티팩트 Egress 비용을 약 90% 절감했습니다. 더 읽기 →</span>
+      <span class="item-meta">Uber Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Uber는 10년 이상 운영된 온프레미스 아티팩트 저장소를 현대화했다. 기존 시스템은 2개 데이터센터에서 각각 5개 노드로 운영되었으며, 지역 디스크에 복제 계수 3으로 아티팩트를 저장했고 GeoDNS로 트래픽을 라우팅했다. 이를 클라우드 기반 다중 지역 블롭 스토리지로 마이그레이션하고 MySQL 메타데이터 스토어와 검증 프록시를 도입하여 Egress 비용을 90% 감소, 가용성을 99.99%로 개선했다.</div>
+      <div class="item-link"><a href="https://www.uber.com/blog/modernizing-artifact-storage/" target="_blank" rel="noopener">Uber의 아티팩트 저장소 현대화 Uber의 10년 된 온프레미스 아티팩트 저장소는 월 5+ 페타바이트 규모의 다운로드를 처리했지만 쓰기 장애, 침묵한 복제 실패, 수 시간의 수동 재조정 위험이 있었습니다. 팀은 MySQL 메타데이터 저장소를 기반으로 조건부 HTTP 요청을 통해 신선도를 검증하는 프록시 뒤의 다중 지역 클라우드 Blob 저장소로 마이그레이션했습니다. Egress가 99% 이상 감소했고, 99.99% 가용성에서 아티팩트 Egress 비용을 약 90% 절감했습니다. 더 읽기 →</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="papers">
   <div class="section-header">
@@ -275,40 +285,65 @@ Uber의 10년 된 온프레미스 아티팩트 저장소는 월 5+ 페타바이�
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.13104" target="_blank" rel="noopener">현대 에이전트 시스템의 자체 개선: 개요</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">자율 에이전트의 자가 개선 기술이 연구 프로토타입에서 실제 배포 시스템으로 진화하고 있다. 이 논문은 경험을 누적된 능력 향상으로 변환하는 적응형 시스템으로서 현대 에이전트를 분석하며, 파운데이션 모델과 프롬프트·메모리·도구·제어 로직으로 구성된 운영 체계를 갖춘 시스템 레벨 프레임워크를 제시한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.13104" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">현대 에이전트 시스템의 자체 개선: 개요</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">자율 에이전트의 자가 개선 기술이 연구 프로토타입에서 실제 배포 시스템으로 진화하고 있다. 이 논문은 경험을 누적된 능력 향상으로 변환하는 적응형 시스템으로서 현대 에이전트를 분석하며, 파운데이션 모델과 프롬프트·메모리·도구·제어 로직으로 구성된 운영 체계를 갖춘 시스템 레벨 프레임워크를 제시한다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.13104" target="_blank" rel="noopener">현대 에이전트 시스템의 자체 개선: 개요</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.13705" target="_blank" rel="noopener">AgentCompass: 에이전트 능력 평가를 위한 통합 인프라</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">LLM 기반 에이전트 평가를 위한 오픈소스 인프라인 AgentCompass를 소개한다. 현재 평가 파이프라인은 단편적이고 강하게 결합되어 있어 재현성 문제와 중복 엔지니어링을 야기한다. AgentCompass는 Benchmark, Harness, Environment 세 독립적 컴포넌트로 구성되어 이러한 문제를 해결한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.13705" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">AgentCompass: 에이전트 능력 평가를 위한 통합 인프라</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">LLM 기반 에이전트 평가를 위한 오픈소스 인프라인 AgentCompass를 소개한다. 현재 평가 파이프라인은 단편적이고 강하게 결합되어 있어 재현성 문제와 중복 엔지니어링을 야기한다. AgentCompass는 Benchmark, Harness, Environment 세 독립적 컴포넌트로 구성되어 이러한 문제를 해결한다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.13705" target="_blank" rel="noopener">AgentCompass: 에이전트 능력 평가를 위한 통합 인프라</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.13884" target="_blank" rel="noopener">경험 메모리 그래프: 에이전트를 위한 원-샷 오류 수정</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">내용이 불완전합니다 (abstract가 끝나지 않음). 요약을 위해 전체 abstract 내용이 필요합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.13884" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">경험 메모리 그래프: 에이전트를 위한 원-샷 오류 수정</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">내용이 불완전합니다 (abstract가 끝나지 않음). 요약을 위해 전체 abstract 내용이 필요합니다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.13884" target="_blank" rel="noopener">경험 메모리 그래프: 에이전트를 위한 원-샷 오류 수정</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2607.13091" target="_blank" rel="noopener">축적된 행동 규칙을 통한 자체 개선 AI 코딩 에이전트: 폐루프 프레임워크</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">LLM 기반 코딩 에이전트가 인간의 리뷰 피드백으로부터 오류를 저장하는 메커니즘이 부족해 같은 실수를 반복하는 문제를 제시합니다. 이를 해결하기 위해 폐쇄형 루프 프레임워크를 제안하며, 수용된 리뷰 코멘트를 지속적인 행동 규칙으로 변환하여 에이전트가 감지 가능한 오류 클래스를 점진적으로 확대합니다. 프레임워크는 버전 관리되는 지시 파일에 규칙을 누적하고, 코드 제출 전 자체 검토 체크리스트와 자동화된 검증 메커니즘을 결합합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2607.13091" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">축적된 행동 규칙을 통한 자체 개선 AI 코딩 에이전트: 폐루프 프레임워크</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">LLM 기반 코딩 에이전트가 인간의 리뷰 피드백으로부터 오류를 저장하는 메커니즘이 부족해 같은 실수를 반복하는 문제를 제시합니다. 이를 해결하기 위해 폐쇄형 루프 프레임워크를 제안하며, 수용된 리뷰 코멘트를 지속적인 행동 규칙으로 변환하여 에이전트가 감지 가능한 오류 클래스를 점진적으로 확대합니다. 프레임워크는 버전 관리되는 지시 파일에 규칙을 누적하고, 코드 제출 전 자체 검토 체크리스트와 자동화된 검증 메커니즘을 결합합니다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2607.13091" target="_blank" rel="noopener">축적된 행동 규칙을 통한 자체 개선 AI 코딩 에이전트: 폐루프 프레임워크</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://arxiv.org/abs/2606.06223" target="_blank" rel="noopener">리워드 해킹 활성화에서 에이전트 위험 상태로: LLM 에이전트의 문맥 보정 메커니즘 모니터링</a></div>
-    <div class="item-meta">arXiv</div>
-    <div class="item-summary">언어 모델 에이전트의 안전성을 모니터링하기 위해 reward-hacking 행동을 연구한 논문입니다. 관찰-추론-행동 선택의 반복 사이클 속에서 활성화 기반 점수와 토큰 엔트로피를 이용해 reward-hack을 탐지합니다. School-of-Reward-Hacks 데이터셋으로 미세 조정된 어댑터가 에이전트의 행동 선택으로 reward-hack 경향을 전이할 수 있음을 발견했습니다.<br><br>(참고: 제공된 초록이 "espec" 이후로 중단되어 전체 내용을 파악할 수 없습니다.)</div>
-  </div>
-  <div class="item-arrow"><a href="https://arxiv.org/abs/2606.06223" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">리워드 해킹 활성화에서 에이전트 위험 상태로: LLM 에이전트의 문맥 보정 메커니즘 모니터링</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">언어 모델 에이전트의 안전성을 모니터링하기 위해 reward-hacking 행동을 연구한 논문입니다. 관찰-추론-행동 선택의 반복 사이클 속에서 활성화 기반 점수와 토큰 엔트로피를 이용해 reward-hack을 탐지합니다. School-of-Reward-Hacks 데이터셋으로 미세 조정된 어댑터가 에이전트의 행동 선택으로 reward-hack 경향을 전이할 수 있음을 발견했습니다.(참고: 제공된 초록이 "espec" 이후로 중단되어 전체 내용을 파악할 수 없습니다.)</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2606.06223" target="_blank" rel="noopener">리워드 해킹 활성화에서 에이전트 위험 상태로: LLM 에이전트의 문맥 보정 메커니즘 모니터링</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="hn-reddit">
   <div class="section-header">
@@ -317,75 +352,55 @@ Uber의 10년 된 온프레미스 아티팩트 저장소는 월 5+ 페타바이�
     <span class="section-count">10개</span>
   </div>
   <div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://thinkingmachines.ai/news/introducing-inkling/" target="_blank" rel="noopener">Inkling: 우리의 오픈 가중치 모델</a></div>
     <div class="item-meta">HN · 1115 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://thinkingmachines.ai/news/introducing-inkling/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.pigeonsandplanes.com/read/music-piracy-what-cd-oink-nine-inch-nails-streaming" target="_blank" rel="noopener">음악 불법 다운로드의 잃어버린 즐거움</a></div>
     <div class="item-meta">HN · 565 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.pigeonsandplanes.com/read/music-piracy-what-cd-oink-nine-inch-nails-streaming" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/xai-org/grok-build" target="_blank" rel="noopener">Grok Build 오픈소스 공개</a></div>
     <div class="item-meta">HN · 531 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/xai-org/grok-build" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://mort.coffee/home/sqlite-editions/" target="_blank" rel="noopener">SQLite should have (Rust-style) editions</a></div>
     <div class="item-meta">HN · 324 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://mort.coffee/home/sqlite-editions/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://community.oneplus.com/thread/2170715118587871237" target="_blank" rel="noopener">OnePlus halts operations in USA and Europe</a></div>
     <div class="item-meta">HN · 301 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://community.oneplus.com/thread/2170715118587871237" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.siegelendowment.org/wp-content/uploads/2026/07/fortune-david-siegel-open-source-ai.pdf" target="_blank" rel="noopener">정부, 기업, 비영리 기관이 무료 오픈소스 AI에 투자해야 한다 [pdf]</a></div>
     <div class="item-meta">HN · 249 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.siegelendowment.org/wp-content/uploads/2026/07/fortune-david-siegel-open-source-ai.pdf" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://joinedanthropic.com" target="_blank" rel="noopener">YC 창업자들은 지금 어디에? 대부분 OpenAI와 Anthropic</a></div>
     <div class="item-meta">HN · 214 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://joinedanthropic.com" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://madcampos.dev/blog/2026/07/accessibility-from-scratch/" target="_blank" rel="noopener">버튼을 처음부터 만들려면 먼저 우주를 창조해야 한다</a></div>
     <div class="item-meta">HN · 197 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://madcampos.dev/blog/2026/07/accessibility-from-scratch/" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://www.openculture.com/2026/07/explore-1300-beautiful-wildlife-illustrations-from-the-19th-century.html" target="_blank" rel="noopener">19세기의 아름다운 야생동물 삽화 1,300점이 이제 복원되었다</a></div>
     <div class="item-meta">HN · 173 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://www.openculture.com/2026/07/explore-1300-beautiful-wildlife-illustrations-from-the-19th-century.html" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://atproto.com/blog/at-protocol-trademark" target="_blank" rel="noopener">Bluesky, ATProto 상표화</a></div>
     <div class="item-meta">HN · 159 pts</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://atproto.com/blog/at-protocol-trademark" target="_blank" rel="noopener">&rarr;</a></div>
 </div>
 </div><div class="section" id="github">
   <div class="section-header">
@@ -394,40 +409,58 @@ Uber의 10년 된 온프레미스 아티팩트 저장소는 월 5+ 페타바이�
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/1c7/chinese-independent-developer" target="_blank" rel="noopener">1c7/chinese-independent-developer</a></div>
-    <div class="item-meta">56,724</div>
-    <div class="item-summary">중국 독립 개발자들의 사이드 프로젝트를 모으는 GitHub 저장소입니다. RSS 리더, 투자 기록 도구, 음성 신시사이저, 저코드 에디터, 역사 타임라인 등 웹사이트나 앱 형태의 프로젝트들을 수집하고 있으며, 프로젝트의 상태는 개발 중, 이미 출시, 종료 등 3가지로 분류됩니다. 개발자 도구나 포럼형 사이트는 제외하고, 좋은 제목 작성을 권장합니다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/1c7/chinese-independent-developer" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">1c7/chinese-independent-developer</span>
+      <span class="item-meta">56,724</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">중국 독립 개발자들의 사이드 프로젝트를 모으는 GitHub 저장소입니다. RSS 리더, 투자 기록 도구, 음성 신시사이저, 저코드 에디터, 역사 타임라인 등 웹사이트나 앱 형태의 프로젝트들을 수집하고 있으며, 프로젝트의 상태는 개발 중, 이미 출시, 종료 등 3가지로 분류됩니다. 개발자 도구나 포럼형 사이트는 제외하고, 좋은 제목 작성을 권장합니다.</div>
+      <div class="item-link"><a href="https://github.com/1c7/chinese-independent-developer" target="_blank" rel="noopener">1c7/chinese-independent-developer</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/apache/ossie" target="_blank" rel="noopener">apache/ossie</a></div>
-    <div class="item-meta">783</div>
-    <div class="item-summary">Apache Ossie는 데이터 분석, AI, BI 생태계에서 의미론적 모델 교환을 표준화하는 오픈소스 프로젝트다. JSON과 YAML 기반의 공급업체 중립적 사양을 제공하여 같은 KPI가 도구마다 다르게 정의되는 문제를 해결한다. 이를 통해 데이터 정의의 일관성을 보장하고, 팀들의 수동 조정 노력을 제거하며, AI 에이전트의 신뢰성을 높인다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/apache/ossie" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">apache/ossie</span>
+      <span class="item-meta">783</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Apache Ossie는 데이터 분석, AI, BI 생태계에서 의미론적 모델 교환을 표준화하는 오픈소스 프로젝트다. JSON과 YAML 기반의 공급업체 중립적 사양을 제공하여 같은 KPI가 도구마다 다르게 정의되는 문제를 해결한다. 이를 통해 데이터 정의의 일관성을 보장하고, 팀들의 수동 조정 노력을 제거하며, AI 에이전트의 신뢰성을 높인다.</div>
+      <div class="item-link"><a href="https://github.com/apache/ossie" target="_blank" rel="noopener">apache/ossie</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/Nutlope/hallmark" target="_blank" rel="noopener">Nutlope/hallmark</a></div>
     <div class="item-meta">10,337</div>
-    <div class="item-summary"></div>
   </div>
-  <div class="item-arrow"><a href="https://github.com/Nutlope/hallmark" target="_blank" rel="noopener">&rarr;</a></div>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/OpenCut-app/OpenCut" target="_blank" rel="noopener">OpenCut-app/OpenCut</a></div>
-    <div class="item-meta">73,639</div>
-    <div class="item-summary">OpenCut는 웹, 데스크톱, 모바일용 무료 오픈소스 비디오 에디터로, 현재 처음부터 다시 작성되고 있다. 향후 Editor API, 플러그인 지원, Rust 코어 기반 멀티플랫폼 지원, MCP 서버, 헤드리스 모드, 스크립팅 탭 등이 추가될 예정이다. 현재 opencut.app에서는 클래식 버전이 운영 중이며, 새 버전은 new.opencut.app에서 개발 중이다. 개발 환경은 proto와 moon을 사용하여 구성된다. 아직 외부 기여는 수용하지 않고 있다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/OpenCut-app/OpenCut" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">OpenCut-app/OpenCut</span>
+      <span class="item-meta">73,639</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">OpenCut는 웹, 데스크톱, 모바일용 무료 오픈소스 비디오 에디터로, 현재 처음부터 다시 작성되고 있다. 향후 Editor API, 플러그인 지원, Rust 코어 기반 멀티플랫폼 지원, MCP 서버, 헤드리스 모드, 스크립팅 탭 등이 추가될 예정이다. 현재 opencut.app에서는 클래식 버전이 운영 중이며, 새 버전은 new.opencut.app에서 개발 중이다. 개발 환경은 proto와 moon을 사용하여 구성된다. 아직 외부 기여는 수용하지 않고 있다.</div>
+      <div class="item-link"><a href="https://github.com/OpenCut-app/OpenCut" target="_blank" rel="noopener">OpenCut-app/OpenCut</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-left">
-    <div class="item-name"><a href="https://github.com/PostHog/posthog" target="_blank" rel="noopener">PostHog/posthog</a></div>
-    <div class="item-meta">35,671</div>
-    <div class="item-summary">PostHog는 제품 구축에 필요한 모든 도구를 제공하는 오픈소스 올인원 플랫폼이다. Product Analytics를 통해 이벤트 기반 분석으로 사용자 행동을 이해하고 시각화나 SQL로 데이터를 분석할 수 있다. Web Analytics로 웹 트래픽과 사용자 활동을 모니터링한다.</div>
-  </div>
-  <div class="item-arrow"><a href="https://github.com/PostHog/posthog" target="_blank" rel="noopener">&rarr;</a></div>
+  <details>
+    <summary>
+      <span class="item-name">PostHog/posthog</span>
+      <span class="item-meta">35,671</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">PostHog는 제품 구축에 필요한 모든 도구를 제공하는 오픈소스 올인원 플랫폼이다. Product Analytics를 통해 이벤트 기반 분석으로 사용자 행동을 이해하고 시각화나 SQL로 데이터를 분석할 수 있다. Web Analytics로 웹 트래픽과 사용자 활동을 모니터링한다.</div>
+      <div class="item-link"><a href="https://github.com/PostHog/posthog" target="_blank" rel="noopener">PostHog/posthog</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div>
 </body>

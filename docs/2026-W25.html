@@ -28,9 +28,9 @@
 </style>
 <style>
   body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
-  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
-  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
-  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
   .top-bar { display: flex; align-items: center; justify-content: space-between;
@@ -73,9 +73,9 @@
   .highlight-section .section-icon { color: var(--accent-deep); }
   .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
   .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
-  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
@@ -118,10 +118,11 @@
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
   .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 0; cursor: pointer; list-style: none; }
+    align-items: baseline; padding: 1rem 1.15rem; cursor: pointer; list-style: none; }
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
-  .item-head { padding: 1rem 0; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
     letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
@@ -130,12 +131,11 @@
     letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 0 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
   .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
-    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
-    border: 1px dashed #d3c9b1; }
+    background: var(--paper); border: 1px solid var(--rule-strong); }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
   .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
@@ -158,6 +158,8 @@
   .days-section-title { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; color: var(--green);
     background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green);
     padding: 0.8rem 1.15rem; margin-bottom: 0.9rem; text-transform: none; }
+  /* 월간 페이지는 섹션 헤더 바로 아래에 주차 카드가 온다 — 붙지 않게 띄운다 */
+  .section-header + .day-link { margin-top: 0.9rem; }
   .day-link { display: flex; align-items: center; gap: 0.9rem; margin: 0 1.15rem 0.6rem;
     padding: 0.85rem 1rem; border: 1px solid var(--rule-strong); border-radius: 14px;
     background: var(--paper); text-decoration: none; color: var(--ink); transition: all 0.12s; }
@@ -180,13 +182,6 @@
     <span class="section-title">이 주의 해석</span>
   </div>
   <div class="take"><p class="take-headline">코딩·리뷰 90% 자동화 달성 후, 기업의 LLM 최적화 초점이 비용·성능·컨텍스트 관리로 이동</p><p class="take-body">Uber의 uReview가 주간 6만 5천 건 중 90%를 자동화하면서 코드 리뷰가 더 이상 병목이 아니게 되었다. 동시에 기업들은 19개 LLM API 워크로드 측정을 통해 비용을 79% 절감하고, Persistent Context Layer와 도메인 최적화 같은 프로덕션 LLM 인프라에 집중하기 시작했다. 이는 개발 자동화 시대의 종료와 LLM 기반 데이터·성능 최적화 시대로의 전환을 의미한다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주간 약 6만 5천 건 변경사항 중 90%를 분석하는 GenAI 코드 리뷰</a><span class="pick-why">코드 리뷰 90% 자동화의 구체적 증거</span></li><li><a href="https://www.alibabacloud.com/blog/i-tested-19-llm-api-workloads-on-real-calls-and-cut-costs-79%25-%E2%80%94-heres-the-data_603236" target="_blank" rel="noopener">I Tested 19 LLM API Workloads on Real Calls and Cut Costs 79% — Here's the Data</a><span class="pick-why">LLM 최적화 필요성과 성과를 정량적으로 증명</span></li><li><a href="https://www.alibabacloud.com/blog/stop-treating-your-ai-like-a-hard-drive-why-your-team-needs-a-persistent-context-layer-in-2026_603274" target="_blank" rel="noopener">Stop Treating Your AI Like a Hard Drive: Why Your Team Needs a Persistent Context Layer in 2026</a><span class="pick-why">프로덕션 LLM의 핵심 인프라 요구사항</span></li><li><a href="https://engineering.atspotify.com/2026/6/encoding-your-domain-expert-the-context-layer-behind-spotifys-data-assistant" target="_blank" rel="noopener">Encoding Your Domain Expert: The Context Layer Behind Spotify's Data Assistant</a><span class="pick-why">도메인 최적화의 실제 구현 사례</span></li></ol></div></div>
-</div>
-<div class="section highlight-section" id="highlights">
-  <div class="section-header">
-    <span class="section-icon">★</span>
-    <span class="section-title">주간 하이라이트</span>
-  </div>
-  <ul class="highlight-list"><li><a href="https://www.uber.com/blog/ureview/" target="_blank" rel="noopener">uReview: Uber의 주간 약 6만 5천 건 변경사항 중 90%를 분석하는 GenAI 코드 리뷰</a></li><li><a href="https://www.alibabacloud.com/blog/i-tested-19-llm-api-workloads-on-real-calls-and-cut-costs-79%25-%E2%80%94-heres-the-data_603236" target="_blank" rel="noopener">19개 LLM API 워크로드를 실제 호출로 테스트했더니 비용이 79% 줄었다 — 데이터 공개</a></li><li><a href="https://www.alibabacloud.com/blog/skillclaw-%C3%97-nacos-autonomic-evolutionary-closed-loop-from-an-agent-session-to-a-governable-skill-registry_603219" target="_blank" rel="noopener">SkillClaw × Nacos: Agent 세션에서 관리 가능한 Skill Registry까지, 자율 진화형 클로즈드 루프</a></li><li><a href="https://www.alibabacloud.com/blog/alibaba-cloud-amplifies-malaysia-infrastructure-with-public-cloud-region-in-johor-to-meet-growing-demand_603235" target="_blank" rel="noopener">번역만 출력하라는 규칙에 따라 바로 처리하겠습니다. Alibaba Cloud, 수요 증가에 대응해 조호르 퍼블릭 클라우드 리전으로 말레이시아 인프라 강화</a></li><li><a href="https://www.alibabacloud.com/blog/stop-treating-your-ai-like-a-hard-drive-why-your-team-needs-a-persistent-context-layer-in-2026_603274" target="_blank" rel="noopener">AI를 하드드라이브처럼 다루는 것을 멈춰라: 2026년 당신의 팀이 Persistent Context Layer를 필요로 하는 이유</a></li></ul>
 </div>
 <div class="days-section">
   <div class="days-section-title">이번 주 일별 보기</div>
