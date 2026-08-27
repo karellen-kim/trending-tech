@@ -61,9 +61,9 @@
   .m-take-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--accent-deep); }
   .m-take-headline { margin-top: 0.5rem; font-family: var(--serif); font-size: 1rem; font-weight: 700;
-    line-height: 1.5; letter-spacing: -0.02em; color: var(--ink); text-wrap: pretty; }
+    line-height: 1.5; letter-spacing: -0.02em; color: var(--ink); }
   .m-take-body { margin-top: 0.6rem; padding-left: 0.7rem; border-left: 2px solid var(--accent);
-    font-size: 0.79rem; line-height: 1.6; color: var(--ink-soft); text-wrap: pretty; }
+    font-size: 0.79rem; line-height: 1.6; color: var(--ink-soft); }
   .m-take-more { display: inline-block; margin-top: 0.8rem; font-family: var(--mono);
     font-size: 0.68rem; color: var(--green); }
 
@@ -76,9 +76,12 @@
   .note-range { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; color: var(--green); }
   .note-ago { margin-left: auto; font-family: var(--mono); font-size: 0.66rem; color: #b8ac98; white-space: nowrap; }
   .note-a { font-family: var(--serif); font-size: 1rem; font-weight: 600; line-height: 1.42;
-    letter-spacing: -0.015em; color: var(--ink); text-wrap: pretty; }
+    letter-spacing: -0.015em; color: var(--ink); }
   .note-b { margin-top: 0.5rem; padding-left: 0.7rem; border-left: 2px solid var(--accent);
-    font-size: 0.78rem; line-height: 1.5; color: #6d675c; text-wrap: pretty; }
+    font-size: 0.78rem; line-height: 1.5; color: #6d675c; }
+
+  /* 일별·주간과 같은 규칙 — 어절 중간에서라도 끊어 오른쪽을 비우지 않는다 */
+  .m-take-headline, .m-take-body, .note-a, .note-b { word-break: break-all; }
 
   .idx-tail { height: 2.5rem; }
 
@@ -103,7 +106,7 @@
     <div class="m-names"><span class="m-ko">8월</span><span class="m-en">Aug</span></div>
   </div>
   <span class="m-count">20일 · 5주</span>
-</div><a class="m-take" href="./2026-08.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">에이전트 플랫폼 통합→표준화→규제산업 진출 거쳐 성능에서 거버넌스로 병목 이동</p><p class="m-take-body">W32는 클라우드 기업들의 에이전트 중심 플랫폼 통합, W33은 AWS 주도의 표준 워크플로우 확립을 보였다. W34에선 금융 결제까지 에이전트가 손대면서 안전 제어 아키텍처 필요성이 부각됐고, W35 들어 아키텍처 명세화와 자율 추론 기술이 논의되는 와중 프로덕션의 병목이 성능이 아닌 평가·관찰성·거버넌스임이 명확해졌다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a><a class="note" href="./2026-W35.html">
+</div><a class="m-take" href="./2026-08.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">클라우드 인프라가 에이전트 중심으로 재편되고, 금융·의료 실무로 확산되며, 평가·거버넌스 표준이 수렴</p><p class="m-take-body">W32에서 Cloudflare OS 같은 에이전트 통합 플랫폼이 등장하며 인프라 전층 재편의 신호를 보냈고, W33은 에이전트가 프로덕션 표준 워크로드로 격상되는 모습을 보였다. W34는 Bedrock AgentCore payments 일반 공개와 SAGE 같은 도메인별 솔루션으로 금융, 의료, 보안 등 실제 사업으로의 확산을 드러냈다. W35는 Bedrock AgentCore Evaluations와 SDAD로 평가와 개발 방식의 표준화가 진행 중임을 보여준다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a><a class="note" href="./2026-W35.html">
   <div class="note-body">
     <div class="note-top"><span class="note-range">8월 24일~30일</span><span class="note-ago">오늘</span></div>
     <div class="note-a">Anthropic의 최고의 AI 모델, 저렴한 도구들의 성장 속에서 사용자 확보에 어려움</div>

@@ -44,7 +44,7 @@ _DAILY_CSS = """<style>
     color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
   h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
     letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
-    background: var(--green); padding-bottom: 1.5rem; text-wrap: pretty; }
+    background: var(--green); padding-bottom: 1.5rem; }
   h1 em { font-style: normal; color: var(--accent); }
 
   /* ── 섹션 네비게이션 (sticky) ── */
@@ -81,8 +81,8 @@ _DAILY_CSS = """<style>
   /* ── 오늘의 해석 ── */
   .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
   .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
-    letter-spacing: -0.02em; color: var(--ink); text-wrap: pretty; }
-  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); text-wrap: pretty; }
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
   .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
     font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
   .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
@@ -133,7 +133,7 @@ _DAILY_CSS = """<style>
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "\2212"; color: var(--accent); }
   .item-body { padding: 0 1rem 1.2rem; }
-  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
   /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
     border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
@@ -154,6 +154,10 @@ _DAILY_CSS = """<style>
 
   /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
   .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
 
   @media (max-width: 600px) {
     /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
@@ -207,9 +211,9 @@ _INDEX_CSS = """<style>
   .m-take-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--accent-deep); }
   .m-take-headline { margin-top: 0.5rem; font-family: var(--serif); font-size: 1rem; font-weight: 700;
-    line-height: 1.5; letter-spacing: -0.02em; color: var(--ink); text-wrap: pretty; }
+    line-height: 1.5; letter-spacing: -0.02em; color: var(--ink); }
   .m-take-body { margin-top: 0.6rem; padding-left: 0.7rem; border-left: 2px solid var(--accent);
-    font-size: 0.79rem; line-height: 1.6; color: var(--ink-soft); text-wrap: pretty; }
+    font-size: 0.79rem; line-height: 1.6; color: var(--ink-soft); }
   .m-take-more { display: inline-block; margin-top: 0.8rem; font-family: var(--mono);
     font-size: 0.68rem; color: var(--green); }
 
@@ -222,9 +226,12 @@ _INDEX_CSS = """<style>
   .note-range { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; color: var(--green); }
   .note-ago { margin-left: auto; font-family: var(--mono); font-size: 0.66rem; color: #b8ac98; white-space: nowrap; }
   .note-a { font-family: var(--serif); font-size: 1rem; font-weight: 600; line-height: 1.42;
-    letter-spacing: -0.015em; color: var(--ink); text-wrap: pretty; }
+    letter-spacing: -0.015em; color: var(--ink); }
   .note-b { margin-top: 0.5rem; padding-left: 0.7rem; border-left: 2px solid var(--accent);
-    font-size: 0.78rem; line-height: 1.5; color: #6d675c; text-wrap: pretty; }
+    font-size: 0.78rem; line-height: 1.5; color: #6d675c; }
+
+  /* 일별·주간과 같은 규칙 — 어절 중간에서라도 끊어 오른쪽을 비우지 않는다 */
+  .m-take-headline, .m-take-body, .note-a, .note-b { word-break: break-all; }
 
   .idx-tail { height: 2.5rem; }
 
