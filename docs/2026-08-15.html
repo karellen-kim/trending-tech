@@ -113,6 +113,11 @@
   @media (max-width: 600px) {
     body { padding: 0 1rem 3rem; }
     .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+    /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+    .item-name, .take-refs, .take-headline, .picks { overflow-wrap: anywhere; }
+    .take { padding: 1.1rem 1.2rem; }
+    .day-link { flex-wrap: wrap; gap: 0.4rem; }
+    .day-label { min-width: 0; }
   }
 </style>
 </head>

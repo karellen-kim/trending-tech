@@ -122,6 +122,11 @@ _DAILY_CSS = """<style>
   @media (max-width: 600px) {
     body { padding: 0 1rem 3rem; }
     .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
+    /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+    .item-name, .take-refs, .take-headline, .picks { overflow-wrap: anywhere; }
+    .take { padding: 1.1rem 1.2rem; }
+    .day-link { flex-wrap: wrap; gap: 0.4rem; }
+    .day-label { min-width: 0; }
   }
 </style>"""
 
@@ -207,6 +212,30 @@ _INDEX_CSS = """<style>
     .note { grid-template-columns: 3rem 1fr; }
     .note .meta { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
     .note .arrow { display: none; }
+  }
+
+  /* ── 좁은 화면 ──
+     사이드바가 200px 을 고정으로 가져가 본문이 그만큼 좁아진다.
+     세로 목록을 상단 가로 바로 눕히고, 강조는 왼쪽 선 대신 아래 선으로 옮긴다. */
+  @media (max-width: 720px) {
+    body { display: block; }
+    .sidebar { width: auto; height: auto; overflow: visible; z-index: 10;
+      border-right: none; border-bottom: 1px solid var(--rule);
+      background: var(--paper); padding: 0.9rem 0 0; }
+    .sidebar-header { padding: 0 1.1rem 0.7rem; margin-bottom: 0.4rem; }
+    .s-label { margin-bottom: 0.2rem; }
+    .year-btn { display: inline-block; width: auto; padding: 0.45rem 1.1rem;
+      border-left: none; border-bottom: 2px solid transparent; }
+    .year-btn.active { border-left-color: transparent; border-bottom-color: var(--accent); }
+    .year-btn::after { float: none; margin-left: 0.35rem; }
+    .month-list { padding: 0.25rem 1.1rem 0.75rem; }
+    .month-list.open { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .month-btn { width: auto; padding: 0.35rem 0.85rem;
+      border: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+    .month-btn.active { border-color: var(--accent); background: var(--accent-wash); }
+    .m-take { padding: 1.1rem 1.2rem; }
+    .m-take-headline { font-size: 0.96rem; }
+    .meta-row { flex-direction: column; gap: 0.3rem; align-items: flex-start; }
   }
 </style>"""
 
