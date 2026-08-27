@@ -164,9 +164,10 @@
     .item-head { grid-template-columns: 1fr; }
     .item-head .item-meta { margin-top: 0.45rem; }
     .item details > summary { grid-template-columns: 1fr auto; }
-    .item details > summary .item-name { grid-column: 1; grid-row: 1; }
+    /* 제목은 한 줄을 통째로 쓴다. 토글을 옆에 두면 그만큼 폭을 잃는다. */
+    .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
     .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
-    .item details > summary .item-toggle { grid-column: 2; grid-row: 1; }
+    .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
   }
 </style>
 </head>
