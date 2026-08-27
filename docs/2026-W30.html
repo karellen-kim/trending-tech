@@ -8,89 +8,110 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
-    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
-    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
-    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
-    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
-    --mono: "JetBrains Mono", ui-monospace, monospace;
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 </style>
 <style>
-  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
+  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
+  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
-  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
-  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
-  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
 
   /* ── 페이지 제목 ── */
-  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
-  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; text-wrap: pretty; }
   h1 em { font-style: normal; color: var(--accent); }
 
   /* ── 섹션 네비게이션 (sticky) ── */
-  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
-  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
-  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
-  .nav-link:last-child { border-right: none; }
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
 
   /* ── 섹션 ── */
-  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
 
   /* ── 섹션 헤더 ── */
-  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
-  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
-  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
-  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
 
   /* ── 하이라이트 섹션 ── */
-  .highlight-section .section-header { border-bottom-color: var(--accent); }
-  .highlight-section .section-icon { background: var(--accent); }
-  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
-  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
   /* ── 오늘의 해석 ── */
-  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
-  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
-    color: var(--ink); }
-  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
-  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
-    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); text-wrap: pretty; }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); text-wrap: pretty; }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
   .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
     text-transform: uppercase; margin-right: 0.6rem; }
-  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
   .take-refs a:hover { text-decoration: underline; }
 
   /* ── 기간 해석의 핵심 문서 ── */
-  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50); }
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
   .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--ink-faint); }
   .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
   .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
-  .picks li a { color: var(--accent-deep); text-decoration: none; font-weight: 500; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
   .picks li a:hover { text-decoration: underline; }
-  .pick-why { display: block; font-size: 0.78rem; color: var(--ink-faint); margin-top: 0.15rem; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
 
   /* ── 꼭 봐야 할 글 ── */
-  .item-star { color: var(--accent); margin-right: 0.35rem; font-size: 0.85rem; }
-  .item.important .item-name { color: var(--accent-deep); }
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
 
   /* ── 오디오 리뷰 ── */
   .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
-    margin-top: 0.9rem; padding: 0.8rem 1rem; border: 1px solid var(--rule); background: var(--paper-deep); }
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
   .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
-  .audio-block a { font-size: 0.82rem; color: var(--accent-deep); text-decoration: none; font-weight: 500; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
   .audio-block a:hover { text-decoration: underline; }
 
   /* ── 아이템 (아코디언) ── */
@@ -101,45 +122,49 @@
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
   .item-head { padding: 1rem 0; }
-  .item-name { font-weight: 600; font-size: 0.97rem; line-height: 1.4; color: var(--ink); min-width: 0; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
-  .item-name a:hover { color: var(--accent-deep); }
-  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint);
-    letter-spacing: 0.04em; white-space: nowrap; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
   .item-body { padding: 0 0 1.2rem; }
-  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
-  .item-diagram .diagram { margin: 0; padding: 1rem 1rem 0.7rem; background: var(--paper-deep);
-    border: 1px solid var(--rule); color: var(--ink); }
+  .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
+    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
+    border: 1px dashed #d3c9b1; }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
-  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule);
-    font-size: 0.72rem; color: var(--ink-faint); text-align: center; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
+    font-family: var(--serif); font-style: italic; font-size: 0.74rem; color: #7d7364; text-align: center; }
   .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
-  .item-link a { color: var(--accent-deep); text-decoration: none; }
+  .item-link a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
 
   @media (max-width: 600px) {
-    body { padding: 0 1rem 3rem; }
-    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
-    /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
-    .item-name, .take-refs, .take-headline, .picks { overflow-wrap: anywhere; }
-    .take { padding: 1.1rem 1.2rem; }
-    .day-link { flex-wrap: wrap; gap: 0.4rem; }
-    .day-label { min-width: 0; }
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { font-size: 0.68rem; padding: 0.32rem 0.66rem; }
+    h1 { font-size: 1.85rem; }
   }
 </style>
 <style>
-  .days-section { margin-top: 3rem; }
-  .days-section-title { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; padding-bottom: 0.6rem; border-bottom: 2px solid var(--ink); margin-bottom: 0; }
-  .day-link { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); transition: background 0.1s; }
-  .day-link:last-child { border-bottom: none; }
-  .day-link:hover { color: var(--accent-deep); }
-  .day-label { font-weight: 600; font-size: 0.95rem; min-width: 4rem; }
-  .day-date { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); }
-  .day-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); margin-left: auto; }
-  .day-link:hover .day-arrow { color: var(--accent); }
+  .days-section { margin-top: 0; }
+  .days-section-title { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; color: var(--green);
+    background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green);
+    padding: 0.8rem 1.15rem; margin-bottom: 0.9rem; text-transform: none; }
+  .day-link { display: flex; align-items: center; gap: 0.9rem; margin: 0 1.15rem 0.6rem;
+    padding: 0.85rem 1rem; border: 1px solid var(--rule-strong); border-radius: 14px;
+    background: var(--paper); text-decoration: none; color: var(--ink); transition: all 0.12s; }
+  .day-link:hover { border-color: var(--green); background: var(--paper-deep); }
+  .day-label { font-family: var(--serif); font-weight: 600; font-size: 0.9rem; min-width: 3.4rem; color: var(--ink); }
+  .day-date { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-faint); }
+  .day-arrow { font-family: var(--mono); font-size: 0.8rem; color: var(--accent-deep); margin-left: auto; }
 </style>
 </head>
 <body>
@@ -148,7 +173,7 @@
   <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
 </div>
 <div class="page-meta">2026-W30</div>
-<h1><em>2026년 7월 20일 ~ 7월 26일</em></h1>
+<h1>2026년 7월 20일 ~ 7월 26일</h1>
 <div class="section highlight-section" id="take">
   <div class="section-header">
     <span class="section-icon">★</span>

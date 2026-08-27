@@ -5,91 +5,112 @@ _FAVICON = """<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3C
 
 _FONTS = """<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">"""
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">"""
 
 _BASE_CSS = """<style>
   :root {
-    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
-    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
-    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
-    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
-    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
-    --mono: "JetBrains Mono", ui-monospace, monospace;
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 </style>"""
 
 _DAILY_CSS = """<style>
-  body { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다 */
+  .page-meta, h1, .take, .highlight-list li, .item-head, .item-body,
+  .item details > summary, .days-section-title, .day-link { padding-left: 1.15rem; padding-right: 1.15rem; }
 
   /* ── 상단 바 ── */
-  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
-  .back-btn { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--rule); padding: 0.28rem 0.7rem; }
-  .back-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
 
   /* ── 페이지 제목 ── */
-  .page-meta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
-  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; text-wrap: pretty; }
   h1 em { font-style: normal; color: var(--accent); }
 
   /* ── 섹션 네비게이션 (sticky) ── */
-  .page-nav { position: sticky; top: 0; background: var(--paper); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); padding: 0; margin-bottom: 3rem; z-index: 20; display: flex; flex-wrap: wrap; }
-  .nav-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; padding: 0.55rem 1rem; border-right: 1px solid var(--rule); white-space: nowrap; transition: all 0.12s; }
-  .nav-link:hover { color: var(--accent-deep); background: var(--accent-wash); }
-  .nav-link:last-child { border-right: none; }
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
 
   /* ── 섹션 ── */
-  .section { margin-bottom: 4rem; scroll-margin-top: 48px; }
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
 
   /* ── 섹션 헤더 ── */
-  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--ink); }
-  .section-icon { font-family: var(--mono); font-size: 0.62rem; background: var(--ink); color: var(--paper); padding: 0.2rem 0.5rem; letter-spacing: 0.06em; flex-shrink: 0; }
-  .section-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
-  .section-count { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-faint); margin-left: auto; letter-spacing: 0.08em; }
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
 
   /* ── 하이라이트 섹션 ── */
-  .highlight-section .section-header { border-bottom-color: var(--accent); }
-  .highlight-section .section-icon { background: var(--accent); }
-  .highlight-list { list-style: none; padding: 0; background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); }
-  .highlight-list li { font-size: 0.93rem; color: var(--ink); padding: 0.7rem 1rem 0.7rem 2.2rem; position: relative; border-bottom: 1px solid oklch(0.92 0.04 50); line-height: 1.5; }
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); padding: 0.85rem 1rem 0.85rem 2.1rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.45; letter-spacing: -0.015em; }
   .highlight-list li:last-child { border-bottom: none; }
-  .highlight-list li::before { content: "→"; position: absolute; left: 0.8rem; color: var(--accent); font-family: var(--mono); font-size: 0.75rem; top: 0.8rem; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1rem; top: 1.15rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
   .highlight-list li a { color: inherit; text-decoration: none; }
   .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
 
   /* ── 오늘의 해석 ── */
-  .take { background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); padding: 1.4rem 1.5rem; }
-  .take-headline { font-size: 1.12rem; font-weight: 700; line-height: 1.5; letter-spacing: -0.02em;
-    color: var(--ink); }
-  .take-body { margin-top: 0.9rem; font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
-  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50);
-    font-size: 0.78rem; line-height: 1.9; color: var(--ink-faint); }
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); text-wrap: pretty; }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); text-wrap: pretty; }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
   .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
     text-transform: uppercase; margin-right: 0.6rem; }
-  .take-refs a { color: var(--accent-deep); text-decoration: none; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
   .take-refs a:hover { text-decoration: underline; }
 
   /* ── 기간 해석의 핵심 문서 ── */
-  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid oklch(0.92 0.04 50); }
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
   .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--ink-faint); }
   .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
   .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
-  .picks li a { color: var(--accent-deep); text-decoration: none; font-weight: 500; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
   .picks li a:hover { text-decoration: underline; }
-  .pick-why { display: block; font-size: 0.78rem; color: var(--ink-faint); margin-top: 0.15rem; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
 
   /* ── 꼭 봐야 할 글 ── */
-  .item-star { color: var(--accent); margin-right: 0.35rem; font-size: 0.85rem; }
-  .item.important .item-name { color: var(--accent-deep); }
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
 
   /* ── 오디오 리뷰 ── */
   .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
-    margin-top: 0.9rem; padding: 0.8rem 1rem; border: 1px solid var(--rule); background: var(--paper-deep); }
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
   .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
-  .audio-block a { font-size: 0.82rem; color: var(--accent-deep); text-decoration: none; font-weight: 500; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
   .audio-block a:hover { text-decoration: underline; }
 
   /* ── 아이템 (아코디언) ── */
@@ -100,142 +121,100 @@ _DAILY_CSS = """<style>
   .item details > summary::-webkit-details-marker { display: none; }
   .item details > summary:hover .item-name { color: var(--accent-deep); }
   .item-head { padding: 1rem 0; }
-  .item-name { font-weight: 600; font-size: 0.97rem; line-height: 1.4; color: var(--ink); min-width: 0; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0; text-wrap: pretty; }
   .item-name a { color: var(--ink); text-decoration: none; }
-  .item-name a:hover { color: var(--accent-deep); }
-  .item-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-faint);
-    letter-spacing: 0.04em; white-space: nowrap; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
   .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
   .item details[open] > summary .item-toggle::before { content: "\2212"; color: var(--accent); }
   .item-body { padding: 0 0 1.2rem; }
-  .item-summary { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.7; }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; text-wrap: pretty; }
   .item-diagram { margin: 0 0 1rem; overflow-x: auto; }
-  .item-diagram .diagram { margin: 0; padding: 1rem 1rem 0.7rem; background: var(--paper-deep);
-    border: 1px solid var(--rule); color: var(--ink); }
+  .item-diagram .diagram { margin: 0; padding: 1rem 0.9rem 0.7rem; border-radius: 10px; color: var(--ink);
+    background: repeating-linear-gradient(135deg, #f4efe1 0 6px, var(--paper) 6px 12px);
+    border: 1px dashed #d3c9b1; }
   /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
   .item-diagram svg { height: auto; display: block; margin: 0 auto; }
-  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule);
-    font-size: 0.72rem; color: var(--ink-faint); text-align: center; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
+    font-family: var(--serif); font-style: italic; font-size: 0.74rem; color: #7d7364; text-align: center; }
   .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
-  .item-link a { color: var(--accent-deep); text-decoration: none; }
+  .item-link a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
 
   @media (max-width: 600px) {
-    body { padding: 0 1rem 3rem; }
-    .nav-link { font-size: 0.6rem; padding: 0.45rem 0.65rem; }
-    /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
-    .item-name, .take-refs, .take-headline, .picks { overflow-wrap: anywhere; }
-    .take { padding: 1.1rem 1.2rem; }
-    .day-link { flex-wrap: wrap; gap: 0.4rem; }
-    .day-label { min-width: 0; }
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { font-size: 0.68rem; padding: 0.32rem 0.66rem; }
+    h1 { font-size: 1.85rem; }
   }
 </style>"""
 
 _INDEX_CSS = """<style>
-  /* ── 레이아웃 ── */
-  body { display: flex; min-height: 100vh; }
+  body { max-width: 720px; margin: 0 auto; background: var(--paper); }
 
-  /* ── 사이드바 (기존 유지) ── */
-  .sidebar { width: 200px; flex-shrink: 0; border-right: 1px solid var(--rule); position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 2rem 0; }
-  .sidebar-header { padding: 0 1.4rem 1.4rem; border-bottom: 1px solid var(--rule); margin-bottom: 1rem; }
-  .s-label { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; margin-bottom: 0.4rem; }
-  .s-title { font-size: 1rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
-  .year-btn { width: 100%; padding: 0.7rem 1.4rem; display: block; cursor: pointer; background: none; border: none; font-family: var(--sans); text-align: left; font-size: 0.9rem; font-weight: 500; color: var(--ink-soft); border-left: 2px solid transparent; transition: all 0.12s; }
-  .year-btn:hover { background: var(--paper-deep); }
-  .year-btn.active { background: var(--accent-wash); border-left-color: var(--accent); color: var(--accent-deep); font-weight: 600; }
-  .year-btn::after { content: "▾"; float: right; font-size: 0.7rem; color: var(--ink-faint); transition: transform 0.15s; }
-  .year-btn.open::after { transform: rotate(180deg); display: inline-block; }
-  .month-list { display: none; padding: 0.15rem 0 0.6rem; background: var(--paper-deep); }
-  .month-list.open { display: block; }
-  .month-btn { width: 100%; padding: 0.42rem 1.4rem 0.42rem 2.3rem; display: block; cursor: pointer; background: none; border: none; font-family: var(--sans); text-align: left; font-size: 0.8rem; font-weight: 500; color: var(--ink-soft); border-left: 2px solid transparent; transition: all 0.12s; }
-  .month-btn:hover { color: var(--ink); }
-  .month-btn.active { border-left-color: var(--accent); color: var(--accent-deep); font-weight: 600; }
+  /* ── 딥그린 표지 ── */
+  .idx-head { background: var(--green); color: var(--cream); padding: 2rem 1.6rem 1.6rem; }
+  .idx-kicker { display: flex; align-items: center; gap: 0.5rem; font-family: var(--mono);
+    font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-soft); }
+  .idx-kicker span { width: 18px; height: 1px; background: var(--green-soft); }
+  .idx-title { font-family: var(--serif); font-size: clamp(2.6rem,11vw,3.4rem); font-weight: 700;
+    line-height: 1; letter-spacing: -0.04em; margin-top: 0.85rem; color: var(--cream); }
+  .idx-title em { font-style: normal; font-weight: 400; color: var(--accent); }
+  .idx-foot { margin-top: 1.25rem; padding-top: 0.9rem; border-top: 1px solid rgba(242,239,228,0.22);
+    display: flex; justify-content: space-between; align-items: baseline; }
+  .idx-updated { font-family: var(--mono); font-size: 0.7rem; color: #a9c6bb; }
+  .idx-year { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: 0.02em; color: var(--accent); }
 
-  /* ── 메인 ── */
-  .main { flex: 1; overflow-y: auto; min-width: 0; }
-  .year-section { display: none; }
-  .m-section { display: none; }
+  /* ── 월 구분 띠 ── */
+  .m-band { display: flex; align-items: flex-end; justify-content: space-between;
+    padding: 1rem 1.6rem 0.9rem; background: var(--accent-wash);
+    border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .m-band-l { display: flex; align-items: flex-end; gap: 0.62rem; }
+  .m-num { font-family: var(--serif); font-size: 2.5rem; font-weight: 700; line-height: 0.8;
+    letter-spacing: -0.04em; color: var(--green); }
+  .m-names { display: flex; flex-direction: column; gap: 2px; }
+  .m-ko { font-family: var(--serif); font-size: 0.94rem; font-weight: 600; line-height: 1; color: var(--green); }
+  .m-en { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.14em; text-transform: uppercase; color: #7d8b7f; }
+  .m-count { font-family: var(--mono); font-size: 0.66rem; color: #7d8b7f; white-space: nowrap; }
 
-  /* ── 목록에서 보는 이 달의 해석 ── */
-  .m-take { display: block; margin: 0 clamp(1.5rem,4vw,3.5rem) 2rem; padding: 1.3rem 1.5rem;
-    background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); text-decoration: none; }
-  .m-take:hover { border-color: var(--accent); }
-  .m-take-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em;
+  /* ── 이 달의 해석 ── */
+  .m-take { display: block; padding: 1.15rem 1.6rem 1.25rem; border-bottom: 1px solid var(--rule);
+    text-decoration: none; background: var(--paper); }
+  .m-take:hover { background: var(--paper-deep); }
+  .m-take-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--accent-deep); }
-  .m-take-headline { margin-top: 0.5rem; font-size: 1.02rem; font-weight: 700; line-height: 1.5;
-    letter-spacing: -0.02em; color: var(--ink); }
-  .m-take-body { margin-top: 0.7rem; font-size: 0.85rem; line-height: 1.7; color: var(--ink-soft); }
-  .m-take-more { display: inline-block; margin-top: 0.9rem; font-family: var(--mono);
-    font-size: 0.68rem; color: var(--accent-deep); }
+  .m-take-headline { margin-top: 0.5rem; font-family: var(--serif); font-size: 1rem; font-weight: 700;
+    line-height: 1.5; letter-spacing: -0.02em; color: var(--ink); text-wrap: pretty; }
+  .m-take-body { margin-top: 0.6rem; padding-left: 0.7rem; border-left: 2px solid var(--accent);
+    font-size: 0.79rem; line-height: 1.6; color: var(--ink-soft); text-wrap: pretty; }
+  .m-take-more { display: inline-block; margin-top: 0.8rem; font-family: var(--mono);
+    font-size: 0.68rem; color: var(--green); }
 
-  /* ── 히어로 ── */
-  .main-hero { padding: clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3.5rem) clamp(2.5rem,5vw,4rem); max-width: 900px; position: relative; }
-  .main-hero::before { content: ""; position: absolute; top: 2rem; left: clamp(1.5rem,4vw,3.5rem); right: clamp(1.5rem,4vw,3.5rem); height: 1px; background: var(--ink); }
-  .meta-row { display: flex; justify-content: space-between; align-items: baseline; padding-top: 2.5rem; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
-  .meta-row span:last-child { color: var(--accent-deep); }
-  .main-title { font-size: clamp(2.4rem,6vw,4.8rem); line-height: 0.95; font-weight: 600; margin-top: clamp(1.5rem,4vw,2.5rem); letter-spacing: -0.035em; color: var(--ink); }
-  .main-title em { font-style: normal; font-weight: 300; color: var(--accent-deep); }
-  .hero-grid { margin-top: clamp(2rem,4vw,3.5rem); display: grid; grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap: 1px; background: var(--rule); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-  .hero-grid > div { background: var(--paper); padding: 1rem 1.25rem; }
-  .hero-grid .k { display: block; font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; margin-bottom: 0.3rem; }
-  .hero-grid .v { font-size: 1.05rem; color: var(--ink); font-weight: 600; letter-spacing: -0.01em; }
-  .hero-grid .v small { font-size: 0.72rem; color: var(--ink-soft); margin-left: 0.2rem; font-weight: 400; }
+  /* ── 주차 목록 ── */
+  .note { display: flex; gap: 0.9rem; padding: 1.15rem 1.6rem; border-bottom: 1px solid var(--rule);
+    text-decoration: none; color: var(--ink); }
+  .note:hover { background: var(--paper-deep); }
+  .note-rail { display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 7px; }
+  .note-dot { width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .note-line { flex: 1; width: 1px; background: var(--rule-strong); }
+  .note-body { flex: 1; min-width: 0; }
+  .note-top { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.45rem; }
+  .note-range { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; color: var(--green); }
+  .note-ago { margin-left: auto; font-family: var(--mono); font-size: 0.66rem; color: #b8ac98; white-space: nowrap; }
+  .note-a { font-family: var(--serif); font-size: 1rem; font-weight: 600; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); text-wrap: pretty; }
+  .note-b { margin-top: 0.5rem; padding-left: 0.7rem; border-left: 2px solid var(--accent);
+    font-size: 0.78rem; line-height: 1.5; color: #6d675c; text-wrap: pretty; }
 
-  /* ── 월 섹션 ── */
-  .m-section { padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,4vw,3.5rem); border-top: 1px solid var(--rule); max-width: 900px; }
-  .section-head { display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem,3vw,2.2rem); align-items: baseline; margin-bottom: clamp(1.5rem,3vw,2.5rem); }
-  .section-num { font-size: clamp(2.8rem,6vw,4.8rem); line-height: 0.85; color: var(--accent); font-weight: 200; letter-spacing: -0.04em; }
-  .section-titles { border-left: 1px solid var(--ink); padding-left: clamp(0.9rem,2.5vw,1.8rem); padding-top: 0.4rem; }
-  .section-kicker { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-deep); font-weight: 600; margin-bottom: 0.5rem; }
-  .section-title { font-size: clamp(1.5rem,2.8vw,2rem); line-height: 1.15; font-weight: 600; letter-spacing: -0.025em; }
-
-  /* ── 주차 리스트 ── */
-  .notes { border-top: 2px solid var(--ink); }
-  .note { display: grid; grid-template-columns: 3.5rem 1fr auto; gap: clamp(0.8rem,2vw,2rem); align-items: center; padding: clamp(1.2rem,3vw,2rem) 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); transition: padding 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease; position: relative; }
-  .note:hover { padding-left: 0.8rem; padding-right: 0.8rem; background: var(--paper-deep); }
-  .note::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 0; background: var(--accent); transition: width 0.4s cubic-bezier(0.22,1,0.36,1); }
-  .note:hover::after { width: 100%; }
-  .note .n { font-size: 0.78rem; color: var(--accent); font-weight: 400; letter-spacing: 0.06em; font-family: var(--mono); }
-  .note .body { min-width: 0; }
-  .note .body h3 { font-size: clamp(1.1rem,1.8vw,1.35rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.3rem; }
-  .note .body h3 em { font-style: normal; color: var(--accent-deep); font-weight: 400; }
-  .note .body p { color: var(--ink-soft); font-size: 0.88rem; font-weight: 300; line-height: 1.55; }
-  .note .meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; font-size: 0.7rem; color: var(--ink-faint); text-align: right; white-space: nowrap; }
-  .note .meta .tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-deep); padding: 0.2rem 0.5rem; border: 1px solid var(--accent); background: var(--accent-wash); }
-  .note .arrow { font-family: var(--mono); color: var(--ink); font-weight: 500; font-size: 1rem; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
-  .note:hover .arrow { transform: translateX(5px); color: var(--accent-deep); }
+  .idx-tail { height: 2.5rem; }
 
   @media (prefers-reduced-motion: no-preference) {
-    .m-section, .note { animation: rise 0.6s cubic-bezier(0.22,1,0.36,1) both; }
-    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  }
-  @media (max-width: 640px) {
-    .note { grid-template-columns: 3rem 1fr; }
-    .note .meta { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
-    .note .arrow { display: none; }
-  }
-
-  /* ── 좁은 화면 ──
-     사이드바가 200px 을 고정으로 가져가 본문이 그만큼 좁아진다.
-     세로 목록을 상단 가로 바로 눕히고, 강조는 왼쪽 선 대신 아래 선으로 옮긴다. */
-  @media (max-width: 720px) {
-    body { display: block; }
-    .sidebar { width: auto; height: auto; overflow: visible; z-index: 10;
-      border-right: none; border-bottom: 1px solid var(--rule);
-      background: var(--paper); padding: 0.9rem 0 0; }
-    .sidebar-header { padding: 0 1.1rem 0.7rem; margin-bottom: 0.4rem; }
-    .s-label { margin-bottom: 0.2rem; }
-    .year-btn { display: inline-block; width: auto; padding: 0.45rem 1.1rem;
-      border-left: none; border-bottom: 2px solid transparent; }
-    .year-btn.active { border-left-color: transparent; border-bottom-color: var(--accent); }
-    .year-btn::after { float: none; margin-left: 0.35rem; }
-    .month-list { padding: 0.25rem 1.1rem 0.75rem; }
-    .month-list.open { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-    .month-btn { width: auto; padding: 0.35rem 0.85rem;
-      border: 1px solid var(--rule); border-left: 1px solid var(--rule); }
-    .month-btn.active { border-color: var(--accent); background: var(--accent-wash); }
-    .m-take { padding: 1.1rem 1.2rem; }
-    .m-take-headline { font-size: 0.96rem; }
-    .meta-row { flex-direction: column; gap: 0.3rem; align-items: flex-start; }
+    .note { animation: rise 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
   }
 </style>"""
 
@@ -421,17 +400,18 @@ def render_daily_page(data: dict) -> str:
 </html>"""
 
 _DAY_LINK_CSS = """<style>
-  .days-section { margin-top: 3rem; }
-  .days-section-title { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; padding-bottom: 0.6rem; border-bottom: 2px solid var(--ink); margin-bottom: 0; }
-  .day-link { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); transition: background 0.1s; }
-  .day-link:last-child { border-bottom: none; }
-  .day-link:hover { color: var(--accent-deep); }
-  .day-label { font-weight: 600; font-size: 0.95rem; min-width: 4rem; }
-  .day-date { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); }
-  .day-arrow { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-faint); margin-left: auto; }
-  .day-link:hover .day-arrow { color: var(--accent); }
+  .days-section { margin-top: 0; }
+  .days-section-title { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; color: var(--green);
+    background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green);
+    padding: 0.8rem 1.15rem; margin-bottom: 0.9rem; text-transform: none; }
+  .day-link { display: flex; align-items: center; gap: 0.9rem; margin: 0 1.15rem 0.6rem;
+    padding: 0.85rem 1rem; border: 1px solid var(--rule-strong); border-radius: 14px;
+    background: var(--paper); text-decoration: none; color: var(--ink); transition: all 0.12s; }
+  .day-link:hover { border-color: var(--green); background: var(--paper-deep); }
+  .day-label { font-family: var(--serif); font-weight: 600; font-size: 0.9rem; min-width: 3.4rem; color: var(--ink); }
+  .day-date { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-faint); }
+  .day-arrow { font-family: var(--mono); font-size: 0.8rem; color: var(--accent-deep); margin-left: auto; }
 </style>"""
-
 
 def _period_take_html(take: dict | None, title: str) -> str:
     """주간·월간 해석 섹션. 해석 한 문장 + 근거 + 대표 문서 목록."""
@@ -511,7 +491,7 @@ def render_weekly_page(week_data: dict) -> str:
   <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
 </div>
 <div class="page-meta">{week_id}</div>
-<h1><em>{label.split("(")[0].strip()}</em></h1>
+<h1>{label.split("(")[0].strip()}</h1>
 {take_html}
 {hl_html}
 <div class="days-section">
@@ -524,7 +504,7 @@ def render_weekly_page(week_data: dict) -> str:
 def render_index_page(entries: list[dict], month_takes: dict | None = None) -> str:
     """month_takes: {"2026-07": {"headline":..., "body":...}} — 월 페이지의 해석을
     목록에서도 보여준다. 렌더러가 파일을 읽지 않도록 호출부에서 넘긴다."""
-    from datetime import datetime
+    from datetime import date as _date, datetime
 
     def _week_id(d: str) -> str:
         dt = datetime.strptime(d, "%Y-%m-%d").date()
@@ -532,98 +512,69 @@ def render_index_page(entries: list[dict], month_takes: dict | None = None) -> s
 
     def _week_range(week_id: str) -> tuple:
         y, w = week_id.split("-W")
-        start = datetime.strptime(f"{y}-W{w}-1", "%G-W%V-%u").date()
-        end = datetime.strptime(f"{y}-W{w}-7", "%G-W%V-%u").date()
-        return start, end
+        return (datetime.strptime(f"{y}-W{w}-1", "%G-W%V-%u").date(),
+                datetime.strptime(f"{y}-W{w}-7", "%G-W%V-%u").date())
 
-    # 연도 → 월 → 주차별 분류
-    by_year = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+    # 연도 → 월 → 주차
+    by_month = defaultdict(lambda: defaultdict(list))
     for e in sorted(entries, key=lambda x: x["date"], reverse=True):
-        y, mo, _ = e["date"].split("-")
-        wid = _week_id(e["date"])
-        by_year[y][mo][wid].append(e)
+        mid = e["date"][:7]
+        by_month[mid][_week_id(e["date"])].append(e)
 
-    years = sorted(by_year.keys(), reverse=True)
-
-    # stats
     all_dates = sorted(e["date"] for e in entries)
-    first_date = all_dates[0][:7].replace("-", ".") if all_dates else "—"
     last_date = all_dates[-1] if all_dates else "—"
-    total_days = len(all_dates)
+    newest = _date.fromisoformat(last_date) if all_dates else None
+    year = last_date[:4] if all_dates else ""
 
-    sidebar = ""
-    for y in years:
-        mo_btns = "".join(
-            f'<button class="month-btn" data-month="{y}-{mo}" '
-            f'onclick="showMonth(\'{y}\',\'{mo}\')">{int(mo)}\uc6d4</button>'
-            for mo in sorted(by_year[y].keys(), reverse=True))
-        sidebar += (f'<button class="year-btn" data-year="{y}" onclick="toggleYear(\'{y}\')">{y}</button>'
-                    f'<div class="month-list" id="months-{y}">{mo_btns}</div>')
-
-    year_sections = ""
-    for y in years:
-        months_html = ""
-        for mo_idx, mo in enumerate(sorted(by_year[y].keys(), reverse=True), 1):
-            notes_html = ""
-            for wid in sorted(by_year[y][mo].keys(), reverse=True):
-                week_entries = by_year[y][mo][wid]
-                day_count = len(week_entries)
-                w_num = wid.split("-W")[1]
-                s, e_ = _week_range(wid)
-
-                if s.month == e_.month:
-                    date_label = f"{s.month}월 {s.day:02d}일~{e_.day:02d}일"
-                else:
-                    date_label = f"{s.month}월 {s.day:02d}일~{e_.month}월 {e_.day:02d}일"
-
-                # 하이라이트 수집 (최대 2개)
-                highlights = []
-                for we in sorted(week_entries, key=lambda x: x["date"]):
-                    highlights.extend(we.get("highlights", []))
-                if highlights:
-                    desc = "　·　".join(h[:40] + ("…" if len(h) > 40 else "") for h in highlights[:2])
-                    desc_html = f'<p>{_e(desc)}</p>'
-                else:
-                    desc_html = f'<p>{day_count}일</p>'
-
-                notes_html += f"""<a class="note" href="./{wid}.html">
-  <div class="n">W{w_num}</div>
-  <div class="body">
-    <h3>{date_label}</h3>
-    {desc_html}
+    body = ""
+    for mid in sorted(by_month.keys(), reverse=True):
+        y, mo = mid.split("-")
+        wids = sorted(by_month[mid].keys(), reverse=True)
+        days = sum(len(v) for v in by_month[mid].values())
+        body += f"""<div class="m-band">
+  <div class="m-band-l">
+    <span class="m-num">{mo}</span>
+    <div class="m-names"><span class="m-ko">{int(mo)}월</span><span class="m-en">{_MONTH_NAMES[mo]}</span></div>
   </div>
-  <div class="meta">
-    <span class="tag">{day_count}일</span>
-    <span class="arrow">&rarr;</span>
-  </div>
-</a>"""
-
-            mt = (month_takes or {}).get(f"{y}-{mo}") or {}
-            take_html = ""
-            if mt.get("headline"):
-                mt_body = f'<p class="m-take-body">{_e(mt["body"])}</p>' if mt.get("body") else ""
-                take_html = (f'<a class="m-take" href="./{y}-{mo}.html">'
-                             f'<span class="m-take-label">이 달의 해석</span>'
-                             f'<p class="m-take-headline">{_e(mt["headline"])}</p>'
-                             f'{mt_body}<span class="m-take-more">월간 페이지 &rarr;</span></a>')
-
-            months_html += f"""<div class="m-section" id="m-{y}-{mo}">
-  <div class="section-head">
-    <div class="section-num">{mo:>02}</div>
-    <div class="section-titles">
-      <div class="section-kicker">{y}</div>
-      <h2 class="section-title">{int(mo)}월 {_MONTH_NAMES[mo]}</h2>
-    </div>
-  </div>
-  {take_html}
-  <div class="notes">{notes_html}</div>
+  <span class="m-count">{days}일 · {len(wids)}주</span>
 </div>"""
 
-        year_sections += f'<div class="year-section" id="year-{y}">{months_html}</div>'
+        mt = (month_takes or {}).get(mid) or {}
+        if mt.get("headline"):
+            mt_body = f'<p class="m-take-body">{_e(mt["body"])}</p>' if mt.get("body") else ""
+            body += (f'<a class="m-take" href="./{mid}.html">'
+                     f'<span class="m-take-label">이 달의 해석</span>'
+                     f'<p class="m-take-headline">{_e(mt["headline"])}</p>'
+                     f'{mt_body}<span class="m-take-more">월간 페이지 &rarr;</span></a>')
 
-    first_year = years[0] if years else ""
-    first_month = (sorted(by_year[first_year].keys(), reverse=True)[0]
-                   if first_year else "")
+        for wid in wids:
+            week_entries = sorted(by_month[mid][wid], key=lambda x: x["date"])
+            s_, e_ = _week_range(wid)
+            if s_.month == e_.month:
+                label = f"{s_.month}월 {s_.day}일~{e_.day}일"
+            else:
+                label = f"{s_.month}월 {s_.day}일~{e_.month}월 {e_.day}일"
+
+            # 그 주 마지막 수록일이 얼마나 지났는지 — Wxx 대신 시간 감각을 준다
+            ago = ""
+            if newest:
+                gap = (newest - _date.fromisoformat(week_entries[-1]["date"])).days
+                ago = "오늘" if gap <= 0 else f"{gap}일 전"
+
+            hl = []
+            for we in week_entries:
+                hl.extend(h for h in (we.get("highlights") or []) if h)
+            a = _e(hl[0]) if hl else f"{len(week_entries)}일치 기록"
+            b = f'<div class="note-b">{_e(hl[1])}</div>' if len(hl) > 1 else ""
+
+            body += f"""<a class="note" href="./{wid}.html">
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">{label}</span><span class="note-ago">{ago}</span></div>
+    <div class="note-a">{a}</div>
+    {b}
+  </div>
+</a>"""
 
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -637,49 +588,16 @@ def render_index_page(entries: list[dict], month_takes: dict | None = None) -> s
 {_INDEX_CSS}
 </head>
 <body>
-<nav class="sidebar">
-  <div class="sidebar-header">
-    <div class="s-label">trending</div>
-    <div class="s-title">tech</div>
+<header class="idx-head">
+  <div class="idx-kicker"><span></span>weekly archive</div>
+  <h1 class="idx-title">trending<br><em>tech</em></h1>
+  <div class="idx-foot">
+    <span class="idx-updated">last updated {last_date}</span>
+    <span class="idx-year">{year}</span>
   </div>
-  {sidebar}
-</nav>
-<main class="main">
-  <div class="main-hero">
-    <div class="meta-row">
-      <span>trending-tech &middot; archive</span>
-      <span>last updated &middot; {last_date}</span>
-    </div>
-    <h1 class="main-title">trending<br><em>tech</em></h1>
-  </div>
-  {year_sections}
-</main>
-<script>
-function toggleYear(y) {{
-  var list = document.getElementById('months-' + y);
-  var wasOpen = list.classList.contains('open');
-  document.querySelectorAll('.month-list').forEach(function(l) {{ l.classList.remove('open'); }});
-  document.querySelectorAll('.year-btn').forEach(function(b) {{ b.classList.remove('open'); }});
-  if (!wasOpen) {{
-    list.classList.add('open');
-    document.querySelector('.year-btn[data-year="' + y + '"]').classList.add('open');
-  }}
-}}
-function showMonth(y, mo) {{
-  document.querySelectorAll('.year-section').forEach(function(s) {{ s.style.display = 'none'; }});
-  document.querySelectorAll('.m-section').forEach(function(s) {{ s.style.display = 'none'; }});
-  document.querySelectorAll('.year-btn').forEach(function(b) {{ b.classList.remove('active'); }});
-  document.querySelectorAll('.month-btn').forEach(function(b) {{ b.classList.remove('active'); }});
-  document.getElementById('year-' + y).style.display = 'block';
-  document.getElementById('m-' + y + '-' + mo).style.display = 'block';
-  document.querySelector('.year-btn[data-year="' + y + '"]').classList.add('active');
-  document.querySelector('.month-btn[data-month="' + y + '-' + mo + '"]').classList.add('active');
-}}
-if ('{first_year}') {{
-  toggleYear('{first_year}');
-  showMonth('{first_year}', '{first_month}');
-}}
-</script>
+</header>
+{body}
+<div class="idx-tail"></div>
 </body>
 </html>"""
 

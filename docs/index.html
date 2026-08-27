@@ -8,371 +8,235 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: oklch(1 0 0); --paper-deep: oklch(0.985 0 0);
-    --ink: oklch(0.18 0.015 260); --ink-soft: oklch(0.38 0.012 260); --ink-faint: oklch(0.58 0.008 260);
-    --rule: oklch(0.90 0.005 260); --accent: oklch(0.55 0.16 38);
-    --accent-deep: oklch(0.40 0.14 38); --accent-wash: oklch(0.96 0.025 50);
-    --sans: "IBM Plex Sans KR", -apple-system, sans-serif;
-    --mono: "JetBrains Mono", ui-monospace, monospace;
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 </style>
 <style>
-  /* ── 레이아웃 ── */
-  body { display: flex; min-height: 100vh; }
+  body { max-width: 720px; margin: 0 auto; background: var(--paper); }
 
-  /* ── 사이드바 (기존 유지) ── */
-  .sidebar { width: 200px; flex-shrink: 0; border-right: 1px solid var(--rule); position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 2rem 0; }
-  .sidebar-header { padding: 0 1.4rem 1.4rem; border-bottom: 1px solid var(--rule); margin-bottom: 1rem; }
-  .s-label { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; margin-bottom: 0.4rem; }
-  .s-title { font-size: 1rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
-  .year-btn { width: 100%; padding: 0.7rem 1.4rem; display: block; cursor: pointer; background: none; border: none; font-family: var(--sans); text-align: left; font-size: 0.9rem; font-weight: 500; color: var(--ink-soft); border-left: 2px solid transparent; transition: all 0.12s; }
-  .year-btn:hover { background: var(--paper-deep); }
-  .year-btn.active { background: var(--accent-wash); border-left-color: var(--accent); color: var(--accent-deep); font-weight: 600; }
-  .year-btn::after { content: "▾"; float: right; font-size: 0.7rem; color: var(--ink-faint); transition: transform 0.15s; }
-  .year-btn.open::after { transform: rotate(180deg); display: inline-block; }
-  .month-list { display: none; padding: 0.15rem 0 0.6rem; background: var(--paper-deep); }
-  .month-list.open { display: block; }
-  .month-btn { width: 100%; padding: 0.42rem 1.4rem 0.42rem 2.3rem; display: block; cursor: pointer; background: none; border: none; font-family: var(--sans); text-align: left; font-size: 0.8rem; font-weight: 500; color: var(--ink-soft); border-left: 2px solid transparent; transition: all 0.12s; }
-  .month-btn:hover { color: var(--ink); }
-  .month-btn.active { border-left-color: var(--accent); color: var(--accent-deep); font-weight: 600; }
+  /* ── 딥그린 표지 ── */
+  .idx-head { background: var(--green); color: var(--cream); padding: 2rem 1.6rem 1.6rem; }
+  .idx-kicker { display: flex; align-items: center; gap: 0.5rem; font-family: var(--mono);
+    font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-soft); }
+  .idx-kicker span { width: 18px; height: 1px; background: var(--green-soft); }
+  .idx-title { font-family: var(--serif); font-size: clamp(2.6rem,11vw,3.4rem); font-weight: 700;
+    line-height: 1; letter-spacing: -0.04em; margin-top: 0.85rem; color: var(--cream); }
+  .idx-title em { font-style: normal; font-weight: 400; color: var(--accent); }
+  .idx-foot { margin-top: 1.25rem; padding-top: 0.9rem; border-top: 1px solid rgba(242,239,228,0.22);
+    display: flex; justify-content: space-between; align-items: baseline; }
+  .idx-updated { font-family: var(--mono); font-size: 0.7rem; color: #a9c6bb; }
+  .idx-year { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: 0.02em; color: var(--accent); }
 
-  /* ── 메인 ── */
-  .main { flex: 1; overflow-y: auto; min-width: 0; }
-  .year-section { display: none; }
-  .m-section { display: none; }
+  /* ── 월 구분 띠 ── */
+  .m-band { display: flex; align-items: flex-end; justify-content: space-between;
+    padding: 1rem 1.6rem 0.9rem; background: var(--accent-wash);
+    border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .m-band-l { display: flex; align-items: flex-end; gap: 0.62rem; }
+  .m-num { font-family: var(--serif); font-size: 2.5rem; font-weight: 700; line-height: 0.8;
+    letter-spacing: -0.04em; color: var(--green); }
+  .m-names { display: flex; flex-direction: column; gap: 2px; }
+  .m-ko { font-family: var(--serif); font-size: 0.94rem; font-weight: 600; line-height: 1; color: var(--green); }
+  .m-en { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.14em; text-transform: uppercase; color: #7d8b7f; }
+  .m-count { font-family: var(--mono); font-size: 0.66rem; color: #7d8b7f; white-space: nowrap; }
 
-  /* ── 목록에서 보는 이 달의 해석 ── */
-  .m-take { display: block; margin: 0 clamp(1.5rem,4vw,3.5rem) 2rem; padding: 1.3rem 1.5rem;
-    background: var(--accent-wash); border: 1px solid oklch(0.92 0.04 50); text-decoration: none; }
-  .m-take:hover { border-color: var(--accent); }
-  .m-take-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em;
+  /* ── 이 달의 해석 ── */
+  .m-take { display: block; padding: 1.15rem 1.6rem 1.25rem; border-bottom: 1px solid var(--rule);
+    text-decoration: none; background: var(--paper); }
+  .m-take:hover { background: var(--paper-deep); }
+  .m-take-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--accent-deep); }
-  .m-take-headline { margin-top: 0.5rem; font-size: 1.02rem; font-weight: 700; line-height: 1.5;
-    letter-spacing: -0.02em; color: var(--ink); }
-  .m-take-body { margin-top: 0.7rem; font-size: 0.85rem; line-height: 1.7; color: var(--ink-soft); }
-  .m-take-more { display: inline-block; margin-top: 0.9rem; font-family: var(--mono);
-    font-size: 0.68rem; color: var(--accent-deep); }
+  .m-take-headline { margin-top: 0.5rem; font-family: var(--serif); font-size: 1rem; font-weight: 700;
+    line-height: 1.5; letter-spacing: -0.02em; color: var(--ink); text-wrap: pretty; }
+  .m-take-body { margin-top: 0.6rem; padding-left: 0.7rem; border-left: 2px solid var(--accent);
+    font-size: 0.79rem; line-height: 1.6; color: var(--ink-soft); text-wrap: pretty; }
+  .m-take-more { display: inline-block; margin-top: 0.8rem; font-family: var(--mono);
+    font-size: 0.68rem; color: var(--green); }
 
-  /* ── 히어로 ── */
-  .main-hero { padding: clamp(2rem,5vw,4rem) clamp(1.5rem,4vw,3.5rem) clamp(2.5rem,5vw,4rem); max-width: 900px; position: relative; }
-  .main-hero::before { content: ""; position: absolute; top: 2rem; left: clamp(1.5rem,4vw,3.5rem); right: clamp(1.5rem,4vw,3.5rem); height: 1px; background: var(--ink); }
-  .meta-row { display: flex; justify-content: space-between; align-items: baseline; padding-top: 2.5rem; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
-  .meta-row span:last-child { color: var(--accent-deep); }
-  .main-title { font-size: clamp(2.4rem,6vw,4.8rem); line-height: 0.95; font-weight: 600; margin-top: clamp(1.5rem,4vw,2.5rem); letter-spacing: -0.035em; color: var(--ink); }
-  .main-title em { font-style: normal; font-weight: 300; color: var(--accent-deep); }
-  .hero-grid { margin-top: clamp(2rem,4vw,3.5rem); display: grid; grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap: 1px; background: var(--rule); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-  .hero-grid > div { background: var(--paper); padding: 1rem 1.25rem; }
-  .hero-grid .k { display: block; font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; margin-bottom: 0.3rem; }
-  .hero-grid .v { font-size: 1.05rem; color: var(--ink); font-weight: 600; letter-spacing: -0.01em; }
-  .hero-grid .v small { font-size: 0.72rem; color: var(--ink-soft); margin-left: 0.2rem; font-weight: 400; }
+  /* ── 주차 목록 ── */
+  .note { display: flex; gap: 0.9rem; padding: 1.15rem 1.6rem; border-bottom: 1px solid var(--rule);
+    text-decoration: none; color: var(--ink); }
+  .note:hover { background: var(--paper-deep); }
+  .note-rail { display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 7px; }
+  .note-dot { width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .note-line { flex: 1; width: 1px; background: var(--rule-strong); }
+  .note-body { flex: 1; min-width: 0; }
+  .note-top { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.45rem; }
+  .note-range { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; color: var(--green); }
+  .note-ago { margin-left: auto; font-family: var(--mono); font-size: 0.66rem; color: #b8ac98; white-space: nowrap; }
+  .note-a { font-family: var(--serif); font-size: 1rem; font-weight: 600; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); text-wrap: pretty; }
+  .note-b { margin-top: 0.5rem; padding-left: 0.7rem; border-left: 2px solid var(--accent);
+    font-size: 0.78rem; line-height: 1.5; color: #6d675c; text-wrap: pretty; }
 
-  /* ── 월 섹션 ── */
-  .m-section { padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,4vw,3.5rem); border-top: 1px solid var(--rule); max-width: 900px; }
-  .section-head { display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem,3vw,2.2rem); align-items: baseline; margin-bottom: clamp(1.5rem,3vw,2.5rem); }
-  .section-num { font-size: clamp(2.8rem,6vw,4.8rem); line-height: 0.85; color: var(--accent); font-weight: 200; letter-spacing: -0.04em; }
-  .section-titles { border-left: 1px solid var(--ink); padding-left: clamp(0.9rem,2.5vw,1.8rem); padding-top: 0.4rem; }
-  .section-kicker { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-deep); font-weight: 600; margin-bottom: 0.5rem; }
-  .section-title { font-size: clamp(1.5rem,2.8vw,2rem); line-height: 1.15; font-weight: 600; letter-spacing: -0.025em; }
-
-  /* ── 주차 리스트 ── */
-  .notes { border-top: 2px solid var(--ink); }
-  .note { display: grid; grid-template-columns: 3.5rem 1fr auto; gap: clamp(0.8rem,2vw,2rem); align-items: center; padding: clamp(1.2rem,3vw,2rem) 0; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); transition: padding 0.3s cubic-bezier(0.22,1,0.36,1), background 0.2s ease; position: relative; }
-  .note:hover { padding-left: 0.8rem; padding-right: 0.8rem; background: var(--paper-deep); }
-  .note::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 0; background: var(--accent); transition: width 0.4s cubic-bezier(0.22,1,0.36,1); }
-  .note:hover::after { width: 100%; }
-  .note .n { font-size: 0.78rem; color: var(--accent); font-weight: 400; letter-spacing: 0.06em; font-family: var(--mono); }
-  .note .body { min-width: 0; }
-  .note .body h3 { font-size: clamp(1.1rem,1.8vw,1.35rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.3rem; }
-  .note .body h3 em { font-style: normal; color: var(--accent-deep); font-weight: 400; }
-  .note .body p { color: var(--ink-soft); font-size: 0.88rem; font-weight: 300; line-height: 1.55; }
-  .note .meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; font-size: 0.7rem; color: var(--ink-faint); text-align: right; white-space: nowrap; }
-  .note .meta .tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-deep); padding: 0.2rem 0.5rem; border: 1px solid var(--accent); background: var(--accent-wash); }
-  .note .arrow { font-family: var(--mono); color: var(--ink); font-weight: 500; font-size: 1rem; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
-  .note:hover .arrow { transform: translateX(5px); color: var(--accent-deep); }
+  .idx-tail { height: 2.5rem; }
 
   @media (prefers-reduced-motion: no-preference) {
-    .m-section, .note { animation: rise 0.6s cubic-bezier(0.22,1,0.36,1) both; }
-    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  }
-  @media (max-width: 640px) {
-    .note { grid-template-columns: 3rem 1fr; }
-    .note .meta { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
-    .note .arrow { display: none; }
-  }
-
-  /* ── 좁은 화면 ──
-     사이드바가 200px 을 고정으로 가져가 본문이 그만큼 좁아진다.
-     세로 목록을 상단 가로 바로 눕히고, 강조는 왼쪽 선 대신 아래 선으로 옮긴다. */
-  @media (max-width: 720px) {
-    body { display: block; }
-    .sidebar { width: auto; height: auto; overflow: visible; z-index: 10;
-      border-right: none; border-bottom: 1px solid var(--rule);
-      background: var(--paper); padding: 0.9rem 0 0; }
-    .sidebar-header { padding: 0 1.1rem 0.7rem; margin-bottom: 0.4rem; }
-    .s-label { margin-bottom: 0.2rem; }
-    .year-btn { display: inline-block; width: auto; padding: 0.45rem 1.1rem;
-      border-left: none; border-bottom: 2px solid transparent; }
-    .year-btn.active { border-left-color: transparent; border-bottom-color: var(--accent); }
-    .year-btn::after { float: none; margin-left: 0.35rem; }
-    .month-list { padding: 0.25rem 1.1rem 0.75rem; }
-    .month-list.open { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-    .month-btn { width: auto; padding: 0.35rem 0.85rem;
-      border: 1px solid var(--rule); border-left: 1px solid var(--rule); }
-    .month-btn.active { border-color: var(--accent); background: var(--accent-wash); }
-    .m-take { padding: 1.1rem 1.2rem; }
-    .m-take-headline { font-size: 0.96rem; }
-    .meta-row { flex-direction: column; gap: 0.3rem; align-items: flex-start; }
+    .note { animation: rise 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
   }
 </style>
 </head>
 <body>
-<nav class="sidebar">
-  <div class="sidebar-header">
-    <div class="s-label">trending</div>
-    <div class="s-title">tech</div>
+<header class="idx-head">
+  <div class="idx-kicker"><span></span>weekly archive</div>
+  <h1 class="idx-title">trending<br><em>tech</em></h1>
+  <div class="idx-foot">
+    <span class="idx-updated">last updated 2026-08-27</span>
+    <span class="idx-year">2026</span>
   </div>
-  <button class="year-btn" data-year="2026" onclick="toggleYear('2026')">2026</button><div class="month-list" id="months-2026"><button class="month-btn" data-month="2026-08" onclick="showMonth('2026','08')">8월</button><button class="month-btn" data-month="2026-07" onclick="showMonth('2026','07')">7월</button><button class="month-btn" data-month="2026-06" onclick="showMonth('2026','06')">6월</button><button class="month-btn" data-month="2026-05" onclick="showMonth('2026','05')">5월</button></div>
-</nav>
-<main class="main">
-  <div class="main-hero">
-    <div class="meta-row">
-      <span>trending-tech &middot; archive</span>
-      <span>last updated &middot; 2026-08-27</span>
-    </div>
-    <h1 class="main-title">trending<br><em>tech</em></h1>
+</header>
+<div class="m-band">
+  <div class="m-band-l">
+    <span class="m-num">08</span>
+    <div class="m-names"><span class="m-ko">8월</span><span class="m-en">Aug</span></div>
   </div>
-  <div class="year-section" id="year-2026"><div class="m-section" id="m-2026-08">
-  <div class="section-head">
-    <div class="section-num">08</div>
-    <div class="section-titles">
-      <div class="section-kicker">2026</div>
-      <h2 class="section-title">8월 Aug</h2>
-    </div>
-  </div>
-  <a class="m-take" href="./2026-08.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">에이전트 플랫폼 통합→표준화→규제산업 진출 거쳐 성능에서 거버넌스로 병목 이동</p><p class="m-take-body">W32는 클라우드 기업들의 에이전트 중심 플랫폼 통합, W33은 AWS 주도의 표준 워크플로우 확립을 보였다. W34에선 금융 결제까지 에이전트가 손대면서 안전 제어 아키텍처 필요성이 부각됐고, W35 들어 아키텍처 명세화와 자율 추론 기술이 논의되는 와중 프로덕션의 병목이 성능이 아닌 평가·관찰성·거버넌스임이 명확해졌다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a>
-  <div class="notes"><a class="note" href="./2026-W35.html">
-  <div class="n">W35</div>
-  <div class="body">
-    <h3>8월 24일~30일</h3>
-    <p>Anthropic의 최고의 AI 모델, 저렴한 도구들의 성장 속에서 사용…　·　코딩만 빨라졌다고요? 아뇨, 일하는 방식이 다 뜯어고쳐졌습니다.</p>
-  </div>
-  <div class="meta">
-    <span class="tag">4일</span>
-    <span class="arrow">&rarr;</span>
+  <span class="m-count">20일 · 5주</span>
+</div><a class="m-take" href="./2026-08.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">에이전트 플랫폼 통합→표준화→규제산업 진출 거쳐 성능에서 거버넌스로 병목 이동</p><p class="m-take-body">W32는 클라우드 기업들의 에이전트 중심 플랫폼 통합, W33은 AWS 주도의 표준 워크플로우 확립을 보였다. W34에선 금융 결제까지 에이전트가 손대면서 안전 제어 아키텍처 필요성이 부각됐고, W35 들어 아키텍처 명세화와 자율 추론 기술이 논의되는 와중 프로덕션의 병목이 성능이 아닌 평가·관찰성·거버넌스임이 명확해졌다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a><a class="note" href="./2026-W35.html">
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">8월 24일~30일</span><span class="note-ago">오늘</span></div>
+    <div class="note-a">Anthropic의 최고의 AI 모델, 저렴한 도구들의 성장 속에서 사용자 확보에 어려움</div>
+    <div class="note-b">코딩만 빨라졌다고요? 아뇨, 일하는 방식이 다 뜯어고쳐졌습니다.</div>
   </div>
 </a><a class="note" href="./2026-W34.html">
-  <div class="n">W34</div>
-  <div class="body">
-    <h3>8월 17일~23일</h3>
-    <p>Qwen 3.8 27B는 우수하지만 기본적으로 과도하게 생각하는 경향이 …　·　Agentao: 도구 사용 LLM 에이전트를 위한 관리된 로컬 우선 런타…</p>
-  </div>
-  <div class="meta">
-    <span class="tag">4일</span>
-    <span class="arrow">&rarr;</span>
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">8월 17일~23일</span><span class="note-ago">4일 전</span></div>
+    <div class="note-a">Qwen 3.8 27B는 우수하지만 기본적으로 과도하게 생각하는 경향이 있다</div>
+    <div class="note-b">Agentao: 도구 사용 LLM 에이전트를 위한 관리된 로컬 우선 런타임</div>
   </div>
 </a><a class="note" href="./2026-W33.html">
-  <div class="n">W33</div>
-  <div class="body">
-    <h3>8월 10일~16일</h3>
-    <p>로컬 에이전트용 30B 경량 모델, 오프라인 워크플로우 지원　·　아파치 플러스, 실시간 데이터 레이크 졸업 및 완전 실시간화</p>
-  </div>
-  <div class="meta">
-    <span class="tag">6일</span>
-    <span class="arrow">&rarr;</span>
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">8월 10일~16일</span><span class="note-ago">11일 전</span></div>
+    <div class="note-a">로컬 에이전트용 30B 경량 모델, 오프라인 워크플로우 지원</div>
+    <div class="note-b">아파치 플러스, 실시간 데이터 레이크 졸업 및 완전 실시간화</div>
   </div>
 </a><a class="note" href="./2026-W32.html">
-  <div class="n">W32</div>
-  <div class="body">
-    <h3>8월 03일~09일</h3>
-    <p>AI 에이전트용 컴퓨터 기능 제공, 클라우드플레어 엣지 인프라 확장　·　70B LLM을 4GB GPU로 실행, 효율성과 접근성 혁신</p>
-  </div>
-  <div class="meta">
-    <span class="tag">4일</span>
-    <span class="arrow">&rarr;</span>
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">8월 3일~9일</span><span class="note-ago">18일 전</span></div>
+    <div class="note-a">AI 에이전트용 컴퓨터 기능 제공, 클라우드플레어 엣지 인프라 확장</div>
+    <div class="note-b">70B LLM을 4GB GPU로 실행, 효율성과 접근성 혁신</div>
   </div>
 </a><a class="note" href="./2026-W31.html">
-  <div class="n">W31</div>
-  <div class="body">
-    <h3>7월 27일~8월 02일</h3>
-    <p>zhaoxuya520/reverse-skill　·　mvanhorn/last30days-skill</p>
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">7월 27일~8월 2일</span><span class="note-ago">25일 전</span></div>
+    <div class="note-a">zhaoxuya520/reverse-skill</div>
+    <div class="note-b">mvanhorn/last30days-skill</div>
   </div>
-  <div class="meta">
-    <span class="tag">2일</span>
-    <span class="arrow">&rarr;</span>
+</a><div class="m-band">
+  <div class="m-band-l">
+    <span class="m-num">07</span>
+    <div class="m-names"><span class="m-ko">7월</span><span class="m-en">Jul</span></div>
   </div>
-</a></div>
-</div><div class="m-section" id="m-2026-07">
-  <div class="section-head">
-    <div class="section-num">07</div>
-    <div class="section-titles">
-      <div class="section-kicker">2026</div>
-      <h2 class="section-title">7월 Jul</h2>
-    </div>
-  </div>
-  <a class="m-take" href="./2026-07.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">에이전트가 프로덕션을 자동화하자, 검증·제어가 따라가지 못하고 있다</p><p class="m-take-body">W28-29에서 우버 uReview(주간 6.5만 건 90%), Spotify 데이터 어시스턴트 등 에이전트가 실제 프로덕션을 자동화하기 시작했다. W30에서 Claude 5 컨텍스트 엔지니어링이 그것을 기술적으로 가능하게 했음이 드러났다. W31에서 자동화가 검증을 압도하면서 에이전트의 자기기만·기만·제어 불가능성이 대두된다—제어·검증 메커니즘의 공백이 명백해졌다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a>
-  <div class="notes"><a class="note" href="./2026-W31.html">
-  <div class="n">W31</div>
-  <div class="body">
-    <h3>7월 27일~8월 02일</h3>
-    <p>프라이버시 보호 기술을 오픈소스로 공개, 모든 개발자 접근 가능　·　도메인 전문성을 AI에 구조적으로 임베딩하는 엔터프라이즈 패턴</p>
-  </div>
-  <div class="meta">
-    <span class="tag">4일</span>
-    <span class="arrow">&rarr;</span>
+  <span class="m-count">17일 · 5주</span>
+</div><a class="m-take" href="./2026-07.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">에이전트가 프로덕션을 자동화하자, 검증·제어가 따라가지 못하고 있다</p><p class="m-take-body">W28-29에서 우버 uReview(주간 6.5만 건 90%), Spotify 데이터 어시스턴트 등 에이전트가 실제 프로덕션을 자동화하기 시작했다. W30에서 Claude 5 컨텍스트 엔지니어링이 그것을 기술적으로 가능하게 했음이 드러났다. W31에서 자동화가 검증을 압도하면서 에이전트의 자기기만·기만·제어 불가능성이 대두된다—제어·검증 메커니즘의 공백이 명백해졌다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a><a class="note" href="./2026-W31.html">
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">7월 27일~8월 2일</span><span class="note-ago">27일 전</span></div>
+    <div class="note-a">프라이버시 보호 기술을 오픈소스로 공개, 모든 개발자 접근 가능</div>
+    <div class="note-b">도메인 전문성을 AI에 구조적으로 임베딩하는 엔터프라이즈 패턴</div>
   </div>
 </a><a class="note" href="./2026-W30.html">
-  <div class="n">W30</div>
-  <div class="body">
-    <h3>7월 20일~26일</h3>
-    <p>AI 에이전트 도입으로 코딩이 더 이상 개발 병목이 아니라는 스포티파이의…　·　Claude 5를 위한 컨텍스트 엔지니어링의 새로운 규칙과 기법.</p>
-  </div>
-  <div class="meta">
-    <span class="tag">1일</span>
-    <span class="arrow">&rarr;</span>
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">7월 20일~26일</span><span class="note-ago">32일 전</span></div>
+    <div class="note-a">AI 에이전트 도입으로 코딩이 더 이상 개발 병목이 아니라는 스포티파이의 실증사례.</div>
+    <div class="note-b">Claude 5를 위한 컨텍스트 엔지니어링의 새로운 규칙과 기법.</div>
   </div>
 </a><a class="note" href="./2026-W29.html">
-  <div class="n">W29</div>
-  <div class="body">
-    <h3>7월 13일~19일</h3>
-    <p>Cloudflare Precursor: agentic 행동을 클라이언트 …　·　Alibaba AgentRun: AI 에이전트를 위한 격리된 일회용 워크…</p>
-  </div>
-  <div class="meta">
-    <span class="tag">5일</span>
-    <span class="arrow">&rarr;</span>
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">7월 13일~19일</span><span class="note-ago">40일 전</span></div>
+    <div class="note-a">Cloudflare Precursor: agentic 행동을 클라이언트 신호로 감지하는 보안 기술 도입</div>
+    <div class="note-b">Alibaba AgentRun: AI 에이전트를 위한 격리된 일회용 워크스페이스 제공 서비스</div>
   </div>
 </a><a class="note" href="./2026-W28.html">
-  <div class="n">W28</div>
-  <div class="body">
-    <h3>7월 06일~12일</h3>
-    <p>엔터프라이즈 AI 에이전트가 사용 경험으로부터 자동 학습하는 기술이 핵심…　·　Google의 새 오픈 모델 Gemma 4 공개.</p>
-  </div>
-  <div class="meta">
-    <span class="tag">4일</span>
-    <span class="arrow">&rarr;</span>
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">7월 6일~12일</span><span class="note-ago">46일 전</span></div>
+    <div class="note-a">엔터프라이즈 AI 에이전트가 사용 경험으로부터 자동 학습하는 기술이 핵심.</div>
+    <div class="note-b">Google의 새 오픈 모델 Gemma 4 공개.</div>
   </div>
 </a><a class="note" href="./2026-W27.html">
-  <div class="n">W27</div>
-  <div class="body">
-    <h3>6월 29일~7월 05일</h3>
-    <p>Cloudflare x402로 모든 웹 리소스에 결제 시스템 표준화 추진　·　Claude Sonnet 5로 AI 성능과 비용 효율성 획기적으로 향상</p>
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">6월 29일~7월 5일</span><span class="note-ago">54일 전</span></div>
+    <div class="note-a">Cloudflare x402로 모든 웹 리소스에 결제 시스템 표준화 추진</div>
+    <div class="note-b">Claude Sonnet 5로 AI 성능과 비용 효율성 획기적으로 향상</div>
   </div>
-  <div class="meta">
-    <span class="tag">3일</span>
-    <span class="arrow">&rarr;</span>
+</a><div class="m-band">
+  <div class="m-band-l">
+    <span class="m-num">06</span>
+    <div class="m-names"><span class="m-ko">6월</span><span class="m-en">Jun</span></div>
   </div>
-</a></div>
-</div><div class="m-section" id="m-2026-06">
-  <div class="section-head">
-    <div class="section-num">06</div>
-    <div class="section-titles">
-      <div class="section-kicker">2026</div>
-      <h2 class="section-title">6월 Jun</h2>
-    </div>
-  </div>
-  <a class="m-take" href="./2026-06.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">AI 개발 자동화가 90% 효율을 달성한 후, 기업의 경쟁축이 비용·거버넌스에서 도메인 컨텍스트·학습 루프로 전환</p><p class="m-take-body">W23에서 개발 자동화가 90% 효율을 달성했고 비용이 병목으로 부상했다. W24~W25에서는 거버넌스와 컨텍스트 관리가 대두되고, W26~W27에서 도메인 전문화와 지속 학습 루프가 차세대 경쟁력으로 제시된다. 단순 자동화에서 적응형 시스템으로의 진화가 이번 달의 핵심 흐름이다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a>
-  <div class="notes"><a class="note" href="./2026-W27.html">
-  <div class="n">W27</div>
-  <div class="body">
-    <h3>6월 29일~7월 05일</h3>
-    <p>현재 상황: 제공된 트렌드 목록을 분석하여 최고 임팩트 5개를 한국어 한…　·　Ornith-1.0: LLM 자체 스캐폴딩으로 코딩 능력 강화</p>
-  </div>
-  <div class="meta">
-    <span class="tag">1일</span>
-    <span class="arrow">&rarr;</span>
+  <span class="m-count">23일 · 5주</span>
+</div><a class="m-take" href="./2026-06.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">AI 개발 자동화가 90% 효율을 달성한 후, 기업의 경쟁축이 비용·거버넌스에서 도메인 컨텍스트·학습 루프로 전환</p><p class="m-take-body">W23에서 개발 자동화가 90% 효율을 달성했고 비용이 병목으로 부상했다. W24~W25에서는 거버넌스와 컨텍스트 관리가 대두되고, W26~W27에서 도메인 전문화와 지속 학습 루프가 차세대 경쟁력으로 제시된다. 단순 자동화에서 적응형 시스템으로의 진화가 이번 달의 핵심 흐름이다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a><a class="note" href="./2026-W27.html">
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">6월 29일~7월 5일</span><span class="note-ago">58일 전</span></div>
+    <div class="note-a">현재 상황: 제공된 트렌드 목록을 분석하여 최고 임팩트 5개를 한국어 한 줄 요약으로 정리하겠습니다.</div>
+    <div class="note-b">Ornith-1.0: LLM 자체 스캐폴딩으로 코딩 능력 강화</div>
   </div>
 </a><a class="note" href="./2026-W26.html">
-  <div class="n">W26</div>
-  <div class="body">
-    <h3>6월 22일~28일</h3>
-    <p>물리 AI 시대 도래, 로봇 플랫폼으로 자동화 현실화　·　오픈소스 에이전트 능력 대폭 향상, 기업 도입 현실화</p>
-  </div>
-  <div class="meta">
-    <span class="tag">4일</span>
-    <span class="arrow">&rarr;</span>
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">6월 22일~28일</span><span class="note-ago">61일 전</span></div>
+    <div class="note-a">물리 AI 시대 도래, 로봇 플랫폼으로 자동화 현실화</div>
+    <div class="note-b">오픈소스 에이전트 능력 대폭 향상, 기업 도입 현실화</div>
   </div>
 </a><a class="note" href="./2026-W25.html">
-  <div class="n">W25</div>
-  <div class="body">
-    <h3>6월 15일~21일</h3>
-    <p>Uber, GenAI로 주간 6.5만 코드 변경의 90%를 자동 리뷰　·　Uber 데이터 레이크하우스: 하루 6조 행·10PB 수집 규모</p>
-  </div>
-  <div class="meta">
-    <span class="tag">5일</span>
-    <span class="arrow">&rarr;</span>
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">6월 15일~21일</span><span class="note-ago">67일 전</span></div>
+    <div class="note-a">Uber, GenAI로 주간 6.5만 코드 변경의 90%를 자동 리뷰</div>
+    <div class="note-b">Uber 데이터 레이크하우스: 하루 6조 행·10PB 수집 규모</div>
   </div>
 </a><a class="note" href="./2026-W24.html">
-  <div class="n">W24</div>
-  <div class="body">
-    <h3>6월 08일~14일</h3>
-    <p>Apple이 자사 AI 아키텍처를 Google Gemini 모델 중심으로…　·　Uber의 GenAI 코드리뷰 uReview, 주간 6.5만 변경의 90…</p>
-  </div>
-  <div class="meta">
-    <span class="tag">6일</span>
-    <span class="arrow">&rarr;</span>
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">6월 8일~14일</span><span class="note-ago">75일 전</span></div>
+    <div class="note-a">Apple이 자사 AI 아키텍처를 Google Gemini 모델 중심으로 재구축</div>
+    <div class="note-b">Uber의 GenAI 코드리뷰 uReview, 주간 6.5만 변경의 90% 분석</div>
   </div>
 </a><a class="note" href="./2026-W23.html">
-  <div class="n">W23</div>
-  <div class="body">
-    <h3>6월 01일~07일</h3>
-    <p>uReview: Uber가 주간 6.5만 변경의 90%를 GenAI로 코…　·　오픈·클로즈드 모델은 서로 다른 지수곡선 위에 있다 (Nathan Lam…</p>
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">6월 1일~7일</span><span class="note-ago">81일 전</span></div>
+    <div class="note-a">uReview: Uber가 주간 6.5만 변경의 90%를 GenAI로 코드 리뷰 중</div>
+    <div class="note-b">오픈·클로즈드 모델은 서로 다른 지수곡선 위에 있다 (Nathan Lambert)</div>
   </div>
-  <div class="meta">
-    <span class="tag">7일</span>
-    <span class="arrow">&rarr;</span>
+</a><div class="m-band">
+  <div class="m-band-l">
+    <span class="m-num">05</span>
+    <div class="m-names"><span class="m-ko">5월</span><span class="m-en">May</span></div>
   </div>
-</a></div>
-</div><div class="m-section" id="m-2026-05">
-  <div class="section-head">
-    <div class="section-num">05</div>
-    <div class="section-titles">
-      <div class="section-kicker">2026</div>
-      <h2 class="section-title">5월 May</h2>
-    </div>
+  <span class="m-count">1일 · 1주</span>
+</div><a class="m-take" href="./2026-05.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">Uber·Spotify, 프로덕션 규모에서 GenAI 에이전트 정상 운영 진입</p><p class="m-take-body">W22에서 Uber의 uReview(주당 65K 변경의 90%)와 Spotify의 자동화된 데이터 마이그레이션 에이전트가 나란히 주목받은 것은 실험 단계를 넘어 실제 프로덕션에서 AI 에이전트가 정상 궤도에 올랐음을 보여준다. Spotify x Anthropic의 대담은 이런 전환이 단순 도구 추가가 아니라 개발 프로세스 자체의 재구성이라는 업계 인식을 반영한다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a><a class="note" href="./2026-W22.html">
+  <div class="note-rail"><span class="note-dot"></span><span class="note-line"></span></div>
+  <div class="note-body">
+    <div class="note-top"><span class="note-range">5월 25일~31일</span><span class="note-ago">88일 전</span></div>
+    <div class="note-a">microsoft/markitdown</div>
+    <div class="note-b">harry0703/MoneyPrinterTurbo</div>
   </div>
-  <a class="m-take" href="./2026-05.html"><span class="m-take-label">이 달의 해석</span><p class="m-take-headline">Uber·Spotify, 프로덕션 규모에서 GenAI 에이전트 정상 운영 진입</p><p class="m-take-body">W22에서 Uber의 uReview(주당 65K 변경의 90%)와 Spotify의 자동화된 데이터 마이그레이션 에이전트가 나란히 주목받은 것은 실험 단계를 넘어 실제 프로덕션에서 AI 에이전트가 정상 궤도에 올랐음을 보여준다. Spotify x Anthropic의 대담은 이런 전환이 단순 도구 추가가 아니라 개발 프로세스 자체의 재구성이라는 업계 인식을 반영한다.</p><span class="m-take-more">월간 페이지 &rarr;</span></a>
-  <div class="notes"><a class="note" href="./2026-W22.html">
-  <div class="n">W22</div>
-  <div class="body">
-    <h3>5월 25일~31일</h3>
-    <p>microsoft/markitdown　·　harry0703/MoneyPrinterTurbo</p>
-  </div>
-  <div class="meta">
-    <span class="tag">1일</span>
-    <span class="arrow">&rarr;</span>
-  </div>
-</a></div>
-</div></div>
-</main>
-<script>
-function toggleYear(y) {
-  var list = document.getElementById('months-' + y);
-  var wasOpen = list.classList.contains('open');
-  document.querySelectorAll('.month-list').forEach(function(l) { l.classList.remove('open'); });
-  document.querySelectorAll('.year-btn').forEach(function(b) { b.classList.remove('open'); });
-  if (!wasOpen) {
-    list.classList.add('open');
-    document.querySelector('.year-btn[data-year="' + y + '"]').classList.add('open');
-  }
-}
-function showMonth(y, mo) {
-  document.querySelectorAll('.year-section').forEach(function(s) { s.style.display = 'none'; });
-  document.querySelectorAll('.m-section').forEach(function(s) { s.style.display = 'none'; });
-  document.querySelectorAll('.year-btn').forEach(function(b) { b.classList.remove('active'); });
-  document.querySelectorAll('.month-btn').forEach(function(b) { b.classList.remove('active'); });
-  document.getElementById('year-' + y).style.display = 'block';
-  document.getElementById('m-' + y + '-' + mo).style.display = 'block';
-  document.querySelector('.year-btn[data-year="' + y + '"]').classList.add('active');
-  document.querySelector('.month-btn[data-month="' + y + '-' + mo + '"]').classList.add('active');
-}
-if ('2026') {
-  toggleYear('2026');
-  showMonth('2026', '08');
-}
-</script>
+</a>
+<div class="idx-tail"></div>
 </body>
 </html>
