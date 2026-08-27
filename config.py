@@ -47,7 +47,7 @@ MAX_COMPANY_TOTAL = 25    # 기술블로그 섹션 하루 전체 상한
 MAX_DEV_TOTAL = 20        # 개발자블로그 섹션 하루 전체 상한
 MAX_BODY_FETCH = 40       # 요약이 짧아 본문을 새로 받아올 최대 건수
 ENABLE_SVG = True
-MAX_SVG_ITEMS = 8         # 개념 SVG 생성 대상 상위 N건
+MAX_SVG_ITEMS = 4         # 개념 SVG 생성 대상 상위 N건 (다이어그램 1건이 콘텐츠 2000자·180초 타임아웃으로 가장 무거운 호출)
 SUMMARY_WORKERS = 4       # 분석(날짜판정+번역+요약) 병렬 실행 수
 RSS_WORKERS = 8           # RSS 수집 병렬 실행 수
 
