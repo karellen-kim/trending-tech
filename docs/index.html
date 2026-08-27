@@ -83,6 +83,12 @@
   /* 일별·주간과 같은 규칙 — 어절 중간에서라도 끊어 오른쪽을 비우지 않는다 */
   .m-take-headline, .m-take-body, .note-a, .note-b { word-break: break-all; }
 
+  @media (max-width: 600px) {
+    .idx-kicker, .idx-updated, .m-en, .m-count, .m-take-label,
+    .m-take-more, .note-range, .note-ago { font-size: 0.74rem; }
+    .m-take-body, .note-b { font-size: 0.88rem; }
+  }
+
   .idx-tail { height: 2.5rem; }
 
   @media (prefers-reduced-motion: no-preference) {

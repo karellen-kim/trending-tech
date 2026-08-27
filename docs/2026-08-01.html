@@ -163,8 +163,7 @@
   @media (max-width: 600px) {
     /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
     body { padding-bottom: 3rem; }
-    .nav-link { font-size: 0.68rem; padding: 0.32rem 0.66rem; }
-    h1 { font-size: 1.85rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
     /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
        제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
     .item-head { grid-template-columns: 1fr; }
@@ -174,6 +173,18 @@
     .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
     .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
     .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
+
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
   }
 </style>
 </head>
