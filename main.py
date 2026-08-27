@@ -264,7 +264,7 @@ def save_weekly_page(today: date) -> None:
         except Exception:
             pass
 
-    days = sorted(days, key=lambda x: x["date"])
+    days = sorted(days, key=lambda x: x["date"], reverse=True)
     wdata.update({
         "week_id": wid,
         "week_label": _week_label(wid),
