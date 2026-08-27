@@ -124,7 +124,9 @@
   .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
     align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
-    letter-spacing: -0.015em; color: var(--ink); min-width: 0; }
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
   .item-name a { color: var(--ink); text-decoration: none; }
   .item-name a:hover { color: var(--green); }
   .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
