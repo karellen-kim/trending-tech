@@ -66,6 +66,10 @@ FILTER_PROMPT = """다음 AI/ML 논문 목록에서 오늘 가장 주목할 만�
 {papers_list}"""
 
 def _run_claude(prompt: str, timeout: int = 120) -> str:
+    # RSS·스크레이핑 원문에 널 바이트가 섞여 들어오면 subprocess 가 exec 에 넘길 때
+    # ValueError 로 죽는다(널 바이트는 argv 에 담을 수 없다). 외부 콘텐츠가 이 함수를
+    # 거쳐 프로세스 경계를 넘는 지점이라 여기서 한 번만 걸러낸다.
+    prompt = prompt.replace("\x00", "")
     try:
         result = subprocess.run(
             ["claude", "-p", prompt, "--model", "claude-haiku-4-5-20251001"],
@@ -77,6 +81,9 @@ def _run_claude(prompt: str, timeout: int = 120) -> str:
         return result.stdout.strip()
     except subprocess.TimeoutExpired:
         print(f"[claude] 타임아웃({timeout}s)")
+        return ""
+    except ValueError as e:
+        print(f"[claude] 호출 실패: {e}")
         return ""
 
 def translate_title(title: str) -> str:
