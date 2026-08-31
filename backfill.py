@@ -39,10 +39,16 @@ _TAKE_CSS = """
 """
 
 _SECTION = re.compile(r'<div class="section[^"]*" id="([^"]+)">')
-_ITEM_NAME = re.compile(
+# 항목은 두 형태다 — 요약이 없으면 item-name 에 <a> 가 바로 들어 있고,
+# 요약이 있으면 <details> 로 접혀 item-name 은 평문이고 링크는 하단 item-link 에 있다.
+_ITEM_START = re.compile(r'<div class="item(?: important)?">')
+_SIMPLE_NAME = re.compile(
     r'<div class="item-name">(?:<span class="item-star"[^>]*>★</span>)?\s*'
     r'<a href="([^"]+)"[^>]*>(.*?)</a>', re.S)
-_ITEM_META = re.compile(r'<div class="item-meta">(.*?)</div>', re.S)
+_DETAILED_NAME = re.compile(
+    r'<span class="item-name">(?:<span class="item-star"[^>]*>★</span>)?\s*(.*?)</span>', re.S)
+_ITEM_LINK = re.compile(r'class="item-link"><a href="([^"]+)"')
+_ITEM_META = re.compile(r'<(?:div|span) class="item-meta">(.*?)</(?:div|span)>', re.S)
 _TAG = re.compile(r"<[^>]+>")
 
 # 페이지 섹션 id → summarizer 가 보는 데이터 키
@@ -62,6 +68,25 @@ def _clean(s: str) -> str:
                     .replace("&quot;", '"').replace("&#39;", "'").split())
 
 
+def _parse_one_item(chunk: str) -> dict | None:
+    """항목 하나짜리 조각에서 제목·URL·출처를 뽑는다. 둘 중 맞는 형태를 시도한다."""
+    m = _SIMPLE_NAME.search(chunk)
+    if m:
+        url, title = m.group(1), _clean(m.group(2))
+    else:
+        m = _DETAILED_NAME.search(chunk)
+        if not m:
+            return None
+        title = _clean(m.group(1))
+        lm = _ITEM_LINK.search(chunk)
+        url = lm.group(1) if lm else ""
+    if not title or not url:
+        return None
+    meta = _ITEM_META.search(chunk)
+    return {"title": title, "title_ko": title, "name": title, "url": url,
+            "source": _clean(meta.group(1)) if meta else ""}
+
+
 def parse_items(html: str) -> dict:
     """페이지에 실린 글을 섹션별로 되읽는다. generate_today_take 가 보는 모양으로 맞춘다."""
     data = {"company_blogs": [], "dev_blogs": [], "papers": [], "github": []}
@@ -72,18 +97,12 @@ def parse_items(html: str) -> dict:
             continue
         stop = bounds[i + 1][1] if i + 1 < len(bounds) else len(html)
         block = html[end:stop]
-        metas = _ITEM_META.findall(block)
-        for n, (url, title) in enumerate(_ITEM_NAME.findall(block)):
-            title = _clean(title)
-            if not title:
-                continue
-            data[key].append({
-                "title": title,
-                "title_ko": title,
-                "name": title,
-                "url": url,
-                "source": _clean(metas[n]) if n < len(metas) else "",
-            })
+        starts = [m.start() for m in _ITEM_START.finditer(block)]
+        for j, s0 in enumerate(starts):
+            s1 = starts[j + 1] if j + 1 < len(starts) else len(block)
+            item = _parse_one_item(block[s0:s1])
+            if item:
+                data[key].append(item)
     return data
 
 
