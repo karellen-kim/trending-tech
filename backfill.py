@@ -225,18 +225,28 @@ def run_weeks() -> int:
 
 
 def run_months() -> int:
+    """빠진 월간 해석만 채운다. main.save_monthly_page 는 당월을 매일 갱신하려고
+    무조건 다시 만들지만, 여기서는 이미 있는 달까지 건드리면 안 된다 —
+    한 번은 이 무조건 재생성이 5월치를 엉뚱한(8월) 내용으로 덮어쓴 적이 있다."""
     from main import save_monthly_page
     print("[월별] 시작")
     months = sorted({f.stem[:7] for f in DOCS_DIR.glob("????-??-??.json")})
     n = 0
     for mid in months:
+        mjf = DOCS_DIR / f"{mid}.json"
+        if mjf.exists():
+            try:
+                if (json.loads(mjf.read_text(encoding="utf-8")).get("month_take") or {}).get("headline"):
+                    continue
+            except Exception:
+                pass
         y, m = mid.split("-")
         try:
             if save_monthly_page(date(int(y), int(m), 15)):
                 n += 1
         except Exception as e:
             print(f"  {mid} 오류: {type(e).__name__}: {str(e)[:120]}")
-    print(f"[월별] {n}건 생성")
+    print(f"[월별] {n}건 채움")
     return n
 
 
