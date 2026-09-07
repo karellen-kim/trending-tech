@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-09-07 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1rem; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
+  .item-body { padding: 0 1rem 1.2rem; }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
+    padding: 1rem 0.9rem 0.7rem;
+    /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
+    --accent: #b08a2a; --accent-wash: #f6f1e2; }
+  /* svg 인라인 max-width:100% 가 좁은 화면에서 그림을 1/3 로 압착해 글자를 뭉갠다.
+     원본 크기를 지키고 상자에서 옆으로 밀어 본다. */
+  .item-diagram svg { max-width: none !important; }
+  .item-diagram .diagram { margin: 0; padding: 0; border: none; background: none; color: var(--ink);
+    width: max-content; min-width: 100%; }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
+    font-family: var(--serif); font-style: italic; font-size: 0.74rem; color: #7d7364; text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    .item details > summary { grid-template-columns: 1fr auto; }
+    /* 제목은 한 줄을 통째로 쓴다. 토글을 옆에 두면 그만큼 폭을 잃는다. */
+    .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
+    .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
+    .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
+
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-09-07</div>
+<h1><em>07</em> Sep 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">에이전트가 평가·검색·구축·배포 인프라를 갖추면서 프로덕션 단계로 진입했고, 이에 따라 조직 개발 체계가 재편되고 있다.</p><p class="take-body">논문들이 에이전트의 평가(Harbor), 검색(Iris), 구축(Tau-Bench), 배포(프로덕션 코딩) 인프라에 집중하고 있으며, GitHub 도구들(Camofox)은 이를 실제로 구현하기 위한 환경을 제공한다. 동시에 Toss와 카카오는 이런 에이전트 중심의 변화에 맞춰 조직 내 개발 역할과 문서 전달 방식을 재구성하고 있다.</p><div class="take-refs"><span>근거</span><a href="https://arxiv.org/abs/2609.04678" target="_blank" rel="noopener">배포하는 것을 학습하라: 프로덕션 코딩의 토큰 충실 포스트 트레이닝</a> · <a href="https://arxiv.org/abs/2609.04611" target="_blank" rel="noopener">$	au^	au$-Bench: 엔드-투-엔드 실제 에이전트 구축 환경</a> · <a href="https://arxiv.org/abs/2609.04304" target="_blank" rel="noopener">Iris: 검색 최전선으로의 도약</a> · <a href="https://arxiv.org/abs/2609.04298" target="_blank" rel="noopener">Harbor Adapters와 Harbor-Index: 대규모 에이전트 평가를 위한 인프라 및 큐레이션 메타데이터셋</a> · <a href="https://github.com/jo-inc/camofox-browser" target="_blank" rel="noopener">AI 에이전트용 Camofox 브라우저</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/64508ea9-2e60-44c3-8762-6e4d3323a661" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">4개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://tech.kakao.com/posts/834" target="_blank" rel="noopener">카카오, if(kakao)26 컨퍼런스 개최... 모든 연결에 지능을</a></div>
+    <div class="item-meta">Kakao Tech</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://toss.tech/article/technical-writing-2-eng" target="_blank" rel="noopener">우리 전문성을 넘어서</a></div>
+    <div class="item-meta">Toss Tech</div>
+  </div>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">이전에 존재하지 않던 역할을 만들기</span>
+      <span class="item-meta">Toss Tech</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 316" style="width:480px;max-width:100%" role="img" aria-label="코드와 맥락으로 완전한 지식 기록" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">역할의 확대</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">불완전한 기록</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">코드</text><text x="116" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">what</text><line x1="116" y1="130" x2="116" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="162" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">기술문서</text><text x="116" y="202" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">how</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">완전한 SSoT</text><rect x="276" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">코드</text><text x="364" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">what</text><line x1="364" y1="130" x2="364" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="162" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">기술문서</text><text x="364" y="202" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">how</text><line x1="364" y1="216" x2="364" y2="245" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="248" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="271" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">조직 맥락</text><text x="364" y="288" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">why</text><line x1="240" y1="50" x2="240" y2="308" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>코드와 맥락으로 완전한 지식 기록</figcaption></figure></div><div class="item-summary">Toss의 Technical Writer가 문서 작성을 넘어 조직의 지식 관리 시스템을 설계하는 역할로 확대된 과정에 관한 글.<br>- 코드는 '무엇'만 보여주고 '왜'와 의사결정 과정은 담지 못해 문서화가 필수<br>- AI 시대에 조직의 고유한 맥락과 역사를 따로 기록해야 AI가 효과적으로 작동<br>- 완전한 SSoT(Single Source of Truth)는 코드와 그것을 둘러싼 맥락이 함께 있을 때만 완성</div>
+      <div class="item-link"><a href="https://toss.tech/article/technical-writing-1-eng" target="_blank" rel="noopener">이전에 존재하지 않던 역할을 만들기</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Toss에서 문서가 개발자를 찾는 방식</span>
+      <span class="item-meta">Toss Tech</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Toss Frontend 팀이 구축한 새로운 문서 시스템에 관한 글.<br>- 개발자가 문서를 찾기 위해 파고 다니지 않아도 됨<br>- docs와 AI를 통해 개발자의 질문에 즉각적인 답변 제공<br>- 개발자가 개발에만 온전히 집중할 수 있도록 하는 환경 조성</div>
+      <div class="item-link"><a href="https://toss.tech/article/toss-frontend-ai-docs-eng" target="_blank" rel="noopener">Toss에서 문서가 개발자를 찾는 방식</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">2개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Sep/6/research-acceleration-the-view-inside-openai/" target="_blank" rel="noopener">연구 가속화: OpenAI 내부의 관점</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Sep/6/theres-no-limit-to-how-bad-code-can-get/" target="_blank" rel="noopener">나쁜 코드가 나빠질 수 있는 한계는 없다</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Harbor Adapters와 Harbor-Index: 대규모 에이전트 평가를 위한 인프라 및 큐레이션 메타데이터셋</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">에이전트 벤치마크 평가를 위한 통합 평가 인프라 소개<br>- 80개 이상의 벤치마크 어댑터 개발 및 코드 리뷰와 parity experiments로 검증<br>- 8개 모델을 capability tier별로 54개 벤치마크에서 평가</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.04298" target="_blank" rel="noopener">Harbor Adapters와 Harbor-Index: 대규모 에이전트 평가를 위한 인프라 및 큐레이션 메타데이터셋</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Iris: 검색 최전선으로의 도약</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 118" style="width:656px;max-width:100%" role="img" aria-label="하이퍼링크에서 역으로 작업 생성 후 모델 훈련하는 방식" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Iris: 웹 기반 검색 에이전트</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">웹 코퍼스</text><text x="104" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">하이퍼링크 구조</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">작업 생성</text><text x="328" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">설명적 참조</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Iris 모델</text><text x="552" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">35B/397B</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="191" y="61" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">역으로 생성</text><line x1="416" y1="77" x2="461" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="429" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">훈련</text></svg><figcaption>하이퍼링크에서 역으로 작업 생성 후 모델 훈련하는 방식</figcaption></figure></div><div class="item-summary">웹 코퍼스 기반의 멀티홉 검색 에이전트 모델 개발과 훈련 방법론에 관한 논문.<br>- Iris-mini(35B-A3B)와 Iris-pro(397B-A17B) 두 규모의 검색 에이전트 모델 제시<br>- 웹 코퍼스의 하이퍼링크 구조에서 역으로 작업 생성, 엔티티를 설명적 참조로 재작성해 문자열 매칭으로 해결 불가능하게 구성<br>- 참조 모델이 폐쇄책 설정에서는 실패하지만 증거 제공 시 해결하는 질문만 선별하는 훈련 방법 적용</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.04304" target="_blank" rel="noopener">Iris: 검색 최전선으로의 도약</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>$	au^	au$-Bench: 엔드-투-엔드 실제 에이전트 구축 환경</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 196" style="width:480px;max-width:100%" role="img" aria-label="기존 벤치마크와 τ^τ-Bench의 평가 범위 차이" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">에이전트 평가 벤치마크 비교</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">기존 벤치마크</text><rect x="28" y="76" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">에이전트 성능 평가</text><line x1="116" y1="113" x2="116" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="145" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">한정된 작업</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">τ^τ-Bench</text><rect x="276" y="76" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">에이전트 구축 평가</text><line x1="364" y1="113" x2="364" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="145" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">실제 프로덕션 작업</text><line x1="240" y1="50" x2="240" y2="188" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>기존 벤치마크와 τ^τ-Bench의 평가 범위 차이</figcaption></figure></div><div class="item-summary">LLM 에이전트의 실제 프로덕션 환경에서의 구축 능력을 평가하는 벤치마크에 관한 글.<br>- LLM 에이전트가 고객서비스, 분쟁 판정, 내부 시스템 운영 등 프로덕션 소프트웨어로 배포되고 있음<br>- 기존 벤치마크는 실제 클라이언트 계약 조건 하에서 AI 시스템이 에이전트를 구축할 수 있는지 평가하지 못함<br>- $	au^	au$-bench는 개발자 에이전트에게 실제 비즈니스 기록과 클라이언트 요구사항을 제공하여 에이전트 구축을 직접 과제로 삼음</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.04611" target="_blank" rel="noopener">$	au^	au$-Bench: 엔드-투-엔드 실제 에이전트 구축 환경</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>배포하는 것을 학습하라: 프로덕션 코딩의 토큰 충실 포스트 트레이닝</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 196" style="width:480px;max-width:100%" role="img" aria-label="간단한 훈련 환경의 문제를 해결하고 원본 토큰 충실성을 유지하는 방식" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">훈련과 배포 환경 일치</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">기존 훈련 방식</text><rect x="28" y="76" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">간단한 훈련 환경</text><line x1="116" y1="113" x2="116" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="145" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">오프라인 토큰 재구성</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">개선된 훈련 방식</text><rect x="276" y="76" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">원본 프롬프트 샘플링</text><line x1="364" y1="113" x2="364" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="145" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">검증 가능한 토큰 공간</text><line x1="240" y1="50" x2="240" y2="188" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>간단한 훈련 환경의 문제를 해결하고 원본 토큰 충실성을 유지하는 방식</figcaption></figure></div><div class="item-summary">코딩 및 터미널 에이전트의 포스트 트레이닝 파이프라인에서 훈련-배포 환경 불일치로 인한 토큰 및 제어 충실성 오류를 해결하는 방안에 관한 논문<br>- 문제: 간단해진 훈련 환경이 프로덕션 배포와 불일치하고, 에이전트 로그에서 오프라인 토큰 재구성이 원본 프롬프트를 왜곡<br>- 해결책: 충실성 인식 훈련 결합 프레임워크 제시<br>- 구체적 개선: 원본 프롬프트의 트레이너 측 샘플링 유지, 협상된 훈련 프로토콜로 거짓 모델 호출 제거, 검증 가능한 토큰 공간으로 손실 계산 제한</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.04678" target="_blank" rel="noopener">배포하는 것을 학습하라: 프로덕션 코딩의 토큰 충실 포스트 트레이닝</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">DODR: 잠재 공간에서의 결정론적 연산자 기반 추론</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 196" style="width:480px;max-width:100%" role="img" aria-label="기존 AR 모델의 한계를 DODR로 극복" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">DODR: AR 모델 개선</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">AR 모델 (기존)</text><rect x="28" y="76" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">오류 축적</text><line x1="116" y1="113" x2="116" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="145" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">선형 체인 병목</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">DODR (개선)</text><rect x="276" y="76" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">추론-그래프 계산</text><line x1="364" y1="113" x2="364" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="145" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">스냅샷 벡터</text><line x1="240" y1="50" x2="240" y2="188" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>기존 AR 모델의 한계를 DODR로 극복</figcaption></figure></div><div class="item-summary">자동회귀 대규모 언어모델의 추론 방식의 근본적 결함을 해결하기 위한 DODR 아키텍처 제안.<br>- AR 모델의 3가지 결함: 오류 축적, 확률이 필연성을 대체, 선형 체인 정보 병목<br>- 고차원 선형대수 공간에서 추론-그래프 계산으로 추론을 재구성<br>- 추론 상태를 스냅샷 벡터로 표현</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.04782" target="_blank" rel="noopener">DODR: 잠재 공간에서의 결정론적 연산자 기반 추론</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">HyperFrames</span>
+      <span class="item-meta">45,049</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">HTML을 작성하여 비디오로 렌더링하는 도구로, AI 에이전트 구축을 위해 설계되었습니다.<br>- HTML 기반으로 비디오 렌더링 가능<br>- 에이전트 중심 설계<br>- npm 패키지로 제공되며 Node.js 22 이상 필요</div>
+      <div class="item-link"><a href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noopener">HyperFrames</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">MarkItDown</span>
+      <span class="item-meta">179,562</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">LLM과 텍스트 분석 파이프라인에서 사용하기 위해 다양한 파일을 Markdown으로 변환하는 Python 유틸리티<br>- PDF, PowerPoint, Word, Excel, 이미지, 오디오, HTML, YouTube URL, EPUB 등 다양한 파일 포맷 지원<br>- 제목, 목록, 표, 링크 등 문서 구조를 Markdown으로 보존<br>- 텍스트 분석 도구 처리 목적이며 인간이 읽기 위한 고충실도 변환이 아님</div>
+      <div class="item-link"><a href="https://github.com/microsoft/markitdown" target="_blank" rel="noopener">MarkItDown</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">컨텍스트 모드</span>
+      <span class="item-meta">20,615</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Context window optimization for AI coding agents. Sandboxes tool output (98% reduction), persists session memory, and enforces routing across 17 platforms via MCP + hooks.</div>
+      <div class="item-link"><a href="https://github.com/mksglu/context-mode" target="_blank" rel="noopener">컨텍스트 모드</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>AI 에이전트용 Camofox 브라우저</span>
+      <span class="item-meta">9,409</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Camoufox 기반의 탐지 회피 브라우저 서버.<br>- Camoufox(Firefox 포크)를 기반으로 C++ 수준에서 fingerprint spoofing을 수행<br>- AI 에이전트용 탐지 회피 브라우저 서버 제공<br>- MIT 라이선스로 공개되어 있으며, Jo 팀이 개발</div>
+      <div class="item-link"><a href="https://github.com/jo-inc/camofox-browser" target="_blank" rel="noopener">AI 에이전트용 Camofox 브라우저</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">MoonTV: Next.js 기반 크로스 플랫폼 영상 집계 재생기</span>
+      <span class="item-meta">9,620</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Next.js 14, Tailwind CSS, TypeScript로 구축한 오픈소스 영상 스트리밍 플레이어 프로젝트.<br>- 다중 소스 검합 검색, HLS.js &amp; ArtPlayer 통합 재생, 자동 광고 스킵 기능 지원<br>- Kvrocks/Redis/Upstash를 통한 다기기 즐겨찾기·재생 기록 동기화<br>- PWA 지원으로 오프라인 캐시, 데스크톱·모바일 반응형 레이아웃 제공 (배포 후 재생 소스 자체 추가 필요)</div>
+      <div class="item-link"><a href="https://github.com/MoonTechLab/LunaTV" target="_blank" rel="noopener">MoonTV: Next.js 기반 크로스 플랫폼 영상 집계 재생기</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div>
+</body>
+</html>
