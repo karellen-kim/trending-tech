@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-09-13 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1rem; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
+  .item-body { padding: 0 1rem 1.2rem; }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
+    padding: 1rem 0.9rem 0.7rem;
+    /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
+    --accent: #b08a2a; --accent-wash: #f6f1e2; }
+  /* svg 인라인 max-width:100% 가 좁은 화면에서 그림을 1/3 로 압착해 글자를 뭉갠다.
+     원본 크기를 지키고 상자에서 옆으로 밀어 본다. */
+  .item-diagram svg { max-width: none !important; }
+  .item-diagram .diagram { margin: 0; padding: 0; border: none; background: none; color: var(--ink);
+    width: max-content; min-width: 100%; }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
+    font-family: var(--serif); font-style: italic; font-size: 0.74rem; color: #7d7364; text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    .item details > summary { grid-template-columns: 1fr auto; }
+    /* 제목은 한 줄을 통째로 쓴다. 토글을 옆에 두면 그만큼 폭을 잃는다. */
+    .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
+    .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
+    .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
+
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-09-13</div>
+<h1><em>13</em> Sep 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 하이라이트</span>
+    
+  </div>
+  <ul class="highlight-list"><li><a href="https://github.com/JustVugg/colibri" target="_blank" rel="noopener">작은 엔진으로 거대 모델 구현, 모델 최적화의 새로운 방향</a></li><li><a href="https://simonwillison.net/2026/Sep/12/astra-running-routes/" target="_blank" rel="noopener">최신 LLM으로 실제 업무 자동화 사례 구현</a></li><li><a href="https://blog.vespa.ai/public-mcp-interns/" target="_blank" rel="noopener">AI 개발 표준 프로토콜 공개, 개발자 커뮤니티 지원</a></li><li><a href="https://github.com/tech-leads-club/agent-skills" target="_blank" rel="noopener">에이전트 스킬 프레임워크, AI 개발 패러다임 전환</a></li><li><a href="https://github.com/melgarafael/DeskcommCRM" target="_blank" rel="noopener">오픈소스 AI 판매 자동화, 비즈니스 실용 사례</a></li></ul>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">1개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">배포, 발견, 검사, 관찰: 공개 Vespa MCP 서버 개발기</span>
+      <span class="item-meta">Vespa Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 247" style="width:480px;max-width:100%" role="img" aria-label="커스텀 통합을 MCP 표준으로 대체" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">MCP로 Vespa 통합</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">기존</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AI 어시스턴트</text><text x="116" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">Claude,…</text><line x1="116" y1="130" x2="116" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="162" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Custom</text><text x="116" y="202" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Integration</text><text x="116" y="219" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">도구별 구축</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">새로움</text><rect x="276" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AI 어시스턴트</text><text x="364" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">Claude,…</text><line x1="364" y1="130" x2="364" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="162" width="176" height="71" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="202" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">MCP Server</text><line x1="240" y1="50" x2="240" y2="239" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>커스텀 통합을 MCP 표준으로 대체</figcaption></figure></div><div class="item-summary">Vespa Cloud용 공개 MCP 서버 개발 및 평가 방식 구축에 관한 인턴십 프로젝트 결과<br>- Vespa Cloud 애플리케이션과 Claude/Codex 같은 AI 어시스턴트의 직접 상호작용을 가능하게 하는 MCP 서버 개발<br>- MCP(Model Context Protocol)는 커스텀 통합을 대체하는 표준화된 인터페이스로, 모든 호환 LLM/AI 에이전트와 연결 가능<br>- MCP 서버의 에이전트 사용성을 평가하고 Vespa CLI 직접 접근 대비 채점하는 평가 체계 구축</div>
+      <div class="item-link"><a href="https://blog.vespa.ai/public-mcp-interns/" target="_blank" rel="noopener">배포, 발견, 검사, 관찰: 공개 Vespa MCP 서버 개발기</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">GPT-6 Astra와 ChatGPT Work로 러닝 경로 생성하기</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">ChatGPT Work에서 GPT-6 Astra를 사용해 사용자의 주소로부터 루프형 러닝 경로를 자동 생성한 사례<br>- OSM 데이터를 기반으로 5K, 10K 러닝 경로 생성<br>- 내장 시각화와 GPX, GeoJSON 파일로 다운로드 가능<br>- 처리 시간 27분</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Sep/12/astra-running-routes/" target="_blank" rel="noopener">GPT-6 Astra와 ChatGPT Work로 러닝 경로 생성하기</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">캘리포니아 갈색 펠리컨</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">San Mateo County의 Pacifica Pier에서 촬영한 캘리포니아 갈색 펠리컨의 사진<br>- 촬영지: San Mateo County, CA, US의 Pacifica Pier<br>- Pacifica Pier는 6월 초에 콘크리트 보도 균열로 인해 폐쇄됨</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Sep/12/sighting-399708714/" target="_blank" rel="noopener">캘리포니아 갈색 펠리컨</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Paul Ford의 말</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 196" style="width:480px;max-width:100%" role="img" aria-label="초기 예상과 현실의 차이를 보여줍니다" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">AI 시대 개발자의 역할</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">초기 예상</text><rect x="28" y="76" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AI 로봇 등장</text><line x1="116" y1="113" x2="116" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="145" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AI로 개발자 대체</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">현실</text><rect x="276" y="76" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">인간 전문성 필수</text><line x1="364" y1="113" x2="364" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="145" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AI 우수하지만 오류</text><line x1="240" y1="50" x2="240" y2="188" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>초기 예상과 현실의 차이를 보여줍니다</figcaption></figure></div><div class="item-summary">AI 시대 소프트웨어 개발자 역할의 미래에 대한 Paul Ford의 견해.<br>- 초기에 AI 로봇의 등장으로 개발자 역할이 사라질 것처럼 보였음<br>- 진정한 첨단 소프트웨어 개발에는 인간의 사고와 협력, 개인의 기술과 전문성이 필수적<br>- AI는 매우 좋은 소프트웨어를 작성할 수 있지만 실수를 범하기도 쉬움</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Sep/12/paul-ford/" target="_blank" rel="noopener">Paul Ford의 말</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Colibri — 작은 엔진, 거대한 모델</span>
+      <span class="item-meta">29,119</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">C 언어로 작성한 경량 MoE 추론 엔진으로, 소비자 하드웨어에서 744B~2.8T 규모의 거대 언어 모델을 실행한다.<br>- 스토리지·RAM·VRAM을 단일 추론 계층으로 취급하는 AI 메모리 멀티티어링 기술 사용<br>- GLM-5.2/5.3(744B), Kimi K3(2.8T), DeepSeek V4/V4.1, Qwen 등 9개 모델군 지원<br>- 순수 C 언어 작성, 엔진 의존성 없음, 동일한 `coli chat`/`coli serve`/`coli web` 프론트엔드 사용</div>
+      <div class="item-link"><a href="https://github.com/JustVugg/colibri" target="_blank" rel="noopener">Colibri — 작은 엔진, 거대한 모델</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Ever Gauzy 플랫폼</span>
+      <span class="item-meta">4,705</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">협업·온디맨드·공유 경제를 위한 오픈 소스 비즈니스 관리 플랫폼<br>- ERP(전사적 자원 관리)·CRM(고객 관계 관리)·HRM(인적 자원 관리) 기능 제공<br>- Ever Works(오픈 에이전틱 런타임)와 Ever Teams(오픈 업무·생산성 플랫폼) 관련 프로젝트 운영<br>- AGPL v3 라이선스 기반의 오픈 소스 프로젝트</div>
+      <div class="item-link"><a href="https://github.com/ever-co/ever-gauzy" target="_blank" rel="noopener">Ever Gauzy 플랫폼</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Tech Leads Club Agent Skills</span>
+      <span class="item-meta">5,468</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">The secure, validated skill registry for professional AI coding agents. Extend Antigravity, Claude Code, Cursor, Copilot and more with absolute confidence.</div>
+      <div class="item-link"><a href="https://github.com/tech-leads-club/agent-skills" target="_blank" rel="noopener">Tech Leads Club Agent Skills</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">🛠️ DeskcommCRM — WhatsApp용 오픈 소스 AI 판매 관리 시스템</span>
+      <span class="item-meta">2,051</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">WhatsApp에서 작동하는 AI 에이전트를 탑재한 오픈 소스 CRM 플랫폼<br>- AI 에이전트가 WhatsApp에서 고객 응대, 자격 심사, 판매를 자동으로 수행<br>- 자체 서버 실행 방식으로 월정액 없음, 모든 기능 활성화, 데이터 완전 소유<br>- Next.js 16, TypeScript, Supabase(Postgres+Auth+Storage) 기반 구축</div>
+      <div class="item-link"><a href="https://github.com/melgarafael/DeskcommCRM" target="_blank" rel="noopener">🛠️ DeskcommCRM — WhatsApp용 오픈 소스 AI 판매 관리 시스템</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">OpenMontage</span>
+      <span class="item-meta">58,172</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">첫 번째 오픈소스 에이전트 기반 비디오 프로덕션 시스템.<br>- 비디오를 붙여넣으면(Paste A Video) 자동으로 처리하는 기능 제공<br>- 파이프라인 기반의 모듈식 워크플로우 구조<br>- AGPLv3 오픈소스 라이선스로 공개</div>
+      <div class="item-link"><a href="https://github.com/calesthio/OpenMontage" target="_blank" rel="noopener">OpenMontage</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div>
+</body>
+</html>
