@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026년 9월 — Trending Tech</title>
+<title>2026-W38 — Trending Tech</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -205,24 +205,21 @@
 </head>
 <body>
 <div class="top-bar">
-  <a href="./index.html" class="back-btn">&larr; 목록</a>
-  <span class="page-meta">2026-09</span>
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
 </div>
-<div class="page-meta">MONTHLY DIGEST</div>
-<h1>2026년 9월 <em>기술 흐름</em></h1>
+<div class="page-meta">2026-W38</div>
+<h1>2026년 9월 14일 ~ 9월 20일</h1>
 <div class="section highlight-section" id="take">
   <div class="section-header">
     <span class="section-icon">★</span>
-    <span class="section-title">이 달의 해석</span>
+    <span class="section-title">이 주의 해석</span>
   </div>
-  <div class="take"><p class="take-headline">에이전트가 검증·모니터링·거버넌스 인프라 없이는 프로덕션에서 신뢰할 수 없다는 깨달음이 전산업으로 확산했다.</p><p class="take-body">W38에서는 LLM 에이전트의 사전 검증 방법론이 주목받았고, W37에서는 AWS·Databricks 같은 클라우드 기업들이 프로덕션 에이전트 모니터링과 거버넌스 인프라를 적극 개발하고 있다. 단순히 '에이전트가 잘 작동한다'에서 '신뢰할 수 있고, 감시하고, 규칙을 따르는 에이전트'로 요구사항이 고도화되었다. 이는 에이전트가 도구에서 엔터프라이즈 워크플로우의 필수 구성 요소로 진입했다는 신호다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://arxiv.org/abs/2609.11957" target="_blank" rel="noopener">도약 전 확인: LLM 에이전트를 위한 사전 검증</a><span class="pick-why">에이전트 신뢰성 검증의 학술적 기초</span></li><li><a href="https://simonwillison.net/2026/Sep/14/commit-rewriter/" target="_blank" rel="noopener">commit-rewriter 0.1</a><span class="pick-why">에이전트가 개발 도구로 나왔다는 신호</span></li><li><a href="https://aws.amazon.com/blogs/machine-learning/monitoring-production-agent-lifecycle-with-aws-devops-agent-and-agentcore-evaluations/" target="_blank" rel="noopener">AWS DevOps Agent와 AgentCore Evaluations으로 프로덕션 에이전트 라이프사이클 모니터링하기</a><span class="pick-why">프로덕션 모니터링 인프라화</span></li><li><a href="https://toss.tech/article/52631" target="_blank" rel="noopener">AI가 팀 규칙을 지키도록 하는 방법</a><span class="pick-why">거버넌스의 실무적 해답</span></li></ol></div></div>
+  <div class="take"><p class="take-headline">LLM 기반 커밋/리뷰 도구 실행 시대, 에이전트 검증과 RAG 고도화가 동시 필수조건</p><p class="take-body">commit-rewriter 0.1 출시와 alibaba/OpenCodeReview 공개로 LLM 개발 자동화가 현실화되는 동시에, 이들 도구의 신뢰성을 보장하기 위한 검증 방법론이 학술과 산업에서 병행 진행 중이다. harness isolation과 pre-leap verification 같은 검증 프레임이 강조되고, 계층적 문맥 인식 RAG 고도화도 동반되는 상황이다. 즉 '도구화'와 '신뢰성 보장'이 불가분의 쌍으로 작동하는 시점이 이번 주의 특징이다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://simonwillison.net/2026/Sep/14/commit-rewriter/" target="_blank" rel="noopener">commit-rewriter 0.1</a><span class="pick-why">자동화 트렌드의 구체적 도구 실행 증거</span></li><li><a href="https://github.com/alibaba/open-code-review" target="_blank" rel="noopener">alibaba/OpenCodeReview</a><span class="pick-why">엔터프라이즈 규모로의 산업화 신호</span></li><li><a href="https://arxiv.org/abs/2609.11957" target="_blank" rel="noopener">도약 전 확인: LLM 에이전트를 위한 사전 검증</a><span class="pick-why">에이전트 신뢰성의 선행 필요조건 정의</span></li><li><a href="https://arxiv.org/abs/2609.11987" target="_blank" rel="noopener">하니스인가 모델인가? 오염 제어 사설 스위트로 에이전트 코딩의 하니스 효과 격리</a><span class="pick-why">검증 방법론의 이론적 토대</span></li></ol></div></div>
 </div>
-<div class="section" id="weeks">
-  <div class="section-header">
-    <span class="section-icon">주간</span>
-    <span class="section-title">이 달의 주차</span>
-  </div>
-  <a href="./2026-W38.html" class="day-link"><span class="day-label">2026년 9월 14일 ~ 9월 20일</span><span class="day-date">2026-W38</span><span class="day-arrow">&rarr;</span></a><a href="./2026-W37.html" class="day-link"><span class="day-label">2026년 9월 7일 ~ 9월 13일</span><span class="day-date">2026-W37</span><span class="day-arrow">&rarr;</span></a>
+<div class="days-section">
+  <div class="days-section-title">이번 주 일별 보기</div>
+  <a href="./2026-09-14.html" class="day-link"><span class="day-label">월요일</span><span class="day-date">2026-09-14</span><span class="day-arrow">&rarr;</span></a>
 </div>
 </body>
 </html>
