@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-09-17 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1rem; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
+  .item-body { padding: 0 1rem 1.2rem; }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
+    padding: 1rem 0.9rem 0.7rem;
+    /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
+    --accent: #b08a2a; --accent-wash: #f6f1e2; }
+  /* svg 인라인 max-width:100% 가 좁은 화면에서 그림을 1/3 로 압착해 글자를 뭉갠다.
+     원본 크기를 지키고 상자에서 옆으로 밀어 본다. */
+  .item-diagram svg { max-width: none !important; }
+  .item-diagram .diagram { margin: 0; padding: 0; border: none; background: none; color: var(--ink);
+    width: max-content; min-width: 100%; }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
+    font-family: var(--serif); font-style: italic; font-size: 0.74rem; color: #7d7364; text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    .item details > summary { grid-template-columns: 1fr auto; }
+    /* 제목은 한 줄을 통째로 쓴다. 토글을 옆에 두면 그만큼 폭을 잃는다. */
+    .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
+    .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
+    .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
+
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-09-17</div>
+<h1><em>17</em> Sep 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">에이전트가 자신의 정책을 반복 개선하고 메모리를 유지하면서, 그걸 비용 효율적으로 구현하는 게 다음 단계</p><p class="take-body">에이전트 관련 논문들(Apple 메모리, 자기개선 프레임워크, 물리 작업)은 LLM이 반복적으로 자신의 정책을 개선하고 상태를 유지할 수 있다는 걸 보여준다. 이게 실현되려면 추론 비용을 획기적으로 줄여야 하는데, 프롬프트 캐싱(1)과 효율적 모델(14)로 해결 중이다. 동시에 보안·감시 관련 글이 늘어나는 건 실제 엔터프라이즈 도입 단계에 진입했다는 신호다.</p><div class="take-refs"><span>근거</span><a href="https://machinelearning.apple.com/research/shared-selective-persistent-memory" target="_blank" rel="noopener">에이전트 LLM 시스템을 위한 공유 선택적 지속 메모리</a> · <a href="https://arxiv.org/abs/2609.13406" target="_blank" rel="noopener">일반화 에이전트 반복: 반복적 정책 개선과 재귀적 자기 개선을 위한 형식적 프레임워크</a> · <a href="https://arxiv.org/abs/2609.15364" target="_blank" rel="noopener">RSIAgent: 새로운 환경에서의 재귀적 자기개선을 위한 자율 탐색</a> · <a href="https://aws.amazon.com/blogs/machine-learning/optimizing-cost-and-latency-with-amazon-bedrock-prompt-caching/" target="_blank" rel="noopener">Amazon Bedrock 프롬프트 캐싱으로 비용과 레이턴시 최적화</a> · <a href="https://arxiv.org/abs/2609.13356" target="_blank" rel="noopener">ZGCM-1: 수학 및 에이전트 검색을 위한 완전 오픈 극도로 효율적인 기초 모델</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/f2e599f9-ab38-4be7-a43a-2a603b2d6835" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">11개</span>
+  </div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Amazon Bedrock 프롬프트 캐싱으로 비용과 레이턴시 최적화</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 230" style="width:480px;max-width:100%" role="img" aria-label="동일 컨텍스트 반복 요청 시 입력 토큰 비용 비교" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">프롬프트 캐싱의 비용 절감</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">캐싱 없음</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="108" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">컨텍스트 반복 요청</text><line x1="116" y1="130" x2="116" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="162" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">입력 토큰 비용</text><text x="116" y="202" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">100%</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">캐싱 있음</text><rect x="276" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Converse API</text><text x="364" y="116" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">사용</text><line x1="364" y1="130" x2="364" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="162" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">입력 토큰 비용</text><text x="364" y="202" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">최대 90% 절감</text><line x1="240" y1="50" x2="240" y2="222" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>동일 컨텍스트 반복 요청 시 입력 토큰 비용 비교</figcaption></figure></div><div class="item-summary">Amazon Bedrock의 프롬프트 캐싱을 통해 입력 토큰 비용을 절감하는 방법을 다룬 글.<br>- 동일한 컨텍스트를 반복해서 보낼 때 입력 토큰 비용을 최대 90%까지 절감 가능<br>- Converse API를 사용해 프롬프트 캐싱을 구현<br>- 6가지 실제 시나리오: message content, system prompt, tool definition, mixed TTL, tenant isolation, LangChain integration</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/optimizing-cost-and-latency-with-amazon-bedrock-prompt-caching/" target="_blank" rel="noopener">Amazon Bedrock 프롬프트 캐싱으로 비용과 레이턴시 최적화</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Amazon SageMaker 서버리스 모델 커스터마이제이션을 이용한 AI 기반 제품 태깅 시스템 구축</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 187" style="width:656px;max-width:100%" role="img" aria-label="모델 커스터마이징으로 빠르고 일관성 있는 태그 자동화" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Qwen3-8B 기반 제품 태깅</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Qwen3-8B</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">SFT·RLVR</text><text x="328" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">커스터마이징</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">SageMaker</text><text x="552" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Serverless</text><rect x="16" y="136" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="159" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">제품 태깅 시스템</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="205" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">학습</text><line x1="416" y1="77" x2="461" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="429" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">배포</text><path d="M 552 104 L 552 120 L 104 120 L 104 133" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="306" y="104" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="115" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">태그 생성</text></svg><figcaption>모델 커스터마이징으로 빠르고 일관성 있는 태그 자동화</figcaption></figure></div><div class="item-summary">수동 태깅의 느리고 불일관적인 문제를 해결하기 위해 Qwen3-8B 모델을 Amazon SageMaker에서 커스터마이징하고 배포하는 방법을 소개하는 글.<br>- Qwen3-8B를 supervised fine-tuning(SFT)과 reinforcement learning with verifiable rewards(RLVR)로 커스터마이징<br>- Amazon SageMaker serverless model customization 플랫폼 사용<br>- 비동기 추론으로 배포하여 비용 효율적인 제품 태깅 시스템 구축</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/build-an-ai-powered-product-tagging-system-with-amazon-sagemaker-serverless-model-customization/" target="_blank" rel="noopener">Amazon SageMaker 서버리스 모델 커스터마이제이션을 이용한 AI 기반 제품 태깅 시스템 구축</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Amazon SageMaker AI 훈련 작업을 위한 인스턴스 선호도 목록 발표</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Amazon SageMaker AI의 훈련 및 처리 작업을 위한 인스턴스 선호도 목록 기능 소개<br>- 최대 5개의 인스턴스 타입을 순서대로 지정 가능<br>- 가용 용량이 있는 첫 번째 타입에서 자동으로 작업 실행<br>- 수동 재시도 루프와 용량 감시 스크립트 제거</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/announcing-instance-preference-lists-for-amazon-sagemaker-ai-training-jobs/" target="_blank" rel="noopener">Amazon SageMaker AI 훈련 작업을 위한 인스턴스 선호도 목록 발표</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>에이전트 LLM 시스템을 위한 공유 선택적 지속 메모리</span>
+      <span class="item-meta">Apple ML Research</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">마ル티턴 도구 사용으로 코드를 생성하는 에이전트 LLM 시스템의 메모리 아키텍처에 관한 논문<br>- 문제: 매 세션이 처음부터 시작되어 설정, 도메인 제약, 데이터 스키마, 도구 사용 패턴 등 이전 세션의 생산성 요소를 버림<br>- 기존 방식의 한계: 전체 대화 이력 저장은 토큰 비효율적이며 무관한 컨텍스트가 생성 품질을 저하시킴<br>- 제시된 솔루션: 에이전트 시스템을 위한 'shared selective persistent memory' 메모리 아키텍처</div>
+      <div class="item-link"><a href="https://machinelearning.apple.com/research/shared-selective-persistent-memory" target="_blank" rel="noopener">에이전트 LLM 시스템을 위한 공유 선택적 지속 메모리</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Gemini 3.8 Live와 3.8 Live Extended Thinking 소개</span>
+      <span class="item-meta">Google DeepMind</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 221" style="width:656px;max-width:100%" role="img" aria-label="음성 입력부터 자연스러운 응답까지의 처리 흐름" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Gemini 3.8 Live 출시</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">음성 입력</text><rect x="240" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Gemini 3.8</text><text x="328" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Live</text><text x="328" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">지능 &amp; 병렬 추론</text><rect x="464" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">다중 작업 처리</text><text x="552" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">추론, 시각,…</text><rect x="16" y="153" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="176" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">음성 응답</text><text x="104" y="193" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">자연스럽고 유동적</text><line x1="416" y1="86" x2="461" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="418" y="70" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">동시 처리</text></svg><figcaption>음성 입력부터 자연스러운 응답까지의 처리 흐름</figcaption></figure></div><div class="item-summary">Google이 새로운 음성 대화 모델인 Gemini 3.8 Live와 3.8 Live Extended Thinking을 출시했다.<br>- 지능 및 병렬 추론의 주요 업그레이드로 음성 상호작용이 더 자연스럽고 유동적이며 지능적이다<br>- 복잡한 추론, 실시간 시각 맥락, 백그라운드 작업을 대화 중단 없이 처리할 수 있다<br>- Gemini API, Google Workspace, Gemini 앱을 통해 오늘부터 사용 가능하다</div>
+      <div class="item-link"><a href="https://deepmind.google/blog/introducing-gemini-3-8-live-and-3-8-live-extended-thinking/" target="_blank" rel="noopener">Gemini 3.8 Live와 3.8 Live Extended Thinking 소개</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">추론 병목 우회: Retrieve-for-Train을 이용한 복잡한 AI 검색 가속화</span>
+      <span class="item-meta">Google Research</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">강화학습으로 경량 확산 모델을 학습하여 AI 검색의 추론 비용을 줄이는 Retrieve-for-Train 프레임워크에 관한 논문.<br>- 강화학습을 통해 경량 확산 모델을 한 번 학습하여 비싼 추론 시간 계산을 우회함<br>- 무거운 자동회귀 '생각 예산' 대신 즉시 일관성 있고 전문가 수준의 검색 결과 생성<br>- 현대 검색·추천 시스템은 단일 최적 결과가 아니라 일관되고 상보적인 결과 세트를 반환해야 함 (예: "camping gear" 검색 시 텐트만 10개가 아니라 텐트·침낭·스토브·헤드램프 등 다양한 카테고리 포함)</div>
+      <div class="item-link"><a href="https://research.google/blog/bypassing-inference-bottlenecks-accelerating-complex-ai-search-with-retrieve-for-train/" target="_blank" rel="noopener">추론 병목 우회: Retrieve-for-Train을 이용한 복잡한 AI 검색 가속화</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">제3자 위험 평가 | Confluent와 함께 자신감 있게 빠르게 나아가기</span>
+      <span class="item-meta">Confluent Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">클라우드 벤더 보안 검증을 위한 제3자 위험 평가(TPRA)의 중요성과 Confluent의 지원에 관한 글<br>- TPRA는 벤더의 보안 태세·운영 복원력·규정 준수 기준을 체계적으로 평가하여 검증 가능한 증거 제공<br>- TPRA는 조달 사이클 단축, DORA·GDPR·APRA 등 규정 준수 지원, 벤더 1회 평가로 고객이 다중 접근 가능<br>- Confluent는 Trust Center에서 조달 담당자부터 CISO까지 다양한 이해관계자를 위한 평가 보고서 제공</div>
+      <div class="item-link"><a href="https://www.confluent.io/blog/third-party-risk-assessments-or-how-confluent-helps-you-move-faster-with-confidence/" target="_blank" rel="noopener">제3자 위험 평가 | Confluent와 함께 자신감 있게 빠르게 나아가기</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Genie와 AI 비즈니스 프로세스를 통한 에너지 도난 탐지의 통제된 실행</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">에너지 공급 회사가 ML 도난 탐지를 조사·복구·보고으로 연결하는 통합 워크플로우 구축 방법에 관한 글.<br>- 영국에서 에너지 도난으로 인한 연간 £1.4억 손실, 목표 사건의 40%만 탐지<br>- Databricks App이 리스크 해석, 조사 우선순위, 보고서 작성, 복구 워크플로우를 단일 플랫폼에서 통합하고 Lakebase가 실시간 사건 상태와 복구 총액 관리<br>- Genie One, Unity Catalog, Unity Gateway, Agent Bricks로 신뢰할 수 있는 메트릭, 통제된 AI 사용, 자동화된 임원진 보고서 제공</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/how-energy-teams-turn-theft-detection-governed-action-genie-and-ai-business-processes" target="_blank" rel="noopener">Genie와 AI 비즈니스 프로세스를 통한 에너지 도난 탐지의 통제된 실행</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">OMB M-26-14를 위한 CISA의 로깅 참조 아키텍처: 연방 기관이 다음으로 해야 할 일</span>
+      <span class="item-meta">Elastic Search Labs</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">CISA가 OMB M-26-14를 위한 Logging Reference Architecture(LRA)를 출시하고 연방 기관이 로깅 계획을 완료해야 하는 상황에 관한 글<br>- CISA가 Logging Reference Architecture(LRA) 공개<br>- OMB M-26-14 대응으로 연방 기관의 로깅 계획 완료 필요<br>- LRA 가이던스의 주요 측면 설명</div>
+      <div class="item-link"><a href="https://www.elastic.co/search-labs/blog/cisa-logging-omb-m-26-14" target="_blank" rel="noopener">OMB M-26-14를 위한 CISA의 로깅 참조 아키텍처: 연방 기관이 다음으로 해야 할 일</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Elastic Serverless 교차 프로젝트 검색 GA 출시 - 데이터 이동 없이 연결된 모든 프로젝트 검색 가능</span>
+      <span class="item-meta">Elastic Search Labs</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Elastic Cloud Serverless에서 교차 프로젝트 검색 기능의 정식 출시 공지.<br>- 여러 프로젝트를 링크한 후 단일 Discover 또는 ES|QL 세션에서 모두 쿼리 가능<br>- 인증서나 원격 클러스터 설정 없이 3클릭으로 구성<br>- 2026년 9월 1일부터 이용 가능</div>
+      <div class="item-link"><a href="https://www.elastic.co/search-labs/blog/cross-project-search-elastic-serverless-ga" target="_blank" rel="noopener">Elastic Serverless 교차 프로젝트 검색 GA 출시 - 데이터 이동 없이 연결된 모든 프로젝트 검색 가능</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">리더보드 1등 LLM, 토스에서도 1등일까? - Toss Benchmark 구축기</span>
+      <span class="item-meta">Toss Tech</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">토스에서 범용 LLM 리더보드의 높은 점수가 실제 서비스 성능을 보장하지 않는다는 문제를 해결하기 위해 Toss Benchmark를 구축한 사례에 관한 글.<br>- 토스의 LLM 활용 영역이 커머스(카탈로그 생성, 판매자 음성 에이전트), 금융(카드 약관 분석, 대출 상담), 광고, 가맹점 심사, 개발·운영 등으로 다양함<br>- 영어를 잘 이해하는 모델이 한국어를 잘 처리한다는 보장이 없고, 추론 모드의 고점수가 빠른 응답이 필요한 환경에서도 같은 성능을 낸다는 보장이 없음<br>- Toss Benchmark는 한정된 GPU 자원에서 서빙할 모델을 선별하고 Toss Foundation 모델이 갖춰야 할 능력을 정하기 위한 기준임</div>
+      <div class="item-link"><a href="https://toss.tech/article/toss-benchmark" target="_blank" rel="noopener">리더보드 1등 LLM, 토스에서도 1등일까? - Toss Benchmark 구축기</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">2개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">내러티브 완성하기</span>
+      <span class="item-meta">Martin Fowler</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">프레젠테이션 구축 시 내러티브 구성 방법에 관한 조언<br>- Big idea를 정리하기<br>- 청중을 시각화하기<br>- 구조화된 스토리라인을 구축하기</div>
+      <div class="item-link"><a href="https://martinfowler.com/articles/never-send-slides/nail-your-narrative.html" target="_blank" rel="noopener">내러티브 완성하기</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Gemini Live 음성</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Google이 새로운 음성-음성 모델들을 출시한 소식.<br>- Google이 Gemini 3.8 Live와 3.8 Live Extended Thinking이라는 두 개의 음성-음성 모델 출시<br>- OpenAI의 GPT-Live 패밀리와 비슷한 형태<br>- Simon Willison의 도구를 통해 접근 가능</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Sep/15/gemini-live/" target="_blank" rel="noopener">Gemini Live 음성</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>ZGCM-1: 수학 및 에이전트 검색을 위한 완전 오픈 극도로 효율적인 기초 모델</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 452 325" style="width:452px;max-width:100%" role="img" aria-label="컴팩트 모델에 사고와 도구를 결합한 설계" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="226" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">ZGCM-1 효율적 기초 모델</text><rect x="96" y="50" width="260" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">7B 밀집 기초 모델</text><rect x="96" y="119" width="260" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="142" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">의도적 사고</text><rect x="96" y="188" width="260" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="211" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">도구 사용</text><rect x="96" y="257" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="280" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">256K 컨텍스트</text><text x="226" y="297" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">슬라이딩 윈도우</text><line x1="226" y1="156" x2="226" y2="185" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="217" y="164" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="228" y="175" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">결합</text></svg><figcaption>컴팩트 모델에 사고와 도구를 결합한 설계</figcaption></figure></div><div class="item-summary">처음부터 훈련된 7B 밀집 기초 모델로 극도의 데이터·시스템·알고리즘 효율성을 달성한 모델.<br>- 컴팩트 모델이 내부의 의도적 사고와 외부 도구 사용을 결합하여 매개변수 용량 제한을 극복하는 설계 철학<br>- 256K 컨텍스트를 지원하는 고효율 오픈 훈련 레시피 개발<br>- 아키텍처와 시스템 공동 설계를 통한 인터리브된 게이트형 슬라이딩 윈도우와 전체 주의 메커니즘 적용</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.13356" target="_blank" rel="noopener">ZGCM-1: 수학 및 에이전트 검색을 위한 완전 오픈 극도로 효율적인 기초 모델</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>일반화 에이전트 반복: 반복적 정책 개선과 재귀적 자기 개선을 위한 형식적 프레임워크</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">arXiv:2609.13406v1 Announce Type: new <br>Abstract: When we speak of recursive self-improvement (RSI), are we speaking of a phenomenon, a mechanism, or a prospect? Towards autonomous and evolving intelligence, RSI is being claimed at many scales, while no single framework that formally describes these emerging instances exists. Its counterpart in the classical realm, iterative policy improvement, is characterized by generalized policy iteration (GPI), a framework of broad applicability with well-understood theoretical properties, but only where the update principle and the evaluation base lie out</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.13406" target="_blank" rel="noopener">일반화 에이전트 반복: 반복적 정책 개선과 재귀적 자기 개선을 위한 형식적 프레임워크</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">자적응형 물리적 AI를 향하여: LLM 에이전트가 장기 물리 작업을 관리할 수 있을까?</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">arXiv:2609.13436v1 Announce Type: new <br>Abstract: Large Language Model (LLM) agents offer a promising path toward autonomously managing long-term physical tasks without human intervention. However, physical tasks require agents to continuously observe the environment, make consequential actions, and remain effective as the environment changes. Existing approaches either require substantial data and retraining, or primarily focus on agents operating in the virtual world. In this work, we explore the feasibility of building a self-adaptive physical AI agent that manages long-term physical tasks i</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.13436" target="_blank" rel="noopener">자적응형 물리적 AI를 향하여: LLM 에이전트가 장기 물리 작업을 관리할 수 있을까?</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">신뢰성 있는 에이전트 AI: 위협 환경, 방어 아키텍처, 미해결 과제에 관한 사이버보안 및 시스템 종합 조사</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 196" style="width:480px;max-width:100%" role="img" aria-label="실행 권한 추가로 고전적 보안 경계 붕괴" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">기초 모델 vs 에이전틱 AI</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">기초 모델</text><rect x="28" y="76" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">격리된 신경망</text><line x1="116" y1="113" x2="116" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="145" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">고전적 보안경계</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">에이전틱 AI</text><rect x="276" y="76" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">도구 실행 권한</text><line x1="364" y1="113" x2="364" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="145" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">경계 붕괴</text><line x1="240" y1="50" x2="240" y2="188" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>실행 권한 추가로 고전적 보안 경계 붕괴</figcaption></figure></div><div class="item-summary">기초 모델에서 자율적 에이전트 AI로의 전환으로 인한 사이버보안 위협 및 방어 체계에 관한 조사<br>- 에이전틱 AI 시스템의 구조: 재귀적 인지 추론 루프, 지속적 메모리 아키텍처, 실시간 도구 실행 평면, 다중 에이전트 협력 구조 결합<br>- 보안 경계 붕괴: 확률적 신경망 코어가 파일시스템, 네트워크, 클라우드 인프라에 대한 실행 권한을 가질 때 고전적 보안 경계가 해소됨<br>- 자연어의 다중 역할: 동시에 입력 데이터, 내부 제어 코드, 통신 프로토콜로 작동하는 문제</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.13731" target="_blank" rel="noopener">신뢰성 있는 에이전트 AI: 위협 환경, 방어 아키텍처, 미해결 과제에 관한 사이버보안 및 시스템 종합 조사</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>RSIAgent: 새로운 환경에서의 재귀적 자기개선을 위한 자율 탐색</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">arXiv:2609.15364v1 Announce Type: new <br>Abstract: Digital agents must often adapt to new environments whose interfaces, tools, and failure modes are not fully captured by pretrained models. We introduce \textbf{RSIAgent}, a training-free multi-agent framework for recursive self-improvement through autonomous memory construction. RSIAgent coordinates curriculum, actor, and verifier agents to continually explore the environment, validate outcomes, and retain environment-specific knowledge, including reusable causal relationships between actions, conditions, and consequences. It further adopts a \</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.15364" target="_blank" rel="noopener">RSIAgent: 새로운 환경에서의 재귀적 자기개선을 위한 자율 탐색</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">알리바바 Open Code Review</span>
+      <span class="item-meta">30,838</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI &amp; Anthropic compatible.</div>
+      <div class="item-link"><a href="https://github.com/alibaba/open-code-review" target="_blank" rel="noopener">알리바바 Open Code Review</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Cloudflare 보안 감사 스킬</span>
+      <span class="item-meta">6,043</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">코딩 에이전트를 보안 감사자로 변환하는 스킬로, 6단계 구조화된 감사 프로세스를 통해 취약점을 발견한다.<br>- 아키텍처 매핑, 신뢰 경계, 입력 표면을 자동으로 식별하고 커버리지를 추적하는 Reconnaissance 단계<br>- 독립적인 검증자를 통해 후보마다 결과를 검증하고 최종 기록을 독립적으로 재검증하는 다층 검증 체계<br>- Cloudflare의 실제 취약점 발견 시스템의 출발점이며, 다중 단계·전사적 시스템으로 성장한 바탕이 된 초기 버전</div>
+      <div class="item-link"><a href="https://github.com/cloudflare/security-audit-skill" target="_blank" rel="noopener">Cloudflare 보안 감사 스킬</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Colibri — 작은 엔진, 거대한 모델</span>
+      <span class="item-meta">34,699</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">C로 구현된 대규모 MoE 모델 추론 엔진에 관한 프로젝트.<br>- 744B~2.8T 파라미터 모델을 일반 및 이질적 하드웨어에서 실행 가능<br>- 저장소, RAM, VRAM을 단일 추론 계층으로 취급하는 AI 메모리 다중 계층화 기법 사용<br>- GLM-5.2/5.3, Inkling, Kimi K3, DeepSeek V4 등 9개 모델 패밀리 지원</div>
+      <div class="item-link"><a href="https://github.com/JustVugg/colibri" target="_blank" rel="noopener">Colibri — 작은 엔진, 거대한 모델</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Tinycast: 경량 macOS 런처</span>
+      <span class="item-meta">5,334</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Swift와 AppKit으로 구현된 완전 네이티브 macOS 런처 프로젝트.<br>- 단일 핫키로 일상 작업에 모두 접근 가능<br>- 100 MB 미만의 메모리 사용량<br>- 제3자 의존성 없이 SwiftUI와 AppKit으로 구현</div>
+      <div class="item-link"><a href="https://github.com/abue-ammar/tinycast" target="_blank" rel="noopener">Tinycast: 경량 macOS 런처</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Voicebox</span>
+      <span class="item-meta">54,161</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">오픈소스 AI 음성 스튜디오.<br>- 음성 클론 및 음성 생성 기능<br>- 앱에 음성 받아쓰기 기능 추가 가능<br>- 전체 음성 I/O 스택을 로컬 머신에서 실행</div>
+      <div class="item-link"><a href="https://github.com/jamiepine/voicebox" target="_blank" rel="noopener">Voicebox</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div>
+</body>
+</html>
