@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-09-18 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1rem; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
+  .item-body { padding: 0 1rem 1.2rem; }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
+    padding: 1rem 0.9rem 0.7rem;
+    /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
+    --accent: #b08a2a; --accent-wash: #f6f1e2; }
+  /* svg 인라인 max-width:100% 가 좁은 화면에서 그림을 1/3 로 압착해 글자를 뭉갠다.
+     원본 크기를 지키고 상자에서 옆으로 밀어 본다. */
+  .item-diagram svg { max-width: none !important; }
+  .item-diagram .diagram { margin: 0; padding: 0; border: none; background: none; color: var(--ink);
+    width: max-content; min-width: 100%; }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
+    font-family: var(--serif); font-style: italic; font-size: 0.74rem; color: #7d7364; text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    .item details > summary { grid-template-columns: 1fr auto; }
+    /* 제목은 한 줄을 통째로 쓴다. 토글을 옆에 두면 그만큼 폭을 잃는다. */
+    .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
+    .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
+    .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
+
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-09-18</div>
+<h1><em>18</em> Sep 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">LLM 에이전트가 업무 자동화에 실장되면서, 신뢰성을 위해 단순 검색을 넘어 구조화된 데이터와 명확한 평가 기준이 요구되고 있다.</p><p class="take-body">Databricks의 '에이전트를 위한 데이터베이스 5가지 평가 기준'과 '웹 검색 한계' 글은 현재 에이전트 시스템이 직면한 진단을 제시한다. 동시에 AWS Connect Talent와 LY Corp의 광고 분석 자동화는 이미 프로덕션 에이전트가 작동하고 있음을 보여준다. AWS Bedrock Knowledge Bases 글은 단순 검색의 한계를 보완하기 위해 구조화된 벡터 스토어가 필수 인프라임을 강조한다.</p><div class="take-refs"><span>근거</span><a href="https://www.databricks.com/blog/database-for-ai-agents" target="_blank" rel="noopener">AI 에이전트를 위한 데이터베이스: 5가지 평가 기준</a> · <a href="https://www.databricks.com/blog/web-search-your-agent-inherited-isnt-good-enough" target="_blank" rel="noopener">에이전트가 물려받은 웹 검색은 충분하지 않다</a> · <a href="https://aws.amazon.com/blogs/machine-learning/selecting-a-vector-store-for-amazon-bedrock-knowledge-bases/" target="_blank" rel="noopener">Amazon Bedrock Knowledge Bases를 위한 벡터 스토어 선택</a> · <a href="https://techblog.lycorp.co.jp/ko/ai-agent-ad-report-automation" target="_blank" rel="noopener">LLM에게 어디까지 맡길 것인가: AI 에이전트 기반 광고 분석 리포트 자동화</a> · <a href="https://aws.amazon.com/blogs/machine-learning/reduce-time-to-hire-for-quality-candidates-with-ai-powered-amazon-connect-talent/" target="_blank" rel="noopener">AI 기반 Amazon Connect Talent로 우수 인재 채용 시간 단축하기</a></div></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">16개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Amazon SageMaker HyperPod Inference Gateway 출시</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 135" style="width:656px;max-width:100%" role="img" aria-label="GPU 신호로 최적 Pod를 선택해 latency 단축" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">HyperPod Inference Gateway</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Inference 요청</text><rect x="240" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">GPU-aware</text><text x="328" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Routing</text><text x="328" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">실시간 GPU 신호</text><rect x="464" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Kubernetes</text><text x="552" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Pod</text><text x="552" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">latency 82%…</text><line x1="192" y1="86" x2="237" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="191" y="70" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">라우팅 요청</text><line x1="416" y1="86" x2="461" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="404" y="70" width="71" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">최적 Pod 배치</text></svg><figcaption>GPU 신호로 최적 Pod를 선택해 latency 단축</figcaption></figure></div><div class="item-summary">Amazon EKS를 위한 Kubernetes-native GPU-aware routing 애드온에 관한 글<br>- Kubernetes-native, GPU-aware routing add-on으로 Amazon EKS에서 동작<br>- 실시간 GPU 신호를 사용해 각 inference 요청을 최적의 pod로 라우팅<br>- 모델 서버나 클라이언트 애플리케이션 변경 없이 first-token latency를 최대 82% 단축</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/introducing-amazon-sagemaker-hyperpod-inference-gateway/" target="_blank" rel="noopener">Amazon SageMaker HyperPod Inference Gateway 출시</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>AI 기반 Amazon Connect Talent로 우수 인재 채용 시간 단축하기</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 기반 인재 채용 솔루션을 소개한 글<br>- AI 주도 면접, 데이터 기반 평가, 일관된 평가를 통해 우수 인재를 효율적으로 식별<br>- 지원자에게 유연한 면접 경험 제공<br>- Amazon의 수십 년 채용 과학에 기반하여 모든 평가, 면접, 점수의 투명성 제공</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/reduce-time-to-hire-for-quality-candidates-with-ai-powered-amazon-connect-talent/" target="_blank" rel="noopener">AI 기반 Amazon Connect Talent로 우수 인재 채용 시간 단축하기</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Amazon Bedrock Knowledge Bases를 위한 벡터 스토어 선택</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 204" style="width:656px;max-width:100%" role="img" aria-label="Bedrock RAG 벡터 스토어 성능 비용 비교" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">벡터 스토어 3가지 비교</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Bedrock</text><text x="104" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Knowledge…</text><rect x="240" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Amazon</text><text x="328" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">OpenSearch…</text><rect x="464" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Aurora</text><text x="552" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">PostgreSQL</text><text x="552" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">pgvector</text><rect x="16" y="153" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="176" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">S3 Vectors</text><line x1="192" y1="86" x2="237" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="205" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">지원</text><path d="M 104 121 L 104 137 L 552 137 L 552 124" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="317" y="135" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="146" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">지원</text><path d="M 104 121 L 104 137 L 104 137 L 104 150" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="93" y="121" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="104" y="132" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">지원</text></svg><figcaption>Bedrock RAG 벡터 스토어 성능 비용 비교</figcaption></figure></div><div class="item-summary">Amazon Bedrock Knowledge Bases RAG 애플리케이션에서 벡터 스토어 선택이 성능과 비용에 미치는 영향을 다룬 글.<br>- Amazon OpenSearch Service, Amazon Aurora PostgreSQL with pgvector, Amazon S3 Vectors 세 가지 벡터 스토어 비교<br>- 세 가지 RAG 사용 사례를 기반으로 한 벤치마크 제시<br>- 실용적인 벡터 스토어 선택 프레임워크 제공</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/selecting-a-vector-store-for-amazon-bedrock-knowledge-bases/" target="_blank" rel="noopener">Amazon Bedrock Knowledge Bases를 위한 벡터 스토어 선택</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">동적으로 조절된 활성화 조향</span>
+      <span class="item-meta">Apple ML Research</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 213" style="width:480px;max-width:100%" role="img" aria-label="기존 균일 개입에서 적응적 조절로 전환" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">동적 조향 강도 조절</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">기존 (Uniform)</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">균일한 개입</text><text x="116" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">모든 입력</text><line x1="116" y1="130" x2="116" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="162" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">성능 저하</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">DSAS (Dynamic)</text><rect x="276" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">선택적 개입</text><text x="364" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">필요시만</text><line x1="364" y1="130" x2="364" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="162" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">적응적 조절</text><line x1="240" y1="50" x2="240" y2="205" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>기존 균일 개입에서 적응적 조절로 전환</figcaption></figure></div><div class="item-summary">생성 모델의 행동을 제어하는 activation steering 기법의 개선 방법에 관한 글.<br>- 기존 activation steering 방법은 모든 입력에 균일하게 개입을 적용하여 조향이 불필요한 경우 모델 성능 저하<br>- DSAS는 '언제 조향할 것인가'와 '어떻게 조향할 것인가'를 분리하는 방법에 구애받지 않는 프레임워크<br>- 기존 조향 수단의 강도를 적응적으로 조절</div>
+      <div class="item-link"><a href="https://machinelearning.apple.com/research/dynamically-scaled-activation-steering" target="_blank" rel="noopener">동적으로 조절된 활성화 조향</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">REVERSAL-BENCH: 역가능성 축과 리셋 오라클을 이용한 리셋 불가 강화학습 경계 측정</span>
+      <span class="item-meta">Apple ML Research</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 213" style="width:480px;max-width:100%" role="img" aria-label="기존 RL과 REVERSAL-BENCH의 접근 방식 비교" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">역가능성 제어 방식</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">Traditional RL</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="108" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">환경 역가능성 가정</text><line x1="116" y1="130" x2="116" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="162" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">외부 리셋 필요</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">REVERSAL-BENCH</text><rect x="276" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">역가능성 제어</text><text x="364" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">ρ∈[0,1]</text><line x1="364" y1="130" x2="364" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="162" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">리셋 오라클</text><line x1="240" y1="50" x2="240" y2="205" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>기존 RL과 REVERSAL-BENCH의 접근 방식 비교</figcaption></figure></div><div class="item-summary">외부 리셋 없이 연속적인 정책 훈련을 목표로 하는 자율 강화학습 벤치마크에 관한 글.<br>- 기존 강화학습 패러다임은 환경의 역가능성에 의존하지만, 실제 조작에서는 물체를 밀거나 입자 물질을 쏟는 등 되돌릴 수 없는 사건이 존재한다.<br>- REVERSAL-BENCH는 연속 매개변수 ρ∈[0,1]을 통해 역가능성을 제어한다.<br>- 리셋 오라클을 제공하여 지상진실 검증을 수행한다.</div>
+      <div class="item-link"><a href="https://machinelearning.apple.com/research/reversal-bench-rl-cliff" target="_blank" rel="noopener">REVERSAL-BENCH: 역가능성 축과 리셋 오라클을 이용한 리셋 불가 강화학습 경계 측정</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">교육 실습의 미래: Generative UI로 교사들이 학습 인터랙티브를 만들기</span>
+      <span class="item-meta">Google Research</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Generative UI를 활용하여 교사들이 교육 목표에 맞는 인터랙티브 시뮬레이션을 직접 생성할 수 있게 하는 Google Research의 연구<br>- 교사들이 맞춤형, 인터랙티브, 안내형 교육 시뮬레이션을 동적으로 생성할 수 있음<br>- 생성형 UI와 학습 설계 가이드라인을 함께 활용하는 방식<br>- 기존의 인터랙티브 학습 콘텐츠 제작에 드는 높은 비용과 교사의 과중한 노력 문제를 해결</div>
+      <div class="item-link"><a href="https://research.google/blog/the-future-of-practice-enabling-teachers-to-create-learning-interactives-with-generative-ui/" target="_blank" rel="noopener">교육 실습의 미래: Generative UI로 교사들이 학습 인터랙티브를 만들기</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">CSIRO가 AWS에서 확장 가능하고 비용 최적화된 게놈 변형 쿼리 시스템을 구축한 방법</span>
+      <span class="item-meta">AWS Architecture Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">CSIRO 연구원들이 AWS 기반의 게놈 변형 데이터 쿼리 솔루션을 개발한 사례입니다.<br>- Serverless Beacon (sBeacon)이라는 확장 가능한 서버리스 솔루션 개발<br>- GA4GH Beacon 표준을 구현하여 게놈 변형 데이터의 안전한 쿼리 지원<br>- Amazon S3, AWS Lambda, Amazon DynamoDB, Amazon Athena를 조합하여 프로덕션 규모의 임상 및 연구 애플리케이션 지원</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/architecture/how-csiro-built-scalable-cost-optimized-genomic-variant-querying-on-aws/" target="_blank" rel="noopener">CSIRO가 AWS에서 확장 가능하고 비용 최적화된 게놈 변형 쿼리 시스템을 구축한 방법</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Amazon EKS 공유 서비스 아키텍처로 Equinix의 운영 오버헤드 40% 감소</span>
+      <span class="item-meta">AWS Architecture Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Equinix가 Amazon EKS 기반 공유 서비스 아키텍처를 도입해 자체 관리 Kubernetes 환경의 운영 복잡성을 해결한 사례<br>- 다중 계정 North Star 아키텍처로 거버넌스 및 공유 서비스 중앙화<br>- 배포 속도 4배 향상<br>- 운영 오버헤드 40% 감소</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/architecture/how-equinix-cut-operational-overhead-with-a-shared-services-architecture-on-amazon-eks/" target="_blank" rel="noopener">Amazon EKS 공유 서비스 아키텍처로 Equinix의 운영 오버헤드 40% 감소</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">AWS 기반 클라우드 네이티브 PACS 구축</span>
+      <span class="item-meta">AWS Architecture Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AWS에서 의료 영상을 현대화하는 하이브리드 클라우드 아키텍처 패턴에 관한 글<br>- 다중 병원 네트워크의 PACS 아카이브 중앙집중화<br>- 시설 간 상호운용성 구현<br>- Amazon S3 스토리지 티어를 통한 비용 및 보존 관리</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/architecture/building-cloud-native-pacs-on-aws/" target="_blank" rel="noopener">AWS 기반 클라우드 네이티브 PACS 구축</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>AI 에이전트를 위한 데이터베이스: 5가지 평가 기준</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 에이전트가 필요로 하는 데이터베이스의 평가 기준에 관한 글<br>- 5가지 핵심 기준: 에이전트당 브랜치 격리, 스케일 투 제로 컴퓨팅, 단일 쿼리 하이브리드 검색, 동시성 환경의 ACID 보증, ETL 지연 없는 통합 플랫폼<br>- AI 에이전트는 지속적인 동시 읽기/쓰기와 다양한 메모리 타입 검색, 현재 운영 데이터 접근이 필요<br>- Databricks의 Lakebase가 5가지 기준을 모두 충족하며 Superhuman과 easyJet에서 검증됨</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/database-for-ai-agents" target="_blank" rel="noopener">AI 에이전트를 위한 데이터베이스: 5가지 평가 기준</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>에이전트가 물려받은 웹 검색은 충분하지 않다</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Omnigent와 Nimble을 통한 에이전트 통합 플랫폼과 웹 검색 개선에 관한 글.<br>- Omnigent는 하나의 에이전트 정의로 Claude Code, Codex, raw API 등 여러 harness에서 실행 가능하게 통합<br>- Nimble 웹 검색으로 정확도 46%→71% 향상, 검색 비용 50% 절감<br>- Databricks Foundation Model APIs를 통해 비용 추적, 거버넌스, 감사 추적을 통일하고 관리</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/web-search-your-agent-inherited-isnt-good-enough" target="_blank" rel="noopener">에이전트가 물려받은 웹 검색은 충분하지 않다</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">AIOps란 무엇인가?</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">IT 운영에 AI와 머신러닝을 적용해 이상 감지, 이벤트 연관성, 근본 원인을 파악하고 인시던트 대응을 자동화하는 기술.<br>- 2017년 Gartner가 정의한 개념으로, 다운타임 위험 감소·알림 피로 해소·평균 해결 시간(MTTR) 단축이 목표<br>- 마이크로서비스·멀티클라우드·AI 워크로드·에이전트 기반 시스템에서 시간당 생성되는 신호가 수동 처리 불가능한 수준<br>- Observability와 DevOps를 보완하며 인간 감독을 유지한 상태에서 자동화된 운영 대응 제공</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/what-is-aiops" target="_blank" rel="noopener">AIOps란 무엇인가?</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://tech.kakao.com/posts/836" target="_blank" rel="noopener">if(kakao)26에서 네트워킹하는 법</a></div>
+    <div class="item-meta">Kakao Tech</div>
+  </div>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>LLM에게 어디까지 맡길 것인가: AI 에이전트 기반 광고 분석 리포트 자동화</span>
+      <span class="item-meta">LY Corp Tech</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">LINE Ads에서 AI 에이전트로 광고 분석 리포트를 자동화하는 시스템 개발 과정.<br>- AI 에이전트가 LINE OA 광고와 Display 광고의 매출을 분석해 DoD, MoM, YoY 변화를 계산하고 주요 변동 요인, 성장·이탈 신호를 Slack·이메일로 자동 전송<br>- 담당자의 다중 시스템 접속·데이터 수집을 제거하고 변화의 의미 판단과 후속 대응에 집중 가능하게 개선<br>- LLM 사용 시 계산과 해석 분리, 분석 품질 향상 방법, 에이전트 기반 원인 탐색 설계를 핵심 기술로 소개</div>
+      <div class="item-link"><a href="https://techblog.lycorp.co.jp/ko/ai-agent-ad-report-automation" target="_blank" rel="noopener">LLM에게 어디까지 맡길 것인가: AI 에이전트 기반 광고 분석 리포트 자동화</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">사용자를 위해 일부러 어렵게 만드는 경험, 어디까지 괜찮을까?</span>
+      <span class="item-meta">Toss Tech</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">토스뱅크 Product Designer가 10대 대상 저축 제품의 '저금통 잠금' 기능을 설계하면서 강제성과 심리적 부작용 사이의 균형을 고민한 이야기.<br>- 10대 저축 실패 패턴과 심리: 저축 의지는 충분하지만 보상 시스템 발달에 비해 충동 조절을 담당하는 전두엽은 20대 초중반까지 발달 중<br>- 사용자 주도 기능 개발: "목표금액까지 못 채우면 돈 못 꺼내게 해주세요"라는 사용자 피드백이 기능의 출발점<br>- 난이도 설계의 딜레마: "돼지저금통 부수기" 등 강제적 잠금 해제 메커니즘이 목표 달성을 돕는 동시에 실패 시 아이에게 자책감과 수치심을 줄 수 있다는 우려</div>
+      <div class="item-link"><a href="https://toss.tech/article/lockbank" target="_blank" rel="noopener">사용자를 위해 일부러 어렵게 만드는 경험, 어디까지 괜찮을까?</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/choosing-the-right-model-for-your-work-a-guide-to-the-qwen-series_603566" target="_blank" rel="noopener">당신의 작업에 맞는 모델 선택하기: Qwen 시리즈 가이드</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+  </div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">2026년 검색 전문가 커리어 개발 포인트</span>
+      <span class="item-meta">Doug Turnbull</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 452 290" style="width:452px;max-width:100%" role="img" aria-label="다양한 모달리티를 지원하는 통합 검색 아키텍처" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="226" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">2026 검색시스템</text><rect x="96" y="50" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">검색 모달리티</text><text x="226" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">E-commerce, RAG</text><rect x="96" y="136" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="159" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">핵심 기능</text><text x="226" y="176" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">순위, 필터, 권한</text><rect x="96" y="222" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="245" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">지원 인프라</text><text x="226" y="262" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">인덱싱, 텔레메트리</text></svg><figcaption>다양한 모달리티를 지원하는 통합 검색 아키텍처</figcaption></figure></div><div class="item-summary">검색 전문가의 2026년 커리어 개발 방향을 제시하는 글입니다.<br>- 백엔드·프론트엔드 엔지니어링은 AI와 관련성에 가려져 간과되고 있지만 필수적임<br>- E-commerce search, RAG/chat, Submit-a-spec, Search-for-your-coding-agent 등 다양한 검색 모달리티 등장<br>- 검색 시스템은 결과 순위 지정을 넘어 필터, 권한, 리다이렉트, 텔레메트리, 인덱싱 파이프라인, 관리 도구 등을 지원해야 함</div>
+      <div class="item-link"><a href="http://softwaredoug.com/blog/2026/09/17/state-of-search-career.html" target="_blank" rel="noopener">2026년 검색 전문가 커리어 개발 포인트</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">형식 검증이 효과를 본다</span>
+      <span class="item-meta">Kent Beck</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">형식 검증의 실제 가치에 대한 Kent Beck의 경험담.<br>- 대학원 TA 시절부터 경력 내 비공식적 활용 경험<br>- Fortune Buchholtz의 약 1년 전 형식 검증 재소개<br>- 다시 시도했으나 증명 부분에서 어려움을 겪음</div>
+      <div class="item-link"><a href="https://newsletter.kentbeck.com/p/formal-methods-pay-off" target="_blank" rel="noopener">형식 검증이 효과를 본다</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Sep/18/the-creative-spirit-of-who-framed-roger-rabbit/" target="_blank" rel="noopener">Who Framed Roger Rabbit의 창의적 정신</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">경고: 저명한 Rustacean들을 대상으로 한 표적 공격</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 187" style="width:656px;max-width:100%" role="img" aria-label="공격자가 Rust 주요 인물을 대상으로 악성코드 배포까지 이르는 공격 경로" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Rust 커뮤니티 표적 공격</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Rust 커뮤니티 인물</text><text x="104" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">rust-lang…</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">화상 통화</text><text x="328" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">일자리 제의로 위장</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">기기/계정</text><rect x="16" y="136" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="159" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">악성코드</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="194" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">표적 선정</text><line x1="416" y1="77" x2="461" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="429" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">손상</text><path d="M 552 104 L 552 120 L 104 120 L 104 133" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="317" y="104" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="115" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">배포</text></svg><figcaption>공격자가 Rust 주요 인물을 대상으로 악성코드 배포까지 이르는 공격 경로</figcaption></figure></div><div class="item-summary">Rust 커뮤니티의 주요 인물들을 대상으로 한 표적 공격 캠페인에 대한 보안 경고<br>- rust-lang 멤버와 인기 크레이트 소유자들이 기기와 계정 손상을 목표로 표적 중<br>- 양성적 목적(예: 일자리)으로 위장한 화상 통화로 접근<br>- 손상된 계정을 통해 악성코드를 배포하려는 의도</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Sep/17/targeted-attacks-on-rustaceans/" target="_blank" rel="noopener">경고: 저명한 Rustacean들을 대상으로 한 표적 공격</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Sep/17/how-to-write-with-an-llm/" target="_blank" rel="noopener">LLM으로 글쓰기</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">입장: Foundation Models를 자가 진화형 OS 계층으로 가상화할 때가 왔다</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 196" style="width:480px;max-width:100%" role="img" aria-label="Fragmented 구조에서 표준화된 FMOS로" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">AI 스택의 진화</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">현재: Fragmented</text><rect x="28" y="76" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">각 프레임워크</text><line x1="116" y1="113" x2="116" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="145" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">임베드 런타임</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">제안: Unified</text><rect x="276" y="76" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">FMOS</text><line x1="364" y1="113" x2="364" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="145" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">표준 런타임</text><line x1="240" y1="50" x2="240" y2="188" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>Fragmented 구조에서 표준화된 FMOS로</figcaption></figure></div><div class="item-summary">AI 애플리케이션이 compound agentic systems로 전환되면서 표준화된 운영 체제의 필요성을 주장하는 글.<br>- 현재 스택은 fragmented 상태이며, 각 프레임워크가 state, memory, budgets, guardrails를 위해 implicit runtime을 임베드하여 동작 이식성(non-portable)과 거버넌스 취약성 문제 발생<br>- 프로토콜(MCP, A2A)이 도구/에이전트 연결은 용이하게 하지만 근본 문제 미해결<br>- Foundation Model Operating System (FMOS)이 필요함을 주장 (operating systems 이전 시대와 유사 — 각 프로그램이 기본 서비스를 재구현)</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.19203" target="_blank" rel="noopener">입장: Foundation Models를 자가 진화형 OS 계층으로 가상화할 때가 왔다</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">장기 수행 에이전트 아키텍처: 레벨, 틱, 캐스케이드된 인텔리전스</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 238" style="width:656px;max-width:100%" role="img" aria-label="Model 주변 harness로 지속 실행 가능한 에이전트 구조" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Hierarchical Agent Design</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Language</text><text x="104" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Model</text><rect x="240" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Model</text><text x="328" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Harness</text><rect x="464" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Hierarchical</text><text x="552" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Control</text><text x="552" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">7개…</text><rect x="16" y="153" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="176" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Continual</text><text x="104" y="193" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Execution</text><text x="104" y="210" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">forgetting…</text><line x1="192" y1="86" x2="237" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="205" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">추가</text><line x1="416" y1="86" x2="461" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="429" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">구성</text><path d="M 552 121 L 552 137 L 104 137 L 104 150" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="317" y="121" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="132" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">달성</text></svg><figcaption>Model 주변 harness로 지속 실행 가능한 에이전트 구조</figcaption></figure></div><div class="item-summary">Language-model 에이전트가 며칠~주 단위 장기 작업을 수행할 때 필요한 아키텍처에 관한 논문<br>- 에이전트는 continually learning하기 전에 forgetting 없이 continually run 가능해야 함<br>- 이 능력은 model 자체보다 model 주변의 harness에 있음<br>- long-horizon 설정에서 7개의 bottlenecks를 도출하고 hierarchical architecture로 해결</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.19519" target="_blank" rel="noopener">장기 수행 에이전트 아키텍처: 레벨, 틱, 캐스케이드된 인텔리전스</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">When2Think: 난이도 인식 길이 제어를 통한 효율적인 하이브리드 추론 모델 학습</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 230" style="width:480px;max-width:100%" role="img" aria-label="기존 균일 정책의 비효율성 vs 난이도별 적응형 동적 할당" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">When2Think</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">Existing Approach</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Uniform</text><text x="116" y="116" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">length…</text><line x1="116" y1="130" x2="116" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="162" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Accuracy-spe</text><text x="116" y="202" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">ed gap</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">Proposed Solution</text><rect x="276" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="108" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">When2Think</text><line x1="364" y1="130" x2="364" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="162" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Instance-ada</text><text x="364" y="202" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">ptive…</text><line x1="240" y1="50" x2="240" y2="222" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>기존 균일 정책의 비효율성 vs 난이도별 적응형 동적 할당</figcaption></figure></div><div class="item-summary">대규모 추론 모델의 비효율성을 해결하는 동적 계산 할당 프레임워크에 관한 논문입니다.<br>- 기존 LRM은 쉬운 문제는 과도하게, 어려운 문제는 부족하게 생각하는 체계적 비효율성 존재<br>- Uniform length penalties나 rigid routing 같은 기존 방식은 쉬운 인스턴스의 계산 감소를 위해 어려운 인스턴스의 정확도를 포기하는 효율성 대가 발생<br>- When2Think는 instance-adaptive computation allocation 문제로 정식화한 post-training 하이브리드 추론 프레임워크로 동적 계산 할당 제안</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.19671" target="_blank" rel="noopener">When2Think: 난이도 인식 길이 제어를 통한 효율적인 하이브리드 추론 모델 학습</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">MIP* = RE의 핵심 정리에 대한 장기간의 자동 형식화</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 204" style="width:656px;max-width:100%" role="img" aria-label="AI 증명과 인간 검토로 수학 정리를 기계 검증된 형태로 변환" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">수학 정리 형식화 파이프라인</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">수학 정리</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AI 증명 에이전트</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">중첩 검토 루프</text><text x="552" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">drift 제거</text><rect x="16" y="136" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="159" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Lean 4 증명</text><text x="104" y="176" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">기계 검증</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="194" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">증명 요청</text><line x1="416" y1="77" x2="461" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="418" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">검증 요청</text><path d="M 552 104 L 552 120 L 104 120 L 104 133" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="306" y="104" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="115" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">형식 생성</text></svg><figcaption>AI 증명과 인간 검토로 수학 정리를 기계 검증된 형태로 변환</figcaption></figure></div><div class="item-summary">AI 증명 에이전트를 활용한 수학 정리의 기계 검증 형식화 시스템에 관한 논문.<br>- FormalFlow: 인간 감독 하에 AI 증명 에이전트를 조율하는 시스템으로 statement drift와 proof composition 문제를 해결<br>- 공유 청사진을 통한 중첩된 계획, 증명, 검토 루프로 검증과 검토를 강화<br>- Lean 4 기계 검증 증명 완성</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2609.19814" target="_blank" rel="noopener">MIP* = RE의 핵심 정리에 대한 장기간의 자동 형식화</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">멀티에이전트 LLM 성능을 좌우하는 것은 모델 지능만이 아닌 아키텍처 설계다</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">멀티에이전트 LLM 프레임워크의 아키텍처 설계가 시스템 성능에 미치는 영향에 관한 연구<br>- 아키텍처 선택이 실행 오버헤드, 메모리 동작, 계획 효과성, 조율 확장성을 직접 제어함<br>- 기존 벤치마크는 개별 에이전트를 고립된 상태에서만 평가하며 표준화된 프레임워크 수준의 비교가 결여됨<br>- 멀티에이전트 LLM 프레임워크를 분해하는 아키텍처 분류법을 제시함</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2602.03128" target="_blank" rel="noopener">멀티에이전트 LLM 성능을 좌우하는 것은 모델 지능만이 아닌 아키텍처 설계다</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">ECC - 에이전트 하네스 운영 체제</span>
+      <span class="item-meta">261,667</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.</div>
+      <div class="item-link"><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">ECC - 에이전트 하네스 운영 체제</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">TencentCloud/Octop</span>
+      <span class="item-meta">3,826</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">자체 호스팅 가능한 다중 사용자·다중 에이전트 AI 어시스턴트 프로젝트<br>- Python 3.12+ 기반으로 구축됨<br>- MIT 라이선스, 버전 1.0.0으로 공개<br>- PyPI에 등록되어 설치 가능</div>
+      <div class="item-link"><a href="https://github.com/TencentCloud/Octop" target="_blank" rel="noopener">TencentCloud/Octop</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">OpenSpec</span>
+      <span class="item-meta">69,153</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Spec-driven development (SDD) for AI coding assistants.</div>
+      <div class="item-link"><a href="https://github.com/Fission-AI/OpenSpec" target="_blank" rel="noopener">OpenSpec</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Anki</span>
+      <span class="item-meta">31,110</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Anki 컴퓨터 버전의 소스코드 저장소입니다.<br>- 간격 반복(spaced repetition) 학습 프로그램<br>- 기여 가이드라인 및 개발 문서 제공<br>- 공개 베타 빌드(betas.ankiweb.net) 제공</div>
+      <div class="item-link"><a href="https://github.com/ankitects/anki" target="_blank" rel="noopener">Anki</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">지식 업무 플러그인</span>
+      <span class="item-meta">24,755</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Claude를 특정 직무별 전문가로 만드는 플러그인 시스템.<br>- 각 플러그인은 스킬·커넥터·슬래시 커맨드·서브에이전트를 번들로 제공<br>- 11개의 오픈소스 플러그인이 있으며, productivity와 sales 등이 예시로 제시됨<br>- 회사의 도구·용어·프로세스에 맞게 커스터마이징하여 팀이 더 일관된 결과를 얻을 수 있음</div>
+      <div class="item-link"><a href="https://github.com/anthropics/knowledge-work-plugins" target="_blank" rel="noopener">지식 업무 플러그인</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div>
+</body>
+</html>
