@@ -163,6 +163,24 @@ def test_open_source_dialog_clicks_add_when_closed():
     assert clicked[1] in notebooklm._L["website"]
 
 
+def test_dismiss_dialogs_clicks_exact_close_button():
+    """공지 모달이 소스 다이얼로그를 덮어 클릭을 가로챈다. 소스 다이얼로그의 '닫기' 와 구분한다."""
+    page = MagicMock()
+    clicked = []
+
+    def get_by_role(role, name=None, exact=None):
+        loc = MagicMock()
+        if name == "대화상자 닫기" and exact:
+            loc.first.click.side_effect = lambda: clicked.append(name)
+        else:
+            loc.first.wait_for.side_effect = RuntimeError("not found")
+        return loc
+
+    page.get_by_role.side_effect = get_by_role
+    notebooklm._dismiss_dialogs(page)
+    assert clicked == ["대화상자 닫기"]
+
+
 def test_open_source_dialog_fails_when_nothing_found():
     page = MagicMock()
     page.get_by_role.return_value.first.wait_for.side_effect = RuntimeError("no")

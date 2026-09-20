@@ -25,6 +25,7 @@ _L = {
     "generate": ["생성", "Generate"],
     "generating": ["생성 중", "Generating"],
     "create_notebook": ["새로 만들기", "새 노트 만들기", "Create new", "New notebook"],
+    "close_dialog": ["대화상자 닫기", "Close dialog"],   # 영어 라벨은 화면에서 확인 못 함
 }
 _FORMATS = {
     "deep_dive": ["심층 분석", "Deep Dive"],
@@ -115,11 +116,27 @@ def _visible_any(page, labels, timeout=3_000) -> bool:
     return False
 
 
+def _dismiss_dialogs(page) -> None:
+    """공지 모달이 떠 있으면 닫는다.
+    2026-09-11 배치부터 새 노트북 위에 '5시간마다 한도 초기화' 안내 모달이 뜬다.
+    모달이 클릭을 가로채 '웹사이트' 가 보이는데도 누르지 못하고 실패했다.
+    소스 다이얼로그에도 '닫기' 버튼이 있어 이름을 정확히 맞춘다."""
+    for label in _L["close_dialog"]:
+        try:
+            btn = page.get_by_role("button", name=label, exact=True).first
+            btn.wait_for(state="visible", timeout=2_000)
+            btn.click()
+            page.wait_for_timeout(1_000)
+        except Exception:
+            continue
+
+
 def _open_source_dialog(page) -> bool:
     """URL 입력 화면까지 진입한다.
     빈 노트북은 ?addSource=true 로 소스 다이얼로그가 이미 열린 채 뜨고, 그 상태에서는
     '출처 추가' 가 role=button 으로 노출되지 않아 누르려 하면 실패한다.
     그래서 '웹사이트' 가 이미 보이면 곧바로 누른다."""
+    _dismiss_dialogs(page)
     if _visible_any(page, _L["website"]):
         return _click_any(page, _L["website"])
     if not _click_any(page, _L["add_source"]):
