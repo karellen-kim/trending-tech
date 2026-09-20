@@ -1,3 +1,5 @@
+from time import sleep
+
 import feedparser
 import requests
 from datetime import datetime, timezone, timedelta, time
@@ -40,7 +42,9 @@ def fetch_subreddit(name: str, max_items: int = MAX_REDDIT_ITEMS) -> list[dict]:
 
 def fetch_all_reddit() -> list[dict]:
     all_items = []
-    for name in REDDIT_SUBREDDITS:
+    for n, name in enumerate(REDDIT_SUBREDDITS):
+        if n:
+            sleep(1)   # 간격 없이 연속 요청하면 429 로 전멸한다 (실측: 6개 전부 실패)
         try:
             all_items.extend(fetch_subreddit(name))
         except Exception as e:

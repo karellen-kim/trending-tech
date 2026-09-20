@@ -332,7 +332,8 @@ def render_daily_page(data: dict) -> str:
     company_blogs = data.get("company_blogs", [])
     dev_blogs = data.get("dev_blogs", [])
     papers = data.get("papers", [])
-    hn_reddit = data.get("hn", []) + data.get("reddit", [])
+    # community 는 HN·Reddit 을 섞어 5건으로 자른 목록. 옛 페이지는 hn/reddit 키를 쓴다.
+    hn_reddit = data.get("community") or (data.get("hn", []) + data.get("reddit", []))
     github = data.get("github", [])
 
     sections = ""

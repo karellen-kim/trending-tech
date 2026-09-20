@@ -4,11 +4,14 @@ import signal
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, timedelta, datetime
+from itertools import zip_longest
 
 from config import (DOCS_DIR, SLACK_WEBHOOK_URL, MAX_PAPER_ITEMS, SUMMARY_WORKERS, now_kst,
-                    MAX_COMPANY_TOTAL, MAX_DEV_TOTAL, ENABLE_SVG, MAX_SVG_ITEMS,
-                    ENABLE_NOTEBOOKLM)
+                    MAX_COMMUNITY_ITEMS, MAX_COMPANY_TOTAL, MAX_DEV_TOTAL, ENABLE_SVG,
+                    MAX_SVG_ITEMS, ENABLE_NOTEBOOKLM)
 from sources.github import fetch_trending
+from sources.hackernews import fetch_top_stories
+from sources.reddit import fetch_all_reddit
 from sources.rss import fetch_all_blogs
 from sources.arxiv import fetch_all_papers
 from sources.scraper import fetch_all_scraped
@@ -21,6 +24,24 @@ from svgmaker import add_svgs
 from notebooklm import generate_audio_review
 from renderer import render_daily_page, render_weekly_page, render_index_page
 from notifier import send_slack
+
+
+def _merge_community(hn: list[dict], reddit: list[dict],
+                     limit: int = MAX_COMMUNITY_ITEMS) -> list[dict]:
+    """HN·Reddit 을 번갈아 뽑아 상위 limit 건만 남긴다.
+    Reddit RSS 에는 점수가 없어 두 소스를 한 기준으로 정렬할 수 없다.
+    각 소스의 원래 순위를 유지한 채 섞는다."""
+    merged, seen = [], set()
+    for pair in zip_longest(hn, reddit):
+        for item in pair:
+            if not item or len(merged) >= limit:
+                continue
+            url = item.get("url", "")
+            if url and url in seen:   # HN 과 r/programming 이 같은 글을 싣는다
+                continue
+            seen.add(url)
+            merged.append(item)
+    return merged
 
 
 def _analyze_items(items: list[dict], content_key: str, filter_today: bool = True) -> list[dict]:
@@ -89,15 +110,28 @@ def _load_recent_urls(days: int = 7) -> set[str]:
 def collect(today: str) -> dict:
     print(f"[{today}] 수집 시작")
     yesterday_github = _load_yesterday_github()
-    with ThreadPoolExecutor(max_workers=4) as ex:
+    with ThreadPoolExecutor(max_workers=6) as ex:
         f_gh = ex.submit(fetch_trending, "daily", yesterday_github)
         f_bl = ex.submit(fetch_all_blogs)
         f_ar = ex.submit(fetch_all_papers)
         f_sc = ex.submit(fetch_all_scraped)
+        f_hn = ex.submit(fetch_top_stories)
+        f_rd = ex.submit(fetch_all_reddit)
         github = f_gh.result()
         all_blogs = f_bl.result()
         papers = f_ar.result()
         scraped = f_sc.result()
+        # 커뮤니티는 부가 섹션이다. 한 소스가 죽어도 배치는 계속된다.
+        try:
+            hn = f_hn.result()
+        except Exception as e:
+            print(f"[HN] 수집 실패: {e}")
+            hn = []
+        try:
+            reddit = f_rd.result()
+        except Exception as e:
+            print(f"[Reddit] 수집 실패: {e}")
+            reddit = []
 
     company_blogs = [b for b in all_blogs if b.get("category") == "company"]
     company_blogs += scraped
@@ -113,9 +147,13 @@ def collect(today: str) -> dict:
         print(f"  [중복제거] 이미 실린 글 {before - after}건 제외")
 
     papers = filter_important_papers(papers, max_items=MAX_PAPER_ITEMS)
+    # 최근 페이지에 이미 실린 글은 커뮤니티에서도 뺀다 (블로그 섹션과 같은 기준)
+    hn = [i for i in hn if i.get("url") not in seen]
+    reddit = [i for i in reddit if i.get("url") not in seen]
+    community = _merge_community(hn, reddit)
 
     print(f"  GitHub:{len(github)} Company:{len(company_blogs)} "
-          f"Dev:{len(dev_blogs)} Papers:{len(papers)}")
+          f"Dev:{len(dev_blogs)} Papers:{len(papers)} Community:{len(community)}")
 
     return {
         "date": today,
@@ -123,6 +161,7 @@ def collect(today: str) -> dict:
         "company_blogs": company_blogs,
         "dev_blogs": dev_blogs,
         "papers": papers,
+        "community": community,
     }
 
 
@@ -133,6 +172,9 @@ def summarize(data: dict) -> dict:
     data["dev_blogs"] = _analyze_items(data["dev_blogs"], "summary")[:MAX_DEV_TOTAL]
     data["papers"] = _analyze_items(data["papers"], "abstract", filter_today=False)
     data["github"] = _analyze_items(data["github"], "readme", filter_today=False)
+    # 커뮤니티는 제목만 있어 요약할 본문이 없다. 실질적으로 제목 번역만 얻는다.
+    # 날짜 판정은 태우지 않는다 — Reddit 은 수집 단계에서 걸렀고, HN front_page 는 기준이 없다.
+    data["community"] = _analyze_items(data.get("community", []), "title", filter_today=False)
     if ENABLE_SVG:
         print("[다이어그램] 생성 중...")
         add_svgs(data["company_blogs"], MAX_SVG_ITEMS)
@@ -204,7 +246,7 @@ def save_html(data: dict) -> list[str]:
             "date": today,
             "highlights": highlights,
             "github_names": [i["name"] for i in data["github"]],
-            "seen_urls": [i["url"] for k in ("company_blogs", "dev_blogs")
+            "seen_urls": [i["url"] for k in ("company_blogs", "dev_blogs", "community")
                           for i in data.get(k, []) if i.get("url")],
             # 주간·월간 해석이 이 필드들을 모아 쓴다
             "today_take": {k: v for k, v in (data.get("today_take") or {}).items()
