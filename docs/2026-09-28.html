@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026년 9월 — Trending Tech</title>
+<title>2026-09-28 — Trending Tech</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -187,42 +187,157 @@
     .pick-why { font-size: 0.8rem; }
   }
 </style>
-<style>
-  .days-section { margin-top: 0; }
-  .days-section-title { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; color: var(--green);
-    background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green);
-    padding: 0.8rem 1.15rem; margin-bottom: 0.9rem; text-transform: none; }
-  /* 월간 페이지는 섹션 헤더 바로 아래에 주차 카드가 온다 — 붙지 않게 띄운다 */
-  .section-header + .day-link { margin-top: 0.9rem; }
-  .day-link { display: flex; align-items: center; gap: 0.9rem; margin: 0 1.15rem 0.6rem;
-    padding: 0.85rem 1rem; border: 1px solid var(--rule-strong); border-radius: 14px;
-    background: var(--paper); text-decoration: none; color: var(--ink); transition: all 0.12s; }
-  .day-link:hover { border-color: var(--green); background: var(--paper-deep); }
-  .day-label { font-family: var(--serif); font-weight: 600; font-size: 0.9rem; min-width: 3.4rem; color: var(--ink); }
-  .day-date { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-faint); }
-  .day-arrow { font-family: var(--mono); font-size: 0.8rem; color: var(--accent-deep); margin-left: auto; }
-</style>
 </head>
 <body>
 <div class="top-bar">
-  <a href="./index.html" class="back-btn">&larr; 목록</a>
-  <span class="page-meta">2026-09</span>
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
 </div>
-<div class="page-meta">MONTHLY DIGEST</div>
-<h1>2026년 9월 <em>기술 흐름</em></h1>
-<div class="section highlight-section" id="take">
+<div class="page-meta">2026-09-28</div>
+<h1><em>28</em> Sep 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
-    <span class="section-title">이 달의 해석</span>
+    <span class="section-title">오늘의 해석</span>
+    
   </div>
-  <div class="take"><p class="take-headline">에이전트 운영이 검증·감시·도구를 갖춘 프로덕션 표준으로 본격 정착되는 중</p><p class="take-body">W37-W40에 걸쳐 감시·검증·인프라·도구가 프로덕션 필수 요건으로 부상했다. 특히 신뢰성 검증(W38)과 운영 감시(W37)가 핵심이 되었으며, W39에서 인프라 통합이, W40에서 관리 도구가 정착되었다. 이는 에이전트가 신뢰할 수 있는 운영 기술로 진화하는 과정을 보여준다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://arxiv.org/abs/2609.11957" target="_blank" rel="noopener">도약 전 확인: LLM 에이전트를 위한 사전 검증</a><span class="pick-why">에이전트 검증의 학술적 기초</span></li><li><a href="https://aws.amazon.com/blogs/machine-learning/optimizing-agent-system-prompts-with-amazon-bedrock-agentcore/" target="_blank" rel="noopener">Amazon Bedrock AgentCore를 활용한 에이전트 시스템 프롬프트 최적화</a><span class="pick-why">프로덕션 표준화 방법론</span></li><li><a href="https://aws.amazon.com/blogs/machine-learning/monitoring-production-agent-lifecycle-with-aws-devops-agent-and-agentcore-evaluations/" target="_blank" rel="noopener">AWS DevOps Agent와 AgentCore Evaluations으로 프로덕션 에이전트 라이프사이클 모니터링하기</a><span class="pick-why">프로덕션 감시 인프라</span></li><li><a href="https://github.com/paperclipai/paperclip" target="_blank" rel="noopener">Paperclip - 업무 AI 에이전트 관리 앱</a><span class="pick-why">에이전트 관리 도구의 실제</span></li></ol></div></div>
-</div>
-<div class="section" id="weeks">
+  <div class="take"><p class="take-headline">AI 에이전트 도구 관리부터 기초 엔지니어링까지, 개발자 중심의 AI 실무화가 진행 중</p><p class="take-body">실제 업무에서 AI 에이전트를 관리하는 구체적인 도구(Paperclip)의 등장과 AI를 배우려는 개발자를 위한 기초 교육(AI 엔지니어링)이 동시에 나타나고 있다. 이는 AI가 더 이상 연구 수준의 개념이 아니라, 개발자가 실제 업무에서 다루고 배워야 하는 실용적 영역으로 빠르게 변화하고 있음을 보여준다.</p><div class="take-refs"><span>근거</span><a href="https://github.com/paperclipai/paperclip" target="_blank" rel="noopener">Paperclip - 업무 AI 에이전트 관리 앱</a> · <a href="https://github.com/rohitg00/ai-engineering-from-scratch" target="_blank" rel="noopener">기초부터 시작하는 AI 엔지니어링</a></div></div>
+</div><div class="section" id="dev-blogs">
   <div class="section-header">
-    <span class="section-icon">주간</span>
-    <span class="section-title">이 달의 주차</span>
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">3개</span>
   </div>
-  <a href="./2026-W40.html" class="day-link"><span class="day-label">2026년 9월 28일 ~ 10월 4일</span><span class="day-date">2026-W40</span><span class="day-arrow">&rarr;</span></a><a href="./2026-W39.html" class="day-link"><span class="day-label">2026년 9월 21일 ~ 9월 27일</span><span class="day-date">2026-W39</span><span class="day-arrow">&rarr;</span></a><a href="./2026-W38.html" class="day-link"><span class="day-label">2026년 9월 14일 ~ 9월 20일</span><span class="day-date">2026-W38</span><span class="day-arrow">&rarr;</span></a><a href="./2026-W37.html" class="day-link"><span class="day-label">2026년 9월 7일 ~ 9월 13일</span><span class="day-date">2026-W37</span><span class="day-arrow">&rarr;</span></a>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">C#에서 UTF-16 문자열을 얼마나 빠르게 수정할 수 있을까?</span>
+      <span class="item-meta">Daniel Lemire</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 452 273" style="width:452px;max-width:100%" role="img" aria-label="문자 범위별 코드 유닛 구조" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="226" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">C# UTF-16 인코딩</text><rect x="96" y="50" width="260" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">UTF-16</text><rect x="96" y="119" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="142" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">기본 다국어 평면</text><text x="226" y="159" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">1개 유닛</text><rect x="96" y="205" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="228" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">대리 쌍</text><text x="226" y="245" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">2개 유닛</text></svg><figcaption>문자 범위별 코드 유닛 구조</figcaption></figure></div><div class="item-summary">C#의 UTF-16 문자열 처리 성능에 관한 글입니다.<br>- C# 문자열은 UTF-16으로 인코딩되며, 대부분의 문자는 16비트 코드 유닛 1개로 표현<br>- 기본 다국어 평면 밖의 문자와 이모지는 상위 대리(U+D800~U+DBFF)와 하위 대리(U+DC00~U+DFFF) 2개 필요<br>- [내용 불완전 — 'A surrogate w'에서 끝남]</div>
+      <div class="item-link"><a href="https://lemire.me/blog/2026/09/26/how-fast-can-you-fix-a-utf-16-string-in-c/" target="_blank" rel="noopener">C#에서 UTF-16 문자열을 얼마나 빠르게 수정할 수 있을까?</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">충전식 자전거 라이트의 낡은 배터리 교체</span>
+      <span class="item-meta">Julia Evans</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">10년 전 구입한 충전식 자전거 라이트의 배터리 성능 저하와 수리 시도에 관한 글.<br>- 완전 충전 후 약 5분만 작동 후 꺼짐<br>- 전자기기 수리 경험이 부족한 사람이 이를 수리해보려는 시도<br>- 오래된 전자기기 수리 가능성에 대한 호기심이 동기</div>
+      <div class="item-link"><a href="https://jvns.ca/blog/2026/09/27/replacing-the-old-battery-on-rechargeable-bike-lights/" target="_blank" rel="noopener">충전식 자전거 라이트의 낡은 배터리 교체</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Sep/26/kakapo-party/" target="_blank" rel="noopener">Kākāpō Party</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://authorsguild.org/news/ag-v-openai-top-execs-knew-mass-book-piracy-was-illegal/" target="_blank" rel="noopener">OpenAI가 Hacker News에 나타날 내용의 여론을 우려했다</a></div>
+    <div class="item-meta">HN · 508 pts</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/InfinityLoop1308/PipePipe" target="_blank" rel="noopener">PipePipe: SponsorBlock을 구현한 NewPipe 하드포크</a></div>
+    <div class="item-meta">HN · 459 pts</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.astralcodexten.com/p/does-georgism-work-five-years-later" target="_blank" rel="noopener">조지즘이 효과가 있는가? 5년 후</a></div>
+    <div class="item-meta">HN · 442 pts</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://lexontech.org/fifteen-years-later-the-apple-cards-origin-story" target="_blank" rel="noopener">15년 후의 Apple Cards 기원 이야기</a></div>
+    <div class="item-meta">HN · 419 pts</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.tomshardware.com/tech-industry/semiconductors/asml-says-its-sells-absolutely-nothing-in-europe-calls-on-eu-to-help-create-demand" target="_blank" rel="noopener">ASML, 2026년 유럽에서 '절대 아무것도' 판매하지 않았다</a></div>
+    <div class="item-meta">HN · 355 pts</div>
+  </div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Paperclip - 업무 AI 에이전트 관리 앱</span>
+      <span class="item-meta">88,832</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">The open-source app everyone uses to manage agents at work</div>
+      <div class="item-link"><a href="https://github.com/paperclipai/paperclip" target="_blank" rel="noopener">Paperclip - 업무 AI 에이전트 관리 앱</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">vectorize-io/hindsight</span>
+      <span class="item-meta">35,810</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Hindsight: Agent Memory That Learns</div>
+      <div class="item-link"><a href="https://github.com/vectorize-io/hindsight" target="_blank" rel="noopener">vectorize-io/hindsight</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">debpalash/VoiceStudio</span>
+      <span class="item-meta">39,003</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">음성 클로닝, 음성 설계, 비디오 더빙, 받아쓰기, 음성 인식, 오디오북 생성 등의 기능을 제공하는 오픈소스 도구.<br>- 음성 클로닝, 음성 설계, 비디오 더빙, 받아쓰기, 음성 텍스트 변환, 오디오북 생성<br>- 646개 언어 지원<br>- AGPL-3.0 라이선스로 오픈소스 공개</div>
+      <div class="item-link"><a href="https://github.com/debpalash/VoiceStudio" target="_blank" rel="noopener">debpalash/VoiceStudio</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>기초부터 시작하는 AI 엔지니어링</span>
+      <span class="item-meta">58,891</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 엔지니어링을 배우기 위한 종합 참고 자료입니다.<br>- 523개의 레슨으로 구성<br>- 20개의 phases로 체계화<br>- 12개 언어 지원 (스페인어, 프랑스어, 포르투갈어, 독일어, 이탈리아어, 중국어, 일본어, 한국어, 힌디어, 아랍어, 러시아어, 터키어)</div>
+      <div class="item-link"><a href="https://github.com/rohitg00/ai-engineering-from-scratch" target="_blank" rel="noopener">기초부터 시작하는 AI 엔지니어링</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">PipePipe: 더 빠르고 안정적인 NewPipe</span>
+      <span class="item-meta">6,434</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">NewPipe를 기반으로 개선된 동영상 플레이어 앱.<br>- YouTube 강화: SponsorBlock으로 광고 건너뛰기, ReturnYouTubeDislike로 평가 복원, 원본 제목 표시, 로그인 지원<br>- 고급 재생: 댕마쿠 라이브 채팅, AV1/VP9 코덱, 배경 재생 모드, 슬립 타이머, 스와이프 제스처 시크<br>- 플레이리스트 기능: 전체 다운로드, 검색/정렬, 키워드/채널 필터링, 쇼츠/유료 영상 차단</div>
+      <div class="item-link"><a href="https://github.com/InfinityLoop1308/PipePipe" target="_blank" rel="noopener">PipePipe: 더 빠르고 안정적인 NewPipe</a> &rarr;</div>
+    </div>
+  </details>
+</div>
 </div>
 </body>
 </html>
