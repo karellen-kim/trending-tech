@@ -195,66 +195,220 @@
 </div>
 <div class="page-meta">2026-09-29</div>
 <h1><em>29</em> Sep 2026</h1>
-<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
 <div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 해석</span>
     
   </div>
-  <div class="take"><p class="take-headline">LLM 에이전트의 실행 제어·토큰 효율성이 집중 연구 대상이 되는 시점에 기업들이 에이전트를 플랫폼에 직접 통합하기 시작했다</p><p class="take-body">5건의 논문이 에이전트의 제어 실패(파킨슨 증후군), 토큰 낭비, 신뢰도, 다중 에이전트 효율성 등 실행 단계의 구체적 문제들을 다루고 있다. 동시에 Cloudflare는 agentic CLI를 API 전체에 대해 출시하고, Microsoft는 AI 에이전트를 Office 플랫폼에 내장하고 있다. 즉, 에이전트가 연구 단계에서 프로덕션 고민 단계로 이행하고 있다는 신호다.</p><div class="take-refs"><span>근거</span><a href="https://arxiv.org/abs/2609.30662" target="_blank" rel="noopener">LLM 파킨슨 증후군: 자율 LLM 에이전트의 실행 제어 실패, 토큰 비효율적 지속, 불확실성 인식 글로벌 실행 제어 아키텍처</a> · <a href="https://blog.cloudflare.com/cloudflare-cf-cli-launch/" target="_blank" rel="noopener">cf 소개: Cloudflare API 전체를 지원하는 agentic CLI</a> · <a href="https://arxiv.org/abs/2609.30734" target="_blank" rel="noopener">무엇을 건너뛸지 배우기: 효율적 다중 에이전트 LLM 워크플로우를 위한 반사실적 신용 할당</a> · <a href="https://github.com/dream-num/univer" target="_blank" rel="noopener">AI 에이전트를 위한 Office 플랫폼</a> · <a href="https://arxiv.org/abs/2609.31619" target="_blank" rel="noopener">멈추는 것을 학습하지 않고 멈추기: 자기지도 신뢰도 훈련을 통한 추론 효율성 개선</a></div></div>
+  <div class="take"><p class="take-headline">에이전트가 조직 규모 자동화와 의사결정 담당으로 확대 배포</p><p class="take-body">AWS 에이전트 스웜 프로토콜, Databricks의 12,000명 전사 배포, GitHub의 AI 보안 에이전트가 취약점 발견까지 수행하는 사례들이 보여준다. 에이전트가 단순 어시스턴트가 아니라 조직의 자동 의사결정 권한을 가진 시스템으로 격상되고 있다. Adrian Cockcroft의 'When agents make decisions' 제목이 이를 명시적으로 질문한다.</p><div class="take-refs"><span>근거</span><a href="https://aws.amazon.com/blogs/architecture/build-adaptive-ai-interfaces-with-the-ag-ui-protocol-agent-swarms-and-nova-act-on-aws/" target="_blank" rel="noopener">AG-UI 프로토콜, 에이전트 스웜, Amazon Nova Act로 AWS 기반 적응형 AI 인터페이스 구축</a> · <a href="https://www.databricks.com/blog/how-databricks-rolls-out-frontier-models-14000-employees-day-1" target="_blank" rel="noopener">Databricks가 12,000명 직원에게 frontier 모델을 Day 1에 배포하는 방법</a> · <a href="https://github.blog/security/how-we-found-24-android-vulnerabilities-using-our-open-source-ai-security-agent/" target="_blank" rel="noopener">오픈소스 AI 보안 에이전트로 발견한 24개 Android 취약점</a> · <a href="https://adrianco.medium.com/when-agents-decide-60ac6d59bdfe?source=rss-eed29d74b3fb------2" target="_blank" rel="noopener">에이전트가 결정할 때</a></div></div>
 </div><div class="section" id="tech-blog">
   <div class="section-header">
     <span class="section-icon">TECH</span>
     <span class="section-title">기술 블로그</span>
-    <span class="section-count">4개</span>
+    <span class="section-count">18개</span>
   </div>
   <div class="item">
   <details>
     <summary>
-      <span class="item-name">Vite로 구동하는 Next.js 애플리케이션: Vinext 1.0 소개</span>
-      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-name">Grok 4.7이 Amazon Bedrock에서 출시됨</span>
+      <span class="item-meta">AWS ML Blog</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">Vinext 1.0이 AI 실험에서 프로덕션 레벨 프레임워크로 졸업하여 개발자들이 Vite에서 Next.js 앱을 실행할 수 있다.<br>- 고급 캐시 워밍 기능 추가<br>- 더 넓은 호환성 지원<br>- 자동화된 테스팅 파이프라인 도입</div>
-      <div class="item-link"><a href="https://blog.cloudflare.com/vinext-nextjs-on-vite/" target="_blank" rel="noopener">Vite로 구동하는 Next.js 애플리케이션: Vinext 1.0 소개</a> &rarr;</div>
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 238" style="width:656px;max-width:100%" role="img" aria-label="Amazon Bedrock에 출시된 Grok 4.7의 기능 스택" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Grok 4.7 Available</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Grok 4.7</text><rect x="240" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Token</text><text x="328" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Context…</text><text x="328" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">500K</text><rect x="464" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Reasoning</text><text x="552" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Effort</text><text x="552" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">4</text><rect x="16" y="153" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="176" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">API</text><text x="104" y="193" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Interfaces</text><text x="104" y="210" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">3</text><line x1="192" y1="86" x2="237" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="205" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">제공</text><path d="M 104 121 L 104 137 L 552 137 L 552 124" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="317" y="135" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="146" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">포함</text><path d="M 104 224 L 104 137 L 104 137 L 104 47" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="93" y="121" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="104" y="132" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">접근</text></svg><figcaption>Amazon Bedrock에 출시된 Grok 4.7의 기능 스택</figcaption></figure></div><div class="item-summary">xAI의 Grok 4.7이 Amazon Bedrock에서 출시되었습니다.<br>- 500K 토큰 컨텍스트 윈도우 제공<br>- 4가지 configurable reasoning effort 레벨 지원<br>- Responses, Chat Completions, Converse API를 통해 접근 가능</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/grok-4-7-is-now-available-on-amazon-bedrock/" target="_blank" rel="noopener">Grok 4.7이 Amazon Bedrock에서 출시됨</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">AWS에서 Claude Sonnet 5.5 소개</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Claude Sonnet 5.5의 AWS 출시에 관한 글<br>- Claude Sonnet 5.5가 Amazon Bedrock과 Claude Platform on AWS에서 이용 가능<br>- 더 효율적인 모델로 작업당 비용이 낮고 속도가 빠름<br>- 코딩과 지식 작업에 최적화됨</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/introducing-claude-sonnet-5-5-on-aws/" target="_blank" rel="noopener">AWS에서 Claude Sonnet 5.5 소개</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">vLLM-Omni을 사용한 SageMaker AI 실시간 음성 애플리케이션 구축 – Part 1</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 118" style="width:656px;max-width:100%" role="img" aria-label="텍스트 입력에서 실시간 음성 스트리밍까지" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">SageMaker 음성 스트리밍</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Gradio</text><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">애플리케이션</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Qwen3-TTS 모델</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">음성 스트리밍</text><text x="552" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">실시간</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="191" y="61" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">텍스트 전송</text><line x1="416" y1="77" x2="461" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="418" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">음성 생성</text></svg><figcaption>텍스트 입력에서 실시간 음성 스트리밍까지</figcaption></figure></div><div class="item-summary">Amazon SageMaker AI에 텍스트-음성(TTS) 모델을 배포하고 실시간으로 음성을 스트리밍하는 방법에 관한 글<br>- AWS vLLM-Omni Deep Learning Container를 활용한 배포<br>- Qwen3-TTS 모델 배포<br>- Gradio 애플리케이션을 통한 지속적인 양방향 연결로의 음성 스트리밍</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/build-real-time-voice-applications-with-vllm-omni-on-sagemaker-ai-part-1/" target="_blank" rel="noopener">vLLM-Omni을 사용한 SageMaker AI 실시간 음성 애플리케이션 구축 – Part 1</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">통신 병목: 언어 모델에서 트리 구조 표현식 직렬화의 왕복 연구</span>
+      <span class="item-meta">Apple ML Research</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 101" style="width:656px;max-width:100%" role="img" aria-label="자연어 변환 후 원본 복구 가능성 측정" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Round-Trip 구조 직렬화</text><rect x="16" y="50" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">산술 표현식</text><rect x="240" y="50" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Word Problem</text><rect x="464" y="50" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">복구 검증</text><line x1="192" y1="68" x2="237" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="166" y="52" width="99" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="64" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">Generator로 변환</text><line x1="416" y1="68" x2="461" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="390" y="52" width="99" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="64" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">Extractor로 검증</text></svg><figcaption>자연어 변환 후 원본 복구 가능성 측정</figcaption></figure></div><div class="item-summary">언어 모델이 구조화된 정보를 자연어로 직렬화할 때 얼마나 많은 정보가 보존되는지를 실증적으로 측정하는 연구.<br>- Round-trip protocol 적용: generator와 extractor를 통한 왕복 검증<br>- Generator: 절차적으로 생성된 산술 표현식을 word problem으로 변환<br>- Extractor: word problem만으로 원래 표현식 복구 가능 여부 검증</div>
+      <div class="item-link"><a href="https://machinelearning.apple.com/research/communication-bottleneck-serialization" target="_blank" rel="noopener">통신 병목: 언어 모델에서 트리 구조 표현식 직렬화의 왕복 연구</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://machinelearning.apple.com/research/federated-variational-inequalities" target="_blank" rel="noopener">Federated 변분 부등식을 위한 더 빠른 수렴률</a></div>
+    <div class="item-meta">Apple ML Research</div>
+  </div>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">생물학의 복잡성을 위한 AI 연구 시스템 Quine 소개</span>
+      <span class="item-meta">Microsoft Research</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 187" style="width:656px;max-width:100%" role="img" aria-label="AI 모델이 가설부터 실험, 개선까지 전 과정을 지원" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Quine: 생물학 연구 프로세스</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Quine 생물학 AI</text><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">모델</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">가설 우선순위 결정</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">실험 수행</text><rect x="16" y="136" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="159" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">연구 방향 개선</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="184" y="61" width="64" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">탐색 공간 제공</text><line x1="416" y1="77" x2="461" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="418" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">가설 검증</text><path d="M 552 104 L 552 120 L 104 120 L 104 133" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="303" y="104" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="115" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">결과 피드백</text></svg><figcaption>AI 모델이 가설부터 실험, 개선까지 전 과정을 지원</figcaption></figure></div><div class="item-summary">생물학의 멀티모달 세계 모델을 구축하는 초기 단계 AI 연구 노력인 Quine에 대한 글입니다.<br>- 생물학적 규모와 양식을 연결하여 직관이 허용하는 것보다 훨씬 큰 탐색 공간을 계산적으로 탐색 가능하게 함<br>- 과학자들이 실험실 진입 전에 가설의 우선순위를 결정하는 데 지원<br>- 실험 결과를 피드백으로 활용하여 향후 연구 방향 개선</div>
+      <div class="item-link"><a href="https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology/" target="_blank" rel="noopener">생물학의 복잡성을 위한 AI 연구 시스템 Quine 소개</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Microsoft Research Asia – Singapore 출범 1년: 연구, 파트너십, 인재를 통한 실제 가치 창출</span>
+      <span class="item-meta">Microsoft Research</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Microsoft Research Asia – Singapore 랩의 1년 성과에 관한 글<br>- 강력한 기초를 확립했음<br>- 정부, 학계, 산업 전반에 걸쳐 협력을 심화했음<br>- 최첨단 AI 연구가 실제 가치를 만드는 방법을 탐색했음</div>
+      <div class="item-link"><a href="https://www.microsoft.com/en-us/research/blog/one-year-in-how-microsoft-research-asia-singapore-is-advancing-research-partnership-and-talent-for-real-world-impact/" target="_blank" rel="noopener">Microsoft Research Asia – Singapore 출범 1년: 연구, 파트너십, 인재를 통한 실제 가치 창출</a> &rarr;</div>
     </div>
   </details>
 </div><div class="item important">
   <details>
     <summary>
-      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>cf 소개: Cloudflare API 전체를 지원하는 agentic CLI</span>
-      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>AG-UI 프로토콜, 에이전트 스웜, Amazon Nova Act로 AWS 기반 적응형 AI 인터페이스 구축</span>
+      <span class="item-meta">AWS Architecture Blog</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">Cloudflare의 새로운 명령줄 도구 cf와 SDK 생성기 공개에 관한 글<br>- cf는 전체 Cloudflare API를 미러링하는 명령줄 도구<br>- 프로그래밍 방식의 TypeScript 설정을 지원<br>- 내부 SDK 생성기 Forge를 오픈소스로 공개</div>
-      <div class="item-link"><a href="https://blog.cloudflare.com/cloudflare-cf-cli-launch/" target="_blank" rel="noopener">cf 소개: Cloudflare API 전체를 지원하는 agentic CLI</a> &rarr;</div>
+      <div class="item-summary">에이전트의 가변적 출력에 자동으로 적응하는 AI 인터페이스 구축 방법에 관한 글<br>- AG-UI 프로토콜을 통한 동적 UI 생성<br>- Strands Agents SDK 스웜 패턴을 활용한 설명 가능한 다중 에이전트 협업<br>- Amazon Nova Act를 통한 API 없는 레거시 시스템 통합</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/architecture/build-adaptive-ai-interfaces-with-the-ag-ui-protocol-agent-swarms-and-nova-act-on-aws/" target="_blank" rel="noopener">AG-UI 프로토콜, 에이전트 스웜, Amazon Nova Act로 AWS 기반 적응형 AI 인터페이스 구축</a> &rarr;</div>
     </div>
   </details>
 </div><div class="item">
   <details>
     <summary>
-      <span class="item-name">웹은 얼마나 빠른가? BEACON으로 수십억 개의 실사용자 측정값 탐색하기</span>
+      <span class="item-name">Post-Quantum 마이그레이션의 길을 AI로 찾다</span>
       <span class="item-meta">Cloudflare Blog</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 204" style="width:656px;max-width:100%" role="img" aria-label="RUM 데이터가 BEACON으로 수집되어 BigQuery에서 분석 가능" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">BEACON: 웹 성능 데이터 공개</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Cloudflare</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">BEACON 데이터셋</text><text x="328" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">수십억 개</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Google</text><text x="552" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">BigQuery</text><rect x="16" y="136" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="159" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">성능 분석</text><text x="104" y="176" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">Core Web…</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="205" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">수집</text><line x1="416" y1="77" x2="461" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="429" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">공개</text><path d="M 552 104 L 552 120 L 104 120 L 104 133" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="317" y="104" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="115" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">조회</text></svg><figcaption>RUM 데이터가 BEACON으로 수집되어 BigQuery에서 분석 가능</figcaption></figure></div><div class="item-summary">Cloudflare가 BEACON 데이터셋을 오픈소싱하여 수십억 개의 익명화된 RUM 성능 기록을 Google BigQuery에 공개했다.<br>- Google BigQuery에서 익명화된 Real User Monitoring 성능 기록 수십억 개에 접근 가능<br>- Core Web Vitals 및 soft navigation metrics 포함<br>- 브라우저와 지역별 성능 분석 가능</div>
-      <div class="item-link"><a href="https://blog.cloudflare.com/how-fast-is-the-web/" target="_blank" rel="noopener">웹은 얼마나 빠른가? BEACON으로 수십억 개의 실사용자 측정값 탐색하기</a> &rarr;</div>
+      <div class="item-summary">Post-Quantum 암호화 마이그레이션을 위한 내부 AI 도구 CryptoLabe 구축에 관한 글<br>- CryptoLabe는 코드베이스 전반에서 암호화를 발견하는 AI 도구<br>- 암호화 의존성을 표면화해 마이그레이션 진행을 지원<br>- 2029년까지의 완전한 Post-Quantum 마이그레이션 달성 목표</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/ai-driven-cryptography-discovery/" target="_blank" rel="noopener">Post-Quantum 마이그레이션의 길을 AI로 찾다</a> &rarr;</div>
     </div>
   </details>
 </div><div class="item">
   <details>
     <summary>
-      <span class="item-name">마케팅 데이터에서 가장 흔히 오해되는 24가지 용어</span>
+      <span class="item-name">인터넷 전체를 위한 인증기관 구축</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Cloudflare가 인증기관(CA)으로 인증받기 위한 기술적 접근에 관한 글이다.<br>- Universal SSL 출시 12년 후 인증기관 신청<br>- 기존 root, ACME-first 접근, Merkle Tree Certificates 결합<br>- post-quantum CA를 오픈 웹을 위해 구축 중</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/cloudflare-certificate-authority/" target="_blank" rel="noopener">인터넷 전체를 위한 인증기관 구축</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">AI 시대의 적응형 애플리케이션 보안: Cloudflare가 코드, 트래픽, 인텔리전스를 연결하여 공격을 차단하는 방법</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Cloudflare가 도입한 적응형 보안 프레임워크에 관한 글<br>- 위험 발견, 에이전트 거버넌스, 런타임 보호를 연결<br>- AI 기반 대응 포함<br>- 지속적인 학습 루프 구조</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/ai-era-framework/" target="_blank" rel="noopener">AI 시대의 적응형 애플리케이션 보안: Cloudflare가 코드, 트래픽, 인텔리전스를 연결하여 공격을 차단하는 방법</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Databricks가 12,000명 직원에게 frontier 모델을 Day 1에 배포하는 방법</span>
       <span class="item-meta">Databricks Blog</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 230" style="width:480px;max-width:100%" role="img" aria-label="팀별 다른 해석을 5가지 항목으로 검증해 공유 정의 수립" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">마케팅·데이터팀 용어 정의 통일</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">현재 문제</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">마케팅팀 해석</text><text x="116" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">90일 미구매</text><line x1="116" y1="130" x2="116" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="162" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">데이터팀 해석</text><text x="116" y="202" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">30일 미사용</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">개선 방안</text><rect x="276" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="108" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">5가지 항목 검증</text><line x1="364" y1="130" x2="364" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="162" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="194" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">공유 정의 확립</text><line x1="240" y1="50" x2="240" y2="222" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>팀별 다른 해석을 5가지 항목으로 검증해 공유 정의 수립</figcaption></figure></div><div class="item-summary">마케팅 팀과 데이터 엔지니어링 팀이 같은 데이터 용어를 다르게 해석해서 발생하는 문제와 해결 방법 가이드.<br>- "inactive customers"(90일 미구매 vs 30일 앱 미사용), "real-time"(15분 갱신 vs 초 단위) 등 구체적 사례에서 해석 차이로 인한 캠페인 재작업 발생<br>- 캠페인 실행 전 데이터 소스, 고객 정체성, audience 준비도, 신선도 요구사항, 소유권 등 5가지 항목에서 정의 합의<br>- 마케팅, 분석, AI 전반에 재사용 가능한 정의를 공유된 비즈니스 맥락으로 데이터와 워크플로우에 연결</div>
-      <div class="item-link"><a href="https://www.databricks.com/blog/helping-marketing-data-engineering-same-word-different-meaning" target="_blank" rel="noopener">마케팅 데이터에서 가장 흔히 오해되는 24가지 용어</a> &rarr;</div>
+      <div class="item-summary">Databricks가 10,000명 이상 직원에게 새로운 frontier AI 모델을 빠르게 제공하면서도 비용 증가와 품질 저하를 방지하기 위한 배포 전략에 관한 글<br>- Opus 5.0이 Opus 4.8보다 비용이 높고 정량·정성 평가 점수가 낮은 등, frontier 모델이 항상 개선을 의미하지 않음<br>- GPT Astra 배포 시 비용 제어 부재로 평균 개발자당 60% 비용 증가 발생, 10,000명 이상 사용자 규모에서 회사 계획이 어려워짐<br>- 모델이 특히 잘하는 작업을 파악해 사용을 조정하고, Unity Gateway를 통해 적응적 배포와 평가를 수행</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/how-databricks-rolls-out-frontier-models-14000-employees-day-1" target="_blank" rel="noopener">Databricks가 12,000명 직원에게 frontier 모델을 Day 1에 배포하는 방법</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Lakebase Search: Postgres를 위한 최고 수준의 전문검색 및 벡터 검색</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Postgres에 내장된 전문검색 및 벡터 검색 엔진 Lakebase Search에 관한 글.<br>- lakebase_vector(ANN 검색)와 lakebase_text(BM25) 확장으로 Postgres 내에서 직접 의미론적·키워드·하이브리드 검색을 실행 가능하며, 별도의 검색 시스템 및 ETL 파이프라인이 불필요<br>- 100M 벡터 기준으로 차선책 대비 처리량 2배, Cloud Postgres with pgvector 대비 비용 4배 절감, 97% recall at 71ms P99 latency 달성<br>- 스토리지와 컴퓨트를 분리하고 계층적 IVF 클러스터링 + RaBitQ 바이너리 양자화를 활용하며, 쿼리 사용량 기반 과금 구조로 스케일 투 제로 지원</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres" target="_blank" rel="noopener">Lakebase Search: Postgres를 위한 최고 수준의 전문검색 및 벡터 검색</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">제조 데이터와 AI: 제품 가치사슬 연결</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">제조 데이터와 AI를 통한 제품 가치사슬 통합에 관한 글<br>- 제조 데이터는 가치사슬 전체에 걸쳐 있지만 시스템은 기능·공장별로 분리되어 있음<br>- Databricks는 분산된 시스템의 데이터를 통합하거나 제 위치에서 조회 가능하게 함<br>- 통제된 의미론, 자연어 분석, 에이전트 애플리케이션으로 사람들이 데이터 엔지니어가 되지 않고도 데이터 활용 가능</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/manufacturing-data-and-ai-connecting-product-value-chain" target="_blank" rel="noopener">제조 데이터와 AI: 제품 가치사슬 연결</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Elastic Cloud Serverless: 또 다른 Azure 지역 추가</span>
+      <span class="item-meta">Elastic Search Labs</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Elastic Cloud Serverless가 새로운 지역에서 이용 가능해짐을 알리는 소식.<br>- Microsoft Azure의 Iowa 지역에서 Elastic Cloud Serverless 서비스 개시<br>- Serverless Azure 지역이 전 세계 12개로 확대<br>- Elastic의 고객 데이터 위치에 맞춰 글로벌 서비스 제공 전략 강조</div>
+      <div class="item-link"><a href="https://www.elastic.co/search-labs/blog/elastic-cloud-serverless-now-available-azure-iowa" target="_blank" rel="noopener">Elastic Cloud Serverless: 또 다른 Azure 지역 추가</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>오픈소스 AI 보안 에이전트로 발견한 24개 Android 취약점</span>
+      <span class="item-meta">GitHub Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">오픈소스 AI 보안 에이전트를 활용하여 Android 취약점을 찾은 사례와 기법에 관한 글<br>- 24개의 Android 취약점 발견<br>- 타겟된 AI 작업 흐름을 통한 비판적 버그 적발<br>- 동일한 오픈소스 에이전트를 자신의 앱에서 실행하는 방법 제시</div>
+      <div class="item-link"><a href="https://github.blog/security/how-we-found-24-android-vulnerabilities-using-our-open-source-ai-security-agent/" target="_blank" rel="noopener">오픈소스 AI 보안 에이전트로 발견한 24개 Android 취약점</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.blog/open-source/git/highlights-from-git-2-56/" target="_blank" rel="noopener">Git 2.56 주요 기능</a></div>
+    <div class="item-meta">GitHub Blog</div>
+  </div>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Hive는 잊으려 했지만, Spark는 기억하고 있었다: 사라진 get_table RPC 복원기</span>
+      <span class="item-meta">NAVER D2</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">네이버의 Hadoop 플랫폼 C3 Metastore를 Apache Hive 4.2로 업그레이드하는 과정에서 Spark 잡이 실패한 현상과 그 해결 과정에 관한 글입니다.<br>- Spark 잡이 'Invalid method name: get_table' 오류로 실패<br>- Metastore Thrift 인터페이스에서 제거된 'get_table' RPC 메서드가 원인<br>- Thrift IDL 2줄과 서버 구현으로 사라진 RPC 메서드를 복원해 해결</div>
+      <div class="item-link"><a href="https://d2.naver.com/helloworld/7314597" target="_blank" rel="noopener">Hive는 잊으려 했지만, Spark는 기억하고 있었다: 사라진 get_table RPC 복원기</a> &rarr;</div>
     </div>
   </details>
 </div>
@@ -262,107 +416,105 @@
   <div class="section-header">
     <span class="section-icon">DEV</span>
     <span class="section-title">개발자 블로그 &amp; SNS</span>
-    <span class="section-count">4개</span>
+    <span class="section-count">10개</span>
   </div>
-  <div class="item">
+  <div class="item important">
   <div class="item-head">
-    <div class="item-name"><a href="https://lemire.me/blog/2026/09/28/simdjson-5-0-is-out/" target="_blank" rel="noopener">simdjson 5.0 출시</a></div>
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://adrianco.medium.com/when-agents-decide-60ac6d59bdfe?source=rss-eed29d74b3fb------2" target="_blank" rel="noopener">에이전트가 결정할 때</a></div>
+    <div class="item-meta">Adrian Cockcroft</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://lemire.me/blog/2026/09/28/simdjson-5-0-is-out/" target="_blank" rel="noopener">simdjson 5.0이 출시됨</a></div>
     <div class="item-meta">Daniel Lemire</div>
   </div>
 </div><div class="item">
-  <details>
-    <summary>
-      <span class="item-name">Muse AI Agent 인용</span>
-      <span class="item-meta">Simon Willison</span>
-      <span class="item-toggle" aria-hidden="true"></span>
-    </summary>
-    <div class="item-body">
-      <div class="item-summary">MX Keys Mini 픽업 배송 실패 사건.<br>- 픽업 담당자 Usman이 9:15에 건물 도착 후 9:38까지 응답 없이 떠남<br>- 자동응답이 9:27에 '여기 있습니다'를 보냈으나 실제로는 사용자가 없었음<br>- 발신자가 사용자 계정에서 사과하고 재시도를 제안함</div>
-      <div class="item-link"><a href="https://simonwillison.net/2026/Sep/28/muse-ai-agent/" target="_blank" rel="noopener">Muse AI Agent 인용</a> &rarr;</div>
-    </div>
-  </details>
-</div><div class="item">
-  <details>
-    <summary>
-      <span class="item-name">2026년 LLM 동향 (현재까지)</span>
-      <span class="item-meta">Simon Willison</span>
-      <span class="item-toggle" aria-hidden="true"></span>
-    </summary>
-    <div class="item-body">
-      <div class="item-summary">WeAreDevelopers World Congress North America에서의 closing keynote 발표와 2026년 LLM 트렌드를 다룬 내용.<br>- WeAreDevelopers World Congress North America (San Jose)에서 closing keynote 발표<br>- 2026년의 주요 트렌드를 시간순으로 탐색<br>- YouTube 비디오와 annotated slides, notes 제공</div>
-      <div class="item-link"><a href="https://simonwillison.net/2026/Sep/27/2026-in-llms-so-far/" target="_blank" rel="noopener">2026년 LLM 동향 (현재까지)</a> &rarr;</div>
-    </div>
-  </details>
-</div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Sep/27/hn-49871741/" target="_blank" rel="noopener">S3는 미래, S3는 과거</a></div>
-    <div class="item-meta">Simon Willison</div>
+    <div class="item-name"><a href="http://brooker.co.za/blog/2026/09/28/engineering-system-one.html" target="_blank" rel="noopener">작은 결정들: 선도적 모델 개발하기</a></div>
+    <div class="item-meta">Marc Brooker</div>
   </div>
-</div>
-</div><div class="section" id="papers">
-  <div class="section-header">
-    <span class="section-icon">PAPER</span>
-    <span class="section-title">AI / LLM 논문</span>
-    <span class="section-count">5개</span>
-  </div>
-  <div class="item">
+</div><div class="item">
   <details>
     <summary>
-      <span class="item-name">ScopeBench: 에이전트는 목표 압박 하에서 참여 범위 경계를 유지하는가?</span>
-      <span class="item-meta">arXiv</span>
+      <span class="item-name">Bliki: 합리적인 기본값</span>
+      <span class="item-meta">Martin Fowler</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">자율적으로 배포되는 웹 애플리케이션 및 네트워크 침투 테스트 에이전트의 범위 준수 능력을 평가하는 벤치마크에 관한 논문.<br>- ScopeBench는 명시된 목표를 달성하기 위해 명시된 범위를 위반해야만 하는 30개의 막힌 에이전트 보안 작업으로 구성<br>- 기존 공격 보안 벤치마크는 해킹 능력을 측정하지만, 실제 배포의 주요 장벽은 범위 준수라는 특수한 정렬 문제<br>- 각 작업은 두 가지 조건 하에서 제시됨</div>
-      <div class="item-link"><a href="https://arxiv.org/abs/2609.30325" target="_blank" rel="noopener">ScopeBench: 에이전트는 목표 압박 하에서 참여 범위 경계를 유지하는가?</a> &rarr;</div>
-    </div>
-  </details>
-</div><div class="item important">
-  <details>
-    <summary>
-      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>LLM 파킨슨 증후군: 자율 LLM 에이전트의 실행 제어 실패, 토큰 비효율적 지속, 불확실성 인식 글로벌 실행 제어 아키텍처</span>
-      <span class="item-meta">arXiv</span>
-      <span class="item-toggle" aria-hidden="true"></span>
-    </summary>
-    <div class="item-body">
-      <div class="item-summary">LLM 에이전트가 원래 목표 달성 후에도 불필요하게 행동을 계속하는 문제에 관한 논문.<br>- LLM은 계획·도구 사용·코드 작성·장기 워크플로우 실행은 가능하지만 프로젝트 수준의 실행 제어를 보장하지 못함<br>- 에이전트가 저가치 정제, 반복 검증, 자체 생성된 복잡성 수리 등으로 계속 행동하는 현상을 "LLM 파킨슨병"이라는 은유로 정의<br>- 이 현상이 자동회귀 구조로만 설명되지 않는다고 주장</div>
-      <div class="item-link"><a href="https://arxiv.org/abs/2609.30662" target="_blank" rel="noopener">LLM 파킨슨 증후군: 자율 LLM 에이전트의 실행 제어 실패, 토큰 비효율적 지속, 불확실성 인식 글로벌 실행 제어 아키텍처</a> &rarr;</div>
-    </div>
-  </details>
-</div><div class="item important">
-  <details>
-    <summary>
-      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>무엇을 건너뛸지 배우기: 효율적 다중 에이전트 LLM 워크플로우를 위한 반사실적 신용 할당</span>
-      <span class="item-meta">arXiv</span>
-      <span class="item-toggle" aria-hidden="true"></span>
-    </summary>
-    <div class="item-body">
-      <div class="item-summary">다중 에이전트 LLM 워크플로우에서 효율성을 높기 위해 어떤 컴포넌트를 건너뛸지 학습하는 방법에 관한 연구.<br>- 계획, 실행, 검증, 요약의 모든 컴포넌트를 실행하면 계산 낭비나 올바른 중간 답변이 손실될 수 있다<br>- 컴포넌트 생략을 반사실적 신용 할당으로 공식화하고, 전체 워크플로우 로그와 제어된 스킵 개입을 통해 각 단계의 필요성을 판단한다<br>- Learning What to Skip(LW2S)이라는 학습 방법을 제시한다</div>
-      <div class="item-link"><a href="https://arxiv.org/abs/2609.30734" target="_blank" rel="noopener">무엇을 건너뛸지 배우기: 효율적 다중 에이전트 LLM 워크플로우를 위한 반사실적 신용 할당</a> &rarr;</div>
+      <div class="item-summary">특정 작업을 수행할 때 특별한 상황이 없으면 사용해야 하는 관행에 관한 글<br>- 소프트웨어 개발의 예: 버전 관리 사용, UI 로직과 도메인 로직 분리, 배포 파이프라인 자동화<br>- '합리적인 기본값'은 '최고의 관행(best practice)'과 대조되는 용어</div>
+      <div class="item-link"><a href="https://martinfowler.com/bliki/SensibleDefault.html" target="_blank" rel="noopener">Bliki: 합리적인 기본값</a> &rarr;</div>
     </div>
   </details>
 </div><div class="item">
   <details>
     <summary>
-      <span class="item-name">실시간 음성 에이전트 평가: 컴포넌트 품질에서 근거 기반 결과까지</span>
-      <span class="item-meta">arXiv</span>
+      <span class="item-name">단편: 9월 29일</span>
+      <span class="item-meta">Martin Fowler</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">실시간 음성 에이전트의 평가 방법론 통합에 관한 논문.<br>- Speech foundation modelling, turn-taking psycholinguistics, agentic evaluation 세 커뮤니티에 평가 체계가 분산<br>- 각 분야가 서로 다른 메트릭 보고: latency (architecture papers), prediction accuracy (turn-taking papers), task success (agentic benchmarks)<br>- 배포된 에이전트가 "실제로 좋은지" 설명하는 단일 지표 부재</div>
-      <div class="item-link"><a href="https://arxiv.org/abs/2609.30798" target="_blank" rel="noopener">실시간 음성 에이전트 평가: 컴포넌트 품질에서 근거 기반 결과까지</a> &rarr;</div>
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 170" style="width:656px;max-width:100%" role="img" aria-label="강한 능력이 높은 요구도를 만드는 악순환" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">에이전트 활용의 역설</text><rect x="16" y="50" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Coding Agent</text><rect x="240" y="50" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">높은 잠재력</text><rect x="464" y="50" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">높은 요구역량</text><rect x="16" y="119" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="142" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">소프트웨어 엔지니어링</text><line x1="192" y1="68" x2="237" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="194" y="52" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="64" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">가능하게함</text><line x1="416" y1="68" x2="461" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="422" y="52" width="36" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="64" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">요구한다</text><path d="M 552 87 L 552 103 L 104 103 L 104 116" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="306" y="87" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="98" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">어렵게한다</text></svg><figcaption>강한 능력이 높은 요구도를 만드는 악순환</figcaption></figure></div><div class="item-summary">코딩 에이전트가 소프트웨어 엔지니어링을 더 어렵게 만든다는 Simon Willison의 주장에 관한 글<br>- 에이전트로 작업할수록 소프트웨어 엔지니어링이 더 어려워진다고 확신함<br>- 에이전트로는 놀라운 것들을 할 수 있지만 전체 잠재력을 발휘하려면 extraordinary discipline과 knowledge가 필요함<br>- Willison의 저작을 따라가며 받는 지속적인 인상임</div>
+      <div class="item-link"><a href="https://martinfowler.com/fragments/2026-09-29.html" target="_blank" rel="noopener">단편: 9월 29일</a> &rarr;</div>
     </div>
   </details>
-</div><div class="item important">
+</div><div class="item">
   <details>
     <summary>
-      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>멈추는 것을 학습하지 않고 멈추기: 자기지도 신뢰도 훈련을 통한 추론 효율성 개선</span>
-      <span class="item-meta">arXiv</span>
+      <span class="item-name">텍스트 분류를 위한 언어 모델: Bag-of-Words에서 Jev까지</span>
+      <span class="item-meta">Sebastian Raschka</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">추론 모델의 계산 효율성을 높이기 위한 신뢰도 기반 훈련 방법에 관한 논문<br>- 추론 모델이 매우 긴 추론 과정을 생성하여 추론이 계산적으로 비싼 문제 존재<br>- 기존 접근법: 추론 시간 초기 중단 메커니즘 또는 학습 중 길이 페널티로 짧은 추론 유도<br>- 제안 방법: 자기지도학습 절차를 통해 추론 모델을 신뢰도 예측하도록 미세 조정하여 효율성 향상</div>
-      <div class="item-link"><a href="https://arxiv.org/abs/2609.31619" target="_blank" rel="noopener">멈추는 것을 학습하지 않고 멈추기: 자기지도 신뢰도 훈련을 통한 추론 효율성 개선</a> &rarr;</div>
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 230" style="width:480px;max-width:100%" role="img" aria-label="범용 LLM에서 분류 특화 모델로 선택지가 확대되면서 속도와 비용이 개선됐다." font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">분류 모델의 진화</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">범용 LLM</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">GPT</text><text x="116" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">느리고 비쌈</text><line x1="116" y1="130" x2="116" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="162" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">오픈 가중치 LLM</text><text x="116" y="202" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">느리고 비쌈</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">분류 특화</text><rect x="276" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Jev</text><text x="364" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">빠르고 저렴</text><line x1="364" y1="130" x2="364" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="162" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">특수 목적 분류기</text><text x="364" y="202" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">최고 성능</text><line x1="240" y1="50" x2="240" y2="222" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>범용 LLM에서 분류 특화 모델로 선택지가 확대되면서 속도와 비용이 개선됐다.</figcaption></figure></div><div class="item-summary">최근 출시된 Jev AI 모델의 텍스트 분류 기능과 기존 모델들과의 비교.<br>- 지난 2주간 기술 커뮤니티에서 문화 현상이 된 분류 특화 AI 모델 Jev<br>- GPT 및 오픈 가중치 LLM 대비 분류 작업에서 더 빠르고 저렴한 성능<br>- 특수 목적 분류기보다 일반적이지만, 좁고 잘 정의된 문제에서는 특화 모델의 성능이 더 나을 수 있음</div>
+      <div class="item-link"><a href="https://magazine.sebastianraschka.com/p/classifier-history-and-jev" target="_blank" rel="noopener">텍스트 분류를 위한 언어 모델: Bag-of-Words에서 Jev까지</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">수학자들을 위한 실존 위기 이해 프레임워크</span>
+      <span class="item-meta">Kent Beck</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 452 239" style="width:452px;max-width:100%" role="img" aria-label="AI는 가시적 부분에만 우수하고, 비가시적 부분은 여전히 인간의 몫이다" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="226" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">가시·비가시 구조와 AI</text><rect x="96" y="50" width="260" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">이해·교육·futures</text><rect x="96" y="119" width="260" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="142" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">기능과 정리</text><rect x="96" y="188" width="260" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="211" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AI 시스템</text><line x1="226" y1="87" x2="226" y2="116" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="206" y="95" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="228" y="106" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">진전 가능</text><line x1="226" y1="188" x2="226" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="217" y="164" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="228" y="175" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">우수</text></svg><figcaption>AI는 가시적 부분에만 우수하고, 비가시적 부분은 여전히 인간의 몫이다</figcaption></figure></div><div class="item-summary">AI 시대에 수학자들이 겪는 정체성 위기와 그에 대한 사고 방식을 제시하는 글.<br>- 프로그래밍과 수학 모두 가시적 부분(기능/정리)과 보이지 않는 부분(이해·교육·단순화·추상화)으로 구성되어 있음<br>- 보이지 않는 부분을 "futures" 또는 "optionality"라 부르며, 이것이 가시적 부분의 진전을 가능하게 함<br>- 프로그래밍에서는 이를 역으로 "기술 부채"(Ward Cunningham 제시)라고 부르고, AI는 가시적 부분에만 우수하기 때문에 수학자들의 불안이 발생할 수 있음</div>
+      <div class="item-link"><a href="https://newsletter.kentbeck.com/p/mathematicians-heres-a-way-to-think" target="_blank" rel="noopener">수학자들을 위한 실존 위기 이해 프레임워크</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Claude Sonnet 5.5</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Anthropic이 새로운 Claude Sonnet 5.5 모델을 출시한 내용<br>- 30% 이상 빠르고 대부분의 작업에 최대 30% 낮은 비용<br>- Sonnet 5와 동일 가격이지만 모든 벤치마크에서 성능 향상<br>- 실행 비용도 더 저렴할 것으로 예상</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/" target="_blank" rel="noopener">Claude Sonnet 5.5</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Joe Daroo 인용</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 모델의 사이버 보안 능력 발전과 조직의 보안 태도 구축에 대한 의견<br>- 모델의 사이버·스웜·메시지 보드 관련 능력의 급격한 증가에 놀람<br>- 보안 태도는 시간이 필요하고 시스템 강화만으로는 부족함<br>- 회사 문화에 보안을 내재화하고 조직 구성원의 변화가 필수적</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Sep/28/joedaroo/" target="_blank" rel="noopener">Joe Daroo 인용</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Muse AI 에이전트 인용</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">MX Keys Mini 픽업 실패 사건과 자동 회신 오류에 대한 메시지.<br>- Usman이 9:15에 도착했으나 담당자가 응하지 않음<br>- 9:27에 자동 회신이 '여기 있어!'라는 부정확한 메시지를 발송<br>- Usman이 9:38에 떠났으며 부정적인 평가를 남김</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Sep/28/muse-ai-agent/" target="_blank" rel="noopener">Muse AI 에이전트 인용</a> &rarr;</div>
     </div>
   </details>
 </div>
@@ -374,28 +526,28 @@
   </div>
   <div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://sancho.bearblog.dev/google-weird/" target="_blank" rel="noopener">Google은 언제부터 이상해졌을까?</a></div>
-    <div class="item-meta">HN · 1551 pts</div>
+    <div class="item-name"><a href="https://mubi.com/en/notebook/posts/pirating-the-pirates" target="_blank" rel="noopener">해적을 노리는 해적들</a></div>
+    <div class="item-meta">HN · 647 pts</div>
   </div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://colo.to/nvidia-stock-narrative.html" target="_blank" rel="noopener">Nvidia 주식 10억 달러 상당 채무</a></div>
-    <div class="item-meta">HN · 906 pts</div>
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1wsyu8m/ba_computer_science_but_fell_in_love_with_machine/" target="_blank" rel="noopener">컴퓨터과학 학사이지만 머신러닝과 AI에 빠져 개인 연구가 NeurIPS 포스터로 채택됨</a></div>
+    <div class="item-meta">r/MachineLearning</div>
   </div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://fireworks.ai/blog/ember-1" target="_blank" rel="noopener">Ember-1</a></div>
-    <div class="item-meta">HN · 537 pts</div>
+    <div class="item-name"><a href="https://www.derekthompson.org/p/the-death-of-the-american-host" target="_blank" rel="noopener">당신은 더 이상 초대받지 않습니다</a></div>
+    <div class="item-meta">HN · 389 pts</div>
   </div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://david.alvarezrosa.com/posts/self-hosting-on-the-dark-web/" target="_blank" rel="noopener">Dark Web에서의 자체 호스팅</a></div>
-    <div class="item-meta">HN · 292 pts</div>
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1wsockf/what_are_the_trending_topics_in_medical_imaging_d/" target="_blank" rel="noopener">의료 영상의 최신 트렌드는 무엇인가?</a></div>
+    <div class="item-meta">r/MachineLearning</div>
   </div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://loficities.com/" target="_blank" rel="noopener">Show HN: Lofi Cities – 픽셀 아트 도시 야경과 브라우저 생성 로파이</a></div>
-    <div class="item-meta">HN · 291 pts</div>
+    <div class="item-name"><a href="https://jorgegarciaherrero.com/wp-content/interactivos/20260916-Prompt-like-a-butterfly-sting-like-a-tracker-(clean).pdf" target="_blank" rel="noopener">AI 기업들의 광고주 데이터 유출</a></div>
+    <div class="item-meta">HN · 303 pts</div>
   </div>
 </div>
 </div><div class="section" id="github">
@@ -407,61 +559,61 @@
   <div class="item">
   <details>
     <summary>
-      <span class="item-name">AERIS-10: 오픈소스 펄스 선형 주파수 변조 위상배열 레이더</span>
-      <span class="item-meta">25,650</span>
+      <span class="item-name">OpenShell</span>
+      <span class="item-meta">10,143</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">오픈소스 펄스 선형 주파수 변조 위상배열 레이더 프로젝트<br>- 10.5GHz 주파수 대역에서 동작<br>- 하드웨어는 CERN-OHL-P, 소프트웨어는 MIT 라이센스<br>- 알파 단계로 개발 진행 중</div>
-      <div class="item-link"><a href="https://github.com/NawfalMotii79/PLFM_RADAR" target="_blank" rel="noopener">AERIS-10: 오픈소스 펄스 선형 주파수 변조 위상배열 레이더</a> &rarr;</div>
+      <div class="item-summary">자율 AI 에이전트 fleet을 위한 안전하고 프라이빗한 런타임.<br>- 정책 선언을 통해 각 agent이 파일·패키지·API·인증정보에 접근하도록 설정<br>- OpenShell이 정책을 강제해 데이터·시크릿·네트워크에 대한 무제한 접근 방지<br>- 0.1.x 버전에서 stable release cadence, new isolation primitives, expanded extension surface 등 제공</div>
+      <div class="item-link"><a href="https://github.com/NVIDIA/OpenShell" target="_blank" rel="noopener">OpenShell</a> &rarr;</div>
     </div>
   </details>
 </div><div class="item">
   <details>
     <summary>
-      <span class="item-name">CS341 시스템 프로그래밍 코스북</span>
-      <span class="item-meta">2,312</span>
+      <span class="item-name">DBX: 25MB에 담은 100+ 데이터베이스</span>
+      <span class="item-meta">21,740</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">일리노이 대학 CS 341 과정의 오픈소스 시스템 프로그래밍 교과서.<br>- C 언어로 모든 코드와 명령 제공<br>- 프로그래밍 언어 과정 이수 및 어셈블리 명령어 이해 가정<br>- Angrave의 원본 위키북을 기반으로 표준화 및 확장</div>
-      <div class="item-link"><a href="https://github.com/cs341-illinois/coursebook" target="_blank" rel="noopener">CS341 시스템 프로그래밍 코스북</a> &rarr;</div>
-    </div>
-  </details>
-</div><div class="item">
-  <details>
-    <summary>
-      <span class="item-name">인생 진급 가이드 | AI 시대 평생 학습</span>
-      <span class="item-meta">64,473</span>
-      <span class="item-toggle" aria-hidden="true"></span>
-    </summary>
-    <div class="item-body">
-      <div class="item-summary">AI 시대에 평범한 사람이 계속 학습하고 창조하며 성장하는 방법에 관한 가이드<br>- AI가 제공하는 저렴한 답변보다 가치 있는 질문 찾기, 증거 판별, 조언을 실제 작업으로 변환, 최종 판단에 책임지기가 진정으로 귀함<br>- 학습 순환 구조: 문제 발견 → 주도적 학습 → AI 협력 → 실제 작업 완성 → 증거 보관 → 검토 이전<br>- 2017년 영어 학습 지남에서 출발해 AI 학습, 프로젝트 개발, 창업, 신체 회복까지 확장된 지속 업데이트 프로젝트</div>
-      <div class="item-link"><a href="https://github.com/byoungd/up" target="_blank" rel="noopener">인생 진급 가이드 | AI 시대 평생 학습</a> &rarr;</div>
+      <div class="item-summary">100개 이상의 데이터베이스를 25MB 크기로 제공하는 도구<br>- 100개 이상의 데이터베이스를 25MB 용량에 구현<br>- Desktop, Docker, CLI 형식 지원<br>- 빌트인 AI 어시스턴트와 MCP Server 포함</div>
+      <div class="item-link"><a href="https://github.com/t8y2/dbx" target="_blank" rel="noopener">DBX: 25MB에 담은 100+ 데이터베이스</a> &rarr;</div>
     </div>
   </details>
 </div><div class="item">
   <details>
     <summary>
       <span class="item-name">OpenRig</span>
-      <span class="item-meta">1,463</span>
+      <span class="item-meta">2,166</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">AI 코딩 에이전트를 조직화된 팀으로 관리하는 플랫폼.<br>- YAML로 에이전트 팀을 정의하고 한 명령으로 부팅 가능<br>- Claude Code와 Codex를 같은 릭에서 단일 시스템으로 관리<br>- Node.js 20/22/24, tmux 필수, macOS/Linux 지원 (Windows 미지원)</div>
+      <div class="item-summary">AI 코딩 에이전트들을 YAML로 정의해 한 명령어로 팀을 구성하고 관리하는 시스템이다.<br>- YAML로 에이전트 팀을 정의하고 한 명령어로 부팅 가능<br>- Claude Code와 Codex 등 여러 에이전트를 하나의 시스템으로 관리<br>- 리드 에이전트가 팀의 전문가 에이전트들을 조율하여 결과와 결정사항을 전달</div>
       <div class="item-link"><a href="https://github.com/mvschwarz/openrig" target="_blank" rel="noopener">OpenRig</a> &rarr;</div>
     </div>
   </details>
-</div><div class="item important">
+</div><div class="item">
   <details>
     <summary>
-      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>AI 에이전트를 위한 Office 플랫폼</span>
-      <span class="item-meta">21,028</span>
+      <span class="item-name">Openship</span>
+      <span class="item-meta">13,630</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">Univer SDK는 스프레드시트, 문서, 프레젠테이션 등 다양한 오피스 기능을 제공하는 고성능 SDK이다.<br>- 스프레드시트, 문서, 프레젠테이션, 베이스, 보드를 지원하며 PDF는 곧 출시 예정<br>- 플러그인 아키텍처, Canvas 기반 렌더링, 수식 엔진으로 구성<br>- 브라우저와 Node.js 양쪽에서 작동하는 단일 Facade API 제공</div>
-      <div class="item-link"><a href="https://github.com/dream-num/univer" target="_blank" rel="noopener">AI 에이전트를 위한 Office 플랫폼</a> &rarr;</div>
+      <div class="item-summary">오픈소스 자체 호스팅 배포 플랫폼으로 CI/CD가 내장되어 있다.<br>- 리포지토리를 지정하면 빌드, 배포, 라우팅, TLS 종료를 자동으로 수행<br>- 데스크톱 앱, 웹 대시보드, CLI의 세 가지 인터페이스로 제어 가능<br>- Apache-2.0 라이선스 오픈소스 프로젝트</div>
+      <div class="item-link"><a href="https://github.com/oblien/openship" target="_blank" rel="noopener">Openship</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">ReClip</span>
+      <span class="item-meta">9,889</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">자체 호스팅 가능한 오픈소스 동영상·음성 다운로더로, 웹 UI를 통해 다양한 사이트에서 콘텐츠를 다운로드할 수 있다.<br>- 1000개 이상의 사이트 지원 (yt-dlp 사용), YouTube, TikTok, Instagram, Twitter/X 포함<br>- MP4 동영상 또는 MP3 음성 추출, 품질/해상도 선택 가능<br>- 단일 Python 파일 백엔드(약 150줄)와 프레임워크 불필요한 반응형 웹 UI</div>
+      <div class="item-link"><a href="https://github.com/averygan/reclip" target="_blank" rel="noopener">ReClip</a> &rarr;</div>
     </div>
   </details>
 </div>
