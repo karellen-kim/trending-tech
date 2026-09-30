@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-09-30 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1rem; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
+  .item-body { padding: 0 1rem 1.2rem; }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
+    padding: 1rem 0.9rem 0.7rem;
+    /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
+    --accent: #b08a2a; --accent-wash: #f6f1e2; }
+  /* svg 인라인 max-width:100% 가 좁은 화면에서 그림을 1/3 로 압착해 글자를 뭉갠다.
+     원본 크기를 지키고 상자에서 옆으로 밀어 본다. */
+  .item-diagram svg { max-width: none !important; }
+  .item-diagram .diagram { margin: 0; padding: 0; border: none; background: none; color: var(--ink);
+    width: max-content; min-width: 100%; }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
+    font-family: var(--serif); font-style: italic; font-size: 0.74rem; color: #7d7364; text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    .item details > summary { grid-template-columns: 1fr auto; }
+    /* 제목은 한 줄을 통째로 쓴다. 토글을 옆에 두면 그만큼 폭을 잃는다. */
+    .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
+    .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
+    .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
+
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-09-30</div>
+<h1><em>30</em> Sep 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">클라우드 제공자의 지역별 AI 거점 분산은 엔터프라이즈의 에이전트 기반 운영 자동화를 촉발</p><p class="take-body">AWS가 Claude를 인도, Seoul, Singapore로 확대하며 AI 인프라를 지역화하는 가운데, Cloudflare의 Auto Router는 다양한 모델 간 비용 최적화를 주요 문제로 제기한다. 기업들은 이를 에이전트 기반 자동화로 응수하고 있으며, Databricks의 대규모 모델 배포, Cloudflare Workers의 프로덕션 에이전트, Vespa의 검색 품질 강조가 이 방향을 뒷받침한다.</p><div class="take-refs"><span>근거</span><a href="https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-expands-claude-model-availability-to-india-cross-region-inference/" target="_blank" rel="noopener">Amazon Bedrock, Claude 모델의 인도 내 추론 서비스 확대</a> · <a href="https://aws.amazon.com/blogs/machine-learning/introducing-anthropic-models-on-amazon-bedrock-for-in-region-inference-in-seoul-and-singapore/" target="_blank" rel="noopener">Amazon Bedrock에서 Anthropic 모델의 Seoul·Singapore 지역 내 추론 지원 시작</a> · <a href="https://blog.cloudflare.com/auto-router/" target="_blank" rel="noopener">AI Gateway의 Auto Router로 AI 지출 줄이기</a> · <a href="https://blog.cloudflare.com/real-time-issue-detection/" target="_blank" rel="noopener">Cloudflare Workers 프로덕션 이슈를 에이전트로 직접 감지 및 전송하기</a> · <a href="https://blog.vespa.ai/retrieval-ai-agent-architecture/" target="_blank" rel="noopener">검색 품질이 AI 에이전트 아키텍처의 핵심 도전 과제가 되는 이유</a></div></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">17개</span>
+  </div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Amazon Bedrock, Claude 모델의 인도 내 추론 서비스 확대</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 204" style="width:656px;max-width:100%" role="img" aria-label="Amazon Bedrock을 통해 Claude 모델을 인도에서 처리" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Claude 모델 인도 출시</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Messages API</text><text x="104" y="98" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">외 3개</text><rect x="240" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Amazon</text><text x="328" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Bedrock</text><rect x="464" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Claude Opus</text><text x="552" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">5</text><text x="552" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">외 2개</text><rect x="16" y="153" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="176" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">India Region</text><line x1="192" y1="86" x2="237" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="205" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">전달</text><line x1="416" y1="86" x2="461" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="429" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">호출</text><path d="M 552 121 L 552 137 L 104 137 L 104 150" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="317" y="121" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="132" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">처리</text></svg><figcaption>Amazon Bedrock을 통해 Claude 모델을 인도에서 처리</figcaption></figure></div><div class="item-summary">Amazon Bedrock이 Claude 모델들의 인도 내 추론 서비스를 시작했다.<br>- Claude Opus 5, Claude Sonnet 5, Claude Haiku 4.5가 인도 리전에서 사용 가능<br>- 인도 리전 내에서 데이터를 처리하면서 모델에 접근 가능<br>- Amazon Bedrock 콘솔 또는 Messages, InvokeModel, Converse API를 통해 접근 가능</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-expands-claude-model-availability-to-india-cross-region-inference/" target="_blank" rel="noopener">Amazon Bedrock, Claude 모델의 인도 내 추론 서비스 확대</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Amazon Bedrock에서 Anthropic 모델의 Seoul·Singapore 지역 내 추론 지원 시작</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 118" style="width:656px;max-width:100%" role="img" aria-label="Bedrock에서 Anthropic 모델의 지역별 지원" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Seoul/Singapore 지역 내 추론</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Amazon</text><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Bedrock</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Seoul</text><text x="328" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">Opus 5,…</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Singapore</text><text x="552" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">Sonnet 5</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="188" y="61" width="57" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">지역 내 추론</text><path d="M 104 104 L 104 120 L 552 120 L 552 107" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="300" y="118" width="57" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="129" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">지역 내 추론</text></svg><figcaption>Bedrock에서 Anthropic 모델의 지역별 지원</figcaption></figure></div><div class="item-summary">Amazon Bedrock이 Anthropic 모델의 지역 내 추론 기능을 Seoul과 Singapore에서 제공 시작.<br>- Claude Opus 5와 Claude Sonnet 5가 Seoul에서, Claude Sonnet 5가 Singapore에서 지역 내 추론 지원<br>- 한국과 싱가포르의 로컬 데이터 처리 요구사항이 있는 경우 이들 모델을 규모 있게 사용 가능<br>- 추론이 호출한 지역 내에서 완전히 처리됨</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/introducing-anthropic-models-on-amazon-bedrock-for-in-region-inference-in-seoul-and-singapore/" target="_blank" rel="noopener">Amazon Bedrock에서 Anthropic 모델의 Seoul·Singapore 지역 내 추론 지원 시작</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Amazon Bedrock의 GPT-6.1 Sol로 일상 업무에 강화된 지능 제공</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Amazon Bedrock에서 GPT-6.1 Sol이 정식 공개됨.<br>- 강화된 추론 능력으로 코딩 작업 지원<br>- 컴퓨터 사용 자동화 지원<br>- 자주 실행되는 전문 업무에 적용 가능</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/bring-near-astra-intelligence-to-everyday-work-with-gpt-6-1-sol-on-amazon-bedrock/" target="_blank" rel="noopener">Amazon Bedrock의 GPT-6.1 Sol로 일상 업무에 강화된 지능 제공</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">SynthID Bio 소개</span>
+      <span class="item-meta">Google DeepMind</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 생성 단백질에 워터마킹 기술의 개념 증명에 관한 글.<br>- AI 생성 단백질에 워터마킹 적용<br>- 생물학적 기능 보존<br>- 개념 증명 단계의 연구</div>
+      <div class="item-link"><a href="https://deepmind.google/blog/introducing-synthid-bio/" target="_blank" rel="noopener">SynthID Bio 소개</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Diffusion Controller로 AI 이미지 생성을 통합하고 단순화하다</span>
+      <span class="item-meta">Google Research</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 230" style="width:480px;max-width:100%" role="img" aria-label="기존의 단절을 경량으로 통합하는 Diffusion Controller" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Diffusion Controller의 통합</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">기존 접근</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">추론 시 조정</text><text x="116" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">가볍지만 부정확</text><line x1="116" y1="130" x2="116" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="162" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">미세조정</text><text x="116" y="202" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">정확하지만 무거움</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">새로운 방식</text><rect x="276" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">경량 조종</text><text x="364" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">가볍고 빠름</text><line x1="364" y1="130" x2="364" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="162" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">정밀한 조종</text><text x="364" y="202" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">프롬프트 정확히</text><line x1="240" y1="50" x2="240" y2="222" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>기존의 단절을 경량으로 통합하는 Diffusion Controller</figcaption></figure></div><div class="item-summary">Google Research가 소개한 Diffusion Controller라는 경량 네트워크 기술에 관한 글.<br>- Diffusion Controller는 텍스트-이미지 생성을 정밀하게 조종하는 "steering damper" 네트워크로, 기존의 단절된 방법들(추론 시 조정 vs 무거운 미세조정)을 통합<br>- 접근 제한이 있는 폐쇄형 모델에도 원활하게 부착 가능하며 기준선 안정성을 해치지 않으면서 이미지 품질 향상<br>- 기존 방법의 문제: "선글라스를 쓴 도마뱀"처럼 정확한 프롬프트 의도 달성 시, 세부사항 누락 또는 이미지 품질 왜곡의 균형 맞추기 어려움</div>
+      <div class="item-link"><a href="https://research.google/blog/how-diffusion-controller-unifies-and-simplifies-ai-image-generation/" target="_blank" rel="noopener">Diffusion Controller로 AI 이미지 생성을 통합하고 단순화하다</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Cloudflare Impact, 기부 서비스 1억 달러 달성</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 187" style="width:656px;max-width:100%" role="img" aria-label="기부를 통한 사이버 보안 보호 확대" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Cloudflare 1억달러 기부</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Cloudflare</text><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Impact</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">기부 서비스</text><text x="328" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">1억 달러</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">언론·정부·시민·학교</text><text x="552" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">수천 기관</text><rect x="16" y="136" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="159" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">사이버 보안</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="188" y="61" width="57" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">1억달러 지원</text><line x1="416" y1="77" x2="461" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="415" y="61" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">서비스 제공</text><path d="M 552 104 L 552 120 L 104 120 L 104 133" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="306" y="104" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="115" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">보안 강화</text></svg><figcaption>기부를 통한 사이버 보안 보호 확대</figcaption></figure></div><div class="item-summary">Cloudflare의 Impact 프로그램이 1억 달러 규모의 기부 서비스 마일스톤을 달성했다.<br>- 1억 달러의 기부 서비스를 통해 수천 개의 기관 지원<br>- 언론인, 시민사회, 지방정부, 선거 관리 기관, 공립학교 등이 수혜 대상<br>- 기부 서비스로 사이버 공격으로부터 보호 제공</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/100-million-donations/" target="_blank" rel="noopener">Cloudflare Impact, 기부 서비스 1억 달러 달성</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>AI Gateway의 Auto Router로 AI 지출 줄이기</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Cloudflare AI Gateway의 모델 라우팅 기능으로 AI 비용을 절감하는 방법에 관한 글<br>- Edge-deployed classifier를 사용해 요청 복잡성을 평가하고 최적의 모델을 자동 선택<br>- 예상 출력 품질과 토큰 비용을 균형 맞춰 AI 지출을 대폭 절감<br>- 성능 유지하면서 비용 절감 가능</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/auto-router/" target="_blank" rel="noopener">AI Gateway의 Auto Router로 AI 지출 줄이기</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Cloudflare Workers 프로덕션 이슈를 에이전트로 직접 감지 및 전송하기</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Cloudflare Workers의 기본 제공 에러 모니터링으로 프로덕션 이슈를 자동으로 감지하고 처리하는 기능에 관한 글입니다.<br>- 에러 모니터링으로 프로덕션 실패를 그룹화<br>- 스택 트레이스, 로그, 트레이스, 애플리케이션 컨텍스트를 코딩 에이전트로 직접 전송<br>- 에이전트가 추가 조사를 수행하고 풀 리퀘스트 생성</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/real-time-issue-detection/" target="_blank" rel="noopener">Cloudflare Workers 프로덕션 이슈를 에이전트로 직접 감지 및 전송하기</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">당신의 데이터, 당신의 스토리지, 당신의 규칙: Unity Catalog 관리형 테이블 저장 가이드</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Unity Catalog 관리형 테이블의 스토리지 관리 방식과 데이터 저장 위치 제어 방법을 설명하는 글이다.<br>- 관리형 테이블 데이터는 사용자가 소유한 클라우드 스토리지(S3, ADLS, GCS)에 저장되며, 사용자가 저장소의 소유권과 가시성을 유지한다<br>- SET MANAGED LOCATION으로 새로운 테이블들의 저장 위치를 변경할 수 있고, 외부 테이블 변환으로 데이터를 설정된 위치로 이동시킬 수 있다<br>- Databricks가 Iceberg 또는 Delta 형식에서 데이터 레이아웃, 튜닝, 정리를 자동으로 처리하고 최적화를 적용한다</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/your-data-your-storage-your-rules-2026-guide-storing-unity-catalog-managed-tables" target="_blank" rel="noopener">당신의 데이터, 당신의 스토리지, 당신의 규칙: Unity Catalog 관리형 테이블 저장 가이드</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Databricks가 신규 frontier 모델을 12,000명 직원에게 첫날부터 배포하는 방법</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Databricks가 신규 AI 모델에 대한 대규모 빠른 접근을 제공하면서 모델 품질과 비용을 관리하는 전략.<br>- Opus 5.0은 Opus 4.8보다 비싸면서도 엔지니어들의 정량·정성 평가 점수에서 더 낮은 순위를 받음<br>- GPT Astra 제어 그룹 배포 시 비용 완화 조치 없이 진행했을 때 평균 개발자 비용이 60% 증가함<br>- 어떤 작업에 Astra가 적합한지 파악 후 사용 대상을 제한하여 전체 비용을 크게 감소시킴</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/how-databricks-rolls-out-frontier-models-12000-employees-day-1" target="_blank" rel="noopener">Databricks가 신규 frontier 모델을 12,000명 직원에게 첫날부터 배포하는 방법</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">비동기 인식 Python 프로파일러 구축 방법</span>
+      <span class="item-meta">Datadog Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Datadog이 asyncio 기반 Python 서비스의 성능 분석을 위해 개발한 async-aware 프로파일러 기술 소개.<br>- 전통적 flame graph는 asyncio 작업들을 독립적인 스택으로 표시하여 응용 경로를 불명확하게 함<br>- Async-aware 프로파일러는 작업 간 관계를 재구성하여 논리적 실행 경로를 보존<br>- 프로파일러 오버헤드를 60% 이상 감소시키면서 더 높은 충실도의 프로필 생성</div>
+      <div class="item-link"><a href="https://www.datadoghq.com/blog/engineering/async-python-profiler/" target="_blank" rel="noopener">비동기 인식 Python 프로파일러 구축 방법</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">함께 만드는 성공: 2026-2027 Elastic 파트너 어워드 축하</span>
+      <span class="item-meta">Elastic Search Labs</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Elastic이 파트너의 기여도와 고객 성과를 인정하는 파트너 어워드 프로그램에 관한 글.<br>- Elastic Partner Awards는 파트너들의 기여를 인정하기 위해 만들어짐<br>- 파트너들이 고객에게 전달하는 성과 결과를 평가 대상으로 삼음<br>- 2026-2027년도 Elastic Partner Award 수상자 발표</div>
+      <div class="item-link"><a href="https://www.elastic.co/search-labs/blog/elastic-partner-awards-2026" target="_blank" rel="noopener">함께 만드는 성공: 2026-2027 Elastic 파트너 어워드 축하</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">인도에서 프로덕션 레벨의 AI 구축</span>
+      <span class="item-meta">Elastic Search Labs</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">인도의 개발자 팀들이 Elasticsearch를 활용해 프로덕션 레벨의 AI 애플리케이션을 구축한 사례에 관한 글<br>- Forge the Future Hackathon 2026에서 개발자 팀들이 Elasticsearch를 사용해 프로덕션 레벨의 AI 애플리케이션을 구축<br>- 우승자들은 Elastic{ON} Mumbai에서 발표</div>
+      <div class="item-link"><a href="https://www.elastic.co/search-labs/blog/mumbai-forge-the-future-hackathon-2026" target="_blank" rel="noopener">인도에서 프로덕션 레벨의 AI 구축</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.blog/news-insights/policy-news-and-insights/developer-policy-update-transparency-state-policy-and-whats-ahead/" target="_blank" rel="noopener">개발자 정책 업데이트: 투명성, 주 정책 그리고 향후 계획</a></div>
+    <div class="item-meta">GitHub Blog</div>
+  </div>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>검색 품질이 AI 에이전트 아키텍처의 핵심 도전 과제가 되는 이유</span>
+      <span class="item-meta">Vespa Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">에이전트 시스템이 직면한 검색 품질의 중요성에 관한 글<br>- 에이전트 시스템은 컨텍스트를 구축한 후 그것을 사용해 답변을 생산하는 두 단계로 구성되며, LLM 문제로 보이는 많은 실패들이 실제로는 컨텍스트 구축 단계에서 시작된다<br>- 에이전트 모델이 올바른 소스를 찾을 수 없으면 생성 모델을 개선해도 전체 시스템이 개선되지 않는다<br>- Specstory(코딩 세션 히스토리에서 의사결정과 트레이드오프 검색)와 AnkiHub(강의 슬라이드에서 플래시카드 검색) 사례가 올바른 검색의 중요성을 보여준다</div>
+      <div class="item-link"><a href="https://blog.vespa.ai/retrieval-ai-agent-architecture/" target="_blank" rel="noopener">검색 품질이 AI 에이전트 아키텍처의 핵심 도전 과제가 되는 이유</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://d2.naver.com/helloworld/8118359" target="_blank" rel="noopener">에이전트, 개념부터 같이 정리해봐요 - 워크플로우 · 하네스 · Context/Memory · MCP/A2A</a></div>
+    <div class="item-meta">NAVER D2</div>
+  </div>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">9인조 다람쥐 아이돌을 데뷔시켰습니다</span>
+      <span class="item-meta">Toss Tech</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">토스뱅크 Visual Designer가 적금 상품 키워봐요의 다람쥐 캐릭터 9개를 AI로 만든 과정.<br>- 초기 버전의 자동이체 방식에서 사용자 직접 저금 방식으로 변경하며 매일 앱 방문 동기 필요<br>- 31일간 쌓인 매력·지혜·힘 스탯 조합에 따라 최종 형태 결정되는 구조로 개성 있는 캐릭터 설계<br>- 노드 기반 AI 이미지 툴에서 공통 문장과 빈칸으로 뼈대를 만들어 프롬프트 최적화, 초반 100장→최종 2~3장 효율로 개선</div>
+      <div class="item-link"><a href="https://toss.tech/article/chipmunk" target="_blank" rel="noopener">9인조 다람쥐 아이돌을 데뷔시켰습니다</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">6개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://lemire.me/blog/2026/09/30/transcoding-utf-8-to-utf-16-with-replacement-at-gigabytes-per-second/" target="_blank" rel="noopener">UTF-8을 UTF-16으로 변환하기: 초당 기가바이트의 치환 처리</a></div>
+    <div class="item-meta">Daniel Lemire</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://lemire.me/blog/2026/09/30/how-do-you-deal-with-people-who-strongly-disagree-with-your-views/" target="_blank" rel="noopener">당신의 의견에 강하게 반대하는 사람들을 어떻게 대할 것인가?</a></div>
+    <div class="item-meta">Daniel Lemire</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://martinfowler.com/articles/never-send-slides/slide-principles.html" target="_blank" rel="noopener">효과적인 슬라이드의 원칙들</a></div>
+    <div class="item-meta">Martin Fowler</div>
+  </div>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Anthropic Frontier Red Team 인용</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">모델들의 이진 익스플로이트 능력 평가<br>- 100개 Binary Exploitation 작업에서 여러 모델 성능 평가<br>- GLM-5.3: 4% 시나리오에서 full control flow hijacks 달성<br>- Claude Mythos Preview: 6% 시나리오에서 full control flow hijacks 달성</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Sep/29/anthropic-frontier-red-team/" target="_blank" rel="noopener">Anthropic Frontier Red Team 인용</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Sep/29/hn-49898129/" target="_blank" rel="noopener">GPT 6.1 Sol: Astra 수준 성능을 5분의 1 가격에</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Photo Scrubber — 로컬 얼굴 흐림 및 메타데이터 제거</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">사진에서 낯선 사람들의 식별 가능한 얼굴을 자동으로 처리하는 도구<br>- GPT-6 Astra를 사용해 얼굴을 자동 식별 및 흐리게 처리<br>- 로컬 환경에서 실행되는 실험적 도구<br>- 사진의 메타데이터 제거 기능 포함</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Sep/29/photo-scrubber/" target="_blank" rel="noopener">Photo Scrubber — 로컬 얼굴 흐림 및 메타데이터 제거</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://openai.com/index/introducing-gpt-6-1-sol/" target="_blank" rel="noopener">GPT 6.1 Sol: Astra 수준의 성능을 5분의 1 가격에</a></div>
+    <div class="item-meta">HN · 1005 pts</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1wtyl5m/concurrent_image_understanding_and_generation/" target="_blank" rel="noopener">이미지 이해와 생성의 동시 처리: 자기 정정 결합 마르코프 점프 프로세스</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/ninjahawk/livenerf" target="_blank" rel="noopener">Livenerf: Opus 5.5가 너프되었나?</a></div>
+    <div class="item-meta">HN · 761 pts</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1wtygav/lessthinkqwen34b_the_same_model_with_far_less/" target="_blank" rel="noopener">LessThink-Qwen3-4B: 같은 모델, 훨씬 적은 사고 과정</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://openai.com/index/introducing-dots/" target="_blank" rel="noopener">Dots: 항상 켜져 있는 에이전트</a></div>
+    <div class="item-meta">HN · 693 pts</div>
+  </div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">VoiceStudio: 646개 언어로 음성 클로닝</span>
+      <span class="item-meta">49,898</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">음성 클로닝, 음성 설계, 영상 더빙, 받아쓰기, 전사, 오디오북 생성을 지원하는 오픈소스 플랫폼<br>- 646개 언어 지원<br>- AGPL-3.0 라이센스로 배포<br>- Electron 앱으로 제공</div>
+      <div class="item-link"><a href="https://github.com/debpalash/VoiceStudio" target="_blank" rel="noopener">VoiceStudio: 646개 언어로 음성 클로닝</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">컨텍스트 모드</span>
+      <span class="item-meta">24,343</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Context window optimization for AI coding agents. Sandboxes tool output (98% reduction), persists session memory, and enforces routing across 17 platforms via MCP + hooks.</div>
+      <div class="item-link"><a href="https://github.com/mksglu/context-mode" target="_blank" rel="noopener">컨텍스트 모드</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Ponytail</span>
+      <span class="item-meta">148,750</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.</div>
+      <div class="item-link"><a href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener">Ponytail</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">MoneyPrinterTurbo - 통합 AI 동영상 생성 도구</span>
+      <span class="item-meta">127,332</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">주제나 키워드만으로 고해상도 단편 동영상을 자동 생성하는 AI 도구<br>- 동영상 스크립트, 소재 매칭, 자막, 배경음악을 자동으로 생성하고 합성<br>- Python 3.11+ 기반으로 Windows, macOS, Linux 멀티플랫폼 지원<br>- WebUI와 API 두 가지 인터페이스 제공</div>
+      <div class="item-link"><a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" rel="noopener">MoneyPrinterTurbo - 통합 AI 동영상 생성 도구</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">OpenClaw 🦞 — 당신의 기기에서 실행되는 AI 어시스턴트</span>
+      <span class="item-meta">390,867</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">자신의 컴퓨터에서 실행되는 오픈소스 AI 어시스턴트.<br>- Discord, iMessage, Slack, Teams, Telegram, WhatsApp 등 20개 이상의 채팅 플랫폼 지원</div>
+      <div class="item-link"><a href="https://github.com/openclaw/openclaw" target="_blank" rel="noopener">OpenClaw 🦞 — 당신의 기기에서 실행되는 AI 어시스턴트</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div>
+</body>
+</html>
