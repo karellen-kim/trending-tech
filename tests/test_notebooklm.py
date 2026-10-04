@@ -73,6 +73,45 @@ def test_click_any_returns_false_when_nothing_matches():
     assert notebooklm._click_any(page, ["없는버튼"]) is False
 
 
+def test_click_any_exact_tries_exact_role_match_first():
+    """'생성' 처럼 짧은 라벨은 exact=False 매칭에서 화면 밖 다른 요소와 섞여
+    실패할 수 있었다 (2026-10 실측). exact=True 는 role=button 정확 매칭을 먼저 시도한다."""
+    page = MagicMock()
+    calls = []
+
+    def get_by_role(role, name=None, exact=None):
+        calls.append(exact)
+        loc = MagicMock()
+        if name == "생성" and exact is True:
+            loc.first.wait_for.return_value = None
+            loc.first.click.return_value = None
+        else:
+            loc.first.wait_for.side_effect = RuntimeError("not found")
+        return loc
+
+    page.get_by_role.side_effect = get_by_role
+    page.get_by_text.return_value.first.wait_for.side_effect = RuntimeError("not found")
+    assert notebooklm._click_any(page, ["생성"], exact=True) is True
+    assert calls[0] is True  # exact 매칭을 가장 먼저 시도했다
+
+
+def test_click_any_default_exact_false_unchanged():
+    """exact 기본값은 False 로, 기존 add_source/website 등 호출부의 동작을 그대로 유지한다"""
+    page = MagicMock()
+    calls = []
+
+    def get_by_role(role, name=None, exact=None):
+        calls.append(exact)
+        loc = MagicMock()
+        loc.first.wait_for.side_effect = RuntimeError("not found")
+        return loc
+
+    page.get_by_role.side_effect = get_by_role
+    page.get_by_text.return_value.first.wait_for.side_effect = RuntimeError("not found")
+    assert notebooklm._click_any(page, ["없는버튼"]) is False
+    assert calls == [False]  # exact=True 시도가 섞이지 않았다
+
+
 def test_fill_urls_joins_with_newlines():
     """이 화면은 '여러 URL을 추가하려면 줄 바꿈으로 구분하세요'라고 안내한다"""
     page = MagicMock()

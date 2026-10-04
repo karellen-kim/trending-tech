@@ -36,12 +36,21 @@ _FORMATS = {
 _STEP_TIMEOUT = 30_000   # 개별 UI 조작 대기(ms)
 
 
-def _click_any(page, labels, timeout=_STEP_TIMEOUT) -> bool:
-    """여러 후보 라벨 중 먼저 보이는 것을 클릭한다."""
+def _click_any(page, labels, timeout=_STEP_TIMEOUT, exact=False) -> bool:
+    """여러 후보 라벨 중 먼저 보이는 것을 클릭한다.
+
+    exact=True 면 role=button 정확 매칭을 가장 먼저 시도한다. '생성'처럼 짧은 라벨은
+    exact=False 매칭에서 화면에 없는 다른 요소의 접근성 이름에 부분 포함돼, 그 엉뚱한
+    요소가 보이길 기다리다 타임아웃되는 경우가 있었다 (2026-10 실측: 오디오 오버뷰
+    생성 모달의 '생성' 버튼 — 모달 밖 다른 요소와 섞여 클릭이 통째로 실패했다)."""
     deadline = timeout
     for label in labels:
-        for target in (page.get_by_role("button", name=label, exact=False),
-                       page.get_by_text(label, exact=False)):
+        targets = []
+        if exact:
+            targets.append(page.get_by_role("button", name=label, exact=True))
+        targets += [page.get_by_role("button", name=label, exact=False),
+                    page.get_by_text(label, exact=False)]
+        for target in targets:
             try:
                 el = target.first
                 el.wait_for(state="visible", timeout=deadline // max(len(labels), 1))
@@ -244,7 +253,7 @@ def _run(urls: list[str], prompt: str, notebook_title: str = "") -> str:
                 except Exception:
                     pass
 
-            if not _click_any(page, _L["generate"]):
+            if not _click_any(page, _L["generate"], exact=True):
                 print("[Notebook] '생성' 버튼을 찾지 못했다")
                 return ""
 
