@@ -24,7 +24,7 @@ _L = {
     "audio_overview": ["AI 오디오 오버뷰", "Audio Overview"],
     "generate": ["생성", "Generate"],
     "generating": ["생성 중", "Generating"],
-    "create_notebook": ["새로 만들기", "새 노트 만들기", "Create new", "New notebook"],
+    "create_notebook": ["새 노트북", "새로 만들기", "새 노트 만들기", "Create new", "New notebook"],
     "close_dialog": ["대화상자 닫기", "Close dialog"],   # 영어 라벨은 화면에서 확인 못 함
 }
 _FORMATS = {
@@ -145,6 +145,28 @@ def _open_source_dialog(page) -> bool:
     return _click_any(page, _L["website"])
 
 
+def _wait_studio_ready(page, timeout_ms: int = 25_000, step_ms: int = 1_000) -> None:
+    """소스 크롤링이 끝나 스튜디오 버튼(AI 오디오 오버뷰 등)이 활성화될 때까지 기다린다.
+
+    2026-10 실측: 크롤링이 안 끝난 버튼은 class 에 'disabled-tile' 이 붙어 있는데,
+    DOM disabled 속성은 없어서 Playwright 클릭은 '성공'으로 판정되고도 생성 다이얼로그가
+    열리지 않는다. 고정 대기(8초)만으로는 간헐적으로 부족해서 class 가 빠질 때까지 폴링한다.
+    버튼을 못 찾거나 타임아웃까지 안 빠져도 예외 없이 조용히 리턴한다 — 그 뒤 _click_any 가
+    통상적인 실패 처리를 한다."""
+    try:
+        btn = page.get_by_role("button", name=_L["audio_overview"][0], exact=False).first
+        btn.wait_for(state="visible", timeout=timeout_ms)
+    except Exception:
+        return
+    elapsed = 0
+    while elapsed < timeout_ms:
+        cls = btn.get_attribute("class") or ""
+        if "disabled-tile" not in cls:
+            return
+        page.wait_for_timeout(step_ms)
+        elapsed += step_ms
+
+
 def _fill_urls(page, urls: list[str]) -> bool:
     """URL 입력 상자를 찾아 줄바꿈으로 구분해 한 번에 넣는다.
     이 화면은 '여러 URL을 추가하려면 공백이나 줄 바꿈으로 구분하세요'라고 안내한다."""
@@ -204,6 +226,7 @@ def _run(urls: list[str], prompt: str, notebook_title: str = "") -> str:
 
             # 소스 크롤링이 끝나야 스튜디오 버튼이 활성화된다
             page.wait_for_timeout(8_000)
+            _wait_studio_ready(page)
 
             if not _click_any(page, _L["audio_overview"]):
                 print("[Notebook] 'AI 오디오 오버뷰' 버튼을 찾지 못했다")

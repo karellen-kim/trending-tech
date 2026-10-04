@@ -112,6 +112,11 @@ def test_labels_include_korean_and_english():
         assert any(l.isascii() for l in labels), key
 
 
+def test_create_notebook_label_includes_current_ui_text():
+    """2026-10 실측: '새로 만들기' -> '새 노트북' 으로 라벨이 바뀌었다"""
+    assert "새 노트북" in notebooklm._L["create_notebook"]
+
+
 # ── 소스 추가 다이얼로그 진입 (빈 노트북은 이미 열려 있다) ──
 
 def test_open_source_dialog_skips_when_already_open():
@@ -199,6 +204,36 @@ def test_visible_any_false_when_absent():
     page.get_by_role.return_value.first.wait_for.side_effect = RuntimeError("no")
     page.get_by_text.return_value.first.wait_for.side_effect = RuntimeError("no")
     assert notebooklm._visible_any(page, ["없음"], timeout=100) is False
+
+
+# ── 스튜디오 버튼 활성화 대기 (disabled-tile 레이스 컨디션) ──
+
+def test_wait_studio_ready_returns_when_class_clears():
+    """disabled-tile 이 빠지면 더 기다리지 않고 바로 리턴한다"""
+    page = MagicMock()
+    btn = MagicMock()
+    btn.get_attribute.side_effect = ["disabled-tile foo", "disabled-tile foo", "foo"]
+    page.get_by_role.return_value.first = btn
+    notebooklm._wait_studio_ready(page, timeout_ms=10_000, step_ms=1_000)
+    assert btn.get_attribute.call_count == 3
+    assert page.wait_for_timeout.call_count == 2
+
+
+def test_wait_studio_ready_gives_up_after_timeout():
+    """끝까지 비활성이어도 블로킹하지 않고 타임아웃 뒤 리턴한다"""
+    page = MagicMock()
+    btn = MagicMock()
+    btn.get_attribute.return_value = "disabled-tile foo"
+    page.get_by_role.return_value.first = btn
+    notebooklm._wait_studio_ready(page, timeout_ms=3_000, step_ms=1_000)
+    assert btn.get_attribute.call_count == 3
+
+
+def test_wait_studio_ready_handles_missing_button():
+    """버튼을 아예 못 찾아도 예외를 던지지 않는다"""
+    page = MagicMock()
+    page.get_by_role.return_value.first.wait_for.side_effect = RuntimeError("not found")
+    notebooklm._wait_studio_ready(page, timeout_ms=1_000)  # 예외 없이 끝나야 한다
 
 
 # ── 노트북 생성 + 제목 ──
