@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-10-17 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1rem; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
+  .item-body { padding: 0 1rem 1.2rem; }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
+    padding: 1rem 0.9rem 0.7rem;
+    /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
+    --accent: #b08a2a; --accent-wash: #f6f1e2; }
+  /* svg 인라인 max-width:100% 가 좁은 화면에서 그림을 1/3 로 압착해 글자를 뭉갠다.
+     원본 크기를 지키고 상자에서 옆으로 밀어 본다. */
+  .item-diagram svg { max-width: none !important; }
+  .item-diagram .diagram { margin: 0; padding: 0; border: none; background: none; color: var(--ink);
+    width: max-content; min-width: 100%; }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
+    font-family: var(--serif); font-style: italic; font-size: 0.74rem; color: #7d7364; text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    .item details > summary { grid-template-columns: 1fr auto; }
+    /* 제목은 한 줄을 통째로 쓴다. 토글을 옆에 두면 그만큼 폭을 잃는다. */
+    .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
+    .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
+    .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
+
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-10-17</div>
+<h1><em>17</em> Oct 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">에이전트의 신뢰성을 위한 프레임워크에서 개발자 도구 생태계로 전환</p><p class="take-body">AWS와 Google은 프로덕션급 에이전트를 신뢰할 수 있게 하는 평가 프레임워크와 특화 모델을 제시한다. 동시에 GitHub 커뮤니티는 에이전트 개발을 위한 도구들(플러그인, 메모리 시스템, 오케스트레이터)을 공개하고 있다. 신뢰할 수 있는 에이전트 구축의 기초가 정립되면서, 개발자가 실제로 에이전트를 만들 때 필요한 도구 생태계가 함께 형성되는 단계다.</p><div class="take-refs"><span>근거</span><a href="https://aws.amazon.com/blogs/machine-learning/building-trust-in-ai-agents-a-production-ready-evaluation-framework-with-amazon-bedrock-agentcore/" target="_blank" rel="noopener">AI 에이전트의 신뢰성 구축: Amazon Bedrock AgentCore 기반 프로덕션 준비 평가 프레임워크</a> · <a href="https://aws.amazon.com/blogs/machine-learning/introducing-reflection-beam-an-open-weight-model-for-agentic-coding-on-aws/" target="_blank" rel="noopener">Reflection Beam 소개: AWS에서 에이전트 코딩을 위한 오픈 가중치 모델</a> · <a href="https://github.com/K-Dense-AI/scientific-agent-skills" target="_blank" rel="noopener">K-Dense-AI 과학적 에이전트 스킬</a> · <a href="https://github.com/akitaonrails/ai-memory" target="_blank" rel="noopener">ai-memory: AI 코딩 에이전트를 위한 장기 메모리</a> · <a href="https://github.com/stablyai/orca" target="_blank" rel="noopener">Orca - 100배 빌더를 위한 AI 오케스트레이터</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/8f56bce6-b811-47f1-a2b6-6ecb032bdbe1" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">7개</span>
+  </div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>AI 에이전트의 신뢰성 구축: Amazon Bedrock AgentCore 기반 프로덕션 준비 평가 프레임워크</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 204" style="width:656px;max-width:100%" role="img" aria-label="첫 커밋부터 프로덕션까지 조용한 품질 저하를 감지하는 9단계 평가 프레임워크" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">AI 에이전트 품질 평가 프레임워크</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">코드 커밋</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">평가 프레임워크</text><text x="328" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">9단계</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">프로덕션 배포</text><rect x="16" y="136" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="159" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">품질 저하 감지</text><text x="104" y="176" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">조용한</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="194" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">품질 검증</text><line x1="416" y1="77" x2="461" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="418" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">배포 결정</text><path d="M 552 104 L 552 120 L 104 120 L 104 133" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="300" y="104" width="57" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="115" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">지속 모니터링</text></svg><figcaption>첫 커밋부터 프로덕션까지 조용한 품질 저하를 감지하는 9단계 평가 프레임워크</figcaption></figure></div><div class="item-summary">Amazon Bedrock AgentCore 기반의 AI 에이전트 품질 저하를 감지하는 평가 프레임워크에 관한 글<br>- 자율 AI 에이전트는 레이턴시를 유지하면서 답변 품질이 조용히 하락하는 현상 발생<br>- 첫 커밋부터 프로덕션까지 전체 라이프사이클에서 조용한 품질 저하를 감지하는 9단계 평가 프레임워크 제시<br>- Amazon Bedrock AgentCore 기반으로 구축된 프로덕션 준비 상태의 프레임워크</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/building-trust-in-ai-agents-a-production-ready-evaluation-framework-with-amazon-bedrock-agentcore/" target="_blank" rel="noopener">AI 에이전트의 신뢰성 구축: Amazon Bedrock AgentCore 기반 프로덕션 준비 평가 프레임워크</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Reflection Beam 소개: AWS에서 에이전트 코딩을 위한 오픈 가중치 모델</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 204" style="width:656px;max-width:100%" role="img" aria-label="오픈 가중치 모델을 AWS에 배포하는 두 가지 경로" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Beam AWS 배포</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Reflection</text><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Beam</text><text x="104" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">에이전트 코딩</text><rect x="240" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">SageMaker</text><text x="328" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">JumpStart</text><text x="328" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">실시간 엔드포인트</text><rect x="464" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">SageMaker</text><text x="552" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">HyperPod</text><text x="552" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">분산 배포</text><rect x="16" y="153" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="176" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">SGLang/vLLM</text><line x1="192" y1="86" x2="237" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="205" y="70" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">배포</text><path d="M 104 121 L 104 137 L 552 137 L 552 124" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="317" y="135" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="146" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">배포</text><path d="M 552 121 L 552 137 L 104 137 L 104 150" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="317" y="121" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="132" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">활용</text></svg><figcaption>오픈 가중치 모델을 AWS에 배포하는 두 가지 경로</figcaption></figure></div><div class="item-summary">Reflection AI의 Beam 모델을 AWS에 배포하는 방법에 관한 글.<br>- Beam은 에이전트 코딩과 장기 작업을 위한 오픈 가중치 모델<br>- Amazon SageMaker JumpStart 실시간 엔드포인트를 통한 배포 옵션 제시<br>- Amazon SageMaker HyperPod Inference, SGLang, vLLM을 활용한 Kubernetes 기반 분산 GPU 인프라 제어</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/introducing-reflection-beam-an-open-weight-model-for-agentic-coding-on-aws/" target="_blank" rel="noopener">Reflection Beam 소개: AWS에서 에이전트 코딩을 위한 오픈 가중치 모델</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">생물학적 현실에 기반한 AI 에이전트: 자율형 습식 실험실의 구축</span>
+      <span class="item-meta">Google Research</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 118" style="width:656px;max-width:100%" role="img" aria-label="폐쇄 루프 분자 설계로 암 표적 나노몰 단백질 발견" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">AI 에이전트 습식실험실 자동화</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">AI 에이전트</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">습식 실험실</text><text x="328" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">분자 설계</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">결과 학습</text><text x="552" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">나노몰 수준</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="194" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">가설 실행</text><line x1="416" y1="77" x2="461" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="415" y="61" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">데이터 수집</text><path d="M 552 104 L 552 77 L 104 77 L 104 47" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="306" y="61" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">자가 개선</text></svg><figcaption>폐쇄 루프 분자 설계로 암 표적 나노몰 단백질 발견</figcaption></figure></div><div class="item-summary">Google Research에서 AI 에이전트를 습식 실험실에 적용하여 분자 설계와 약물 발견을 자동화하는 연구<br>- 폐쇄 루프 분자 설계 순환을 통해 암 표적의 단일 자릿수 나노몰 수준 단백질 결합체 발견<br>- AI 에이전트가 실험 가설 실행, 결과 학습, 자가 개선을 통해 복잡한 문제 해결<br>- 3D 기하학과 물리적 상태 추론, 액체 취급 로봇 자동화가 핵심 과제</div>
+      <div class="item-link"><a href="https://research.google/blog/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomous-wet-labs/" target="_blank" rel="noopener">생물학적 현실에 기반한 AI 에이전트: 자율형 습식 실험실의 구축</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">다중 명령문 트랜잭션 일반 공개, Lakehouse 웨어하우싱의 진화</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 230" style="width:480px;max-width:100%" role="img" aria-label="분리된 시스템에서 통합 아키텍처로 진화" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Lakehouse의 트랜잭션 지원</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">기존 방식</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Data</text><text x="116" y="116" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Warehouse</text><line x1="116" y1="130" x2="116" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="162" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="194" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Data Lake</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">새로운 방식</text><rect x="276" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Lakehouse</text><text x="364" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">Delta/Icebe…</text><line x1="364" y1="130" x2="364" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="162" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Transactions</text><text x="364" y="202" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">다중 명령문</text><line x1="240" y1="50" x2="240" y2="222" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>분리된 시스템에서 통합 아키텍처로 진화</figcaption></figure></div><div class="item-summary">Databricks의 Lakehouse에서 다중 명령문 트랜잭션 일반 공개에 관한 글<br>- Databricks가 lakehouse 아키텍처에서 최초로 다중 명령문 트랜잭션을 Delta Lake와 Apache Iceberg 테이블에 natively 지원<br>- Stored procedures, temporary tables, SQL scripting과 함께 제공되어 별도 warehouse 시스템 없이 atomic guarantees와 복잡한 multi-step workflows 실행 가능<br>- 기존 warehouse 시스템의 추가 데이터 이동, fragmented governance, complex consistency workarounds 문제 해결</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/transactions-are-generally-available-advancing-warehousing-lakehouse" target="_blank" rel="noopener">다중 명령문 트랜잭션 일반 공개, Lakehouse 웨어하우싱의 진화</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">바이너리 맹점 극복: npm 패키지 악성코드 심사를 위한 LLM 도메인 지식 주입</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">npm 레지스트리의 악성코드 중 바이너리 패키지에 대한 LLM의 탐지 한계와 개선 방안 연구<br>- 2025년 11월 이후 수집한 11,413개 npm 패키지-버전 분석 결과, 96.2%는 소스/외부 서버에 페이로드를 숨기고 3.8%(432개)는 바이너리 번들<br>- 소거된 불명확한 바이너리는 깨끗한 소스 뒤에 숨겨져 LLM을 양성 판정으로 오도 가능<br>- 도메인 지식 인코딩으로 다양한 난독화·모호성 수준의 바이너리 탐지 성능 개선</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/closing-binary-blind-spot-domain-knowledge-injection-llm-malware-triage-npm-packages" target="_blank" rel="noopener">바이너리 맹점 극복: npm 패키지 악성코드 심사를 위한 LLM 도메인 지식 주입</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://netflixtechblog.com/ontology-driven-observability-building-an-end-to-end-knowledge-graph-at-netflix-scale-421392cf5adf?source=rss----2615bd06b42e---4" target="_blank" rel="noopener">온톨로지 기반 관측성: Netflix 규모의 엔드-투-엔드 지식 그래프 구축</a></div>
+    <div class="item-meta">Netflix Tech Blog</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://toss.tech/article/package-management-2" target="_blank" rel="noopener">토스뱅크가 패키지를 관리하는 방식 #2: 토스뱅크 패키지의 세 가지 기준</a></div>
+    <div class="item-meta">Toss Tech</div>
+  </div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">4개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://lemire.me/blog/2026/10/17/decoding-base64-in-python-at-10-gigabytes-per-second/" target="_blank" rel="noopener">Python에서 초당 10기가바이트 속도로 base64 디코딩하기</a></div>
+    <div class="item-meta">Daniel Lemire</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://lemire.me/blog/2026/10/15/redis-now-has-compressed-bitmaps-roaring/" target="_blank" rel="noopener">Redis 이제 압축된 비트맵(Roaring) 지원</a></div>
+    <div class="item-meta">Daniel Lemire</div>
+  </div>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Meta, 오픈·클로즈드 모델의 최고 경계를 뒤흔들다</span>
+      <span class="item-meta">Nathan Lambert</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">미국 오픈 웨이트 모델의 경쟁력이 회복되고 중국 모델과의 격차가 축소된 현황을 다룬 글.<br>- Meta의 Muse Spark Open이 현재 최강의 미국 오픈 웨이트 모델로 부상<br>- 미국 최고 모델과 중국 최고 모델 간 성능 격차가 약 절반 수준으로 축소됨<br>- Mistral Large 4(인덱스 스코어 38)와 Reflection의 Beam 등 강력한 모델들이 순차 출시되며 경쟁 심화</div>
+      <div class="item-link"><a href="https://www.interconnects.ai/p/meta-shakes-up-the-frontiers-open" target="_blank" rel="noopener">Meta, 오픈·클로즈드 모델의 최고 경계를 뒤흔들다</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Oct/16/code-review/" target="_blank" rel="noopener">Addy Osmani, Morgan Westlee Lunt, Qing Wang 인용</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.tesla.com/roadster" target="_blank" rel="noopener">Tesla Roadster</a></div>
+    <div class="item-meta">HN · 1526 pts</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1x819z7/how_many_of_you_have_seen_this_honest_iclr/" target="_blank" rel="noopener">ICLR 제출물에서 이런 정직한 글을 본 적 있나요? [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.anthropic.com/research/ecdsa-curve-origins" target="_blank" rel="noopener">Claude, ECDSA 곡선의 기원을 밝히다</a></div>
+    <div class="item-meta">HN · 947 pts</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1x7qgr0/research_2788_tokenss_on_a_single_rtx_5090_with_a/" target="_blank" rel="noopener">Diffusion LLM으로 RTX 5090에서 2,788 tokens/s 달성 — ORL 완전 오픈소스 소개</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.mercor.com/research/labor-index/benchmark-map/" target="_blank" rel="noopener">미국 근무시간의 90%는 AI 벤치마크 범위 밖의 작업에 사용된다</a></div>
+    <div class="item-meta">HN · 554 pts</div>
+  </div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Claude Code 플러그인 공식 디렉토리</span>
+      <span class="item-meta">41,294</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Claude Code용 고품질 플러그인의 큐레이션된 디렉토리<br>- 플러그인 설치: `/plugin install {plugin-name}@claude-plugins-official` 명령 또는 `/plugin &gt; Discover`에서 검색<br>- 플러그인 분류: 내부 플러그인(`/plugins`)은 Anthropic이 개발·유지, 외부 플러그인(`/external_plugins`)은 파트너·커뮤니티 제공<br>- 플러그인 구조: 각 플러그인은 `.claude-plugin/plugin.json` 메타데이터 필수, `.mcp.json` MCP 서버 설정 선택사항</div>
+      <div class="item-link"><a href="https://github.com/anthropics/claude-plugins-official" target="_blank" rel="noopener">Claude Code 플러그인 공식 디렉토리</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">AI 구직 검색</span>
+      <span class="item-meta">49,526</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Claude Code 기반의 AI 구동 구직 지원 프레임워크이다.<br>- 구직 공고를 평가하고, CV를 맞춤형으로 조정하고, 자기소개서를 작성하고, 면접을 준비한다<br>- 로컬 머신에서 실행되는 방식이다<br>- Anthropic과 무관한 독립적인 오픈소스 프로젝트이다</div>
+      <div class="item-link"><a href="https://github.com/MadsLorentzen/ai-job-search" target="_blank" rel="noopener">AI 구직 검색</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>K-Dense-AI 과학적 에이전트 스킬</span>
+      <span class="item-meta">52,024</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 에이전트를 위한 과학적 스킬 모음 프로젝트.<br>- 177개의 스킬과 100+ 데이터베이스 포함<br>- Cursor, Claude Code, Codex, Google Antigravity 호환<br>- MIT 라이선스, arXiv 논문 등재 (2609.00065), 버전 2.72.0</div>
+      <div class="item-link"><a href="https://github.com/K-Dense-AI/scientific-agent-skills" target="_blank" rel="noopener">K-Dense-AI 과학적 에이전트 스킬</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>ai-memory: AI 코딩 에이전트를 위한 장기 메모리</span>
+      <span class="item-meta">9,751</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">여러 AI 코딩 에이전트 간에 작업 맥락과 메모리를 공유하는 시스템<br>- 20개 이상의 플랫폼(Claude Code, Codex, Cursor, Gemini CLI, OpenCode, Grok, Devin, Kimi, Kiro 등)을 지원하는 통합 메모리<br>- Claude Code에서 시작한 작업을 Codex로 이어받아도 아키텍처, 실패한 접근, 미해결 문제를 다시 설명할 필요 없음<br>- 기존 에이전트 메모리의 한계(한 기계, 한 에이전트, 도구 전환 시 손실)를 제거</div>
+      <div class="item-link"><a href="https://github.com/akitaonrails/ai-memory" target="_blank" rel="noopener">ai-memory: AI 코딩 에이전트를 위한 장기 메모리</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Orca - 100배 빌더를 위한 AI 오케스트레이터</span>
+      <span class="item-meta">94,990</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">여러 AI 코드 에디터를 동시에 실행할 수 있는 오케스트레이터.<br>- Codex, ClaudeCode, OpenCode, Pi를 나란히 실행 가능<br>- macOS, Windows, Linux 멀티플랫폼 지원<br>- 다국어 지원 (중문, 일문, 한국어, 스페인어, 프랑스어, 포르투갈어)</div>
+      <div class="item-link"><a href="https://github.com/stablyai/orca" target="_blank" rel="noopener">Orca - 100배 빌더를 위한 AI 오케스트레이터</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div>
+</body>
+</html>
