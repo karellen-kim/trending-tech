@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-10-19 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1rem; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
+  .item-body { padding: 0 1rem 1.2rem; }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
+    padding: 1rem 0.9rem 0.7rem;
+    /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
+    --accent: #b08a2a; --accent-wash: #f6f1e2; }
+  /* svg 인라인 max-width:100% 가 좁은 화면에서 그림을 1/3 로 압착해 글자를 뭉갠다.
+     원본 크기를 지키고 상자에서 옆으로 밀어 본다. */
+  .item-diagram svg { max-width: none !important; }
+  .item-diagram .diagram { margin: 0; padding: 0; border: none; background: none; color: var(--ink);
+    width: max-content; min-width: 100%; }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
+    font-family: var(--serif); font-style: italic; font-size: 0.74rem; color: #7d7364; text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    .item details > summary { grid-template-columns: 1fr auto; }
+    /* 제목은 한 줄을 통째로 쓴다. 토글을 옆에 두면 그만큼 폭을 잃는다. */
+    .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
+    .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
+    .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
+
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-10-19</div>
+<h1><em>19</em> Oct 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">에이전트 AI의 초점이 규모에서 검증·효율·안정성으로 옮겨가고 있다</p><p class="take-body">논문 7-11이 에이전트의 검증 가능성과 추론 효율을 집중적으로 다루는 반면, Headroom(16)은 이를 구현하는 컨텍스트 압축 레이어를, Meta(3)와 Toss(4)는 대규모 인프라의 성능과 병목 해결을 각각 강화하고 있다. 규모 경쟁에서 신뢰성과 비용 효율의 우선순위로 전환된 것이다.</p><div class="take-refs"><span>근거</span><a href="https://arxiv.org/abs/2610.22448" target="_blank" rel="noopener">Lean4AgenticRL: 검증 가능한 다단계 프로세스 보상으로 에이전트 강화학습 발전</a> · <a href="https://arxiv.org/abs/2610.23255" target="_blank" rel="noopener">샘플링, 혼합, 검증 중 무엇을 선택할까?: 불완전한 검증기 하에서 테스트 시간 계산 할당</a> · <a href="https://github.com/headroomlabs-ai/headroom" target="_blank" rel="noopener">Headroom — AI 에이전트를 위한 컨텍스트 압축 레이어</a> · <a href="https://engineering.fb.com/2026/10/19/data-center-engineering/inside-prometheus-meta-gigawatt-scale-supercluster/" target="_blank" rel="noopener">Prometheus 공개: Meta의 기가와트급 슈퍼클러스터 구축 여정</a> · <a href="https://toss.tech/article/nic-interrupt-bottleneck" target="_blank" rel="noopener">평균 CPU는 여유로운데, 커밋은 왜 느릴까?</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/0ab747cd-30ba-480b-a1dd-ecbb4f4165d3" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">4개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">패치를 넘어: NetScaler 게이트웨이의 미래 취약점 방어</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 299" style="width:480px;max-width:100%" role="img" aria-label="로그인 결정을 취약 코드 앞으로 옮겨 즉시 방어" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">NetScaler 취약점 방어</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">기존 (취약)</text><rect x="28" y="76" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">명령</text><line x1="116" y1="113" x2="116" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="145" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">취약 코드</text><text x="116" y="185" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">CVE-2026-88…</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">개선 (방어)</text><rect x="276" y="76" width="176" height="37" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">명령</text><line x1="364" y1="113" x2="364" y2="142" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="145" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="168" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">로그인 결정</text><text x="364" y="185" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">사전 검증</text><line x1="364" y1="199" x2="364" y2="228" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="231" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="254" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">취약 코드</text><text x="364" y="271" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">CVE-2026-88…</text><line x1="240" y1="50" x2="240" y2="291" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>로그인 결정을 취약 코드 앞으로 옮겨 즉시 방어</figcaption></figure></div><div class="item-summary">NetScaler Gateway의 패칭 지연 시간 동안 취약점으로부터 보호하는 전략에 관한 글.<br>- CVE-2026-88771은 누구나 로그인 전 NetScaler Gateway에서 명령을 실행할 수 있게 함<br>- 패칭에 많은 시간이 필요해서 대부분의 팀이 충분한 시간을 갖지 못함<br>- 로그인 결정(sign-in decision)을 취약한 코드 앞으로 옮겨 미리 방어할 수 있음</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/protect-your-netscaler-gateway/" target="_blank" rel="noopener">패치를 넘어: NetScaler 게이트웨이의 미래 취약점 방어</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Databricks, 뉴욕시를 주요 AI 인재 허브로 확대</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 204" style="width:656px;max-width:100%" role="img" aria-label="뉴욕의 전략적 가치를 바탕으로 사무실 2배 확장 및 신규 시설 추가" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Databricks 뉴욕 사무실 확장</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">뉴욕</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">사무실 확장</text><text x="328" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">12만 제곱피트</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Engineering</text><text x="552" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">&amp; Research층</text><rect x="16" y="136" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="159" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Executive</text><text x="104" y="176" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Briefing…</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="205" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">선택</text><line x1="416" y1="77" x2="461" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="429" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">신설</text><path d="M 328 104 L 328 120 L 104 120 L 104 133" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="205" y="104" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="115" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">신설</text></svg><figcaption>뉴욕의 전략적 가치를 바탕으로 사무실 2배 확장 및 신규 시설 추가</figcaption></figure></div><div class="item-summary">Databricks가 뉴욕시 사무실을 대폭 확장하는 투자 발표 소식입니다.<br>- 5 Bryant Park에서 약 12만 제곱피트로 규모를 2배 확대하며 5개 층 구성<br>- Engineering and Research 전용 층과 Executive Briefing Center를 새로 추가<br>- 뉴욕은 미국 최대 규모 기술 인재 풀이며, Fortune 500 금융·미디어·헬스케어·소매 기업들과 유럽·인도 시간대 연계에 유리</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/databricks-doubling-down-new-york-city-premier-ai-talent-hub" target="_blank" rel="noopener">Databricks, 뉴욕시를 주요 AI 인재 허브로 확대</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Prometheus 공개: Meta의 기가와트급 슈퍼클러스터 구축 여정</span>
+      <span class="item-meta">Meta Engineering</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 135" style="width:656px;max-width:100%" role="img" aria-label="폐쇄형 액체냉각으로 거대 인프라를 만들어 AI 모델 출시 지원" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Prometheus 슈퍼클러스터 구축</text><rect x="16" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">폐쇄형 액체냉각</text><rect x="240" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Prometheus</text><text x="328" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">슈퍼클러스터</text><text x="328" y="107" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">100만 GPU 확장</text><rect x="464" y="50" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="82" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Muse 파운데이션</text><text x="552" y="98" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">모델</text><line x1="192" y1="86" x2="237" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="198" y="70" width="36" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">냉각지원</text><line x1="416" y1="86" x2="461" y2="86" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="422" y="70" width="36" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="80" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">학습지원</text></svg><figcaption>폐쇄형 액체냉각으로 거대 인프라를 만들어 AI 모델 출시 지원</figcaption></figure></div><div class="item-summary">Meta의 Prometheus 기가와트 규모 슈퍼클러스터 구축에 관한 글<br>- Muse 파운데이션 모델의 출시를 가능하게 한 Prometheus 인프라 공개<br>- 첫 단계 완료, 약 100만 개 GPU로의 확장 진행 중<br>- 폐쇄형 액체냉각(closed-loop liquid cooling) 기술 적용</div>
+      <div class="item-link"><a href="https://engineering.fb.com/2026/10/19/data-center-engineering/inside-prometheus-meta-gigawatt-scale-supercluster/" target="_blank" rel="noopener">Prometheus 공개: Meta의 기가와트급 슈퍼클러스터 구축 여정</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>평균 CPU는 여유로운데, 커밋은 왜 느릴까?</span>
+      <span class="item-meta">Toss Tech</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 204" style="width:656px;max-width:100%" role="img" aria-label="특정 CPU 소켓 병목을 인터럽트 분산으로 해결" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">LGWR 소켓 병목과 해결책</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">LGWR 프로세스</text><text x="104" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">CPU 28번만</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">커밋 지연</text><text x="328" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">0.1초+</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">인터럽트 분산</text><text x="552" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">한→두소켓</text><rect x="16" y="136" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="159" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">CPU 사용률</text><text x="104" y="176" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">36.6→17.4%</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="205" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">발생</text><path d="M 552 104 L 552 77 L 328 77 L 328 47" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="429" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">해결</text><path d="M 552 104 L 552 120 L 104 120 L 104 133" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="317" y="104" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="115" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">개선</text></svg><figcaption>특정 CPU 소켓 병목을 인터럽트 분산으로 해결</figcaption></figure></div><div class="item-summary">토스증권 Oracle DB의 커밋 지연 문제 원인 파악 및 해결 사례.<br>- Oracle의 LGWR 프로세스가 특정 CPU 소켓에서만 실행될 때 0.1초 이상의 커밋 대기 시간 발생<br>- pidstat 분석으로 CPU 28번에서만 지연이 발생함을 확인, 평균 지표 뒤에 가려진 병목 발견<br>- NIC 인터럽트를 한 소켓에서 두 소켓으로 분산하여 커밋 대기 대부분 개선, 다른 RAC에서는 CPU 사용률 36.6%에서 17.4%로 감소</div>
+      <div class="item-link"><a href="https://toss.tech/article/nic-interrupt-bottleneck" target="_blank" rel="noopener">평균 CPU는 여유로운데, 커밋은 왜 느릴까?</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">2개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">llm-tools-datasette 0.1.1</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 247" style="width:480px;max-width:100%" role="img" aria-label="업그레이드로 인한 플러그인 호환성 변화와 해결" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">LLM httpx2 전환</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">이전</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">LLM</text><text x="116" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">httpx</text><line x1="116" y1="130" x2="116" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="162" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">llm-tools-da</text><text x="116" y="202" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">tasette</text><text x="116" y="219" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">호환</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">현재</text><rect x="276" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">LLM</text><text x="364" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">v0.33,…</text><line x1="364" y1="130" x2="364" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="162" width="176" height="71" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">llm-tools-da</text><text x="364" y="202" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">tasette</text><text x="364" y="219" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">수정됨</text><line x1="240" y1="50" x2="240" y2="239" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>업그레이드로 인한 플러그인 호환성 변화와 해결</figcaption></figure></div><div class="item-summary">LLM의 httpx2 업그레이드로 인한 플러그인 호환성 문제 해결 릴리스입니다.<br>- LLM v0.33에서 httpx에서 httpx2로 전환됨<br>- httpx에 직접 의존하지 않던 플러그인들이 영향을 받음<br>- llm-tools-datasette가 그 중 하나였으며 이제 수정됨</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Oct/18/llm-tools-datasette/" target="_blank" rel="noopener">llm-tools-datasette 0.1.1</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Oct/18/llm-echo/" target="_blank" rel="noopener">llm-echo 0.5</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Lean4AgenticRL: 검증 가능한 다단계 프로세스 보상으로 에이전트 강화학습 발전</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 452 290" style="width:452px;max-width:100%" role="img" aria-label="저수준에서 고수준으로 쌓인 LLM 에이전트 보상" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="226" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">다단계 검증 가능 보상 구조</text><rect x="96" y="50" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">도구호출 보상</text><text x="226" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">저수준</text><rect x="96" y="136" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="159" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">워크플로우 단계 보상</text><text x="226" y="176" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">중수준</text><rect x="96" y="222" width="260" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="226" y="245" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">결과 보상</text><text x="226" y="262" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">고수준</text></svg><figcaption>저수준에서 고수준으로 쌓인 LLM 에이전트 보상</figcaption></figure></div><div class="item-summary">대규모 언어 모델의 에이전트 강화학습 효율성 향상에 관한 논문.<br>- 기존 최첨단 LLM들은 고수준의 결과 보상에만 의존하며 훈련 효율성이 떨어짐<br>- 저수준의 도구호출 보상과 중수준의 워크플로우 단계 보상이 거의 고려되지 않는 문제<br>- Lean4AgenticRL을 통해 다단계 검증 가능한 프로세스 보상 구조로 개선 시도</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2610.22448" target="_blank" rel="noopener">Lean4AgenticRL: 검증 가능한 다단계 프로세스 보상으로 에이전트 강화학습 발전</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">LLM이 머신러닝 실험의 결과를 예측할 수 있을까?</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 170" style="width:656px;max-width:100%" role="img" aria-label="LLM이 실험 아이디어를 제안하고 영향을 예측해 선택·실행하는 순환" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">LLM의 ML 실험 자동 개선</text><rect x="16" y="50" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">LLM</text><rect x="240" y="50" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">실험 아이디어 제안</text><rect x="464" y="50" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">영향 예측</text><rect x="16" y="119" width="176" height="37" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="142" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">실험 실행</text><line x1="192" y1="68" x2="237" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="205" y="52" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="64" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">제안</text><line x1="416" y1="68" x2="461" y2="68" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="415" y="52" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="64" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">정확도 평가</text><path d="M 552 87 L 552 103 L 104 103 L 104 116" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="306" y="87" width="43" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="98" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">선택 실행</text><path d="M 104 156 L 104 103 L 104 103 L 104 47" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="79" y="87" width="50" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="104" y="98" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">결과 피드백</text></svg><figcaption>LLM이 실험 아이디어를 제안하고 영향을 예측해 선택·실행하는 순환</figcaption></figure></div><div class="item-summary">LLM이 자체 생성한 ML 실험 아이디어의 영향을 예측하는 능력에 관한 연구입니다.<br>- Recursive Self-Improvement(RSI)로 LLM이 ML 실험을 제안, 선택, 실행하는 전 과정을 수행 가능<br>- 광대한 ML 설계 공간에서 장시간 학습 제약 내에 가치 있는 실험을 판단할 '직관' 필요<br>- 현재 최첨단 LLM이 자체 생성 실험 아이디어의 영향을 예측하는 정확도 측정 및 평가</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2610.22599" target="_blank" rel="noopener">LLM이 머신러닝 실험의 결과를 예측할 수 있을까?</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">장기 에이전트 강화학습을 위한 트리 기반 사후 분포 증류</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 480 230" style="width:480px;max-width:100%" role="img" aria-label="희소 신용 할당과 드리프트 문제 해결" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="240" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">신용 할당과 정책 드리프트</text><text x="116" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">문제</text><rect x="28" y="76" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">터미널 보상만 사용</text><text x="116" y="116" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">희소, 고분산</text><line x1="116" y1="130" x2="116" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="28" y="162" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="116" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">순차 미니배치</text><text x="116" y="202" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">정책 드리프트</text><text x="364" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor" opacity="0.75">해결책</text><rect x="276" y="76" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="99" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">Critic +</text><text x="364" y="116" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">프로세스 보상</text><line x1="364" y1="130" x2="364" y2="159" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="276" y="162" width="176" height="54" rx="4" fill="var(--accent-wash, #f5f2ee)" stroke="var(--accent, #e05c1a)" stroke-width="1.5"/><text x="364" y="194" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">On-policy 증류</text><line x1="240" y1="50" x2="240" y2="222" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/></svg><figcaption>희소 신용 할당과 드리프트 문제 해결</figcaption></figure></div><div class="item-summary">검증 가능한 보상을 통한 장기 강화학습의 신용 할당과 정책 진부화 문제를 다룬 연구<br>- 터미널 보상만 사용할 때 턴 레벨 신용 할당이 희소하고 고분산<br>- 고정 롤아웃 배치에서 순차적 미니배치 업데이트로 인한 행동 정책으로부터의 정책 드리프트<br>- 기존 해결책으로 학습된 critic, 프로세스 보상 모델, on-policy distillation 등 활용</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2610.23181" target="_blank" rel="noopener">장기 에이전트 강화학습을 위한 트리 기반 사후 분포 증류</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">LangNCO: 자연어 제약을 신경망 조합 최적화 추론 시간 개입으로 컴파일</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><figure class="diagram"><svg viewBox="0 0 656 221" style="width:656px;max-width:100%" role="img" aria-label="사전학습된 모델 수정 없이 추론 시간에 자연어 제약 삽입" font-family="inherit" xmlns="http://www.w3.org/2000/svg" fill="none"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs><text x="328" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">자연어 제약을 NCO에 적용</text><rect x="16" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">자연어 제약</text><text x="104" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">인스턴스별</text><rect x="240" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="328" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">LLM 의미론적</text><text x="328" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">프론트엔드</text><rect x="464" y="50" width="176" height="54" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="552" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">추론 시간 개입</text><text x="552" y="90" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">구조화됨</text><rect x="16" y="136" width="176" height="71" rx="4" fill="transparent" stroke="currentColor" stroke-width="1.5"/><text x="104" y="159" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">사전학습 NCO</text><text x="104" y="176" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">solver</text><text x="104" y="193" text-anchor="middle" font-size="11" fill="var(--accent, #e05c1a)">수정 안 함</text><line x1="192" y1="77" x2="237" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="205" y="61" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="216" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">해석</text><line x1="416" y1="77" x2="461" y2="77" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="426" y="61" width="29" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="440" y="72" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">컴파일</text><path d="M 552 104 L 552 120 L 104 120 L 104 133" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/><rect x="317" y="104" width="22" height="15" rx="2" fill="var(--paper, #fff)" stroke="none"/><text x="328" y="115" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">적용</text></svg><figcaption>사전학습된 모델 수정 없이 추론 시간에 자연어 제약 삽입</figcaption></figure></div><div class="item-summary">배포 후 변경된 자연어 요구사항을 사전학습된 신경망 조합 최적화 모델에 추론 시간에 적용하는 프레임워크<br>- 사전학습된 NCO solver를 수정하지 않고 인스턴스별 자연어 제약을 구조화된 추론 시간 개입으로 컴파일<br>- 사전학습된 정책의 아키텍처, 학습된 입력 표현, 파라미터 변경 없음<br>- 사전학습된 LLM을 대체 가능한 의미론적 프론트엔드로 활용</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2610.23190" target="_blank" rel="noopener">LangNCO: 자연어 제약을 신경망 조합 최적화 추론 시간 개입으로 컴파일</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>샘플링, 혼합, 검증 중 무엇을 선택할까?: 불완전한 검증기 하에서 테스트 시간 계산 할당</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">추론 시간에 더 많은 계산을 사용하여 언어모델과 에이전트의 정확성을 높이는 방법에 관한 논문.<br>- 올바른 후보 솔루션의 존재 확률은 샘플 수에 따라 예측 가능하게 증가하지만, 검증기의 선택 정확도는 예측 불가능함<br>- 실제 검증기(단위 테스트, 다수결 투표, LLM 판사, 보상 모델)는 잘못된 답을 받아들이고 올바른 답을 거부하며 상관된 오류를 범함<br>- 고정된 예산 하에서 생성할 샘플 개수를 결정해야 하는 최적 할당 문제</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2610.23255" target="_blank" rel="noopener">샘플링, 혼합, 검증 중 무엇을 선택할까?: 불완전한 검증기 하에서 테스트 시간 계산 할당</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://karrisaarinen.com/posts/someone-behind-the-software/" target="_blank" rel="noopener">소프트웨어 뒤의 사람</a></div>
+    <div class="item-meta">HN · 505 pts</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1x9c5ty/beating_warcraft_iiis_insane_ai_with_selfplay/" target="_blank" rel="noopener">자기 자신과의 경쟁 강화학습으로 Warcraft III의 Insane AI를 단일 데스크톱에서 이기기</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.youtube.com/watch?v=LKrwhjOI8Nc" target="_blank" rel="noopener">수학을 공부하기에 지금이 최고의 시간이다 (by: 3blue1brown)</a></div>
+    <div class="item-meta">HN · 466 pts</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1x9fyhd/conference_papers_are_cooked_d/" target="_blank" rel="noopener">학회 논문들이 조작되었다! [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://arxiv.org/abs/2610.18861" target="_blank" rel="noopener">하이브리드 추론 에이전트: 잠재공간에서 사고하고 텍스트로 행동하는 LLM</a></div>
+    <div class="item-meta">HN · 465 pts</div>
+  </div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">AI Job Search</span>
+      <span class="item-meta">55,855</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Claude Code 기반 AI 파워 구직 자동화 프레임워크.<br>- Claude가 채용공고 평가, CV 맞춤, 자기소개서 작성, 면접 준비를 자동으로 수행<br>- 사용자 프로필을 입력하면 로컬 머신에서 실행되는 오픈소스 프로젝트<br>- Anthropic과 무관한 독립 프로젝트로 암호화폐·토큰·유료 스폰서십 없음</div>
+      <div class="item-link"><a href="https://github.com/MadsLorentzen/ai-job-search" target="_blank" rel="noopener">AI Job Search</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">AI 메모리</span>
+      <span class="item-meta">10,979</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">여러 AI 코딩 에이전트 간 공유되는 장기 메모리 시스템<br>- Claude Code, Codex, Cursor, Gemini CLI, OpenCode, Grok, Devin, Kimi, Kiro 등 20개 이상의 에이전트가 하나의 공유 메모리 사용 가능<br>- 에이전트 전환 시 이전 작업의 아키텍처, 시도한 방식, 열린 질문을 다시 설명하지 않고 이어갈 수 있음<br>- 단일 머신·단일 에이전트에만 한정되던 기존 메모리의 제약 제거</div>
+      <div class="item-link"><a href="https://github.com/akitaonrails/ai-memory" target="_blank" rel="noopener">AI 메모리</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">ComfyUI</span>
+      <span class="item-meta">139,306</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface. The fastest local inference engine in the world.</div>
+      <div class="item-link"><a href="https://github.com/Comfy-Org/ComfyUI" target="_blank" rel="noopener">ComfyUI</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Orca</span>
+      <span class="item-meta">97,770</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">100배 생산성 개발자를 위한 AI 오케스트레이터 플랫폼입니다.<br>- Codex, ClaudeCode, OpenCode, Pi를 나란히 실행 가능<br>- macOS, Windows, Linux 지원<br>- MIT 라이선스</div>
+      <div class="item-link"><a href="https://github.com/stablyai/orca" target="_blank" rel="noopener">Orca</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Headroom — AI 에이전트를 위한 컨텍스트 압축 레이어</span>
+      <span class="item-meta">76,057</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">AI 에이전트 프롬프트의 토큰을 효율적으로 압축하는 도구.<br>- 55,957 토큰 프롬프트를 24,340 토큰으로 압축<br>- FATAL 라인을 바이트 단위로 보존하는 선택적 압축 기능<br>- Python(PyPI)과 JavaScript(npm)로 제공되며 kompress-v2-base 모델 지원</div>
+      <div class="item-link"><a href="https://github.com/headroomlabs-ai/headroom" target="_blank" rel="noopener">Headroom — AI 에이전트를 위한 컨텍스트 압축 레이어</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div>
+</body>
+</html>
