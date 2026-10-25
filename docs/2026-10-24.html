@@ -195,58 +195,128 @@
 </div>
 <div class="page-meta">2026-10-24</div>
 <h1><em>24</em> Oct 2026</h1>
-<nav class="page-nav"><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
-<div class="section" id="tech-blog">
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+
+  </div>
+  <div class="take"><p class="take-headline">에이전트의 일이 코드 작성에서 배포·운영까지 넓어지면서, 검증과 권한 통제가 도구 설계의 핵심으로 떠오른다.</p><p class="take-body">파이프라인에서는 에이전트가 만든 코드의 구조적 오류를 실행 전에 검사해 실패 비용을 줄이고, AWS 도구에서는 에이전트 전용 권한 정책과 감사 기록으로 작업을 통제한다. 보안 감사에서도 취약점을 찾은 에이전트와 이를 검증하는 에이전트를 분리한다. 이 사례들을 관통하는 흐름은 에이전트에게 더 많은 일을 맡기기 위해, 신뢰의 근거를 모델의 답변에서 외부 검증 절차와 실행 환경으로 옮기는 것이다.</p><div class="take-refs"><span>근거</span><a href="https://www.databricks.com/blog/built-agents-case-spark-declarative-pipelines" target="_blank" rel="noopener">에이전트를 위한 설계: Spark Declarative Pipelines를 선택해야 하는 이유</a> · <a href="https://github.com/aws/agent-toolkit-for-aws" target="_blank" rel="noopener">AWS 애플리케이션 개발·배포·관리를 돕는 Agent Toolkit for AWS</a> · <a href="https://github.com/cloudflare/security-audit-skill" target="_blank" rel="noopener">Cloudflare의 보안 감사 스킬</a></div></div>
+</div><div class="section" id="tech-blog">
   <div class="section-header">
     <span class="section-icon">TECH</span>
     <span class="section-title">기술 블로그</span>
     <span class="section-count">9개</span>
   </div>
   <div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://aws.amazon.com/blogs/machine-learning/multi-turn-reinforcement-learning-on-amazon-sagemaker-ai-a-hands-on-guide/" target="_blank" rel="noopener">Multi-Turn Reinforcement Learning on Amazon SageMaker AI: A hands-on guide</a></div>
-    <div class="item-meta">AWS ML Blog</div>
-  </div>
+  <details>
+    <summary>
+      <span class="item-name">Amazon SageMaker AI에서 멀티턴 강화학습하기</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Amazon SageMaker AI에서 에이전트의 여러 단계 행동을 학습하는 멀티턴 강화학습 실습 가이드다.<br>- SageMaker AI는 AWS Lambda 포워더를 통해 호스팅된 에이전트에 프롬프트를 보내며, 이 글의 예제는 Amazon Bedrock AgentCore를 사용한다.<br>- 에이전트는 학습 중인 정책 모델을 호출해 필요한 만큼 행동하고, 에피소드가 끝나면 보상 하나를 보고한다. 올바른 행동 경로 대신 결과의 채점 방식만 지정한다.<br>- 예제로 다섯 글자 단어를 여섯 번 안에 맞히는 Wordle을 사용하며, 각 글자의 포함 여부와 위치를 초록색·노란색·회색으로 피드백한다.</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/multi-turn-reinforcement-learning-on-amazon-sagemaker-ai-a-hands-on-guide/" target="_blank" rel="noopener">Amazon SageMaker AI에서 멀티턴 강화학습하기</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://aws.amazon.com/blogs/machine-learning/orchestrating-sagemaker-ai-endpoint-auto-scaling-with-aws-cdk/" target="_blank" rel="noopener">Orchestrating SageMaker AI endpoint auto scaling with AWS CDK</a></div>
-    <div class="item-meta">AWS ML Blog</div>
-  </div>
+  <details>
+    <summary>
+      <span class="item-name">AWS CDK로 SageMaker AI 엔드포인트 오토 스케일링 오케스트레이션하기</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">SageMaker AI 실시간 엔드포인트 업데이트 시 오토 스케일링 등록 해제와 재등록을 자동화하는 방법을 다룬 글.<br>- 오토 스케일링 대상이 등록된 상태에서 엔드포인트의 인스턴스 유형을 변경하거나 변형(variant)을 제거하려 하면 SageMaker AI가 업데이트를 거부한다.<br>- 업데이트를 위해 스케일링 대상의 등록을 해제하면 CloudFormation이 AWS Application Auto Scaling 리소스를 추적할 수 없게 된다.<br>- 재사용 가능한 CDK construct와 AWS CloudFormation 사용자 지정 리소스로 등록 해제·재등록을 자동화해, 수동 개입 없이 한 번의 배포로 엔드포인트 구성과 오토 스케일링 매개변수를 변경한다.</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/orchestrating-sagemaker-ai-endpoint-auto-scaling-with-aws-cdk/" target="_blank" rel="noopener">AWS CDK로 SageMaker AI 엔드포인트 오토 스케일링 오케스트레이션하기</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://aws.amazon.com/blogs/machine-learning/visualize-points-and-routes-with-geojson-in-amazon-quick-sight-layer-maps/" target="_blank" rel="noopener">Visualize points and routes with GeoJSON in Amazon Quick Sight layer maps</a></div>
-    <div class="item-meta">AWS ML Blog</div>
-  </div>
+  <details>
+    <summary>
+      <span class="item-name">Amazon Quick Sight 레이어 맵에서 GeoJSON으로 지점과 경로 시각화하기</span>
+      <span class="item-meta">AWS ML Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Amazon Quick Sight 레이어 맵에 추가된 GeoJSON 기반 지점·경로 시각화 기능을 소개하는 글이다.<br>- 기존에는 GeoJSON 파일로 영업 구역이나 행정 구역 같은 사용자 지정 도형 레이어를 그리고 데이터셋과 연결할 수 있었다.<br>- 새로 지원하는 Point 유형은 개별 매장이나 시설처럼 특정 위치를 지도에 표시한다.<br>- 함께 추가된 LineString 유형은 배송 경로나 공항 간 항공편처럼 위치 사이의 경로를 그리며, 기존과 동일한 GeoJSON 작업 흐름을 사용한다.</div>
+      <div class="item-link"><a href="https://aws.amazon.com/blogs/machine-learning/visualize-points-and-routes-with-geojson-in-amazon-quick-sight-layer-maps/" target="_blank" rel="noopener">Amazon Quick Sight 레이어 맵에서 GeoJSON으로 지점과 경로 시각화하기</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://research.google/blog/bringing-foundational-models-to-the-front-lines-of-tb-screening/" target="_blank" rel="noopener">Bringing foundational models to the front lines of TB screening</a></div>
-    <div class="item-meta">Google Research</div>
-  </div>
+  <details>
+    <summary>
+      <span class="item-name">파운데이션 모델을 결핵 검진 최전선으로</span>
+      <span class="item-meta">Google Research</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Google Research와 Google for Health가 결핵 검진 현장에서 활용할 수 있는 AI 모델을 연구해 온 과정을 소개한 글이다.<br>- 결핵으로 매년 약 123만 명이 사망하며, 발견되지 않은 수백만 건의 활동성 결핵이 전파를 이어가고 있다.<br>- 외딴 농촌 주민과 지하 광산 노동자 등은 영상의학 전문의가 부족하고 영상 검사 시설까지 며칠이 걸리는 환경에 놓여 있다.<br>- 지난 5년간 초기 연구 벤치마크에서 출발해, 진료 현장에 맞게 조정하고 배포할 수 있는 개방형 파운데이션 모델을 지향하는 연구를 진행했다.</div>
+      <div class="item-link"><a href="https://research.google/blog/bringing-foundational-models-to-the-front-lines-of-tb-screening/" target="_blank" rel="noopener">파운데이션 모델을 결핵 검진 최전선으로</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://blog.cloudflare.com/origin-range-requests/" target="_blank" rel="noopener">Origin Range Requests: Serving large files without range-request tuning</a></div>
-    <div class="item-meta">Cloudflare Blog</div>
-  </div>
+  <details>
+    <summary>
+      <span class="item-name">Origin Range Requests: 범위 요청 튜닝 없이 대용량 파일 제공하기</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Cloudflare가 대용량 파일의 부분 요청을 처리하는 캐시를 재설계하고 Origin Range Requests로 제공한다는 글이다.<br>- 기존 캐시는 몇 MB만 요청해도 원본 서버에서 128 MiB를 가져와 데이터 센터 간에 전송할 수 있어 대역폭과 디스크 작업이 낭비됐다.<br>- 새 구현으로 R2의 p99 첫 바이트 수신 시간(TTFB)이 약 절반으로 줄었고, 후속 개선으로 R2와 유사한 워크로드의 계층형 캐시 트래픽이 약 6% 감소했다.<br>- Origin Range Requests는 모든 요금제에서 Cache Rule로 활성화할 수 있으며, 범위 크기를 조정하거나 지원팀에 문의할 필요가 없다.</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/origin-range-requests/" target="_blank" rel="noopener">Origin Range Requests: 범위 요청 튜닝 없이 대용량 파일 제공하기</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://blog.cloudflare.com/post-quantum-geo-key-manager/" target="_blank" rel="noopener">Bringing post-quantum cryptography to geographically fenced key management</a></div>
-    <div class="item-meta">Cloudflare Blog</div>
-  </div>
+  <details>
+    <summary>
+      <span class="item-name">지역 제한 키 관리에 양자내성 암호 도입</span>
+      <span class="item-meta">Cloudflare Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Cloudflare가 지정된 지역에서만 복호화 키에 접근할 수 있는 PQ GeoKey Manager를 출시했다는 글이다.<br>- Data Localization Suite(DLS)를 지원하는 비공개 베타로 출시했으며, 정식 출시(GA)는 2027년 1분기로 계획하고 있다.<br>- 각 복호화 키를 래핑해 고객이 허용한 지역에 있는 Cloudflare 서버만 해당 키를 복호화할 수 있도록 한다.<br>- 고객의 데이터 주권 목표를 지원하고, Cloudflare의 모든 제품을 양자내성(PQ) 암호로 전환하는 과정의 주요 이정표다.</div>
+      <div class="item-link"><a href="https://blog.cloudflare.com/post-quantum-geo-key-manager/" target="_blank" rel="noopener">지역 제한 키 관리에 양자내성 암호 도입</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>에이전트를 위한 설계: Spark Declarative Pipelines를 선택해야 하는 이유</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">동일한 에이전트와 작업으로 절차형·선언형 Spark 파이프라인의 실행 비용과 코드량을 비교한 글.<br>- 절차형 파이프라인은 선언형보다 약 34배 많은 컴퓨팅 시간을 사용했다. 선언형은 전체 실행 없이 구조적 오류를 잡는 저비용 ‘드라이 런’이 가능하다는 점이 주된 차이였다.<br>- 선언형 파이프라인은 동일한 파이프라인을 구현하는 데 코드가 51% 적어, 읽고 검토해야 할 분량이 줄었다.<br>- Databricks의 SDP 파이프라인 중 70% 이상이 에이전트로 생성되고 있어, 반복 시도 비용과 코드 검토의 중요성이 커지고 있다.</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/built-agents-case-spark-declarative-pipelines" target="_blank" rel="noopener">에이전트를 위한 설계: Spark Declarative Pipelines를 선택해야 하는 이유</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://www.databricks.com/blog/built-agents-case-spark-declarative-pipelines" target="_blank" rel="noopener">Built for Agents: The Case for Spark Declarative Pipelines</a></div>
-    <div class="item-meta">Databricks Blog</div>
-  </div>
+  <details>
+    <summary>
+      <span class="item-name">Databricks를 활용한 실시간 에너지 거래와 분석</span>
+      <span class="item-meta">Databricks Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Databricks에서 실시간 에너지 거래와 분석을 하나의 플랫폼으로 통합하는 방법을 다룬 글이다.<br>- Spark Structured Streaming Real-Time Mode가 시장 데이터를 Serverless Postgres인 Lakebase로 전송하며, 이 데이터는 거래 앱·머신러닝 모델·대시보드·자연어 질의 도구 Genie One에 활용된다.<br>- Unity Catalog에서 권한·데이터 계보·감사를 통합 관리하므로 시스템별로 거버넌스를 따로 설정할 필요가 없다.<br>- EU의 익일 전력시장 거래 간격이 1시간에서 15분으로 바뀌면서 시간당 거래 구간이 4배로 늘고, 데이터 기록·주문·위험 재계산량도 증가한다.</div>
+      <div class="item-link"><a href="https://www.databricks.com/blog/real-time-energy-trading-and-analytics-databricks" target="_blank" rel="noopener">Databricks를 활용한 실시간 에너지 거래와 분석</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://www.databricks.com/blog/real-time-energy-trading-and-analytics-databricks" target="_blank" rel="noopener">Real-time energy trading and analytics on Databricks</a></div>
-    <div class="item-meta">Databricks Blog</div>
-  </div>
-</div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://netflixtechblog.com/beyond-api-compatibility-building-a-tool-to-measure-the-blast-radius-of-library-changes-9474f2fd4f90?source=rss----2615bd06b42e---4" target="_blank" rel="noopener">Beyond API Compatibility: Building a Tool to Measure the Blast Radius of Library Changes</a></div>
-    <div class="item-meta">Netflix Tech Blog</div>
-  </div>
+  <details>
+    <summary>
+      <span class="item-name">API 호환성을 넘어: 라이브러리 변경의 영향 범위를 측정하는 도구 만들기</span>
+      <span class="item-meta">Netflix Tech Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Netflix의 Quasar가 공유 Java 라이브러리의 API 변경과 소비자 저장소의 사용 현황을 연결해 릴리스 판단을 돕는 방법을 다룬 글이다.<br>- Quasar는 제안된 API 변경을 소비자 저장소에서 관찰된 참조와 연결해 라이브러리 제공자에게 릴리스 판단 근거를 제공한다.<br>- 코딩 에이전트는 로컬 수정을 가속할 수 있지만, 저장소 간 맥락 없이는 소비자에게 미칠 위험을 판단하거나 마이그레이션 계획을 돕기 어렵다.<br>- 폐기 예정 API를 제거할 때 테스트 통과와 호환성 검사만으로는 부족하다. 여전히 해당 메서드를 호출하는 소비자가 있는지, 소비자들이 어떤 버전에 분포하는지 확인해야 한다.</div>
+      <div class="item-link"><a href="https://netflixtechblog.com/beyond-api-compatibility-building-a-tool-to-measure-the-blast-radius-of-library-changes-9474f2fd4f90?source=rss----2615bd06b42e---4" target="_blank" rel="noopener">API 호환성을 넘어: 라이브러리 변경의 영향 범위를 측정하는 도구 만들기</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="dev-blogs">
   <div class="section-header">
@@ -255,30 +325,65 @@
     <span class="section-count">5개</span>
   </div>
   <div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="http://brooker.co.za/blog/2026/10/23/animations.html" target="_blank" rel="noopener">Animations for System Builders: Metastability and Lost Writes</a></div>
-    <div class="item-meta">Marc Brooker</div>
-  </div>
+  <details>
+    <summary>
+      <span class="item-name">시스템 개발자를 위한 애니메이션: 준안정성과 쓰기 유실</span>
+      <span class="item-meta">Marc Brooker</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">애니메이션을 활용해 시스템의 작동과 실패 원리를 이해하는 방법을 다룬 글이다.<br>- 저자는 LLM에 자신의 이해도를 확인할 질문을 해달라고 요청하는 기법을 사용한다.<br>- Raft 클러스터는 구성원 하나의 스토리지 계층만 fsync()에 대해 거짓으로 응답해도 쓰기가 유실될 수 있으며, 이를 애니메이션 사례로 제시한다.<br>- 저자가 만든 Stability Sim은 준안정적 장애를 이해하도록 돕는 도구로, 재시도와 큐가 준안정성을 쉽게 유발한다는 점을 추상적 수준에서 보여줬다.</div>
+      <div class="item-link"><a href="http://brooker.co.za/blog/2026/10/23/animations.html" target="_blank" rel="noopener">시스템 개발자를 위한 애니메이션: 준안정성과 쓰기 유실</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://magazine.sebastianraschka.com/p/building-reasoning-models" target="_blank" rel="noopener">Build Your Own Reasoning Model: A Full Video Course</a></div>
-    <div class="item-meta">Sebastian Raschka</div>
-  </div>
+  <details>
+    <summary>
+      <span class="item-name">나만의 추론 모델 만들기: 전체 동영상 강의</span>
+      <span class="item-meta">Sebastian Raschka</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Sebastian Raschka가 추론 모델의 평가와 성능 개선 방법을 직접 구현하는 동영상 강의를 공개했다.<br>- 총 8개 영상, 11시간이 넘는 코딩 강의로 구성됐다.<br>- 사전 학습된 LLM에서 시작해 Python과 PyTorch로 평가, 추론 시점 확장, 강화학습, 증류 기법을 구현한다.<br>- 이전 강의인 Coding LLMs from the Ground Up의 후속편이지만, 이전 강의를 수강하지 않아도 볼 수 있다.</div>
+      <div class="item-link"><a href="https://magazine.sebastianraschka.com/p/building-reasoning-models" target="_blank" rel="noopener">나만의 추론 모델 만들기: 전체 동영상 강의</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Oct/24/battledrones/" target="_blank" rel="noopener">battledrones v14: Compass Rose, a four player map</a></div>
-    <div class="item-meta">Simon Willison</div>
-  </div>
+  <details>
+    <summary>
+      <span class="item-name">battledrones v14: 4인용 맵 Compass Rose</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">모바일 웹 RTS Battledrones에 4인 온라인 대전을 지원하는 Compass Rose 맵을 추가한 업데이트다.<br>- 기존 맵은 2인용이었으며, 새 맵은 4방향 회전 대칭 구조로 설계됐다.<br>- Claude Opus 5.5가 맵과 WebSocket 멀티플레이 코드를 수정했다. 공유 링크나 QR 코드로 최대 4명이 참가하며, 빈자리는 AI가 채운다.<br>- 기존 파란색·빨간색 팀에 보라색·초록색 팀이 추가됐다. 각 진영이 거대 Goliath 메카 4대로 시작하는 ‘Goliath Armada’ 변형 규칙의 4자 AI 대전 리플레이도 공개했다.</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Oct/24/battledrones/" target="_blank" rel="noopener">battledrones v14: 4인용 맵 Compass Rose</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Oct/23/quick-study-painter/" target="_blank" rel="noopener">Quick Study</a></div>
-    <div class="item-meta">Simon Willison</div>
-  </div>
+  <details>
+    <summary>
+      <span class="item-name">Quick Study</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">사진을 열면 몇 초 안에 붓으로 그린 듯한 버전을 만드는 도구 Quick Study를 소개하는 글이다.<br>- Simon Willison이 Claude Opus 5.5 High에 프롬프트를 입력해 제작했다.<br>- canvas 요소와 모의 붓을 사용해 사진을 빠르게 그리도록 요청했다.<br>- Sobel 에지 검출을 사용하며, Google Fonts 외에는 외부 라이브러리를 사용하지 않는다.</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Oct/23/quick-study-painter/" target="_blank" rel="noopener">Quick Study</a> &rarr;</div>
+    </div>
+  </details>
 </div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Oct/23/kimi-k31-pro/" target="_blank" rel="noopener">Introducing Kimi K3.1 Pro</a></div>
-    <div class="item-meta">Simon Willison</div>
-  </div>
+  <details>
+    <summary>
+      <span class="item-name">Kimi K3.1 Pro 소개</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Moonshot의 Kimi K3.1 Pro API 출시와 가격, 성능 평가를 소개하는 글이다.<br>- 2026년 10월 23일 Kimi API에 출시됐으며, 아직 모델 가중치는 공개되지 않았다. Moonshot은 2026년 11월 4일까지 전체 가중치를 공개하겠다고 예고했다.<br>- 기본 요금은 100만 토큰당 입력 2달러, 출력 10달러다. Highspeed 버전은 2~3배 빠르고 가격은 2배지만, 입력 토큰 캐시 적중 요금은 동일하다.<br>- Artificial Analysis에서 55점을 기록해 Claude Fable 5.1·GPT-6 Astra·Gemini 4 Argon의 53점을 앞섰으며, Claude Opus 5.5의 58점에 이어 두 번째로 높은 점수를 받았다.</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Oct/23/kimi-k31-pro/" target="_blank" rel="noopener">Kimi K3.1 Pro 소개</a> &rarr;</div>
+    </div>
+  </details>
 </div>
 </div><div class="section" id="hn-reddit">
   <div class="section-header">
@@ -288,27 +393,27 @@
   </div>
   <div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://www.kimi.ai/blog/kimi-k3-1-pro" target="_blank" rel="noopener">Kimi K3.1 Pro and K3.1 Pro Highspeed</a></div>
+    <div class="item-name"><a href="https://www.kimi.ai/blog/kimi-k3-1-pro" target="_blank" rel="noopener">Kimi K3.1 Pro와 K3.1 Pro Highspeed</a></div>
     <div class="item-meta">HN · 992 pts</div>
   </div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xdhf7r/r_the_hive_mind_is_a_single_reinforcement/" target="_blank" rel="noopener">[R] The Hive Mind is a Single Reinforcement Learning Agent: Deriving the Exact Equivalence Between Swarm Dynamics and Multi-Armed Bandits</a></div>
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xdhf7r/r_the_hive_mind_is_a_single_reinforcement/" target="_blank" rel="noopener">[R] 집단 지성은 하나의 강화학습 에이전트다: 군집 동역학과 Multi-Armed Bandits 사이의 정확한 등가 관계 도출</a></div>
     <div class="item-meta">r/MachineLearning</div>
   </div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://blog.calif.io/p/iphone" target="_blank" rel="noopener">Today, we hacked what we'd set out to hack: the iPhone</a></div>
+    <div class="item-name"><a href="https://blog.calif.io/p/iphone" target="_blank" rel="noopener">오늘, 우리는 목표로 삼았던 iPhone 해킹에 성공했다</a></div>
     <div class="item-meta">HN · 982 pts</div>
   </div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xe9uoh/increasing_number_of_ug_authors_in_a_conferences/" target="_blank" rel="noopener">Increasing number of UG authors in A* conferences with no supervisor [D]</a></div>
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xe9uoh/increasing_number_of_ug_authors_in_a_conferences/" target="_blank" rel="noopener">지도교수 없이 A* 학회에 논문을 발표하는 학부생 저자 증가 [D]</a></div>
     <div class="item-meta">r/MachineLearning</div>
   </div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://music.apple.com/this-url-doesnt-exist" target="_blank" rel="noopener">Apple Music 404 Not Found</a></div>
+    <div class="item-name"><a href="https://music.apple.com/this-url-doesnt-exist" target="_blank" rel="noopener">Apple Music 404: 찾을 수 없음</a></div>
     <div class="item-meta">HN · 835 pts</div>
   </div>
 </div>
@@ -318,28 +423,28 @@
     <span class="section-title">GitHub 트렌딩</span>
     <span class="section-count">5개</span>
   </div>
-  <div class="item">
+  <div class="item important">
   <details>
     <summary>
-      <span class="item-name">cloudflare/security-audit-skill</span>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Cloudflare의 보안 감사 스킬</span>
       <span class="item-meta">43,344</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings</div>
-      <div class="item-link"><a href="https://github.com/cloudflare/security-audit-skill" target="_blank" rel="noopener">cloudflare/security-audit-skill</a> &rarr;</div>
+      <div class="item-summary">코딩 에이전트가 격리된 에이전트들을 조율해 단일 저장소의 보안 감사를 수행하도록 만드는 스킬이다.<br>- Cloudflare의 취약점 탐지 하네스의 출발점이 된 스킬로, 전체 감사는 6단계로 구성된다.<br>- 정찰 단계에서 아키텍처·신뢰 경계·입력 지점 등을 architecture.md와 coverage-ledger.json에 기록하고, 커버리지 단위별로 탐색 에이전트를 배정해 검사와 누락 점검을 수행한다.<br>- 새로운 검증 에이전트가 각 취약점 후보를 반증하려 시도하고, 결과를 confirmed·needs_validation·rejected로 분류한다. 최종 소스 관련 주장을 독립적으로 재검증한 뒤 검증된 기록과 커버리지에서 보고서 3종을 생성한다.</div>
+      <div class="item-link"><a href="https://github.com/cloudflare/security-audit-skill" target="_blank" rel="noopener">Cloudflare의 보안 감사 스킬</a> &rarr;</div>
     </div>
   </details>
-</div><div class="item">
+</div><div class="item important">
   <details>
     <summary>
-      <span class="item-name">aws/agent-toolkit-for-aws</span>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>AWS 애플리케이션 개발·배포·관리를 돕는 Agent Toolkit for AWS</span>
       <span class="item-meta">3,006</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">Official, AWS-supported MCP servers, skills, and plugins to help AI agents build on AWS</div>
-      <div class="item-link"><a href="https://github.com/aws/agent-toolkit-for-aws" target="_blank" rel="noopener">aws/agent-toolkit-for-aws</a> &rarr;</div>
+      <div class="item-summary">AI 코딩 에이전트가 AWS 서비스를 활용하도록 도구·지식·가드레일을 제공하는 툴킷을 소개한다.<br>- Claude Code, Codex, Cursor, Devin, Kiro, fx 등 기존 코딩 에이전트와 함께 사용할 수 있다.<br>- 터미널에서 AWS CLI 명령어 `aws configure agent-toolkit`으로 설정할 수 있다.<br>- Claude Code에서는 공식 Anthropic 마켓플레이스의 `aws-core` 플러그인을 설치해 서비스 선택, CDK/CloudFormation, 서버리스, 컨테이너, 스토리지, 관측성, 결제, SDK 사용, 배포를 지원받을 수 있다.</div>
+      <div class="item-link"><a href="https://github.com/aws/agent-toolkit-for-aws" target="_blank" rel="noopener">AWS 애플리케이션 개발·배포·관리를 돕는 Agent Toolkit for AWS</a> &rarr;</div>
     </div>
   </details>
 </div><div class="item">
@@ -350,20 +455,20 @@
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">Anti-AI-slop design skill for Claude Code, Cursor, and Codex.</div>
+      <div class="item-summary">Hallmark는 Claude Code, Codex, Cursor, OpenCode에서 AI가 만든 티를 줄이는 디자인 스킬이다.<br>- 48개 테마 중 3개를 제시하며, 각 테마는 종이·서체·색상·표면·컴포넌트·질감과 완성된 페이지 예시를 포함한다.<br>- 방문자의 목적에 맞춰 페이지를 구성하고, 실제 브라우저에서 반복적인 디자인 패턴과 실제로 전송되지 않는 폼 등을 검사한다. 기존 작업 맥락을 공유하지 않는 검토자가 최종 검토한다.<br>- 검증 기준은 3단계다. Floor 위반은 출시를 막고, Reflex는 근거를 기록하면 예외를 허용하며, Finish는 완성도를 점검하되 출시를 막지 않는다.</div>
       <div class="item-link"><a href="https://github.com/Nutlope/hallmark" target="_blank" rel="noopener">Nutlope/hallmark</a> &rarr;</div>
     </div>
   </details>
 </div><div class="item">
   <details>
     <summary>
-      <span class="item-name">luongnv89/claude-howto</span>
+      <span class="item-name">luongnv89/claude-howto: 주말 동안 익히는 Claude Code</span>
       <span class="item-meta">44,257</span>
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">A visual, example-driven guide to Claude Code — from basic concepts to advanced agents, with copy-paste templates that bring immediate value.</div>
-      <div class="item-link"><a href="https://github.com/luongnv89/claude-howto" target="_blank" rel="noopener">luongnv89/claude-howto</a> &rarr;</div>
+      <div class="item-summary">Claude Code의 기본 실행부터 에이전트·훅·스킬·MCP 서버 활용까지 안내하는 학습 가이드다.<br>- 시각적 튜토리얼, 복사해 사용할 수 있는 템플릿, 단계별 학습 경로를 제공한다.<br>- 15분 시작 가이드, 수준별 시작 지점 안내, 기능 카탈로그를 제공한다.<br>- 저장소 버전은 2.1.302이며, Claude Code 2.1 이상을 명시한다.</div>
+      <div class="item-link"><a href="https://github.com/luongnv89/claude-howto" target="_blank" rel="noopener">luongnv89/claude-howto: 주말 동안 익히는 Claude Code</a> &rarr;</div>
     </div>
   </details>
 </div><div class="item">
@@ -374,7 +479,7 @@
       <span class="item-toggle" aria-hidden="true"></span>
     </summary>
     <div class="item-body">
-      <div class="item-summary">The design language that makes your AI harness better at design.</div>
+      <div class="item-summary">Impeccable은 AI 코딩 에이전트의 프런트엔드 디자인을 돕는 스킬과 명령어, 탐지 규칙을 제공한다.<br>- `/impeccable init`으로 대상 사용자, 목적, 운영 맥락, 제약, 말투, 근거를 PRODUCT.md에 기록해 이후 명령어에서 활용한다.<br>- polish, audit, critique, distill, animate, bolder, quieter 등 24개 명령어로 AI에 디자인 작업을 지시한다.<br>- 62개의 결정론적 탐지 규칙과 LLM 기반 비평 검사를 제공하며, CLI와 브라우저 확장은 LLM이나 API 키 없이 결정론적 규칙을 실행한다.</div>
       <div class="item-link"><a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener">pbakaus/impeccable</a> &rarr;</div>
     </div>
   </details>
