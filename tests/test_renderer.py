@@ -175,3 +175,34 @@ def test_weekly_page_without_take_still_renders():
     html = render_weekly_page(data)
     assert html.startswith("<!DOCTYPE html>")
     assert "2026-08-17.html" in html
+
+
+def test_summary_markdown_links_show_only_escaped_labels():
+    from renderer import render_weekly_page, render_monthly_page
+    prose = '앞 [<문서> & 설명](https://inline-prose.test/Foo_(bar)) 뒤'
+    take = {'headline': prose, 'body': prose,
+            'refs': [{'text': '근거', 'url': 'https://evidence.test'}],
+            'picks': [{'text': '근거', 'url': 'https://evidence.test', 'why': prose}]}
+    pages = [
+        render_daily_page(dict(SAMPLE_DATA, today_take=take)),
+        render_weekly_page(dict(WEEK_DATA, week_take=take)),
+        render_monthly_page({'month_id': '2026-05', 'month_take': take, 'weeks': []}),
+        render_index_page([{'date': '2026-05-31', 'highlights': [prose, prose]}],
+                          {'2026-05': take}),
+    ]
+    for html in pages:
+        assert '앞 &lt;문서&gt; &amp; 설명 뒤' in html
+        assert 'https://inline-prose.test' not in html
+        assert '[&lt;문서&gt;' not in html
+        assert '<문서>' not in html
+    for html in pages[:3]:
+        assert 'href="https://evidence.test"' in html
+
+
+def test_item_summary_links_are_plain_text_and_normal_parentheses_remain():
+    from renderer import _item_html
+    html = _item_html('T', 'https://source.test', '',
+                      '[문서](https://example.com/doc) 실행 비용 (토큰 + 지연)은 유지된다')
+    assert '문서 실행 비용 (토큰 + 지연)은 유지된다' in html
+    assert 'https://example.com' not in html
+    assert 'href="https://source.test"' in html

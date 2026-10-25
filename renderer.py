@@ -1,3 +1,4 @@
+import re
 from collections import defaultdict
 
 _FAVICON = """<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -264,6 +265,11 @@ _MONTH_NAMES = {"01":"Jan","02":"Feb","03":"Mar","04":"Apr","05":"May","06":"Jun
 def _e(s: str) -> str:
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
+def _prose(s: str) -> str:
+    # 요약문은 링크의 표시 문구만 남기고 HTML로 해석되지 않도록 이스케이프한다.
+    text = re.sub(r"\[([^\]]+)\]\(https?://(?:[^()\s]|\([^()\s]*\))*\)", r"\1", s)
+    return _e(text)
+
 def _item_html(name: str, url: str, meta: str, summary: str,
                name_ko: str = "", svg: str = "", important: bool = False) -> str:
     display_name = name_ko if name_ko and name_ko.strip() else name
@@ -284,7 +290,7 @@ def _item_html(name: str, url: str, meta: str, summary: str,
     if svg and svg.strip():
         body += f'<div class="item-diagram">{svg}</div>'
     if summary and summary.strip():
-        body += f'<div class="item-summary">{_e(summary).replace(chr(10), "<br>")}</div>'
+        body += f'<div class="item-summary">{_prose(summary).replace(chr(10), "<br>")}</div>'
 
     # 제목을 <summary> 안에서 링크로 두면 클릭이 펼침과 충돌하므로,
     # 접힌 헤더에는 텍스트만 두고 펼친 본문 하단에 원문 링크를 둔다.
@@ -354,17 +360,17 @@ def render_daily_page(data: dict) -> str:
                 f'<a href="{r["url"]}" target="_blank" rel="noopener">{_e(r["text"])}</a>'
                 if r.get("url") else _e(r["text"]) for r in take["refs"])
             refs = f'<div class="take-refs"><span>근거</span>{links_html}</div>'
-        body_html = f'<p class="take-body">{_e(take["body"])}</p>' if take.get("body") else ""
+        body_html = f'<p class="take-body">{_prose(take["body"])}</p>' if take.get("body") else ""
         sections += _section_html("highlights", "★", "오늘의 해석",
-            f'<div class="take"><p class="take-headline">{_e(take["headline"])}</p>'
+            f'<div class="take"><p class="take-headline">{_prose(take["headline"])}</p>'
             f'{body_html}{refs}</div>{audio}')
     elif highlights:
         links = data.get("highlight_links") or []
         rows = ""
         for n, h in enumerate(highlights):
             url = links[n].get("url", "") if n < len(links) else ""
-            body = (f'<a href="{url}" target="_blank" rel="noopener">{_e(h)}</a>'
-                    if url else _e(h))
+            body = (f'<a href="{url}" target="_blank" rel="noopener">{_prose(h)}</a>'
+                    if url else _prose(h))
             rows += f'<li>{body}</li>'
         sections += _section_html("highlights", "★", "오늘의 하이라이트",
             f'<ul class="highlight-list">{rows}</ul>{audio}')
@@ -461,12 +467,12 @@ def _period_take_html(take: dict | None, title: str) -> str:
     take = take or {}
     if not take.get("headline"):
         return ""
-    body = f'<p class="take-body">{_e(take["body"])}</p>' if take.get("body") else ""
+    body = f'<p class="take-body">{_prose(take["body"])}</p>' if take.get("body") else ""
     picks = ""
     if take.get("picks"):
         rows = "".join(
             f'<li><a href="{p["url"]}" target="_blank" rel="noopener">{_e(p.get("text",""))}</a>'
-            + (f'<span class="pick-why">{_e(p["why"])}</span>' if p.get("why") else "")
+            + (f'<span class="pick-why">{_prose(p["why"])}</span>' if p.get("why") else "")
             + "</li>"
             for p in take["picks"] if p.get("url"))
         if rows:
@@ -476,7 +482,7 @@ def _period_take_html(take: dict | None, title: str) -> str:
     <span class="section-icon">★</span>
     <span class="section-title">{title}</span>
   </div>
-  <div class="take"><p class="take-headline">{_e(take["headline"])}</p>{body}{picks}</div>
+  <div class="take"><p class="take-headline">{_prose(take["headline"])}</p>{body}{picks}</div>
 </div>"""
 
 
@@ -566,10 +572,10 @@ def render_index_page(entries: list[dict], month_takes: dict | None = None) -> s
 
         mt = (month_takes or {}).get(mid) or {}
         if mt.get("headline"):
-            mt_body = f'<p class="m-take-body">{_e(mt["body"])}</p>' if mt.get("body") else ""
+            mt_body = f'<p class="m-take-body">{_prose(mt["body"])}</p>' if mt.get("body") else ""
             body += (f'<a class="m-take" href="./{mid}.html">'
                      f'<span class="m-take-label">이 달의 해석</span>'
-                     f'<p class="m-take-headline">{_e(mt["headline"])}</p>'
+                     f'<p class="m-take-headline">{_prose(mt["headline"])}</p>'
                      f'{mt_body}<span class="m-take-more">월간 페이지 &rarr;</span></a>')
 
         for wid in wids:
@@ -589,8 +595,8 @@ def render_index_page(entries: list[dict], month_takes: dict | None = None) -> s
             hl = []
             for we in week_entries:
                 hl.extend(h for h in (we.get("highlights") or []) if h)
-            a = _e(hl[0]) if hl else f"{len(week_entries)}일치 기록"
-            b = f'<div class="note-b">{_e(hl[1])}</div>' if len(hl) > 1 else ""
+            a = _prose(hl[0]) if hl else f"{len(week_entries)}일치 기록"
+            b = f'<div class="note-b">{_prose(hl[1])}</div>' if len(hl) > 1 else ""
 
             body += f"""<a class="note" href="./{wid}.html">
   <div class="note-body">
