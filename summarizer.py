@@ -1,6 +1,10 @@
 import json
+import os
 import re
+import signal
 import subprocess
+from pathlib import Path
+from tempfile import TemporaryDirectory
 from datetime import datetime, timedelta
 
 from config import COLLECT_DAYS
@@ -65,25 +69,41 @@ FILTER_PROMPT = """다음 AI/ML 논문 목록에서 오늘 가장 주목할 만�
 
 {papers_list}"""
 
-def _run_claude(prompt: str, timeout: int = 120) -> str:
-    # RSS·스크레이핑 원문에 널 바이트가 섞여 들어오면 subprocess 가 exec 에 넘길 때
-    # ValueError 로 죽는다(널 바이트는 argv 에 담을 수 없다). 외부 콘텐츠가 이 함수를
-    # 거쳐 프로세스 경계를 넘는 지점이라 여기서 한 번만 걸러낸다.
+LLM_TIMEOUT = 600
+
+
+def _run_codex(prompt: str, timeout: int = LLM_TIMEOUT) -> str:
     prompt = prompt.replace("\x00", "")
     try:
-        result = subprocess.run(
-            ["claude", "-p", prompt, "--model", "claude-haiku-4-5-20251001"],
-            capture_output=True, text=True, timeout=timeout
-        )
-        if result.returncode != 0:
-            print(f"[claude] 실패(rc={result.returncode}): {result.stderr.strip()[:200]}")
-            return ""
-        return result.stdout.strip()
+        # 호출별 파일에서 최종 응답만 읽어 진행 로그가 JSON에 섞이지 않게 한다.
+        with TemporaryDirectory(prefix="trending-codex-") as temp_dir:
+            output_path = Path(temp_dir) / "response.txt"
+            process = subprocess.Popen(
+                ["codex", "exec", "--model", "gpt-6.1-sol",
+                 "--sandbox", "read-only", "--ephemeral", "--color", "never",
+                 "--output-last-message", str(output_path), "-"],
+                stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                text=True, start_new_session=True,
+            )
+            try:
+                _, stderr = process.communicate(input=prompt, timeout=timeout)
+            except BaseException:
+                # 타임아웃·배치 중단 시 npm 실행기와 네이티브 자식을 함께 종료한다.
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                process.communicate()
+                raise
+            if process.returncode != 0:
+                print(f"[codex] 실패(rc={process.returncode}): {stderr.strip()[:200]}")
+                return ""
+            return output_path.read_text(encoding="utf-8").strip()
     except subprocess.TimeoutExpired:
-        print(f"[claude] 타임아웃({timeout}s)")
+        print(f"[codex] 타임아웃({timeout}s)")
         return ""
-    except ValueError as e:
-        print(f"[claude] 호출 실패: {e}")
+    except (OSError, ValueError) as e:
+        print(f"[codex] 호출 실패: {e}")
         return ""
 
 def translate_title(title: str) -> str:
@@ -92,12 +112,12 @@ def translate_title(title: str) -> str:
     ascii_ratio = sum(1 for c in title if ord(c) < 128) / max(len(title), 1)
     if ascii_ratio < 0.6:
         return title
-    return _run_claude(TRANSLATE_TITLE_PROMPT.format(title=title), timeout=60)
+    return _run_codex(TRANSLATE_TITLE_PROMPT.format(title=title), timeout=LLM_TIMEOUT)
 
 def summarize_item(title: str, content: str) -> str:
     if not content or len(content.strip()) < 150:
         return ""
-    return _run_claude(SUMMARIZE_PROMPT.format(title=title, content=content[:2000]))
+    return _run_codex(SUMMARIZE_PROMPT.format(title=title, content=content[:2000]))
 
 _JSON_FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.S)
 _JSON_OBJ = re.compile(r"\{.*\}", re.S)
@@ -125,11 +145,11 @@ def _recent_desc(today: str, days: int) -> str:
 
 def analyze_item(title: str, content: str, pub_hint: str, today: str,
                  date_verified: bool = False, days: int = COLLECT_DAYS) -> dict:
-    """제목 번역 + 핵심 요약을 claude 호출 한 번으로 처리한다.
+    """제목 번역 + 핵심 요약을 Codex 호출 한 번으로 처리한다.
     date_verified=False(피드에서 날짜를 못 읽은 경우)일 때만 날짜 판정까지 함께 시킨다."""
     content = (content or "")[:1500]
     if date_verified:
-        raw = _run_claude(SUMMARIZE_ONLY_PROMPT.format(title=title, content=content), timeout=120)
+        raw = _run_codex(SUMMARIZE_ONLY_PROMPT.format(title=title, content=content), timeout=LLM_TIMEOUT)
         parsed = _parse_json(raw)
         if parsed is None:
             return dict(_SAFE_DEFAULT, is_today=True)
@@ -140,10 +160,10 @@ def analyze_item(title: str, content: str, pub_hint: str, today: str,
             "summary": str(parsed.get("summary") or ""),
         }
 
-    raw = _run_claude(ANALYZE_PROMPT.format(
+    raw = _run_codex(ANALYZE_PROMPT.format(
         today=today, recent_desc=_recent_desc(today, days),
         pub_hint=pub_hint or "unknown",
-        title=title, content=content), timeout=120)
+        title=title, content=content), timeout=LLM_TIMEOUT)
     data = _parse_json(raw)
     if data is None:
         return dict(_SAFE_DEFAULT)
@@ -160,7 +180,7 @@ HIGHLIGHT_PROMPT = """오늘의 개발/기술 트렌드 항목들을 보고, 가
 
 {items_text}"""
 
-TAKE_TIMEOUT = 240   # 항목 20건을 한 번에 다루므로 넉넉히
+TAKE_TIMEOUT = LLM_TIMEOUT
 
 TODAY_TAKE_PROMPT = """아래는 오늘 수집된 기술 글 목록이야.
 개별 글을 요약하지 말고, 이 글들을 가로질러 읽었을 때 드러나는 흐름 하나를 짚어줘.
@@ -238,7 +258,7 @@ def generate_today_take(data: dict) -> dict:
     # 실패하면 페이지에서 해석과 별표가 통째로 빠지므로 한 번 재시도한다.
     parsed, headline = None, ""
     for attempt in range(2):
-        parsed = _parse_json(_run_claude(prompt, timeout=TAKE_TIMEOUT))
+        parsed = _parse_json(_run_codex(prompt, timeout=TAKE_TIMEOUT))
         headline = str((parsed or {}).get("headline") or "").strip() if isinstance(parsed, dict) else ""
         if headline:
             break
@@ -283,7 +303,7 @@ def generate_highlight_links(data: dict) -> list[dict]:
     if not cands:
         return []
     items_text = "\n".join(f"{n + 1}. [{c['source']}] {c['title']}" for n, c in enumerate(cands))
-    response = _run_claude(HIGHLIGHT_LINK_PROMPT.format(items_text=items_text), timeout=90)
+    response = _run_codex(HIGHLIGHT_LINK_PROMPT.format(items_text=items_text), timeout=LLM_TIMEOUT)
     out, seen = [], set()
     for line in (response or "").splitlines():
         line = line.strip()
@@ -317,7 +337,7 @@ def generate_highlights(data: dict) -> list[str]:
     if not items:
         return []
     items_text = "\n".join(items[:20])
-    response = _run_claude(HIGHLIGHT_PROMPT.format(items_text=items_text), timeout=90)
+    response = _run_codex(HIGHLIGHT_PROMPT.format(items_text=items_text), timeout=LLM_TIMEOUT)
     return [line.strip() for line in response.splitlines() if line.strip()][:5]
 
 def filter_important_papers(papers: list[dict], max_items: int = 5) -> list[dict]:
@@ -327,7 +347,7 @@ def filter_important_papers(papers: list[dict], max_items: int = 5) -> list[dict
         f"{i+1}. {p['title']}: {p['abstract'][:200]}"
         for i, p in enumerate(papers)
     )
-    response = _run_claude(FILTER_PROMPT.format(max_items=max_items, papers_list=papers_list), timeout=90)
+    response = _run_codex(FILTER_PROMPT.format(max_items=max_items, papers_list=papers_list), timeout=LLM_TIMEOUT)
     try:
         indices = [int(x.strip()) - 1 for x in response.split(",") if x.strip().isdigit()]
         return [papers[i] for i in indices if 0 <= i < len(papers)]
@@ -359,7 +379,7 @@ def _period_take(entries: list[dict], period_desc: str, unit: str, pick_n: int =
         items_text="\n".join(lines))
     parsed, headline = None, ""
     for attempt in range(2):
-        parsed = _parse_json(_run_claude(prompt, timeout=TAKE_TIMEOUT))
+        parsed = _parse_json(_run_codex(prompt, timeout=TAKE_TIMEOUT))
         headline = str((parsed or {}).get("headline") or "").strip() if isinstance(parsed, dict) else ""
         if headline:
             break

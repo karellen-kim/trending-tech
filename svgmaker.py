@@ -8,7 +8,7 @@ import json
 import re
 from concurrent.futures import ThreadPoolExecutor
 
-from summarizer import _run_claude, _parse_json
+from summarizer import _run_codex, _parse_json, LLM_TIMEOUT
 
 DIAGRAM_PROMPT = """아래 글의 핵심을 보여주는 다이어그램 명세를 JSON으로 만들어줘.
 글을 안 읽은 사람이 그림만 보고 핵심을 알 수 있어야 한다.
@@ -340,7 +340,7 @@ def generate_concept_svg(title: str, content: str) -> str:
     if not content or len(content.strip()) < MIN_CONTENT:
         return ""
     source = f"{title}\n{content}"
-    raw = _run_claude(DIAGRAM_PROMPT.format(title=title, content=content[:2000]), timeout=180)
+    raw = _run_codex(DIAGRAM_PROMPT.format(title=title, content=content[:2000]), timeout=LLM_TIMEOUT)
     spec = _parse_json(raw)
     if not isinstance(spec, dict):
         print(f"[다이어그램] 명세 파싱 실패: {title[:40]}")

@@ -1,3 +1,4 @@
+import re
 import requests
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -11,7 +12,11 @@ def _fetch_readme(path: str) -> str:
     try:
         resp = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
         if resp.status_code == 200:
-            return resp.text[:README_MAX_CHARS]
+            # Badge markup and link destinations must not consume the model's content budget.
+            text = BeautifulSoup(resp.text, "html.parser").get_text(" ", strip=True)
+            text = re.sub(r"!\[[^\]]*\]\([^)]*\)", "", text)
+            text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)
+            return text.strip()[:README_MAX_CHARS]
     except Exception:
         pass
     return ""

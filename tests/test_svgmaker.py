@@ -161,18 +161,18 @@ def test_long_label_is_truncated():
 
 
 def test_generate_returns_empty_on_none_type(monkeypatch):
-    monkeypatch.setattr(svgmaker, "_run_claude", lambda p, **kw: '{"type": "none"}')
+    monkeypatch.setattr(svgmaker, "_run_codex", lambda p, **kw: '{"type": "none"}')
     assert svgmaker.generate_concept_svg("T", "본문" * 200) == ""
 
 
 def test_generate_returns_empty_on_garbage(monkeypatch):
-    monkeypatch.setattr(svgmaker, "_run_claude", lambda p, **kw: "모델이 딴소리를 함")
+    monkeypatch.setattr(svgmaker, "_run_codex", lambda p, **kw: "모델이 딴소리를 함")
     assert svgmaker.generate_concept_svg("T", "본문" * 200) == ""
 
 
 def test_generate_handles_code_fence(monkeypatch):
     import json
-    monkeypatch.setattr(svgmaker, "_run_claude",
+    monkeypatch.setattr(svgmaker, "_run_codex",
                         lambda p, **kw: "```json\n" + json.dumps(FLOW) + "\n```")
     src = "클라이언트가 Redis 캐시를 조회하고 미스면 PostgreSQL 로 위임한다. " * 6
     out = svgmaker.generate_concept_svg("요청 처리 경로", src)
@@ -214,7 +214,7 @@ def test_generate_drops_ungrounded_spec(monkeypatch):
     fake = {"type": "flow", "title": "t", "caption": "c",
             "nodes": [{"id": "a", "label": "ADOT 콜렉터"}, {"id": "b", "label": "CloudWatch"}],
             "edges": [{"from": "a", "to": "b", "label": "전송"}]}
-    monkeypatch.setattr(svgmaker, "_run_claude", lambda p, **kw: json.dumps(fake))
+    monkeypatch.setattr(svgmaker, "_run_codex", lambda p, **kw: json.dumps(fake))
     assert svgmaker.generate_concept_svg("Kafka 리밸런싱", SOURCE * 2) == ""
 
 

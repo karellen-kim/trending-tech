@@ -45,7 +45,7 @@ def _merge_community(hn: list[dict], reddit: list[dict],
 
 
 def _analyze_items(items: list[dict], content_key: str, filter_today: bool = True) -> list[dict]:
-    """날짜 판정·제목 번역·요약을 항목당 claude 호출 1회로 처리하고,
+    """날짜 판정·제목 번역·요약을 항목당 Codex 호출 1회로 처리하고,
     오늘 글이 아닌 항목은 리스트에서 제외한다."""
     if not items:
         return items
@@ -378,13 +378,13 @@ def git_commit_push(date_str: str, month_id: str = "") -> None:
 
 
 def _timeout_handler(signum, frame):
-    print("[TIMEOUT] 1시간 초과, 강제 종료")
+    print("[TIMEOUT] 6시간 초과, 강제 종료")
     raise SystemExit(1)
 
 
 def main():
     signal.signal(signal.SIGALRM, _timeout_handler)
-    signal.alarm(3600)
+    signal.alarm(6 * 3600)
 
     today = now_kst().date()
     today_str = str(today)
