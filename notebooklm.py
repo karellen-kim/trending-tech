@@ -11,8 +11,10 @@
 최초 1회는 `python -m notebooklm login` 으로 창을 띄워 직접 로그인해야 한다.
 """
 import sys
+import json
+import re
 
-from config import (NOTEBOOKLM_PROFILE_DIR, NOTEBOOKLM_FORMAT,
+from config import (LOGS_DIR, NOTEBOOKLM_PROFILE_DIR, NOTEBOOKLM_FORMAT,
                     NOTEBOOKLM_LANGUAGE, NOTEBOOKLM_HEADLESS, NOTEBOOKLM_TIMEOUT)
 
 # 실제 화면에서 확인한 라벨. UI 언어가 영어일 수도 있어 둘 다 받는다.
@@ -140,18 +142,34 @@ def _dismiss_dialogs(page) -> None:
             continue
 
 
+def _click_source_button(page, labels) -> bool:
+    """배경 설명의 같은 문구가 아니라 실제 소스 버튼만 누른다."""
+    for label in labels:
+        try:
+            button = page.get_by_role("button", name=label, exact=False).first
+            button.wait_for(state="visible", timeout=2_000)
+            button.click()
+            return True
+        except Exception:
+            continue
+    return False
+
+
 def _open_source_dialog(page) -> bool:
-    """URL 입력 화면까지 진입한다.
-    빈 노트북은 ?addSource=true 로 소스 다이얼로그가 이미 열린 채 뜨고, 그 상태에서는
-    '출처 추가' 가 role=button 으로 노출되지 않아 누르려 하면 실패한다.
-    그래서 '웹사이트' 가 이미 보이면 곧바로 누른다."""
+    """이미 열린 URL 입력 화면을 보존하고 실제 소스 버튼으로 진입한다."""
+    for placeholder in _L["url_box"]:
+        try:
+            if page.get_by_placeholder(placeholder, exact=False).first.is_visible():
+                return True
+        except Exception:
+            continue
+    if _click_source_button(page, _L["website"]):
+        return True
     _dismiss_dialogs(page)
-    if _visible_any(page, _L["website"]):
-        return _click_any(page, _L["website"])
-    if not _click_any(page, _L["add_source"]):
+    if not _click_source_button(page, _L["add_source"]):
         return False
     page.wait_for_timeout(1_500)
-    return _click_any(page, _L["website"])
+    return _click_source_button(page, _L["website"])
 
 
 def _wait_studio_ready(page, timeout_ms: int = 25_000, step_ms: int = 1_000) -> None:
@@ -187,16 +205,32 @@ def _fill_urls(page, urls: list[str]) -> bool:
             return True
         except Exception:
             continue
+    # 배경의 웹 리서치 textarea에 URL을 넣으면 소스가 추가되지 않는다.
+    return False
+
+
+def _open_notebook(page, timeout_ms: int, notebook_url: str = "") -> str:
+    """복구 주소가 있으면 재사용하고 없을 때만 새 노트북을 만든다."""
+    if notebook_url:
+        page.goto(notebook_url, wait_until="domcontentloaded", timeout=timeout_ms)
+        return notebook_url
+    return _create_notebook(page, timeout_ms)
+
+
+def _capture_diagnostics(page, stage: str) -> None:
+    """실패한 화면의 상태를 배치 로그 디렉터리에 보존한다."""
+    LOGS_DIR.mkdir(exist_ok=True)
     try:
-        box = page.locator("textarea").first
-        box.wait_for(state="visible", timeout=5_000)
-        box.fill("\n".join(urls))
-        return True
-    except Exception:
-        return False
+        state = page.evaluate("""() => ({url: location.href, text: document.body.innerText,
+          buttons: [...document.querySelectorAll('button')].map(e => ({text:e.innerText, label:e.getAttribute('aria-label'),disabled:e.disabled})),
+          inputs: [...document.querySelectorAll('textarea,input')].map(e => ({placeholder:e.getAttribute('placeholder'),value:e.value}))})""")
+        (LOGS_DIR / f"notebook-{stage}.log").write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+        page.screenshot(path=str(LOGS_DIR / f"notebook-{stage}.png"), full_page=True)
+    except Exception as e:
+        print(f"[Notebook] 진단 기록 실패: {type(e).__name__}")
 
 
-def _run(urls: list[str], prompt: str, notebook_title: str = "") -> str:
+def _run(urls: list[str], prompt: str, notebook_title: str = "", notebook_url: str = "") -> str:
     from playwright.sync_api import sync_playwright
 
     with sync_playwright() as p:
@@ -216,11 +250,11 @@ def _run(urls: list[str], prompt: str, notebook_title: str = "") -> str:
                 print("[Notebook] 로그인이 필요하다. `python -m notebooklm login` 으로 먼저 로그인할 것")
                 return ""
 
-            # 하루치씩 나누기 위해 매번 새 노트북을 만든다 (한 노트북에 쌓으면 소스가 무한히 는다)
-            notebook_url = _create_notebook(page, ms)
+            # 날짜별 노트북을 만들고 복구할 때는 기존 주소에서 이어간다.
+            notebook_url = _open_notebook(page, ms, notebook_url)
             if not notebook_url:
                 return ""
-            print(f"[Notebook] 새 노트북 생성: {notebook_url}")
+            print(f"[Notebook] 노트북 준비: {notebook_url}", flush=True)
 
             page.wait_for_timeout(5_000)   # Angular 앱이 그려질 때까지 기다린다
             if not _open_source_dialog(page):
@@ -229,7 +263,9 @@ def _run(urls: list[str], prompt: str, notebook_title: str = "") -> str:
             if not _fill_urls(page, urls):
                 print("[Notebook] URL 입력란을 찾지 못했다")
                 return ""
+            _capture_diagnostics(page, "source-filled")
             if not _click_any(page, _L["insert"]):
+                _capture_diagnostics(page, "insert-failed")
                 print("[Notebook] '삽입' 버튼을 찾지 못했다")
                 return ""
 
@@ -263,6 +299,7 @@ def _run(urls: list[str], prompt: str, notebook_title: str = "") -> str:
                 print(f"[Notebook] 제목: {notebook_title}")
 
             # 생성이 실제로 시작됐는지 확인한다 (완료까지 기다리지는 않는다)
+            _capture_diagnostics(page, "audio-requested")
             body = page.inner_text("body")
             started = any(k in body for k in _L["generating"])
             print(f"[Notebook] 오디오 오버뷰 생성 {'시작됨' if started else '요청함'}: "
@@ -272,7 +309,8 @@ def _run(urls: list[str], prompt: str, notebook_title: str = "") -> str:
             ctx.close()
 
 
-def generate_audio_review(urls: list[str], title: str = "", date_str: str = "") -> str:
+def generate_audio_review(urls: list[str], title: str = "", date_str: str = "",
+                          notebook_url: str = "") -> str:
     """새 노트북을 만들어 링크를 올리고 오디오 오버뷰 생성을 시킨다.
     성공하면 노트북 주소, 실패하면 빈 문자열.
     제목은 "[Daily] YY.MM.DD 헤드라인" 으로 붙인다."""
@@ -283,10 +321,43 @@ def generate_audio_review(urls: list[str], title: str = "", date_str: str = "") 
               f"서로 어떤 흐름으로 이어지는지 짚어줘.") if title else ""
     notebook_title = _notebook_title(date_str, title) if date_str else ""
     try:
+        if notebook_url:
+            return _run(urls, prompt, notebook_title, notebook_url=notebook_url)
         return _run(urls, prompt, notebook_title)
     except Exception as e:
         print(f"[Notebook] 실패: {type(e).__name__}: {str(e)[:150]}")
         return ""
+
+
+def _audio_status(page) -> str:
+    """오디오 예약·생성 중·재생 가능 상태를 화면에서 구분한다."""
+    text = page.inner_text("body")
+    if "예약됨" in text or "Scheduled" in text:
+        return "scheduled"
+    if re.search(r"생성\s*중|Generating", text):
+        return "generating"
+    if page.locator("audio").count():
+        return "ready"
+    return "unknown"
+
+
+def inspect_audio_review(notebook_url: str) -> str:
+    """기존 노트북을 변경하지 않고 오디오 생성 상태만 확인한다."""
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as p:
+        ctx = p.chromium.launch_persistent_context(
+            user_data_dir=str(NOTEBOOKLM_PROFILE_DIR), headless=NOTEBOOKLM_HEADLESS,
+            args=["--disable-blink-features=AutomationControlled"],
+        )
+        try:
+            page = ctx.pages[0] if ctx.pages else ctx.new_page()
+            page.goto(notebook_url, wait_until="domcontentloaded", timeout=NOTEBOOKLM_TIMEOUT * 1000)
+            page.wait_for_timeout(6_000)
+            status = _audio_status(page)
+            _capture_diagnostics(page, "audio-status")
+            return status
+        finally:
+            ctx.close()
 
 
 def login() -> None:

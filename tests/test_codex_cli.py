@@ -115,3 +115,49 @@ def test_codex_timeout_kills_launcher_and_child(tmp_path):
                     pass
         for process in processes:
             process.wait()
+
+
+def test_required_timeout_is_typed_and_logged(capsys):
+    process = _process()
+    process.pid = 12345
+    process.communicate.side_effect = [subprocess.TimeoutExpired('codex', 600), ('', '')]
+    with patch('summarizer.subprocess.Popen', return_value=process), patch('summarizer.os.killpg'):
+        with pytest.raises(summarizer.LlmCallError) as error:
+            summarizer._run_codex('private input', strict=True, context='analyze:test')
+    assert error.value.kind == 'timeout'
+    output = capsys.readouterr().out
+    assert 'private input' not in output
+    assert '"event": "llm_call_finished"' in output
+    assert '"status": "timeout"' in output
+
+
+def test_cli_error_logs_redact_credentials_and_addresses(capsys):
+    process = _process(1, stderr='Bearer secret123 xoxb-123-456-abcdef person@example.com')
+    with patch('summarizer.subprocess.Popen', return_value=process):
+        with pytest.raises(summarizer.LlmCallError):
+            summarizer._run_codex('prompt', strict=True)
+    output = capsys.readouterr().out
+    assert 'secret123' not in output and 'xoxb-123' not in output and 'person@example.com' not in output
+    assert '[redacted]' in output
+
+
+def test_required_empty_final_message_fails():
+    def popen(args, **kwargs):
+        Path(args[args.index('--output-last-message') + 1]).write_text('  ')
+        return _process()
+    with patch('summarizer.subprocess.Popen', side_effect=popen):
+        with pytest.raises(summarizer.LlmCallError) as error:
+            summarizer._run_codex('prompt', strict=True)
+    assert error.value.kind == 'empty_response'
+
+
+@pytest.mark.parametrize('raw, secret', [
+    ('{"api_key":"demo-private-value"}', 'demo-private-value'),
+    ("{'refresh_token': 'private-token-value'}", 'private-token-value'),
+    ('Authorization: Basic ZGVtbzpwcml2YXRl', 'ZGVtbzpwcml2YXRl'),
+    ('{"authorization":"Bearer private bearer value"}', 'private bearer value'),
+])
+def test_redaction_covers_quoted_credentials(raw, secret):
+    clean = summarizer._redact_cli_error(raw)
+    assert secret not in clean
+    assert '[redacted]' in clean

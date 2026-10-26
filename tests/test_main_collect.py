@@ -76,8 +76,9 @@ def test_analyze_items_keeps_all_when_filter_off(monkeypatch):
     assert len(out) == 1
 
 
-def test_analyze_items_runs_in_parallel(monkeypatch):
+def test_analyze_items_honors_configured_parallelism(monkeypatch):
     import time
+    monkeypatch.setattr(main, "SUMMARY_WORKERS", 4)
     monkeypatch.setattr(main, "analyze_item", lambda *a, **kw: time.sleep(0.2) or {
         "is_today": True, "pub_date": "x", "title_ko": "한글", "summary": "요약"})
     items = [{"title": f"t{i}", "summary": "가" * 300, "pub_hint": "x"} for i in range(8)]

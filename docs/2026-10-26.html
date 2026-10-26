@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-10-26 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 아이템 (아코디언) ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1rem; cursor: pointer; list-style: none; }
+  .item details > summary::-webkit-details-marker { display: none; }
+  .item details > summary:hover .item-name { color: var(--accent-deep); }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
+  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
+  .item-body { padding: 0 1rem 1.2rem; }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
+  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
+    padding: 1rem 0.9rem 0.7rem;
+    /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
+    --accent: #b08a2a; --accent-wash: #f6f1e2; }
+  /* svg 인라인 max-width:100% 가 좁은 화면에서 그림을 1/3 로 압착해 글자를 뭉갠다.
+     원본 크기를 지키고 상자에서 옆으로 밀어 본다. */
+  .item-diagram svg { max-width: none !important; }
+  .item-diagram .diagram { margin: 0; padding: 0; border: none; background: none; color: var(--ink);
+    width: max-content; min-width: 100%; }
+  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
+  .item-diagram svg { height: auto; display: block; }
+  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
+    font-family: var(--serif); font-style: italic; font-size: 0.74rem; color: #7d7364; text-align: center; }
+  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
+  .item-link a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    .item details > summary { grid-template-columns: 1fr auto; }
+    /* 제목은 한 줄을 통째로 쓴다. 토글을 옆에 두면 그만큼 폭을 잃는다. */
+    .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
+    .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
+    .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
+
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-10-26</div>
+<h1><em>26</em> Oct 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn-reddit" class="nav-link">Hacker News & Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+
+  </div>
+  <div class="take"><p class="take-headline">AI 에이전트의 통제가 프롬프트 속 금지 지시에서 도구 호출과 스킬 설치를 검사하는 인프라로 옮겨가고 있다.</p><p class="take-body">Alibaba의 900회 실험에서는 금지 지시를 넣어도 다른 고객의 티켓 조회가 일부 통과했지만, 호출 직전 소유권 검사를 추가한 조건에서는 차단됐다. Flava의 공통 인증·접근 제어와 SkillSpector의 설치 전 보안 검사까지 함께 보면, 에이전트가 규칙을 지키리라는 기대를 실제로 무엇에 접근하고 무엇을 실행할 수 있는지 검증하는 운영 구조로 바꾸는 흐름이 드러난다.</p><div class="take-refs"><span>근거</span><a href="https://www.alibabacloud.com/blog/does-do-not-work-on-ai-agents-900-tests-with-agentrun-mcp-tool-hooks_603668" target="_blank" rel="noopener">AI 에이전트에게 '하지 마'라는 지시가 통할까? AgentRun MCP Tool Hooks로 진행한 900회 테스트</a> · <a href="https://techblog.lycorp.co.jp/ko/flava-mcp-hub-ai-infrastructure" target="_blank" rel="noopener">Flava MCP Hub가 걸어온 길: AI 시대를 위한 배관 공사</a> · <a href="https://github.com/NVIDIA/SkillSpector" target="_blank" rel="noopener">NVIDIA/SkillSpector</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/ef8a96db-6a44-403f-9a91-4ec0d867d295" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">2개</span>
+  </div>
+  <div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>Flava MCP Hub가 걸어온 길: AI 시대를 위한 배관 공사</span>
+      <span class="item-meta">LY Corp Tech</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><svg aria-label="팀별 인증·운영을 공통 플랫폼에 맡기고 Gateway를 자체 구현으로 전환" fill="none" font-family="inherit" role="img" style="width:480px;max-width:100%" viewbox="0 0 480 230" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="9" refy="5" viewbox="0 0 10 10"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path></marker></defs><text fill="currentColor" font-size="13" font-weight="700" text-anchor="middle" x="240" y="26">MCP 인증·운영의 공통화</text><text fill="currentColor" font-size="12" font-weight="700" opacity="0.75" text-anchor="middle" x="116" y="60">기존: 팀별 부담·오픈소스</text><rect fill="transparent" height="71" rx="4" stroke="currentColor" stroke-width="1.5" width="176" x="28" y="76"></rect><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="116" y="108">각 팀의 MCP</text><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="116" y="124">인증·운영</text><line marker-end="url(#ar)" stroke="currentColor" stroke-width="1.5" x1="116" x2="116" y1="147" y2="176"></line><rect fill="transparent" height="37" rx="4" stroke="currentColor" stroke-width="1.5" width="176" x="28" y="179"></rect><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="116" y="202">오픈소스 Gateway</text><text fill="currentColor" font-size="12" font-weight="700" opacity="0.75" text-anchor="middle" x="364" y="60">전환: 전사 공통·자체 구현</text><rect fill="var(--accent-wash, #f5f2ee)" height="71" rx="4" stroke="var(--accent, #e05c1a)" stroke-width="1.5" width="176" x="276" y="76"></rect><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="364" y="99">Flava MCP</text><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="364" y="116">Hub</text><text fill="var(--accent, #e05c1a)" font-size="11" text-anchor="middle" x="364" y="133">Flava 위·4층…</text><line marker-end="url(#ar)" stroke="currentColor" stroke-width="1.5" x1="364" x2="364" y1="147" y2="176"></line><rect fill="var(--accent-wash, #f5f2ee)" height="37" rx="4" stroke="var(--accent, #e05c1a)" stroke-width="1.5" width="176" x="276" y="179"></rect><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="364" y="202">자체 Gateway</text><line opacity="0.35" stroke="currentColor" stroke-dasharray="3 4" stroke-width="1" x1="240" x2="240" y1="50" y2="222"></line></svg></div><div class="item-summary">팀마다 반복하던 MCP 인증·운영 부담을 전사 공통 플랫폼으로 해결한 Flava MCP Hub의 설계와 전환 과정을 소개하는 글이다.<br>- Flava MCP Hub는 사내 공통 프라이빗 클라우드인 Flava 위에 구축한 전사 공통 MCP 플랫폼이다.<br>- 각 팀이 브라우저 콜백 처리, 토큰 캐시, 만료된 토큰 갱신 로직을 중복 구현하고 운영까지 부담하던 구조를 플랫폼이 대신 처리하도록 바꿨다.<br>- 내부 구조를 ‘4층 배관 모델’로 나누고, MCP 표준과 사내 인증의 간극을 해소한 방법 및 오픈소스 Gateway에서 자체 Gateway로 전환한 과정을 다룬다.</div>
+      <div class="item-link"><a href="https://techblog.lycorp.co.jp/ko/flava-mcp-hub-ai-infrastructure" target="_blank" rel="noopener">Flava MCP Hub가 걸어온 길: AI 시대를 위한 배관 공사</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>AI 에이전트에게 '하지 마'라는 지시가 통할까? AgentRun MCP Tool Hooks로 진행한 900회 테스트</span>
+      <span class="item-meta">Alibaba Cloud Blog</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">시스템 프롬프트의 금지 지시로 AI 에이전트의 고객별 티켓 접근을 제한할 수 있는지 시험한 글이다.<br>- 테스트에서는 가상의 고객 Acme Corp만 담당하는 지원 담당자 역할로 에이전트에 요청했다.<br>- 시스템 프롬프트에 'Acme Corp 이외의 고객에게 속한 티켓은 절대 읽지 말라'는 지시를 넣었다.<br>- 다른 가상 고객 Globex Inc의 티켓 T-1002를 요청하자 에이전트는 해당 티켓을 가져왔다. 글은 이를 IDOR 접근 제어 결함으로 설명한다.</div>
+      <div class="item-link"><a href="https://www.alibabacloud.com/blog/does-do-not-work-on-ai-agents-900-tests-with-agentrun-mcp-tool-hooks_603668" target="_blank" rel="noopener">AI 에이전트에게 '하지 마'라는 지시가 통할까? AgentRun MCP Tool Hooks로 진행한 900회 테스트</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">1개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Seam Cutter</span>
+      <span class="item-meta">Simon Willison</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">이미지 가운데 부분을 잘라낼 수 있는 자르기 도구 Seam Cutter를 소개하는 글.<br>- 이미지를 가로 또는 세로 방향으로 나눌 수 있다.<br>- 나눈 양쪽 부분을 서로에 대해 밀어 위치를 조정할 수 있다.<br>- 이 방식으로 이미지 중간의 특정 구간을 제거할 수 있다.</div>
+      <div class="item-link"><a href="https://simonwillison.net/2026/Oct/25/seam-cutter/" target="_blank" rel="noopener">Seam Cutter</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">HyScale: 학습형 희소 어텐션을 위한 장문 컨텍스트 학습 확장</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><svg aria-label="전체 점수 생성과 반복 선택이 병목이며, 선택 결과는 인덱스다" fill="none" font-family="inherit" role="img" style="width:656px;max-width:100%" viewbox="0 0 656 135" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="9" refy="5" viewbox="0 0 10 10"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path></marker></defs><text fill="currentColor" font-size="13" font-weight="700" text-anchor="middle" x="328" y="26">HyScale의 핵심 통찰</text><rect fill="transparent" height="71" rx="4" stroke="currentColor" stroke-width="1.5" width="176" x="16" y="50"></rect><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="104" y="82">전체 점수 테이블</text><text fill="var(--accent, #e05c1a)" font-size="11" text-anchor="middle" x="104" y="98">쿼리마다 모든 이전…</text><rect fill="transparent" height="71" rx="4" stroke="currentColor" stroke-width="1.5" width="176" x="240" y="50"></rect><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="328" y="73">토큰 선택 → 인덱스</text><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="328" y="90">집합</text><text fill="var(--accent, #e05c1a)" font-size="11" text-anchor="middle" x="328" y="107">재계산 때 선택 반복</text><rect fill="transparent" height="71" rx="4" stroke="currentColor" stroke-width="1.5" width="176" x="464" y="50"></rect><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="552" y="82">희소 어텐션</text><text fill="var(--accent, #e05c1a)" font-size="11" text-anchor="middle" x="552" y="98">k개 토큰만 읽음</text><line marker-end="url(#ar)" stroke="currentColor" stroke-width="1.5" x1="192" x2="237" y1="86" y2="86"></line><rect fill="var(--paper, #fff)" height="15" rx="2" stroke="none" width="85" x="174" y="70"></rect><text fill="currentColor" font-size="11" opacity="0.8" text-anchor="middle" x="216" y="80">점수로 k개를 고른다</text><line marker-end="url(#ar)" stroke="currentColor" stroke-width="1.5" x1="416" x2="461" y1="86" y2="86"></line><rect fill="var(--paper, #fff)" height="15" rx="2" stroke="none" width="92" x="394" y="70"></rect><text fill="currentColor" font-size="11" opacity="0.8" text-anchor="middle" x="440" y="80">인덱스로 토큰을 읽는다</text></svg></div><div class="item-summary">HyScale은 학습형 희소 어텐션을 위한 장문 컨텍스트 학습 시스템이다.<br>- 희소 어텐션은 k개의 토큰만 읽지만, 선택 과정은 각 쿼리마다 이전의 모든 토큰에 점수를 매겨 학습 병목이 된다.<br>- 기존 시스템은 전체 점수 테이블을 메모리에 생성하고, 재계산 과정에서 토큰 선택을 반복한다.<br>- 핵심 통찰은 선택 결과가 활성값이 아니라 인덱스 집합이라는 점이다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2610.32057" target="_blank" rel="noopener">HyScale: 학습형 희소 어텐션을 위한 장문 컨텍스트 학습 확장</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Ψ-0.6: 통합 시각·언어 세계 모델의 적응형 사고 흐름</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-diagram"><svg aria-label="네 기능을 과제에 맞게 조합하고 이미지와 텍스트를 번갈아 쓴다" fill="none" font-family="inherit" role="img" style="width:656px;max-width:100%" viewbox="0 0 656 187" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ar" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="9" refy="5" viewbox="0 0 10 10"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path></marker></defs><text fill="currentColor" font-size="13" font-weight="700" text-anchor="middle" x="328" y="26">Ψ-0.6의 통합 추론</text><rect fill="transparent" height="54" rx="4" stroke="currentColor" stroke-width="1.5" width="176" x="16" y="50"></rect><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="104" y="73">지각·언어·기하·시뮬레</text><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="104" y="90">이션</text><rect fill="transparent" height="54" rx="4" stroke="currentColor" stroke-width="1.5" width="176" x="240" y="50"></rect><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="328" y="82">사고 흐름</text><rect fill="transparent" height="54" rx="4" stroke="currentColor" stroke-width="1.5" width="176" x="464" y="50"></rect><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="552" y="82">이미지</text><rect fill="transparent" height="37" rx="4" stroke="currentColor" stroke-width="1.5" width="176" x="16" y="136"></rect><text fill="currentColor" font-size="13" font-weight="600" text-anchor="middle" x="104" y="159">텍스트</text><line marker-end="url(#ar)" stroke="currentColor" stroke-width="1.5" x1="192" x2="237" y1="77" y2="77"></line><rect fill="var(--paper, #fff)" height="15" rx="2" stroke="none" width="85" x="174" y="61"></rect><text fill="currentColor" font-size="11" opacity="0.8" text-anchor="middle" x="216" y="72">과제에 맞춰 조합한다</text><line marker-end="url(#ar)" stroke="currentColor" stroke-width="1.5" x1="416" x2="461" y1="77" y2="77"></line><rect fill="var(--paper, #fff)" height="15" rx="2" stroke="none" width="71" x="404" y="61"></rect><text fill="currentColor" font-size="11" opacity="0.8" text-anchor="middle" x="440" y="72">이미지를 사용한다</text><path d="M 552 104 L 552 120 L 104 120 L 104 133" marker-end="url(#ar)" stroke="currentColor" stroke-width="1.5"></path><rect fill="var(--paper, #fff)" height="15" rx="2" stroke="none" width="71" x="292" y="104"></rect><text fill="currentColor" font-size="11" opacity="0.8" text-anchor="middle" x="328" y="115">텍스트로 전환한다</text><path d="M 104 173 L 104 112 L 552 112 L 552 47" marker-end="url(#ar)" stroke="currentColor" stroke-width="1.5"></path><rect fill="var(--paper, #fff)" height="15" rx="2" stroke="none" width="71" x="292" y="96"></rect><text fill="currentColor" font-size="11" opacity="0.8" text-anchor="middle" x="328" y="106">이미지로 전환한다</text></svg></div><div class="item-summary">지각·언어·기하·시뮬레이션을 하나의 추론 과정으로 결합하는 통합 시각·언어 세계 모델 Ψ-0.6을 소개한다.<br>- 과제에 맞춰 지각, 언어, 기하, 시뮬레이션을 적응적으로 조합한다.<br>- 이 기능들이 공유하는 추론 과정을 ‘streams of thought(사고 흐름)’라고 부른다.<br>- 사고 흐름 안에서 이미지와 텍스트를 번갈아 사용한다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2610.32177" target="_blank" rel="noopener">Ψ-0.6: 통합 시각·언어 세계 모델의 적응형 사고 흐름</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">MXFP4로 MoE LLM 학습하기: BF16과의 격차를 좁힌 방법</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">MXFP4 형식으로 MoE LLM을 학습하는 ALTO 학습 레시피를 소개하는 글.<br>- ALTO는 오픈소스로 공개된 학습 레시피다.<br>- 학습 대상은 200억 개의 파라미터를 가진 MoE 모델 GPT-OSS-20B다.<br>- MLPerf Small MoE Training 벤치마크에서 MXFP4 microscaling 형식을 사용한다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2610.32229" target="_blank" rel="noopener">MXFP4로 MoE LLM 학습하기: BF16과의 격차를 좁힌 방법</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">양방향 메모리-스킬 학습을 통한 평생 컨텍스트 적응</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">평생 LLM 에이전트의 컨텍스트 적응을 위한 MemCryst 프레임워크를 소개하는 글이다.<br>- 메모리는 과거 경험을 제공하지만, 검색한 기록에서 새 과제의 해결 방법을 추론하는 작업은 여전히 필요할 수 있다.<br>- 스킬은 재사용 가능한 절차를 제공하지만, 적용에 필요한 과제별 사실이 빠져 있을 수 있다.<br>- 검색된 메모리와 스킬은 에이전트의 행동을 바꾸며, 이후 학습에 사용할 경험에도 영향을 준다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2610.32295" target="_blank" rel="noopener">양방향 메모리-스킬 학습을 통한 평생 컨텍스트 적응</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">확장 가능한 사전학습과 지속 학습을 위한 중첩 희소성</span>
+      <span class="item-meta">arXiv</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">MoE transformer의 attention 연산을 일반화하는 대안적 조건부 계산 메커니즘을 탐구한 글.<br>- MoE transformer는 각 순전파에서 모델 가중치의 희소한 일부만 사용하는 조건부 계산을 수행한다.<br>- 기존 MoE transformer의 희소성은 고전적 transformer의 다층 퍼셉트론을 일반화한 MoE 연산에서 발생한다.<br>- 이 연구는 attention 연산을 일반화하는 방식으로 조건부 계산을 구현하는 대안적 메커니즘을 탐구한다.</div>
+      <div class="item-link"><a href="https://arxiv.org/abs/2610.31818" target="_blank" rel="noopener">확장 가능한 사전학습과 지속 학습을 위한 중첩 희소성</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div><div class="section" id="hn-reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Hacker News &amp; Reddit</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://imaginationlibrary.com/" target="_blank" rel="noopener">Dolly Parton의 Imagination Library</a></div>
+    <div class="item-meta">HN · 608 pts</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xf6x35/nanbeige_releases_nanbeige4333b_an_apache_20/" target="_blank" rel="noopener">Nanbeige, 소형 에이전트를 위한 Apache 2.0 교사 모델 Nanbeige4.3-33B 공개 [N]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm" target="_blank" rel="noopener">Anthropic S-1</a></div>
+    <div class="item-meta">HN · 560 pts</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xfqhfc/pbt_doesnt_make_grokking_faster_but_it_can_escape/" target="_blank" rel="noopener">PBT는 grokking 속도를 높이지는 않지만, grokking이 전혀 일어나지 않는 하이퍼파라미터 범위를 벗어날 수는 있다 [P]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://charliegerard.dev/blog/overgrown-extension/" target="_blank" rel="noopener">Overgrown, 방치한 탭을 식물이 뒤덮을 때</a></div>
+    <div class="item-meta">HN · 360 pts</div>
+  </div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <details>
+    <summary>
+      <span class="item-name">Nutlope/hallmark</span>
+      <span class="item-meta">35,429</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Hallmark는 Claude Code, Codex, Cursor, OpenCode에서 AI가 만든 듯한 디자인을 피하도록 돕는 디자인 스킬이다.<br>- 48개 테마 중 3개를 제안하며, 각 테마는 종이·서체·색상·표면·컴포넌트·질감과 완성 페이지 예시를 포함한다.<br>- 예약·판매·뉴스레터 구독 등 방문 목적에 맞춰 페이지를 구성하고, 핵심 행동을 해당 유형에 맞는 위치와 페이지 끝에 배치한다.<br>- 실제 브라우저에서 기계적으로 보이는 디자인 패턴을 검사하고 별도 맥락의 검토자가 최종 검토한다. 품질 기준은 출시를 막는 Floor, 사유를 기록하면 예외가 가능한 Reflex, 출시를 막지 않는 Finish로 나뉜다.</div>
+      <div class="item-link"><a href="https://github.com/Nutlope/hallmark" target="_blank" rel="noopener">Nutlope/hallmark</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">JetBrains/thinkrail</span>
+      <span class="item-meta">2,438</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">ThinkRail은 pi 코딩 에이전트를 기반으로 프로젝트 지식을 축적하는 에이전트형 IDE다.<br>- git worktree로 브랜치와 작업 디렉터리가 분리된 작업 공간을 만들어, 기존 체크아웃을 건드리지 않고 에이전트들이 병렬로 작업한다.<br>- 지속적으로 갱신되는 명세와 재사용 가능한 스킬로 프로젝트 지식을 유지하며, 작업 방식에 맞는 도구를 직접 만들도록 확장 기능 지원을 추가할 예정이다.<br>- PR이 병합·종료되거나 일주일간 활동이 없으면 작업 공간을 프로젝트별 보관함으로 자동 이동하고, 다시 작업하면 복원한다.</div>
+      <div class="item-link"><a href="https://github.com/JetBrains/thinkrail" target="_blank" rel="noopener">JetBrains/thinkrail</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">affaan-m/ECC</span>
+      <span class="item-meta">289,381</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">코딩 에이전트에 체계적인 개발 절차와 도구를 제공하는 ECC의 설치 방법과 운영 모델을 소개하는 글.<br>- 안내형 설정과 Claude Code 기본 플러그인 명령은 같은 ecc@ecc 플러그인을 설치하며, 둘 중 하나만 선택하고 전체 수동 설치를 중복 적용하지 않도록 안내한다.<br>- 공식 배포처는 github.com/affaan-m/ECC, npm 패키지 ecc-universal·ecc-agentshield, GitHub App, ecc@ecc 플러그인, ecc.tools이며 비공식 미러는 유지보수·검토 대상이 아니다.<br>- 오픈소스 저장소는 MIT 라이선스로 계속 무료 제공하며, ECC Pro는 비공개 저장소용 호스팅 GitHub App으로 좌석당 월 19달러부터 시작한다.</div>
+      <div class="item-link"><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">affaan-m/ECC</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item">
+  <details>
+    <summary>
+      <span class="item-name">pbakaus/impeccable</span>
+      <span class="item-meta">88,652</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">Impeccable은 AI 코딩 에이전트의 프런트엔드 디자인을 위한 가이드를 제공하는 도구다.<br>- `/impeccable init`은 대상 사용자, 목적, 운영 맥락, 제약, 어조, 근거를 PRODUCT.md에 기록해 이후 명령에서 활용한다.<br>- 스킬 1개와 `polish`, `audit`, `critique`, `distill`, `animate` 등 명령어 24개를 제공한다.<br>- 결정론적 탐지 규칙 62개와 LLM 전용 비평 검사를 제공하며, CLI와 브라우저 확장에서는 LLM이나 API 키 없이 결정론적 규칙을 실행한다.</div>
+      <div class="item-link"><a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener">pbakaus/impeccable</a> &rarr;</div>
+    </div>
+  </details>
+</div><div class="item important">
+  <details>
+    <summary>
+      <span class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span>NVIDIA/SkillSpector</span>
+      <span class="item-meta">21,825</span>
+      <span class="item-toggle" aria-hidden="true"></span>
+    </summary>
+    <div class="item-body">
+      <div class="item-summary">SkillSpector는 설치 전 AI 에이전트 스킬의 취약점·악성 패턴·보안 위험을 탐지하는 보안 스캐너다.<br>- 연구 데이터셋 중 분석한 스킬 31,132개에서 26.1%는 취약점을 포함했고, 5.2%는 악의적 의도가 있는 것으로 추정됐다.<br>- NVIDIA Verified Skills 파이프라인의 일부로, 스킬을 검사·평가·서명하며 통과한 스킬은 NVIDIA 스킬 카탈로그에 게시된다.<br>- Git 저장소·URL·ZIP 파일·디렉터리·단일 파일을 검사하며, 프롬프트 인젝션·데이터 유출·권한 상승 등 17개 범주의 취약점 패턴 71개를 탐지한다.</div>
+      <div class="item-link"><a href="https://github.com/NVIDIA/SkillSpector" target="_blank" rel="noopener">NVIDIA/SkillSpector</a> &rarr;</div>
+    </div>
+  </details>
+</div>
+</div>
+</body>
+</html>

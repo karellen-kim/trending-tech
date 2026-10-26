@@ -13,7 +13,7 @@ def fetch_arxiv_papers(feed_url: str) -> list[dict]:
         items.append({
             "title": getattr(entry, "title", "").replace("\n", " ").strip(),
             "url": getattr(entry, "link", ""),
-            "abstract": getattr(entry, "summary", "")[:600],
+            "abstract": getattr(entry, "summary", ""),
         })
     return items
 

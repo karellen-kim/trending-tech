@@ -32,3 +32,12 @@ def test_fetch_arxiv_papers_uses_timeout():
          patch("sources.arxiv.feedparser.parse", return_value=_mock_feed()):
         fetch_arxiv_papers("https://rss.arxiv.org/rss/cs.AI")
     assert mock_get.call_args.kwargs.get("timeout") == 15
+
+
+def test_fetch_preserves_complete_abstract_for_analysis():
+    from types import SimpleNamespace
+    abstract = 'intro ' * 130 + 'The actual contribution is retained after the introduction.'
+    feed = SimpleNamespace(entries=[SimpleNamespace(title='Paper',link='https://arxiv.org/abs/test',summary=abstract)])
+    with patch('sources.arxiv.requests.get', return_value=MagicMock(content=b'<rss/>')), \
+         patch('sources.arxiv.feedparser.parse', return_value=feed):
+        assert fetch_arxiv_papers('https://rss.arxiv.org/rss/cs.AI')[0]['abstract'] == abstract

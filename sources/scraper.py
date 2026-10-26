@@ -60,7 +60,7 @@ def _fetch_article_text(url: str, max_chars: int = 2000) -> str:
         soup = BeautifulSoup(resp.text, "html.parser")
         for tag in soup(["script", "style", "nav", "footer", "header"]):
             tag.decompose()
-        container = soup.find("article") or soup.find("main") or soup.body
+        container = soup.select_one(".markdown-body") or soup.find("article") or soup.find("main") or soup.body
         if not container:
             return ""
         text = " ".join(container.get_text(" ", strip=True).split())

@@ -340,7 +340,7 @@ def generate_concept_svg(title: str, content: str) -> str:
     if not content or len(content.strip()) < MIN_CONTENT:
         return ""
     source = f"{title}\n{content}"
-    raw = _run_codex(DIAGRAM_PROMPT.format(title=title, content=content[:2000]), timeout=LLM_TIMEOUT)
+    raw = _run_codex(DIAGRAM_PROMPT.format(title=title, content=content[:2000]), timeout=LLM_TIMEOUT, context=f"diagram:{title}")
     spec = _parse_json(raw)
     if not isinstance(spec, dict):
         print(f"[다이어그램] 명세 파싱 실패: {title[:40]}")
@@ -366,6 +366,6 @@ def add_svgs(items: list[dict], max_items: int) -> list[dict]:
     def one(item):
         item["svg"] = generate_concept_svg(item.get("title", ""), item.get("summary", ""))
 
-    with ThreadPoolExecutor(max_workers=3) as ex:
+    with ThreadPoolExecutor(max_workers=1) as ex:
         list(ex.map(one, targets))
     return items

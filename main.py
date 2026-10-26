@@ -2,7 +2,7 @@ import json
 import os
 import signal
 import subprocess
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, timedelta, datetime
 from itertools import zip_longest
 
@@ -15,7 +15,7 @@ from sources.reddit import fetch_all_reddit
 from sources.rss import fetch_all_blogs
 from sources.arxiv import fetch_all_papers
 from sources.scraper import fetch_all_scraped
-from summarizer import (analyze_item, filter_important_papers, generate_highlights,
+from summarizer import (LlmCallError, _log_llm_event, analyze_item, filter_important_papers, generate_highlights,
                         generate_highlight_links, generate_today_take, mark_important,
                         generate_week_take, generate_month_take)
 import digest
@@ -62,17 +62,43 @@ def _analyze_items(items: list[dict], content_key: str, filter_today: bool = Tru
         # 판정 프롬프트를 태우면 is_today=false 로 답하면서 요약·번역까지 빈 값이 되어
         # 렌더러가 영어 원문으로 폴백한다.
         verified = bool(item.get("date_verified")) or not filter_today
-        result = analyze_item(title, content, item.get("pub_hint", "unknown"), today,
-                              date_verified=verified)
-        item["summary"] = result["summary"]
-        item["title_ko"] = result["title_ko"]
+        context = f"{title} {item.get('url', '')}".strip()
+        try:
+            result = analyze_item(title, content, item.get("pub_hint", "unknown"), today,
+                                  date_verified=verified)
+        except LlmCallError as error:
+            raise LlmCallError(error.kind, error.message, context=context) from error
+        if not isinstance(result, dict) or type(result.get("is_today")) is not bool:
+            raise LlmCallError("invalid_response", "is_today must be a boolean", context=context)
+        retained = verified or result["is_today"]
+        if retained:
+            if not isinstance(result.get("title_ko"), str) or not result["title_ko"].strip():
+                raise LlmCallError("missing_output", "Required title translation is empty", context=context)
+            if content_key != "title" and len(content.strip()) >= 150:
+                if not isinstance(result.get("summary"), str) or not result["summary"].strip():
+                    raise LlmCallError("missing_output", "Required summary is empty", context=context)
+        item["summary"] = result.get("summary", "")
+        item["title_ko"] = result.get("title_ko", "")
         # 수집 단계에서 날짜를 확인한 항목은 그 값을 유지한다
-        item["pub_date"] = item.get("pub_date") or result["pub_date"]
+        item["pub_date"] = item.get("pub_date") or result.get("pub_date", "unknown")
         item["is_today"] = result["is_today"]
         return item
 
-    with ThreadPoolExecutor(max_workers=SUMMARY_WORKERS) as ex:
-        analyzed = list(ex.map(one, items))
+    ex = ThreadPoolExecutor(max_workers=SUMMARY_WORKERS)
+    futures = {ex.submit(one, item): index for index, item in enumerate(items)}
+    analyzed = [None] * len(items)
+    try:
+        for future in as_completed(futures):
+            analyzed[futures[future]] = future.result()
+    except BaseException as error:
+        cancelled = sum(future.cancel() for future in futures)
+        _log_llm_event("analysis_failed", kind=getattr(error, "kind", "interrupted"),
+                       total=len(items), completed=sum(item is not None for item in analyzed),
+                       cancelled=cancelled, error=str(error) if isinstance(error, LlmCallError) else type(error).__name__)
+        ex.shutdown(wait=False, cancel_futures=True)
+        raise
+    else:
+        ex.shutdown(wait=True)
     if not filter_today:
         return analyzed
     kept = [i for i in analyzed if i.get("is_today")]
@@ -253,6 +279,7 @@ def save_html(data: dict) -> list[str]:
                            if k in ("headline", "body")},
             "important_links": [{"text": l.get("text", ""), "url": l.get("url", "")}
                                 for l in (data.get("highlight_links") or []) if l.get("url")],
+            **({"audio_url": data["audio_url"]} if data.get("audio_url") else {}),
         }, ensure_ascii=False),
         encoding="utf-8"
     )
@@ -390,6 +417,10 @@ def main():
     today_str = str(today)
     data = collect(today_str)
     data = summarize(data)
+    if any(data.get(section) for section in ("company_blogs", "dev_blogs", "papers", "github", "community")):
+        take = data.get("today_take") or {}
+        if not isinstance(take, dict) or not isinstance(take.get("headline"), str) or not take["headline"].strip():
+            raise LlmCallError("missing_output", "Required today_take headline is empty", context=today_str)
 
     # 오디오는 노트북에서 재생하므로, 성공하면 그 노트북 링크를 페이지에 건다
     notebook_url = make_audio(data)

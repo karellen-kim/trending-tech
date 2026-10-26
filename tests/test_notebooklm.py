@@ -121,13 +121,13 @@ def test_fill_urls_joins_with_newlines():
     box.fill.assert_called_once_with("http://a\nhttp://b")
 
 
-def test_fill_urls_falls_back_to_textarea():
+def test_fill_urls_refuses_background_research_textarea():
     page = MagicMock()
     page.get_by_placeholder.return_value.first.wait_for.side_effect = RuntimeError("no")
     ta = MagicMock()
     page.locator.return_value.first = ta
-    assert notebooklm._fill_urls(page, ["http://a"]) is True
-    ta.fill.assert_called_once_with("http://a")
+    assert notebooklm._fill_urls(page, ["http://a"]) is False
+    ta.fill.assert_not_called()
 
 
 def test_fill_urls_returns_false_when_no_input():
@@ -162,6 +162,7 @@ def test_open_source_dialog_skips_when_already_open():
     """빈 노트북은 ?addSource=true 로 다이얼로그가 열린 채 뜬다.
     그때 '출처 추가' 는 role=button 으로 노출되지 않아 누르면 실패한다."""
     page = MagicMock()
+    page.get_by_placeholder.return_value.first.is_visible.return_value = False
     clicked = []
 
     def get_by_role(role, name=None, exact=None):
@@ -182,6 +183,7 @@ def test_open_source_dialog_skips_when_already_open():
 def test_open_source_dialog_clicks_add_when_closed():
     """소스가 이미 있는 노트북은 다이얼로그가 닫혀 있어 '출처 추가' 를 눌러야 한다"""
     page = MagicMock()
+    page.get_by_placeholder.return_value.first.is_visible.return_value = False
     clicked = []
     state = {"dialog_open": False}
 
@@ -227,6 +229,7 @@ def test_dismiss_dialogs_clicks_exact_close_button():
 
 def test_open_source_dialog_fails_when_nothing_found():
     page = MagicMock()
+    page.get_by_placeholder.return_value.first.is_visible.return_value = False
     page.get_by_role.return_value.first.wait_for.side_effect = RuntimeError("no")
     page.get_by_text.return_value.first.wait_for.side_effect = RuntimeError("no")
     assert notebooklm._open_source_dialog(page) is False
@@ -339,3 +342,50 @@ def test_set_title_skips_empty():
     page = MagicMock()
     assert notebooklm._set_title(page, "") is False
     page.get_by_role.assert_not_called()
+
+
+def test_resume_opens_existing_notebook_without_creating(monkeypatch):
+    page = MagicMock()
+    url = 'https://notebook.google.com/notebook/existing'
+    create = MagicMock()
+    monkeypatch.setattr(notebooklm, '_create_notebook', create)
+    assert notebooklm._open_notebook(page, 120000, url) == url
+    page.goto.assert_called_once_with(url, wait_until='domcontentloaded', timeout=120000)
+    create.assert_not_called()
+
+
+def test_resume_url_reaches_browser_runner(monkeypatch):
+    run = MagicMock(return_value='https://notebook.google.com/notebook/existing')
+    monkeypatch.setattr(notebooklm, '_run', run)
+    notebooklm.generate_audio_review(['https://source.test'],notebook_url='https://notebook.google.com/notebook/existing')
+    assert run.call_args.kwargs['notebook_url'] == 'https://notebook.google.com/notebook/existing'
+
+
+def test_open_source_dialog_does_not_click_background_website_text():
+    page = MagicMock()
+    page.get_by_placeholder.return_value.first.is_visible.return_value = False
+    page.get_by_role.return_value.first.wait_for.side_effect = RuntimeError("no button")
+    page.get_by_text.return_value.first.wait_for.return_value = None
+    assert notebooklm._open_source_dialog(page) is False
+    page.get_by_text.assert_not_called()
+
+
+def test_open_source_dialog_preserves_visible_url_input(monkeypatch):
+    page = MagicMock()
+    page.get_by_placeholder.return_value.first.is_visible.return_value = True
+    dismiss = MagicMock()
+    monkeypatch.setattr(notebooklm, "_dismiss_dialogs", dismiss)
+    assert notebooklm._open_source_dialog(page) is True
+    dismiss.assert_not_called()
+    page.get_by_role.assert_not_called()
+
+
+def test_audio_status_distinguishes_scheduled_from_generated():
+    page = MagicMock()
+    page.inner_text.return_value = '스튜디오 오디오 제목 2오전 이후로 예약됨'
+    assert notebooklm._audio_status(page) == 'scheduled'
+    page.inner_text.return_value = 'AI 오디오 오버뷰 생성 중...'
+    assert notebooklm._audio_status(page) == 'generating'
+    page.inner_text.return_value = '스튜디오'
+    page.locator.return_value.count.return_value = 1
+    assert notebooklm._audio_status(page) == 'ready'

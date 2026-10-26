@@ -49,7 +49,7 @@ MAX_DEV_TOTAL = 20        # 개발자블로그 섹션 하루 전체 상한
 MAX_BODY_FETCH = 40       # 요약이 짧아 본문을 새로 받아올 최대 건수
 ENABLE_SVG = True
 MAX_SVG_ITEMS = 4         # 개념 SVG 생성 대상 상위 N건 (다이어그램 1건이 콘텐츠 2000자·180초 타임아웃으로 가장 무거운 호출)
-SUMMARY_WORKERS = 4       # 분석(날짜판정+번역+요약) 병렬 실행 수
+SUMMARY_WORKERS = 1       # Codex CLI 동시 요청 지연이 재현돼 직렬 실행한다 (수집 병렬도와 별개).
 RSS_WORKERS = 8           # RSS 수집 병렬 실행 수
 
 # 전부 실측 검증된 피드 (HTTP 200 + 엔트리 존재 + 날짜 파싱 가능)

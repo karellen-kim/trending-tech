@@ -5,9 +5,12 @@ import signal
 import subprocess
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+from threading import Lock
+from time import monotonic
+from uuid import uuid4
 
-from config import COLLECT_DAYS
+from config import COLLECT_DAYS, LOGS_DIR
 
 SUMMARIZE_ONLY_PROMPT = """아래 글의 제목을 한국어로 옮기고 핵심을 정리해줘.
 
@@ -70,16 +73,65 @@ FILTER_PROMPT = """다음 AI/ML 논문 목록에서 오늘 가장 주목할 만�
 {papers_list}"""
 
 LLM_TIMEOUT = 600
+_LLM_LOCK = Lock()
+_ACTIVE_CALLS = 0
 
 
-def _run_codex(prompt: str, timeout: int = LLM_TIMEOUT) -> str:
+class LlmCallError(RuntimeError):
+    """필수 분석에 쓸 수 없는 LLM 결과를 실패 종류와 항목 문맥으로 전달한다."""
+
+    def __init__(self, kind: str, message: str, context: str = ""):
+        self.kind = kind
+        self.context = _redact_cli_error(context)[:200]
+        message = _redact_cli_error(message)
+        self.message = message
+        super().__init__(f"{kind}: {message}" + (f" ({self.context})" if self.context else ""))
+
+
+def _redact_cli_error(text: str) -> str:
+    """진단에 필요한 오류만 남기고 자격 증명·이메일을 제거한다."""
+    text = re.sub(r"(?i)\b(bearer|basic)\s+[^\s\"']+", r"\1 [redacted]", text)
+    text = re.sub(r"\b(?:xox[baprs]-[\w-]+|sk-[\w-]+|eyJ[\w-]+\.[\w-]+\.[\w-]+)", "[redacted]", text)
+    text = re.sub(r"[\w.+%-]+@[\w.-]+\.[A-Za-z]{2,}", "[redacted]", text)
+    text = re.sub(
+        r'''(?i)(["']?(?:access[_-]?token|refresh[_-]?token|token|api[_-]?key|authorization|password|secret)["']?\s*[:=]\s*)(?:"[^"\n]*"|'[^'\n]*'|[^\s,&]+)''',
+        r'\1"[redacted]"', text,
+    )
+    return text[-1500:]
+
+
+def _log_llm_event(event: str, **fields) -> None:
+    """프롬프트·응답 본문 없이 호출 상태를 콘솔과 배치 진단 파일에 기록한다."""
+    record = json.dumps({"event": event, "time": datetime.now(timezone.utc).isoformat(), "process_id": os.getpid(), **fields}, ensure_ascii=False)
+    with _LLM_LOCK:
+        print(record, flush=True)
+        try:
+            LOGS_DIR.mkdir(exist_ok=True)
+            with (LOGS_DIR / "llm-calls.log").open("a", encoding="utf-8") as log:
+                log.write(record + "\n")
+        except OSError:
+            pass
+
+
+def _run_codex(prompt: str, timeout: int = LLM_TIMEOUT, *, strict: bool = False,
+               context: str = "llm") -> str:
+    """Codex 최종 응답을 읽고 필수 호출의 실패는 명시적인 예외로 전달한다."""
+    global _ACTIVE_CALLS
     prompt = prompt.replace("\x00", "")
+    context = _redact_cli_error(context)[:200]
+    call_id = uuid4().hex[:12]
+    start = monotonic()
+    with _LLM_LOCK:
+        _ACTIVE_CALLS += 1
+        active_calls = _ACTIVE_CALLS
+    _log_llm_event("llm_call_started", call_id=call_id, context=context,
+                   timeout_seconds=timeout, input_chars=len(prompt), active_calls=active_calls)
+    status, error, stderr = "cancelled", "", ""
     try:
-        # 호출별 파일에서 최종 응답만 읽어 진행 로그가 JSON에 섞이지 않게 한다.
         with TemporaryDirectory(prefix="trending-codex-") as temp_dir:
             output_path = Path(temp_dir) / "response.txt"
             process = subprocess.Popen(
-                ["codex", "exec", "--model", "gpt-6.1-sol",
+                ["codex", "exec", "--model", "gpt-6.1-sol", "--json",
                  "--sandbox", "read-only", "--ephemeral", "--color", "never",
                  "--output-last-message", str(output_path), "-"],
                 stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -88,23 +140,40 @@ def _run_codex(prompt: str, timeout: int = LLM_TIMEOUT) -> str:
             try:
                 _, stderr = process.communicate(input=prompt, timeout=timeout)
             except BaseException:
-                # 타임아웃·배치 중단 시 npm 실행기와 네이티브 자식을 함께 종료한다.
                 try:
                     os.killpg(process.pid, signal.SIGKILL)
                 except ProcessLookupError:
                     pass
-                process.communicate()
+                _, stderr = process.communicate()
                 raise
             if process.returncode != 0:
-                print(f"[codex] 실패(rc={process.returncode}): {stderr.strip()[:200]}")
-                return ""
-            return output_path.read_text(encoding="utf-8").strip()
+                raise LlmCallError("process_error", f"exit={process.returncode}; {_redact_cli_error(stderr)}", context)
+            result = output_path.read_text(encoding="utf-8").strip()
+            if not result:
+                raise LlmCallError("empty_response", "최종 응답이 비어 있습니다", context)
+            status = "success"
+            return result
     except subprocess.TimeoutExpired:
-        print(f"[codex] 타임아웃({timeout}s)")
+        status, error = "timeout", f"{timeout}초 안에 호출이 완료되지 않았습니다"
+        if stderr:
+            error += "; " + _redact_cli_error(stderr)
+        if strict:
+            raise LlmCallError(status, error, context) from None
         return ""
-    except (OSError, ValueError) as e:
-        print(f"[codex] 호출 실패: {e}")
+    except (LlmCallError, OSError, ValueError) as exc:
+        status = exc.kind if isinstance(exc, LlmCallError) else "execution_error"
+        error = _redact_cli_error(str(exc))
+        if strict:
+            if isinstance(exc, LlmCallError):
+                raise
+            raise LlmCallError(status, error, context) from None
         return ""
+    finally:
+        with _LLM_LOCK:
+            _ACTIVE_CALLS -= 1
+            remaining_calls = _ACTIVE_CALLS
+        _log_llm_event("llm_call_finished", call_id=call_id, context=context, status=status,
+                       elapsed_seconds=round(monotonic() - start, 3), active_calls=remaining_calls, error=error)
 
 def translate_title(title: str) -> str:
     if not title or not title.strip():
@@ -112,12 +181,12 @@ def translate_title(title: str) -> str:
     ascii_ratio = sum(1 for c in title if ord(c) < 128) / max(len(title), 1)
     if ascii_ratio < 0.6:
         return title
-    return _run_codex(TRANSLATE_TITLE_PROMPT.format(title=title), timeout=LLM_TIMEOUT)
+    return _run_codex(TRANSLATE_TITLE_PROMPT.format(title=title), timeout=LLM_TIMEOUT, context=f"translate:{title}")
 
 def summarize_item(title: str, content: str) -> str:
     if not content or len(content.strip()) < 150:
         return ""
-    return _run_codex(SUMMARIZE_PROMPT.format(title=title, content=content[:2000]))
+    return _run_codex(SUMMARIZE_PROMPT.format(title=title, content=content[:2000]), context=f"summarize:{title}")
 
 _JSON_FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.S)
 _JSON_OBJ = re.compile(r"\{.*\}", re.S)
@@ -149,10 +218,11 @@ def analyze_item(title: str, content: str, pub_hint: str, today: str,
     date_verified=False(피드에서 날짜를 못 읽은 경우)일 때만 날짜 판정까지 함께 시킨다."""
     content = (content or "")[:1500]
     if date_verified:
-        raw = _run_codex(SUMMARIZE_ONLY_PROMPT.format(title=title, content=content), timeout=LLM_TIMEOUT)
+        raw = _run_codex(SUMMARIZE_ONLY_PROMPT.format(title=title, content=content), timeout=LLM_TIMEOUT,
+                         strict=True, context=f"analyze:{title}")
         parsed = _parse_json(raw)
-        if parsed is None:
-            return dict(_SAFE_DEFAULT, is_today=True)
+        if not isinstance(parsed, dict) or not all(isinstance(parsed.get(k), str) for k in ("title_ko", "summary")):
+            raise LlmCallError("invalid_response", "분석 JSON 응답이 아닙니다", title)
         return {
             "is_today": True,
             "pub_date": "",
@@ -163,12 +233,14 @@ def analyze_item(title: str, content: str, pub_hint: str, today: str,
     raw = _run_codex(ANALYZE_PROMPT.format(
         today=today, recent_desc=_recent_desc(today, days),
         pub_hint=pub_hint or "unknown",
-        title=title, content=content), timeout=LLM_TIMEOUT)
+        title=title, content=content), timeout=LLM_TIMEOUT, strict=True, context=f"analyze:{title}")
     data = _parse_json(raw)
-    if data is None:
-        return dict(_SAFE_DEFAULT)
+    if not isinstance(data, dict) or not isinstance(data.get("is_today"), bool):
+        raise LlmCallError("invalid_response", "is_today는 명시적인 bool이어야 합니다", title)
+    if data["is_today"] and not all(isinstance(data.get(k), str) for k in ("title_ko", "summary")):
+        raise LlmCallError("invalid_response", "번역·요약 필드는 문자열이어야 합니다", title)
     return {
-        "is_today": bool(data.get("is_today")),
+        "is_today": data["is_today"],
         "pub_date": str(data.get("pub_date") or "unknown"),
         "title_ko": str(data.get("title_ko") or ""),
         "summary": str(data.get("summary") or ""),
@@ -258,7 +330,7 @@ def generate_today_take(data: dict) -> dict:
     # 실패하면 페이지에서 해석과 별표가 통째로 빠지므로 한 번 재시도한다.
     parsed, headline = None, ""
     for attempt in range(2):
-        parsed = _parse_json(_run_codex(prompt, timeout=TAKE_TIMEOUT))
+        parsed = _parse_json(_run_codex(prompt, timeout=TAKE_TIMEOUT, context="today_take"))
         headline = str((parsed or {}).get("headline") or "").strip() if isinstance(parsed, dict) else ""
         if headline:
             break
@@ -303,7 +375,7 @@ def generate_highlight_links(data: dict) -> list[dict]:
     if not cands:
         return []
     items_text = "\n".join(f"{n + 1}. [{c['source']}] {c['title']}" for n, c in enumerate(cands))
-    response = _run_codex(HIGHLIGHT_LINK_PROMPT.format(items_text=items_text), timeout=LLM_TIMEOUT)
+    response = _run_codex(HIGHLIGHT_LINK_PROMPT.format(items_text=items_text), timeout=LLM_TIMEOUT, context="highlight_links")
     out, seen = [], set()
     for line in (response or "").splitlines():
         line = line.strip()
@@ -337,7 +409,7 @@ def generate_highlights(data: dict) -> list[str]:
     if not items:
         return []
     items_text = "\n".join(items[:20])
-    response = _run_codex(HIGHLIGHT_PROMPT.format(items_text=items_text), timeout=LLM_TIMEOUT)
+    response = _run_codex(HIGHLIGHT_PROMPT.format(items_text=items_text), timeout=LLM_TIMEOUT, context="highlights")
     return [line.strip() for line in response.splitlines() if line.strip()][:5]
 
 def filter_important_papers(papers: list[dict], max_items: int = 5) -> list[dict]:
@@ -347,12 +419,13 @@ def filter_important_papers(papers: list[dict], max_items: int = 5) -> list[dict
         f"{i+1}. {p['title']}: {p['abstract'][:200]}"
         for i, p in enumerate(papers)
     )
-    response = _run_codex(FILTER_PROMPT.format(max_items=max_items, papers_list=papers_list), timeout=LLM_TIMEOUT)
-    try:
-        indices = [int(x.strip()) - 1 for x in response.split(",") if x.strip().isdigit()]
-        return [papers[i] for i in indices if 0 <= i < len(papers)]
-    except Exception:
-        return papers[:max_items]
+    response = _run_codex(FILTER_PROMPT.format(max_items=max_items, papers_list=papers_list), timeout=LLM_TIMEOUT, strict=True, context="paper_selection")
+    if not re.fullmatch(r"\s*\d+(?:\s*,\s*\d+)*\s*", response):
+        raise LlmCallError("invalid_response", "논문 선택 응답은 번호 목록이어야 합니다", "paper_selection")
+    indices = list(dict.fromkeys(int(value.strip()) - 1 for value in response.split(",")))
+    if not all(0 <= index < len(papers) for index in indices):
+        raise LlmCallError("invalid_response", "논문 선택 번호가 범위를 벗어났습니다", "paper_selection")
+    return [papers[index] for index in indices[:max_items]]
 
 
 def _period_take(entries: list[dict], period_desc: str, unit: str, pick_n: int = 4) -> dict:
@@ -379,7 +452,7 @@ def _period_take(entries: list[dict], period_desc: str, unit: str, pick_n: int =
         items_text="\n".join(lines))
     parsed, headline = None, ""
     for attempt in range(2):
-        parsed = _parse_json(_run_codex(prompt, timeout=TAKE_TIMEOUT))
+        parsed = _parse_json(_run_codex(prompt, timeout=TAKE_TIMEOUT, context="period_take"))
         headline = str((parsed or {}).get("headline") or "").strip() if isinstance(parsed, dict) else ""
         if headline:
             break

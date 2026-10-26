@@ -117,3 +117,15 @@ def test_fetch_article_text_keeps_declared_encoding():
         out = scraper._fetch_article_text("http://x")
     assert resp.encoding == "utf-8"
     assert "정상 문서 내용" in out
+
+
+def test_fetch_article_text_prefers_markdown_body_over_navigation_main():
+    content = "Alibaba Model Studio deploys and monitors models. " * 100
+    raw = ("<html><body><main>Blog Events Webinars Tutorials Forum</main>"
+           f'<div class="wrap-main-left-article markdown-body">{content}</div>'
+           "</body></html>").encode("utf-8")
+    resp = _FakeResp(raw, "utf-8", "utf-8")
+    with patch("sources.scraper.requests.get", return_value=resp):
+        out = scraper._fetch_article_text("https://www.alibabacloud.com/blog/example")
+    assert out == content.strip()[:2000]
+    assert "Blog Events" not in out

@@ -48,10 +48,12 @@ def test_analyze_item_handles_code_fence():
     assert out["is_today"] is False
 
 
-def test_analyze_item_returns_safe_default_on_garbage():
-    with patch("summarizer._run_codex", return_value="모델이 이상한 말을 함"):
-        out = summarizer.analyze_item("T", "본문" * 200, "unknown", "2026-08-14")
-    assert out == {"is_today": False, "pub_date": "unknown", "title_ko": "", "summary": ""}
+def test_analyze_item_rejects_invalid_analysis_instead_of_dropping_it():
+    import pytest
+    for payload in ['모델이 이상한 말을 함', '{}', '{"is_today":null}', '{"is_today":"false"}', '{"is_today":true,"title_ko":[],"summary":"x"}']:
+        with patch("summarizer._run_codex", return_value=payload):
+            with pytest.raises(summarizer.LlmCallError):
+                summarizer.analyze_item("T", "본문" * 200, "unknown", "2026-08-14")
 
 
 def test_analyze_item_calls_llm_once():
@@ -191,7 +193,7 @@ def test_today_take_retries_on_empty_response():
             "dev_blogs": [], "papers": [], "github": []}
     calls = []
 
-    def fake(prompt, timeout=None):
+    def fake(prompt, timeout=None, **kwargs):
         calls.append(timeout)
         if len(calls) == 1:
             return ""      # 첫 호출 타임아웃
@@ -209,7 +211,7 @@ def test_today_take_timeout_is_generous():
             "dev_blogs": [], "papers": [], "github": []}
     seen = []
     with patch("summarizer._run_codex",
-               side_effect=lambda p, timeout=None: seen.append(timeout) or '{"headline":"H","refs":[1]}'):
+               side_effect=lambda p, timeout=None, **kwargs: seen.append(timeout) or '{"headline":"H","refs":[1]}'):
         summarizer.generate_today_take(data)
     assert seen[0] >= 180, f"타임아웃이 {seen[0]}초로 너무 짧다"
 
@@ -268,7 +270,7 @@ def test_month_take_uses_week_entries():
     payload = ('{"headline": "이번 달 흐름", "body": "근거",'
                ' "picks": [{"text": "글B", "url": "http://b", "why": "가장 컸다"}]}')
     captured = {}
-    def fake(prompt, timeout=None):
+    def fake(prompt, timeout=None, **kwargs):
         captured["p"] = prompt
         return payload
     with patch("summarizer._run_codex", side_effect=fake):
@@ -280,3 +282,12 @@ def test_month_take_uses_week_entries():
 
 def test_month_take_empty_without_weeks():
     assert summarizer.generate_month_take([]) == {}
+
+
+def test_paper_selection_rejects_invalid_response_instead_of_silently_dropping_papers():
+    import pytest
+    papers = [{'title': 'A', 'abstract': 'body'}]
+    for raw in ['', 'no response', '0', '99']:
+        with patch('summarizer._run_codex', return_value=raw):
+            with pytest.raises(summarizer.LlmCallError):
+                summarizer.filter_important_papers(papers)
