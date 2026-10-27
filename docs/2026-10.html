@@ -114,13 +114,9 @@
   .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
   .audio-block a:hover { text-decoration: underline; }
 
-  /* ── 아이템 (아코디언) ── */
+  /* ── 항상 펼쳐진 요약 ── */
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
-  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 1rem; cursor: pointer; list-style: none; }
-  .item details > summary::-webkit-details-marker { display: none; }
-  .item details > summary:hover .item-name { color: var(--accent-deep); }
   .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
     align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
@@ -131,28 +127,9 @@
   .item-name a:hover { color: var(--green); }
   .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
     letter-spacing: 0.08em; white-space: nowrap; }
-  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
-  .item details[open] > summary .item-toggle::before { content: "2"; color: var(--accent); }
-  .item-body { padding: 0 1rem 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
+  .community-date { padding: 0.8rem 1.15rem 0; font-size: 0.75rem; color: var(--ink-faint); }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
-  /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
-  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
-    border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
-    padding: 1rem 0.9rem 0.7rem;
-    /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
-    --accent: #b08a2a; --accent-wash: #f6f1e2; }
-  /* svg 인라인 max-width:100% 가 좁은 화면에서 그림을 1/3 로 압착해 글자를 뭉갠다.
-     원본 크기를 지키고 상자에서 옆으로 밀어 본다. */
-  .item-diagram svg { max-width: none !important; }
-  .item-diagram .diagram { margin: 0; padding: 0; border: none; background: none; color: var(--ink);
-    width: max-content; min-width: 100%; }
-  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
-  .item-diagram svg { height: auto; display: block; }
-  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
-    font-family: var(--serif); font-style: italic; font-size: 0.74rem; color: #7d7364; text-align: center; }
-  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
-  .item-link a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
-
   /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
   .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
   /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
@@ -168,12 +145,6 @@
        제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
     .item-head { grid-template-columns: 1fr; }
     .item-head .item-meta { margin-top: 0.45rem; }
-    .item details > summary { grid-template-columns: 1fr auto; }
-    /* 제목은 한 줄을 통째로 쓴다. 토글을 옆에 두면 그만큼 폭을 잃는다. */
-    .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
-    .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
-    .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
-
     /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
        화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
        11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
@@ -215,7 +186,7 @@
     <span class="section-icon">★</span>
     <span class="section-title">이 달의 해석</span>
   </div>
-  <div class="take"><p class="take-headline">에이전트 AI의 중심이 개별 작업의 자율 실행에서 검증·제어·비용을 함께 설계하는 업무 운영 체계로 옮겨갔다.</p><p class="take-body">W41의 검증·자기개선 한계와 블랙박스 감사 논의는 에이전트가 작업을 수행하는 능력과 그 결과를 신뢰할 수 있는지가 별개라는 문제를 드러냈다. W42의 프로덕션 준비 평가 프레임워크는 이 문제를 배포 판단의 절차로 구체화했다. W43의 오케스트레이터 단순화와 AI 비용 관리는 신뢰성을 검증 단계에서만 확보하는 것이 아니라 실행 구조와 운영 경제성까지 함께 설계해야 한다는 방향으로 이어진다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://arxiv.org/abs/2610.10611" target="_blank" rel="noopener">에이전트식 AI의 검증과 자기개선: 기초와 한계</a><span class="pick-why">자율 실행을 신뢰로 연결할 때의 한계를 짚는다.</span></li><li><a href="https://aws.amazon.com/blogs/machine-learning/building-trust-in-ai-agents-a-production-ready-evaluation-framework-with-amazon-bedrock-agentcore/" target="_blank" rel="noopener">AI 에이전트의 신뢰성 구축: Amazon Bedrock AgentCore 기반 프로덕션 준비 평가 프레임워크</a><span class="pick-why">신뢰성 논의를 실제 배포 판단 절차로 연결한다.</span></li><li><a href="https://engineering.fb.com/2026/10/19/ml-applications/thin-orchestrator-ai-agent-architecture/" target="_blank" rel="noopener">최소한의 오케스트레이터: 라우터의 역할을 줄여 AI 에이전트의 신뢰성을 높이다</a><span class="pick-why">실행 구조의 단순화를 신뢰성 확보 수단으로 제시한다.</span></li><li><a href="https://www.databricks.com/blog/ai-cost-management" target="_blank" rel="noopener">AI 비용 관리의 새로운 경제학</a><span class="pick-why">에이전트 운영의 판단축을 비용과 지속 가능성으로 넓힌다.</span></li></ol></div></div>
+  <div class="take"><p class="take-headline">에이전트의 신뢰성을 확보하는 무게중심이 지시문 작성에서 검증·권한 통제·경험 학습을 설계하는 실행 환경으로 이동했다.</p><p class="take-body">W41의 추론·행동 분리와 에이전트 감사, W42의 프로덕션 평가 프레임워크는 자율 실행을 맡기려면 검증 구조가 필요하다는 문제의식을 드러냈다. W43에서는 오케스트레이터의 역할 축소와 권한·비용 관리로 그 구조가 구체화됐다. W44의 도구 훅, MCP 인프라, 메모리·스킬 간 학습은 행동을 지시문만으로 유도하는 데서 나아가 실행을 통제하고 경험을 다음 행동에 반영하는 환경으로 흐름이 이어졌음을 보여준다.</p><div class="picks"><span class="picks-label">핵심 문서</span><ol><li><a href="https://aws.amazon.com/blogs/machine-learning/building-trust-in-ai-agents-a-production-ready-evaluation-framework-with-amazon-bedrock-agentcore/" target="_blank" rel="noopener">AI 에이전트의 신뢰성 구축: Amazon Bedrock AgentCore 기반 프로덕션 준비 평가 프레임워크</a><span class="pick-why">자율 실행을 실제 배포로 연결하는 검증 관문</span></li><li><a href="https://engineering.fb.com/2026/10/19/ml-applications/thin-orchestrator-ai-agent-architecture/" target="_blank" rel="noopener">최소한의 오케스트레이터: 라우터의 역할을 줄여 AI 에이전트의 신뢰성을 높이다</a><span class="pick-why">신뢰성 문제를 실행 구조의 설계 문제로 전환</span></li><li><a href="https://www.alibabacloud.com/blog/does-do-not-work-on-ai-agents-900-tests-with-agentrun-mcp-tool-hooks_603668" target="_blank" rel="noopener">AI 에이전트에게 “하지 마”라는 지시가 통할까? AgentRun MCP Tool Hooks로 진행한 900회 테스트</a><span class="pick-why">지시문과 실행 단계 통제의 차이를 실험으로 점검</span></li><li><a href="https://arxiv.org/abs/2610.32295" target="_blank" rel="noopener">메모리와 스킬의 양방향 학습을 통한 지속적 컨텍스트 적응</a><span class="pick-why">경험을 축적해 이후 행동을 바꾸는 피드백 축</span></li></ol></div></div>
 </div>
 <div class="section" id="weeks">
   <div class="section-header">
