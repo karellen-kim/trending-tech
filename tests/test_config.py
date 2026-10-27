@@ -38,7 +38,7 @@ def test_source_count_expanded():
 
 def test_community_limits_and_diagram_settings_removed():
     assert config.MAX_HN_ITEMS == 3
-    assert config.MAX_REDDIT_ITEMS == 5
+    assert config.MAX_REDDIT_ITEMS == 3
     assert not hasattr(config, 'ENABLE_SVG')
     assert not hasattr(config, 'MAX_SVG_ITEMS')
     assert not hasattr(config, 'MAX_COMMUNITY_ITEMS')

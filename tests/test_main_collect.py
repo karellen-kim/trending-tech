@@ -25,7 +25,7 @@ def test_collect_separates_ranked_hn_and_caps_reddit(monkeypatch):
         data = main.collect("2026-10-27")
     fetch_hn.assert_called_once_with(day="2026-10-26")
     assert [i["title"] for i in data["hn"]] == ["h0", "h1", "h2"]
-    assert [i["title"] for i in data["reddit"]] == ["r1", "r2", "r3", "r4", "r5"]
+    assert [i["title"] for i in data["reddit"]] == ["r1", "r2", "r3"]
     assert data["hn_date"] == "2026-10-26"
     assert "community" not in data
 

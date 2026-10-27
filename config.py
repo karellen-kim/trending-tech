@@ -39,7 +39,7 @@ MAX_GITHUB_ITEMS = 5
 MAX_HN_ITEMS = 3
 MAX_PAPER_ITEMS = 3
 MAX_BLOG_ITEMS = 3        # 소스당 검사할 최신 글 수
-MAX_REDDIT_ITEMS = 5
+MAX_REDDIT_ITEMS = 3
 MAX_SCRAPER_ITEMS = 3
 
 COLLECT_DAYS = 2          # 오늘 포함 최근 N일 글을 수집 (하루치만 보면 5건 수준이라 2일)
