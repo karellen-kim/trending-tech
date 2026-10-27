@@ -8,6 +8,8 @@ def _mock_feed():
     entry = MagicMock()
     entry.title = "New Post"
     entry.link = "https://example.com/post"
+    entry.summary = "This is a summary."
+    entry.content = []
     entry.get = lambda k, d="": "This is a summary." if k == "summary" else d
     # 고정 날짜를 쓰면 수집 범위(COLLECT_DAYS) 밖으로 밀려나므로 오늘 기준으로 만든다
     entry.published_parsed = datetime.now(timezone.utc).timetuple()
@@ -195,3 +197,58 @@ def test_pub_hint_is_unknown_when_feed_has_no_date():
     with patch("sources.rss.requests.get", return_value=resp):
         items = rss.fetch_rss_entries("s", "http://f")
     assert items[0]["pub_hint"] == "unknown"
+
+
+def test_feed_preserves_full_plaintext_after_long_html_prefix():
+    from types import SimpleNamespace
+    from sources import rss
+    article = 'Actual detailed findings and mechanisms. ' * 30
+    raw = ('<blockquote>Introductory quote.</blockquote>' +
+           '<span data-layout="' + 'x' * 600 + '"></span>' +
+           '<script>unwanted_script()</script><style>.unwanted_style{}</style>' +
+           '<p>' + article + '</p>')
+    feed = SimpleNamespace(entries=[SimpleNamespace(title='Article', link='https://article', summary=raw)])
+    with patch('sources.rss.requests.get', return_value=Mock(content=b'')), \
+            patch('sources.rss.feedparser.parse', return_value=feed):
+        items = rss.fetch_rss_entries('Feed', 'https://feed')
+    assert items[0]['summary'] == raw[:500]
+    assert len(items[0]['content']) > 500
+    assert article.strip() in items[0]['content']
+    assert '<p>' not in items[0]['content']
+    assert 'unwanted_script' not in items[0]['content']
+    assert 'unwanted_style' not in items[0]['content']
+    with patch('sources.rss._fetch_article_text') as fetch:
+        rss.enrich_with_body(items)
+    fetch.assert_not_called()
+
+
+def test_feed_prefers_complete_content_over_summary():
+    from sources import rss
+    article = 'Complete feed body. ' * 60
+    xml = ('<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">'
+           '<channel><item><title>Article</title><link>https://article</link>'
+           '<description>Short teaser</description>'
+           '<content:encoded><![CDATA[<p>' + article + '</p>]]></content:encoded>'
+           '</item></channel></rss>').encode()
+    with patch('sources.rss.requests.get', return_value=Mock(content=xml)):
+        items = rss.fetch_rss_entries('Feed', 'https://feed')
+    assert items[0]['content'] == article.strip()
+    with patch('sources.rss._fetch_article_text') as fetch:
+        rss.enrich_with_body(items)
+    fetch.assert_not_called()
+
+
+def test_feed_keeps_long_summary_when_content_is_short():
+    from types import SimpleNamespace
+    from sources import rss
+    article = 'Full article in the summary field. ' * 60
+    entry = SimpleNamespace(title='Article', link='https://article',
+                            summary='<p>' + article + '</p>',
+                            content=[{'value': '<p>Short teaser</p>'}])
+    with patch('sources.rss.requests.get', return_value=Mock(content=b'')), \
+            patch('sources.rss.feedparser.parse', return_value=SimpleNamespace(entries=[entry])):
+        items = rss.fetch_rss_entries('Feed', 'https://feed')
+    assert items[0]['content'] == article.strip()
+    with patch('sources.rss._fetch_article_text') as fetch:
+        rss.enrich_with_body(items)
+    fetch.assert_not_called()

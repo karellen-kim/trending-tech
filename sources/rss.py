@@ -1,6 +1,6 @@
-import re
 import feedparser
 import requests
+from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone, timedelta, time
 from config import now_kst
@@ -9,16 +9,22 @@ from sources.scraper import _fetch_article_text
 
 KST = timezone(timedelta(hours=9))
 _HEADERS = {"User-Agent": "trending-tech-bot/1.0"}
-_TAG = re.compile(r"<[^>]+>")
 MIN_CONTENT = 150   # summarizer 가 요약을 포기하는 하한
 
+def _plain_text(html: str) -> str:
+    soup = BeautifulSoup(html or "", "html.parser")
+    for tag in soup.select("script, style"):
+        tag.decompose()
+    return " ".join(soup.get_text(" ", strip=True).split())
+
 def _text_len(html: str) -> int:
-    return len(" ".join(_TAG.sub(" ", html or "").split()))
+    return len(_plain_text(html))
 
 def enrich_with_body(items: list[dict], max_fetch: int = MAX_BODY_FETCH) -> list[dict]:
     """RSS 요약이 짧은 항목만 원문 본문을 받아 content 에 채운다.
     실측상 전체 엔트리의 45%가 150자 미만이라 이 단계 없이는 요약이 빈 문자열이 된다."""
-    targets = [i for i in items if _text_len(i.get("summary", "")) < MIN_CONTENT][:max_fetch]
+    targets = [i for i in items if max(_text_len(i.get("summary", "")),
+                                      _text_len(i.get("content", ""))) < MIN_CONTENT][:max_fetch]
     if not targets:
         return items
 
@@ -73,11 +79,15 @@ def fetch_rss_entries(name: str, url: str, max_items: int = MAX_BLOG_ITEMS, **kw
         if pub is not None and not (start <= pub < end):
             continue
         summary = getattr(entry, "summary", "") or ""
+        feed_content = [_plain_text(part.get("value", ""))
+                        for part in (getattr(entry, "content", None) or [])]
+        content = max([_plain_text(summary), *feed_content], key=len)
         items.append({
             "title": getattr(entry, "title", ""),
             "url": getattr(entry, "link", ""),
             "source": name,
             "summary": summary[:500],
+            "content": content,
             "pub_hint": _pub_hint(entry),
             "date_verified": pub is not None,
             "pub_date": pub.astimezone(KST).strftime("%Y-%m-%d") if pub else "",
