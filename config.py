@@ -55,13 +55,11 @@ RSS_WORKERS = 8           # RSS 수집 병렬 실행 수
 # 전부 실측 검증된 피드 (HTTP 200 + 엔트리 존재 + 날짜 파싱 가능)
 RSS_SOURCES = [
     # AI·리서치
-    {"name": "AWS ML Blog", "url": "https://aws.amazon.com/blogs/machine-learning/feed/", "category": "company"},
     {"name": "Apple ML Research", "url": "https://machinelearning.apple.com/rss.xml", "category": "company"},
     {"name": "Google DeepMind", "url": "https://deepmind.google/discover/blog/feed", "category": "company"},
     {"name": "Google Research", "url": "https://research.google/blog/rss", "category": "company"},
     {"name": "Microsoft Research", "url": "https://www.microsoft.com/en-us/research/feed/", "category": "company"},
     # 빅테크 엔지니어링
-    {"name": "AWS Architecture Blog", "url": "https://aws.amazon.com/blogs/architecture/feed/", "category": "company"},
     {"name": "Cloudflare Blog", "url": "https://blog.cloudflare.com/rss/", "category": "company"},
     {"name": "Confluent Blog", "url": "https://www.confluent.io/rss.xml", "category": "company"},
     {"name": "Databricks Blog", "url": "https://www.databricks.com/blog/feed.xml", "category": "company"},
