@@ -4,15 +4,14 @@ import signal
 import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, timedelta, datetime
-from itertools import zip_longest
 
 from config import (DOCS_DIR, SLACK_WEBHOOK_URL, MAX_PAPER_ITEMS, SUMMARY_WORKERS, now_kst,
-                    MAX_COMMUNITY_ITEMS, MAX_COMPANY_TOTAL, MAX_DEV_TOTAL, ENABLE_SVG,
-                    MAX_SVG_ITEMS, ENABLE_NOTEBOOKLM)
+                    MAX_HN_ITEMS, MAX_REDDIT_ITEMS, MAX_COMPANY_TOTAL, MAX_DEV_TOTAL,
+                    ENABLE_NOTEBOOKLM)
 from sources.github import fetch_trending
 from sources.hackernews import fetch_top_stories
 from sources.reddit import fetch_all_reddit
-from sources.rss import fetch_all_blogs
+from sources.rss import fetch_all_blogs, enrich_with_body
 from sources.arxiv import fetch_all_papers
 from sources.scraper import fetch_all_scraped
 from summarizer import (LlmCallError, _log_llm_event, analyze_item, filter_important_papers, generate_highlights,
@@ -20,28 +19,9 @@ from summarizer import (LlmCallError, _log_llm_event, analyze_item, filter_impor
                         generate_week_take, generate_month_take)
 import digest
 from renderer import render_monthly_page
-from svgmaker import add_svgs
 from notebooklm import generate_audio_review
 from renderer import render_daily_page, render_weekly_page, render_index_page
 from notifier import send_slack
-
-
-def _merge_community(hn: list[dict], reddit: list[dict],
-                     limit: int = MAX_COMMUNITY_ITEMS) -> list[dict]:
-    """HN·Reddit 을 번갈아 뽑아 상위 limit 건만 남긴다.
-    Reddit RSS 에는 점수가 없어 두 소스를 한 기준으로 정렬할 수 없다.
-    각 소스의 원래 순위를 유지한 채 섞는다."""
-    merged, seen = [], set()
-    for pair in zip_longest(hn, reddit):
-        for item in pair:
-            if not item or len(merged) >= limit:
-                continue
-            url = item.get("url", "")
-            if url and url in seen:   # HN 과 r/programming 이 같은 글을 싣는다
-                continue
-            seen.add(url)
-            merged.append(item)
-    return merged
 
 
 def _analyze_items(items: list[dict], content_key: str, filter_today: bool = True) -> list[dict]:
@@ -54,7 +34,7 @@ def _analyze_items(items: list[dict], content_key: str, filter_today: bool = Tru
     def one(item):
         # 짧은 RSS 요약이 truthy 라는 이유로 받아온 본문을 가리던 문제가 있었다
         # (Databricks 86자 요약이 1999자 본문을 덮었다). 가장 긴 것을 쓴다.
-        cands = [item.get(content_key), item.get("content"),
+        cands = [item.get(content_key), item.get("content"), item.get("summary"),
                  item.get("description"), item.get("abstract")]
         content = max((c for c in cands if c), key=len, default="")
         title = item.get("title") or item.get("name", "")
@@ -133,15 +113,17 @@ def _load_recent_urls(days: int = 7) -> set[str]:
     return urls
 
 
-def collect(today: str) -> dict:
+def collect(today: str, hn_day: str | None = None) -> dict:
     print(f"[{today}] 수집 시작")
+    hn_day = hn_day or (date.fromisoformat(today) - timedelta(days=1)).isoformat()
+    date.fromisoformat(hn_day)
     yesterday_github = _load_yesterday_github()
     with ThreadPoolExecutor(max_workers=6) as ex:
         f_gh = ex.submit(fetch_trending, "daily", yesterday_github)
         f_bl = ex.submit(fetch_all_blogs)
         f_ar = ex.submit(fetch_all_papers)
         f_sc = ex.submit(fetch_all_scraped)
-        f_hn = ex.submit(fetch_top_stories)
+        f_hn = ex.submit(fetch_top_stories, day=hn_day)
         f_rd = ex.submit(fetch_all_reddit)
         github = f_gh.result()
         all_blogs = f_bl.result()
@@ -173,13 +155,23 @@ def collect(today: str) -> dict:
         print(f"  [중복제거] 이미 실린 글 {before - after}건 제외")
 
     papers = filter_important_papers(papers, max_items=MAX_PAPER_ITEMS)
-    # 최근 페이지에 이미 실린 글은 커뮤니티에서도 뺀다 (블로그 섹션과 같은 기준)
-    hn = [i for i in hn if i.get("url") not in seen]
-    reddit = [i for i in reddit if i.get("url") not in seen]
-    community = _merge_community(hn, reddit)
+    # HN past의 공식 순위는 과거 URL 중복 여부와 무관하게 유지한다.
+    hn = hn[:MAX_HN_ITEMS]
+    reddit_urls = set(seen)
+    unique_reddit = []
+    for item in reddit:
+        url = item.get("url", "")
+        if url and url in reddit_urls:
+            continue
+        if url:
+            reddit_urls.add(url)
+        unique_reddit.append(item)
+        if len(unique_reddit) >= MAX_REDDIT_ITEMS:
+            break
+    reddit = unique_reddit
 
     print(f"  GitHub:{len(github)} Company:{len(company_blogs)} "
-          f"Dev:{len(dev_blogs)} Papers:{len(papers)} Community:{len(community)}")
+          f"Dev:{len(dev_blogs)} Papers:{len(papers)} HN:{len(hn)} Reddit:{len(reddit)}")
 
     return {
         "date": today,
@@ -187,7 +179,9 @@ def collect(today: str) -> dict:
         "company_blogs": company_blogs,
         "dev_blogs": dev_blogs,
         "papers": papers,
-        "community": community,
+        "hn": hn,
+        "reddit": reddit,
+        "hn_date": hn_day,
     }
 
 
@@ -198,14 +192,24 @@ def summarize(data: dict) -> dict:
     data["dev_blogs"] = _analyze_items(data["dev_blogs"], "summary")[:MAX_DEV_TOTAL]
     data["papers"] = _analyze_items(data["papers"], "abstract", filter_today=False)
     data["github"] = _analyze_items(data["github"], "readme", filter_today=False)
-    # 커뮤니티는 제목만 있어 요약할 본문이 없다. 실질적으로 제목 번역만 얻는다.
-    # 날짜 판정은 태우지 않는다 — Reddit 은 수집 단계에서 걸렀고, HN front_page 는 기준이 없다.
-    data["community"] = _analyze_items(data.get("community", []), "title", filter_today=False)
-    if ENABLE_SVG:
-        print("[다이어그램] 생성 중...")
-        add_svgs(data["company_blogs"], MAX_SVG_ITEMS)
-        add_svgs(data["dev_blogs"], MAX_SVG_ITEMS)
-        add_svgs(data["papers"], MAX_SVG_ITEMS)
+    body_keys = ("content", "summary", "description", "abstract")
+    for section in ("hn", "reddit"):
+        items = data.get(section, [])
+        # 이미 제공된 본문은 그대로 사용하고, 본문이 없는 링크만 읽는다.
+        targets = [item for item in items if item.get("url") and
+                   not any(len((item.get(key) or "").strip()) >= 150 for key in body_keys)]
+        enrich_with_body(targets)
+        body_available = [any(len((item.get(key) or "").strip()) >= 150 for key in body_keys)
+                          for item in items]
+        analyzed = _analyze_items(items, "content", filter_today=False)
+        for item, has_body in zip(analyzed, body_available):
+            if not has_body:
+                item["summary"] = ""
+        if section in data:
+            data[section] = analyzed
+    # 과거 JSON을 수동 재처리하는 경우의 호환 경로.
+    if "community" in data:
+        data["community"] = _analyze_items(data["community"], "title", filter_today=False)
     # 오늘 글들을 가로질러 읽은 해석 한 문장. 근거가 된 글은 목록에서 ★ 로 표시한다.
     take = generate_today_take(data)
     data["today_take"] = take
@@ -226,6 +230,14 @@ def make_audio(data: dict) -> str:
     """하이라이트 링크로 새 노트북을 만들고 오디오 오버뷰 생성을 시킨다.
     성공하면 노트북 주소를 돌려준다. 파일은 내려받지 않는다 — 재생은 노트북에서 한다.
     실패해도 배치는 계속된다."""
+    existing_url = data.get("audio_url", "")
+    if not existing_url:
+        try:
+            existing_url = json.loads((DOCS_DIR / f"{data['date']}.json").read_text(encoding="utf-8")).get("audio_url", "")
+        except (OSError, ValueError):
+            pass
+    if existing_url:
+        return existing_url
     if not ENABLE_NOTEBOOKLM:
         return ""
     urls = [l.get("url") for l in data.get("highlight_links", []) if l.get("url")]
@@ -272,7 +284,7 @@ def save_html(data: dict) -> list[str]:
             "date": today,
             "highlights": highlights,
             "github_names": [i["name"] for i in data["github"]],
-            "seen_urls": [i["url"] for k in ("company_blogs", "dev_blogs", "community")
+            "seen_urls": [i["url"] for k in ("company_blogs", "dev_blogs", "hn", "reddit", "community")
                           for i in data.get(k, []) if i.get("url")],
             # 주간·월간 해석이 이 필드들을 모아 쓴다
             "today_take": {k: v for k, v in (data.get("today_take") or {}).items()
@@ -280,6 +292,7 @@ def save_html(data: dict) -> list[str]:
             "important_links": [{"text": l.get("text", ""), "url": l.get("url", "")}
                                 for l in (data.get("highlight_links") or []) if l.get("url")],
             **({"audio_url": data["audio_url"]} if data.get("audio_url") else {}),
+            **{key: data[key] for key in ("hn", "reddit", "hn_date") if key in data},
         }, ensure_ascii=False),
         encoding="utf-8"
     )
@@ -409,15 +422,15 @@ def _timeout_handler(signum, frame):
     raise SystemExit(1)
 
 
-def main():
+def main(hn_day: str | None = None):
     signal.signal(signal.SIGALRM, _timeout_handler)
     signal.alarm(6 * 3600)
 
     today = now_kst().date()
     today_str = str(today)
-    data = collect(today_str)
+    data = collect(today_str, hn_day=hn_day) if hn_day is not None else collect(today_str)
     data = summarize(data)
-    if any(data.get(section) for section in ("company_blogs", "dev_blogs", "papers", "github", "community")):
+    if any(data.get(section) for section in ("company_blogs", "dev_blogs", "papers", "github", "hn", "reddit", "community")):
         take = data.get("today_take") or {}
         if not isinstance(take, dict) or not isinstance(take.get("headline"), str) or not take["headline"].strip():
             raise LlmCallError("missing_output", "Required today_take headline is empty", context=today_str)

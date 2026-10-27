@@ -2,55 +2,47 @@ from unittest.mock import patch
 import main
 
 
-def test_merge_community_interleaves_and_caps():
-    """Reddit RSS 에는 점수가 없어 한 기준으로 정렬할 수 없다. 번갈아 섞는다."""
-    hn = [{"title": f"h{i}"} for i in range(4)]
-    rd = [{"title": f"r{i}"} for i in range(4)]
-    out = main._merge_community(hn, rd, limit=5)
-    assert [i["title"] for i in out] == ["h0", "r0", "h1", "r1", "h2"]
+import pytest
 
 
-def test_merge_community_drops_duplicate_urls():
-    """HN 과 r/programming 이 같은 글을 싣는다. 5칸짜리 섹션에서 두 칸을 먹으면 안 된다."""
-    hn = [{"title": "a", "url": "http://x"}, {"title": "b", "url": "http://y"}]
-    rd = [{"title": "a-dup", "url": "http://x"}, {"title": "c", "url": "http://z"}]
-    out = main._merge_community(hn, rd, limit=5)
-    assert [i["url"] for i in out] == ["http://x", "http://y", "http://z"]
+@pytest.fixture(autouse=True)
+def isolated_docs(tmp_path, monkeypatch):
+    monkeypatch.setattr(main, "DOCS_DIR", tmp_path)
 
 
-def test_merge_community_fills_from_one_side():
-    """한쪽이 비어도 5건을 채운다"""
-    out = main._merge_community([], [{"title": f"r{i}"} for i in range(7)], limit=5)
-    assert [i["title"] for i in out] == ["r0", "r1", "r2", "r3", "r4"]
-
-
-def test_collect_merges_community_into_five():
-    """HN·Reddit 을 합쳐 5건만 싣는다"""
-    hn = [{"title": f"h{i}", "url": f"http://h{i}", "points": 10} for i in range(4)]
-    rd = [{"title": f"r{i}", "url": f"http://r{i}", "source": "r/x"} for i in range(4)]
+def test_collect_separates_ranked_hn_and_caps_reddit(monkeypatch):
+    hn = [{"title": f"h{i}", "url": f"http://h{i}", "rank": i + 1} for i in range(4)]
+    rd = [{"title": f"r{i}", "url": f"http://r{i}"} for i in range(7)]
+    rd.insert(2, {"title": "r1 duplicate", "url": "http://r1"})
     with patch("main.fetch_trending", return_value=[]), \
          patch("main.fetch_all_blogs", return_value=[]), \
          patch("main.fetch_all_papers", return_value=[]), \
          patch("main.fetch_all_scraped", return_value=[]), \
-         patch("main.fetch_top_stories", return_value=hn), \
+         patch("main.fetch_top_stories", return_value=hn) as fetch_hn, \
          patch("main.fetch_all_reddit", return_value=rd), \
-         patch("main.filter_important_papers", return_value=[]):
-        data = main.collect("2026-09-20")
-    assert [i["title"] for i in data["community"]] == ["h0", "r0", "h1", "r1", "h2"]
+         patch("main.filter_important_papers", return_value=[]), \
+         patch("main._load_recent_urls", return_value={"http://h0", "http://r0"}):
+        data = main.collect("2026-10-27")
+    fetch_hn.assert_called_once_with(day="2026-10-26")
+    assert [i["title"] for i in data["hn"]] == ["h0", "h1", "h2"]
+    assert [i["title"] for i in data["reddit"]] == ["r1", "r2", "r3", "r4", "r5"]
+    assert data["hn_date"] == "2026-10-26"
+    assert "community" not in data
 
 
-def test_collect_survives_hn_failure():
-    """한 소스가 죽어도 배치는 계속된다"""
-    rd = [{"title": "r0", "url": "http://r0", "source": "r/x"}]
+def test_collect_explicit_hn_day_and_failure():
     with patch("main.fetch_trending", return_value=[]), \
          patch("main.fetch_all_blogs", return_value=[]), \
          patch("main.fetch_all_papers", return_value=[]), \
          patch("main.fetch_all_scraped", return_value=[]), \
-         patch("main.fetch_top_stories", side_effect=RuntimeError("HN 503")), \
-         patch("main.fetch_all_reddit", return_value=rd), \
+         patch("main.fetch_top_stories", side_effect=RuntimeError("HN503")) as fetch_hn, \
+         patch("main.fetch_all_reddit", return_value=[{"title": "r0", "url": "http://r0"}]), \
          patch("main.filter_important_papers", return_value=[]):
-        data = main.collect("2026-09-20")
-    assert [i["title"] for i in data["community"]] == ["r0"]
+        data = main.collect("2026-10-26", hn_day="2026-10-26")
+    fetch_hn.assert_called_once_with(day="2026-10-26")
+    assert data["hn"] == []
+    assert len(data["reddit"]) == 1
+    assert data["hn_date"] == "2026-10-26"
 
 
 def test_analyze_items_drops_non_today(monkeypatch):
@@ -104,7 +96,6 @@ def test_summarize_translates_community(monkeypatch):
                             title=t, verified=date_verified) or {
                             "is_today": False, "pub_date": "x",
                             "title_ko": "한글제목", "summary": "요약"})
-    monkeypatch.setattr(main, "ENABLE_SVG", False)
     monkeypatch.setattr(main, "generate_today_take", lambda d: {})
     monkeypatch.setattr(main, "generate_highlight_links", lambda d: [])
     monkeypatch.setattr(main, "generate_highlights", lambda d: [])
@@ -180,3 +171,65 @@ def test_analyze_keeps_summary_when_no_content(monkeypatch):
               "pub_hint": "x", "date_verified": True}]
     main._analyze_items(items, "summary")
     assert "본문이 여기 다 있다" in got["content"]
+
+
+def test_summarize_hn_and_reddit_uses_real_body_and_no_body_fallback(monkeypatch):
+    calls = {}
+    fetched = []
+
+    def enrich(items):
+        fetched.extend(item['url'] for item in items)
+        for item in items:
+            if item['title'] == 'Fetched':
+                item['content'] = '본문 ' * 80
+        return items
+
+    def analyze(title, content, *args, **kwargs):
+        calls[title] = (content, kwargs['date_verified'])
+        return {'is_today': True, 'pub_date': '', 'title_ko': title + ' 번역',
+                'summary': '원문 요약' if content else '지어낸 요약'}
+
+    monkeypatch.setattr(main, 'enrich_with_body', enrich)
+    monkeypatch.setattr(main, 'analyze_item', analyze)
+    monkeypatch.setattr(main, 'generate_today_take', lambda data: {'headline': '흐름', 'refs': []})
+    data = main.summarize({'date': '2026-10-27', 'company_blogs': [], 'dev_blogs': [],
+                          'papers': [], 'github': [],
+                          'hn': [{'title': 'Provided', 'url': 'https://provided', 'content': '기사 ' * 80},
+                                 {'title': 'SummaryOnly', 'url': 'https://summary', 'summary': '제공 본문 ' * 80},
+                                 {'title': 'Fetched', 'url': 'https://fetched'}],
+                          'reddit': [{'title': 'Unavailable', 'url': 'https://unavailable'}]})
+    assert fetched == ['https://fetched', 'https://unavailable']
+    assert calls['Provided'] == ('기사 ' * 80, True)
+    assert calls['SummaryOnly'] == ('제공 본문 ' * 80, True)
+    assert calls['Fetched'] == ('본문 ' * 80, True)
+    assert calls['Unavailable'] == ('', True)
+    assert [item['summary'] for item in data['hn']] == ['원문 요약', '원문 요약', '원문 요약']
+    assert data['reddit'][0]['summary'] == ''
+    assert data['reddit'][0]['title_ko'] == 'Unavailable 번역'
+
+
+def test_audio_reuses_existing_saved_notebook(monkeypatch, tmp_path):
+    import json
+    url = 'https://notebooklm.google.com/notebook/existing'
+    (tmp_path / '2026-10-26.json').write_text(json.dumps({'audio_url': url}))
+    monkeypatch.setattr(main, 'ENABLE_NOTEBOOKLM', True)
+    with patch('main.generate_audio_review') as generate:
+        assert main.make_audio({'date': '2026-10-26', 'highlight_links': [{'url': 'https://source'}]}) == url
+    generate.assert_not_called()
+
+
+def test_main_forwards_explicit_hn_day(monkeypatch):
+    from unittest.mock import Mock
+    monkeypatch.setenv('RUN_DATE', '2026-10-26')
+    monkeypatch.setenv('DRY', '1')
+    monkeypatch.setattr(main.signal, 'signal', Mock())
+    monkeypatch.setattr(main.signal, 'alarm', Mock())
+    collect = Mock(return_value={'date': '2026-10-26'})
+    monkeypatch.setattr(main, 'collect', collect)
+    monkeypatch.setattr(main, 'summarize', lambda data: data)
+    monkeypatch.setattr(main, 'make_audio', lambda data: '')
+    monkeypatch.setattr(main, 'save_html', lambda data: [])
+    monkeypatch.setattr(main, 'save_weekly_page', lambda today: None)
+    monkeypatch.setattr(main, 'save_monthly_page', lambda today: '')
+    main.main(hn_day='2026-10-26')
+    collect.assert_called_once_with('2026-10-26', hn_day='2026-10-26')

@@ -114,13 +114,9 @@ _DAILY_CSS = """<style>
   .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
   .audio-block a:hover { text-decoration: underline; }
 
-  /* ── 아이템 (아코디언) ── */
+  /* ── 항상 펼쳐진 요약 ── */
   .item { border-bottom: 1px solid var(--rule); }
   .item:last-child { border-bottom: none; }
-  .item details > summary { display: grid; grid-template-columns: 1fr auto auto; gap: 0.8rem;
-    align-items: baseline; padding: 1rem 1rem; cursor: pointer; list-style: none; }
-  .item details > summary::-webkit-details-marker { display: none; }
-  .item details > summary:hover .item-name { color: var(--accent-deep); }
   .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
     align-items: baseline; padding: 1rem 1.15rem; }
   .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
@@ -131,28 +127,9 @@ _DAILY_CSS = """<style>
   .item-name a:hover { color: var(--green); }
   .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
     letter-spacing: 0.08em; white-space: nowrap; }
-  .item-toggle::before { content: "+"; font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint); }
-  .item details[open] > summary .item-toggle::before { content: "\2212"; color: var(--accent); }
-  .item-body { padding: 0 1rem 1.2rem; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
+  .community-date { padding: 0.8rem 1.15rem 0; font-size: 0.75rem; color: var(--ink-faint); }
   .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
-  /* 테두리는 스크롤 상자에 둔다. figure 에 두면 그림과 같이 밀려 나가 칸을 벗어난다. */
-  .item-diagram { margin: 0 0 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
-    border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
-    padding: 1rem 0.9rem 0.7rem;
-    /* SVG 안에 박힌 var(--accent) 가 골드라 흰 배경에서 흐리다. 그림 안에서만 진하게 */
-    --accent: #b08a2a; --accent-wash: #f6f1e2; }
-  /* svg 인라인 max-width:100% 가 좁은 화면에서 그림을 1/3 로 압착해 글자를 뭉갠다.
-     원본 크기를 지키고 상자에서 옆으로 밀어 본다. */
-  .item-diagram svg { max-width: none !important; }
-  .item-diagram .diagram { margin: 0; padding: 0; border: none; background: none; color: var(--ink);
-    width: max-content; min-width: 100%; }
-  /* svg 자체가 style="width:Npx;max-width:100%" 를 들고 있다 — 확대하지 않고 1:1 로 그린다 */
-  .item-diagram svg { height: auto; display: block; }
-  .item-diagram figcaption { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule-strong);
-    font-family: var(--serif); font-style: italic; font-size: 0.74rem; color: #7d7364; text-align: center; }
-  .item-link { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.7rem; }
-  .item-link a { color: var(--green); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
-
   /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
   .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
   /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
@@ -168,12 +145,6 @@ _DAILY_CSS = """<style>
        제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
     .item-head { grid-template-columns: 1fr; }
     .item-head .item-meta { margin-top: 0.45rem; }
-    .item details > summary { grid-template-columns: 1fr auto; }
-    /* 제목은 한 줄을 통째로 쓴다. 토글을 옆에 두면 그만큼 폭을 잃는다. */
-    .item details > summary .item-name { grid-column: 1 / -1; grid-row: 1; }
-    .item details > summary .item-meta { grid-column: 1; grid-row: 2; margin-top: 0.45rem; }
-    .item details > summary .item-toggle { grid-column: 2; grid-row: 2; align-self: end; }
-
     /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
        화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
        11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
@@ -275,37 +246,16 @@ def _item_html(name: str, url: str, meta: str, summary: str,
     display_name = name_ko if name_ko and name_ko.strip() else name
     star = '<span class="item-star" title="꼭 봐야 할 글">★</span>' if important else ""
     link_html = f'<a href="{url}" target="_blank" rel="noopener">{_e(display_name)}</a>'
-    has_body = bool((summary or "").strip()) or bool((svg or "").strip())
     cls = "item important" if important else "item"
-
-    if not has_body:
-        return f"""<div class="{cls}">
+    body = ""
+    if summary and summary.strip():
+        body = f'<div class="item-body"><div class="item-summary">{_prose(summary).replace(chr(10), "<br>")}</div></div>'
+    return f"""<div class="{cls}">
   <div class="item-head">
     <div class="item-name">{star}{link_html}</div>
     <div class="item-meta">{_e(meta)}</div>
   </div>
-</div>"""
-
-    body = ""
-    if svg and svg.strip():
-        body += f'<div class="item-diagram">{svg}</div>'
-    if summary and summary.strip():
-        body += f'<div class="item-summary">{_prose(summary).replace(chr(10), "<br>")}</div>'
-
-    # 제목을 <summary> 안에서 링크로 두면 클릭이 펼침과 충돌하므로,
-    # 접힌 헤더에는 텍스트만 두고 펼친 본문 하단에 원문 링크를 둔다.
-    return f"""<div class="{cls}">
-  <details>
-    <summary>
-      <span class="item-name">{star}{_e(display_name)}</span>
-      <span class="item-meta">{_e(meta)}</span>
-      <span class="item-toggle" aria-hidden="true"></span>
-    </summary>
-    <div class="item-body">
-      {body}
-      <div class="item-link">{link_html} &rarr;</div>
-    </div>
-  </details>
+  {body}
 </div>"""
 
 _SECTIONS_META = [
@@ -313,7 +263,8 @@ _SECTIONS_META = [
     ("tech-blog",     "기술",  "기술 블로그"),
     ("dev-blogs",     "개발",  "개발자 블로그 &amp; SNS"),
     ("papers",        "논문",  "AI / LLM 논문"),
-    ("hn-reddit",     "커뮤",  "Hacker News &amp; Reddit"),
+    ("hn",            "HN",    "Hacker News"),
+    ("reddit",        "커뮤",  "Reddit"),
     ("github",        "코드",  "GitHub 트렌딩"),
 ]
 
@@ -338,8 +289,11 @@ def render_daily_page(data: dict) -> str:
     company_blogs = data.get("company_blogs", [])
     dev_blogs = data.get("dev_blogs", [])
     papers = data.get("papers", [])
-    # community 는 HN·Reddit 을 섞어 5건으로 자른 목록. 옛 페이지는 hn/reddit 키를 쓴다.
-    hn_reddit = data.get("community") or (data.get("hn", []) + data.get("reddit", []))
+    # 이전 혼합 형식도 별도 섹션으로 읽되 명시적인 새 목록을 우선한다.
+    community = data.get("community", [])
+    legacy_reddit = [i for i in community if i.get("source", "").startswith("r/") or "reddit.com/" in i.get("url", "")]
+    hn = data.get("hn", [i for i in community if i not in legacy_reddit])
+    reddit = data.get("reddit", legacy_reddit)
     github = data.get("github", [])
 
     sections = ""
@@ -393,13 +347,20 @@ def render_daily_page(data: dict) -> str:
                        i.get("title_ko",""), i.get("svg",""), i.get("important", False))
             for i in papers), len(papers))
 
-    if hn_reddit:
-        sections += _section_html("hn-reddit", "커뮤", "Hacker News &amp; Reddit", "".join(
-            _item_html(
-                i.get("title",""), i["url"],
-                f"{i.get('source','HN')} · {i.get('points',0)} pts" if "points" in i else i.get("source",""),
-                i.get("summary",""), i.get("title_ko",""))
-            for i in hn_reddit), len(hn_reddit))
+    if hn:
+        hn_date = data.get("hn_date")
+        date_html = f'<div class="community-date">{_e(hn_date)} UTC · 당시 페이지 순위</div>' if hn_date else ""
+        sections += _section_html("hn", "HN", "Hacker News", date_html + "".join(
+            _item_html(i.get("title", ""), i["url"],
+                       f"{i.get('rank', n)}위 · {i.get('points', 0)} pts",
+                       i.get("summary", ""), i.get("title_ko", ""))
+            for n, i in enumerate(hn, 1)), len(hn))
+
+    if reddit:
+        sections += _section_html("reddit", "커뮤", "Reddit", "".join(
+            _item_html(i.get("title", ""), i["url"], i.get("source", "Reddit"),
+                       i.get("summary", ""), i.get("title_ko", ""))
+            for i in reddit), len(reddit))
 
     if github:
         sections += _section_html("github", "코드", "GitHub 트렌딩", "".join(
@@ -414,7 +375,8 @@ def render_daily_page(data: dict) -> str:
         "tech-blog": bool(company_blogs),
         "dev-blogs": bool(dev_blogs),
         "papers": bool(papers),
-        "hn-reddit": bool(hn_reddit),
+        "hn": bool(hn),
+        "reddit": bool(reddit),
         "github": bool(github),
     }
     nav_links = "".join(

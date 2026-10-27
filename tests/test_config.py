@@ -34,3 +34,11 @@ def test_top_n_limit_is_three():
 
 def test_source_count_expanded():
     assert len(config.RSS_SOURCES) >= 55
+
+
+def test_community_limits_and_diagram_settings_removed():
+    assert config.MAX_HN_ITEMS == 3
+    assert config.MAX_REDDIT_ITEMS == 5
+    assert not hasattr(config, 'ENABLE_SVG')
+    assert not hasattr(config, 'MAX_SVG_ITEMS')
+    assert not hasattr(config, 'MAX_COMMUNITY_ITEMS')

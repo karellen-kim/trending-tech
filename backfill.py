@@ -39,8 +39,7 @@ _TAKE_CSS = """
 """
 
 _SECTION = re.compile(r'<div class="section[^"]*" id="([^"]+)">')
-# 항목은 두 형태다 — 요약이 없으면 item-name 에 <a> 가 바로 들어 있고,
-# 요약이 있으면 <details> 로 접혀 item-name 은 평문이고 링크는 하단 item-link 에 있다.
+# 새 페이지는 제목 링크와 요약을 바로 표시한다. 과거 접힌 페이지의 하단 링크도 읽는다.
 _ITEM_START = re.compile(r'<div class="item(?: important)?">')
 _SIMPLE_NAME = re.compile(
     r'<div class="item-name">(?:<span class="item-star"[^>]*>★</span>)?\s*'
@@ -56,6 +55,8 @@ _SECTION_KEY = {
     "tech-blog": "company_blogs",
     "dev-blogs": "dev_blogs",
     "hn-reddit": "dev_blogs",
+    "hn": "dev_blogs",
+    "reddit": "dev_blogs",
     "papers": "papers",
     "arxiv": "papers",
     "github": "github",

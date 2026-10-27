@@ -36,19 +36,16 @@ NOTEBOOKLM_HEADLESS = os.getenv("NOTEBOOKLM_HEADLESS", "1") == "1"
 NOTEBOOKLM_TIMEOUT = int(os.getenv("NOTEBOOKLM_TIMEOUT", "120"))
 
 MAX_GITHUB_ITEMS = 5
-MAX_HN_ITEMS = 10
-MAX_PAPER_ITEMS = 5
+MAX_HN_ITEMS = 3
+MAX_PAPER_ITEMS = 3
 MAX_BLOG_ITEMS = 3        # 소스당 검사할 최신 글 수
 MAX_REDDIT_ITEMS = 5
 MAX_SCRAPER_ITEMS = 3
-MAX_COMMUNITY_ITEMS = 5   # HN + Reddit 합산 상한
 
 COLLECT_DAYS = 2          # 오늘 포함 최근 N일 글을 수집 (하루치만 보면 5건 수준이라 2일)
 MAX_COMPANY_TOTAL = 25    # 기술블로그 섹션 하루 전체 상한
 MAX_DEV_TOTAL = 20        # 개발자블로그 섹션 하루 전체 상한
 MAX_BODY_FETCH = 40       # 요약이 짧아 본문을 새로 받아올 최대 건수
-ENABLE_SVG = True
-MAX_SVG_ITEMS = 4         # 개념 SVG 생성 대상 상위 N건 (다이어그램 1건이 콘텐츠 2000자·180초 타임아웃으로 가장 무거운 호출)
 SUMMARY_WORKERS = 1       # Codex CLI 동시 요청 지연이 재현돼 직렬 실행한다 (수집 병렬도와 별개).
 RSS_WORKERS = 8           # RSS 수집 병렬 실행 수
 
@@ -96,6 +93,8 @@ RSS_SOURCES = [
     {"name": "Marc Brooker", "url": "https://brooker.co.za/blog/rss.xml", "category": "dev"},
     {"name": "Martin Fowler", "url": "https://martinfowler.com/feed.atom", "category": "dev"},
     {"name": "Martin Kleppmann", "url": "https://feeds.feedburner.com/martinkl?format=xml", "category": "dev"},
+    {"name": "Sam Newman", "url": "https://samnewman.io/blog/feed.xml", "category": "dev"},
+    {"name": "Murat Demirbas", "url": "https://muratbuffalo.blogspot.com/feeds/posts/default", "category": "dev"},
     # AI·LLM
     {"name": "Andrej Karpathy", "url": "https://karpathy.bearblog.dev/feed/", "category": "dev"},
     {"name": "Chip Huyen", "url": "https://huyenchip.com/feed.xml", "category": "dev"},

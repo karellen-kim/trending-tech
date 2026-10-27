@@ -53,22 +53,23 @@ def test_render_daily_page_has_items():
     assert "microsoft/phi-4" in html
     assert "LLaMA 4 Released" in html
 
-def test_item_is_collapsible():
+def test_item_summary_is_visible_without_click():
     from renderer import _item_html
     html = _item_html("Title", "http://x", "meta", "요약 본문", "한글제목")
-    assert "<details" in html and "<summary" in html and "한글제목" in html
+    assert "<details" not in html and "<summary" not in html
+    assert "요약 본문" in html and 'href="http://x"' in html and "한글제목" in html
 
 
-def test_collapsed_by_default():
+def test_summary_has_no_toggle():
     from renderer import _item_html
-    assert "<details open" not in _item_html("T", "http://x", "m", "본문", "")
+    assert "item-toggle" not in _item_html("T", "http://x", "m", "본문", "")
 
 
-def test_svg_is_embedded_raw_not_escaped():
+def test_old_svg_is_not_rendered():
     from renderer import _item_html
     svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect width="5" height="5"/></svg>'
     html = _item_html("T", "http://x", "m", "본문", "", svg)
-    assert "<svg" in html and "&lt;svg" not in html
+    assert "<svg" not in html and "본문" in html
 
 
 def test_summary_is_still_escaped():
@@ -206,3 +207,19 @@ def test_item_summary_links_are_plain_text_and_normal_parentheses_remain():
     assert '문서 실행 비용 (토큰 + 지연)은 유지된다' in html
     assert 'https://example.com' not in html
     assert 'href="https://source.test"' in html
+
+
+def test_community_sections_are_separate_and_keep_legacy_items():
+    from bs4 import BeautifulSoup
+    data = dict(SAMPLE_DATA, hn_date="2026-05-30")
+    soup = BeautifulSoup(render_daily_page(data), "html.parser")
+    assert "LLaMA 4 Released" in soup.select_one("#hn").get_text()
+    assert "New tokenizer trick" not in soup.select_one("#hn").get_text()
+    assert "New tokenizer trick" in soup.select_one("#reddit").get_text()
+    assert "2026-05-30 UTC" in soup.select_one("#hn").get_text()
+    assert soup.select_one('a[href="#reddit"]')
+    legacy = {"date": data["date"], "community": [dict(data["hn"][0], source="HN"), data["reddit"][0]]}
+    legacy_soup = BeautifulSoup(render_daily_page(legacy), "html.parser")
+    assert legacy_soup.select_one("#hn") and legacy_soup.select_one("#reddit")
+    legacy.update(hn=[], reddit=[])
+    assert not BeautifulSoup(render_daily_page(legacy), "html.parser").select_one("#hn")
