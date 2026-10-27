@@ -2,6 +2,7 @@ from time import sleep
 
 import feedparser
 import requests
+from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta, time
 from config import now_kst
 from config import REDDIT_SUBREDDITS, MAX_REDDIT_ITEMS
@@ -30,11 +31,22 @@ def fetch_subreddit(name: str, max_items: int = MAX_REDDIT_ITEMS) -> list[dict]:
                 pass
         title = getattr(entry, "title", "")
         link = getattr(entry, "link", "")
+        # RSS의 작성자·[link]·[comments] 메타데이터는 본문이 아니다.
+        candidates = [part.get("value", "") for part in entry.get("content", [])]
+        candidates.append(entry.get("summary", ""))
+        bodies = []
+        for html in candidates:
+            soup = BeautifulSoup(html or "", "html.parser")
+            for tag in soup(["script", "style"]):
+                tag.decompose()
+            bodies.append(" ".join(body.get_text(" ", strip=True) for body in soup.select(".md")))
+        content = max(bodies, key=len, default="")
         items.append({
             "title": title,
             "url": link,
             "source": f"r/{name}",
             "summary": "",
+            "content": content,
         })
         if len(items) >= max_items:
             break
