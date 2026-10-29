@@ -19,7 +19,7 @@ def test_collect_separates_ranked_hn_and_caps_reddit(monkeypatch):
          patch("main.fetch_all_papers", return_value=[]), \
          patch("main.fetch_all_scraped", return_value=[]), \
          patch("main.fetch_top_stories", return_value=hn) as fetch_hn, \
-         patch("main.fetch_all_reddit", return_value=rd), \
+         patch("main.fetch_all_reddit", return_value={"items": rd, "status": "success", "sources": []}), \
          patch("main.filter_important_papers", return_value=[]), \
          patch("main._load_recent_urls", return_value={"http://h0", "http://r0"}):
         data = main.collect("2026-10-27")
@@ -28,6 +28,8 @@ def test_collect_separates_ranked_hn_and_caps_reddit(monkeypatch):
     assert [i["title"] for i in data["reddit"]] == ["r1", "r2", "r3"]
     assert data["hn_date"] == "2026-10-26"
     assert "community" not in data
+    assert data['source_status']['hn'] == {'required': False, 'status': 'success', 'count': 4}
+    assert data['source_status']['reddit']['status'] == 'success'
 
 
 def test_collect_explicit_hn_day_and_failure():
@@ -36,13 +38,16 @@ def test_collect_explicit_hn_day_and_failure():
          patch("main.fetch_all_papers", return_value=[]), \
          patch("main.fetch_all_scraped", return_value=[]), \
          patch("main.fetch_top_stories", side_effect=RuntimeError("HN503")) as fetch_hn, \
-         patch("main.fetch_all_reddit", return_value=[{"title": "r0", "url": "http://r0"}]), \
+         patch("main.fetch_all_reddit", return_value={"items": [{"title": "r0", "url": "http://r0"}],
+                                                     "status": "success", "sources": []}), \
          patch("main.filter_important_papers", return_value=[]):
         data = main.collect("2026-10-26", hn_day="2026-10-26")
     fetch_hn.assert_called_once_with(day="2026-10-26")
     assert data["hn"] == []
     assert len(data["reddit"]) == 1
     assert data["hn_date"] == "2026-10-26"
+    assert data['source_status']['hn']['status'] == 'failed'
+    assert data['source_status']['reddit']['status'] == 'success'
 
 
 def test_analyze_items_drops_non_today(monkeypatch):
@@ -218,7 +223,7 @@ def test_audio_reuses_existing_saved_notebook(monkeypatch, tmp_path):
     generate.assert_not_called()
 
 
-def test_main_forwards_explicit_hn_day(monkeypatch):
+def test_main_forwards_explicit_hn_day(monkeypatch, tmp_path):
     from unittest.mock import Mock
     monkeypatch.setenv('RUN_DATE', '2026-10-26')
     monkeypatch.setenv('DRY', '1')
@@ -228,7 +233,11 @@ def test_main_forwards_explicit_hn_day(monkeypatch):
     monkeypatch.setattr(main, 'collect', collect)
     monkeypatch.setattr(main, 'summarize', lambda data: data)
     monkeypatch.setattr(main, 'make_audio', lambda data: '')
-    monkeypatch.setattr(main, 'save_html', lambda data: [])
+    def save_html(data):
+        (tmp_path / '2026-10-26.json').write_text('{"date":"2026-10-26"}')
+        (tmp_path / '2026-10-26.html').write_text('<html>test</html>')
+        return []
+    monkeypatch.setattr(main, 'save_html', save_html)
     monkeypatch.setattr(main, 'save_weekly_page', lambda today: None)
     monkeypatch.setattr(main, 'save_monthly_page', lambda today: '')
     main.main(hn_day='2026-10-26')

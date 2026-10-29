@@ -5,7 +5,7 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, timedelta, datetime
 
-from config import (DOCS_DIR, SLACK_WEBHOOK_URL, MAX_PAPER_ITEMS, SUMMARY_WORKERS, now_kst,
+from config import (DOCS_DIR, LOGS_DIR, SLACK_WEBHOOK_URL, MAX_PAPER_ITEMS, SUMMARY_WORKERS, now_kst,
                     MAX_HN_ITEMS, MAX_REDDIT_ITEMS, MAX_COMPANY_TOTAL, MAX_DEV_TOTAL,
                     ENABLE_NOTEBOOKLM)
 from sources.github import fetch_trending
@@ -22,6 +22,7 @@ from renderer import render_monthly_page
 from notebooklm import generate_audio_review
 from renderer import render_daily_page, render_weekly_page, render_index_page
 from notifier import send_slack
+from run_receipt import RunReceipt, record_stage
 
 
 def _analyze_items(items: list[dict], content_key: str, filter_today: bool = True) -> list[dict]:
@@ -132,14 +133,22 @@ def collect(today: str, hn_day: str | None = None) -> dict:
         # 커뮤니티는 부가 섹션이다. 한 소스가 죽어도 배치는 계속된다.
         try:
             hn = f_hn.result()
-        except Exception as e:
-            print(f"[HN] 수집 실패: {e}")
+            hn_status = {"required": False, "status": "success", "count": len(hn)}
+        except Exception as error:
+            print(f"[HN] 수집 실패: {type(error).__name__}")
             hn = []
+            hn_status = {"required": False, "status": "failed", "count": 0,
+                         "error_type": type(error).__name__}
         try:
-            reddit = f_rd.result()
-        except Exception as e:
-            print(f"[Reddit] 수집 실패: {e}")
+            reddit_result = f_rd.result()
+            reddit = reddit_result["items"]
+            reddit_status = {"required": False, **{key: reddit_result[key] for key in ("status", "sources")},
+                             "count": len(reddit)}
+        except Exception as error:
+            print(f"[Reddit] 수집 실패: {type(error).__name__}")
             reddit = []
+            reddit_status = {"required": False, "status": "failed", "count": 0,
+                             "error_type": type(error).__name__}
 
     company_blogs = [b for b in all_blogs if b.get("category") == "company"]
     company_blogs += scraped
@@ -182,6 +191,7 @@ def collect(today: str, hn_day: str | None = None) -> dict:
         "hn": hn,
         "reddit": reddit,
         "hn_date": hn_day,
+        "source_status": {"hn": hn_status, "reddit": reddit_status},
     }
 
 
@@ -293,6 +303,7 @@ def save_html(data: dict) -> list[str]:
                                 for l in (data.get("highlight_links") or []) if l.get("url")],
             **({"audio_url": data["audio_url"]} if data.get("audio_url") else {}),
             **{key: data[key] for key in ("hn", "reddit", "hn_date") if key in data},
+            **({"source_status": data["source_status"]} if "source_status" in data else {}),
         }, ensure_ascii=False),
         encoding="utf-8"
     )
@@ -405,7 +416,8 @@ def save_monthly_page(today: date) -> str:
     return mid
 
 
-def git_commit_push(date_str: str, month_id: str = "") -> None:
+def git_commit_push(date_str: str, month_id: str = "") -> dict:
+    """Git 커밋과 push를 수행하며 push 실패에도 커밋 증거를 보존한다."""
     wid = _week_id(date.fromisoformat(date_str))
     extra = [f"docs/{month_id}.html", f"docs/{month_id}.json"] if month_id else []
     subprocess.run(["git", "add", *extra,
@@ -413,8 +425,11 @@ def git_commit_push(date_str: str, month_id: str = "") -> None:
         f"docs/{wid}.html", f"docs/{wid}.json",
         "docs/index.html"], check=True)
     subprocess.run(["git", "commit", "-m", f"chore: {date_str} trends"], check=True)
+    sha = subprocess.run(["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip()
+    record_stage("git", "running", commit_sha=sha, committed=True, pushed=False)
     subprocess.run(["git", "push"], check=True)
     print("[Git] 커밋 + 푸시 완료")
+    return {"status": "success", "commit_sha": sha, "committed": True, "pushed": True}
 
 
 def _timeout_handler(signum, frame):
@@ -422,35 +437,81 @@ def _timeout_handler(signum, frame):
     raise SystemExit(1)
 
 
-def main(hn_day: str | None = None):
-    signal.signal(signal.SIGALRM, _timeout_handler)
-    signal.alarm(6 * 3600)
+def _termination_handler(signum, frame):
+    """SIGTERM을 종료 영수증을 남길 수 있는 프로세스 중단으로 바꾼다."""
+    raise SystemExit(128 + signum)
 
+
+def main(hn_day: str | None = None):
+    """시작부터 게시까지 실행 영수증을 남기고 중단·부분 결과를 구분한다."""
     today = now_kst().date()
     today_str = str(today)
+    with RunReceipt(LOGS_DIR / "runs", today_str) as run:
+        handlers = {sig: signal.getsignal(sig) for sig in (signal.SIGALRM, signal.SIGTERM)}
+        previous_alarm = signal.alarm(0)
+        try:
+            signal.signal(signal.SIGALRM, _timeout_handler)
+            signal.signal(signal.SIGTERM, _termination_handler)
+            signal.alarm(6 * 3600)
+            _run_daily(today, today_str, hn_day, run)
+            run.require_finished_llm()
+        finally:
+            signal.alarm(0)
+            for sig, handler in handlers.items():
+                signal.signal(sig, handler)
+            if previous_alarm:
+                signal.alarm(previous_alarm)
+
+
+def _run_daily(today: date, today_str: str, hn_day: str | None, run: RunReceipt) -> None:
+    """기존 일일 흐름에서 실제로 통과한 단계와 게시 결과만 기록한다."""
+    run.stage("collection", "running")
     data = collect(today_str, hn_day=hn_day) if hn_day is not None else collect(today_str)
+    run.sources(data.get("source_status", {}))
+    run.stage("collection", "success")
+    run.stage("summary", "running")
     data = summarize(data)
     if any(data.get(section) for section in ("company_blogs", "dev_blogs", "papers", "github", "hn", "reddit", "community")):
         take = data.get("today_take") or {}
         if not isinstance(take, dict) or not isinstance(take.get("headline"), str) or not take["headline"].strip():
             raise LlmCallError("missing_output", "Required today_take headline is empty", context=today_str)
+    run.require_finished_llm()
+    run.stage("summary", "success")
 
     # 오디오는 노트북에서 재생하므로, 성공하면 그 노트북 링크를 페이지에 건다
     notebook_url = make_audio(data)
     if notebook_url:
         data["audio_url"] = notebook_url
+    run.stage("artifacts", "running")
     highlights = save_html(data)
 
     # 주간 페이지 갱신 (매일). 하이라이트는 그 주 ★ 글에서 모은다.
     save_weekly_page(today)
     mid = save_monthly_page(today)
+    run.require_finished_llm()
+    daily_json = DOCS_DIR / f"{today_str}.json"
+    daily_html = DOCS_DIR / f"{today_str}.html"
+    saved = json.loads(daily_json.read_text(encoding="utf-8"))
+    if saved.get("date") != today_str or not daily_html.read_text(encoding="utf-8").strip():
+        raise RuntimeError("Daily artifacts are missing or invalid")
+    run.stage("artifacts", "success", json=str(daily_json), html=str(daily_html))
 
     if os.getenv("DRY") == "1":
+        run.stage("git", "skipped", reason="dry_run")
+        run.stage("slack", "skipped", reason="dry_run")
+        run.outcome = "dry_run"
         print("[DRY] 커밋·푸시·Slack 건너뜀")
     else:
-        git_commit_push(today_str, mid)
-        send_slack(SLACK_WEBHOOK_URL, today_str, highlights, data.get("today_take"))
-    print(f"[완료] {today_str}")
+        run.stage("git", "running")
+        git = git_commit_push(today_str, mid)
+        run.stage("git", **git)
+        run.stage("slack", "running")
+        slack = send_slack(SLACK_WEBHOOK_URL, today_str, highlights, data.get("today_take"))
+        run.stage("slack", **slack)
+        complete = slack["status"] == "success" and all(
+            result["status"] == "success" for result in data.get("source_status", {}).values())
+        run.outcome = "published" if complete else "partial"
+    print(f"[{run.outcome}] {today_str}")
 
 
 if __name__ == "__main__":
