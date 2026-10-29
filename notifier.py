@@ -22,11 +22,16 @@ def _build_text(date: str, take: dict | None, highlights: list[str]) -> str:
 
 
 def send_slack(webhook_url: str, date: str, highlights: list[str],
-               take: dict | None = None) -> None:
+               take: dict | None = None) -> dict:
+    """Slack 수신 확인을 반환하고 HTTP 실패는 본문·webhook 없이 전파한다."""
     if not webhook_url:
         print("[Slack] SLACK_WEBHOOK_URL 미설정, 전송 건너뜀")
-        return
+        return {"status": "skipped", "reason": "not_configured"}
     text = _build_text(date, take, highlights)
-    resp = requests.post(webhook_url, json={"text": text}, timeout=10)
+    try:
+        resp = requests.post(webhook_url, json={"text": text}, timeout=10)
+    except requests.RequestException:
+        raise RuntimeError("Slack request failed") from None
     if resp.status_code != 200:
-        print(f"[Slack] 전송 실패: {resp.status_code} {resp.text}")
+        raise RuntimeError(f"Slack HTTP {resp.status_code}")
+    return {"status": "success", "http_status": resp.status_code}

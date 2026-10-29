@@ -11,6 +11,7 @@ from time import monotonic
 from uuid import uuid4
 
 from config import COLLECT_DAYS, LOGS_DIR
+from run_receipt import record_llm_event
 
 SUMMARIZE_ONLY_PROMPT = """아래 글의 제목을 한국어로 옮기고 핵심을 정리해줘.
 
@@ -102,7 +103,9 @@ def _redact_cli_error(text: str) -> str:
 
 def _log_llm_event(event: str, **fields) -> None:
     """프롬프트·응답 본문 없이 호출 상태를 콘솔과 배치 진단 파일에 기록한다."""
-    record = json.dumps({"event": event, "time": datetime.now(timezone.utc).isoformat(), "process_id": os.getpid(), **fields}, ensure_ascii=False)
+    run_id = record_llm_event(event, fields)
+    record = json.dumps({"event": event, "time": datetime.now(timezone.utc).isoformat(), "process_id": os.getpid(),
+                         "run_id": run_id, **fields}, ensure_ascii=False)
     with _LLM_LOCK:
         print(record, flush=True)
         try:
