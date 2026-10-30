@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-10-29 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 항상 펼쳐진 요약 ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
+  .community-date { padding: 0.8rem 1.15rem 0; font-size: 0.75rem; color: var(--ink-faint); }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-10-29</div>
+<h1><em>29</em> Oct 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn" class="nav-link">Hacker News</a><a href="#reddit" class="nav-link">Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">에이전트와 함께하는 개발의 활동량이 커지면서, 결과를 얼마나 믿고 맡길 수 있는지가 쟁점으로 떠오르고 있다.</p><p class="take-body">에이전트와 함께 개발하며 커밋·푸시가 역대 최고치를 기록했다는 보고와, 뛰어난 개발자들이 에이전트 기반 개발을 경계한다는 문제 제기가 나란히 등장한다. 연구에서는 검증 가능한 보상을 사용하는 강화학습의 탐색을 유도하는 방법을 다룬다. 이를 함께 읽으면, 에이전트 활용의 확대와 그 결과를 신뢰할 근거 마련 사이의 간극이 굵은 줄기로 보인다.</p><div class="take-refs"><span>근거</span><a href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener">Octoverse: 개발자들이 에이전트와 함께 개발하며 2026년 커밋·푸시 횟수 역대 최고치 기록</a> · <a href="https://martinfowler.com/rachels-ramblings/good-devs-wary.html" target="_blank" rel="noopener">뛰어난 개발자들은 왜 에이전트 기반 개발을 그토록 경계할까?</a> · <a href="https://arxiv.org/abs/2610.37041" target="_blank" rel="noopener">Guided-RLVR: 검증 가능한 보상 기반 강화학습에서의 유도 탐색</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/ad0ea16f-cd9c-4a7e-b826-fcb619683d43" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">7개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/" target="_blank" rel="noopener">Gemini 4 Carbon: 차세대 프런티어 모델</a></div>
+    <div class="item-meta">Google DeepMind</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Google이 사이버보안과 장기 과제 수행 능력을 강화한 Gemini 4 Carbon을 발표한 글이다.<br>- Artificial Analysis Intelligence Index v5.0에서 59점으로 1위를 기록했다.<br>- 사이버보안 평가에서 취약점 탐지 SEC-bench Pro 88.2%, 취약점 악용 ExploitGym 54.8%, 패치 CWE-bench 71.0%를 기록하며 선두를 차지했다.<br>- 내부 평가에서 안전한 코드 생성 능력이 크게 향상됐으며, 사내 팀의 실제 코딩 환경에서는 의도 불일치와 허위 생성 비율이 감소했다고 밝혔다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://blog.cloudflare.com/ddos-threat-report-2026-q3/" target="_blank" rel="noopener">Cloudflare 2026년 3분기 DDoS 위협 보고서: 소규모 공격은 늘고 초대형 공격은 줄다</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Cloudflare 네트워크 데이터를 바탕으로 2026년 3분기 DDoS 공격의 규모·기법·표적 변화를 분석한 글이다.<br>- 지속 시간 10분 미만·대역폭 1 Gbps 미만의 공격은 208% 증가한 반면, 1 Tbps를 초과하는 초대형 공격은 전 분기 대비 약 69% 감소했다.<br>- 공격 기법이 바뀌면서 CLDAP 플러드는 전 분기 대비 99.5% 감소했고, DNS 증폭 공격은 215%, 일반 UDP 플러드는 122% 증가했다.<br>- 미국이 중국을 제치고 공격을 가장 많이 받은 국가가 됐다. 캐나다와 이스라엘은 공격 대상 국가 순위에서 각각 10계단, 7계단 상승했다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.databricks.com/blog/how-procore-powering-construction-analytics-opensharing-0" target="_blank" rel="noopener">Procore가 OpenSharing으로 건설 데이터 분석을 강화하는 방법</a></div>
+    <div class="item-meta">Databricks Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Procore가 Databricks의 OpenSharing을 도입해 건설 분석 데이터의 갱신 주기와 공유 규모를 확대한 사례다.<br>- API 기반 분석 제품의 하루 1회 갱신 한계를 해소해, 고객이 후속 시스템과 업무 프로세스에 필요한 데이터를 매시간 가져올 수 있게 했다.<br>- 수백 개의 정제된 테이블을 배포하며, 고객별로 접근을 분리해 수십만 개의 개별 데이터 공유를 대규모로 관리한다.<br>- 최종 고객과 내부 제품팀의 데이터 가용성을 2배로 높이고, 시설 소유주·종합건설업체·전문건설업체가 각 공사를 신뢰할 수 있는 단일 뷰로 파악하도록 지원한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/" target="_blank" rel="noopener">GitHub Universe 2026: 스택의 모든 계층을 진화시키다</a></div>
+    <div class="item-meta">GitHub Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">GitHub Universe 2026에서 공개한 에이전트 기반 소프트웨어 전달 시스템의 비전과 이를 구현할 제품·인프라 개편에 관한 글이다.<br>- 성과의 기준을 코드의 양이 아닌 기능 구현·버그 수정·보안 수정 등 완료된 작업으로 제시했다. 개발자는 방향 설정·의사결정·출시 결과를 책임지고, 에이전트는 변경을 구현하고 검증한다.<br>- 소프트웨어 개발 수명주기를 선형 절차가 아닌 연결된 시스템으로 설명한다. 코드 변경·동료의 요청·운영 지표가 어느 단계에서든 작업을 촉발하며, 각 작업의 결과는 다음 주기를 개선하는 지속 학습으로 이어진다.<br>- 시스템의 세 가지 목표는 속도·지능·품질이다. 아이디어부터 완성까지 시간과 비용을 줄이고, 플랫폼 전반의 맥락과 지속 학습을 결합하며, 보안을 기본으로 갖추고 출시 전에 버그를 발견하는 데 초점을 맞춘다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/" target="_blank" rel="noopener">Octoverse: 개발자들이 에이전트와 함께 개발하며 2026년 커밋·푸시 횟수 역대 최고치 기록</a></div>
+    <div class="item-meta">GitHub Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">에이전트 활용이 확산되는 가운데 GitHub 개발 활동이 역대 최대 규모로 증가한 현황을 다룬 글.<br>- 지난 12개월 동안 GitHub 코드 푸시는 179억 회로, 2024년과 2025년을 합친 횟수를 넘어섰다.<br>- 올해 생성된 저장소 중 에이전트 설정 파일이 있는 저장소는 없는 저장소보다 평균 커밋 수가 8배 많았다.<br>- 네팔의 한 개발자가 만든 홍수 정보 게시판은 네팔어 중심의 공식 재난 경보 전달 서비스 Gati로 성장했으며, GitHub Pages와 Actions에서 운영된다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://engineering.fb.com/2026/10/28/ml-applications/meta-andromeda-next-gen-ads-retrieval-gpu-co-design/" target="_blank" rel="noopener">Meta Andromeda: 모델과 시스템의 공동 설계로 구현하는 차세대 광고 검색</a></div>
+    <div class="item-meta">Meta Engineering</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Meta의 개인화 광고 검색 엔진 Meta Andromeda가 모델·시스템·GPU 하드웨어의 공동 설계로 성능과 처리 효율을 높인 방법을 소개하는 글.<br>- 모든 노출 가능 광고를 랭킹 단계에 가까운 모델 성능으로 평가하고, 동일한 지연 시간 한도 안에서 더 큰 광고 후보군을 탐색한다.<br>- 초당 10억 개 이상의 광고를 처리하며 상위 후보를 추려낸다. 이는 2024년 Meta Andromeda 대비 100배 높은 처리량이다.<br>- 2025년부터 Meta Andromeda를 통해 Facebook 전환 수가 2.4% 증가했다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://d2.naver.com/helloworld/2983631" target="_blank" rel="noopener">사이드카의 선언적 관리: OpenKruise SidecarSet 도입과 운영</a></div>
+    <div class="item-meta">NAVER D2</div>
+  </div>
+  <div class="item-body"><div class="item-summary">관리형 데이터베이스 서비스에서 사이드카를 선언적으로 관리하기 위해 OpenKruise SidecarSet을 도입한 배경과 운영 과제를 다룬 글입니다.<br>- DB 컨테이너는 몇 달씩 실행되지만, 같은 데이터 볼륨을 사용하는 사이드카는 기능 추가·버그 수정·보안 패치로 더 자주 변경됩니다.<br>- 사이드카 이미지는 Pod 스펙이나 Deployment·StatefulSet의 Pod 템플릿마다 따로 지정되어 있어 일괄 변경이 어렵고, 인스턴스별 버전 조합을 확인하려면 Pod를 하나씩 조회해야 합니다.<br>- Pod 템플릿을 변경하면 DB 컨테이너도 재시작됩니다. 실행 중인 Pod의 이미지를 직접 수정하면 해당 사이드카만 재시작되지만, 변경 가능한 컨테이너 스펙은 이미지뿐이며 대상 Pod마다 따로 적용해야 합니다.</div></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://martinfowler.com/bliki/LLM-Voice.html" target="_blank" rel="noopener">Bliki: LLM 말투</a></div>
+    <div class="item-meta">Martin Fowler</div>
+  </div>
+  <div class="item-body"><div class="item-summary">LLM이 쓴 듯한 문체가 독자에게 주는 거부감과 저자가 주의할 점을 다룬 글이다.<br>- 저자는 LLM이 쓴 듯한 느낌이 들면 읽고 싶은 마음이 줄어든다. 판별 도구가 LLM을 쓰지 않았다고 알려줘도 이미 생긴 거부감을 해소하지는 못한다.<br>- 자신의 LLM 문체 판별 능력도 의심한다. 거슬리는 표현 중에는 실제 사람이 쓰는 말도 있어, 세대 차이를 LLM의 흔적으로 오인할 수 있기 때문이다.<br>- 저자들에게 LLM 특유의 말투를 각별히 경계하고, 특히 LLM에 초안 작성을 맡기는 함정에 빠지지 말라고 강하게 권한다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://martinfowler.com/rachels-ramblings/good-devs-wary.html" target="_blank" rel="noopener">뛰어난 개발자들은 왜 에이전트 기반 개발을 그토록 경계할까?</a></div>
+    <div class="item-meta">Martin Fowler</div>
+  </div>
+  <div class="item-body"><div class="item-summary">새로운 개발 방식을 앞장서 도입하던 뛰어난 개발자들이 코딩 에이전트에는 신중한 이유를 다룬 글이다.<br>- 핵심은 소프트웨어를 만들었다는 것과 실제 운영 환경에서 제대로 작동한다는 것이 다르다는 인식이다.<br>- 저자는 코딩에 대한 애착이나 일자리에 대한 걱정만으로는 이들의 주저함을 충분히 설명할 수 없다고 느꼈으며, 9월의 에이전트 기반 개발 토론을 통해 그 배경을 명확히 이해하게 됐다고 말한다.<br>- Thoughtworkers는 유용하고, 다음 해에도 변경할 수 있으며, 운영 환경에서 장애 없이 작동하는 소프트웨어를 중시한다. 이를 위해 지속적 통합, 페어 프로그래밍, 자동화 테스트, 지속적 배포의 초기 형태를 도입·전파하거나 고안했다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Oct/29/ben-hylak/" target="_blank" rel="noopener">Ben Hylak의 말 인용</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Ben Hylak이 자신이 사용하는 제품에 바라는 모습과 자기 제품에 대한 예외를 이야기한 인용문이다.<br>- 사용하는 모든 제품이 UI 없는 headless MCP가 되어 에이전트에 연결되기를 바란다고 했다.<br>- 그 아래에서 작동하는 것들은 전혀 신경 쓰지 않아도 되기를 바란다고 했다.<br>- 자기 제품은 예외라며, 고객들이 UI와 회사를 매우 좋아하고 자신들은 특별하다고 말했다.</div></div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://arxiv.org/abs/2610.36877" target="_blank" rel="noopener">GUI-JEPA: 후보 행동에 조건화된 JEPA 잠재 표현을 활용한 모바일 GUI 에이전트의 빠른 행동 정책</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">토큰 디코딩 없이 JEPA 잠재 공간에서 행동을 선택하는 모바일 GUI 에이전트 정책 GUI-JEPA를 제안한 연구다.<br>- 레이블 없는 GUI 스크린샷으로 사전학습한 인코더와 행동·영역 조건부 예측기로 후보 행동별 잠재 표현을 만들고, 경량 헤드가 모든 후보를 지시문과 비교해 한 번의 배치 연산으로 평가한다.<br>- 행동 점수 계산이 잠재 표현 경로에 의존함을 확인했으며, 예측기는 무작위로 초기화해도 화면 동역학으로 사전학습한 경우와 동등한 성능을 보였다.<br>- AndroidControl에서 동일한 입력으로 미세조정한 Qwen2.5-VL-7B 에이전트 대비 파라미터는 6%이며, 동일 GPU에서 2.8~4.0배 빠르면서 분포 내 정확도는 비교 모델의 86~92%에 도달했다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://arxiv.org/abs/2610.36925" target="_blank" rel="noopener">시각-언어 에이전트는 자신의 잠재 세계에서 학습할 수 있다</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">VLM의 잠재 공간에서 행동 결과를 예측하고 정책을 개선하는 모델 기반 강화학습 프레임워크 Dwell을 소개한다.<br>- VLM을 순환형 잠재 상태 전이 연산자로 재구성해 잠재 공간에서 예측·조정·행동을 수행하도록 한다.<br>- 하나의 VLM이 세계 모델과 정책 역할을 함께 맡으며, 실제 상호작용으로 행동 결과를 예측·평가하고 잠재 공간의 상상으로 행동을 개선한다.<br>- 5개 시각적 상호작용 환경에서 학습 가능한 비교 방법 중 종합 성능이 가장 높았으며, 상상에 필요한 연산량도 크게 줄였다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://arxiv.org/abs/2610.37041" target="_blank" rel="noopener">Guided-RLVR: 검증 가능한 보상 기반 강화학습에서의 유도 탐색</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">RLVR에 경량 제어기를 추가해 추론 경로의 탐색 범위를 넓히는 Guided-RLVR을 제안한 글이다.<br>- 기존 RLVR에서 생성한 추론 경로가 소수의 경로로 쏠려 탐색 범위가 제한되는 문제를 다룬다.<br>- 제어기가 의미 있는 유도 토큰을 샘플링 분포에 전략적으로 주입해 모델이 여러 추론 관점으로 문제에 접근하도록 한다.<br>- 수학 추론과 코드 생성 벤치마크 실험에서 기존 RLVR 방법보다 일관되게 높은 성능을 보이며 더 다양한 추론 경로를 생성했다.</div></div>
+</div>
+</div><div class="section" id="hn">
+  <div class="section-header">
+    <span class="section-icon">HN</span>
+    <span class="section-title">Hacker News</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="community-date">2026-10-28 UTC · 당시 페이지 순위</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://emudhra.we-have-a-problem.com/apple.html" target="_blank" rel="noopener">Apple의 git은 여전히 침해된 eMudhra 인증서를 신뢰한다</a></div>
+    <div class="item-meta">1위 · 1185 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">macOS에 포함된 개발 도구들이 침해된 eMudhra 인증서를 계속 신뢰하고 있다는 글이다.<br>- Apple은 10월 17일 사고를 통보받았지만, 2026년 10월 28일 기준 git·curl·python3는 여전히 해당 인증서를 신뢰한다.<br>- 10월 26일 출시된 macOS 27.2는 문제를 해결하지 않았으며, 사용자가 수동으로 적용한 우회 조치까지 되돌려 다시 취약한 상태로 만들었다.<br>- 공격자는 이 도구들의 HTTPS 연결을 가로챌 수 있다. git에서는 clone·pull 시 공격자가 선택한 코드를 전달하거나, push 내용을 변조하거나, GitHub 토큰 같은 인증 정보를 탈취할 수 있다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://nullpt.rs/fingerprinting-bioweapons" target="_blank" rel="noopener">이 브라우저 지문 수집 스크립트는 왜 생물무기를 만들고 있을까?</a></div>
+    <div class="item-meta">2위 · 1537 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">웹사이트의 브라우저 지문 수집 기법을 크롤링해 캔버스 이미지를 모은 과정을 소개하는 글이다.<br>- Tranco Top Sites 목록을 바탕으로 Playwright를 사용해 웹사이트 10,000곳을 크롤링했다.<br>- canvas의 toDataURL 호출과 navigator.webdriver 같은 지문 수집·봇 탐지 관련 속성 접근을 가로채 일반적인 캔버스를 걸러냈다.<br>- 수집한 다양한 캔버스 이미지를 fingerprint.garden에 모아 공개했다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/" target="_blank" rel="noopener">Gemini 4 Carbon</a></div>
+    <div class="item-meta">3위 · 1001 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Google이 사이버보안과 장기 과제 수행 능력을 강화한 차세대 모델 Gemini 4 Carbon을 발표한 글.<br>- Artificial Analysis Intelligence Index v5.0에서 59점으로 1위를 기록했다.<br>- 보안 취약점 탐지 SEC-bench Pro에서 88.2%, 취약점 악용 ExploitGym에서 54.8%, 패치 CWE-bench에서 71.0%를 기록했다.<br>- 내부 평가에서 안전한 코드 생성 능력이 크게 향상됐으며, 사내 실제 코딩 환경에서 의도 불일치와 허위 생성 비율이 감소했다고 밝혔다.</div></div>
+</div>
+</div><div class="section" id="reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Reddit</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1xif6lf/apsara_conference_qwen4_next_week/" target="_blank" rel="noopener">Apsara 콘퍼런스: 다음 주 Qwen4 출시</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Apsara 콘퍼런스에서 전해진 Qwen4 출시 일정에 관한 글이다.<br>- Apsara 콘퍼런스가 현재 암스테르담에서 열리고 있다.<br>- 한 참가자가 Alibaba Cloud CTO의 발언을 전했다.<br>- 해당 참가자에 따르면 CTO는 Qwen4가 다음 주 출시될 것이라고 말했다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1xil3qy/mistral_large_4_le_chonk_is_now_open_weight/" target="_blank" rel="noopener">Mistral Large 4 (Le Chonk)의 가중치가 공개됐다</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+  </div>
+  
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1xizbq1/sam_altman_local_inference_is_a_terrible/" target="_blank" rel="noopener">Sam Altman: “로컬 추론은 한정된 자원을 몹시 비효율적으로 배분하는 방식이다”</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Sam Altman이 로컬 추론의 자원 비효율성을 주장하고, 글쓴이가 이를 판매자의 이해관계로 꼬집은 글.<br>- Altman은 각자 컴퓨터에 한정된 DRAM을 확보해 놓고 5%의 시간만 사용하는 것이 전 세계 자원 배분 관점에서 비효율적이라고 주장한다.<br>- 공급이 매우 제한된 환경에서는 클라우드에서 자원 활용률을 극대화해야 한다며, 많은 사람의 직관은 이와 반대라고 말한다.<br>- 글쓴이는 RyanTStull의 요약을 인용해, 제품 판매자가 “내게 빌리는 대신 직접 소유하면 안 되는 이유”를 설명하는 상황이라고 풍자한다.</div></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/HKUDS/DeepTutor" target="_blank" rel="noopener">HKUDS/DeepTutor</a></div>
+    <div class="item-meta">50,038</div>
+  </div>
+  <div class="item-body"><div class="item-summary">평생 개인 맞춤형 튜터링을 제공하는 DeepTutor의 주요 릴리스와 기능 업데이트를 소개하는 글.<br>- 2026년 10월 28일 공개된 v1.7.0은 모듈식 설치, 새 학습 작업 공간, Dito 기반 블록 노트북, 내레이션 영상 수업, 재개 가능한 임베딩 체크포인트를 제공한다.<br>- v1.6.15는 학습 경로 변경 검토, 평가 그룹화, 튜터링 메모리 범위 제한, 채팅 복구 개선, 검색 결과 비교, Gemini 기본 음성 기능을 포함한다.<br>- v1.6.14는 원본 자료의 시각 요소를 활용한 연습, 복구 가능한 인덱싱, 통합 영상 읽기, 과학 연구 도구, 관리형 플러그인, 학습 일지를 추가했다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">obra/superpowers</a></div>
+    <div class="item-meta">308,540</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Superpowers는 조합 가능한 스킬과 에이전트가 이를 사용하도록 하는 초기 지침으로 구성된 코딩 에이전트용 소프트웨어 개발 방법론이다.<br>- 바로 코드를 작성하지 않고 사용자의 목표를 질문하며, 대화에서 도출한 명세를 읽기 쉬운 분량으로 나눠 제시한다.<br>- 설계 승인 후 구현 계획을 작성하며, 실제 실패·성공 확인을 거치는 Red/Green TDD와 YAGNI, DRY를 강조한다.<br>- 사용자가 진행을 지시하면 하위 에이전트 중심 개발을 시작해 각 작업을 수행하고 결과를 점검·리뷰한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/nightly-labs/openbot" target="_blank" rel="noopener">nightly-labs/openbot</a></div>
+    <div class="item-meta">3,875</div>
+  </div>
+  <div class="item-body"><div class="item-summary">OpenBot은 지속적으로 유지되는 AI 동료를 위한 로컬 우선 데스크톱 작업 공간이다.<br>- Codex App Server, Claude Code와 ACP 기반 에이전트를 지원하며, 각 에이전트에 독립된 세션·작업 공간·대화를 제공한다.<br>- 일시 정지·재개·취소와 충돌 후 복구를 지원하는 FIFO 메시지 큐, 에이전트 간 메시징·파일 전송, 내장 브라우저를 제공한다.<br>- 개발 프리뷰로, 에이전트는 `danger-full-access`와 `approvalPolicy: never`로 실행된다. 최초 실행 동의 후에는 작업별 확인 없이 파일 읽기·수정, 명령 실행, 네트워크 사용, 내장 브라우저 제어가 가능하다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/CopilotKit/OpenBot" target="_blank" rel="noopener">CopilotKit/OpenBot</a></div>
+    <div class="item-meta">8,145</div>
+  </div>
+  <div class="item-body"><div class="item-summary">OpenBot은 회사 인프라에서 실행하고 직접 수정할 수 있는 AI 비서 템플릿이다.<br>- AG-UI를 통해 프레임워크 기반 또는 직접 작성한 에이전트를 연결하고, 각 에이전트에 전용 채널을 부여한다. 답변은 텍스트뿐 아니라 컴포넌트로도 제공한다.<br>- 각 AI 동료는 별도 로그인과 파일을 갖춘 브라우저와 허용된 도구만 사용한다. 작업 화면을 보며 사용자가 제어권을 넘겨받을 수 있고, 모든 행동은 실행 전에 결정되고 실행 후 기록된다.<br>- 호스팅 서비스나 의존성으로 설치할 패키지 없이 저장소를 복제해 사용한다. examples/의 예제 테넌트 패키지를 자체 동료·채널·스킬로 교체하는 방식이며, 현재 버그와 변경 가능성이 있는 개발 중 베타다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/togg53192-cmd/jailbreaks" target="_blank" rel="noopener">togg53192-cmd의 탈옥 프롬프트 모음</a></div>
+    <div class="item-meta">9,027</div>
+  </div>
+  <div class="item-body"><div class="item-summary">여러 AI 모델을 대상으로 시스템 프롬프트와 에이전트 운영 지침을 모아 놓은 저장소를 소개하는 글.<br>- 26개 이상의 모델을 대상으로 한 프롬프트 32개를 수록하며, 요약이나 일부 발췌 없이 바로 붙여 넣어 쓸 수 있는 완전한 파일을 제공한다.<br>- 시스템 프롬프트, 페르소나 정의, 워크스페이스 정책, AGENTS.md, 설정 블록, Ollama Modelfile을 포함한다.<br>- OpenCode Zen의 무료 스텔스 모델, GLM·DeepSeek·Kimi·Qwen·Gemma·GPT-OSS 등 오픈웨이트 모델, Claude·Gemini·Grok·Mistral 등 비공개 모델을 다루며 연구·교육용으로 명시한다.</div></div>
+</div>
+</div>
+</body>
+</html>
