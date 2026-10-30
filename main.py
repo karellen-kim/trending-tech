@@ -441,11 +441,11 @@ def _termination_handler(signum, frame):
     raise SystemExit(128 + signum)
 
 
-def main(hn_day: str | None = None):
+def main(hn_day: str | None = None, *, run_id: str | None = None, run_date: str | None = None):
     """시작부터 게시까지 실행 영수증을 남기고 중단·부분 결과를 구분한다."""
-    today = now_kst().date()
+    today = date.fromisoformat(run_date) if run_date is not None else now_kst().date()
     today_str = str(today)
-    with RunReceipt(LOGS_DIR / "runs", today_str) as run:
+    with RunReceipt(LOGS_DIR / "runs", today_str, run_id=run_id) as run:
         handlers = {sig: signal.getsignal(sig) for sig in (signal.SIGALRM, signal.SIGTERM)}
         previous_alarm = signal.alarm(0)
         try:
@@ -514,4 +514,5 @@ def _run_daily(today: date, today_str: str, hn_day: str | None, run: RunReceipt)
 
 
 if __name__ == "__main__":
-    main()
+    from supervisor import main as supervised_main
+    raise SystemExit(supervised_main())
