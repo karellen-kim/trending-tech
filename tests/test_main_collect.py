@@ -178,6 +178,26 @@ def test_analyze_keeps_summary_when_no_content(monkeypatch):
     assert "본문이 여기 다 있다" in got["content"]
 
 
+def test_analyze_compares_plaintext_instead_of_html_attribute_length(monkeypatch):
+    """추적 속성만 긴 RSS 미리보기가 실제 본문을 가리면 안 된다."""
+    got = {}
+    monkeypatch.setattr(main, "analyze_item",
+                        lambda t, c, *a, **kw: got.update(content=c) or {
+                            "is_today": True, "title_ko": "제목", "summary": "요약"})
+    body = "Actual article findings. " * 20
+    teaser = '<p data-tracking="' + "x" * 600 + '">Short teaser.</p>'
+    main._analyze_items([{"title": "Article", "summary": teaser, "content": body}], "summary")
+    assert got["content"] == body.strip()
+
+
+def test_analyze_html_shell_does_not_require_a_summary(monkeypatch):
+    """HTML 길이만 150자 이상인 짧은 글은 요약 누락으로 실패하지 않는다."""
+    monkeypatch.setattr(main, "analyze_item", lambda *a, **kw: {
+        "is_today": True, "title_ko": "제목", "summary": ""})
+    teaser = '<p data-tracking="' + "x" * 200 + '">Short teaser.</p>'
+    assert len(main._analyze_items([{"title": "Article", "summary": teaser}], "summary")) == 1
+
+
 def test_summarize_hn_and_reddit_uses_real_body_and_no_body_fallback(monkeypatch):
     calls = {}
     fetched = []
@@ -204,9 +224,9 @@ def test_summarize_hn_and_reddit_uses_real_body_and_no_body_fallback(monkeypatch
                                  {'title': 'Fetched', 'url': 'https://fetched'}],
                           'reddit': [{'title': 'Unavailable', 'url': 'https://unavailable'}]})
     assert fetched == ['https://fetched', 'https://unavailable']
-    assert calls['Provided'] == ('기사 ' * 80, True)
-    assert calls['SummaryOnly'] == ('제공 본문 ' * 80, True)
-    assert calls['Fetched'] == ('본문 ' * 80, True)
+    assert calls['Provided'] == (('기사 ' * 80).strip(), True)
+    assert calls['SummaryOnly'] == (('제공 본문 ' * 80).strip(), True)
+    assert calls['Fetched'] == (('본문 ' * 80).strip(), True)
     assert calls['Unavailable'] == ('', True)
     assert [item['summary'] for item in data['hn']] == ['원문 요약', '원문 요약', '원문 요약']
     assert data['reddit'][0]['summary'] == ''

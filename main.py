@@ -11,7 +11,7 @@ from config import (DOCS_DIR, LOGS_DIR, SLACK_WEBHOOK_URL, MAX_PAPER_ITEMS, SUMM
 from sources.github import fetch_trending
 from sources.hackernews import fetch_top_stories
 from sources.reddit import fetch_all_reddit
-from sources.rss import fetch_all_blogs, enrich_with_body
+from sources.rss import fetch_all_blogs, enrich_with_body, _plain_text
 from sources.arxiv import fetch_all_papers
 from sources.scraper import fetch_all_scraped
 from summarizer import (LlmCallError, _log_llm_event, analyze_item, filter_important_papers, generate_highlights,
@@ -33,11 +33,10 @@ def _analyze_items(items: list[dict], content_key: str, filter_today: bool = Tru
     today = str(now_kst().date())
 
     def one(item):
-        # 짧은 RSS 요약이 truthy 라는 이유로 받아온 본문을 가리던 문제가 있었다
-        # (Databricks 86자 요약이 1999자 본문을 덮었다). 가장 긴 것을 쓴다.
+        # HTML 속성 길이로 부풀린 미리보기가 실제 본문을 가리지 않게 비교한다.
         cands = [item.get(content_key), item.get("content"), item.get("summary"),
                  item.get("description"), item.get("abstract")]
-        content = max((c for c in cands if c), key=len, default="")
+        content = max((_plain_text(c) for c in cands if c), key=len, default="")
         title = item.get("title") or item.get("name", "")
         # 날짜를 거르지 않는 섹션(논문·GitHub)은 판정이 무의미하다.
         # 판정 프롬프트를 태우면 is_today=false 로 답하면서 요약·번역까지 빈 값이 되어

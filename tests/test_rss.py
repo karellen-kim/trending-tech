@@ -146,6 +146,35 @@ def test_enrich_respects_max_fetch(monkeypatch):
     assert len(calls) == 3
 
 
+def test_enrich_blog_preview_uses_longer_article_body(monkeypatch):
+    from sources import rss
+    preview = "Short preview with too few facts. " * 12
+    body = "Detailed article findings. " * 40
+    monkeypatch.setattr(rss, "_fetch_article_text", lambda url: body)
+    item = {"url": "https://article", "summary": preview}
+    rss.enrich_with_body([item], min_content=1500)
+    assert item["content"] == body
+
+
+def test_enrich_does_not_replace_existing_body_with_shorter_page(monkeypatch):
+    from sources import rss
+    original = "Existing useful article body. " * 25
+    monkeypatch.setattr(rss, "_fetch_article_text", lambda url: "Navigation or preview. " * 10)
+    item = {"url": "https://article", "summary": "Preview", "content": original}
+    rss.enrich_with_body([item], min_content=1500)
+    assert item["content"] == original
+
+
+def test_fetch_all_blogs_enriches_previews_up_to_analysis_limit(monkeypatch):
+    from sources import rss
+    monkeypatch.setattr(rss, "RSS_SOURCES", [{"name": "Blog", "url": "https://feed"}])
+    monkeypatch.setattr(rss, "fetch_rss_entries", lambda *a, **kw: [{"url": "https://article"}])
+    enrich = Mock(side_effect=lambda items, **kw: items)
+    monkeypatch.setattr(rss, "enrich_with_body", enrich)
+    rss.fetch_all_blogs()
+    assert enrich.call_args.kwargs["min_content"] == 1500
+
+
 def test_enrich_ignores_html_tags_when_measuring():
     """<p><br/></p> 같은 껍데기는 150자를 넘어도 본문이 아니다"""
     from sources import rss

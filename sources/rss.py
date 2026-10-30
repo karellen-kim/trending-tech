@@ -20,17 +20,20 @@ def _plain_text(html: str) -> str:
 def _text_len(html: str) -> int:
     return len(_plain_text(html))
 
-def enrich_with_body(items: list[dict], max_fetch: int = MAX_BODY_FETCH) -> list[dict]:
-    """RSS 요약이 짧은 항목만 원문 본문을 받아 content 에 채운다.
-    실측상 전체 엔트리의 45%가 150자 미만이라 이 단계 없이는 요약이 빈 문자열이 된다."""
+def enrich_with_body(items: list[dict], max_fetch: int = MAX_BODY_FETCH,
+                     *, min_content: int = MIN_CONTENT) -> list[dict]:
+    """기준보다 짧은 미리보기의 원문을 조회하고 더 긴 본문만 보존한다.
+    블로그는 요약 입력 한도까지 보강하고 커뮤니티는 기존 150자 기준을 쓴다."""
     targets = [i for i in items if max(_text_len(i.get("summary", "")),
-                                      _text_len(i.get("content", ""))) < MIN_CONTENT][:max_fetch]
+                                      _text_len(i.get("content", ""))) < min_content][:max_fetch]
     if not targets:
         return items
 
     def one(item):
+        existing_size = max(_text_len(item.get("summary", "")),
+                            _text_len(item.get("content", "")))
         body = _fetch_article_text(item["url"])
-        if _text_len(body) >= MIN_CONTENT:
+        if _text_len(body) >= MIN_CONTENT and _text_len(body) > existing_size:
             item["content"] = body
 
     with ThreadPoolExecutor(max_workers=8) as ex:
@@ -109,4 +112,4 @@ def fetch_all_blogs() -> list[dict]:
     with ThreadPoolExecutor(max_workers=RSS_WORKERS) as ex:
         for items in ex.map(one, RSS_SOURCES):
             all_items.extend(items)
-    return enrich_with_body(all_items)
+    return enrich_with_body(all_items, min_content=1500)
