@@ -26,6 +26,8 @@ def test_codex_reads_only_final_message():
         assert '--ephemeral' in args
         assert args[-1] == '-'
         assert kwargs['start_new_session'] is True
+        assert kwargs['stdout'] == subprocess.PIPE
+        assert kwargs['stderr'] == subprocess.PIPE
         Path(args[args.index('--output-last-message') + 1]).write_text('  {"summary":"결과"}  ')
         return process
 

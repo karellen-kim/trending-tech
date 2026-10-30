@@ -32,9 +32,11 @@ def record_llm_event(event: str, fields: dict) -> str | None:
 class RunReceipt:
     """시작만 남은 실행과 종료된 실행, 게시 단계를 구분한다. 한 프로세스에 한 실행만 허용한다."""
 
-    def __init__(self, directory: Path, day: str):
+    def __init__(self, directory: Path, day: str, *, run_id: str | None = None):
+        if run_id is not None and (len(run_id) != 32 or any(c not in '0123456789abcdef' for c in run_id)):
+            raise ValueError('run_id must be 32 lowercase hexadecimal characters')
         self.lock = RLock()
-        self.path = directory / f'{uuid4().hex}.json'
+        self.path = directory / f'{run_id or uuid4().hex}.json'
         self.outcome = 'partial'
         self.state = {
             'run_id': self.path.stem, 'date': day, 'process_id': os.getpid(),
