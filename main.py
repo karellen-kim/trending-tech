@@ -467,7 +467,9 @@ def _run_daily(today: date, today_str: str, hn_day: str | None, run: RunReceipt)
     run.stage("collection", "running")
     data = collect(today_str, hn_day=hn_day) if hn_day is not None else collect(today_str)
     run.sources(data.get("source_status", {}))
-    run.stage("collection", "success")
+    collection_complete = all(result["status"] == "success"
+                              for result in data.get("source_status", {}).values())
+    run.stage("collection", "success" if collection_complete else "partial")
     run.stage("summary", "running")
     data = summarize(data)
     if any(data.get(section) for section in ("company_blogs", "dev_blogs", "papers", "github", "hn", "reddit", "community")):

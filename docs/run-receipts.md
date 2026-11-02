@@ -36,8 +36,14 @@ SIGKILL이나 호스트 장애는 종료 기록을 남길 수 없어요. `runnin
 - GitHub·블로그·논문·스크레이퍼의 수집 함수가 예외를 내거나 필수 요약 검증이 실패하면 게시를 중단해요. 기존 수집기 내부에서 삼키는 개별 피드 오류까지 모두 검증했다는 뜻은 아니에요.
 - HN·Reddit은 선택 소스예요. 수집 실패가 있어도 산출물을 만들되 최종 상태를 `partial`로 남겨요. `source_status`는 실행 영수증과 당일 JSON에 보존돼요.
 - Reddit은 subreddit별 성공·실패·수집 수·요청 횟수·HTTP 상태·재시도 대기를 기록해요. 정상 빈 피드와 요청 실패를 구분해요.
-- 429는 subreddit당 최대 3회 요청해요. 재시도 대기는 Reddit 전체에서 최대 30초예요. 기존 subreddit 사이 1초 간격과 요청당 최대 15초는 이 재시도 대기 예산과 별도예요.
-- `Retry-After`가 있으면 초 또는 HTTP 날짜로 읽어요. 없거나 잘못되면 2초, 4초 backoff를 써요. 대기 예산을 넘거나 429 재시도를 소진하면 남은 subreddit은 `skipped_rate_limit`로 남겨요. 오래된 캐시는 재사용하지 않아요.
+- 서버 대기와 실행 예산 안에서 모든 subreddit의 첫 시도를 재시도보다 먼저 진행해요. 소스당 최대 3회, 전체 요청은 소스 수 + 2회(현재 6개이면 8회) 이하예요. 한 소스의 429 재시도가 뒤 소스의 첫 시도를 독점하지 않게 해요. 제한이 지속되면 기존 조기 중단보다 요청이 늘 수 있지만 전체 상한을 넘기지 않아요.
+- 재시도 대기는 Reddit 전체에서 최대 30초예요. 요청 사이 최소 1초와 요청당 최대 15초는 별도예요. `Retry-After`는 초 또는 HTTP 날짜로 읽고, 없거나 잘못되면 해당 소스 시도에 따라 2초, 4초, 8초를 사용해요. 마지막 429의 대기도 다음 실행에 보존해요. 다른 subreddit 요청도 같은 서버 대기를 지켜요. 이전 실행에서 남은 제한 대기도 이번 실행의 30초 예산에 포함해요. 제한 대기와 1초 간격이 겹치면 더 긴 쪽만 기다려요. 429만 재시도하며 다른 HTTP 오류·시간 초과·피드 오류는 바로 실패로 남겨요. RSS에 일반 API의 수치 제한을 적용하지 않아요.
+- 대기 예산 초과·요청 예산 소진·소스별 3회 소진을 구분해요. 시도했던 소스는 `failed`, 시도 전 제한으로 멈춘 소스는 `skipped_rate_limit`이에요. 정상 0건은 `success`예요. 캐시된 글로 수집 성공을 대신하지 않아요.
+- `logs/reddit/collection.lock`으로 같은 checkout의 Reddit 수집 전체를 직렬화해요. 다른 프로세스가 수집 중이면 HTTP 없이 `status=skipped_rate_limit`, `reason=collection_in_progress`로 남겨요. `state.json`은 다음 요청 허용 시각과 제한 대기 여부만 원자 저장해요. 손상·접근 실패는 `status=failed`, `reason=coordination_unavailable`로 보고하며 제한 상태를 자동 초기화하지 않아요. 다른 checkout·호스트의 요청이나 외부 Orca 일정은 제어하지 않아요.
+- 소스별 `requests`에는 요청 시각·동시 요청 수 1·HTTP 상태·정규화한 Retry-After 초와 숫자인 `x-ratelimit-remaining/reset/used`만 남겨요. 원문 헤더·응답·쿠키는 저장하지 않아요. 이 헤더가 없다는 사실만으로 제한 기준을 추정하지 않아요.
+- 소스 누락이 있으면 영수증의 수집 단계도 `partial`이에요. 요약·산출물·게시 성공과 구분하며, 감독은 최상위 `partial`/`dry_run`일 때만 부분 수집을 허용해요. 당일 HTML에도 소스별 성공 0건·실패·미수집과 사유가 표시돼요. 과거 JSON에 사유가 없으면 저장된 상태만 표시해요.
+
+[이슈 #5](https://github.com/karellen-kim/trending-tech/issues/5)의 외부 429 해소는 로컬 검증으로 확인할 수 없어요. 다음 자연 실행에서 Reddit 수집 복구는 6개 모두 `success`이고 `failed`·`skipped_rate_limit`이 없어야 확인돼요. HN 등 다른 소스가 실패하면 전체 실행은 계속 `partial`이에요. 제한이 계속되면 `partial`을 유지해요. 롤백은 코드 revert로 가능하며 진단 파일은 별도로 보존해요.
 
 `Retry-After` 형식은 [RFC 9110 §10.2.3](https://www.rfc-editor.org/rfc/rfc9110.html#section-10.2.3)을 따랐어요. 429 응답의 이 헤더는 [RFC 6585 §4](https://www.rfc-editor.org/rfc/rfc6585.html#section-4)에서 선택 사항이에요.
 

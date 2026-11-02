@@ -223,3 +223,36 @@ def test_community_sections_are_separate_and_keep_legacy_items():
     assert legacy_soup.select_one("#hn") and legacy_soup.select_one("#reddit")
     legacy.update(hn=[], reddit=[])
     assert not BeautifulSoup(render_daily_page(legacy), "html.parser").select_one("#hn")
+
+
+def test_source_status_distinguishes_empty_failure_and_skipped():
+    data = {'date': '2026-11-02', 'source_status': {'reddit': {
+        'status': 'partial', 'sources': [
+            {'name': 'r/empty', 'status': 'success', 'count': 0},
+            {'name': 'r/limited', 'status': 'failed', 'http_status': 429, 'reason': 'retries_exhausted'},
+            {'name': 'r/later', 'status': 'skipped_rate_limit', 'reason': 'wait_budget_exceeded'},
+        ]}}}
+    html = render_daily_page(data)
+    assert '일부 소스를 수집하지 못했어요' in html
+    assert 'r/empty: 수집 성공 · 0건' in html
+    assert 'r/limited: 수집 실패 · HTTP 429 · 재시도 소진' in html
+    assert 'r/later: 제한으로 미수집 · 대기 예산 초과' in html
+
+
+def test_source_status_escapes_names_and_handles_legacy_missing_reason():
+    html = render_daily_page({'date': '2026-11-02', 'source_status': {'reddit': {
+        'status': 'failed', 'sources': [{'name': '<script>bad</script>', 'status': 'skipped_rate_limit'}]}}})
+    assert '<script>bad</script>' not in html
+    assert '&lt;script&gt;' in html and '제한으로 미수집' in html
+
+
+def test_source_status_shows_known_error_types_without_raw_messages():
+    data = {'date': '2026-11-02', 'source_status': {'reddit': {'status': 'failed', 'sources': [
+        {'name': 'r/timeout', 'status': 'failed', 'error_type': 'Timeout'},
+        {'name': 'r/invalid', 'status': 'failed', 'error_type': 'ValueError'},
+        {'name': 'r/unknown', 'status': 'failed', 'error_type': 'private-error'},
+    ]}}}
+    html = render_daily_page(data)
+    assert 'r/timeout: 수집 실패 · 요청 시간 초과' in html
+    assert 'r/invalid: 수집 실패 · 피드 형식 오류' in html
+    assert 'private-error' not in html
