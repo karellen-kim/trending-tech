@@ -129,3 +129,17 @@ def test_fetch_article_text_prefers_markdown_body_over_navigation_main():
         out = scraper._fetch_article_text("https://www.alibabacloud.com/blog/example")
     assert out == content.strip()[:2000]
     assert "Blog Events" not in out
+
+
+def test_fetch_article_text_prefers_rich_content_over_related_articles():
+    content = 'The court sanctioned a filing containing a prompt injection. ' * 60
+    raw = ('<html><body><article>Unrelated announcement card</article>'
+           '<main><h1>Brazilian court sanctions prompt injection filing</h1>'
+           f'<div class="rich-content"><p>{content}</p></div>'
+           '<article>Related article card</article></main></body></html>').encode('utf-8')
+    resp = _FakeResp(raw, 'utf-8', 'utf-8')
+    with patch('sources.scraper.requests.get', return_value=resp):
+        out = scraper._fetch_article_text('https://jetstream.security/insights/example')
+    assert out == content.strip()[:2000]
+    assert 'Unrelated announcement' not in out
+    assert 'Related article card' not in out
