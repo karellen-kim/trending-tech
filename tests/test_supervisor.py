@@ -230,3 +230,16 @@ def test_failed_child_or_unusable_receipt_fails_closed(tmp_path, mode, code):
     assert result['status'] == 'failed'
     assert result['validation_error']
     assert 'secret' not in json.dumps(result)
+
+
+@pytest.mark.parametrize('status', ['published', 'partial', 'dry_run'])
+def test_partial_collection_agrees_with_terminal_status(status):
+    state = completed_state('a' * 32, 123)
+    state['status'] = status
+    state['stages']['collection']['status'] = 'partial'
+    state['source_status'] = {'reddit': {'status': 'partial'}}
+    if status == 'dry_run':
+        for stage in ('git', 'slack'):
+            state['stages'][stage] = {'status': 'skipped', 'reason': 'dry_run'}
+    error = supervisor.validate_receipt(state, 'a' * 32, 123, DAY, 0)
+    assert (error is None) == (status != 'published')

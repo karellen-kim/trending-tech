@@ -6,3 +6,4 @@ logs/*.log
 logs/runs/
 .playwright-mcp/
 *.png
+logs/reddit/

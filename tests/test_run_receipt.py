@@ -115,6 +115,7 @@ def test_optional_source_failure_is_partial(pipeline):
     main.main()
     state = receipt(tmp_path)
     assert state['status'] == 'partial'
+    assert state['stages']['collection']['status'] == 'partial'
     saved = json.loads((tmp_path / 'docs' / '2026-10-29.json').read_text())
     assert saved['source_status']['reddit']['status'] == 'failed'
 

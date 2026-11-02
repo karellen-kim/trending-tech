@@ -31,7 +31,9 @@ def validate_receipt(state: dict, run_id: str, pid: int, day: str,
             isinstance(stages.get(name), dict) for name in
             ('collection', 'summary', 'artifacts', 'git', 'slack')):
         return 'invalid_stages'
-    if any(stages[name].get('status') != 'success' for name in ('collection', 'summary', 'artifacts')):
+    collection_allowed = ('success',) if status == 'published' else ('success', 'partial')
+    if (stages['collection'].get('status') not in collection_allowed
+            or any(stages[name].get('status') != 'success' for name in ('summary', 'artifacts'))):
         return 'incomplete_required_stages'
     git, slack = stages['git'], stages['slack']
     if status == 'dry_run':

@@ -20,3 +20,8 @@ def deny_live_http(monkeypatch):
     def denied(*args, **kwargs):
         raise AssertionError('Live HTTP is forbidden in tests')
     monkeypatch.setattr('requests.sessions.Session.request', denied)
+
+
+@pytest.fixture(autouse=True)
+def isolate_reddit_coordination(monkeypatch, tmp_path):
+    monkeypatch.setattr('sources.reddit.STATE_DIR', tmp_path / 'reddit', raising=False)
