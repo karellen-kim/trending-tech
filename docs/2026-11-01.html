@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-11-01 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  .source-status { margin: 1rem 1.15rem; padding: 0.75rem; border: 1px solid var(--rule); font-size: 0.8rem; }
+  .source-status summary { cursor: pointer; font-weight: 500; }
+  .source-status ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 항상 펼쳐진 요약 ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
+  .community-date { padding: 0.8rem 1.15rem 0; font-size: 0.75rem; color: var(--ink-faint); }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-11-01</div>
+<h1><em>01</em> Nov 2026</h1>
+<aside class="recovery-note" style="margin:1rem;padding:1rem;border:1px solid var(--rule)"><strong>누락분 복구 · 일부 소스 미복원</strong><p>누락분 복구 보고서예요. 블로그는 현재 피드에 남아 있는 글 중 발행일을 확인해 수집했어요. HN은 보고일 전날의 UTC 날짜별 페이지 순위예요. 논문은 보고일(KST)의 arXiv 제출 기록에서 선정했으며 당시 RSS 목록을 복원한 것은 아니에요. 당시 GitHub·Reddit 인기 목록은 저장본이 없어 제외했어요.</p></aside><nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn" class="nav-link">Hacker News</a></nav>
+<details class="source-status" open><summary>일부 소스를 수집하지 못했어요</summary><ul><li>hn: 수집 성공 · 3건</li><li>github: 수집 상태 확인 필요</li><li>recovery: 일부 수집</li></ul></details><div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">AI의 작업 공간이 대화창에서 데이터베이스·실행 화면으로 넓어지면서, 작업을 어디까지 격리할지가 보안 문제가 된다.</p><p class="take-body">기본 모델 설정을 이어받는 Datasette Agent는 데이터 도구에 AI를 연결하는 절차를 줄이고, Lakebase는 에이전트가 실제 데이터를 변경하되 다른 작업과 운영 환경에 영향을 주지 않도록 작업별 DB 브랜치를 제안한다. 반대로 ChatGPT 계정 탈취 사례에서는 HTML 미리보기의 격리 경계가 뚫리자 비공개 데이터 접근과 사용자 대신 행동하는 권한까지 노출됐다. 이들을 관통하는 쟁점은 AI에 실행 공간을 제공할 때 데이터와 계정 권한의 경계도 함께 설계해야 한다는 것이다.</p><div class="take-refs"><span>근거</span><a href="https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts/" target="_blank" rel="noopener">우리는 어떻게 ChatGPT 계정을 탈취했나</a> · <a href="https://www.databricks.com/blog/lakebase-branching-cicd-lessons-100-pr-databases" target="_blank" rel="noopener">CI/CD를 위한 Lakebase 브랜칭: PR 데이터베이스 100개에서 얻은 교훈</a> · <a href="https://simonwillison.net/2026/Oct/31/datasette-llm/" target="_blank" rel="noopener">datasette-llm 0.1a9</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/7e99edad-0e58-4704-b207-c3aa9b86da8d" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">1개</span>
+  </div>
+  <div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.databricks.com/blog/lakebase-branching-cicd-lessons-100-pr-databases" target="_blank" rel="noopener">CI/CD를 위한 Lakebase 브랜칭: PR 데이터베이스 100개에서 얻은 교훈</a></div>
+    <div class="item-meta">Databricks Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Snorkel AI가 CI/CD에서 각 PR에 독립적인 Lakebase Postgres 데이터베이스를 제공한 사례를 다룬 글이다.<br>- 각 열린 PR에 프로덕션 데이터의 읽기·쓰기가 가능한 복사본을 제공하며, 준비 시간을 30분 이상에서 1분 미만으로 줄였다.<br>- copy-on-write 방식으로 약 2.5TB의 프로덕션 데이터에 PR 데이터베이스 100개를 동시에 운영해도 각 브랜치에서 변경한 데이터만큼만 저장 공간이 추가된다.<br>- 브랜치 만료 시간(TTL)으로 PR이 끝난 브랜치를 자동 정리해, 저장 공간을 프로덕션 데이터와 활성 PR의 변경분을 합친 크기에 가깝게 유지한다.</div></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://karpathy.bearblog.dev/hacker-tube/" target="_blank" rel="noopener">HackerTube</a></div>
+    <div class="item-meta">Andrej Karpathy</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Hacker News에서 추천된 YouTube 영상을 모아 약 2시간 만에 만든 HackerTube를 소개하는 글.<br>- Hacker News 댓글을 내려받아 필터링하고 Sonnet으로 스팸을 제거해, YouTube 영상 추천 댓글 약 4만 개를 추렸다.<br>- 2007~2026년 추천된 영상 6,454개를 150개 주제로 모아 YouTube 형태의 UI로 제공한다.<br>- 업로드된 썸네일 대신 영상의 50% 지점 이미지를 사용하며, 계정 없이 브라우저 세션에 상태를 저장하는 맞춤 추천·키보드 단축키·데이터 내보내기를 지원한다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts/" target="_blank" rel="noopener">우리는 어떻게 ChatGPT 계정을 탈취했나</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Parameter Labs가 ChatGPT의 HTML previews에서 발견한 계정 탈취 취약점과 공격 경로를 다룬 글이다.<br>- MathLive 가상 키보드의 postMessage() 수신 코드가 innerHTML을 사용해, HTML preview의 샌드박스 iframe에서도 부모 페이지에 HTML을 삽입할 수 있었다.<br>- 공격자는 삽입한 HTML로 샌드박스 제한이 없는 새 iframe을 만들고, CSP가 허용한 YouTube 도메인의 oEmbed 엔드포인트를 이용해 JavaScript를 실행했다.<br>- ChatGPT에서 JavaScript를 실행할 수 있게 되자 API를 통해 사용자의 비공개 데이터를 가져와 외부로 유출할 수 있었다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://simonwillison.net/2026/Oct/31/datasette-llm/" target="_blank" rel="noopener">datasette-llm 0.1a9</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+  <div class="item-body"><div class="item-summary">datasette-llm 0.1a9에서 Datasette Agent의 기본 모델 설정을 간소화한 업데이트를 소개한다.<br>- 2026년 10월 31일 공개된 버전으로, 다른 플러그인이 의존해 사용할 수 있는 LLM 통합 플러그인이다.<br>- LLM이 사용하는 기본 모델을 자동으로 가져와 Datasette Agent에서도 사용한다.<br>- 이제 `uvx --with datasette-agent datasette content.db --internal internal.db`로 실행할 수 있으며, 기존의 `-s plugins.datasette-agent.default_model gpt-6-astra` 같은 모델 지정이 필요 없어졌다.</div></div>
+</div>
+</div><div class="section" id="hn">
+  <div class="section-header">
+    <span class="section-icon">HN</span>
+    <span class="section-title">Hacker News</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="community-date">2026-10-31 UTC · 당시 페이지 순위</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://karpathy.bearblog.dev/hacker-tube/" target="_blank" rel="noopener">HackerTube: HN에서 추천한 동영상으로 만든 YouTube</a></div>
+    <div class="item-meta">1위 · 2759 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Hacker News에서 추천한 YouTube 동영상을 모아 만든 HackerTube의 제작 과정과 기능을 소개하는 글이다.<br>- Opus가 Hacker News의 전체 댓글을 내려받고, Claude Code의 Workflow에서 Sonnet으로 필터링하고 스팸을 제거해 YouTube 동영상을 추천하는 댓글 4만 개를 추렸다.<br>- 2007~2026년에 추천된 동영상 6,454개를 150개 주제로 모았으며, YouTube 형태의 UI 구현부터 도메인 확보, VPS 배포, 보안 강화와 최적화까지 약 2시간이 걸렸다.<br>- 업로드된 썸네일 대신 영상의 50% 지점 이미지를 사용하고, 계정 없이 브라우저 세션에 상태를 저장해 맞춤 추천을 제공한다. 단축키와 사이트 데이터 내보내기도 지원한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.smithsonianmag.com/science-nature/italian-farmer-found-unknown-seeds-attic-with-nothing-lose-planted-them-result-biblical-180989644/" target="_blank" rel="noopener">한 이탈리아 농부가 다락방에서 정체불명의 씨앗을 발견해 심었다</a></div>
+    <div class="item-meta">2위 · 847 pts</div>
+  </div>
+  
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://atlasum.net/blog/cve-2026-98432-linux-ipv4-tcp-uaf" target="_blank" rel="noopener">TCP 해제 후 사용 취약점: CVE-2026-98432 / CVSS 9.8</a></div>
+    <div class="item-meta">3위 · 728 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Linux의 IPv4 TCP 핸드셰이크 취약점과 배포판별 커널 패치 현황을 다룬 글이다.<br>- CVE-2026-98432는 Linux 4.4부터 존재하는 해제 후 사용 취약점으로, 인증되지 않은 원격 공격자가 접근할 수 있으며 CVSS 3.1 점수는 9.8점이다.<br>- Linux 안정 커널은 2026년 10월 11일과 15일에 수정됐고, Red Hat은 11월 1일 RHEL 8·9·10용 패치 커널을 배포했다. 같은 날 기준 Ubuntu는 패치가 없고 AlmaLinux는 테스트 중이다.<br>- multipath TCP를 꺼도 해결되지 않는다. Anthropic의 root 권한 획득 공격에는 MPTCP 리스너가 필요했지만, 버그 자체는 일반 IPv4 TCP에 있으며 Go Security Team은 MPTCP 리스너가 없는 시스템도 유사한 공격에 취약할 가능성이 있다고 밝혔다.</div></div>
+</div>
+</div>
+</body>
+</html>
