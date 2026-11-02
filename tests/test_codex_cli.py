@@ -20,7 +20,7 @@ def test_codex_reads_only_final_message():
     process = _process()
 
     def popen(args, **kwargs):
-        assert args[:2] == ['codex', 'exec']
+        assert args[:3] == ['codex', '--no-daemon', 'exec']
         assert args[args.index('--model') + 1] == 'gpt-6.1-sol'
         assert args[args.index('--sandbox') + 1] == 'read-only'
         assert '--ephemeral' in args
@@ -34,6 +34,44 @@ def test_codex_reads_only_final_message():
     with patch('summarizer.subprocess.Popen', side_effect=popen):
         assert summarizer._run_codex('요약\x00 원문', timeout=60) == '{"summary":"결과"}'
     process.communicate.assert_called_once_with(input='요약 원문', timeout=60)
+
+
+def test_codex_child_drops_parent_identity_without_changing_parent_environment():
+    parent_env = {
+        'ORCA_PANE_KEY': 'automation-parent-pane',
+        'ORCA_TERMINAL_HANDLE': 'automation-parent-terminal',
+        'ORCA_AGENT_HOOK_PORT': '12345',
+        'ORCA_AGENT_HOOK_TOKEN': 'fake-hook-token',
+        'ORCA_AGENT_HOOK_ENDPOINT': '/tmp/fake-hook-endpoint',
+        'ORCA_AGENT_HOOK_ROOT': '/tmp/fake-hook-root',
+        'ORCA_AGENT_LAUNCH_TOKEN': 'fake-launch-token',
+        'ORCA_WORKSPACE_ID': 'automation-parent-workspace',
+        'CODEX_THREAD_ID': 'parent-thread',
+        'CODEX_SESSION_ID': 'parent-session',
+        'CODEX_TOOL_CALL_ID': 'parent-tool-call',
+        'CODEX_HOME': '/tmp/fake-codex-home',
+        'CODEX_SANDBOX': 'seatbelt',
+        'OPENAI_API_KEY': 'fake-api-key',
+        'HOME': '/tmp/fake-home',
+        'PATH': '/opt/homebrew/bin:/usr/bin:/bin',
+    }
+    process = _process()
+
+    def popen(args, **kwargs):
+        assert args[:3] == ['codex', '--no-daemon', 'exec']
+        child_env = kwargs['env']
+        assert not any(key.startswith('ORCA_') for key in child_env)
+        assert not {'CODEX_THREAD_ID', 'CODEX_SESSION_ID', 'CODEX_TOOL_CALL_ID'} & child_env.keys()
+        for key in ('CODEX_HOME', 'CODEX_SANDBOX', 'OPENAI_API_KEY', 'HOME', 'PATH'):
+            assert child_env[key] == parent_env[key]
+        assert dict(os.environ) == parent_env
+        Path(args[args.index('--output-last-message') + 1]).write_text('result')
+        return process
+
+    with patch.dict(os.environ, parent_env, clear=True), \
+            patch('summarizer.subprocess.Popen', side_effect=popen):
+        assert summarizer._run_codex('prompt') == 'result'
+        assert dict(os.environ) == parent_env
 
 
 @pytest.mark.parametrize('failure', [FileNotFoundError('codex'), ValueError('bad input')])

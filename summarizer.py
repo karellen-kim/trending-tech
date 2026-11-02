@@ -133,12 +133,18 @@ def _run_codex(prompt: str, timeout: int = LLM_TIMEOUT, *, strict: bool = False,
     try:
         with TemporaryDirectory(prefix="trending-codex-") as temp_dir:
             output_path = Path(temp_dir) / "response.txt"
+            # 내부 LLM 완료 훅이 부모 Orca 실행의 완료로 전달되지 않도록 격리한다.
+            child_env = {
+                key: value for key, value in os.environ.items()
+                if not key.startswith("ORCA_")
+                and key not in {"CODEX_THREAD_ID", "CODEX_SESSION_ID", "CODEX_TOOL_CALL_ID"}
+            }
             process = subprocess.Popen(
-                ["codex", "exec", "--model", "gpt-6.1-sol", "--json",
+                ["codex", "--no-daemon", "exec", "--model", "gpt-6.1-sol", "--json",
                  "--sandbox", "read-only", "--ephemeral", "--color", "never",
                  "--output-last-message", str(output_path), "-"],
                 stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                text=True, start_new_session=True,
+                text=True, start_new_session=True, env=child_env,
             )
             try:
                 _, stderr = process.communicate(input=prompt, timeout=timeout)
