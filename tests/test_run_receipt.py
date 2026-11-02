@@ -47,6 +47,16 @@ def test_published_requires_artifacts_and_both_publications(pipeline):
     assert state['stages']['slack']['http_status'] == 200
 
 
+def test_supervisor_date_survives_midnight_before_worker_start(pipeline, monkeypatch):
+    from datetime import datetime
+    _, tmp_path = pipeline
+    monkeypatch.setattr(main, 'now_kst', lambda: datetime(2026, 10, 30, 0, 0, 1))
+    main.main(run_date='2026-10-29')
+    state = receipt(tmp_path)
+    assert state['date'] == '2026-10-29'
+    main.collect.assert_called_once_with('2026-10-29')
+
+
 @pytest.mark.parametrize('error, status, code', [
     (RuntimeError('secret must not appear'), 'failed', 1),
     (SystemExit(143), 'interrupted', 143),
