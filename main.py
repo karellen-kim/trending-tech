@@ -429,6 +429,30 @@ def save_monthly_page(today: date) -> str:
     return mid
 
 
+def _recover_rejected_push() -> None:
+    """추적 브랜치와 동기화하되 기존 작업이나 충돌을 자동으로 덮지 않는다."""
+    def output(*args):
+        return subprocess.run(["git", *args], check=True, capture_output=True,
+                              text=True).stdout.strip()
+
+    if output("status", "--porcelain"):
+        raise RuntimeError("Push recovery requires a clean working tree")
+    for state in ("rebase-merge", "rebase-apply", "MERGE_HEAD", "CHERRY_PICK_HEAD"):
+        if os.path.exists(output("rev-parse", "--git-path", state)):
+            raise RuntimeError("Push recovery cannot interrupt an existing Git operation")
+    if output("rev-parse", "--symbolic-full-name", "@{push}") != output(
+            "rev-parse", "--symbolic-full-name", "@{upstream}"):
+        raise RuntimeError("Push recovery requires matching push and upstream branches")
+    try:
+        subprocess.run(["git", "pull", "--rebase", "--no-autostash"], check=True)
+    except subprocess.CalledProcessError:
+        # Only abort a rebase started here; fetch/auth failures have no rebase state.
+        if any(os.path.exists(output("rev-parse", "--git-path", state))
+               for state in ("rebase-merge", "rebase-apply")):
+            subprocess.run(["git", "rebase", "--abort"], check=True)
+        raise
+
+
 def git_commit_push(date_str: str, month_id: str = "") -> dict:
     """Git 커밋과 push를 수행하며 push 실패에도 커밋 증거를 보존한다."""
     wid = _week_id(date.fromisoformat(date_str))
@@ -440,7 +464,20 @@ def git_commit_push(date_str: str, month_id: str = "") -> dict:
     subprocess.run(["git", "commit", "-m", f"chore: {date_str} trends"], check=True)
     sha = subprocess.run(["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip()
     record_stage("git", "running", commit_sha=sha, committed=True, pushed=False)
-    subprocess.run(["git", "push"], check=True)
+    try:
+        subprocess.run(["git", "push", "--porcelain"], check=True,
+                       capture_output=True, text=True)
+    except subprocess.CalledProcessError as error:
+        rejected = any(line.startswith("!\t") and line.endswith((
+            "[rejected] (fetch first)", "[rejected] (non-fast-forward)"))
+            for line in (error.stdout or "").splitlines())
+        if not rejected:
+            raise
+        _recover_rejected_push()
+        sha = subprocess.run(["git", "rev-parse", "HEAD"], check=True,
+                             capture_output=True, text=True).stdout.strip()
+        record_stage("git", "running", commit_sha=sha, committed=True, pushed=False)
+        subprocess.run(["git", "push"], check=True)
     print("[Git] 커밋 + 푸시 완료")
     return {"status": "success", "commit_sha": sha, "committed": True, "pushed": True}
 
