@@ -19,7 +19,7 @@ SUMMARIZE_ONLY_PROMPT = """아래 글의 제목을 한국어로 옮기고 핵심
 [내용]: {content}
 
 아래 JSON 형식으로만 답해. 설명이나 마크다운 없이 JSON만.
-{{"title_ko": "", "summary": ""}}
+{{"title_ko": "", "summary": "", "summary_status": "ok", "summary_reason": ""}}
 
 규칙:
 - title_ko: 제목을 자연스러운 한국어로. 고유명사(제품명·회사명·기술명)는 그대로 유지해.
@@ -27,7 +27,9 @@ SUMMARIZE_ONLY_PROMPT = """아래 글의 제목을 한국어로 옮기고 핵심
 - summary: 첫 줄에 무엇에 관한 글인지 한 줄, 그 다음 핵심 3가지를 각각 "- "로 시작하는 줄로.
   반드시 [내용]에 있는 정보만 사용해. 추가 지식이나 추론으로 만들어내지 마.
   배경 설명·일반론은 빼고 이 글에만 있는 구체적인 사실·수치·기법을 골라.
-  [내용]이 불충분하면 빈 문자열.
+  요약할 사실이 없거나 구독·로그인 안내만 있으면 summary를 빈 문자열로 두고
+  summary_status를 insufficient_content로, summary_reason을 입력이 부족한 구체적 사유로 써.
+  사실이 충분하면 summary_status는 ok, summary_reason은 빈 문자열로 두고 요약해.
 """
 
 ANALYZE_PROMPT = """오늘은 {today} (KST)야.
@@ -38,7 +40,7 @@ ANALYZE_PROMPT = """오늘은 {today} (KST)야.
 [내용]: {content}
 
 아래 JSON 형식으로만 답해. 설명이나 마크다운 없이 JSON만.
-{{"is_today": true 또는 false, "pub_date": "YYYY-MM-DD 또는 unknown", "title_ko": "", "summary": ""}}
+{{"is_today": true 또는 false, "pub_date": "YYYY-MM-DD 또는 unknown", "title_ko": "", "summary": "", "summary_status": "ok", "summary_reason": ""}}
 
 규칙:
 - [발행일 정보]가 {recent_desc} 중 하나면 is_today 는 true. 그보다 오래됐거나 미래면 false.
@@ -49,7 +51,9 @@ ANALYZE_PROMPT = """오늘은 {today} (KST)야.
 - summary: 첫 줄에 무엇에 관한 글인지 한 줄, 그 다음 핵심 3가지를 각각 "- "로 시작하는 줄로.
   반드시 [내용]에 있는 정보만 사용해. 추가 지식이나 추론으로 만들어내지 마.
   배경 설명·일반론은 빼고 이 글에만 있는 구체적인 사실·수치·기법을 골라.
-  [내용]이 불충분하면 빈 문자열.
+  요약할 사실이 없거나 구독·로그인 안내만 있으면 summary를 빈 문자열로 두고
+  summary_status를 insufficient_content로, summary_reason을 입력이 부족한 구체적 사유로 써.
+  사실이 충분하면 summary_status는 ok, summary_reason은 빈 문자열로 두고 요약해.
 """
 
 TRANSLATE_TITLE_PROMPT = """다음 영어 제목을 자연스러운 한국어로 번역해줘.
@@ -227,33 +231,34 @@ def analyze_item(title: str, content: str, pub_hint: str, today: str,
     date_verified=False(피드에서 날짜를 못 읽은 경우)일 때만 날짜 판정까지 함께 시킨다."""
     content = (content or "")[:1500]
     if date_verified:
-        raw = _run_codex(SUMMARIZE_ONLY_PROMPT.format(title=title, content=content), timeout=LLM_TIMEOUT,
-                         strict=True, context=f"analyze:{title}")
-        parsed = _parse_json(raw)
-        if not isinstance(parsed, dict) or not all(isinstance(parsed.get(k), str) for k in ("title_ko", "summary")):
-            raise LlmCallError("invalid_response", "분석 JSON 응답이 아닙니다", title)
-        return {
-            "is_today": True,
-            "pub_date": "",
-            "title_ko": str(parsed.get("title_ko") or ""),
-            "summary": str(parsed.get("summary") or ""),
-        }
-
-    raw = _run_codex(ANALYZE_PROMPT.format(
-        today=today, recent_desc=_recent_desc(today, days),
-        pub_hint=pub_hint or "unknown",
-        title=title, content=content), timeout=LLM_TIMEOUT, strict=True, context=f"analyze:{title}")
+        prompt = SUMMARIZE_ONLY_PROMPT.format(title=title, content=content)
+    else:
+        prompt = ANALYZE_PROMPT.format(
+            today=today, recent_desc=_recent_desc(today, days),
+            pub_hint=pub_hint or "unknown", title=title, content=content)
+    raw = _run_codex(prompt, timeout=LLM_TIMEOUT, strict=True, context=f"analyze:{title}")
     data = _parse_json(raw)
-    if not isinstance(data, dict) or not isinstance(data.get("is_today"), bool):
+    if not isinstance(data, dict):
+        raise LlmCallError("invalid_response", "분석 JSON 응답이 아닙니다", title)
+    is_today = True if date_verified else data.get("is_today")
+    if not isinstance(is_today, bool):
         raise LlmCallError("invalid_response", "is_today는 명시적인 bool이어야 합니다", title)
-    if data["is_today"] and not all(isinstance(data.get(k), str) for k in ("title_ko", "summary")):
+    if is_today and not all(isinstance(data.get(k), str) for k in ("title_ko", "summary")):
         raise LlmCallError("invalid_response", "번역·요약 필드는 문자열이어야 합니다", title)
-    return {
-        "is_today": data["is_today"],
-        "pub_date": str(data.get("pub_date") or "unknown"),
+    result = {
+        "is_today": is_today,
+        "pub_date": "" if date_verified else str(data.get("pub_date") or "unknown"),
         "title_ko": str(data.get("title_ko") or ""),
         "summary": str(data.get("summary") or ""),
     }
+    if is_today:
+        status, reason = data.get("summary_status", "ok"), data.get("summary_reason", "")
+        if status not in ("ok", "insufficient_content") or not isinstance(reason, str):
+            raise LlmCallError("invalid_response", "요약 상태·사유가 유효하지 않습니다", title)
+        if status == "insufficient_content" and (data["summary"].strip() or not reason.strip()):
+            raise LlmCallError("invalid_response", "입력 부족은 빈 요약과 구체적 사유가 필요합니다", title)
+        result.update(summary_status=status, summary_reason=_redact_cli_error(reason.strip())[:200])
+    return result
 
 HIGHLIGHT_PROMPT = """오늘의 개발/기술 트렌드 항목들을 보고, 가장 중요하고 임팩트 있는 것 5개를 골라서
 각각 한국어로 한 줄(50자 이내)로 요약해줘.

@@ -73,6 +73,27 @@ def test_invalid_receipt_is_rejected(state):
     assert supervisor.validate_receipt(state, 'a' * 32, 123, DAY, 0)
 
 
+@pytest.mark.parametrize('process_code, receipt_code, status, expected', [
+    (1, 1, 'failed', 'unsuccessful_receipt'),
+    (1, 0, 'failed', 'process_exit_mismatch'),
+    (0, 1, 'failed', 'process_exit_mismatch'),
+    (1, 1, 'published', 'unsuccessful_receipt'),
+])
+def test_failed_process_and_exit_mismatch_are_distinct(process_code, receipt_code, status, expected):
+    state = completed_state('a' * 32, 123)
+    state.update(exit_code=receipt_code, status=status)
+    assert supervisor.validate_receipt(state, 'a' * 32, 123, DAY, process_code) == expected
+
+
+@pytest.mark.parametrize('status, expected', [
+    ('published', 'incomplete_required_stages'), ('partial', None)])
+def test_insufficient_summary_cannot_be_reported_as_fully_published(status, expected):
+    state = completed_state('a' * 32, 123)
+    state['status'] = status
+    state['stages']['summary']['insufficient_content_count'] = 1
+    assert supervisor.validate_receipt(state, 'a' * 32, 123, DAY, 0) == expected
+
+
 def test_existing_main_command_uses_supervisor(monkeypatch):
     import runpy
     entry = Mock(return_value=17)

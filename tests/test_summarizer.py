@@ -29,6 +29,39 @@ def test_filter_important_papers_returns_list():
 
 import json
 import summarizer
+import pytest
+
+
+@pytest.mark.parametrize('date_verified', [False, True])
+def test_analyze_item_preserves_explicit_insufficient_content(date_verified):
+    payload = json.dumps({'is_today': True, 'title_ko': '제목', 'summary': '',
+                          'summary_status': 'insufficient_content',
+                          'summary_reason': '본문 대신 구독 안내만 있음'})
+    with patch('summarizer._run_codex', return_value=payload) as call:
+        result = summarizer.analyze_item('Title', 'Subscribe now. ' * 20,
+                                         '2026-11-03', '2026-11-03', date_verified=date_verified)
+    assert result['summary_status'] == 'insufficient_content'
+    assert result['summary_reason'] == '본문 대신 구독 안내만 있음'
+    assert result['summary'] == ''
+    assert 'summary_status' in call.call_args.args[0]
+    assert 'summary_reason' in call.call_args.args[0]
+
+
+@pytest.mark.parametrize('date_verified', [False, True])
+@pytest.mark.parametrize('fields', [
+    {'summary_status': 'unknown'},
+    {'summary_status': None},
+    {'summary_status': 'insufficient_content'},
+    {'summary_status': 'insufficient_content', 'summary_reason': ' '},
+    {'summary_status': 'insufficient_content', 'summary_reason': []},
+    {'summary_status': 'insufficient_content', 'summary_reason': '구독 안내', 'summary': '요약'},
+])
+def test_analyze_item_rejects_invalid_summary_status(date_verified, fields):
+    payload = {'is_today': True, 'title_ko': '제목', 'summary': '', **fields}
+    with patch('summarizer._run_codex', return_value=json.dumps(payload)):
+        with pytest.raises(summarizer.LlmCallError, match='invalid_response'):
+            summarizer.analyze_item('Title', 'body ' * 50, '2026-11-03', '2026-11-03',
+                                    date_verified=date_verified)
 
 
 def test_analyze_item_parses_json():

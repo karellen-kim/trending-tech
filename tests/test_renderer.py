@@ -1,4 +1,19 @@
 from renderer import render_daily_page, render_index_page
+import pytest
+
+
+@pytest.mark.parametrize('section,title_key,fallback_key', [
+    ('papers', 'title', 'abstract'), ('github', 'name', 'description')])
+@pytest.mark.parametrize('insufficient', [False, True])
+def test_explicit_insufficient_summary_has_no_raw_content_fallback(section, title_key,
+                                                                   fallback_key, insufficient):
+    item = {title_key: 'Source title', 'title_ko': '한글 제목', 'url': 'https://example.com/item',
+            'summary': '', fallback_key: 'UNREADABLE_CONTENT_FIXTURE'}
+    if insufficient:
+        item.update(summary_status='insufficient_content', summary_reason='본문 없음')
+    html = render_daily_page({'date': '2026-11-03', section: [item]})
+    assert '한글 제목' in html and 'https://example.com/item' in html
+    assert ('UNREADABLE_CONTENT_FIXTURE' in html) is not insufficient
 
 SAMPLE_DATA = {
     "date": "2026-05-31",

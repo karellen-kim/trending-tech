@@ -26,6 +26,7 @@ def test_save_html_persists_optional_audio_url(tmp_path, monkeypatch, audio_url)
         'seen_urls': [],
         'today_take': {},
         'important_links': [],
+        'summary_omissions': [],
     }
     if audio_url is not None:
         expected['audio_url'] = audio_url
