@@ -54,11 +54,18 @@ def _analyze_items(items: list[dict], content_key: str, filter_today: bool = Tru
         if retained:
             if not isinstance(result.get("title_ko"), str) or not result["title_ko"].strip():
                 raise LlmCallError("missing_output", "Required title translation is empty", context=context)
-            if content_key != "title" and len(content.strip()) >= 150:
+            insufficient = result.get("summary_status") == "insufficient_content"
+            if content_key != "title" and len(content.strip()) >= 150 and not insufficient:
                 if not isinstance(result.get("summary"), str) or not result["summary"].strip():
                     raise LlmCallError("missing_output", "Required summary is empty", context=context)
+            if insufficient:
+                _log_llm_event("summary_unavailable", kind="insufficient_content",
+                               context=context, input_chars=len(content))
         item["summary"] = result.get("summary", "")
         item["title_ko"] = result.get("title_ko", "")
+        for key in ("summary_status", "summary_reason"):
+            if key in result:
+                item[key] = result[key]
         # 수집 단계에서 날짜를 확인한 항목은 그 값을 유지한다
         item["pub_date"] = item.get("pub_date") or result.get("pub_date", "unknown")
         item["is_today"] = result["is_today"]
@@ -75,7 +82,8 @@ def _analyze_items(items: list[dict], content_key: str, filter_today: bool = Tru
         _log_llm_event("analysis_failed", kind=getattr(error, "kind", "interrupted"),
                        total=len(items), completed=sum(item is not None for item in analyzed),
                        cancelled=cancelled, error=str(error) if isinstance(error, LlmCallError) else type(error).__name__)
-        ex.shutdown(wait=False, cancel_futures=True)
+        # 실행 중인 호출의 종료 기록이 영수증 확정보다 먼저 끝나야 한다.
+        ex.shutdown(wait=True, cancel_futures=True)
         raise
     else:
         ex.shutdown(wait=True)
@@ -300,6 +308,12 @@ def save_html(data: dict) -> list[str]:
                            if k in ("headline", "body")},
             "important_links": [{"text": l.get("text", ""), "url": l.get("url", "")}
                                 for l in (data.get("highlight_links") or []) if l.get("url")],
+            "summary_omissions": [
+                {"section": section, "url": item.get("url", ""),
+                 "title": item.get("title_ko") or item.get("title") or item.get("name", ""),
+                 "summary_status": item["summary_status"], "summary_reason": item["summary_reason"]}
+                for section in ("company_blogs", "dev_blogs", "papers", "github", "hn", "reddit", "community")
+                for item in data.get(section, []) if item.get("summary_status") == "insufficient_content"],
             **({"audio_url": data["audio_url"]} if data.get("audio_url") else {}),
             **{key: data[key] for key in ("hn", "reddit", "hn_date") if key in data},
             **({"source_status": data["source_status"]} if "source_status" in data else {}),
@@ -477,7 +491,10 @@ def _run_daily(today: date, today_str: str, hn_day: str | None, run: RunReceipt)
         if not isinstance(take, dict) or not isinstance(take.get("headline"), str) or not take["headline"].strip():
             raise LlmCallError("missing_output", "Required today_take headline is empty", context=today_str)
     run.require_finished_llm()
-    run.stage("summary", "success")
+    insufficient_count = sum(item.get("summary_status") == "insufficient_content"
+                             for section in ("company_blogs", "dev_blogs", "papers", "github", "hn", "reddit", "community")
+                             for item in data.get(section, []))
+    run.stage("summary", "success", insufficient_content_count=insufficient_count)
 
     # 오디오는 노트북에서 재생하므로, 성공하면 그 노트북 링크를 페이지에 건다
     notebook_url = make_audio(data)
@@ -509,7 +526,7 @@ def _run_daily(today: date, today_str: str, hn_day: str | None, run: RunReceipt)
         run.stage("slack", "running")
         slack = send_slack(SLACK_WEBHOOK_URL, today_str, highlights, data.get("today_take"))
         run.stage("slack", **slack)
-        complete = slack["status"] == "success" and all(
+        complete = slack["status"] == "success" and insufficient_count == 0 and all(
             result["status"] == "success" for result in data.get("source_status", {}).values())
         run.outcome = "published" if complete else "partial"
     print(f"[{run.outcome}] {today_str}")

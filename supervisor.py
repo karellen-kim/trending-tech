@@ -19,10 +19,10 @@ def validate_receipt(state: dict, run_id: str, pid: int, day: str,
         return 'receipt_identity_mismatch'
     if not state.get('started_at') or not state.get('finished_at'):
         return 'unfinished_receipt'
-    if process_code != 0 or state.get('exit_code') != process_code:
+    if state.get('exit_code') != process_code:
         return 'process_exit_mismatch'
     status = state.get('status')
-    if status not in ('published', 'partial', 'dry_run'):
+    if process_code != 0 or status not in ('published', 'partial', 'dry_run'):
         return 'unsuccessful_receipt'
     calls, stages, sources = (state.get(key) for key in ('llm_calls', 'stages', 'source_status'))
     if not isinstance(calls, dict) or 'running' in calls.values():
@@ -32,7 +32,11 @@ def validate_receipt(state: dict, run_id: str, pid: int, day: str,
             ('collection', 'summary', 'artifacts', 'git', 'slack')):
         return 'invalid_stages'
     collection_allowed = ('success',) if status == 'published' else ('success', 'partial')
+    insufficient_count = stages['summary'].get('insufficient_content_count', 0)
+    if type(insufficient_count) is not int or insufficient_count < 0:
+        return 'invalid_stages'
     if (stages['collection'].get('status') not in collection_allowed
+            or (status == 'published' and insufficient_count > 0)
             or any(stages[name].get('status') != 'success' for name in ('summary', 'artifacts'))):
         return 'incomplete_required_stages'
     git, slack = stages['git'], stages['slack']
@@ -99,7 +103,8 @@ def supervise(command: list[str], directory: Path, day: str) -> int:
                     if isinstance(state.get('stages'), dict):
                         result['stages'] = {
                             name: {key: value for key, value in stage.items() if key in
-                                   ('status', 'commit_sha', 'committed', 'pushed', 'http_status', 'reason')}
+                                   ('status', 'commit_sha', 'committed', 'pushed', 'http_status', 'reason',
+                                    'insufficient_content_count')}
                             for name, stage in state['stages'].items()
                             if name in ('collection', 'summary', 'artifacts', 'git', 'slack') and isinstance(stage, dict)}
                     if state.get('status') == 'interrupted':

@@ -120,6 +120,25 @@ def test_optional_source_failure_is_partial(pipeline):
     assert saved['source_status']['reddit']['status'] == 'failed'
 
 
+def test_insufficient_summary_is_published_as_partial_with_evidence(pipeline):
+    data, tmp_path = pipeline
+    data['dev_blogs'] = [{'title': 'Article', 'title_ko': '제목', 'url': 'https://example.com/item',
+                          'summary': '', 'summary_status': 'insufficient_content',
+                          'summary_reason': '구독 안내만 있음'}]
+    data['today_take'] = {'headline': '테스트 해석'}
+    main.main()
+    state = receipt(tmp_path)
+    assert state['status'] == 'partial'
+    assert state['exit_code'] == 0
+    assert state['stages']['summary'] == {'status': 'success', 'insufficient_content_count': 1}
+    assert state['stages']['git']['status'] == 'success'
+    assert state['stages']['slack']['status'] == 'success'
+    saved = json.loads((tmp_path / 'docs' / '2026-10-29.json').read_text())
+    assert saved['summary_omissions'] == [{
+        'section': 'dev_blogs', 'url': 'https://example.com/item', 'title': '제목',
+        'summary_status': 'insufficient_content', 'summary_reason': '구독 안내만 있음'}]
+
+
 def test_pending_llm_prevents_publication(pipeline, monkeypatch):
     _, tmp_path = pipeline
     def unfinished(data):

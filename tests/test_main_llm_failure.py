@@ -46,7 +46,78 @@ def test_analysis_failure_cancels_queued_futures(monkeypatch):
     with pytest.raises(LlmCallError):
         main._analyze_items([{'title': 'Failed'}, {'title': 'Queued'}], 'title')
     assert queued.cancelled()
-    executor.shutdown.assert_called_once_with(wait=False, cancel_futures=True)
+    executor.shutdown.assert_called_once_with(wait=True, cancel_futures=True)
+
+
+def test_explicit_insufficient_content_keeps_title_and_records_omission(monkeypatch):
+    result = {'is_today': True, 'title_ko': '제목', 'summary': '',
+              'summary_status': 'insufficient_content', 'summary_reason': '구독 안내만 있음'}
+    monkeypatch.setattr(main, 'analyze_item', Mock(return_value=result))
+    events = Mock()
+    monkeypatch.setattr(main, '_log_llm_event', events)
+    item = {'title': 'Paywall', 'url': 'https://example.com/item',
+            'content': 'Subscribe to read this article. ' * 10}
+    analyzed = main._analyze_items([item], 'content', False)
+    assert analyzed[0]['title_ko'] == '제목'
+    assert analyzed[0]['summary'] == ''
+    assert analyzed[0]['summary_status'] == 'insufficient_content'
+    assert analyzed[0]['summary_reason'] == '구독 안내만 있음'
+    assert events.call_args.args == ('summary_unavailable',)
+
+
+def test_analysis_failure_joins_running_worker_before_final_receipt(monkeypatch, tmp_path):
+    import json
+    from threading import Event, Thread
+
+    import summarizer
+    from run_receipt import RunReceipt
+
+    started, failed, release, done = (Event() for _ in range(4))
+    errors = []
+    log_event = main._log_llm_event
+
+    def observe(event, **fields):
+        log_event(event, **fields)
+        if event == 'analysis_failed':
+            failed.set()
+
+    def analyze(title, *args, **kwargs):
+        if title == 'Failed':
+            assert started.wait(10)
+            raise LlmCallError('timeout', 'fixture timeout')
+        summarizer._log_llm_event('llm_call_started', call_id='worker', context='fixture')
+        started.set()
+        assert release.wait(10)
+        summarizer._log_llm_event('llm_call_finished', call_id='worker', status='success')
+        return {'is_today': True, 'title_ko': title, 'summary': ''}
+
+    def run():
+        try:
+            with RunReceipt(tmp_path / 'runs', '2026-11-03'):
+                main._analyze_items([{'title': 'Failed'}, {'title': 'Running'}], 'title')
+        except BaseException as error:
+            errors.append(error)
+        finally:
+            done.set()
+
+    monkeypatch.setattr(main, 'SUMMARY_WORKERS', 2)
+    monkeypatch.setattr(main, 'analyze_item', analyze)
+    monkeypatch.setattr(main, '_log_llm_event', observe)
+    thread = Thread(target=run)
+    thread.start()
+    try:
+        assert failed.wait(10)
+        assert not done.wait(0.2), 'receipt finalized while worker was still running'
+    finally:
+        release.set()
+        thread.join(10)
+    assert not thread.is_alive()
+    assert len(errors) == 1 and isinstance(errors[0], LlmCallError)
+    state = json.loads(next((tmp_path / 'runs').glob('*.json')).read_text())
+    assert state['status'] == 'failed'
+    assert state['llm_calls'] == {'worker': 'success'}
+    events = [json.loads(line) for line in (tmp_path / 'logs' / 'llm-calls.log').read_text().splitlines()]
+    assert all(event['run_id'] == state['run_id'] for event in events)
 
 
 def test_analysis_retains_input_order_when_completed_in_reverse(monkeypatch):

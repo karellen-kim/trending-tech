@@ -380,7 +380,8 @@ def render_daily_page(data: dict) -> str:
 
     if papers:
         sections += _section_html("papers", "PAPER", "AI / LLM 논문", "".join(
-            _item_html(i["title"], i["url"], "arXiv", i.get("summary") or i.get("abstract",""),
+            _item_html(i["title"], i["url"], "arXiv",
+                       "" if i.get("summary_status") == "insufficient_content" else (i.get("summary") or i.get("abstract","")),
                        i.get("title_ko",""), i.get("svg",""), i.get("important", False))
             for i in papers), len(papers))
 
@@ -402,7 +403,8 @@ def render_daily_page(data: dict) -> str:
     if github:
         sections += _section_html("github", "코드", "GitHub 트렌딩", "".join(
             _item_html(i["name"], i["url"], i.get("stars_today",""),
-                       i.get("summary") or i.get("description",""), i.get("title_ko",""),
+                       "" if i.get("summary_status") == "insufficient_content" else (i.get("summary") or i.get("description","")),
+                       i.get("title_ko",""),
                        "", i.get("important", False))
             for i in github), len(github))
 
