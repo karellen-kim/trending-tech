@@ -48,9 +48,6 @@ _DAILY_CSS = """<style>
     background: var(--green); padding-bottom: 1.5rem; }
   h1 em { font-style: normal; color: var(--accent); }
 
-  .source-status { margin: 1rem 1.15rem; padding: 0.75rem; border: 1px solid var(--rule); font-size: 0.8rem; }
-  .source-status summary { cursor: pointer; font-weight: 500; }
-  .source-status ul { padding-left: 1.2rem; margin-top: 0.5rem; }
 
   /* ── 섹션 네비게이션 (sticky) ── */
   .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
@@ -284,39 +281,6 @@ def _section_html(sid: str, icon: str, title: str, items_html: str, count: int =
   {items_html}
 </div>"""
 
-def _source_status_html(statuses: dict) -> str:
-    """수집 결과가 비어도 정상 0건과 실패·미수집을 보고서에 구분한다."""
-    if not statuses:
-        return ""
-    labels = {"success": "수집 성공", "failed": "수집 실패",
-              "partial": "일부 수집", "skipped_rate_limit": "제한으로 미수집"}
-    reasons = {"retries_exhausted": "재시도 소진", "wait_budget_exceeded": "대기 예산 초과",
-               "request_budget_exhausted": "요청 예산 소진",
-               "collection_in_progress": "다른 수집 실행 중",
-               "coordination_unavailable": "수집 제한 상태 확인 실패"}
-    errors = {"Timeout": "요청 시간 초과", "ConnectTimeout": "연결 시간 초과",
-              "ReadTimeout": "응답 시간 초과", "ConnectionError": "연결 실패",
-              "ValueError": "피드 형식 오류", "HTTPError": "HTTP 요청 실패"}
-    rows = []
-    for name, group in statuses.items():
-        for source in group.get("sources", [dict(group, name=name)]):
-            status = source.get("status", "failed")
-            detail = labels.get(status, "수집 상태 확인 필요")
-            if status == "success":
-                detail += f" · {source.get('count', 0)}건"
-            else:
-                if source.get("http_status") is not None:
-                    detail += f" · HTTP {source['http_status']}"
-                if source.get("reason") in reasons:
-                    detail += f" · {reasons[source['reason']]}"
-                elif source.get("error_type") in errors:
-                    detail += f" · {errors[source['error_type']]}"
-            rows.append(f"<li>{_e(source.get('name', name))}: {_e(detail)}</li>")
-    partial = any(group.get("status") != "success" for group in statuses.values())
-    title = "일부 소스를 수집하지 못했어요" if partial else "소스별 수집 결과"
-    return f'<details class="source-status"{ " open" if partial else ""}><summary>{title}</summary><ul>{"".join(rows)}</ul></details>'
-
-
 def render_daily_page(data: dict) -> str:
     date = data["date"]
     y, m, d = date.split("-")
@@ -333,7 +297,7 @@ def render_daily_page(data: dict) -> str:
     reddit = data.get("reddit", legacy_reddit)
     github = data.get("github", [])
 
-    sections = _source_status_html(data.get("source_status", {}))
+    sections = ""
 
     audio = ""
     if data.get("audio_url"):
