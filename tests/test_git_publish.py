@@ -102,13 +102,43 @@ def test_retry_failure_records_rebased_sha_and_stops(repos, monkeypatch):
 
 def test_dirty_work_is_preserved_without_recovery(repos):
     local, other, remote = repos
+    (local / 'tracked.txt').write_text('base\n')
+    git(local, 'add', 'tracked.txt')
+    git(local, 'commit', '-m', 'tracked work')
     advance(other)
     (local / 'docs/index.html').write_text('daily change\n')
-    (local / 'untracked.txt').write_text('keep me\n')
+    (local / 'tracked.txt').write_text('keep me\n')
     before = git(remote, 'rev-parse', 'HEAD').stdout
     with pytest.raises(RuntimeError, match='clean working tree'):
         main.git_commit_push('2026-11-03')
+    assert (local / 'tracked.txt').read_text() == 'keep me\n'
+    assert git(remote, 'rev-parse', 'HEAD').stdout == before
+
+
+def test_unrelated_untracked_work_is_preserved_during_recovery(repos):
+    local, other, remote = repos
+    advance(other)
+    (local / 'docs/index.html').write_text('daily change\n')
+    (local / 'untracked.txt').write_text('keep me\n')
+    result = main.git_commit_push('2026-11-03')
+    assert result['pushed'] is True
+    assert result['commit_sha'] == git(remote, 'rev-parse', 'HEAD').stdout.strip()
     assert (local / 'untracked.txt').read_text() == 'keep me\n'
+    assert git(remote, 'show', 'HEAD:remote.txt').stdout == 'remote change\n'
+    assert git(remote, 'ls-tree', 'HEAD', 'untracked.txt').stdout == ''
+
+
+def test_untracked_collision_is_preserved_without_publishing(repos):
+    local, other, remote = repos
+    advance(other)
+    before = git(remote, 'rev-parse', 'HEAD').stdout
+    (local / 'docs/index.html').write_text('daily change\n')
+    (local / 'remote.txt').write_text('keep me\n')
+    with pytest.raises(subprocess.CalledProcessError):
+        main.git_commit_push('2026-11-03')
+    assert (local / 'remote.txt').read_text() == 'keep me\n'
+    assert git(local, 'show', 'HEAD:docs/index.html').stdout == 'daily change\n'
+    assert not (local / '.git/rebase-merge').exists()
     assert git(remote, 'rev-parse', 'HEAD').stdout == before
 
 

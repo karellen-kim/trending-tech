@@ -435,7 +435,8 @@ def _recover_rejected_push() -> None:
         return subprocess.run(["git", *args], check=True, capture_output=True,
                               text=True).stdout.strip()
 
-    if output("status", "--porcelain"):
+    # Git itself rejects untracked path collisions without overwriting their contents.
+    if output("status", "--porcelain", "--untracked-files=no"):
         raise RuntimeError("Push recovery requires a clean working tree")
     for state in ("rebase-merge", "rebase-apply", "MERGE_HEAD", "CHERRY_PICK_HEAD"):
         if os.path.exists(output("rev-parse", "--git-path", state)):

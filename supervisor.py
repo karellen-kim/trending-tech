@@ -1,5 +1,7 @@
 """일일 자식 프로세스 종료와 동일 실행 영수증을 대조해 최종 결과만 출력한다."""
 import json
+import os
+from datetime import date
 import re
 import signal
 import subprocess
@@ -130,7 +132,12 @@ def supervise(command: list[str], directory: Path, day: str) -> int:
 def main() -> int:
     """기존 main.py 명령에서 동일 Python으로 실제 일일 업무를 한 번 실행한다."""
     # Importing main keeps the existing callable API; the CLI parent alone supervises it.
-    day = str(now_kst().date())
+    day = os.environ.get("RUN_DATE")
+    if day is None:
+        day = str(now_kst().date())
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", day):
+        raise ValueError("RUN_DATE must be YYYY-MM-DD")
+    date.fromisoformat(day)
     script = (f'import sys; sys.path.insert(0, {str(Path(__file__).resolve().parent)!r}); '
               'from main import main; main(run_date=sys.argv[1], run_id=sys.argv[2])')
     return supervise([sys.executable, '-u', '-c', script, day], LOGS_DIR / 'runs', day)

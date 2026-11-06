@@ -264,3 +264,25 @@ def test_partial_collection_agrees_with_terminal_status(status):
             state['stages'][stage] = {'status': 'skipped', 'reason': 'dry_run'}
     error = supervisor.validate_receipt(state, 'a' * 32, 123, DAY, 0)
     assert (error is None) == (status != 'published')
+
+@pytest.mark.parametrize('requested, expected', [('2026-11-03', '2026-11-03'), (None, '2026-11-04')])
+def test_cli_binds_requested_date_before_worker(monkeypatch, requested, expected):
+    from datetime import datetime
+    monkeypatch.setattr(supervisor, 'now_kst', lambda: datetime(2026, 11, 4, 0, 5))
+    if requested is None:
+        monkeypatch.delenv('RUN_DATE', raising=False)
+    else:
+        monkeypatch.setenv('RUN_DATE', requested)
+    calls = []
+    monkeypatch.setattr(supervisor, 'supervise', lambda command, directory, day: calls.append((command, day)) or 0)
+    assert supervisor.main() == 0
+    assert calls[0][0][-1] == calls[0][1] == expected
+
+@pytest.mark.parametrize('requested', ['', '2026-02-30', '20261103', '2026-11-03T00:00:00'])
+def test_invalid_requested_date_never_launches_worker(monkeypatch, requested):
+    monkeypatch.setenv('RUN_DATE', requested)
+    def unexpected(*args):
+        pytest.fail('invalid date started worker')
+    monkeypatch.setattr(supervisor, 'supervise', unexpected)
+    with pytest.raises(ValueError):
+        supervisor.main()
