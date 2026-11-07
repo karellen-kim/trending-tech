@@ -48,9 +48,6 @@
     background: var(--green); padding-bottom: 1.5rem; }
   h1 em { font-style: normal; color: var(--accent); }
 
-  .source-status { margin: 1rem 1.15rem; padding: 0.75rem; border: 1px solid var(--rule); font-size: 0.8rem; }
-  .source-status summary { cursor: pointer; font-weight: 500; }
-  .source-status ul { padding-left: 1.2rem; margin-top: 0.5rem; }
 
   /* ── 섹션 네비게이션 (sticky) ── */
   .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
@@ -170,105 +167,129 @@
 </div>
 <div class="page-meta">2026-11-06</div>
 <h1><em>06</em> Nov 2026</h1>
-<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn" class="nav-link">Hacker News</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn" class="nav-link">Hacker News</a><a href="#reddit" class="nav-link">Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
 <div class="section highlight-section" id="highlights">
   <div class="section-header">
     <span class="section-icon">★</span>
     <span class="section-title">오늘의 해석</span>
     
   </div>
-  <div class="take"><p class="take-headline">AI용 데이터 플랫폼의 무게중심이 데이터 저장에서 변경사항을 지속적으로 반영하는 최신성 확보로 옮겨가고 있다.</p><p class="take-body">Confluent는 항상 최신 상태인 비즈니스를 AI 시대 데이터 아키텍처의 목표로 내세우고, Streamhouse와 Lakehouse의 차이를 부각한다. Databricks에서도 Debezium과 Zerobus Ingest로 변경 데이터를 Unity Catalog에 푸시하는 방식을 다룬다. 함께 보면 데이터를 모아두는 것에 더해, 발생한 변화를 계속 전달하는 경로가 플랫폼 설계의 핵심으로 떠오르는 흐름이 보인다.</p><div class="take-refs"><span>근거</span><a href="https://www.confluent.io/blog/streamhouse-your-business-always-current/" target="_blank" rel="noopener">언제나 최신 상태의 비즈니스. Streamhouse - AI 시대를 위한 데이터 아키텍처.</a> · <a href="https://www.databricks.com/blog/push-based-cdc-unity-catalog-zerobus-ingest-and-debezium" target="_blank" rel="noopener">Zerobus Ingest와 Debezium을 활용한 Unity Catalog로의 푸시 기반 CDC 전송</a> · <a href="https://www.confluent.io/blog/a-tale-of-two-houses-streamhouse-lakehouse/" target="_blank" rel="noopener">두 하우스 이야기: Streamhouse와 Lakehouse 비교</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/d6b66d4b-d0c9-4298-9751-4a6d4a499aa5" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+  <div class="take"><p class="take-headline">AI 에이전트가 무엇을 만들 수 있는지에서, 그 결과를 어떻게 검증하고 실행을 어디까지 허용할지로 쟁점이 옮겨가고 있다.</p><p class="take-body">에이전트가 작성한 풀스택 웹 앱을 정형 검증하는 도구와 에이전트의 판단·실행을 제어하는 특허 출원이 함께 등장했다는 점이 이 흐름을 보여준다. 멀티모달 의사결정 모델 공개가 에이전트의 능력 확대를 다룬다면, 이 두 사례는 그 능력을 실제 서비스에 넣을 때 결과의 정확성과 실행 통제가 별도의 과제가 된다는 신호로 읽힌다.</p><div class="take-refs"><span>근거</span><a href="https://www.microsoft.com/en-us/research/blog/formally-verifying-agent-written-full-stack-web-apps-with-pdd-kit/" target="_blank" rel="noopener">PDD Kit로 에이전트가 작성한 풀스택 웹 앱 정형 검증하기</a> · <a href="https://corp.banksalad.com/blog/news/bs1502/" target="_blank" rel="noopener">뱅크샐러드, AI 에이전트 판단·실행 제어 기술 특허 출원</a> · <a href="https://tech.kakao.com/posts/846" target="_blank" rel="noopener">AI 에이전트를 위한 멀티모달 의사결정 모델 ‘Kanana-2-v-decide’ 오픈소스 공개</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/d6b66d4b-d0c9-4298-9751-4a6d4a499aa5" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
 </div><div class="section" id="tech-blog">
   <div class="section-header">
     <span class="section-icon">TECH</span>
     <span class="section-title">기술 블로그</span>
-    <span class="section-count">9개</span>
+    <span class="section-count">16개</span>
   </div>
   <div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/" target="_blank" rel="noopener">Agile Deliberation: AI는 사람이 모호한 영역을 정의하도록 어떻게 돕는가</a></div>
-    <div class="item-meta">Google Research</div>
+    <div class="item-name"><a href="https://deepmind.google/blog/gemini-omni-12-flash-fast-and-cost-effective-with-longer-clips/" target="_blank" rel="noopener">Gemini Omni 1.2 Flash: 더 긴 클립을 빠르고 경제적으로 생성</a></div>
+    <div class="item-meta">Google DeepMind</div>
   </div>
-  <div class="item-body"><div class="item-summary">주관적인 범주를 판별하는 이미지 분류기를 만들기 위한 Agile Deliberation의 접근법을 소개하는 글이다.<br>- 사용자가 하위 범주의 범위를 정하고 경계 사례를 해결하도록 대화형 숙의 과정을 안내한다.<br>- LLM 기반 최적화 루프를 사용해 정확하고 사용자의 기준에 부합하는 분류기를 자동으로 구축한다.<br>- ‘건강한 음식’, ‘영감을 주는 예술 작품’, 콘텐츠 검토처럼 문화적 맥락·개인 철학·운영 정책에 따라 범주의 경계가 달라지는 문제를 다룬다.</div></div>
-</div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://www.confluent.io/blog/2026-q4-confluent-bundle-launch/" target="_blank" rel="noopener">2026년 4분기 Confluent Data Streaming Platform의 새로운 기능: Streamhouse를 위한 가장 완전하고 성능이 뛰어난 개방형 기반</a></div>
-    <div class="item-meta">Confluent Blog</div>
-  </div>
-  <div class="item-body"><div class="item-summary">2026년 4분기 Confluent Data Streaming Platform의 Streamhouse 및 AI 관련 신규 기능을 소개하는 글이다.<br>- Query가 Stream, Connect, Process, Govern에 이어 DSP의 다섯 번째 핵심 축으로 추가됐다.<br>- Query의 중심인 Lightning Tables는 Kafka 스트림을 실시간 비즈니스 상태로 변환해, 별도 데이터베이스나 ETL 없이 에이전트와 애플리케이션이 현재 상태를 밀리초 단위로 조회하게 한다.<br>- Managed Model Inference가 정식 출시돼 별도 설정 없이 시작할 수 있으며, 스트리밍 데이터를 활용한 AI 구축을 지원한다.</div></div>
+  <div class="item-body"><div class="item-summary">Google DeepMind가 영상 길이와 편집 기능을 개선하고 비용을 낮춘 Gemini Omni 1.2 Flash를 출시했다.<br>- 기본 15초 영상 생성과 향상된 참조 자료 준수 기능을 제공한다.<br>- 여러 차례의 대화로 클립을 편집할 수 있어 처음부터 다시 생성하지 않고 수정할 수 있다.<br>- 가격을 30% 낮췄으며, Gemini API와 Google Cloud에서 정식 제공한다.</div></div>
 </div><div class="item important">
   <div class="item-head">
-    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.confluent.io/blog/a-tale-of-two-houses-streamhouse-lakehouse/" target="_blank" rel="noopener">두 하우스 이야기: Streamhouse와 Lakehouse 비교</a></div>
-    <div class="item-meta">Confluent Blog</div>
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.microsoft.com/en-us/research/blog/formally-verifying-agent-written-full-stack-web-apps-with-pdd-kit/" target="_blank" rel="noopener">PDD Kit로 에이전트가 작성한 풀스택 웹 앱 정형 검증하기</a></div>
+    <div class="item-meta">Microsoft Research</div>
   </div>
-  <div class="item-body"><div class="item-summary">Streamhouse와 Lakehouse의 역할과 차이, 상호 보완 관계를 다루는 글이다.<br>- 운영 영역은 데이터베이스·마이크로서비스·실시간 애플리케이션·Kafka 같은 이벤트 스트림을 담당하고, 분석 영역은 데이터 웨어하우스나 Lakehouse에 저장된 과거 데이터를 대규모로 집계한다.<br>- Streamhouse는 운영 영역과 분석 영역 사이에 위치하며, 비즈니스의 현재 상태를 지속적으로 수집·처리·제공한다.<br>- Streamhouse는 이벤트를 수집하는 즉시 해당 데이터를 쿼리할 수 있게 하며, 데이터 유입 과정에서 검증과 보강을 수행한다.</div></div>
+  <div class="item-body"><div class="item-summary">PDD Kit를 사용해 AI 에이전트가 작성한 웹 앱의 로그인 로직을 정형 검증한 사례를 소개한다.<br>- PDD Kit는 개발자의 의도를 Verus 기반 정형 명세로 바꾸고, 에이전트의 코드가 모든 입력에 대해 명세를 충족하는지 증명하며, 증명이 닿지 않는 부분은 테스트로 보완한다.<br>- GitHub Next의 Chopin에서 Rust 기반 쇼핑몰 Pet Store의 로그인 로직을 검증해 기존 버그를 발견하고, 명세를 기준으로 로그인 버그가 없음을 증명했다.<br>- 개발자는 의도를 검토했으며, 생성된 코드를 한 줄씩 읽고 검토하지 않았다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://blog.cloudflare.com/vole-mole/" target="_blank" rel="noopener">양자 컴퓨터 시대 이후 웹 프라이버시의 미래</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">양자 내성 암호로의 전환 필요성과 Privacy Pass의 프라이버시 보호 방식, 차세대 기술 개발에 관한 글이다.<br>- 양자 내성 암호로 전환할 때 최우선 대상은 TLS 같은 인증된 키 합의 프로토콜의 기본 구성 요소다. 이것이 마련되지 않으면 암호를 위협할 수준의 양자 컴퓨터가 등장한 뒤 인터넷의 안전한 통신이 불가능해진다.<br>- Cloudflare 같은 사이트 운영자가 사용하는 Privacy Pass는 클라이언트에 토큰을 발급하고 사이트 접근 시 사용하게 한다. 각 토큰은 발급받은 클라이언트와 연결할 수 없어 프라이버시를 보호한다.<br>- Privacy Pass는 iCloud Private Relay 같은 프라이버시 프록시와 Privacy Gateway 같은 릴레이에 10년간 배포되어 왔으며, Cloudflare는 다른 참여자들과 차세대 기술을 웹에 도입하기 위해 협력하고 있다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://blog.cloudflare.com/trusted-agent-delegation/" target="_blank" rel="noopener">에이전트는 사람이 아니다 (하지만 어느 정도는 그렇다)</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">AI 에이전트의 웹 접근을 확대하려면 사이트와 사용자 사이의 관계를 보존할 새로운 장치가 필요하다는 글.<br>- 에이전트는 사이트에서 사람과 구별되지 않거나 여러 사용자를 대신하는 방문자 하나로 보일 수 있어, 사이트가 실제 사용자를 식별하고 서비스를 제공하며 책임을 묻기 어렵게 한다.<br>- 글은 이를 해결할 핵심 요소로 신원·평판·책임성을 제시한다. 각각 신원이 진실한지, 사용자를 신뢰할 수 있는지, 행동의 책임을 누가 지는지 확인하기 위한 것이다.<br>- 개인 AI 에이전트는 사람의 지시를 받아 클라우드 컴퓨터나 브라우저를 조작하며 목표를 수행한다. 지치지 않고 상시·병렬로 작동하며, 사람이 감수하지 않을 불편도 견딘다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.databricks.com/blog/builders-guide-scaling-databricks-apps" target="_blank" rel="noopener">개발자를 위한 Databricks Apps 확장 가이드</a></div>
+    <div class="item-meta">Databricks Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Databricks Apps의 응답성과 가용성을 유지하면서 늘어나는 사용자 수요에 대응하는 확장 방법을 다룬 글이다.<br>- 코드를 작성하기 전에 목표 응답 시간과 최대 동시 사용자 수를 합의하고, 무거운 작업은 적절한 서비스에 맡기며 앱 컴퓨팅은 UI 제공과 호출 조율을 담당한다.<br>- 서비스 응답을 기다리는 동안에도 앱이 반응하도록 코드를 구성하고 사용자별 캐싱을 적용한다. 재구성 가능한 상태와 영구 보존할 상태를 구분하고, 후자는 Lakebase나 Unity Catalog 테이블에 저장해 어느 인스턴스에서든 세션을 복구할 수 있게 한다.<br>- 부하 테스트와 원격 측정 데이터로 인스턴스 크기·워커 수·인스턴스 수를 결정한다. Lakebase 연결 수를 계획하고, 측정한 수요와 가용성 목표에 맞춰 컴퓨팅을 추가한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.databricks.com/blog/which-data-collaboration-tool-opensharing-clean-rooms-marketplace" target="_blank" rel="noopener">어떤 데이터 협업 도구를 선택할까: OpenSharing, Clean Rooms, Marketplace</a></div>
+    <div class="item-meta">Databricks Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Databricks의 세 가지 데이터·AI 자산 공유 도구를 협업 상대와의 관계에 따라 선택하는 방법을 설명한 글이다.<br>- OpenSharing은 이미 알고 있는 수신자에게 실시간 읽기 전용 접근을 제공할 때 사용한다.<br>- Clean Rooms는 파트너들이 데이터 전체를 노출하지 않고 서로의 데이터를 결합하려 할 때 사용한다.<br>- Marketplace는 아직 알지 못하는 이용자에게 데이터·AI 자산을 제공하거나, 새로운 제공자를 찾을 때 사용한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.databricks.com/blog/delta-sharing-opensharing-what-changed-whats-next" target="_blank" rel="noopener">Delta Sharing에서 OpenSharing으로: 무엇이 달라졌고, 앞으로 무엇이 달라질까</a></div>
+    <div class="item-meta">Databricks Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Delta Sharing이 데이터와 AI 자산을 공유하는 OpenSharing으로 확장되면서 달라진 점을 소개하는 글이다.<br>- Databricks와 Linux Foundation은 2026년 6월 Delta Sharing이 Linux Foundation의 거버넌스 아래 운영되는 개방형·벤더 중립 프로토콜 OpenSharing으로 발전했다고 발표했다.<br>- 공유 대상이 테이블에서 에이전트 스킬, AI 모델, 비정형 데이터로 확대됐으며, 데이터를 복사하거나 파트너마다 별도 파이프라인을 구축하지 않고 플랫폼·Iceberg 엔진·온프레미스 스토리지 간 공유를 지원한다.<br>- 기존 Delta Sharing 구성은 계속 작동하며, 동일한 share·recipient·grant 워크플로를 사용해 Unity Catalog 메타스토어에서 새 자산 유형을 활성화할 수 있다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.blog/engineering/architecture-optimization/inside-githubs-new-git-storage-architecture/" target="_blank" rel="noopener">GitHub의 새로운 Git 스토리지 아키텍처 내부 살펴보기</a></div>
+    <div class="item-meta">GitHub Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">GitHub가 에이전트 개발의 대규모 읽기·쓰기 트래픽을 지원하기 위해 구축한 새로운 Git 스토리지 아키텍처를 소개한다.<br>- 내부 테스트에서 하나의 저장소에 에이전트 5,000개가 동시에 작업하고 초당 7,200회의 push를 보내는 동안에도 읽기 지연 시간을 일관되게 낮게 유지했다.<br>- 조정을 최소화하고 스토리지와 컴퓨팅을 분리한다는 원칙 아래, 저장소의 99.99999%를 Azure로 이전하고 쓰기 쿼럼을 개별 참조 단위로 좁혔으며 Azure Blob Storage 기반 가상 복제본을 구축했다.<br>- Git 객체는 불변이며 내용으로 식별되므로 여러 작성자가 합의 없이 동시에 저장할 수 있다. push에서 합의가 필요한 부분은 상대적으로 작은 참조 업데이트이며, 가상 복제본은 이 특성을 활용하는 첫 단계이자 새 아키텍처로 저장소를 편입하는 수단이다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.blog/open-source/maintainers/accessibility-statements-now-have-a-home-on-github/" target="_blank" rel="noopener">GitHub에 접근성 선언문을 위한 공간이 생겼습니다</a></div>
+    <div class="item-meta">GitHub Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">GitHub가 ACCESSIBILITY.md 파일을 인식해 저장소 개요 페이지에서 접근성 정보를 쉽게 찾을 수 있도록 지원한다.<br>- ACCESSIBILITY.md는 저장소 루트, .github/, docs/에 둘 수 있으며, 조직의 .github 저장소에 있는 선언문을 상속할 수도 있다.<br>- 선언문에는 접근성 목표, 기여자에게 기대하는 사항, 지원 환경, 알려진 제약, 접근성 장벽 신고 절차를 담을 수 있다.<br>- 공개 저장소에서는 Insights &gt; Community Standards에서 시작 문서를 이용해 선언문을 추가하거나 제안할 수 있으며, 새 저장소에는 accessibility 이슈 라벨이 기본으로 포함된다.</div></div>
 </div><div class="item important">
   <div class="item-head">
-    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.confluent.io/blog/streamhouse-your-business-always-current/" target="_blank" rel="noopener">언제나 최신 상태의 비즈니스. Streamhouse - AI 시대를 위한 데이터 아키텍처.</a></div>
-    <div class="item-meta">Confluent Blog</div>
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://tech.kakao.com/posts/846" target="_blank" rel="noopener">AI 에이전트를 위한 멀티모달 의사결정 모델 ‘Kanana-2-v-decide’ 오픈소스 공개</a></div>
+    <div class="item-meta">Kakao Tech</div>
   </div>
-  <div class="item-body"><div class="item-summary">AI 에이전트의 업무 수행과 의사결정에 필요한 최신 데이터와 비즈니스 맥락을 다룬 글.<br>- 생성형 AI는 초안 작성과 요약을 넘어 코드 작성과 복잡한 작업 수행으로 확장됐으며, AI 에이전트는 사람이 개입하던 의사결정까지 맡고 있다.<br>- 기존 기업 데이터 아키텍처 대부분은 수분·수시간·수개월 전의 과거를 설명하도록 구축됐지만, 이제는 현재의 비즈니스 운영을 지원하도록 요구받고 있다.<br>- 사람이 AI의 답변을 확인할 때는 오류를 발견해 재질문하거나 무시할 수 있지만, 확인 없이 행동하는 AI 에이전트에서는 오래된 데이터와 부정확한 비즈니스 이해가 더 큰 문제가 된다.</div></div>
-</div><div class="item important">
-  <div class="item-head">
-    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.databricks.com/blog/push-based-cdc-unity-catalog-zerobus-ingest-and-debezium" target="_blank" rel="noopener">Zerobus Ingest와 Debezium을 활용한 Unity Catalog로의 푸시 기반 CDC 전송</a></div>
-    <div class="item-meta">Databricks Blog</div>
-  </div>
-  <div class="item-body"><div class="item-summary">Debezium Server와 Databricks Zerobus Ingest를 결합해 데이터베이스 변경 이벤트를 Unity Catalog의 Delta 테이블로 직접 전송하는 구조를 소개한다.<br>- 인바운드 연결을 차단하는 사설 네트워크에서도 변경 데이터를 외부로 푸시해 복제할 수 있다.<br>- 데이터베이스 소유 팀이 Debezium을 직접 운영하며 write-ahead log를 읽고 네트워크 밖으로 나가는 연결을 통제한다.<br>- 중간 Kafka 메시지 브로커나 풀 기반 커넥터 없이 변경 이벤트를 전송해, 후속 분석용 현재 상태 테이블을 구축하는 데 필요한 인프라를 단순화한다.</div></div>
+  
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://www.databricks.com/blog/introducing-apache-spark-43-now-available-databricks-runtime-19" target="_blank" rel="noopener">Apache Spark® 4.3 소개 — 이제 Databricks Runtime 19에서 이용 가능</a></div>
-    <div class="item-meta">Databricks Blog</div>
+    <div class="item-name"><a href="https://techblog.lycorp.co.jp/ko/line-premium-call-recording" target="_blank" rel="noopener">녹화 버튼 뒤에서 일어나는 일: LINE 프리미엄콜 개발기</a></div>
+    <div class="item-meta">LY Corp Tech</div>
   </div>
-  <div class="item-body"><div class="item-summary">Apache Spark 4.3의 Real-Time Mode 상태 기반 처리와 변경 이력 관리, 실행 성능 및 API 개선을 소개하는 글.<br>- Real-Time Mode가 스트리밍 집계, 중복 제거, 사용자 정의 상태 기반 처리를 지원하며, 대표적인 상태 기반 벤치마크 3개에서 P99 종단 간 지연 시간 150ms 미만을 달성했다.<br>- SCD Type 2 Auto CDC는 Python, SQL, Spark Connect에서 레코드의 시간에 따른 변경 이력을 보존해 보고·감사·과거 데이터 분석용 파이프라인을 간소화한다.<br>- Project Feather가 적용 가능한 소규모 데이터 쿼리의 실행 오버헤드를 줄이고, Spark Connect·Python·SQL 개선으로 데이터 및 AI 애플리케이션의 개발·디버깅·운영을 돕는다.</div></div>
+  <div class="item-body"><div class="item-summary">LINE 프리미엄콜의 통화 녹음·녹화 기능과 Android 개발 시 고려한 내용을 소개하는 글이다.<br>- LINE의 1:1 통화에서 원하는 구간을 기록하며, 양쪽 목소리와 영상 통화 참여자의 모습을 함께 저장하고 통화 상대에게 녹음·녹화 중임을 안내한다.<br>- 음성 통화가 영상 통화로 바뀌어도 하나의 파일에 기록을 이어 가며, Keep Memo에 저장된 기록은 통화 후 다시 확인할 수 있다.<br>- 음성 통화에서는 설정에 따라 일본어 STT를 사용할 수 있으며, 음성 인식은 서버 대신 기기 안의 자체 모델로 처리한다.</div></div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://www.databricks.com/blog/enterprise-case-open-weight-models-databricks" target="_blank" rel="noopener">기업이 Databricks에서 오픈 웨이트 모델을 도입해야 하는 이유</a></div>
-    <div class="item-meta">Databricks Blog</div>
-  </div>
-  <div class="item-body"><div class="item-summary">기업의 AI 전략 재검토 배경과 Databricks의 오픈 웨이트 모델 활용 방안을 다룬 글.<br>- 오픈 웨이트 모델은 더 낮은 비용으로 프런티어급 지능에 근접하면서 기업에 데이터 주권과 운영 자율성을 제공한다.<br>- Unity AI Gateway는 오픈 웨이트·프런티어·외부 모델을 하나의 통제된 API로 제공하며, 빠른 추론·스마트 라우팅·폴백·예산 통제를 지원한다.<br>- 2023년 5월 이후 지능 순위 1위가 20회 이상 바뀌었으며, 단일 공급자에 묶인 아키텍처는 더 나은 모델로 전환하기 어렵게 만든다.</div></div>
-</div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://d2.naver.com/helloworld/5037598" target="_blank" rel="noopener">worklog-system 주간보고 자동화 구축 경험기</a></div>
+    <div class="item-name"><a href="https://d2.naver.com/helloworld/0627744" target="_blank" rel="noopener">2026년과 이후 JavaScript의 동향 - 라이브러리와 프레임워크</a></div>
     <div class="item-meta">NAVER D2</div>
   </div>
-  <div class="item-body"><div class="item-summary">업무 기록을 수집해 주간보고를 자동화하고 TODO와 회의록을 기록하는 worklog-system 구축 경험을 소개한다.<br>- 기억에 의존하지 않고 기록에서 주간보고 내용을 모으는 방법을 다룬다.<br>- 재택과 사무실을 오가며 여러 기기와 VPN 환경에서도 기록을 빠짐없이 수집하는 구조를 소개한다.<br>- 주간보고 화면에 노트·TODO·일정을 추가해 업무 도구로 확장하면서 중앙 서버 없이 해결한 과정을 다룬다.</div></div>
+  <div class="item-body"><div class="item-summary">2026년 10월을 기준으로 JavaScript 라이브러리·프레임워크의 지난 6년간 변화와 공통 흐름을 정리한 글이다.<br>- React가 사용률에서 독보적인 위치를 굳히면서 선택의 초점이 React 위의 메타 프레임워크·빌드 도구와 AI 도구가 기본으로 선택하는 스택을 받아들일지로 이동했다.<br>- 프레임워크 전반의 공통 변화로 Signals로의 수렴, 서버로의 회귀, Rust 기반 빌드 도구로의 이동, 웹 표준의 흡수, AI 도구의 영향을 꼽는다.<br>- React·Angular·Vue·Svelte·Preact의 변화를 살펴보고, TanStack·상태 관리·빌드·테스트 도구까지 다루며 프레임워크보다 JavaScript와 웹의 기본 기술을 깊이 이해해야 한다는 관점을 유지한다.</div></div>
 </div><div class="item">
   <div class="item-head">
     <div class="item-name"><a href="https://d2.naver.com/helloworld/7770448" target="_blank" rel="noopener">2026년과 이후 JavaScript의 동향 - WebAssembly</a></div>
     <div class="item-meta">NAVER D2</div>
   </div>
-  <div class="item-body"><div class="item-summary">2020년 이후 6년간 WebAssembly의 명세와 지원 언어, 브라우저 밖 생태계가 어떻게 달라졌는지 정리한 글이다.<br>- wasm은 숫자 타입 네 가지와 선형 메모리를 중심으로 한 1.0에서 GC, 예외 처리, 64비트 주소 공간, 꼬리 호출을 포함한 3.0으로 발전했다.<br>- WasmGC를 통해 Java, Kotlin, Dart 같은 GC 언어가 자체 런타임 전체를 포함하지 않고 wasm으로 컴파일될 수 있게 됐으며, 2024년 6월 Google Sheets 계산 엔진의 WasmGC 전환 사례가 공개됐다.<br>- 2024년 1월 출시된 WASI 0.2부터 Component Model 기반으로 전환됐고, 이후 0.3도 나왔으며 CDN 업체들이 wasm 기반 엣지 플랫폼을 운영하고 있다.</div></div>
+  <div class="item-body"><div class="item-summary">2020년 이후 6년간 WebAssembly의 명세와 브라우저 안팎 생태계가 어떻게 발전했는지 정리한 글이다.<br>- wasm 3.0은 GC, 예외 처리, 64비트 주소 공간, 꼬리 호출을 명세에 포함했다.<br>- Java, Kotlin, Dart 같은 GC 언어를 자체 런타임 전체를 포함하지 않고 wasm으로 컴파일할 수 있게 됐다. 2024년 6월에는 Google Sheets 계산 엔진의 WasmGC 전환 사례가 공개됐다.<br>- WASI는 2024년 1월 출시된 0.2부터 Component Model 기반으로 전환했으며, CDN 업체들은 wasm 기반 엣지 플랫폼을 운영하고 있다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://corp.banksalad.com/blog/news/bs1501/" target="_blank" rel="noopener">뱅크샐러드 '저금리 대출 대리조회' 금융위 혁신금융서비스 지정</a></div>
+    <div class="item-meta">뱅크샐러드 기술블로그</div>
+  </div>
+  <div class="item-body"><div class="item-summary">뱅크샐러드의 마이데이터 기반 ‘저금리 대출 대리조회’ 서비스가 금융위원회 혁신금융서비스로 지정됐다.<br>- 고객의 신용거래능력에 변화가 생기면 고객을 대신해 대출 가심사를 신청하고 결과를 안내한다.<br>- 신용점수·소득·직장 변동 등 개인 요인과 기준금리·금융사별 심사 기준을 반영해 더 유리한 금리와 한도를 탐색하며, 고객은 한 번 위임한 뒤 언제든 철회할 수 있다.<br>- 뱅크샐러드 대출 AI 에이전트의 주요 기능으로 활용할 예정이며, 중·저신용자의 대출 조건 탐색 부담과 ‘금리 단층’ 완화를 기대한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://corp.banksalad.com/blog/news/bs1503/" target="_blank" rel="noopener">뱅크샐러드 데이터 기반 카드 추천⋯평균 105만원 혜택 받는다</a></div>
+    <div class="item-meta">뱅크샐러드 기술블로그</div>
+  </div>
+  <div class="item-body"><div class="item-summary">뱅크샐러드의 마이데이터 기반 맞춤형 카드 추천 서비스와 이용 고객의 혜택 분석 결과에 관한 글이다.<br>- 서비스 이용 고객은 평균 105만 원의 혜택을 받았으며, 혜택 금액은 50~100만 원 구간이 44.7%로 가장 많고 100~150만 원 구간이 38.8%였다.<br>- 연결된 카드의 최근 1년간 소비 내역과 보유 카드를 분석해 카드 한 장을 추천하고, 같은 소비 패턴으로 추천 카드를 사용했을 때 늘어나는 혜택을 원 단위로 보여준다.<br>- 총 혜택은 포인트 적립·할인·캐시백 이벤트·연회비 지원 등 모든 프로모션을 합산하며, 매월 소개하는 캐시백 이벤트 카드는 현재 최대 87만 원까지 지원한다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://corp.banksalad.com/blog/news/bs1502/" target="_blank" rel="noopener">뱅크샐러드, AI 에이전트 판단·실행 제어 기술 특허 출원</a></div>
+    <div class="item-meta">뱅크샐러드 기술블로그</div>
+  </div>
+  <div class="item-body"><div class="item-summary">뱅크샐러드가 금융 AI 에이전트의 오류와 거래 위험을 통제하는 기술 3건의 특허를 출원했다는 글이다.<br>- 대출 가심사에서 신용 상태 등을 고려해 더 낮은 금리를 받을 수 있는 고객을 선별하고, 실제 심사 결과를 AI 예측 모델에 학습시켜 정확도를 높였다.<br>- 금융 상품 정보와 맞춤형 혜택 분석에서 정보 누락을 점검하고, DSR·LTV 등 금융 규정에 따른 계산식으로 산출한 수치를 최종 교차 검증한다.<br>- 금융 서비스 실행 시 입력된 수치와 정보의 정확성을 검증하고, 고객에게 불리한 거래의 실행을 보류하도록 제어한다.</div></div>
 </div>
 </div><div class="section" id="dev-blogs">
   <div class="section-header">
     <span class="section-icon">DEV</span>
     <span class="section-title">개발자 블로그 &amp; SNS</span>
-    <span class="section-count">4개</span>
+    <span class="section-count">1개</span>
   </div>
   <div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://lemire.me/blog/2026/11/05/a-performance-trap-when-store-forwarding-fails/" target="_blank" rel="noopener">성능 함정: store forwarding이 실패할 때</a></div>
-    <div class="item-meta">Daniel Lemire</div>
-  </div>
-  <div class="item-body"><div class="item-summary">store forwarding이 실패하는 메모리 접근 패턴과 이를 피하는 코드 작성법을 다룬 글이다.<br>- 저장한 데이터는 캐시에 도달하기 전 store buffer에 머물며, 이후의 로드는 이 버퍼에서 데이터를 받을 수 있다.<br>- 로드 범위가 저장 범위보다 넓거나 두 범위가 일부만 겹치면 forwarding이 실패한다. 예를 들어 1바이트를 저장한 뒤 같은 위치에서 8바이트를 읽으면 저장이 캐시에 도달할 때까지 로드가 기다린다.<br>- 예제는 먼저 8바이트를 읽고 레지스터에서 마스크와 OR 연산으로 한 바이트를 수정한 뒤 8바이트 전체를 저장해 문제를 피한다. 같은 8바이트를 저장 직후 다시 읽는 코드는 컴파일러가 재로드를 제거할 수도 있다.</div></div>
-</div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://martinfowler.com/articles/data-product-platform-nav.html" target="_blank" rel="noopener">데이터 제품 플랫폼 길잡이</a></div>
-    <div class="item-meta">Martin Fowler</div>
-  </div>
-  <div class="item-body"><div class="item-summary">CNCF의 Platform Engineering Maturity Model을 바탕으로 데이터 제품과 Data Mesh를 위한 플랫폼의 현재 상태와 다음 단계를 살펴보는 글이다.<br>- 데이터 제품과 Data Mesh를 위한 셀프서비스 플랫폼을 처음부터 구축해야 하는 조직을 다룬다.<br>- 기존 플랫폼의 낮은 도입률이 Data Mesh 확장을 가로막는 상황도 다룬다.<br>- 플랫폼의 현재 상황을 진단하고 다음 단계를 결정하도록 돕는 플랫폼 길잡이를 제시한다.</div></div>
-</div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://www.interconnects.ai/p/how-well-can-we-measure-open-model" target="_blank" rel="noopener">현재 오픈 모델 경제의 규모는 얼마나 될까?</a></div>
-    <div class="item-meta">Nathan Lambert</div>
-  </div>
-  <div class="item-body"><div class="item-summary">오픈 모델 추론 시장의 규모와 성장 여부, OpenAI·Anthropic 대비 비중을 파악하기 위한 연구 노트다.<br>- Interconnects Dashboard는 웹에 흩어진 오픈 모델 도입·성능 데이터를 모으며, 당분간 데이터를 무료로 제공할 예정이다.<br>- 오픈 모델 도입 측정에는 잡음이 많은 플랫폼 지표, 스타트업의 마케팅 관련 지표, 불완전한 공개 평가가 쓰여 정확한 파악이 어렵다.<br>- 시장 측정의 주요 지표로 Baseten·Fireworks·Together AI와 OpenRouter의 토큰 사용량 중 오픈 모델이 차지하는 비중을 활용한다.</div></div>
-</div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://simonwillison.net/2026/Nov/4/datasette-llm/" target="_blank" rel="noopener">datasette-llm 0.1a10</a></div>
+    <div class="item-name"><a href="https://simonwillison.net/2026/Nov/5/paul-ford/" target="_blank" rel="noopener">Paul Ford의 말을 인용하며</a></div>
     <div class="item-meta">Simon Willison</div>
   </div>
-  <div class="item-body"><div class="item-summary">LLM 통합 플러그인 datasette-llm 0.1a10의 버그 수정 릴리스 안내.<br>- 2026년 11월 4일 공개됐다.<br>- 다른 플러그인이 의존해 사용할 수 있는 LLM 통합 플러그인이다.<br>- agent.datasette.io 데모 사이트에서 사용 가능한 LLM 모델이 설정에 지정된 모델로만 제한되지 않던 버그를 수정했다.</div></div>
+  <div class="item-body"><div class="item-summary">웹 브라우저의 강력한 기능과 그 활용 비용에 관한 Paul Ford의 발언을 소개한 글이다.<br>- Paul Ford는 웹 브라우저가 애플리케이션을 위한 매우 강력한 소프트웨어라고 말했다.<br>- 브라우저의 강력한 기능을 활용하는 비용이 거의 매일 낮아지는 듯하다고 말했다.<br>- Simon Willison이 「The Web Is More Than Enough」에서 수집한 인용문으로, 2026년 11월 5일 게시됐다.</div></div>
 </div>
 </div><div class="section" id="papers">
   <div class="section-header">
@@ -278,22 +299,22 @@
   </div>
   <div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://arxiv.org/abs/2611.06254" target="_blank" rel="noopener">HarnessFlow: MCTS 기반 탐색을 통한 LLM 에이전트 하네스 최적화</a></div>
+    <div class="item-name"><a href="https://arxiv.org/abs/2611.07367" target="_blank" rel="noopener">Test-Time Self-Play: 검증기 없이 성능 확장하기</a></div>
     <div class="item-meta">arXiv</div>
   </div>
-  <div class="item-body"><div class="item-summary">HarnessFlow는 모델과 작업 환경을 고정한 채 제한된 후보 평가 예산으로 실행 가능한 전체 하네스를 최적화하는 프레임워크다.<br>- 후보와 평가 이력을 개선 트리로 구성하고, Monte Carlo Tree Search(MCTS) 기반 정책으로 활용과 탐색의 균형을 조절한다.<br>- 코딩 에이전트가 보관된 코드, 실행 피드백, 재사용 가능한 하네스 메커니즘 라이브러리를 활용해 선택된 하네스를 개선한다.<br>- 벤치마크당 15회의 개선 시도로 6개 벤치마크에서 비교 방법 중 가장 높은 평균 테스트 점수인 69.48%를 기록했다. 초기 하네스와 Meta-Harness보다 각각 10.89%포인트, 3.95%포인트 높았으며, 수작업으로 설계한 기준 하네스보다 작업당 평균 실행 비용도 낮았다.</div></div>
+  <div class="item-body"><div class="item-summary">검증기에 의존하지 않고 비대칭 자기 대전으로 추론 시점의 성능을 높이는 Test-Time Self-Play(TTSP)를 제안한 연구다.<br>- 난이도를 보정한 LiveCodeBench v6 하위 집합에서, 평가한 모든 검증기 성능 수준에 걸쳐 TTSP가 가장 높은 성능을 보였다.<br>- 검증기가 약해질수록 가장 강력한 기준 방법과의 격차가 커졌으며, 검증기가 없는 조건에서는 mean@8이 절대값 기준 35%포인트 향상됐다.<br>- 다양한 검증기 성능 수준에서 개선 효과가 유지됐지만, 기본 정책이 정답을 생성하는 비율이 거의 0인 경우에는 효과가 나타나지 않았다.</div></div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://arxiv.org/abs/2611.06500" target="_blank" rel="noopener">도구는 텍스트로 말할 필요가 없다: 에이전트를 위한 잠재 표현 기반 컨텍스트 압축</a></div>
+    <div class="item-name"><a href="https://arxiv.org/abs/2611.06956" target="_blank" rel="noopener">Octopus: Latent-KV 멀티에이전트 강화학습을 위한 하나의 두뇌, 여러 분기</a></div>
     <div class="item-meta">arXiv</div>
   </div>
-  <div class="item-body"><div class="item-summary">LLM 에이전트의 도구 출력을 잠재 토큰으로 압축하는 Coca-Cola 모델을 제안한 연구.<br>- Coca-Cola는 도구 관측 결과를 잠재 토큰으로 압축해 에이전트의 입력 임베딩 공간에 삽입한다.<br>- Action-Preserving Training은 원본 관측과 압축된 관측에서 에이전트의 다음 행동 분포를 정렬해, 의사결정에 중요한 정보를 유지하는 잠재 토큰을 학습한다.<br>- 웹 검색 에이전트를 4개 QA 벤치마크와 2개 모델 계열에서 평가한 결과, 토큰 사용량을 70.01~89.24%, 전체 실행 시간을 24.45~55.97% 줄이면서 과제 성능을 일관되게 개선했다.</div></div>
+  <div class="item-body"><div class="item-summary">Octopus는 모든 실행 스레드가 하나의 모델 백본을 공유하고 GPU에 상주하는 KV 상태 DAG로 협업하는 멀티에이전트 강화학습 프레임워크다.<br>- Zero-Copy Radix Forking은 물리적 KV 페이지를 공유하는 커서 뷰로 분기를 생성해 분기 생성 복잡도를 O(1)로 만든다.<br>- Attention-Only KV Mounting은 다른 스레드의 마지막 KV 블록을 full-attention 계층에 직접 연결하고 선형 순환 상태는 우회한다. 추가 KV 할당 없이 전체 텍스트 상호정보량의 92.2%를 유지하면서 과제 이탈 유도율을 57.9%에서 2.7%로 21배 줄였다.<br>- Packed DAG-GRPO Trainer는 한 에피소드의 모든 분기를 한 번의 블록 희소 어텐션 연산으로 처리하고, 분기를 하나씩 제외했을 때의 한계 보상을 이용해 각 분기의 기여도를 배분한다.</div></div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://arxiv.org/abs/2611.06627" target="_blank" rel="noopener">Physical AI를 위한 Cosmos 기반 상호작용형 세계 시뮬레이션</a></div>
+    <div class="item-name"><a href="https://arxiv.org/abs/2611.07232" target="_blank" rel="noopener">Recursive Sparse Attention: 로그 비용으로 백만 토큰 길이까지 외삽</a></div>
     <div class="item-meta">arXiv</div>
   </div>
-  <div class="item-body"><div class="item-summary">Cosmos 세계 기반 모델을 Physical AI용 실시간 상호작용형 세계 시뮬레이션에 적용하는 공통 프레임워크를 제시한 글이다.<br>- 행동과 장면 제어에 반응하는 시각적 관측을 스트리밍해 사용자와 체화 에이전트가 변화하는 가상 환경과 상호작용하도록 한다.<br>- 행동에 따른 시각적 결과 예측과 외부 시뮬레이터가 유지하는 물리적 상태로부터의 관측 생성을 모두 지원한다.<br>- 카메라 탐색과 로봇 조작, 제어 가능한 비디오 전이, 다중 시점 자율주행 차량 시뮬레이션에서 적용 사례를 제시하며 코드와 모델 체크포인트를 공개한다.</div></div>
+  <div class="item-body"><div class="item-summary">32K 길이로 학습하고 최대 2M 토큰까지 문맥 길이를 확장한 RecSA의 설계와 평가 결과를 소개하는 글이다.<br>- RecSA는 KV 캐시를 트리로 구성하고 각 노드를 하나의 키와 평균 풀링한 값으로 요약한다. 각 상위 레벨에서 최대 k개 후보를 선택해 쿼리당 선택 비용과 읽는 항목 수를 O(log L)로 제한한다.<br>- 각 항목의 RoPE 위치를 해당 레벨의 후보 내 인덱스로 지정해, 문맥이 길어져도 모든 상대 거리가 학습 중 본 범위 안에 머물도록 한다.<br>- Qwen3-4B에서 초기화해 32K 길이의 6.2억 토큰으로 학습했으며, RULER의 131K~2M 모든 평가 길이에서 비교 모델들을 앞섰다. 1M에서는 60.5점으로, 가장 강한 비교 모델인 Dense + DCA의 40.0점을 웃돌았다.</div></div>
 </div>
 </div><div class="section" id="hn">
   <div class="section-header">
@@ -303,20 +324,45 @@
   </div>
   <div class="community-date">2026-11-05 UTC · 당시 페이지 순위</div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://sshhole.com" target="_blank" rel="noopener">Sshole</a></div>
-    <div class="item-meta">1위 · 782 pts</div>
+    <div class="item-name"><a href="https://sshhole.com" target="_blank" rel="noopener">sshole</a></div>
+    <div class="item-meta">1위 · 2869 pts</div>
   </div>
-  <div class="item-body"><div class="item-summary">1980년 빌 조이가 유닉스의 daemon 계정에 비밀번호 로그인을 막는 별표(*)를 넣은 일에 관한 글.<br>- 당시 비밀번호 해시는 누구나 읽을 수 있는 /etc/passwd 파일에 사용자명과 함께 저장돼 있었다.<br>- 빌 조이는 로그인이 허용되지 않는 daemon 계정의 비밀번호 필드에 *를 넣었다. *는 해시가 아니므로 어떤 비밀번호도 일치할 수 없으며, 유닉스는 지금도 이 방식을 사용한다.<br>- 1980년 3BSD의 /etc/passwd에서 daemon 계정의 실명 필드에는 그가 적은 ‘악마 그 자신(the devil himself)’이라는 문구가 있다.</div></div>
+  <div class="item-body"><div class="item-summary">1980년 빌 조이가 유닉스의 daemon 계정에 비밀번호 로그인을 막는 별표(*)를 넣은 이야기.<br>- 당시 비밀번호 해시는 누구나 읽을 수 있는 /etc/passwd 파일에 사용자 이름과 함께 저장돼 있었다.<br>- 빌 조이는 로그인이 허용되지 않아야 하는 daemon 계정의 비밀번호 필드에 *를 넣었다. *는 해시가 아니어서 어떤 비밀번호도 일치할 수 없으며, 유닉스는 지금도 이 방식을 쓴다.<br>- 1980년 3BSD의 /etc/passwd에서 daemon 계정의 실명 필드에는 “악마 그 자신”이라고 적혀 있었다.</div></div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://openai.com/index/a-thousand-fewer-paths-to-root/" target="_blank" rel="noopener">root에 이르는 경로를 천 개 줄이다</a></div>
-    <div class="item-meta">2위 · 433 pts</div>
+    <div class="item-name"><a href="https://github.com/anthropics/claude-code/issues/107757" target="_blank" rel="noopener">Claude Code가 사용자의 이메일 주소를 웹사이트에 전송한다</a></div>
+    <div class="item-meta">2위 · 1449 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Claude Code가 웹 검색 중 사용자의 이메일 주소를 제3자에게 노출했다는 버그 신고다.<br>- 작성자는 Claude Code가 허락 없이 User-Agent 요청 헤더에 이메일 주소를 담아 임의의 제3자에게 전달했으며, 이 때문에 하루 수십 통의 사기 이메일을 받는다고 주장한다.<br>- 작성자는 이 동작을 선택 설정으로 제공할 것이 아니라 실행 환경에서 완전히 제거해야 한다고 요구한다.<br>- 작성자는 Anthropic의 개인정보 보호를 신뢰할 수 없어 회사를 OpenRouter를 사용하는 Pi로 이전하고 있다고 밝혔다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://motorolanews.com/motorola-signature-27-2/" target="_blank" rel="noopener">GrapheneOS를 지원하는 Motorola Signature 27</a></div>
+    <div class="item-meta">3위 · 556 pts</div>
+  </div>
+  
+</div>
+</div><div class="section" id="reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Reddit</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1xovnaa/maybe_well_get_cheap_ram_for_christmas_after_all/" target="_blank" rel="noopener">어쩌면 크리스마스에는 저렴한 RAM을 살 수 있을지도!</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
   </div>
   
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://openai.com/index/introducing-images-2-6/" target="_blank" rel="noopener">Images 2.6</a></div>
-    <div class="item-meta">3위 · 350 pts</div>
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1xpbjku/qwen_4_is_stealth_announced/" target="_blank" rel="noopener">Qwen 4, 조용히 발표되다</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
+  </div>
+  
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/LocalLLaMA/comments/1xossr5/zai_chief_scientist_jie_tang_just_revealed_the/" target="_blank" rel="noopener">Z.ai 수석 과학자 Jie Tang, 출시 예정인 GLM-5.5(32B, 122B, 256B)의 학습 파이프라인 공개</a></div>
+    <div class="item-meta">r/LocalLLaMA</div>
   </div>
   
 </div>
@@ -328,34 +374,34 @@
   </div>
   <div class="item">
   <div class="item-head">
+    <div class="item-name"><a href="https://github.com/zed-industries/zed" target="_blank" rel="noopener">zed-industries/Zed 코드 편집기</a></div>
+    <div class="item-meta">93,256</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Atom과 Tree-sitter 제작진이 만든 고성능 다중 사용자 코드 편집기 Zed를 소개하는 글이다.<br>- macOS·Linux·Windows에서 직접 다운로드하거나 패키지 관리자로 설치할 수 있으며, 웹 버전은 아직 제공되지 않는다.<br>- macOS·Linux·Windows별 빌드 가이드와 CONTRIBUTING.md를 통한 기여 방법을 안내한다.<br>- 소스 코드는 주로 GPL-3.0-or-later, 표시된 구성 요소는 Apache-2.0을 적용하며, cargo-about으로 의존성 라이선스 준수를 자동화하고 CI에서 확인한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
     <div class="item-name"><a href="https://github.com/NVIDIA/auto-ontology" target="_blank" rel="noopener">NVIDIA/auto-ontology</a></div>
-    <div class="item-meta">6,645</div>
+    <div class="item-meta">8,608</div>
   </div>
-  <div class="item-body"><div class="item-summary">NVIDIA Auto Ontology는 기업 메타데이터로 에이전트용 컨텍스트 계층을 구축하는 오픈 라이브러리다.<br>- 메타데이터에서 기업 온톨로지를 생성하고, 기존 온톨로지·시맨틱 모델을 연결해 AI용 지식 그래프를 구축한다.<br>- 시스템마다 다른 정의를 조정하고, 생성된 쿼리를 인증된 정의와 데이터 계보에 대조해 검증하며, 모든 답변에 출처를 제공한다.<br>- MCP·CLI·API로 에이전트에 컨텍스트를 제공하고, 인증된 수정 사항과 사용 내역을 온톨로지에 반영한다.</div></div>
+  <div class="item-body"><div class="item-summary">NVIDIA Auto Ontology는 기업 메타데이터로 에이전트 분석에 필요한 컨텍스트 계층을 구축하는 오픈 라이브러리다.<br>- 메타데이터에서 기업 온톨로지를 생성하고 기존 온톨로지·시맨틱 모델을 연결해 AI용 지식 그래프를 구축한다.<br>- 지표·엔터티·관계의 비즈니스 의미를 제공하고 시스템 간 정의 불일치를 조정하며, 생성된 쿼리를 인증된 정의와 데이터 계보에 대조해 검증하고 답변마다 출처를 제공한다.<br>- MCP·CLI·API로 에이전트에 컨텍스트를 제공하고, 인증된 수정 사항과 사용 내역을 온톨로지에 반영한다.</div></div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">mattpocock/skills</a></div>
-    <div class="item-meta">314,491</div>
+    <div class="item-name"><a href="https://github.com/rails/rails" target="_blank" rel="noopener">rails/rails</a></div>
+    <div class="item-meta">58,932</div>
   </div>
-  <div class="item-body"><div class="item-summary">실무 개발에 사용하는 에이전트 스킬 모음과 설치 방법을 소개하는 글.<br>- 스킬은 작고 수정하기 쉬우며 서로 조합할 수 있도록 설계됐고, 어떤 모델에서든 사용할 수 있다.<br>- 플러그인은 자동으로 업데이트되며, skills.sh는 프로젝트에 편집 가능한 파일을 복사하므로 직접 업데이트해야 한다. 중복 설치를 피하려면 에이전트마다 한 방식만 선택해야 한다.<br>- Claude Code, Codex, GitHub Copilot용 설치 명령을 제공한다. Codex는 시작할 때 자동 업데이트되며, Copilot은 설정 파일에 autoUpdate를 추가하도록 안내한다.</div></div>
+  <div class="item-body"><div class="item-summary">Rails 웹 애플리케이션 프레임워크와 MVC 각 계층의 역할을 소개하는 글.<br>- Rails는 MVC 패턴에 따라 데이터베이스 기반 웹 애플리케이션을 만드는 데 필요한 기능을 제공한다.<br>- Model 계층은 도메인 모델과 비즈니스 로직을 담으며, ActiveRecord::Base를 상속한 모델은 데이터베이스 행을 객체로 다룬다. 일반 Ruby 클래스나 Active Model 인터페이스를 구현한 클래스도 모델이 될 수 있다.<br>- View 계층은 주로 Ruby 코드가 삽입된 HTML 템플릿인 ERB로 리소스를 표현하며, Action View가 컨트롤러 응답이나 이메일 본문을 생성한다.</div></div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener">garrytan/gstack</a></div>
-    <div class="item-meta">139,719</div>
+    <div class="item-name"><a href="https://github.com/mpv-player/mpv" target="_blank" rel="noopener">mpv-player/mpv</a></div>
+    <div class="item-meta">37,808</div>
   </div>
-  <div class="item-body"><div class="item-summary">gstack은 Claude Code 등 코딩 에이전트를 역할별 가상 엔지니어링 팀으로 만드는 오픈소스 도구다.<br>- 제품 재검토, 아키텍처 확정, 디자인 검토, 운영 버그 탐지, 실제 브라우저 QA, OWASP·STRIDE 보안 감사, PR 출시를 역할별로 수행하며, 모든 기능은 슬래시 명령어와 Markdown으로 구성된다.<br>- Y Combinator 사장 겸 CEO인 Garry Tan이 매일 사용하는 도구를 공개했으며, MIT 라이선스로 무료 제공한다.<br>- 시작 절차는 약 30초의 설치 후 `/office-hours`로 구상을 검토하고 설계 문서를 작성한 뒤, `/review`로 CI를 통과해도 운영 환경에서 발생할 버그를 찾고 명백한 문제를 수정하는 방식이다.</div></div>
+  <div class="item-body"><div class="item-summary">명령줄 미디어 플레이어 mpv의 개요와 실행에 필요한 시스템 요구사항을 소개하는 글이다.<br>- mpv는 자유 소프트웨어로, 다양한 미디어 파일 형식과 오디오·비디오 코덱, 자막 형식을 지원한다.<br>- 비교적 최신 Linux, Windows 10 1607 이상 또는 macOS 10.15 이상이 필요하다.<br>- 하드웨어 디코딩은 기본으로 활성화되지 않아 `--hwdec` 옵션으로 켜야 하며, 저성능 GPU에서는 원활한 재생을 위해 `--profile=fast` 사용을 권장한다.</div></div>
 </div><div class="item">
   <div class="item-head">
-    <div class="item-name"><a href="https://github.com/Usagi-org/ai-goofish-monitor" target="_blank" rel="noopener">Usagi-org/ai-goofish-monitor: AI 기반 闲鱼 실시간 모니터링 시스템</a></div>
-    <div class="item-meta">17,399</div>
+    <div class="item-name"><a href="https://github.com/rust-lang/rust" target="_blank" rel="noopener">rust-lang/rust: Rust 공식 소스 코드 저장소</a></div>
+    <div class="item-meta">121,276</div>
   </div>
-  <div class="item-body"><div class="item-summary">Playwright와 AI를 기반으로 闲鱼 상품을 여러 작업으로 실시간 모니터링하고 웹에서 관리하는 시스템이다.<br>- 자연어로 작업을 생성하고 멀티모달 모델로 상품을 분석하며, 작업별 키워드·가격·필터·AI 프롬프트를 독립적으로 설정한다.<br>- 무료 배송, 게시 시간 범위, 성·시·구 지역 필터를 제공하며, Cron 주기 실행과 ntfy.sh·기업용 위챗·Bark·Telegram·Webhook 알림을 지원한다.<br>- Chromium이 내장된 Docker 이미지로 배포하며, 기본 웹 주소는 http://127.0.0.1:8000이고 작업·결과·가격 이력은 SQLite의 data/app.sqlite3에 저장한다.</div></div>
-</div><div class="item">
-  <div class="item-head">
-    <div class="item-name"><a href="https://github.com/D4Vinci/Scrapling" target="_blank" rel="noopener">D4Vinci/Scrapling</a></div>
-    <div class="item-meta">97,539</div>
-  </div>
-  <div class="item-body"><div class="item-summary">Scrapling은 HTTP 요청, 브라우저 렌더링, 데이터 파싱, 동시 크롤링을 하나로 통합한 Python 웹 스크래핑 프레임워크다.<br>- 빠른 HTTP 요청, 스텔스 브라우저, JavaScript 렌더링, 영구 세션, 백그라운드 API 캡처를 지원한다.<br>- CSS·XPath·텍스트·정규식 검색, 적응형 요소 추적, 유사 요소 매칭으로 데이터를 추출하고 깔끔한 Markdown으로 출력한다.<br>- 동시 크롤링, 프록시 순환, 자동 재시도, AutoThrottle, 일시 중지·재개와 JSON·JSONL·CSV·XML 내보내기를 제공하며, CLI·MCP 서버·Agent Skill로도 사용할 수 있다.</div></div>
+  <div class="item-body"><div class="item-summary">Rust의 주요 소스 코드 저장소와 언어의 핵심 특징을 소개하는 글이다.<br>- 저장소에는 Rust 컴파일러, 표준 라이브러리, 문서가 포함되어 있다.<br>- 빠른 속도와 메모리 효율성을 제공하며, 타입 시스템과 소유권 모델로 메모리 및 스레드 안전성을 보장해 컴파일 시점에 버그를 줄인다.<br>- 패키지 관리·빌드 도구 Cargo, 코드 포매터 rustfmt, 린터 Clippy, 편집기 지원 도구 rust-analyzer를 제공한다.</div></div>
 </div>
 </div>
 </body>
