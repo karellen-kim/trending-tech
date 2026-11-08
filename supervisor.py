@@ -115,7 +115,8 @@ def supervise(command: list[str], directory: Path, day: str) -> int:
                         result['stages'] = {
                             name: {key: value for key, value in stage.items() if key in
                                    ('status', 'commit_sha', 'committed', 'pushed', 'http_status', 'reason',
-                                    'insufficient_content_count')}
+                                    'insufficient_content_count', 'attempts', 'retry_wait_seconds',
+                                    'error_kind', 'delivery_state')}
                             for name, stage in state['stages'].items()
                             if name in ('collection', 'summary', 'artifacts', 'git', 'slack') and isinstance(stage, dict)}
                     if state.get('status') == 'interrupted':
