@@ -316,3 +316,43 @@ def test_awake_guard_is_released_when_worker_launch_fails(tmp_path, monkeypatch,
     guard.terminate.assert_called_once()
     guard.wait.assert_called_once_with(timeout=5)
     assert 'SENSITIVE_GUARD_ERROR' not in capsys.readouterr().out
+
+
+@pytest.mark.parametrize('mode,expected_code,expected_slack', [
+    ('read_timeout', 1, {'status': 'failed', 'attempts': 1, 'retry_wait_seconds': 0,
+                         'error_kind': 'read_timeout', 'delivery_state': 'unknown'}),
+    ('retry_success', 0, {'status': 'success', 'http_status': 200, 'attempts': 2,
+                          'retry_wait_seconds': 1, 'delivery_state': 'acknowledged'}),
+])
+def test_slack_delivery_evidence_reaches_supervisor(tmp_path, monkeypatch, capsys, mode, expected_code, expected_slack):
+    monkeypatch.setenv('PYTHONPATH', str(Path(supervisor.__file__).parent))
+    worker = tmp_path / 'slack_worker.py'
+    state = completed_state('unused', 0)
+    worker.write_text('''
+import sys
+from pathlib import Path
+from unittest.mock import Mock, patch
+import requests
+from notifier import send_slack
+from run_receipt import RunReceipt
+
+with RunReceipt(Path(sys.argv[1]), '2026-10-30', run_id=sys.argv[3]) as run:
+    run.state['stages'].update(STAGES)
+    run.stage('slack', 'running')
+    effects = ([requests.ConnectTimeout('private-webhook'), Mock(status_code=200)]
+               if sys.argv[2] == 'retry_success' else requests.ReadTimeout('private-webhook'))
+    with patch('notifier.requests.post', side_effect=effects), patch('notifier.time.sleep'):
+        result = send_slack('private-webhook', '2026-10-30', [])
+    run.stage('slack', **result, webhook_url='private-webhook', exception='private-exception')
+    run.outcome = 'published'
+'''.replace('STAGES', repr(state['stages'])), encoding='utf-8')
+    # The child executes the real notifier/receipt path with HTTP replaced, never a live webhook.
+    code = supervisor.supervise([sys.executable, str(worker), str(tmp_path), mode], tmp_path, DAY)
+    raw = capsys.readouterr().out
+    result = json.loads(raw)
+    assert code == expected_code
+    assert result['process_exit_code'] == result['receipt_exit_code'] == expected_code
+    assert result['status'] == ('failed' if expected_code else 'published')
+    assert result['stages']['git'] == state['stages']['git']
+    assert result['stages']['slack'] == expected_slack
+    assert 'private-' not in raw
