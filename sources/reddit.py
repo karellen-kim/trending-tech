@@ -17,8 +17,15 @@ from config import REDDIT_SUBREDDITS, MAX_REDDIT_ITEMS
 _HEADERS = {"User-Agent": "trending-tech-bot/1.0"}
 KST = timezone(timedelta(hours=9))
 MAX_ATTEMPTS = 3
-MAX_RETRY_WAIT = 30
+MAX_RETRY_WAIT = 360
 STATE_DIR = LOGS_DIR / "reddit"
+
+
+class _QuotaItems(list):
+    """기존 목록 API를 유지하면서 성공 응답의 제한 증거를 수집기에 전달한다."""
+    def __init__(self, values, headers):
+        super().__init__(values)
+        self.rate_limit_headers = headers
 
 
 def _utc_now() -> datetime:
@@ -83,7 +90,7 @@ def fetch_subreddit(name: str, max_items: int = MAX_REDDIT_ITEMS) -> list[dict]:
         })
         if len(items) >= max_items:
             break
-    return items
+    return _QuotaItems(items, _limit_headers(resp))
 
 def _save_limit(state: dict) -> None:
     """잠금을 보유한 프로세스가 다음 허용 시각을 원자 저장한다."""
@@ -130,6 +137,11 @@ def _limit_headers(response) -> dict:
     return headers
 
 
+def _quota_delay(headers: dict) -> float:
+    """잔여량이 소진됐다는 서버 응답이 있을 때만 reset 대기를 적용한다."""
+    return headers.get("x-ratelimit-reset", 0) if headers.get("x-ratelimit-remaining") == 0 else 0
+
+
 def _collect_locked(sources: list[dict], all_items: list[dict]) -> None:
     """첫 시도를 우선하며 전체 요청·대기 예산과 공유 cooldown을 지킨다."""
     state = _load_limit()
@@ -162,18 +174,23 @@ def _collect_locked(sources: list[dict], all_items: list[dict]) -> None:
             result.update(status="success", count=len(items), http_status=200)
             result.pop("error_type", None)
             result.pop("reason", None)
-            evidence["http_status"] = 200
-            state = {"next_allowed_at": _utc_now().timestamp() + 1, "retry_pending": False}
-            delay_owner = None
+            headers = getattr(items, "rate_limit_headers", {})
+            evidence.update(http_status=200, rate_limit_headers=headers)
+            delay = _quota_delay(headers)
+            state = {"next_allowed_at": _utc_now().timestamp() + max(1, delay),
+                     "retry_pending": delay > 0}
+            delay_owner = result if delay else None
         except Exception as error:
             response = getattr(error, "response", None)
             code = response.status_code if response is not None else None
             result.update(http_status=code, error_type=type(error).__name__)
-            evidence.update(http_status=code, rate_limit_headers=_limit_headers(response))
+            headers = _limit_headers(response)
+            evidence.update(http_status=code, error_type=type(error).__name__, rate_limit_headers=headers)
             state = {"next_allowed_at": _utc_now().timestamp() + 1, "retry_pending": False}
             delay_owner = None
             if code == 429:
-                delay = _retry_delay(response.headers.get("Retry-After"), result["attempts"])
+                delay = max(_retry_delay(response.headers.get("Retry-After"), result["attempts"]),
+                            headers.get("x-ratelimit-reset", 0))
                 result["retry_after_seconds"] = delay
                 evidence["retry_after_seconds"] = delay
                 # 한 소스의 제한 범위는 불명확하므로 다른 소스도 서버 대기를 지킨다.
@@ -181,6 +198,15 @@ def _collect_locked(sources: list[dict], all_items: list[dict]) -> None:
                          "retry_pending": True}
                 delay_owner = result
                 if result["attempts"] < MAX_ATTEMPTS:
+                    pending.append(index)
+                else:
+                    result["reason"] = "retries_exhausted"
+            elif (isinstance(error, (requests.ConnectionError, requests.Timeout))
+                  and not isinstance(error, requests.exceptions.SSLError)):
+                if result["attempts"] < 2:
+                    state = {"next_allowed_at": _utc_now().timestamp() + 2 ** result["attempts"],
+                             "retry_pending": True}
+                    delay_owner = result
                     pending.append(index)
                 else:
                     result["reason"] = "retries_exhausted"

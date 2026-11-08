@@ -63,6 +63,14 @@ def validate_receipt(state: dict, run_id: str, pid: int, day: str,
     return None
 
 
+def _start_awake_guard():
+    """macOS 배치 중 자동 절전만 막는다. 덮개 닫기·강제 절전은 막지 못한다."""
+    if sys.platform != 'darwin':
+        return None
+    return subprocess.Popen(['/usr/bin/caffeinate', '-i', '-s', '-w', str(os.getpid())],
+                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+
 def supervise(command: list[str], directory: Path, day: str) -> int:
     """자식 출력은 파일로 격리하고 wait 이후 검증 결과 한 줄과 OS 코드를 반환한다."""
     run_id = uuid4().hex
@@ -71,7 +79,7 @@ def supervise(command: list[str], directory: Path, day: str) -> int:
     result = {'event': 'daily_run_finished', 'run_id': run_id, 'date': day,
               'status': 'failed', 'process_exit_code': None, 'receipt_exit_code': None,
               'receipt_path': str(receipt_path), 'log_path': str(log_path), 'stages': {}}
-    process, interrupted = None, None
+    process, interrupted, awake_guard = None, None, None
 
     def forward(signum, frame):
         nonlocal interrupted
@@ -88,6 +96,7 @@ def supervise(command: list[str], directory: Path, day: str) -> int:
         directory.mkdir(parents=True, exist_ok=True)
         with log_path.open('x', encoding='utf-8') as log:
             if interrupted is None:
+                awake_guard = _start_awake_guard()
                 process = subprocess.Popen([*command, run_id], stdout=log, stderr=subprocess.STDOUT)
                 if interrupted is not None:
                     forward(interrupted, None)
@@ -120,6 +129,13 @@ def supervise(command: list[str], directory: Path, day: str) -> int:
         result['validation_error'] = 'supervisor_io_error'
         code = 1
     finally:
+        if awake_guard is not None:
+            awake_guard.terminate()
+            try:
+                awake_guard.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                awake_guard.kill()
+                awake_guard.wait()
         for sig, handler in handlers.items():
             signal.signal(sig, handler)
     if interrupted is not None:

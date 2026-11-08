@@ -286,3 +286,33 @@ def test_invalid_requested_date_never_launches_worker(monkeypatch, requested):
     monkeypatch.setattr(supervisor, 'supervise', unexpected)
     with pytest.raises(ValueError):
         supervisor.main()
+
+
+def test_macos_awake_guard_is_scoped_to_supervisor(monkeypatch):
+    from unittest.mock import Mock
+    monkeypatch.setattr(supervisor.sys, 'platform', 'darwin')
+    popen = Mock()
+    monkeypatch.setattr(supervisor.subprocess, 'Popen', popen)
+    assert supervisor._start_awake_guard() is popen.return_value
+    assert popen.call_args.args[0] == ['/usr/bin/caffeinate', '-i', '-s', '-w', str(os.getpid())]
+    assert popen.call_args.kwargs['stdout'] == subprocess.DEVNULL
+
+
+def test_other_platforms_do_not_start_awake_guard(monkeypatch):
+    from unittest.mock import Mock
+    monkeypatch.setattr(supervisor.sys, 'platform', 'linux')
+    popen = Mock()
+    monkeypatch.setattr(supervisor.subprocess, 'Popen', popen)
+    assert supervisor._start_awake_guard() is None
+    popen.assert_not_called()
+
+
+def test_awake_guard_is_released_when_worker_launch_fails(tmp_path, monkeypatch, capsys):
+    from unittest.mock import Mock
+    guard = Mock()
+    monkeypatch.setattr(supervisor, '_start_awake_guard', lambda: guard)
+    monkeypatch.setattr(supervisor.subprocess, 'Popen', Mock(side_effect=OSError('SENSITIVE_GUARD_ERROR')))
+    assert supervisor.supervise(['worker'], tmp_path, DAY) == 1
+    guard.terminate.assert_called_once()
+    guard.wait.assert_called_once_with(timeout=5)
+    assert 'SENSITIVE_GUARD_ERROR' not in capsys.readouterr().out

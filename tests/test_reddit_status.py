@@ -107,12 +107,132 @@ def test_missing_or_invalid_header_uses_bounded_backoff(source, monkeypatch, hea
 
 
 def test_wait_budget_is_shared_across_subreddits(source, monkeypatch):
-    get = Mock(side_effect=[response(429, '20'), response(), response(429, '20')])
+    get = Mock(side_effect=[response(429, '200'), response(), response(429, '200')])
     monkeypatch.setattr(reddit.requests, 'get', get)
     result = reddit.fetch_all_reddit()
     assert result['status'] == 'partial'
     assert get.call_count == 3
-    assert sum(call.args[0] for call in source.call_args_list) == 21
+    assert sum(call.args[0] for call in source.call_args_list) == 201
+
+
+def test_success_with_exhausted_quota_waits_before_next_source(source, monkeypatch):
+    first = response()
+    first.headers.update({'X-Ratelimit-Remaining': '0', 'X-Ratelimit-Reset': '56'})
+    get = Mock(side_effect=[first, response()])
+    monkeypatch.setattr(reddit.requests, 'get', get)
+    result = reddit.fetch_all_reddit()
+    assert result['status'] == 'success'
+    assert source.call_args_list[0].args == (56,)
+    times = [datetime.fromisoformat(s['requests'][0]['requested_at']) for s in result['sources']]
+    assert (times[1] - times[0]).total_seconds() == 56
+    assert result['sources'][0]['requests'][0]['rate_limit_headers']['x-ratelimit-reset'] == 56
+
+
+@pytest.mark.parametrize(('retry_after', 'reset', 'expected'), [('2', '56', 56), ('70', '56', 70)])
+def test_429_waits_for_longer_server_limit(source, monkeypatch, retry_after, reset, expected):
+    first = response(429, retry_after)
+    first.headers.update({'X-Ratelimit-Remaining': '0', 'X-Ratelimit-Reset': reset})
+    monkeypatch.setattr(reddit.requests, 'get', Mock(side_effect=[first, response(), response()]))
+    assert reddit.fetch_all_reddit()['status'] == 'success'
+    assert source.call_args_list[0].args == (expected,)
+
+
+@pytest.mark.parametrize('remaining', [None, '5'])
+def test_429_reset_is_respected_without_zero_remaining(source, monkeypatch, remaining):
+    first = response(429, '2')
+    first.headers['X-Ratelimit-Reset'] = '56'
+    if remaining is not None:
+        first.headers['X-Ratelimit-Remaining'] = remaining
+    monkeypatch.setattr(reddit.requests, 'get', Mock(side_effect=[first, response(), response()]))
+    assert reddit.fetch_all_reddit()['status'] == 'success'
+    assert source.call_args_list[0].args == (56,)
+
+
+@pytest.mark.parametrize('reset', ['NaN', '-1', 'inf', 'private-token'])
+def test_invalid_quota_reset_uses_backoff(source, monkeypatch, reset):
+    first = response(429)
+    first.headers.update({'X-Ratelimit-Remaining': '0', 'X-Ratelimit-Reset': reset})
+    monkeypatch.setattr(reddit.requests, 'get', Mock(side_effect=[first, response(), response()]))
+    result = reddit.fetch_all_reddit()
+    assert result['status'] == 'success'
+    assert source.call_args_list[0].args == (2,)
+    assert 'private-token' not in str(result)
+
+
+def test_success_long_quota_cooldown_survives_next_run(source, monkeypatch):
+    first = response()
+    first.headers.update({'X-Ratelimit-Remaining': '0', 'X-Ratelimit-Reset': '3600'})
+    get = Mock(return_value=first)
+    monkeypatch.setattr(reddit.requests, 'get', get)
+    assert reddit.fetch_all_reddit()['status'] == 'partial'
+    result = reddit.fetch_all_reddit()
+    assert get.call_count == 1
+    assert all(s['reason'] == 'wait_budget_exceeded' for s in result['sources'])
+    source.assert_not_called()
+
+
+def test_success_quota_waits_share_total_budget(source, monkeypatch):
+    monkeypatch.setattr(reddit, 'REDDIT_SUBREDDITS', ['one', 'two', 'three'])
+    exhausted = response()
+    exhausted.headers.update({'X-Ratelimit-Remaining': '0', 'X-Ratelimit-Reset': '200'})
+    get = Mock(return_value=exhausted)
+    monkeypatch.setattr(reddit.requests, 'get', get)
+    result = reddit.fetch_all_reddit()
+    assert get.call_count == 2
+    assert sum(call.args[0] for call in source.call_args_list) == 200
+    assert result['sources'][2]['reason'] == 'wait_budget_exceeded'
+    assert result['status'] == 'partial'
+
+
+def test_all_six_sources_can_finish_with_server_minute_quota(source, monkeypatch):
+    monkeypatch.setattr(reddit, 'REDDIT_SUBREDDITS', list('abcdef'))
+    exhausted = response()
+    exhausted.headers.update({'X-Ratelimit-Remaining': '0', 'X-Ratelimit-Reset': '56'})
+    get = Mock(return_value=exhausted)
+    monkeypatch.setattr(reddit.requests, 'get', get)
+    result = reddit.fetch_all_reddit()
+    assert result['status'] == 'success'
+    assert get.call_count == 6
+    assert sum(call.args[0] for call in source.call_args_list) == 280
+    assert sum(s['retry_wait_seconds'] for s in result['sources']) == 280
+
+
+def test_reset_without_exhausted_quota_does_not_force_wait(source, monkeypatch):
+    first = response()
+    first.headers.update({'X-Ratelimit-Remaining': '4', 'X-Ratelimit-Reset': '3600'})
+    monkeypatch.setattr(reddit.requests, 'get', Mock(side_effect=[first, response()]))
+    assert reddit.fetch_all_reddit()['status'] == 'success'
+    assert source.call_args_list[0].args == (1,)
+
+
+@pytest.mark.parametrize('error_type', [requests.ConnectionError, requests.Timeout])
+def test_transient_connection_failure_retries_once(source, monkeypatch, error_type):
+    get = Mock(side_effect=[error_type('private-url-token'), response(), response()])
+    monkeypatch.setattr(reddit.requests, 'get', get)
+    result = reddit.fetch_all_reddit()
+    assert result['status'] == 'success'
+    assert result['sources'][0]['attempts'] == 2
+    assert 'private-url-token' not in str(result)
+    assert result['sources'][0]['requests'][0]['error_type'] == error_type.__name__
+
+
+def test_persistent_connection_failure_stays_in_request_budget(source, monkeypatch):
+    get = Mock(side_effect=requests.ConnectionError('private-url-token'))
+    monkeypatch.setattr(reddit.requests, 'get', get)
+    result = reddit.fetch_all_reddit()
+    assert get.call_count == 4
+    assert all(s['attempts'] == 2 for s in result['sources'])
+    assert all(s['reason'] == 'retries_exhausted' for s in result['sources'])
+    assert 'private-url-token' not in str(result)
+
+
+def test_tls_failure_is_not_retried(source, monkeypatch):
+    get = Mock(side_effect=[requests.exceptions.SSLError('private-url-token'), response()])
+    monkeypatch.setattr(reddit.requests, 'get', get)
+    result = reddit.fetch_all_reddit()
+    assert get.call_count == 2
+    assert result['sources'][0]['attempts'] == 1
+    assert result['status'] == 'partial'
 
 
 def test_partial_result_preserves_successful_items(source, monkeypatch):
