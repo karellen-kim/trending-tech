@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-11-15 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 항상 펼쳐진 요약 ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
+  .community-date { padding: 0.8rem 1.15rem 0; font-size: 0.75rem; color: var(--ink-faint); }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-11-15</div>
+<h1><em>15</em> Nov 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#hn" class="nav-link">Hacker News</a><a href="#reddit" class="nav-link">Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">코딩 에이전트 도구의 초점이 코드 생성에서 계획 검토·품질 검사·승인 절차로 넓어지고 있다.</p><p class="take-body">계획과 코드 변경에 주석을 달아 에이전트에 돌려주는 검토 도구, 규칙 기반 검사와 LLM을 결합한 코드 리뷰 도구는 생성 전후의 검증을 별도 작업으로 다룬다. 여기에 역할·실행 환경·사람의 승인 단계를 반복 가능한 절차로 묶는 워크플로 도구까지 함께 보면, 에이전트가 작성한 코드를 어떤 절차로 검토하고 받아들일지가 공통 과제로 떠오른다고 읽힌다.</p><div class="take-refs"><span>근거</span><a href="https://github.com/Tencent/LoopForge" target="_blank" rel="noopener">Tencent/LoopForge</a> · <a href="https://github.com/backnotprop/plannotator" target="_blank" rel="noopener">backnotprop/plannotator</a> · <a href="https://github.com/alibaba/open-code-review" target="_blank" rel="noopener">alibaba/open-code-review</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/1ee25c5c-11c8-44c4-8c74-b73417719ce0" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://magazine.sebastianraschka.com/p/understanding-positional-embeddings" target="_blank" rel="noopener">현대 LLM의 위치 임베딩 이해하기</a></div>
+    <div class="item-meta">Sebastian Raschka</div>
+  </div>
+  <div class="item-body"><div class="item-summary">LLM이 토큰의 위치 정보를 인코딩하고 처리하는 방식을 설명하는 글이다.<br>- 전통적인 위치 임베딩부터 RoPE까지 시각적 예시, 수식, 간단한 PyTorch 구현으로 작동 원리를 다룬다.<br>- 현대 아키텍처가 명시적 위치 인코딩을 변형하거나 생략하는 방식도 살펴본다.<br>- 2026년 공개 가중치 모델들의 위치 임베딩 선택을 미리 보여주며, 아키텍처를 위치 인코딩 방식별로 분류한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Nov/14/datasette-llm/" target="_blank" rel="noopener">datasette-llm 0.1a11</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Datasette의 LLM 설정을 지원하는 중간 플러그인 datasette-llm의 0.1a11 릴리스 소개다.<br>- 다른 Datasette 플러그인이 사용할 LLM을 설정하는 역할을 한다.<br>- 이번 버전은 OpenAI 호환 엔드포인트 지원을 추가해, 해당 프로토콜을 사용하는 LLM을 호스팅 위치와 관계없이 연결할 수 있다.<br>- LM Studio·Ollama·llama.cpp로 실행하는 로컬 모델도 사용할 수 있으며, uvx와 datasette-agent로 로컬 모델 기반 Datasette Agent 서버를 실행하는 예제를 제공한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Nov/14/datasette-vega/" target="_blank" rel="noopener">datasette-vega 0.7 출시</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Datasette에서 표나 사용자 지정 쿼리의 데이터를 Vega-Lite 차트로 시각화하는 플러그인 datasette-vega의 0.7 출시 소식이다.<br>- 2018년 7월 이후 처음으로 업데이트했으며, 최신 Datasette 알파 버전과의 호환성을 확보했다.<br>- JavaScript 플러그인 실행 기능이 추가된 Datasette Lite에서 더 잘 작동하도록 외관을 일부 조정했다.<br>- README의 라이브 데모 링크를 Datasette Lite에서 실행되는 데모로 변경했다.</div></div>
+</div>
+</div><div class="section" id="hn">
+  <div class="section-header">
+    <span class="section-icon">HN</span>
+    <span class="section-title">Hacker News</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="community-date">2026-11-14 UTC · 당시 페이지 순위</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.spacex.com/launches/starship-flight-15" target="_blank" rel="noopener">SpaceX, Starship 포획으로 15차 비행 마무리</a></div>
+    <div class="item-meta">1위 · 1416 pts</div>
+  </div>
+  
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.techpowerup.com/354814/nvidia-allegedly-engineered-scarcity-by-funding-ai-startups-to-buy-its-gpus" target="_blank" rel="noopener">Nvidia, AI 스타트업에 자사 GPU 구매 자금을 지원해 공급 부족을 조장했다는 의혹</a></div>
+    <div class="item-meta">2위 · 1083 pts</div>
+  </div>
+  
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://so.long.thanks.fish/why-pi-when-i-have-an-old-phone/" target="_blank" rel="noopener">오래된 스마트폰이 있는데 비싼 Raspberry Pi를 살 이유가 있을까?</a></div>
+    <div class="item-meta">3위 · 591 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">고해상도 카메라·GPS·저장공간과 조명 제어가 필요한 프로젝트에서 중고 스마트폰과 Raspberry Pi 구성의 비용·기능을 비교한 글.<br>- 중고 Redmi 13C 5G와 Huawei Mate 30 5G는 Taobao에서 약 300~500위안이며, Raspberry Pi 4·Arducam 64MP·GPS HAT·64GB microSD 구성은 약 1,483위안이다.<br>- Redmi는 50MP JPEG를 저장하고, Mate 30은 40MP 메인 카메라와 망원 렌즈를 갖췄다. 두 기기 모두 GPS·저장공간·시계·배터리·모바일 데이터·터치스크린을 포함한다.<br>- 스마트폰의 USB-C 포트로 조명과 센서를 담당할 PCB에 연결하는 구상이며, 루팅한 Redmi와 LED 컨트롤러가 USB-C로 통신하고 있다.</div></div>
+</div>
+</div><div class="section" id="reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Reddit</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xwcjuq/iclr_2027_initial_review_scores_ranked_by/" target="_blank" rel="noopener">대학별로 순위를 매긴 ICLR 2027 초기 심사 점수 [N]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+  
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xwuwqd/i_dont_think_doubleblind_review_systems_work_d/" target="_blank" rel="noopener">이중 익명 심사 제도가 제대로 작동한다고 생각하지 않는다 [토론]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+  <div class="item-body"><div class="item-summary">이중 익명 논문 심사의 익명성과 공정성에 의문을 제기하는 글이다.<br>- 심사자가 저자의 이름과 소속을 알 수 있는 경우가 많아, 실제로는 단일 익명 심사에 가깝다고 주장한다.<br>- 글쓴이는 학생 심사자가 자신의 논문 채택 가능성을 높이려고 다른 연구자의 논문을 거절하는 사례를 직접 목격했다고 말한다.<br>- 학계 인맥이 넓은 연구실의 논문을 공정하고 편향 없이 평가할 수 있는지 의문을 제기한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xw5uwe/iclr_2027_rebuttal_d/" target="_blank" rel="noopener">ICLR 2027 저자 반박 [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+  <div class="item-body"><div class="item-summary">ICLR 2027 저자 반박 기간에 수정한 논문의 PDF 변경 사항 표시가 보이지 않는다는 질문이다.<br>- 작성자는 가이드라인이 수정된 PDF에 변경 사항 비교를 자동으로 적용한다고 안내하는 것으로 이해했다.<br>- 작성자에게는 변경 사항을 나타내는 색상 표시나 PDF 비교 결과가 보이지 않는다.<br>- ‘Revisions’에서도 확인하지 못해 다른 사람에게는 보이는지 묻고 있다.</div></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/google-labs-code/stitch-skills" target="_blank" rel="noopener">google-labs-code/stitch-skills: Google Stitch용 에이전트 스킬 모음</a></div>
+    <div class="item-meta">9,091</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Google Stitch용 에이전트 스킬·플러그인 모음과 설치 방법을 소개하는 글이다.<br>- Agent Skills 개방형 표준을 따르며 Codex, Antigravity, Gemini CLI, Claude Code, Cursor, OpenCode와 호환된다. OpenCode는 수동 설치를 지원한다.<br>- Codex에서는 CLI 또는 설정 화면에서 마켓플레이스를 등록한 뒤 플러그인을 설치한다. 선택 사항인 --sparse 플래그로 내려받을 경로를 제한해 복제 속도를 높일 수 있다.<br>- 플러그인은 디자인용 stitch-design, 빌드·컴포넌트용 stitch-build, 유틸리티·보조 기능용 stitch-utilities로 나뉘며 필요한 조합으로 설치할 수 있다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://github.com/backnotprop/plannotator" target="_blank" rel="noopener">backnotprop/plannotator</a></div>
+    <div class="item-meta">11,630</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Plannotator는 AI 에이전트의 문서·작업 결과·코드 변경을 검토하고 피드백을 전달하는 로컬 브라우저 기반 도구다.<br>- 새로 공개된 Plannotator Inbox는 멀티 에이전트 작업의 의사결정, 프로토타입, 변형안, 계획 등을 모아 보여준다.<br>- 플러그인·훅·명령어로 에이전트와 직접 연결되며, 계획·명세·마크다운·HTML 등에 주석과 댓글을 달아 에이전트에 전달할 수 있다.<br>- 로컬 변경 사항과 원격 PR의 diff를 검토하고 코드 수정을 제안할 수 있으며, Git·GitButler·Jujutsu·Perforce·GitHub·GitLab을 지원한다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://github.com/alibaba/open-code-review" target="_blank" rel="noopener">alibaba/open-code-review</a></div>
+    <div class="item-meta">51,770</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Alibaba의 내부 AI 코드 리뷰 도구를 오픈소스로 공개한 Open Code Review의 기능과 벤치마크를 소개하는 글이다.<br>- 지난 2년간 Alibaba 내부에서 수만 명의 개발자가 사용했고, 수백만 건의 코드 결함을 발견했다. 모델 엔드포인트를 설정해 사용할 수 있다.<br>- Git diff와 도구 사용이 가능한 에이전트로 파일 전체 읽기, 코드베이스 검색, 다른 변경 파일 확인을 수행하고 줄 단위 리뷰 의견을 생성한다. `ocr scan`은 파일 전체를 검토한다.<br>- 동일 모델을 사용한 Claude Code 대비 정밀도와 F1이 높고, 토큰은 약 1/9만 사용하며 리뷰도 빠르다고 제시한다. 다만 불필요한 지적을 줄이기 위해 재현율은 낮추는 절충을 택했다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://github.com/Tencent/LoopForge" target="_blank" rel="noopener">Tencent/LoopForge</a></div>
+    <div class="item-meta">1,239</div>
+  </div>
+  <div class="item-body"><div class="item-summary">LoopForge는 코딩 에이전트로 팀의 소프트웨어 개발을 진행하는 자체 호스팅 워크스페이스다.<br>- 채팅에서 Main Bot에 요구사항을 설명하면 Docker 샌드박스를 열고 저장소를 체크아웃한 뒤 프로젝트 역할별로 작업을 위임하고 PR을 생성한다.<br>- 검증된 작업 방식을 에이전트·스크립트·사람의 승인 단계로 구성된 SOP로 저장해, 고정된 단계와 검토·승인을 포함한 반복 작업에 활용할 수 있다.<br>- Codex, Claude Code, CodeBuddy 등 코딩 에이전트 CLI가 실제 작업을 수행하며, LoopForge는 역할·샌드박스·체크포인트·이력을 제공한다. MIT 라이선스로 자체 인프라에서 운영할 수 있다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/ggml-org/ggml" target="_blank" rel="noopener">ggml-org/ggml: 머신러닝용 텐서 라이브러리</a></div>
+    <div class="item-meta">15,811</div>
+  </div>
+  <div class="item-body"><div class="item-summary">ggml은 최소한의 설정으로 사용할 수 있는 단순하고 이식성 높은 머신러닝용 텐서 라이브러리다.<br>- 외부 의존성 없이 C/C++로 구현됐으며, 실행 중 메모리 할당이 발생하지 않는다.<br>- x86·ARM·RISC-V·WebAssembly 등 여러 플랫폼과 CPU·GPU·NPU·브라우저 백엔드를 지원하며, x86·ARM·RISC-V에는 SIMD 최적화 커널을 제공한다.<br>- 2~8비트 정수 양자화와 MXFP4·NVFP4 마이크로스케일링 형식을 지원한다.</div></div>
+</div>
+</div>
+</body>
+</html>
