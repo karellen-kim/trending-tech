@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-11-16 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 항상 펼쳐진 요약 ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
+  .community-date { padding: 0.8rem 1.15rem 0; font-size: 0.75rem; color: var(--ink-faint); }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-11-16</div>
+<h1><em>16</em> Nov 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn" class="nav-link">Hacker News</a><a href="#reddit" class="nav-link">Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">AI의 성능 경쟁이 모델 능력을 넘어 에이전트 실행 구조와 연산 자원 배분으로 넓어지고 있다.</p><p class="take-body">멀티에이전트 연구는 에이전트 수·샘플 수·추론 시간의 효과를 분리해, 추가 연산을 어디에 쓸지 판단하는 문제를 다룬다. 하네스를 학습하고 진화하는 프로그램으로 재정의하는 연구와 그래프 기반 자율 개발은 작업을 실행하는 구조 자체를 개선 대상으로 삼는다. CPU·GPU의 빈 시간을 줄여 H100 67장을 절감한 서빙 사례까지 보면, 공통된 관심은 주어진 AI와 자원을 어떻게 조직해 실제 성과로 연결하느냐에 있다.</p><div class="take-refs"><span>근거</span><a href="https://arxiv.org/abs/2611.17610" target="_blank" rel="noopener">에이전트를 늘릴까, 샘플을 늘릴까, 더 오래 생각하게 할까? 멀티에이전트 LLM에서 협업·앙상블·추론 시점 연산량의 효과 분리하기</a> · <a href="https://arxiv.org/abs/2611.18533" target="_blank" rel="noopener">ModHarness-RL: 에이전트 강화학습의 하네스를 학습하고 진화하는 프로그램으로 재정의하기</a> · <a href="https://d2.naver.com/helloworld/5976687" target="_blank" rel="noopener">노트북을 닫아도 개발은 계속된다: 자율 그래프 주도 개발</a> · <a href="https://d2.naver.com/helloworld/9994827" target="_blank" rel="noopener">Image AI 서빙 최적화: CPU와 GPU의 빈 시간을 줄여 H100 67장을 절감하기까지</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/90441e10-bfe1-4dc4-a00a-dedad9e47211" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">4개</span>
+  </div>
+  <div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://d2.naver.com/helloworld/5976687" target="_blank" rel="noopener">노트북을 닫아도 개발은 계속된다: 자율 그래프 주도 개발</a></div>
+    <div class="item-meta">NAVER D2</div>
+  </div>
+  <div class="item-body"><div class="item-summary">NAVER Engineering Day 10th에서 발표한 자율 그래프 주도 개발의 구조와 운영 경험, 성과를 소개하는 글이다.<br>- Upstream·Spec-drive·Dev·Verify·Audit 노드가 요구사항 반영부터 스펙 확정, 구현, 배포 코드 E2E 테스트, 스펙 논리 결함 점검까지 진행한다.<br>- AI Agent 루프가 스펙 문서와 코드를 작성하고, 결정론적 코드가 기계적으로 검사하며, 피드백 루프가 결함을 자동으로 바로잡는다. AI가 필요할 때만 사람을 호출한다.<br>- 백엔드 개발 공수는 86%, 사람과 AI를 합친 전체 비용은 71% 절감했다고 보고했다. 복잡한 AI 대화 구현 사례의 토큰 비용은 $199.61이었다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://d2.naver.com/helloworld/9994827" target="_blank" rel="noopener">Image AI 서빙 최적화: CPU와 GPU의 빈 시간을 줄여 H100 67장을 절감하기까지</a></div>
+    <div class="item-meta">NAVER D2</div>
+  </div>
+  <div class="item-body"><div class="item-summary">SNOW의 16개 Image AI 서비스에서 응답 속도와 안정성을 높이고 H100 환산 67.37장의 GPU 자원을 절감한 경험을 소개한다.<br>- LitServe로 전환하며 반복되는 이미지 인코딩·디코딩을 제거하고 CPU 전처리와 GPU 계산의 대기 시간을 줄였다.<br>- 실제 트래픽에 맞춰 워커·스레드 수, CPU 한도·코어 고정을 조정하고 Autoscaling 로직과 에이전트 실험·검토를 통한 반복 최적화를 진행했다.<br>- 가벼운 작업을 CPU로 분리하고 여러 서비스를 하나의 GPU에 함께 배치해 불필요한 연산과 요청 대기 비용을 줄였다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://d2.naver.com/helloworld/4049909" target="_blank" rel="noopener">카페 관리도구 개편기: 문서는 낡았고, 사람은 떠났고, 코드만 남았다.</a></div>
+    <div class="item-meta">NAVER D2</div>
+  </div>
+  <div class="item-body"><div class="item-summary">14년 된 카페 관리도구를 분석하고 새로운 카페 스튜디오를 개발한 경험을 소개하는 글.<br>- 코드만 남아 있던 기존 카페 관리도구를 AI와 함께 분석했다.<br>- Storybook과 MSW로 화면과 동작을 재현하며 새로운 카페 스튜디오를 개발했다.<br>- 개편 과정에서 기획·디자인·BE와의 협업 방식이 어떻게 달라졌는지 공유한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.alibabacloud.com/blog/alibaba-unveils-qwen4-max-new-ai-teammate-for-work-creativity-and-discovery_603783" target="_blank" rel="noopener">Alibaba, 업무·창작·발견을 위한 새로운 AI 팀원 Qwen4-Max 공개</a></div>
+    <div class="item-meta">Alibaba Cloud Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Alibaba가 Qwen 제품군의 최신 모델 Qwen4-Max를 공개하고 주요 성능과 비용 효율 개선을 소개했다.<br>- 총 2.4조 개의 파라미터, 자체 시각 처리 기능, 100만 토큰의 컨텍스트 창을 갖췄으며, 토큰당 활성화되는 파라미터는 710억 개다.<br>- 실제 코딩 성능 순위인 Code Arena에서 6위를 기록했으며, 에이전트 작업·업무 생산성·시각적 추론 관련 벤치마크에서도 높은 점수를 거뒀다.<br>- 721개 전문 분야의 산업 과제를 평가하는 자체 벤치마크 Work360에서 Qwen3.8-Max보다 전반적으로 우수한 성능을 보였으며, High 추론 모드에서 토큰 사용량은 35%, 과제당 평균 비용은 약 60% 줄었다.</div></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Nov/15/datasette-maplibre/" target="_blank" rel="noopener">datasette-maplibre 0.1a0</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+  <div class="item-body"><div class="item-summary">MapLibre GL과 OpenFreeMap으로 Datasette의 지리공간 데이터를 시각화하는 새 플러그인 datasette-maplibre 0.1a0 출시 글이다.<br>- 기존 datasette-cluster-map과 datasette-leaflet-geojson의 기능을 결합하도록 Claude Fable 5.2에 단일 프롬프트를 입력해 대부분을 개발했다.<br>- GeoJSON 도형을 SVG 미리보기로 표시하고, 화면에 스크롤되어 들어올 때만 WebGL 미리보기를 불러온다.<br>- 최신 Datasette Lite에서 Pyodide와 WebAssembly로 플러그인과 데모 데이터베이스를 브라우저에 로드하며, GeoJSON 도형과 위도·경도 지점을 같은 지도에 표시하는 데모를 제공한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Nov/15/datasette/" target="_blank" rel="noopener">datasette 1.0a43 출시</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Datasette 1.0a43의 주요 기능 개선과 보안 수정 사항을 소개하는 글이다.<br>- 출력 렌더러에 스트리밍 지원을 추가했다. 기본 TSV·CSV 내보내기도 이를 사용하며, 플러그인은 새 Response.stream() 메서드로 테이블의 모든 행을 한 번에 스트리밍할 수 있다.<br>- 비공개 저장 쿼리의 제목과 SQL이 노출될 수 있는 보안 문제를 수정하고 GitHub 보안 권고를 게시했다. 이 문제로 쿼리를 실행할 수는 없었다.<br>- 행 페이지의 JSON 표현을 1.0에 적합하게 설계하고, 스키마 복사·JSON 정렬 표시·DatasetteModal.confirm() 기능과 CSS 다중 페이지 뷰 전환을 추가했다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Nov/15/datasette-2/" target="_blank" rel="noopener">datasette 0.65.6 출시</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+  <div class="item-body"><div class="item-summary">데이터 탐색·공개용 오픈 소스 도구 datasette 0.65.6의 보안 수정 릴리스 안내다.<br>- 2026년 11월 15일에 게시됐다.<br>- 1.0a43의 소규모 보안 수정 사항을 이전 버전에 반영했다.<br>- add_database(db, name=..., route=...)로 등록한 데이터베이스의 route와 name이 다를 때, 접근이 거부된 사용자도 데이터베이스를 다운로드할 수 있었던 문제를 수정했다.</div></div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://arxiv.org/abs/2611.17610" target="_blank" rel="noopener">에이전트를 늘릴까, 샘플을 늘릴까, 더 오래 생각하게 할까? 멀티에이전트 LLM에서 협업·앙상블·추론 시점 연산량의 효과 분리하기</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">멀티에이전트 LLM의 성능에서 협업 효과와 샘플 수·추론 연산량의 효과를 분리해 분석한 연구다.<br>- 9개 주요 실증 평가의 고유한 멀티에이전트 구성 516개를 종합하고, 6차원 자원 벡터와 4개 범주의 기준선 체계로 정리했다.<br>- 샘플 수 또는 자원 예산을 맞춘 기준선과 비교하면 멀티에이전트의 정확도 차이는 평균 -0.042였으며, 비교의 74%에서 기준선과 같거나 낮았다. 로그 오즈 척도의 다층 랜덤 효과 모형에서도 민감도 검사를 거쳐 음의 효과가 유지됐다.<br>- 단일 탐욕적 실행과 샘플링 기준선을 모두 보고한 연구에서는 기준선을 후자로 바꾸면 정확도 차이가 평균 0.038만큼 낮아졌다. 저자들은 동일한 근거를 공유하는 에이전트 간 소통은 정보를 추가하지 않으므로, 성능 향상에는 분할된 근거·외부 검증·모델 간 오류 다양성이 필요하다고 설명한다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://arxiv.org/abs/2611.18533" target="_blank" rel="noopener">ModHarness-RL: 에이전트 강화학습의 하네스를 학습하고 진화하는 프로그램으로 재정의하기</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">ModHarness-RL은 작업 데이터에서 하네스를 학습하고 모델의 강화학습 과정에 맞춰 진화시키는 방법이다.<br>- 상호작용을 타입이 지정된 블록들의 집합인 State로 기록하고, Compression 프로그램으로 누적 이력을 모델의 컨텍스트로 구성하며, Steering 프로그램으로 행동이 벗어날 때 지침을 제공한다.<br>- 강화학습 중 최근 실행 궤적에서 후보 프로그램을 제안하고, 실행으로 검증한 뒤 과거 궤적에 재적용해 모델의 행동 변화에 맞춰 하네스를 갱신한다.<br>- 1.5B~8B 모델로 CodeSearch를 심층 연구하고 ALFWorld와 BIRD SQL을 추가 분석했다. 대부분의 설정에서 Compression과 Steering이 고정 하네스 기준선보다 학습에 사용하지 않은 평가 데이터의 성능을 높였다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://arxiv.org/abs/2611.17831" target="_blank" rel="noopener">V-JEPA-LM: 정적인 텍스트 정렬 표현을 넘어 영상의 변화 양상을 읽는 비디오-언어 모델</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">V-JEPA에 담긴 영상의 변화 정보를 언어 모델이 활용하도록 학습하는 V-JEPA-LM을 제안한 연구다.<br>- 동결된 V-JEPA 특징에서 선형 프로브는 속도를 87% 정확도로 판별했지만, 같은 문항에서 비디오-언어 모델의 답변은 우연 수준에 머물렀다. V-JEPA 같은 예측형 인코더에서는 변화 정보가 영상 간 공유되는 부분공간에 존재했지만, SigLIP 같은 프레임별 텍스트 정렬 인코더에서는 이런 공유 성분이 나타나지 않았다.<br>- 공개 영상에 픽셀 변환을 적용해 변화 양상만 다른 반사실적 학습 데이터를 만들었다. 정답은 변환에 따라 결정되며, 정답 분포를 균형 있게 구성해 언어 모델이 변화 정보를 읽도록 학습했다.<br>- 공개 샘플 453만 개와 프레임당 시각 토큰 32개로 단일 단계 학습한 1B~8B 모델이 11개 영상 벤치마크 평균에서 각 크기별 최고 성능을 기록했다. 4B 모델은 72.1점으로, 비교 대상 최고 공개 4B 모델의 61.1점과 8B 모델의 64.8점을 웃돌았다.</div></div>
+</div>
+</div><div class="section" id="hn">
+  <div class="section-header">
+    <span class="section-icon">HN</span>
+    <span class="section-title">Hacker News</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="community-date">2026-11-15 UTC · 당시 페이지 순위</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://jakub.jankiewicz.org/blog/ai-code-open-source/" target="_blank" rel="noopener">AI가 생성한 모든 코드는 오픈소스여야 한다</a></div>
+    <div class="item-meta">1위 · 1199 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">AI가 생성한 코드를 오픈소스로 공개해야 한다는 주장과 그 근거를 다룬 글이다.<br>- 저자는 AI 모델이 허가나 적절한 출처 표시 없이 오픈소스 코드와 출처 표시 의무가 있는 Stack Overflow·Stack Exchange 자료를 학습했다며, 이를 비공개 독점 코드로 만드는 것은 라이선스 세탁과 같다고 주장한다.<br>- 순수 AI 생성 코드는 인간이 작성하지 않아 저작권 보호 대상이 되어서는 안 된다고 주장하며, 미국의 원숭이 셀카 분쟁과 미국 저작권청의 관련 인용을 근거로 든다.<br>- 영국처럼 컴퓨터 생성 저작물에 제한적 저작권을 인정하는 국가도 있으므로, 국가 간 형평성과 AI의 기반이 된 개방형 생태계를 위해 AI 생성 코드를 오픈소스 라이선스로 공개하거나 퍼블릭 도메인에 기증하자고 제안한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://macanorak.com/the-macbook-pros-oled-pwm-problem-when-a-better-display-becomes-worse-to-use/" target="_blank" rel="noopener">MacBook Pro의 OLED PWM 문제</a></div>
+    <div class="item-meta">2위 · 492 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">MacBook Pro의 새 OLED 디스플레이와 일부 사용자가 보고한 눈의 불편 증상을 다룬 글이다.<br>- Apple은 tandem OLED를 적용한 ‘PROLED XDR Display’를 도입했으며, HDR 최대 밝기를 높이고 Apple 노트북 디스플레이 최초로 터치 입력을 지원했다.<br>- MacRumors 포럼과 Reddit에서 새 MacBook Pro 사용 후 두통, 눈의 피로, 어지럼증, 메스꺼움, 집중 곤란을 겪었다는 보고가 나왔다.<br>- 일부 사용자는 기기를 반품했으며, AppleInsider의 Mike Wuerthele도 11월 10일 관련 어지럼증을 다룬 기사를 게시했다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.nytimes.com/2026/11/15/science/birdbrain-crows-birds-research-decision.html" target="_blank" rel="noopener">까마귀는 인간보다 더 빠르게 결정을 내린다</a></div>
+    <div class="item-meta">3위 · 271 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">까마귀의 시각 정보 처리와 의사결정 속도를 측정한 연구에 관한 글이다.<br>- 실험에는 송장까마귀 두 마리인 Lemmy와 Iggy가 참여했다.<br>- Science에 발표된 연구에서 까마귀는 인간과 원숭이보다 두 배 빠르게 시각적 단서를 처리하고 반응했다.<br>- 이번 연구는 조류의 의사결정에 관여하는 신경 처리 속도를 처음으로 정량화했다.</div></div>
+</div>
+</div><div class="section" id="reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Reddit</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xx1k2o/meta_fair_nyu_unbundling_multimodal_vision/" target="_blank" rel="noopener">[Meta FAIR + NYU] 멀티모달 비전 인코딩의 구성 요소 분리: MLLM 200개 이상을 학습해 확인한 인코더 사전학습의 선택 가능성과 비전 전용 파라미터의 필수성 [R]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+  <div class="item-body"><div class="item-summary">MLLM 200개 이상을 학습해 비전 인코더의 사전학습, 비전 전용 파라미터, LLM 앞 배치를 각각 분리해 검증한 연구다.<br>- LLM을 포함한 모든 모델을 동일한 데이터로 처음부터 학습하고, 인코더 사전학습 비용까지 전체 연산 예산에 포함해 비교했다.<br>- 주요 비교에는 Qwen3-1.7B·4B 구성과 비전용 파라미터 0.4B를 사용했으며, 448px 입력의 VQA 벤치마크 16개와 언어 벤치마크 12개로 평가했다.<br>- 대조학습·자기지도학습·두 가지 캡셔닝 목표로 사전학습한 인코더는 동일 연산량에서 공동 학습한 인코더와 최대 동률이었다. MetaCLIP 사전학습을 6.5배 늘리자 ImageNet 선형 프로브 정확도는 80.4%에서 84.4%로 올랐지만 VQA 성능은 개선되지 않았다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xxqa3i/aistats_2027_paper_discussion_d/" target="_blank" rel="noopener">AISTATS 2027 논문 토론 [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+  
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xx2n25/making_cudamemcpy_5x_faster_on_a_b300_p/" target="_blank" rel="noopener">B300에서 cudaMemcpy 속도를 5배 높이기 [P]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+  <div class="item-body"><div class="item-summary">cudaMemcpy의 pageable 메모리 전송 속도를 높이는 도구 cudamemcpy-tuner를 소개하는 글이다.<br>- B300에서 PyTorch로 1GB 크기의 uint8 텐서를 CPU에서 GPU로 복사하는 작업을 5회 반복해 전송 속도를 측정했다.<br>- 일반 실행에서는 10.2GB/s, `cmt tune -- python bench.py`로 실행했을 때는 51.5GB/s를 기록했다.<br>- 도구의 코드와 사용 예시를 GitHub에 공개하고, 별도 블로그 글을 함께 공유했다.</div></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/ag-ui-protocol/ag-ui" target="_blank" rel="noopener">ag-ui-protocol/ag-ui</a></div>
+    <div class="item-meta">18,520</div>
+  </div>
+  <div class="item-body"><div class="item-summary">AI 에이전트와 사용자용 앱의 연결을 표준화하는 개방형 이벤트 기반 프로토콜 AG-UI에 관한 글이다.<br>- 양방향 이벤트 스트림에서 에이전트가 타입이 지정된 이벤트를 내보내면, 클라이언트는 에이전트 프레임워크와 관계없이 이를 렌더링할 수 있다.<br>- AG-UI 1.0은 JSON Schema 기반의 확정된 명세를 제공하며, TypeScript·Python·.NET SDK는 이 명세에서 생성된다. 0.x와 1.0의 에이전트·클라이언트는 양방향으로 호환된다.<br>- CLI 명령어 npx create-ag-ui-app@latest로 선택한 에이전트 프레임워크에 연결된 Next.js 기반 CopilotKit 프런트엔드 또는 터미널 클라이언트를 생성할 수 있다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/dream-num/univer" target="_blank" rel="noopener">dream-num/univer</a></div>
+    <div class="item-meta">27,532</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Univer는 자체 제품 안에 오피스 애플리케이션을 구축할 수 있는 Office SDK다.<br>- 오픈소스 Sheets와 Docs로 시작해 자체 애플리케이션이나 에이전트를 연결할 수 있다.<br>- 사용자의 데이터와 권한을 활용해 사람과 기존 에이전트에 편집·계산·협업·파일 처리 기능을 제공한다.<br>- 제품군은 스프레드시트, 문서, 프레젠테이션, 관계형 테이블, 캔버스, PDF를 포함한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/tradermonty/claude-trading-skills" target="_blank" rel="noopener">tradermonty의 Claude 트레이딩 스킬</a></div>
+    <div class="item-meta">6,063</div>
+  </div>
+  <div class="item-body"><div class="item-summary">시간이 부족한 개인 투자자를 위한 Claude Skills 기반의 오픈소스 트레이딩 워크플로 도구를 소개하는 글이다.<br>- 장기 투자·ETF·배당주를 핵심으로 삼고, 시장 여건이 유리할 때 규율 있는 스윙 트레이딩을 보조 전략으로 활용하는 투자자를 대상으로 한다.<br>- AI에 매수·매도 결정을 맡기는 대신 시장 점검, 위험 관리, 매매 계획, 투자 일지 작성, 지속적인 개선 과정을 체계화한다.<br>- 저자가 직접 사용하는 실용적인 도구를 먼저 만들고 공개하는 방식으로 개발하며, 투자 신호 서비스나 수익 보장을 제공하지 않는다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/getarcaneapp/arcane" target="_blank" rel="noopener">getarcaneapp/arcane</a></div>
+    <div class="item-meta">8,486</div>
+  </div>
+  <div class="item-body"><div class="item-summary">모두를 위한 현대적인 Docker 관리 도구 Arcane의 버전과 프로젝트 운영 안내다.<br>- main 브랜치는 v3이며, 마지막 2.x 릴리스는 release/2.x.x 브랜치에서 확인할 수 있다.<br>- 기능 요청은 Discussions에서 새로 등록하거나 기존 요청에 투표하며, Issues는 버그 보고에만 사용한다.<br>- 공식 문서에서 설치·설정·개발 가이드를 제공하며, getarcane.app/sbom에서 소프트웨어 구성 명세서(SBOM)를 확인할 수 있다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/DeanChensj/jiangshan-map" target="_blank" rel="noopener">DeanChensj/jiangshan-map</a></div>
+    <div class="item-meta">6,572</div>
+  </div>
+  <div class="item-body"><div class="item-summary">jiangshan-map은 전국시대부터 현재까지 중국 역사를 탐색하는 인터랙티브 역사 지도다.<br>- 기원전 403년부터 현재까지 2,400년 이상의 역사를 다루며, 시간대를 이동하면서 지도의 변화를 살펴볼 수 있다.<br>- 건강·황주·남관·주선진 등 옛 지명의 현재 위치와 장안의 시대별 명칭, 해당 지역의 주요 사건을 탐색한다.<br>- 영어 UI의 라이브 데모를 제공하며, 영어·중국어 간체·중국어 번체·일본어 안내가 있다.</div></div>
+</div>
+</div>
+</body>
+</html>
