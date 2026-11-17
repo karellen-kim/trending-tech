@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-11-17 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 항상 펼쳐진 요약 ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
+  .community-date { padding: 0.8rem 1.15rem 0; font-size: 0.75rem; color: var(--ink-faint); }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-11-17</div>
+<h1><em>17</em> Nov 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn" class="nav-link">Hacker News</a><a href="#reddit" class="nav-link">Reddit</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">AI 개선의 초점이 데이터를 제공하는 데서 업무 맥락과 수행 경험을 학습시키는 쪽으로 이동하고 있다.</p><p class="take-body">기업 데이터 활용에서는 정제된 데이터만으로 부족해 AI에 자사 비즈니스를 가르친 사례가 나왔다. 에이전트 개발에서도 코딩 경험을 학습해 효율을 높이거나, 시청각 경험으로 컴퓨터 사용을 배우고 실제 수행 과정에 기반한 온폴리시 증류를 적용하는 접근이 함께 나타났다. 이들을 관통하는 흐름은 AI에 무엇을 보여줄지를 넘어, 일을 수행하는 데 필요한 맥락과 경험을 어떻게 학습시킬지가 중요해진다는 것이다.</p><div class="take-refs"><span>근거</span><a href="https://www.databricks.com/blog/clean-data-was-never-enough-how-ifs-copperleaf-taught-ai-its-business-databricks-genie-one-0" target="_blank" rel="noopener">정제된 데이터만으로는 부족했다: IFS Copperleaf가 Databricks Genie One으로 AI에 자사 비즈니스를 가르친 방법</a> · <a href="https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/" target="_blank" rel="noopener">TokenEconomizer: 경험을 학습해 AI 코딩 에이전트의 효율 높이기</a> · <a href="https://arxiv.org/abs/2611.18747" target="_blank" rel="noopener">경험으로서의 비디오: 시청각 이해를 통한 컴퓨터 사용 학습</a> · <a href="https://arxiv.org/abs/2611.21020" target="_blank" rel="noopener">SWE-OPD: 에이전트 코딩을 위한 온폴리시 증류</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/3f3c0e01-adf3-4f88-ae06-0cf0898686a8" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">12개</span>
+  </div>
+  <div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.microsoft.com/en-us/research/blog/tokeneconomizer-learning-from-experience-to-make-ai-coding-agents-more-efficient/" target="_blank" rel="noopener">TokenEconomizer: 경험을 학습해 AI 코딩 에이전트의 효율 높이기</a></div>
+    <div class="item-meta">Microsoft Research</div>
+  </div>
+  <div class="item-body"><div class="item-summary">TokenEconomizer는 저장소 내 과거 작업 경험을 활용해 AI 코딩 에이전트의 토큰 낭비와 비용을 줄이는 오픈소스 플러그인이다.<br>- 이전 세션에서 얻은 경험을 활용해 익숙한 사실의 재탐색, 사용하지 않는 도구 로딩, 실패한 접근의 반복을 줄이며, 에이전트나 기반 모델을 수정하지 않는다.<br>- 실제 버그 수정 작업 277개에서 여러 AI 코딩 에이전트의 비용을 18.4~30.9% 줄였다.<br>- 테스트한 모든 저장소에서 비용이 감소했으며, 작업 성공률은 대체로 유지됐다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.databricks.com/blog/built-object-storage-served-cache" target="_blank" rel="noopener">객체 스토리지 위에 구축하고, 캐시에서 읽기 제공하기</a></div>
+    <div class="item-meta">Databricks Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Lakebase Postgres가 객체 스토리지를 기반으로 하면서도 대부분의 페이지 읽기를 로컬 캐시에서 처리하는 방식을 설명하는 글이다.<br>- 프로덕션 환경에서 페이지 읽기의 99.99999%는 빠른 로컬 캐시에서 처리되며, 99.46%는 컴퓨트 노드를 벗어나지 않는다.<br>- 객체 스토리지까지 도달하는 드문 읽기는 오래된 브랜치, 복원, 몇 주간 유휴 상태였던 데이터베이스의 재가동에서 발생하며, 해당 데이터가 캐시되면 이후 읽기는 다시 로컬에서 처리된다.<br>- 객체 스토리지는 내구성과 용량 제약 없는 저장 공간, 즉각적인 브랜치 생성과 복원, 트랜잭션과 분석이 하나의 데이터 사본을 공유하는 LTAP의 기반을 제공한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.databricks.com/blog/talk-your-clinical-data-unlocking-aws-healthlake-opensharing-and-genie-one" target="_blank" rel="noopener">임상 데이터와 대화하기: OpenSharing과 Genie One으로 AWS HealthLake 활용하기</a></div>
+    <div class="item-meta">Databricks Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">OpenSharing으로 AWS HealthLake의 FHIR 데이터를 Databricks에 연결해 분석·거버넌스·AI 기능을 활용하는 통합 솔루션을 소개한다.<br>- HealthLake 데이터를 공유 카탈로그로 Databricks에 직접 연결해, 내보내기 파이프라인이나 데이터 복제 없이 실시간으로 쿼리할 수 있다.<br>- 연결된 데이터에 Unity Catalog의 거버넌스를 적용하고, 노트북과 대시보드에서 쿼리할 수 있다.<br>- Genie One을 통해 자연어로 데이터를 탐색할 수 있어 기술 사용자와 비기술 사용자 모두 임상 인사이트에 접근할 수 있다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://www.databricks.com/blog/clean-data-was-never-enough-how-ifs-copperleaf-taught-ai-its-business-databricks-genie-one-0" target="_blank" rel="noopener">정제된 데이터만으로는 부족했다: IFS Copperleaf가 Databricks Genie One으로 AI에 자사 비즈니스를 가르친 방법</a></div>
+    <div class="item-meta">Databricks Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">IFS Copperleaf가 Databricks Genie One 기반의 전사 AI 어시스턴트 IONA에 업무 맥락을 가르치고 도입 성과를 낸 사례다.<br>- IONA는 Salesforce, HubSpot, M365 등 약 30개 시스템의 관리되는 데이터를 대상으로 직원들의 일상적인 영어 질문에 답한다.<br>- 팀마다 ‘활성 고객’ 같은 지표의 정의가 달라 데이터 정제만으로는 부족했다. 업무 팀은 Genie Ontology 기반의 Skills로 원시 데이터의 의미를 가르치며, Unity Catalog가 이를 관리한다.<br>- 2026년 7월 출시 이후 활성화율 70%를 달성했고, 4개월 만에 운영 비용을 회수했다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://discord.com/blog/vice-city-theme-available-in-discord" target="_blank" rel="noopener">Discord를 Vice City 스타일로 꾸며보세요</a></div>
+    <div class="item-meta">Discord Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Discord에 Vice City 테마를 적용할 수 있다는 안내다.<br>- 11월 19일 Vice City로 돌아가기까지 72시간이 채 남지 않았다.<br>- Grand Theft Auto VI의 분위기를 미리 느낄 수 있도록 꾸미기 기능을 제공한다.<br>- 오늘부터 Vice City 색상 테마, 앱 아이콘, 표시 이름 스타일을 적용할 수 있다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.elastic.co/search-labs/blog/how-security-leaders-see-ai-being-used-in-the-soc" target="_blank" rel="noopener">보안 리더들이 바라보는 SOC의 AI 활용</a></div>
+    <div class="item-meta">Elastic Search Labs</div>
+  </div>
+  <div class="item-body"><div class="item-summary">SOC에서의 AI 활용 통제와 거버넌스에 관한 글.<br>- SOC에서 AI를 어떻게 사용해야 하는지 체계적으로 정하고 강제하는 프레임워크를 갖춘 팀은 18%에 불과하다.<br>- 보안 리더들이 어려움을 겪는 부분은 AI 도입이 아니라 통제다.<br>- AI 활용을 설명하고 그 정당성을 입증하는 일도 보안 리더들의 과제다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.elastic.co/search-labs/blog/how-attackers-target-banks" target="_blank" rel="noopener">공격자들이 신뢰받는 로그인과 도구를 통해 은행을 노리는 방법</a></div>
+    <div class="item-meta">Elastic Search Labs</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Elastic의 2026년 11월 위협 보고서를 바탕으로 금융기관을 겨냥한 공격과 대응을 다룬 글.<br>- 공격자들은 신뢰받는 로그인을 악용한다.<br>- 공격에는 AI 도구와 원격 액세스도 활용된다.<br>- 금융기관이 자금 이동 전에 보안 신호와 사기 신호를 연계하는 방법을 다룬다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://blog.vespa.ai/introducing-agent-ready-schemas/" target="_blank" rel="noopener">에이전트를 위한 스키마 소개</a></div>
+    <div class="item-meta">Vespa Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Vespa가 스키마 정보를 에이전트용 스킬로 자동 제공하는 기능을 소개하는 글이다.<br>- Vespa 8.786.55부터 스키마·필드·랭킹 옵션을 설명하는 스킬을 자동 생성해, 별도 문서를 유지하는 번거로움과 오류 가능성을 줄인다.<br>- services.xml의 container 태그 아래에 schemas 스킬을 추가하면 컨테이너 엔드포인트의 /skills/v1/ 경로로 제공되며, 에이전트 프롬프트에 이 경로를 안내하면 된다.<br>- 스키마에 explanation 블록을 추가해 포함된 데이터와 활용 방법, 각 필드의 내용, 각 rank profile의 용도를 설명하면 스킬의 효과를 높일 수 있다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://tech.kakao.com/posts/849" target="_blank" rel="noopener">if(kakao)26 현장 스케치</a></div>
+    <div class="item-meta">Kakao Tech</div>
+  </div>
+  
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://toss.tech/article/new20-timeline-hub" target="_blank" rel="noopener">지표 뒤에 숨은 맥락을 한눈에: New20 Timeline Hub 만들기</a></div>
+    <div class="item-meta">Toss Tech</div>
+  </div>
+  <div class="item-body"><div class="item-summary">페이스페이 프로모션 New20의 변경 기록을 하나의 시간축으로 연결한 New20 Timeline Hub를 소개하는 글입니다.<br>- 회의록, GitHub PR, 정책 문서, 디자인 보드, 세그먼트 정의, 대시보드에 흩어진 자료를 연결해 특정 시점의 제품 상태를 파악하려 했습니다.<br>- Meta의 Timeline 형식을 커머스 배포 조회 도구에 적용한 사례를 참고해, 제품 맥락을 정책·혜택, 세그먼트, 노출 지면, 실험, 데이터·대시보드의 다섯 갈래로 나눴습니다.<br>- 변경 시점과 지표 변화가 가깝다는 이유만으로 원인을 확정하지 않고, 맥락을 검증할 가설을 찾는 출발점으로 봤습니다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://toss.tech/article/targeting-model-automation" target="_blank" rel="noopener">판단에만 집중하세요: 토스 타겟팅 모델 개발 자동화</a></div>
+    <div class="item-meta">Toss Tech</div>
+  </div>
+  <div class="item-body"><div class="item-summary">토스가 고객 타겟팅 모델 개발 프레임워크 TASTE에 모델 비교·평가·모니터링 자동화를 추가한 과정을 소개한 글이다.<br>- TASTE는 설정 파일 하나로 후보 피쳐 수집부터 피쳐 선정·학습·추론·적재·평가까지 실행하며, 모델 학습 시간을 2주에서 1일로 줄였다.<br>- auto_k는 피쳐 수 K별 성능을 측정해 사용할 피쳐 수를 고른다. 중요도가 급격히 떨어지는 Elbow에서 자르는 방식은 성능 개선에 기여하는 피쳐를 제외하는 문제가 있었다.<br>- 트리와 딥러닝을 같은 평가셋으로 비교하고, 학습 후 기존 모델과의 평가 보고서를 생성한다. 입력 데이터 결손이 한도를 넘으면 적재를 멈추며, 평가는 여러 날짜에서 수행한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://toss.tech/article/training-serving-skew" target="_blank" rel="noopener">같은 모델, 다른 예측</a></div>
+    <div class="item-meta">Toss Tech</div>
+  </div>
+  <div class="item-body"><div class="item-summary">토스 추천 시스템에서 학습과 실제 예측에 사용하는 피처가 달라지는 Training-Serving Skew 문제를 다룬 글이에요.<br>- Trainkit은 기준 시각을 넘지 않는 가장 최근 피처를 연결하는 Point-in-Time (PIT) 조인을 지원하지만, 배치 기준 시각과 실제 서빙 반영 시각이 달라 요청 당시 제공되지 않았던 값이 학습에 사용될 수 있어요.<br>- 오전 10시 5분 요청에서도 업로드가 끝난 사용자 정보는 10시 파티션을, 업로드가 끝나지 않은 상품 정보는 09시 파티션을 사용할 수 있어요.<br>- 토스는 학습과 서빙의 파티션 불일치, 업로드 중 피처 값과 파티션 정보의 불일치, 집계 대상에서 빠진 값이 온라인 저장소에 남아 계속 서빙되는 문제를 겪었어요.</div></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://lemire.me/blog/2026/11/16/cognitive-radius/" target="_blank" rel="noopener">인지의 반경</a></div>
+    <div class="item-meta">Daniel Lemire</div>
+  </div>
+  <div class="item-body"><div class="item-summary">AI가 소프트웨어 작업에서 확장하는 맥락의 범위, 즉 ‘인지의 반경’에 관한 글.<br>- 좋은 모델과 적절한 도구를 쓰면 여러 저장소의 구조, 팀별 관례, 최근 이슈, 설계 결정, 성능 제약, 관련 라이브러리의 이력을 세션에 담아 함께 다룰 수 있다.<br>- 이 맥락을 바탕으로 프로젝트를 넘나드는 질문을 하고, 각 프로젝트의 스타일에 맞는 변경을 생성하며, 품질을 유지하면서 더 많은 프로젝트를 동시에 관리할 수 있다.<br>- 작업 단위는 ‘현재 깊이 파고 있는 프로젝트’에서 ‘지금 일관성을 유지하며 다룰 수 있는 프로젝트들의 집합’으로 바뀌지만, 무엇이 중요한지 판단하고 결과를 검증하는 일은 여전히 사람이 맡는다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="http://brooker.co.za/blog/2026/11/16/understanding.html" target="_blank" rel="noopener">우리가 만든 것을 이해한다는 것은 무슨 뜻일까?</a></div>
+    <div class="item-meta">Marc Brooker</div>
+  </div>
+  <div class="item-body"><div class="item-summary">코드를 이해하는 것과 실제로 구축된 시스템의 특성을 이해하는 것의 차이를 다룬 글.<br>- 저자는 No AI Slop Manifesto의 ‘속도보다 이해’라는 가치에 동의하지만, ‘이해’의 의미는 자신과 다르다고 본다.<br>- 작업 전에 자료·코드·선행 사례를 탐색하라는 선언문의 지침이 코드에 우선적 지위를 부여하며, 장기적으로 중요한 것을 이해하는 데 걸림돌이 된다고 주장한다.<br>- 이해의 초점으로 실제 시스템의 특성을 제시한다. 예시는 ‘SELECT가 커밋되지 않은 트랜잭션의 결과를 보여주지 않는다’는 정밀한 특성과 ‘사용자의 삶을 더 편하게 한다’는 모호한 특성이다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://martinfowler.com/articles/deterministic-simulation-testing.html" target="_blank" rel="noopener">결정론적 시뮬레이션 테스트</a></div>
+    <div class="item-meta">Martin Fowler</div>
+  </div>
+  <div class="item-body"><div class="item-summary">쿼럼 기반 키-값 저장소를 예제로 결정론적 시뮬레이션 테스트 기법을 설명하는 글이다.<br>- 실제 시계·네트워크·스토리지를 단일 스레드 실행 루프로 구동하는 시뮬레이션 구성요소로 대체한다.<br>- 장애뿐 아니라 네트워크·디스크 지연 급증도 시뮬레이션하며, 모든 실행을 재현할 수 있게 한다.<br>- 이 접근법의 Java 구현체인 Tickloom의 코드를 활용해 기법을 설명한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Nov/17/go-proverbs/" target="_blank" rel="noopener">Go Proverbs 인용</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Go Proverbs의 문구를 소개하는 Simon Willison의 인용 게시물이다.<br>- 인용문은 “약간의 의존성을 추가하는 것보다 약간의 코드를 복사하는 편이 낫다”이다.<br>- Simon Willison이 수집한 인용문이며, 출처는 Go Proverbs다.<br>- 2026년 11월 17일 오전 6시 16분에 게시됐다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Nov/16/llm/" target="_blank" rel="noopener">llm 0.37.3</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+  <div class="item-body"><div class="item-summary">SQLite의 JSON 처리 변경으로 발생한 로깅 문제를 수정한 LLM 0.37.3 릴리스에 관한 글이다.<br>- LLM 0.37.3은 최신 Homebrew 패키지에서 발생한 문제를 해결하기 위한 버그 수정 릴리스다.<br>- Homebrew에 포함된 SQLite 3.54.1에서는 select json_object('a', (select json_array(1)))의 결과가 {"a":[1]}에서 {"a":"[1]"}로 바뀌어 LLM의 로깅 코드가 깨졌다.<br>- D. Richard Hipp는 하위 쿼리가 JSON이 아닌 SQL 텍스트를 반환하므로 변경된 동작이 올바르다고 설명했다. 해결 방법은 하위 쿼리를 json()으로 감싸는 것이다.</div></div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://arxiv.org/abs/2611.18747" target="_blank" rel="noopener">경험으로서의 비디오: 시청각 이해를 통한 컴퓨터 사용 학습</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">영상의 시각 정보와 음성 설명을 활용해 컴퓨터 사용을 학습하고 실행 결과를 점검하는 VEX 프레임워크를 소개한다.<br>- VEX는 튜토리얼 영상에서 작업 절차를 추출하고, 작업을 수행한 뒤, 자신의 실행 영상을 다시 보며 진행 상황을 검증하는 watch-act-rewatch 방식을 사용한다.<br>- Qwen3.5-9B를 기반으로 한 video-SALMONN-VEX를 구현하고, 영상에서 추출한 지침을 후속 행동 예측에 맞게 최적화하는 강화학습 기법 AGGO를 도입했다.<br>- AgentNet·OSWorld·CUA-Gym에 실제 튜토리얼 영상 2만 4천 개 이상을 추가했으며, OSWorld에서 video-SALMONN-VEX는 기반 모델인 Qwen3.5 대비 작업 성공률이 상대적으로 22% 높았다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://arxiv.org/abs/2611.21003" target="_blank" rel="noopener">K2-Horizon: 최첨단 오픈소스 언어 모델 제품군</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">범용 추론과 에이전트 작업을 위해 개발한 6종의 완전 공개 언어 모델 K2-Horizon을 소개하는 글이다.<br>- 모델 규모는 0.9B dense부터 375B-A23B MoE까지이며, 에이전트·코딩 벤치마크에서 동급의 강력한 공개 모델을 앞서거나 경쟁력 있는 성능을 보였다.<br>- attention의 value projection에 MoE를 적용한 Mixture-of-Value Attention(MoVA)과 softplus attention gating을 도입했다. 두 기법을 적용한 36B-A4B 모델은 동일 데이터로 학습한 32B dense 모델에 활성 파라미터 약 7분의 1로 거의 필적했다. 별도 draft 모델 없이 디코딩을 최대 2.2배 가속하는 무손실 diffusion adapter Uno도 제안했다.<br>- LLM360의 오픈소스 정의에 따라 학습 단계별 중간 체크포인트, 사전학습 데이터, 로그, 학습·평가·인프라 코드와 데이터 구축 파이프라인을 공개한다. 공개 대상에는 xLLM 학습 프레임워크와 RL360 강화학습 스택이 포함되며, 데이터 파이프라인은 약 10조 개의 합성 사전학습 토큰을 생성했다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://arxiv.org/abs/2611.21020" target="_blank" rel="noopener">SWE-OPD: 에이전트 코딩을 위한 온폴리시 증류</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">대형 교사 모델의 에이전트 코딩 능력을 작은 학생 모델에 전달하는 온폴리시 증류(OPD)를 연구한 글이다.<br>- 학생이 실행 가능한 저장소와 상호작용하며 방문한 접두 시퀀스를 교사가 지도한다. Qwen3.6-27B의 지도로 Qwen3.5-9B의 SWE-bench Pro 해결률이 35.9%에서 39.4%로 높아졌다.<br>- 교사 점수를 캐싱한 오프라인 방식도 학생 기준 모델보다 성능이 개선됐다. 전체 GPU 사용 시간은 59.4~72.6%, 최대 GPU 할당량은 절반으로 줄었으며, 정확도는 벤치마크에 따라 달랐다.<br>- 서로 다른 토크나이저 간 오프라인 증류에서도 DeepSeek-V4-Flash-0731의 지도로 GLM-4.5-Air의 SWE-bench Pro 해결률이 35.8%에서 39.7%, Multilingual 해결률이 41.8%에서 46.2%로 높아졌다. 다만 top-K reverse-KL 손실을 사용한 한 학생 모델은 손실이 감소하는데도 심한 반복을 보여, 손실 감소가 에이전트 성능 향상을 보장하지는 않았다.</div></div>
+</div>
+</div><div class="section" id="hn">
+  <div class="section-header">
+    <span class="section-icon">HN</span>
+    <span class="section-title">Hacker News</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="community-date">2026-11-16 UTC · 당시 페이지 순위</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.cs.cmu.edu/learn/" target="_blank" rel="noopener">Carnegie Mellon, 컴퓨터 과학 강의를 YouTube에 무료로 공개</a></div>
+    <div class="item-meta">1위 · 1917 pts</div>
+  </div>
+  
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://apnews.com/article/bank-outage-chase-wells-fargo-truist-50fee2693c22f597fa6ca51a97ef2cda" target="_blank" rel="noopener">JPMorgan Chase 기술 문제로 미국 은행들의 온라인 뱅킹 지연 발생</a></div>
+    <div class="item-meta">2위 · 806 pts</div>
+  </div>
+  
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://qwen.ai/blog?id=qwen4-max" target="_blank" rel="noopener">Qwen4-Max</a></div>
+    <div class="item-meta">3위 · 868 pts</div>
+  </div>
+  
+</div>
+</div><div class="section" id="reddit">
+  <div class="section-header">
+    <span class="section-icon">커뮤</span>
+    <span class="section-title">Reddit</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xyb8q6/why_are_vits_so_popular_d/" target="_blank" rel="noopener">ViT는 왜 이렇게 인기가 많을까? [토론]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+  <div class="item-body"><div class="item-summary">엣지 기기에서 CNN + Attention 모델을 활용하는 작성자가 순수 ViT보다 하이브리드 모델을 쓰지 않는 이유를 묻는 글이다.<br>- 작성자는 합성곱으로 공간 차원을 줄이는 CNN + Attention 모델을 엣지 기기에 배포해 좋은 효과를 얻었으며, 순수 ViT가 귀납적 편향을 처음부터 학습하는 방식에 의문을 제기한다.<br>- 토크나이저 스템의 장점으로 경계 패딩을 피할 수 있다는 점만 떠올리며, 자기지도학습(SSL)·파운데이션 모델에서 하이브리드 대신 ViT를 선택하는 이유를 궁금해한다.<br>- 작성자의 기억으로는 LeViT가 합성곱 스템을 통해 데이터·시간 효율을 높였으며, 자신이 다루는 데이터셋과 과제가 일반적인 연구와 달라 순수 ViT가 과도하다는 의견에 다른 사람들도 공감하는지 묻는다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xyf1tq/iclr_2027_pcs_ran_an_ai_detector_on_reviews_peer/" target="_blank" rel="noopener">ICLR 2027: 프로그램 위원장들이 심사평에 AI 탐지기를 돌렸다. 동료 심사는 망가졌다 [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+  <div class="item-body"><div class="item-summary">ICLR 2027에서 심사평에 AI 탐지기를 적용하고 미공개 AI 사용 가능성을 지적한 사례를 다룬 글이다.<br>- 프로그램 위원장들은 AI가 작성했을 가능성이 높다고 탐지됐지만 AI 사용 내역이 없는 심사평에 안내를 남겼다. 심사자에게 사람이 직접 작성한 논문 평가와 AI 상호작용 내역을 기재하도록 요청하고, AC와 다른 심사자들에게도 이를 고려해 달라고 했다.<br>- 작성자는 자신은 AI를 사용하지 않았으며, 자신이 맡은 묶음에서 본인과 다른 심사평 하나를 제외한 모든 심사평에 해당 안내가 붙었다고 전했다.<br>- AI 사용 자체는 허용되지만 공개가 필요했다고 설명하며, 앞으로 논문이 AI 심사평을 목표 함수로 삼아 작성될 것이라고 주장했다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.reddit.com/r/MachineLearning/comments/1xxvby6/serious_spaces_d/" target="_blank" rel="noopener">진지하게 이야기할 공간이 있을까요? [D]</a></div>
+    <div class="item-meta">r/MachineLearning</div>
+  </div>
+  <div class="item-body"><div class="item-summary">AI·머신러닝을 진지하게 논의할 Reddit 외 커뮤니티를 찾는 글.<br>- 작성자는 Reddit의 AI·머신러닝 논의 수준이 서브레딧에 따라 들쭉날쭉하다고 느끼며, 트롤링이 적고 연구·프로젝트 공유와 학습이 가능한 공간을 찾고 있다.<br>- Discord도 찾아봤지만 유망한 서버를 찾지 못했고, 프런티어 AI 연구소나 Hugging Face의 서버는 각자의 관점에 지나치게 치우쳐 있다고 느꼈다.<br>- 비슷한 처지의 사람이 많다는 반응을 보고 직접 커뮤니티를 만들었으며, 관심 있는 사람에게 메시지를 보내달라고 덧붙였다.</div></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/elementalsouls/Claude-BugHunter" target="_blank" rel="noopener">elementalsouls/Claude-BugHunter: Claude 버그 헌팅 스킬 모음</a></div>
+    <div class="item-meta">8,433</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Claude Code에서 버그 헌팅과 외부 레드팀 작업을 수행하도록 만든 독립형 스킬 번들이다.<br>- 스킬 83개와 슬래시 명령 15개를 제공하며, 핵심 취약점 유형 24개에 걸친 공개 보고서 패턴 681개 중 433개는 개별 출처를 확인하고 검증할 수 있다.<br>- 웹 애플리케이션용 hunt-* 스킬 58개에 HackerOne 공개 보고서에서 추린 탐지 패턴, 페이로드, 우회 표, 공격 체인 템플릿을 담았다.<br>- M365/Entra, Okta, vCenter, SSL-VPN, SharePoint, 클라우드 IAM의 2024~2026년 CVE 공격 체인과 자격 증명 확보 후 권한 상승 기법을 다루며, 작업 폴더 구성과 Burp MCP 연동도 지원한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/mvanhorn/last30days-skill" target="_blank" rel="noopener">mvanhorn/last30days-skill</a></div>
+    <div class="item-meta">68,684</div>
+  </div>
+  <div class="item-body"><div class="item-summary">여러 플랫폼을 병렬 검색하고 이용자 반응을 점수화해 요약하는 AI 에이전트 검색 도구 /last30days의 소개 글이다.<br>- Reddit 추천, X 좋아요, YouTube 자막, TikTok 참여도, Polymarket 예측 확률 등을 검색하며, 이용자 반응으로 점수를 매긴 뒤 AI 에이전트가 하나의 브리핑으로 종합한다.<br>- 별도 설정 없이 Reddit·HN·Polymarket·GitHub를 이용할 수 있고, 검색 주제가 회사이면 특허 출원과 채용 페이지도 검색한다. 설정 마법사를 통해 X·YouTube·TikTok·arXiv·Techmeme 등을 추가로 활성화할 수 있다.<br>- Claude Code는 마켓플레이스를 통한 자동 업데이트를 지원하며 권장 설치 환경으로 제시된다. Codex·Cursor·Copilot·Gemini CLI 등 50개 이상의 Agent Skills 호스트에는 npx 명령으로 설치할 수 있다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/alibaba/open-code-review" target="_blank" rel="noopener">Alibaba의 Open Code Review</a></div>
+    <div class="item-meta">53,482</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Alibaba 내부 도구에서 출발한 AI 기반 코드 리뷰 CLI 도구 Open Code Review를 소개하는 글이다.<br>- 지난 2년간 Alibaba 개발자 수만 명을 지원하고 코드 결함 수백만 건을 식별한 뒤 오픈소스로 공개됐으며, 모델 엔드포인트를 설정해 사용할 수 있다.<br>- Git diff를 분석하면서 파일 전체 읽기·코드베이스 검색·다른 변경 파일 확인 도구를 활용해 줄 단위 리뷰 의견을 생성하며, `ocr scan`으로 파일 전체도 검토한다.<br>- 공개된 벤치마크 설명에 따르면 동일 모델을 사용하는 Claude Code보다 정밀도와 F1이 높고, 토큰은 약 1/9만 사용하며 리뷰도 빠르지만, 정밀도를 우선한 설계로 재현율은 낮다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/Tencent/LoopForge" target="_blank" rel="noopener">Tencent/LoopForge</a></div>
+    <div class="item-meta">2,896</div>
+  </div>
+  <div class="item-body"><div class="item-summary">LoopForge는 코딩 에이전트로 팀의 소프트웨어 개발을 진행하는 자체 호스팅 워크스페이스다.<br>- 채팅으로 Main Bot에 요구사항을 전달하면 Docker 샌드박스를 열고 저장소를 체크아웃한 뒤, 프로젝트 역할별로 작업을 위임하고 PR을 생성한다.<br>- 검증된 작업 방식은 에이전트·스크립트·사람의 승인 단계로 구성된 SOP로 저장해 반복 실행할 수 있으며, 하위 SOP도 포함할 수 있다.<br>- CodeBuddy, Codex, Claude Code 등 코딩 에이전트 CLI가 실제 작업을 수행하고, LoopForge는 역할·샌드박스·체크포인트·이력을 제공한다. 자체 인프라에서 MIT 라이선스로 운영한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/google-labs-code/stitch-skills" target="_blank" rel="noopener">google-labs-code/stitch-skills: Stitch 디자인 스킬 모음</a></div>
+    <div class="item-meta">9,957</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Google Stitch용 에이전트 스킬과 플러그인 모음의 설치 방법을 소개하는 글이다.<br>- Agent Skills 개방형 표준을 따르며 Codex, Antigravity, Gemini CLI, Claude Code, Cursor, OpenCode와 호환된다.<br>- Codex에서는 CLI나 설정 화면에서 마켓플레이스를 등록하고 플러그인을 설치할 수 있으며, 선택 사항인 sparse 경로로 내려받을 범위를 제한해 복제 속도를 높일 수 있다.<br>- 플러그인은 디자인 중심의 stitch-design, 빌드·컴포넌트용 stitch-build, 유틸리티·보조 기능용 stitch-utilities로 구성된다.</div></div>
+</div>
+</div>
+</body>
+</html>
