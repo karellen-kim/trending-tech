@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-11-23 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 항상 펼쳐진 요약 ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
+  .community-date { padding: 0.8rem 1.15rem 0; font-size: 0.75rem; color: var(--ink-faint); }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-11-23</div>
+<h1><em>23</em> Nov 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn" class="nav-link">Hacker News</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">검색 최적화의 범위가 RAG의 토큰 절약에서 모델의 사전학습과 어텐션 설계까지 넓어지고 있다.</p><p class="take-body">RAG에서 토큰 낭비를 줄이려는 접근과 함께, 검색을 중심에 놓고 언어 모델을 처음부터 사전학습하는 연구가 등장했다. 긴 컨텍스트 추론에서도 키 구성과 검색을 공동 설계한다는 점을 보면, 검색이 별도 기능을 넘어 모델이 정보를 배우고 참조하는 방식 자체의 설계 문제로 확장되는 흐름이 보인다.</p><div class="take-refs"><span>근거</span><a href="https://arxiv.org/abs/2611.26809" target="_blank" rel="noopener">처음부터 검색하기: 언어 모델을 위한 검색 중심 사전학습</a> · <a href="https://arxiv.org/abs/2611.27233" target="_blank" rel="noopener">LongCat Recall Sparse Attention: 긴 컨텍스트 추론을 위한 키 구성과 검색의 공동 설계</a> · <a href="https://d2.naver.com/helloworld/5087915" target="_blank" rel="noopener">뇌를 닮은 세컨드 브레인: 토큰 낭비 없는 RAG</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/87a15d1c-91dc-46fa-b3f4-5bc1102e152e" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://blog.cloudflare.com/probing-dns-at-cloudflare/" target="_blank" rel="noopener">Cloudflare에서 DNS 점검하기</a></div>
+    <div class="item-meta">Cloudflare Blog</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Cloudflare가 Flamingo를 확장해 운영 환경의 DNS를 지속적으로 테스트하고 전파 측정 결과를 배포 판단에 활용하는 방법을 다룬 글이다.<br>- DNS 레코드를 엣지에 게시하는 서비스의 배포 중 스케줄링 버그로 일부 변경 사항이 수 시간 동안 게시되지 않았다. 서비스는 정상 상태였지만 새 호스트 이름의 DNS 해석과 인증서 발급에 문제가 생겼다.<br>- Cloudflare는 고객이 겪는 DNS 동작을 모든 데이터 센터에서 지속적으로 테스트하기 위해, 이미 엣지를 대상으로 하루 수억 건의 테스트를 실행하던 Flamingo에 DNS 지원을 추가했다.<br>- Flamingo의 모듈식 설계를 활용해 DNS 지원을 확장하고, DNS 전파 측정 결과로 배포를 진행할지 롤백할지 결정한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://d2.naver.com/helloworld/3284900" target="_blank" rel="noopener">AI 신입사원을 뉴스 데이터 시니어로 키우는 레포, news-data</a></div>
+    <div class="item-meta">NAVER D2</div>
+  </div>
+  <div class="item-body"><div class="item-summary">AI 에이전트가 뉴스 데이터를 찾고 추출·분석하는 하네스 레포 news-data의 운영 방식과 성과, 한계를 소개한 글이다.<br>- 실제 업무를 맡긴 뒤 작업마다 회고를 작성하고 PR로 레포에 반영해 도메인 지식을 축적한다.<br>- 규칙 로드, 스킬 선택, 요청·데이터 파악, 승인 후 실행·검증, 회고·반영의 5단계로 업무 40건을 처리했으며, 이슈부터 회고 PR까지 걸린 시간은 중앙값 1.6시간이었다.<br>- 검토 병목·정합성·방향성이라는 세 가지 한계에 부딪혔으며, 다음 단계로 계획과 실행을 리모트 데이터 에이전트로 옮기는 방향을 제시한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://d2.naver.com/helloworld/1126768" target="_blank" rel="noopener">새벽 3시 54분, Agent가 먼저 분석하고 처리했습니다</a></div>
+    <div class="item-meta">NAVER D2</div>
+  </div>
+  <div class="item-body"><div class="item-summary">개발과 온콜을 함께 맡는 환경에서 AI Agent에게 원인 조사와 운영 조치를 맡기기까지의 경험을 소개하는 발표입니다.<br>- NAVER Engineering Day 10th 세션으로, 열한 달의 여정을 조사하는 Agent와 직접 조치하는 Agent의 두 단계로 나눠 다룹니다.<br>- 조사 단계에서는 알림을 한곳으로 모으고 Agent에게 기억과 지식을 제공하며 응답 형식을 정하는 과정을 다룹니다.<br>- 조치 단계에서는 수행 가능한 능력, 실행해도 되는 시점의 판정, 잘못된 조치에 대비한 안전망이라는 세 질문과 무인 조치 사례를 다룹니다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://d2.naver.com/helloworld/5087915" target="_blank" rel="noopener">뇌를 닮은 세컨드 브레인: 토큰 낭비 없는 RAG</a></div>
+    <div class="item-meta">NAVER D2</div>
+  </div>
+  <div class="item-body"><div class="item-summary">기존 RAG의 토큰 낭비를 줄이는 AI 메모리 아키텍처 Haema(해마)를 소개한 NAVER Engineering Day 발표다.<br>- 최신 인지 메모리 논문 기법을 결합해 지식 자율 진화와 99% 재현율을 달성한다고 소개한다.<br>- 기억 저장·불러오기·작업 기억·세션 나누기·판정 게이트로 구성되며, 질문 처리 여섯 단계와 긴 대화를 위한 세션 롤오버를 다룬다.<br>- 문장 고르기·중복 제거·통째로 넣는 RAG와의 비교·세션 롤오버의 실측을 다루고, 재현율과 토큰 사용량을 비교한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://toss.tech/article/multi-task-learning-in-finance" target="_blank" rel="noopener">목적마다, 상품마다 늘던 모델을 하나로: 금융 도메인에 멀티태스크 학습 적용하기</a></div>
+    <div class="item-meta">Toss Tech</div>
+  </div>
+  <div class="item-body"><div class="item-summary">토스가 마케팅 목적별·상품별로 늘어난 트리 모델을 멀티태스크 학습(MTL) 모델로 통합한 사례입니다.<br>- 마케팅에서는 공유 인코더와 공유 전문가로 과제 간 데이터를 공유해, 수십 개 금융 행동을 하나의 모델로 예측하도록 통합했습니다.<br>- 마케팅 목적별 트리 모델 대비 평균 정밀도(AP)가 상대적으로 약 54% 높아졌고, 실제 마케팅에서 불필요한 발송을 약 35% 줄였습니다.<br>- 상품별로 세 가지 과제를 예측하던 수백 개 트리 모델을 MTL 하나로 통합했습니다. 상품 정보를 입력받아 신규 상품도 모델을 새로 만들지 않고 예측하며, 기존 대비 MAE는 약 66~79% 감소하고 AUC는 상대적으로 약 10% 상승했습니다.</div></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">4개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://aphyr.com/posts/429-and-you-would-be-supporting-a-local-paper" target="_blank" rel="noopener">게다가 지역 신문을 후원하는 일이기도 하죠</a></div>
+    <div class="item-meta">Aphyr (Kyle Kingsbury)</div>
+  </div>
+  <div class="item-body"><div class="item-summary">자전거 사고로 생명이 위태로웠던 친구 Taber를 돌본 경험과 도움을 준 이들에 대한 감사의 글.<br>- Taber는 지난봄 자전거를 타다가 자동차 문에 부딪혀 목숨을 잃을 뻔했고, 필자와 다른 친구는 새벽 3시까지 병원에 도착해 일주일간 그를 돌봤다.<br>- 두 사람은 번갈아 병상을 지키며 생명 유지 장치 연결을 확인하고, 십여 명의 전문의와 협의하며 기록·행정 업무와 재택 돌봄 전환을 도왔다.<br>- 필자는 간병 중 틈틈이 데이터베이스 버그를 처리하고 숙소에서 옴에 걸리는 등 힘든 시간을 보냈지만, Taber는 매우 잘 회복했으며 필자는 의료진과 주변 사람들, 기부자들에게 감사를 전했다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://lemire.me/blog/2026/11/23/seeing-the-machine-code-of-your-java-program/" target="_blank" rel="noopener">몇 줄의 Java 코드로 Java 프로그램의 기계어 살펴보기</a></div>
+    <div class="item-meta">Daniel Lemire</div>
+  </div>
+  <div class="item-body"><div class="item-summary">JIT 컴파일러가 생성한 기계어와 CPU 실행 지점을 살펴보는 instructive 라이브러리를 소개하는 글이다.<br>- JMH는 함수 실행 시간을 측정하지만, 코드가 느린 이유를 파악하려면 JIT가 생성한 기계어와 프로세서가 시간을 쓰는 지점을 확인해야 한다.<br>- Richard Startin의 instructive는 CPU 시간 10ms마다 실행 중인 기계어 명령어를 기록하고, 가장 많이 실행된 컴파일 메서드와 명령어별 샘플 수를 보여준다.<br>- Roaring은 정수를 65,536개 값 단위로 나누고, 각 구간의 값이 적으면 정렬된 배열로, 많으면 64비트 워드 1,024개로 구성된 비트맵 컨테이너로 저장한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://eugeneyan.com/writing/public-evals" target="_blank" rel="noopener">공개 평가의 작동 방식과 한계, 그리고 바뀌어야 할 점</a></div>
+    <div class="item-meta">Eugene Yan</div>
+  </div>
+  <div class="item-body"><div class="item-summary">공개 모델 평가의 구성 방식과 채점 오류, 평가 지표의 한계를 살펴보는 글이다.<br>- 조사한 공개 평가 12개 중 8개에서 채점기가 통과시켜야 할 결과물을 탈락시킨 증거가 발견됐다.<br>- 많은 벤치마크가 중요한 능력보다 측정하기 쉬운 것을 평가하며, 신뢰성·작업 속도·여러 차례 대화를 통한 협업에 초점을 맞춰야 한다고 주장한다.<br>- 평가 과제는 대체로 사용자 요청 형태의 지시문과 작업 환경을 제공하며, 에이전트는 시작할 때 지시를 한 번 받고 보통 추가 확인 질문을 할 수 없다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Nov/22/select-styling/" target="_blank" rel="noopener">select 박스 스타일링 예제 모음</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+  <div class="item-body"><div class="item-summary">HTML select 박스의 스타일링 방식을 비교하고 선호하는 CSS를 소개한 글이다.<br>- Simon Willison은 select 박스의 기본 모양이 브라우저마다 다르고 Chrome에서는 보기 좋지 않다고 느꼈다.<br>- Claude Fable 5.2로 다양한 스타일링 방식을 보여주는 페이지를 만들었으며, 모든 데스크톱·모바일 브라우저에서 스크린샷을 찍을 계획이라고 밝혔다.<br>- 실험 후 appearance: none으로 기본 외형을 없애고, 1px 테두리·6px 모서리 반경·흰색 배경·SVG 화살표를 적용한 CSS를 선호한다고 밝혔으며 세 브라우저의 결과를 제시했다.</div></div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://arxiv.org/abs/2611.26809" target="_blank" rel="noopener">처음부터 검색하기: 언어 모델을 위한 검색 중심 사전학습</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">사전학습 단계에서 검색 호출과 검색 근거 활용 능력을 가르치는 Search-Native Pretraining과 모델 QueryLM에 관한 연구다.<br>- 일반 텍스트 말뭉치에 웹 검색 쿼리와 로컬 인덱스에서 검색한 응답을 대규모로 추가해, 검색 호출 생성과 검색 근거 활용을 함께 학습시켰다.<br>- Wikipedia와 DCLM-Edu 말뭉치, 3억 6천만~33억 매개변수 모델 실험에서 지식 집약적 과제 성능과 검색 근거를 따르도록 유도하는 능력이 개선됐으며, 양쪽 모델에 지도 미세조정을 적용한 뒤에도 이점이 유지됐다.<br>- 14억 매개변수 QueryLM은 학습 연산량(FLOPs)을 맞춘 33억 매개변수 기준 모델과 비교해 모든 지식 집약적 과제에서 일관되게 동등하거나 더 높은 성능을 보였다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://arxiv.org/abs/2611.27962" target="_blank" rel="noopener">Model Carving: 자신의 토폴로지를 최적화하는 Transformer 학습</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Model Carving은 한 번의 학습으로 Transformer의 가중치와 아키텍처를 함께 최적화하는 기법이다.<br>- 각 서브레이어에 학습 가능한 스칼라 게이트를 적용해, 학습 손실에 따라 구성요소를 제거하고 더 작고 비균일한 네트워크를 만든다.<br>- 일반 Transformer는 1억 4천만~27억 파라미터, 루프형 Transformer는 1억 4천만~13억 파라미터 규모로 사전학습해 평가했다. Carving 모델은 최대 1.7배의 연산량으로 학습한 밀집 모델보다 낮은 검증 손실을 달성했다.<br>- 같은 크기의 가지치기·지식 증류 모델보다 성능이 높았으며, 이점은 모델 규모가 커질수록 확대되고 퓨샷 평가 등 다운스트림 과제에서도 이어졌다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://arxiv.org/abs/2611.27233" target="_blank" rel="noopener">LongCat Recall Sparse Attention: 긴 컨텍스트 추론을 위한 키 구성과 검색의 공동 설계</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">긴 시퀀스에서 검색 기반 희소 어텐션의 검색 병목을 줄이기 위한 LongCat Recall Sparse Attention(LRSA)을 제안한 글이다.<br>- 시퀀스를 시간 버킷으로 나눠 새 키가 들어올 때 기존 이력을 재그룹화하지 않고 각 버킷을 독립적으로 인덱싱한다.<br>- 버킷 안의 인덱싱 키를 수용량이 균형 잡힌 방향별 그룹으로 구성하고, 페이지마다 정해진 수의 온전한 그룹을 배치한다. 그룹별 중심을 유지해 페이지 선택에 세밀한 대표값으로 사용한다.<br>- 선택한 페이지의 구성원과 sink·슬라이딩 윈도·검색 가능한 미인덱싱 후보를 함께 평가해 최종 Top-K 논리 위치를 고른다. 페이지 내 구성원 재배치, 그룹 크기에 따른 구축 단계 융합, 청크 단위 prefill에서 쿼리 간 중복 고정 후보의 저장 공간 공유로 실행 효율을 높인다.</div></div>
+</div>
+</div><div class="section" id="hn">
+  <div class="section-header">
+    <span class="section-icon">HN</span>
+    <span class="section-title">Hacker News</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="community-date">2026-11-22 UTC · 당시 페이지 순위</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://www.caranddriver.com/news/a74490092/toyota-nissan-honda-standardize-parts-lower-costs/" target="_blank" rel="noopener">Toyota, Nissan, Honda, 비용 절감을 위해 부품 표준화 추진</a></div>
+    <div class="item-meta">1위 · 1344 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Toyota, Nissan, Honda가 생산 비용을 줄이기 위해 일부 차량 부품을 표준화한다.<br>- 우선 철강 품질 기준, 플라스틱·수지 관련 규정, 와이어링 하네스의 색상 구분 체계를 통일한다.<br>- 초기 대상은 소비자 눈에 잘 띄지 않아 브랜드 고유성에 영향을 주지 않으면서도 생산 비용에서 큰 비중을 차지하는 세 분야로 선정했다.<br>- 일본 내 공급업체부터 논의를 시작해 해외 공급업체로 확대하며, 장기적으로 차량 전반의 더 많은 부품으로 표준화 범위를 넓힐 계획이다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power/" target="_blank" rel="noopener">2028년 Anthropic 전력의 87%는 가스, 11%는 석탄에서 공급될 전망</a></div>
+    <div class="item-meta">2위 · 994 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">AI 데이터센터의 전력 수요가 자체 발전과 전력망의 화석연료 발전 설비 확충으로 이어지는 현상을 Anthropic 사례로 분석한 글이다.<br>- 데이터센터가 전력을 직접 확보하는 BYOP 방식으로 계획된 가스 발전 용량은 177GW로, 미국 전체 가구의 65%에 전력을 공급할 수 있는 규모다.<br>- 현재 제안된 BYOP 사업에서 2032년 재생에너지의 발전량 비중은 20% 미만으로 추정된다. 전력망에서도 데이터센터가 주요 원인인 수요 증가에 대응해 화석연료 발전소 200GW가 추가로 건설되고 있다.<br>- 2026년 11월 기준 Anthropic이 공개한 재생에너지 관련 약정·계약·투자는 노르웨이와 캐나다에만 있으며, 미국에서는 직접적인 재생에너지 확보 약정을 하지 않았다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://openai.com/index/perplexity-and-intelligence/" target="_blank" rel="noopener">Perplexity와 지능</a></div>
+    <div class="item-meta">3위 · 638 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">OpenAI 수석과학자 Jakub Pachocki가 Perplexity를 모델 개발사 간 비교와 공통 안전 기준을 위한 지표로 제안하는 글이다.<br>- 현대 AI의 다양한 기법은 대규모 데이터로 압축기, 즉 예측기를 훈련하는 과정에서 나온 지능을 주로 활용하며, 저자는 압축기 훈련의 진전을 추적하는 것이 AI 발전을 이해하는 핵심이라고 본다.<br>- 모델 개발사 간 비교와 업계 공통 안전 기준 수립을 위해 Perplexity 또는 이에 상응하는 교차 엔트로피 손실을 지표로 사용할 것을 제안한다.<br>- OpenAI는 경쟁사에 자사의 수준을 더 명확히 드러내는 부담보다 공통 안전 조치 마련의 시급성이 크다고 판단해, 내부 Perplexity 측정치를 공개하며 사전훈련 진전에 대한 투명성을 높이고자 한다.</div></div>
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/elementalsouls/Claude-BugHunter" target="_blank" rel="noopener">elementalsouls/Claude-BugHunter: Claude 기반 버그 탐색 스킬 모음</a></div>
+    <div class="item-meta">19,082</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Claude Code에서 버그 탐색과 외부 레드팀 작업을 수행하도록 구성한 독립형 스킬 번들을 소개하는 글이다.<br>- 스킬 83개와 슬래시 명령어 15개를 제공하며, 핵심 취약점 유형 24개에 걸친 공개 보고서 패턴 681개 중 433개에 개별 출처를 달아 검증할 수 있게 했다.<br>- 방법론·사고방식 계층은 5단계 비선형 작업 흐름을 제공하고, 웹앱 탐색용 hunt-* 스킬 58개는 HackerOne 공개 보고서에서 선별한 탐지 패턴·페이로드·우회 표·공격 연계 템플릿을 담는다.<br>- M365/Entra, Okta, vCenter, SSL-VPN, SharePoint, 클라우드 IAM의 2024~2026년 CVE 연계와 자격 증명 확보 후 권한 상승 기법을 포함하며, 작업 폴더 구성과 Burp MCP 연동을 지원한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">obra/superpowers</a></div>
+    <div class="item-meta">324,737</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Superpowers는 조합 가능한 스킬과 에이전트가 이를 사용하도록 하는 초기 지침으로 구성된 코딩 에이전트용 소프트웨어 개발 방법론이다.<br>- 에이전트는 바로 코드를 작성하지 않고 사용자의 목적을 질문해 명세를 도출한 뒤, 설계를 읽기 쉬운 짧은 단위로 나눠 제시한다.<br>- 설계 승인 후 프로젝트 맥락이 부족한 주니어 엔지니어도 따라갈 수 있는 구현 계획을 만들며, red/green TDD·YAGNI·DRY를 강조한다.<br>- 사용자가 진행을 지시하면 하위 에이전트들이 각 개발 작업을 수행하고, 그 결과를 검사·리뷰하는 개발 절차를 시작한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/jingyaogong/minimind" target="_blank" rel="noopener">jingyaogong/minimind</a></div>
+    <div class="item-meta">69,281</div>
+  </div>
+  <div class="item-body"><div class="item-summary">개인용 GPU에서 소형 언어 모델을 직접 구현하고 학습할 수 있도록 코드와 튜토리얼을 공개한 MiniMind 프로젝트다.<br>- 약 6,400만 개 파라미터의 초소형 모델을 다룬다. ‘2시간·3위안’은 전체 학습이 아니라 NVIDIA 3090 한 장에서 SFT 1에포크를 실행한 시간과 해당 GPU 대여 비용이다.<br>- 데이터 정제, 사전학습, SFT, LoRA, MoE, DPO·PPO·GRPO·CISPO, 도구 사용, Agentic RL, 적응형 사고, 모델 증류까지 전체 학습 과정의 코드를 제공한다.<br>- 핵심 알고리즘은 고수준 추상화 인터페이스에 의존하지 않고 PyTorch로 직접 구현했으며, Apache 2.0 라이선스로 무료 공개한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/firecrawl/firecrawl" target="_blank" rel="noopener">firecrawl/firecrawl</a></div>
+    <div class="item-meta">207,561</div>
+  </div>
+  <div class="item-body"><div class="item-summary">웹사이트를 AI 에이전트용 지식으로 변환하는 Firecrawl의 세 가지 사용 방식과 Local 설치 방법을 소개하는 글.<br>- Firecrawl Local은 데이터베이스·큐·컨테이너 없이 로컬에서 웹사이트를 스크래핑·크롤링·매핑하고, 깔끔한 마크다운 변환과 MCP 서버 및 localhost API를 제공한다.<br>- Firecrawl Cloud는 호스팅 서비스로 Local 기능을 대규모로 제공하며, 검색과 Firecrawl Alexandria의 550개 이상 데이터 제공자를 지원한다.<br>- 자체 호스팅은 apps/api의 서버를 큐·워커·데이터베이스와 함께 배포하는 방식이다. Local은 Rust와 C 컴파일러를 준비한 뒤 cargo install firecrawl-local로 설치한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/nginx/nginx" target="_blank" rel="noopener">nginx/nginx</a></div>
+    <div class="item-meta">32,999</div>
+  </div>
+  <div class="item-body"><div class="item-summary">NGINX의 주요 기능과 라이선스, 초보자를 위한 README 안내입니다.<br>- NGINX는 웹 서버, 고성능 로드 밸런서, 리버스 프록시, API 게이트웨이, 콘텐츠 캐시 기능을 제공합니다.<br>- 간소화된 2조항 BSD 유사 라이선스로 배포되는 무료 오픈 소스 소프트웨어이며, F5가 기업용 배포판과 상용 지원·교육을 제공합니다.<br>- README는 초보자에게 기본 구조를 소개하며, 설치·빌드·설정·디버깅의 자세한 내용과 모듈·지시어 참조는 전체 NGINX 문서에서 안내합니다.</div></div>
+</div>
+</div>
+</body>
+</html>
