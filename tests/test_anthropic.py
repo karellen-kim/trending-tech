@@ -147,3 +147,14 @@ def test_previous_coarse_day_outside_canonical_window_is_not_emitted(clock,monke
     monkeypatch.setattr(anthropic.requests,'get',get)
     assert anthropic.fetch_anthropic_news()==[]
     assert get.call_count==2
+
+
+def test_launch_page_uses_hero_publication_time(clock, monkeypatch):
+    listing='<main>'+row('Launch','/claude-new','Nov 20, 2026')+'</main>'
+    body=article().replace('<meta property="article:published_time" content="2026-11-20T00:00:00Z">','')
+    body=body.replace('<header><h1>Title</h1><time datetime="2026-11-20">2026-11-20</time></header>','')
+    body=body.replace('<main>','<main><section aria-labelledby="launch-hero-title"><time datetime="2026-11-20">November 20, 2026</time><h1 id="launch-hero-title">Launch</h1></section>')
+    monkeypatch.setattr(anthropic.requests,'get',Mock(side_effect=[response(listing),response(body)]))
+    result=anthropic.fetch_anthropic_news()
+    assert result[0]['pub_date']=='2026-11-20'
+    assert 'Actual article body' in result[0]['content']

@@ -73,7 +73,7 @@ def _listing(soup: BeautifulSoup, url: str) -> list[tuple[date, str, str]]:
 def _article(url: str, published: date) -> tuple[date, str]:
     soup = _html(url)
     meta = soup.select_one('meta[property="article:published_time"]')
-    time = soup.select_one('article > header time')
+    time = soup.select_one('article > header time, main section[aria-labelledby="launch-hero-title"] time')
     raw = meta.get('content', '') if meta else (time.get('datetime') or time.get_text(' ', strip=True) if time else '')
     canonical = _date(raw)
     try:
