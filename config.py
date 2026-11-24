@@ -64,6 +64,7 @@ RSS_SOURCES = [
     {"name": "Discord Blog", "url": "https://discord.com/blog/rss.xml", "category": "company"},
     {"name": "Elastic Search Labs", "url": "https://www.elastic.co/search-labs/blog/feed", "category": "company"},
     {"name": "GitHub Blog", "url": "https://github.blog/feed/", "category": "company"},
+    {"name": "Lyft Engineering", "url": "https://eng.lyft.com/feed", "category": "company"},
     {"name": "Meta Engineering", "url": "https://engineering.fb.com/feed/", "category": "company"},
     {"name": "Netflix Tech Blog", "url": "https://netflixtechblog.com/feed", "category": "company"},
     {"name": "Slack Engineering", "url": "https://slack.engineering/feed", "category": "company"},
@@ -128,8 +129,10 @@ REDDIT_SUBREDDITS = [
 ]
 
 # RSS 를 제공하지 않아 스크래핑이 필요한 소스만 남긴다.
-# Spotify·Discord 는 RSS 로 전환, Anthropic 은 RSS 도 파서도 없어 제거.
+# Spotify·Discord·Lyft는 RSS, Anthropic Engineering·News는 전용 파서로 수집한다.
 SCRAPER_SOURCES = [
+    {"name": "Anthropic Engineering", "url": "https://www.anthropic.com/engineering"},
+    {"name": "Anthropic News", "url": "https://www.anthropic.com/news"},
     {"name": "Alibaba Cloud Blog", "url": "https://www.alibabacloud.com/blog"},
     {"name": "Uber Engineering", "url": "https://www.uber.com/en-US/blog/engineering/"},
 ]

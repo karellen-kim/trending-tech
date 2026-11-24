@@ -2,6 +2,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, date, timezone, timedelta
+from sources.anthropic import fetch_anthropic_engineering, fetch_anthropic_news
 from config import now_kst
 from config import SCRAPER_SOURCES, MAX_SCRAPER_ITEMS, COLLECT_DAYS
 
@@ -177,6 +178,8 @@ def fetch_alibaba(max_items: int = MAX_SCRAPER_ITEMS) -> list[dict]:
     return items
 
 _SCRAPERS = {
+    "Anthropic Engineering": fetch_anthropic_engineering,
+    "Anthropic News": fetch_anthropic_news,
     "Uber Engineering": fetch_uber,
     "Alibaba Cloud Blog": fetch_alibaba,
 }

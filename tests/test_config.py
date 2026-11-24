@@ -42,3 +42,11 @@ def test_community_limits_and_diagram_settings_removed():
     assert not hasattr(config, 'ENABLE_SVG')
     assert not hasattr(config, 'MAX_SVG_ITEMS')
     assert not hasattr(config, 'MAX_COMMUNITY_ITEMS')
+
+
+def test_lyft_and_anthropic_are_registered_with_supported_collectors():
+    rss = {source['name']: source for source in config.RSS_SOURCES}
+    scraped = {source['name']: source for source in config.SCRAPER_SOURCES}
+    assert rss['Lyft Engineering'] == {'name': 'Lyft Engineering', 'url': 'https://eng.lyft.com/feed', 'category': 'company'}
+    assert scraped['Anthropic Engineering']['url'] == 'https://www.anthropic.com/engineering'
+    assert scraped['Anthropic News']['url'] == 'https://www.anthropic.com/news'
