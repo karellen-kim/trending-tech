@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-11-27 — Trending Tech</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a1714'/%3E%3Cpolyline points='3,26 10,18 17,22 24,10 29,6' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='22,5 29,6 28,13' fill='none' stroke='%23e05c1a' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 에디토리얼 팔레트 — 딥그린 헤더 · 골드 악센트 · 크림 구분 띠 */
+    --paper: #fffdf8; --paper-deep: #f6f1e2;
+    --ink: #16211d; --ink-soft: #57544a; --ink-faint: #9a917d;
+    --rule: #e6dfcd; --rule-strong: #ded6c2;
+    --green: #1f3b34; --green-soft: #8fb3a6; --green-mute: #6f9789;
+    --cream: #f7f4e9;
+    /* 기존 규칙이 쓰던 이름을 새 색으로 잇는다 */
+    --accent: #e8c46a; --accent-deep: #b08a2a; --accent-wash: #ece5d3;
+    --serif: "Noto Serif KR", Georgia, serif;
+    --sans: "Noto Sans KR", -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+</style>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 0 0 4rem; background: var(--paper); }
+  /* 띠는 화면 폭까지, 글은 안쪽 여백 안에 — 래퍼 없이 요소마다 여백을 준다.
+     shorthand padding 을 쓰는 규칙은 각자 좌우 값을 갖는다 (여기서 주면 덮인다) */
+  .page-meta, h1 { padding-left: 1.15rem; padding-right: 1.15rem; }
+
+  /* ── 상단 바 ── */
+  .top-bar { display: flex; align-items: center; justify-content: space-between;
+    background: var(--green); padding: 1rem 1.15rem 0.2rem; margin-bottom: 0; }
+  .top-bar > span { color: var(--green-mute) !important; }
+  .back-btn { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--green-soft);
+    text-decoration: none; border: none; padding: 0; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── 페이지 제목 ── */
+  .page-meta { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green-soft); background: var(--green); padding-top: 1.3rem; padding-bottom: 0.5rem; margin-bottom: 0; }
+  h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 700;
+    letter-spacing: -0.045em; line-height: 1.02; margin-bottom: 0; color: var(--cream);
+    background: var(--green); padding-bottom: 1.5rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+
+
+  /* ── 섹션 네비게이션 (sticky) ── */
+  .page-nav { position: sticky; top: 0; background: var(--accent-wash); border-bottom: 1px solid var(--green);
+    padding: 0.7rem 1.15rem; margin-bottom: 0; z-index: 20; display: flex; gap: 0.45rem;
+    overflow-x: auto; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { height: 0; }
+  .nav-link { font-size: 0.71rem; font-weight: 500; color: #3f4b42; text-decoration: none;
+    padding: 0.35rem 0.75rem; border: 1px solid #cfc5ac; border-radius: 999px; background: var(--paper);
+    white-space: nowrap; transition: all 0.12s; }
+  .nav-link:hover { color: var(--green); background: var(--accent-wash); }
+  .nav-link:hover { border-color: var(--green); }
+
+  /* ── 섹션 ── */
+  .section { margin-bottom: 0; scroll-margin-top: 48px; }
+
+  /* ── 섹션 헤더 ── */
+  .section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0; padding: 0.8rem 1rem; background: var(--green); }
+  .section-icon { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; flex-shrink: 0; }
+  .section-title { font-family: var(--serif); font-size: 0.98rem; font-weight: 600; color: var(--cream); }
+  .section-count { font-family: var(--mono); font-size: 0.63rem; color: var(--green-soft); margin-left: auto; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ── 하이라이트 섹션 ── */
+  .highlight-section .section-header { background: var(--accent-wash); border-top: 1px solid var(--green); border-bottom: 1px solid var(--green); }
+  .highlight-section .section-icon { color: var(--accent-deep); }
+  .highlight-section .section-title { color: var(--green); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em; }
+  .highlight-list { list-style: none; padding: 0; background: var(--paper); border-bottom: 1px solid var(--rule); }
+  .highlight-list li { font-family: var(--serif); font-size: 0.85rem; font-weight: 600; color: var(--ink); padding: 0.7rem 1.15rem 0.7rem 2.25rem; position: relative; border-bottom: 1px solid var(--rule); line-height: 1.5; letter-spacing: -0.015em; }
+  .highlight-list li:last-child { border-bottom: none; }
+  .highlight-list li::before { content: ""; position: absolute; left: 1.15rem; top: 1.02rem; width: 7px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .highlight-list li a { color: inherit; text-decoration: none; }
+  .highlight-list li a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ── 오늘의 해석 ── */
+  .take { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.4rem 1rem 1.6rem; }
+  .take-headline { font-family: var(--serif); font-size: 1.12rem; font-weight: 700; line-height: 1.5;
+    letter-spacing: -0.02em; color: var(--ink); }
+  .take-body { margin-top: 0.85rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink-soft); }
+  .take-refs { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong);
+    font-size: 0.79rem; line-height: 1.85; color: var(--ink-faint); }
+  .take-refs span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-right: 0.6rem; }
+  .take-refs a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .take-refs a:hover { text-decoration: underline; }
+
+  /* ── 기간 해석의 핵심 문서 ── */
+  .picks { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule-strong); }
+  .picks-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint); }
+  .picks ol { margin: 0.6rem 0 0; padding-left: 1.2rem; }
+  .picks li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .picks li a { font-family: var(--serif); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .picks li a:hover { text-decoration: underline; }
+  .pick-why { display: block; font-size: 0.76rem; color: var(--ink-faint); margin-top: 0.3rem;
+    padding-left: 0.65rem; border-left: 2px solid var(--accent); }
+
+  /* ── 꼭 봐야 할 글 ── */
+  .item-star { color: var(--accent-deep); margin-right: 0.35rem; font-size: 0.8rem; }
+  .item.important .item-name a { color: var(--green); }
+
+  /* ── 오디오 리뷰 ── */
+  .audio-block { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+    margin: 0 1rem 1.4rem; padding: 0.85rem 1rem; border-radius: 12px; background: var(--accent-wash); }
+  .audio-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .audio-block a { font-size: 0.82rem; color: var(--green); text-decoration: none; font-weight: 500; }
+  .audio-block a:hover { text-decoration: underline; }
+
+  /* ── 항상 펼쳐진 요약 ── */
+  .item { border-bottom: 1px solid var(--rule); }
+  .item:last-child { border-bottom: none; }
+  .item-head { display: grid; grid-template-columns: 1fr auto; gap: 0.8rem;
+    align-items: baseline; padding: 1rem 1.15rem; }
+  .item-name { font-family: var(--serif); font-weight: 600; font-size: 1rem; line-height: 1.42;
+    letter-spacing: -0.015em; color: var(--ink); min-width: 0;
+    /* 어절을 끊어서라도 줄을 채운다 — 오른쪽이 비는 것보다 낫다는 판단 */
+    word-break: break-all; }
+  .item-name a { color: var(--ink); text-decoration: none; }
+  .item-name a:hover { color: var(--green); }
+  .item-meta { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-faint);
+    letter-spacing: 0.08em; white-space: nowrap; }
+  .item-body { padding: 0 1.15rem 1.2rem; }
+  .community-date { padding: 0.8rem 1.15rem 0; font-size: 0.75rem; color: var(--ink-faint); }
+  .item-summary { font-size: 0.845rem; color: var(--ink-soft); line-height: 1.68; }
+  /* 긴 제목·URL 이 줄바꿈되지 않으면 가로 스크롤이 생긴다 */
+  .item-name, .take-refs, .take-headline, .picks, .section-title { overflow-wrap: anywhere; }
+  /* 한국어는 어절 단위로 끊겨 다음 어절이 안 들어가면 오른쪽이 통째로 빈다.
+     어절 중간에서라도 끊어 줄을 채운다. 영문 고유명사가 갈리는 것은 감수한다. */
+  .take-headline, .take-body, .take-refs, .picks li, .pick-why,
+  .item-summary, .highlight-list li { word-break: break-all; }
+
+  @media (max-width: 600px) {
+    /* 띠는 화면 끝까지 닿아야 하므로 body 에 좌우 여백을 주지 않는다 */
+    body { padding-bottom: 3rem; }
+    .nav-link { padding: 0.32rem 0.66rem; }
+    /* 출처를 제목과 같은 줄에 두면 "Simon Willison" 이 폭을 가져가
+       제목이 356px 중 212px 만 쓰게 된다. 좁은 화면에서는 아래 줄로 내린다. */
+    .item-head { grid-template-columns: 1fr; }
+    .item-head .item-meta { margin-top: 0.45rem; }
+    /* 데스크톱 편집 스타일은 라벨·메타 문자를 10px 안팎으로 잡는다.
+       화면이 가깝고 밀도가 낮은 폰에서는 그 크기가 읽기 어렵다.
+       11.5px(0.72rem) 를 바닥으로 두고, 본문 텍스트도 함께 한 단 올린다. */
+    .page-meta, .section-icon, .section-count, .picks-label, .audio-label,
+    .item-meta, .take-refs span, .item-link, .back-btn { font-size: 0.72rem; }
+    .nav-link { font-size: 0.76rem; }
+    .item-summary { font-size: 0.9rem; }
+    .take-body, .take-refs { font-size: 0.92rem; }
+    .highlight-list li { font-size: 0.92rem; }
+    .picks li { font-size: 0.92rem; }
+    .pick-why { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="./index.html" class="back-btn">&larr; index</a>
+  <span style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-faint);letter-spacing:0.1em">TRENDING-TECH</span>
+</div>
+<div class="page-meta">2026-11-27</div>
+<h1><em>27</em> Nov 2026</h1>
+<nav class="page-nav"><a href="#highlights" class="nav-link">오늘의 하이라이트</a><a href="#tech-blog" class="nav-link">기술 블로그</a><a href="#dev-blogs" class="nav-link">개발자 블로그 & SNS</a><a href="#papers" class="nav-link">AI / LLM 논문</a><a href="#hn" class="nav-link">Hacker News</a><a href="#github" class="nav-link">GitHub 트렌딩</a></nav>
+<div class="section highlight-section" id="highlights">
+  <div class="section-header">
+    <span class="section-icon">★</span>
+    <span class="section-title">오늘의 해석</span>
+    
+  </div>
+  <div class="take"><p class="take-headline">AI 활용의 과제가 결과물 생성에서 에이전트의 맥락·행동 조정과 현장의 사용 범위 통제로 넓어지고 있다.</p><p class="take-body">모델이 자신의 컨텍스트를 관리하게 하는 연구와 테스트 시점에 언어로 에이전트를 조정하는 연구는, 생성 능력뿐 아니라 작업 중 무엇을 기억하고 어떻게 행동하게 할지가 설계 대상이 되고 있음을 보여준다. 한편 사진기자들에게 AI 기능이 포함된 Photoshop 업데이트를 자제하라는 경고는, 도구에 추가된 AI를 어디까지 허용할지도 현장의 문제로 떠올랐음을 보여준다. 두 흐름을 관통하는 질문은 AI가 무엇을 만들 수 있느냐에서 그 작동과 개입 범위를 어떻게 통제하느냐로 넓어지고 있다.</p><div class="take-refs"><span>근거</span><a href="https://arxiv.org/abs/2611.34147" target="_blank" rel="noopener">모델이 자신의 컨텍스트를 직접 관리하도록 하기: 현재 어디까지 왔나</a> · <a href="https://arxiv.org/abs/2611.34440" target="_blank" rel="noopener">vSFT: 테스트 시점에 언어로 에이전트를 조정하는 방법 학습</a> · <a href="https://simonwillison.net/2026/Nov/26/hn-50651685/" target="_blank" rel="noopener">The New York Times, AI 기능 때문에 사진기자들에게 Photoshop 업데이트 자제 경고</a></div></div><div class="audio-block"><span class="audio-label">오디오 리뷰</span><a href="https://notebook.google.com/notebook/38422ad9-2391-40a2-b76e-ce44c0b33711" target="_blank" rel="noopener">Gemini Notebook에서 듣기 &rarr;</a></div>
+</div><div class="section" id="tech-blog">
+  <div class="section-header">
+    <span class="section-icon">TECH</span>
+    <span class="section-title">기술 블로그</span>
+    <span class="section-count">1개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://engineering.atspotify.com/2026/11/september-29-outage-incident-report-what-we-learnt/" target="_blank" rel="noopener">9월 29일 서비스 장애 보고서: 우리가 배운 점</a></div>
+    <div class="item-meta">Spotify Engineering</div>
+  </div>
+  <div class="item-body"><div class="item-summary">9월 29일 Spotify에서 배포 시스템 변경 간 충돌로 발생한 서비스 장애를 다룬 글이다.<br>- 각각 독립적으로 테스트한 두 변경 사항이 함께 적용되면서 충돌했고, 주요 인증 시스템에 영향을 미쳐 시스템 전반으로 장애가 확산되고 복구가 길어졌다.<br>- 배포 시스템은 스키마가 조금 다른 Kubernetes Deployment와 Argo Rollout을 지원하며, ArgoCD를 통해 테스트 환경 1개와 여러 운영 환경에 배포한다.<br>- 한 변경은 테스트 환경 설정에 영향을 주며 워크로드 유형을 Kubernetes Deployment에서 Argo Rollout으로 바꿨고, 다른 변경은 현재 상태와 목표 상태의 자동 비교에서 제외할 설정 매개변수를 바꿨다.</div></div>
+</div>
+</div><div class="section" id="dev-blogs">
+  <div class="section-header">
+    <span class="section-icon">DEV</span>
+    <span class="section-title">개발자 블로그 &amp; SNS</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://lemire.me/blog/2026/11/26/our-textbook-on-machine-learning-and-artificial-intelligence-is-out/" target="_blank" rel="noopener">머신러닝과 인공지능 교과서를 출간했습니다</a></div>
+    <div class="item-meta">Daniel Lemire</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Daniel Lemire와 Robert Godin이 Python 기반 머신러닝·인공지능 입문 교과서 출간을 알리는 글이다.<br>- 『Introduction to Machine Learning and Artificial Intelligence with Python』은 741쪽으로, 2026년 11월 26일 종이책이 출간됐으며 Kindle판도 제공된다. 대학 입문 수업과 Python을 이미 사용하는 프로그래머를 대상으로 한다.<br>- NumPy·Pandas부터 선형 회귀, 로지스틱 회귀, 결정 트리를 다루고, 신경망의 순전파·역전파 등을 직접 구현한 뒤 PyTorch·transformer와 모델 라이브러리를 활용한 감성 분석·텍스트 생성·번역·미세 조정으로 이어진다.<br>- 언어 모델과 강화학습을 다루며, 마지막 장에서는 컨테이너 기반 감성 분석 서비스 배포와 torch.compile을 통한 성능 개선을 소개한다. 각 장에는 실행 가능한 예제와 연습문제, 해답이 포함된다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://lemire.me/blog/2026/11/26/dont-be-andy-bernard/" target="_blank" rel="noopener">Andy Bernard처럼 되지 마라</a></div>
+    <div class="item-meta">Daniel Lemire</div>
+  </div>
+  <div class="item-body"><div class="item-summary">꾸준한 신뢰로 쌓는 평판과, 명문 기관이나 유명인과의 연관성으로 얻는 명성의 차이를 다룬 글.<br>- 평판은 대금을 제때 지급하고 물건을 약속대로 전달하는 등 신뢰할 만한 행동으로 쌓이지만, 빠르게 잃을 수 있다.<br>- 명성은 엘리트 기관, 유명한 협업자, 적절한 신호에서 빌려온 평판으로, 신뢰를 입증하는 실적보다 빠르고 저렴하게 얻는 경우가 많다.<br>- 명성은 과거에 평판 높은 사람들이 있던 곳에 뒤늦게 따라붙으며 쇠퇴하기도 한다. 저자는 수학 논문의 학술지 투고를 예로 들어, 과거의 명성이 오늘날 같은 평가를 보장하지 않는다고 설명한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://swyx.io/a-design-audit-of-an-ai-built-github-clone" target="_blank" rel="noopener">AI가 만든 GitHub 클론의 디자인 점검</a></div>
+    <div class="item-meta">swyx</div>
+  </div>
+  <div class="item-body"><div class="item-summary">AI 에이전트가 대부분 구현한 Forge를 점검해, 그럴듯한 화면 뒤의 잘못된 정보와 UI 문제를 찾아 고친 글이다.<br>- PR 개수는 30개까지만 표시됐고, 모든 PR의 변경 파일 수는 0개로 나왔다.<br>- 모든 버튼에 기본 강조색인 주황색을 사용했고, 14개 페이지는 제대로 된 오류 화면 없이 "Error: Not found"를 표시했다.<br>- 실제 사이트를 로그인·로그아웃 상태와 1440px·휴대전화 너비에서 점검했다. 수정에는 작은 PR 4개가 들었고, 다섯 번째 PR에서는 각 버그를 CI에서 실패를 감지하는 테스트로 만들었다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://simonwillison.net/2026/Nov/26/jack-despain-zhou/" target="_blank" rel="noopener">Jack Despain Zhou의 말 인용</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+  <div class="item-body"><div class="item-summary">AI가 개인의 고유한 표현을 지우는 현상에 관한 Jack Despain Zhou의 발언을 인용한 글이다.<br>- Zhou는 AI가 이미 일으킨 여러 영향 중 하나로 대대적인 탈개성화를 꼽았다.<br>- 그는 YouTube 영상과 콘퍼런스 발표에서 Claude의 말투를 듣는다고 표현했다.<br>- 이메일로 받는 기고 제안과 글에서도 Claude의 흔적을 보며, 평판과 자격을 내세운 사람들이 이런 글을 자신의 이름으로 발표하려 한다고 지적했다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://simonwillison.net/2026/Nov/26/hn-50651685/" target="_blank" rel="noopener">The New York Times, AI 기능 때문에 사진기자들에게 Photoshop 업데이트 자제 경고</a></div>
+    <div class="item-meta">Simon Willison</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Simon Willison이 The New York Times 사진기자에게 촬영받으며 들은 사진 편집 원칙과 촬영 과정을 소개한 글이다.<br>- 올해 초 Moltbook 기사용 사진을 집에서 촬영하면서 셔츠의 얼룩을 지울 수 있는지 묻자, 사진기자는 자르기와 밸런스 조정 외에는 편집하지 않는다고 답했다.<br>- 사진기자는 원하는 장면을 촬영하기 위해 가장 적합한 자연광을 찾는 데 상당한 시간을 들였다.<br>- 정원에서 노트북을 촬영할 때는 화면 반사가 적은 장소를 찾아다녔으며, 최종 사진에는 화면의 때도 그대로 보인다.</div></div>
+</div>
+</div><div class="section" id="papers">
+  <div class="section-header">
+    <span class="section-icon">PAPER</span>
+    <span class="section-title">AI / LLM 논문</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://arxiv.org/abs/2611.34147" target="_blank" rel="noopener">모델이 자신의 컨텍스트를 직접 관리하도록 하기: 현재 어디까지 왔나</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">모델이 컨텍스트 API로 압축 시점과 대상을 직접 결정하는 방식의 성능과 추론 비용을 평가한 연구다.<br>- NVIDIA의 오픈소스 에이전트 하네스 nooa에서 문서 조사와 머신러닝 엔지니어링 작업을 8K~512K 토큰 예산으로 비교했다. GPT 6.1은 32K 예산의 OfficeQA Pro v2에서 점수가 21%에서 56%로 올랐고, Kimi는 입력 토큰을 최대 41% 줄이면서 성능이 향상됐다.<br>- 모델마다 컨텍스트 API 사용 빈도, 압축 강도, 압축 시작 시점에 큰 차이가 있었으며, 프롬프트 변경도 압축 시작 시점에 영향을 줬다.<br>- 컨텍스트 편집 후 변경되지 않은 뒷부분의 KV cache를 재사용해, 측정 가능한 정확도 변화 없이 요청당 prefill 연산량을 최대 15% 줄였다.</div></div>
+</div><div class="item important">
+  <div class="item-head">
+    <div class="item-name"><span class="item-star" title="꼭 봐야 할 글">★</span><a href="https://arxiv.org/abs/2611.34440" target="_blank" rel="noopener">vSFT: 테스트 시점에 언어로 에이전트를 조정하는 방법 학습</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">vSFT는 자연어 피드백을 모델 가중치 업데이트로 변환해 테스트 시점에 에이전트를 개선하는 프레임워크다.<br>- 감독 모델이 에이전트의 실패 궤적에서 자연어 지도 정보를 생성하고, 하이퍼네트워크가 이를 저랭크 가중치 업데이트로 변환하는 폐쇄 루프를 구성한다.<br>- 테스트 시점에 모델 파라미터를 갱신하는 이 방식은 컨텍스트 내 적응 방식과 기존 강화학습 방법보다 높은 성능을 보였다.<br>- Qwen3-4B 기반 vSFT의 성공률은 GRPO와 Reflexion 대비 각각 ALFWorld에서 8.7%와 13.9%, WebShop에서 4.8%와 18.2% 높았다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://arxiv.org/abs/2611.34923" target="_blank" rel="noopener">Mixture-of-Loops Transformer</a></div>
+    <div class="item-meta">arXiv</div>
+  </div>
+  <div class="item-body"><div class="item-summary">KV 메모리를 깊이와 루프에 걸쳐 선택적으로 재사용해 표현력과 효율을 높이는 Mixture-of-Loops Transformer(MoLT)를 제안한 연구.<br>- MoLA는 키·값(KV)을 메모리로 활용한다. MoLT-R은 잔차 스트림을 유지하고 루프 간 로컬 KV를 읽으며, MoLT-KV는 임베딩에서 다시 시작해 현재 루프의 로컬 KV와 이전 루프의 앞선 위치에 있는 메모리 KV를 읽는다.<br>- MoLT-KV는 같은 위치의 루프 간 의존성을 제거하고, 병렬 학습을 위한 loop forcing과 결합해 학습한 루프 범위를 넘어서는 단일 순회 MoL 디코딩을 가능하게 한다. U-MoLT는 메모리 구성과 예측 출력을 분리해 예측 결과를 바꾸지 않고 불필요한 디코더 순회를 생략한다.<br>- 4,000억 토큰 사전학습에서 U-MoLT는 700M·1.5B 밀집 모델과 3B MoE 모델에서 OLMo3를 능가했다. 700M에서 검증 교차엔트로피 기준 토큰 효율이 1.7배였으며, 3B MoE에서 10개 도메인 perplexity는 0.75 낮아지고 10개 과제 정확도는 2.1%포인트 높아졌다.</div></div>
+</div>
+</div><div class="section" id="hn">
+  <div class="section-header">
+    <span class="section-icon">HN</span>
+    <span class="section-title">Hacker News</span>
+    <span class="section-count">3개</span>
+  </div>
+  <div class="community-date">2026-11-26 UTC · 당시 페이지 순위</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://scottaaronson.blog/?p=10379" target="_blank" rel="noopener">세상에, 세상에, 세상에, 세상에: 지금 벌어지는 일의 엄청난 규모</a></div>
+    <div class="item-meta">1위 · 2027 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Scott Aaronson이 AI의 수학 난제 증명 소식과 그 규모에 받은 충격을 설명하는 글.<br>- 글은 Alpöge/Anthropic의 Riemann Hypothesis 증명에 이어 OpenAI와 Anthropic의 VP ≠ VNP 증명이 나왔다고 서술한다.<br>- OpenAI는 행렬 곱셈 지수 ω의 하한이 9/4임을 증명했다고 주장하며, 이는 10월 6일 발표한 상한과 일치한다고 한다.<br>- 저자는 정확한 값이 유리수라는 점보다 AI가 ω&gt;2 형태의 하한을 증명했다는 점에 더 놀랐으며, 이 과제가 P ≠ NP보다 훨씬 쉬우리라고는 예상하지 않았다고 밝힌다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/intel/intel-one-mono" target="_blank" rel="noopener">Intel One Mono 글꼴 (2023)</a></div>
+    <div class="item-meta">2위 · 557 pts</div>
+  </div>
+  <div class="item-body"><div class="item-summary">개발자의 가독성과 시각적 접근성을 고려해 설계한 오픈소스 고정폭 글꼴 Intel One Mono를 소개하는 글이다.<br>- Frere-Jones Type이 Intel 브랜드팀 및 VMLY&amp;R과 협력해 설계했으며, 저시력 및 법적 시각장애인 개발자 패널이 설계 단계마다 피드백을 제공했다.<br>- 라틴 문자를 사용하는 200개 이상의 언어를 지원하며, Light·Regular·Medium·Bold 네 가지 굵기와 각 굵기에 대응하는 이탤릭체를 제공한다.<br>- 오픈소스 글꼴 라이선스로 무료 제공되며, 바로 사용할 수 있는 공식 배포본과 편집 가능한 소스를 모두 공개한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://commandcode.ai/moat" target="_blank" rel="noopener">Moat: OpenRouter 대체 서비스</a></div>
+    <div class="item-meta">3위 · 308 pts</div>
+  </div>
+  
+</div>
+</div><div class="section" id="github">
+  <div class="section-header">
+    <span class="section-icon">코드</span>
+    <span class="section-title">GitHub 트렌딩</span>
+    <span class="section-count">5개</span>
+  </div>
+  <div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/elementalsouls/Claude-BugHunter" target="_blank" rel="noopener">elementalsouls/Claude-BugHunter</a></div>
+    <div class="item-meta">25,595</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Claude Code에 설치해 버그 헌팅과 외부 레드팀 작업에 활용하는 독립형 스킬 번들이다.<br>- 스킬 85개, 슬래시 명령어 16개와 공개 보고서 패턴 681개를 포함하며, 패턴 중 433개는 개별 출처를 확인·감사할 수 있다.<br>- bb-methodology와 redteam-mindset은 5단계 비선형 작업 흐름과 비판적 사고 체계를 제공하고, hunt-* 스킬 58개는 취약점 유형별 탐지 패턴·페이로드·우회 표·공격 연계 템플릿을 제공한다.<br>- M365/Entra, Okta, vCenter, SSL-VPN 장비, SharePoint, 클라우드 IAM을 대상으로 2024~2026년 CVE 공격 연계와 자격 증명 확보 후 권한 상승 기법을 다루며, Burp MCP 통합을 지원한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">obra/superpowers</a></div>
+    <div class="item-meta">328,070</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Superpowers는 조합 가능한 스킬과 초기 지침을 기반으로 코딩 에이전트의 개발 과정을 구성하는 소프트웨어 개발 방법론이다.<br>- 에이전트는 곧바로 코드를 작성하지 않고 사용자의 목적을 질문하며, 대화에서 명세를 도출해 짧은 단위로 제시한다.<br>- 설계 승인 후 구현 계획을 작성하며, 실제 red/green TDD, YAGNI(필요하지 않은 기능은 만들지 않기), DRY를 강조한다.<br>- 사용자가 실행을 지시하면 하위 에이전트 중심 개발을 시작해 각 작업을 수행하고, 결과를 점검하고 리뷰한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/jingyaogong/minimind" target="_blank" rel="noopener">jingyaogong/minimind</a></div>
+    <div class="item-meta">72,114</div>
+  </div>
+  <div class="item-body"><div class="item-summary">MiniMind는 약 64M 파라미터의 초소형 언어 모델을 처음부터 구현하고 학습하는 오픈소스 프로젝트이자 실습 튜토리얼이다.<br>- ‘2시간·3위안’은 단일 NVIDIA 3090에서 SFT 1 epoch를 완료한 실측 시간과 해당 GPU 임대 비용을 뜻한다.<br>- MoE, 데이터 정제, 사전학습, SFT, LoRA, DPO, PPO·GRPO·CISPO, 도구 사용, Agentic RL, 적응형 사고, 모델 증류까지 전체 학습 과정의 코드를 공개한다.<br>- 핵심 알고리즘은 고수준 추상화 인터페이스에 의존하지 않고 PyTorch로 직접 구현했으며, Apache 2.0 라이선스로 무료 제공한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/firecrawl/firecrawl" target="_blank" rel="noopener">firecrawl/firecrawl</a></div>
+    <div class="item-meta">211,445</div>
+  </div>
+  <div class="item-body"><div class="item-summary">Firecrawl의 세 가지 사용 방식과 Firecrawl Local의 기능·설치 방법을 소개하는 글이다.<br>- Firecrawl Local은 데이터베이스·큐·컨테이너 없이 로컬에서 웹사이트를 스크래핑·크롤링·매핑하고, 정리된 Markdown 변환과 MCP 서버·localhost API를 제공한다.<br>- Firecrawl Cloud는 로컬 기능을 호스팅 서비스로 제공하며, 검색과 Firecrawl Alexandria의 550개 이상 데이터 제공자를 지원한다.<br>- 자체 호스팅은 apps/api의 전체 서버를 큐·워커·데이터베이스와 함께 배포하는 방식이며, Local은 Rust와 C 컴파일러를 준비한 뒤 cargo install firecrawl-local로 설치한다.</div></div>
+</div><div class="item">
+  <div class="item-head">
+    <div class="item-name"><a href="https://github.com/nginx/nginx" target="_blank" rel="noopener">nginx/nginx</a></div>
+    <div class="item-meta">33,626</div>
+  </div>
+  <div class="item-body"><div class="item-summary">NGINX의 주요 기능과 라이선스, 초보자용 README의 범위를 소개하는 글이다.<br>- NGINX는 웹 서버, 고성능 로드 밸런서, 리버스 프록시, API 게이트웨이, 콘텐츠 캐시 기능을 제공한다.<br>- 간소화된 2조항 BSD 유사 라이선스로 배포되는 무료 오픈소스 소프트웨어이며, F5가 기업용 배포판·상용 지원·교육을 제공한다.<br>- README는 초보자를 위한 기본 안내이며, 설치·빌드·설정·디버깅과 모듈·지시어의 상세 정보는 전체 NGINX 문서를 참조하도록 안내한다.</div></div>
+</div>
+</div>
+</body>
+</html>
